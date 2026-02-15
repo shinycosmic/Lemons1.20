@@ -1,6 +1,9 @@
 package net.lemon.planetearth;
 
 import com.mojang.logging.LogUtils;
+import net.lemon.planetearth.item.ModItems;
+import net.lemon.planetearth.creativetabs.ModCreativeModeTabs;
+import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
@@ -25,6 +28,11 @@ public class PlanetEarth {
 
     public PlanetEarth(FMLJavaModLoadingContext context) {
         IEventBus modEventBus = context.getModEventBus();
+
+        //register classes
+        ModCreativeModeTabs.register(modEventBus);
+        ModItems.register(modEventBus);
+
         modEventBus.addListener(this::commonSetup);
         MinecraftForge.EVENT_BUS.register(this);
         modEventBus.addListener(this::addCreative);
