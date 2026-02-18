@@ -1,13 +1,11 @@
 package net.lemon.planetearth.events;
 
-import net.lemon.planetearth.PlanetEarth;
-import net.lemon.planetearth.entity.SnakeEntity;
-import net.lemon.planetearth.util.ModEntities;
+import net.lemon.planetearth.Animalia;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
-@Mod.EventBusSubscriber(modid = PlanetEarth.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
+@Mod.EventBusSubscriber(modid = Animalia.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ModEventBusEvents {
 
     /***
@@ -16,6 +14,6 @@ public class ModEventBusEvents {
      */
     @SubscribeEvent
     public static void registerAttributes(EntityAttributeCreationEvent event) {
-        event.put(ModEntities.OCELLATED_PAMPAS_SNAKE.get(), SnakeEntity.createAttributes().build());
+//        event.put(ModEntities.OCELLATED_PAMPAS_SNAKE.get(), SnakeEntity.createAttributes().build());
     }
 }

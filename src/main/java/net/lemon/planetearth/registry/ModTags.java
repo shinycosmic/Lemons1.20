@@ -1,6 +1,6 @@
-package net.lemon.planetearth.util;
+package net.lemon.planetearth.registry;
 
-import net.lemon.planetearth.PlanetEarth;
+import net.lemon.planetearth.Animalia;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
@@ -13,7 +13,7 @@ public class ModTags {
         //Add Block Tags here
 
         private static TagKey<Block> tag(String name) {
-            return BlockTags.create(new ResourceLocation(PlanetEarth.MODID, name));
+            return BlockTags.create(new ResourceLocation(Animalia.MODID, name));
         }
     }
 
@@ -21,7 +21,7 @@ public class ModTags {
         //Add Item Tags here
 
         private static TagKey<Item> tag(String name) {
-            return ItemTags.create(new ResourceLocation(PlanetEarth.MODID, name));
+            return ItemTags.create(new ResourceLocation(Animalia.MODID, name));
         }
     }
 }

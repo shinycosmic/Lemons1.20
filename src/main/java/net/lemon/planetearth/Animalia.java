@@ -1,13 +1,10 @@
 package net.lemon.planetearth;
 
 import com.mojang.logging.LogUtils;
-import net.lemon.planetearth.entity.render.SnakeRenderer;
-import net.lemon.planetearth.item.ModItems;
+import net.lemon.planetearth.registry.ModItems;
 import net.lemon.planetearth.creativetabs.ModCreativeModeTabs;
-import net.lemon.planetearth.util.ModEntities;
-import net.lemon.planetearth.util.PlanetEarthRenderInit;
-import net.minecraft.client.renderer.entity.EntityRenderers;
-import net.minecraft.world.item.CreativeModeTabs;
+import net.lemon.planetearth.registry.ModEntities;
+import net.lemon.planetearth.util.AnimaliaRenderInit;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
@@ -23,15 +20,15 @@ import org.slf4j.Logger;
 import software.bernie.geckolib.GeckoLib;
 
 // The value here should match an entry in the META-INF/mods.toml file
-@Mod(PlanetEarth.MODID)
-public class PlanetEarth {
+@Mod(Animalia.MODID)
+public class Animalia {
     // Define mod id in a common place for everything to reference
-    public static final String MODID = "planetearth";
+    public static final String MODID = "animalia";
     // Directly reference a slf4j logger
     private static final Logger LOGGER = LogUtils.getLogger();
     // Create a Deferred Register to hold Blocks which will all be registered under the "examplemod" namespace
 
-    public PlanetEarth(FMLJavaModLoadingContext context) {
+    public Animalia(FMLJavaModLoadingContext context) {
         IEventBus modEventBus = context.getModEventBus();
 
         //register classes
@@ -68,7 +65,7 @@ public class PlanetEarth {
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event)
         {
-            PlanetEarthRenderInit.init();
+            AnimaliaRenderInit.init();
         }
     }
 }

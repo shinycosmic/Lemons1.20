@@ -1,7 +1,7 @@
 package net.lemon.planetearth.datagen;
 
-import net.lemon.planetearth.PlanetEarth;
-import net.lemon.planetearth.item.ModItems;
+import net.lemon.planetearth.Animalia;
+import net.lemon.planetearth.registry.ModItems;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
@@ -12,25 +12,27 @@ import net.minecraftforge.registries.RegistryObject;
 
 public class ModItemModelProvider extends ItemModelProvider {
     public ModItemModelProvider(PackOutput output, ExistingFileHelper existingFileHelper) {
-        super(output, PlanetEarth.MODID, existingFileHelper);
+        super(output, Animalia.MODID, existingFileHelper);
     }
 
     /***
      * Usage Case:
      *  simpleItem(ModItems.ITEM_NAME);
+     *
+     *  spawn Eggs:
+     *  withExistingParent(ModItems.NAME_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
      */
     @Override
     protected void registerModels() {
-        simpleItem(ModItems.FISH_FILLET);
-        simpleItem(ModItems.RAW_RODENT);
+        //Item generators
+        simpleItem(ModItems.RAW_ICEFISH);
 
         //spawn egg generators
-        withExistingParent(ModItems.OCELLATED_PAMPAS_SNAKE_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
     }
 
     private ItemModelBuilder simpleItem(RegistryObject<Item> item) {
         return withExistingParent(item.getId().getPath(),
                 new ResourceLocation("item/generated")).texture("layer0",
-                new ResourceLocation(PlanetEarth.MODID, "item/" + item.getId().getPath()));
+                new ResourceLocation(Animalia.MODID, "item/" + item.getId().getPath()));
     }
 }

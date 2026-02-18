@@ -1,6 +1,6 @@
 package net.lemon.planetearth.datagen;
 
-import net.lemon.planetearth.PlanetEarth;
+import net.lemon.planetearth.Animalia;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.RecipeCategory;
@@ -73,7 +73,7 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
         for(ItemLike itemlike : pIngredients) {
             SimpleCookingRecipeBuilder.generic(Ingredient.of(itemlike), pCategory, pResult, pExperience, pCookingTime, pCookingSerializer)
                     .group(pGroup).unlockedBy(getHasName(itemlike), has(itemlike))
-                    .save(pFinishedRecipeConsumer, PlanetEarth.MODID + ":" + (pResult) + pRecipeName + "_" + getItemName(itemlike));
+                    .save(pFinishedRecipeConsumer, Animalia.MODID + ":" + (pResult) + pRecipeName + "_" + getItemName(itemlike));
         }
 
     }

@@ -1,16 +1,14 @@
 package net.lemon.planetearth.creativetabs;
 
-import net.lemon.planetearth.item.ModItems;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.registries.RegistryObject;
 
 import java.util.List;
 
-public class PlanetEarthMobsTab {
+public class AnimaliaMobsTab {
     public static final List<RegistryObject<? extends Item>> SPAWN_EGGS = List.of(
             //Spawn Eggs
-            ModItems.OCELLATED_PAMPAS_SNAKE_SPAWN_EGG
 
     );
 

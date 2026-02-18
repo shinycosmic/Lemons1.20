@@ -12,23 +12,29 @@ normal code.
 Setup Process:
 ==============================
 
-Step 1: Open your command-line and browse to the folder where you extracted the zip file.
+Adding nonspecial Items:
+- AnimaliaFoodTab (Creative Tab)
+- ModFoods/ModItems (registry)
+- ModItemModelProvider/ModItemTagGenerator (datagen)
+- ModRecipeProvider (datagen for recipes)
+- en_us.json (lang)
+- run runData to gen jsons
 
-Step 2: You're left with a choice.
-If you prefer to use Eclipse:
-1. Run the following command: `./gradlew genEclipseRuns`
-2. Open Eclipse, Import > Existing Gradle Project > Select Folder 
-   or run `gradlew eclipse` to generate the project.
+Special items prob need their own java classes in addition to the above
 
-If you prefer to use IntelliJ:
-1. Open IDEA, and import project.
-2. Select your build.gradle file and have it import.
-3. Run the following command: `./gradlew genIntellijRuns`
-4. Refresh the Gradle Project in IDEA if required.
+Adding Entities:
+- ModEntities (registry)
+- AnimaliaMobsTab (creativetab)
+- ModEventBusEvents (registerAttributes, events)
+- NameEntity (Entityclass, in entity -> Custom)
+- NameRender (RenderClass, in entity -> render)
+- NameModel (ModelClass, in entity -> model)
+- AnimaliaRenderInit (init the renderer in util)
+- add geo.json to assets -> geo
+- add animation file to assets -> animations
+- add texture file to assets ->textures -> entity
 
-If at any point you are missing libraries in your IDE, or you've run into problems you can 
-run `gradlew --refresh-dependencies` to refresh the local cache. `gradlew clean` to reset everything 
-(this does not affect your code) and then start the process again.
+May need new AI or Bases with the above
 
 Mapping Names:
 =============================

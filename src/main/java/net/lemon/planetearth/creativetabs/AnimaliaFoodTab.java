@@ -1,17 +1,16 @@
 package net.lemon.planetearth.creativetabs;
 
-import net.lemon.planetearth.item.ModItems;
+import net.lemon.planetearth.registry.ModItems;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.registries.RegistryObject;
 
 import java.util.List;
 
-public class PlanetEarthFoodTab {
+public class AnimaliaFoodTab {
     public static final List<RegistryObject<? extends Item>> FOOD_ITEMS = List.of(
             //Raws
-            ModItems.FISH_FILLET,
-            ModItems.RAW_RODENT
+            ModItems.RAW_ICEFISH
 
             //Cooked
     );
