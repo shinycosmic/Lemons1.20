@@ -50,6 +50,8 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
      *          .unlockedBy(getHasName(ModBlocks.INPUT_ITEM.get()), has(ModBlocks.INPUT_ITEM.get()))
      *          .save(pWriter);
      *
+     * nineBlockStorageRecipes in the RecipeProvider function also does this shapeless with 9 blocks but may need some modifications
+     *
      * @param pWriter
      */
     @Override

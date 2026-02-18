@@ -1,6 +1,11 @@
 {
+  "creativetab.planetearth_food": "Planet Earth Food Tab",
+  "creativetab.planetearth_mobs": "Planet Earth Mobs Tab",
+
   "item.planetearth.fish_fillet": "Raw Fish Fillet",
   "item.planetearth.raw_rodent": "Raw Rodent",
 
-  "creativetab.planetearth_food": "Planet Earth Food Tab"
+  "item.planetearth.ocellatedpampassnake_spawn_egg": "Spawn Ocellated Pampas Snake",
+
+  "entity.snake.ocellatedpampassnake": "Ocellated Pampas Snake"
 }

@@ -21,6 +21,14 @@ public class ModCreativeModeTabs {
                         PlanetEarthFoodTab.displayItems(output);
                     })
                     .build());
+
+    public static final RegistryObject<CreativeModeTab> PLANETEARTH_MOBS = CREATIVE_MODE_TABS.register("planetearth_mobs",
+            () -> CreativeModeTab.builder().icon(() -> new ItemStack(ModItems.OCELLATED_PAMPAS_SNAKE_SPAWN_EGG.get()))
+                    .title(Component.translatable("creativetab.planetearth_mobs"))
+                    .displayItems((param, output) -> {
+                        PlanetEarthMobsTab.displayItems(output);
+                    })
+                    .build());
     public static void register(IEventBus eventBus) {
         CREATIVE_MODE_TABS.register(eventBus);
     }

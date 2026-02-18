@@ -1,8 +1,12 @@
 package net.lemon.planetearth;
 
 import com.mojang.logging.LogUtils;
+import net.lemon.planetearth.entity.render.SnakeRenderer;
 import net.lemon.planetearth.item.ModItems;
 import net.lemon.planetearth.creativetabs.ModCreativeModeTabs;
+import net.lemon.planetearth.util.ModEntities;
+import net.lemon.planetearth.util.PlanetEarthRenderInit;
+import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
@@ -16,6 +20,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.slf4j.Logger;
+import software.bernie.geckolib.GeckoLib;
 
 // The value here should match an entry in the META-INF/mods.toml file
 @Mod(PlanetEarth.MODID)
@@ -32,6 +37,9 @@ public class PlanetEarth {
         //register classes
         ModCreativeModeTabs.register(modEventBus);
         ModItems.register(modEventBus);
+        ModEntities.register(modEventBus);
+
+        GeckoLib.initialize();
 
         modEventBus.addListener(this::commonSetup);
         MinecraftForge.EVENT_BUS.register(this);
@@ -60,7 +68,7 @@ public class PlanetEarth {
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event)
         {
-
+            PlanetEarthRenderInit.init();
         }
     }
 }

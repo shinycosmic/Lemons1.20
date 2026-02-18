@@ -23,6 +23,9 @@ public class ModItemModelProvider extends ItemModelProvider {
     protected void registerModels() {
         simpleItem(ModItems.FISH_FILLET);
         simpleItem(ModItems.RAW_RODENT);
+
+        //spawn egg generators
+        withExistingParent(ModItems.OCELLATED_PAMPAS_SNAKE_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
     }
 
     private ItemModelBuilder simpleItem(RegistryObject<Item> item) {
