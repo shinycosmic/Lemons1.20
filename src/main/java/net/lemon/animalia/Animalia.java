@@ -1,10 +1,10 @@
-package net.lemon.planetearth;
+package net.lemon.animalia;
 
 import com.mojang.logging.LogUtils;
-import net.lemon.planetearth.registry.ModItems;
-import net.lemon.planetearth.creativetabs.ModCreativeModeTabs;
-import net.lemon.planetearth.registry.ModEntities;
-import net.lemon.planetearth.util.AnimaliaRenderInit;
+import net.lemon.animalia.registry.ModItems;
+import net.lemon.animalia.creativetabs.ModCreativeModeTabs;
+import net.lemon.animalia.registry.ModEntities;
+import net.lemon.animalia.util.AnimaliaRenderInit;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;

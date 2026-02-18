@@ -1,6 +1,6 @@
-package net.lemon.planetearth.events;
+package net.lemon.animalia.events;
 
-import net.lemon.planetearth.Animalia;
+import net.lemon.animalia.Animalia;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;

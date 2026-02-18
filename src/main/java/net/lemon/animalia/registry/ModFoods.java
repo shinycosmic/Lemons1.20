@@ -1,4 +1,4 @@
-package net.lemon.planetearth.registry;
+package net.lemon.animalia.registry;
 
 import net.minecraft.world.food.FoodProperties;
 

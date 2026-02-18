@@ -1,7 +1,7 @@
-package net.lemon.planetearth.datagen;
+package net.lemon.animalia.datagen;
 
-import net.lemon.planetearth.Animalia;
-import net.lemon.planetearth.registry.ModItems;
+import net.lemon.animalia.Animalia;
+import net.lemon.animalia.registry.ModItems;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;

@@ -1,11 +1,7 @@
-package net.lemon.planetearth.datagen.loot;
+package net.lemon.animalia.datagen.loot;
 
 import net.minecraft.data.loot.BlockLootSubProvider;
-import net.minecraft.world.flag.FeatureFlagSet;
 import net.minecraft.world.flag.FeatureFlags;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.level.block.Block;
-import net.minecraftforge.registries.RegistryObject;
 
 import java.util.Set;
 

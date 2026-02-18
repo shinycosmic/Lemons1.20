@@ -378,7 +378,7 @@ java.lang.IllegalAccessException: class io.netty.util.internal.PlatformDependent
 [17Feb2026 23:37:27.587] [main/DEBUG] [net.minecraftforge.fml.javafmlmod.FMLJavaModLanguageProvider/LOADING]: Loading FMLModContainer from classloader cpw.mods.modlauncher.TransformingClassLoader@59c70ceb - got cpw.mods.cl.ModuleClassLoader@1e63d216
 [17Feb2026 23:37:27.587] [main/DEBUG] [net.minecraftforge.fml.javafmlmod.FMLModContainer/LOADING]: Creating FMLModContainer instance for software.bernie.example.GeckoLibMod
 [17Feb2026 23:37:27.588] [main/DEBUG] [net.minecraftforge.fml.javafmlmod.FMLJavaModLanguageProvider/LOADING]: Loading FMLModContainer from classloader cpw.mods.modlauncher.TransformingClassLoader@59c70ceb - got cpw.mods.cl.ModuleClassLoader@1e63d216
-[17Feb2026 23:37:27.588] [main/DEBUG] [net.minecraftforge.fml.javafmlmod.FMLModContainer/LOADING]: Creating FMLModContainer instance for net.lemon.planetearth.Animalia
+[17Feb2026 23:37:27.588] [main/DEBUG] [net.minecraftforge.fml.javafmlmod.FMLModContainer/LOADING]: Creating FMLModContainer instance for net.lemon.animalia.Animalia
 [17Feb2026 23:37:27.628] [modloading-worker-0/DEBUG] [net.minecraftforge.versions.forge.ForgeVersion/CORE]: Forge Version package package net.minecraftforge.versions.forge, Forge, version 47.4 from cpw.mods.modlauncher.TransformingClassLoader@59c70ceb
 [17Feb2026 23:37:27.629] [modloading-worker-0/DEBUG] [net.minecraftforge.versions.forge.ForgeVersion/CORE]: Found Forge version 47.4.16
 [17Feb2026 23:37:27.629] [modloading-worker-0/DEBUG] [net.minecraftforge.versions.forge.ForgeVersion/CORE]: Found Forge spec 47.4
@@ -394,11 +394,11 @@ java.lang.IllegalAccessException: class io.netty.util.internal.PlatformDependent
 [17Feb2026 23:37:27.750] [modloading-worker-0/DEBUG] [net.minecraftforge.fml.config.ConfigTracker/CONFIG]: Config file forge-server.toml for forge tracking
 [17Feb2026 23:37:27.750] [modloading-worker-0/DEBUG] [net.minecraftforge.fml.ModLoadingContext/]: Attempted to register an empty config for type COMMON on mod forge
 [17Feb2026 23:37:27.752] [modloading-worker-0/DEBUG] [net.minecraftforge.fml.javafmlmod.AutomaticEventSubscriber/LOADING]: Attempting to inject @EventBusSubscriber classes into the eventbus for animalia
-[17Feb2026 23:37:27.756] [modloading-worker-0/DEBUG] [net.minecraftforge.fml.javafmlmod.AutomaticEventSubscriber/LOADING]: Auto-subscribing net.lemon.planetearth.Animalia$ClientModEvents to MOD
-[17Feb2026 23:37:27.758] [modloading-worker-0/DEBUG] [net.minecraftforge.fml.javafmlmod.AutomaticEventSubscriber/LOADING]: Auto-subscribing net.lemon.planetearth.Config to MOD
-[17Feb2026 23:37:27.758] [modloading-worker-0/DEBUG] [net.minecraftforge.fml.javafmlmod.AutomaticEventSubscriber/LOADING]: Auto-subscribing net.lemon.planetearth.datagen.DataGenerators to MOD
-[17Feb2026 23:37:27.760] [modloading-worker-0/DEBUG] [net.minecraftforge.fml.javafmlmod.AutomaticEventSubscriber/LOADING]: Auto-subscribing net.lemon.planetearth.events.ModEventBusClientEvents to MOD
-[17Feb2026 23:37:27.763] [modloading-worker-0/DEBUG] [net.minecraftforge.fml.javafmlmod.AutomaticEventSubscriber/LOADING]: Auto-subscribing net.lemon.planetearth.events.ModEventBusEvents to MOD
+[17Feb2026 23:37:27.756] [modloading-worker-0/DEBUG] [net.minecraftforge.fml.javafmlmod.AutomaticEventSubscriber/LOADING]: Auto-subscribing net.lemon.animalia.Animalia$ClientModEvents to MOD
+[17Feb2026 23:37:27.758] [modloading-worker-0/DEBUG] [net.minecraftforge.fml.javafmlmod.AutomaticEventSubscriber/LOADING]: Auto-subscribing net.lemon.animalia.Config to MOD
+[17Feb2026 23:37:27.758] [modloading-worker-0/DEBUG] [net.minecraftforge.fml.javafmlmod.AutomaticEventSubscriber/LOADING]: Auto-subscribing net.lemon.animalia.datagen.DataGenerators to MOD
+[17Feb2026 23:37:27.760] [modloading-worker-0/DEBUG] [net.minecraftforge.fml.javafmlmod.AutomaticEventSubscriber/LOADING]: Auto-subscribing net.lemon.animalia.events.ModEventBusClientEvents to MOD
+[17Feb2026 23:37:27.763] [modloading-worker-0/DEBUG] [net.minecraftforge.fml.javafmlmod.AutomaticEventSubscriber/LOADING]: Auto-subscribing net.lemon.animalia.events.ModEventBusEvents to MOD
 [17Feb2026 23:37:27.778] [modloading-worker-0/DEBUG] [net.minecraftforge.fml.javafmlmod.AutomaticEventSubscriber/LOADING]: Attempting to inject @EventBusSubscriber classes into the eventbus for geckolib
 [17Feb2026 23:37:27.778] [modloading-worker-0/DEBUG] [net.minecraftforge.fml.javafmlmod.AutomaticEventSubscriber/LOADING]: Auto-subscribing software.bernie.example.GeckoLibMod to FORGE
 [17Feb2026 23:37:27.778] [modloading-worker-0/DEBUG] [net.minecraftforge.fml.javafmlmod.AutomaticEventSubscriber/LOADING]: Auto-subscribing software.bernie.example.CommonListener to MOD

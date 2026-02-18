@@ -1,6 +1,6 @@
-package net.lemon.planetearth.registry;
+package net.lemon.animalia.registry;
 
-import net.lemon.planetearth.Animalia;
+import net.lemon.animalia.Animalia;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;

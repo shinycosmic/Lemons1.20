@@ -1,4 +1,4 @@
-package net.lemon.planetearth.creativetabs;
+package net.lemon.animalia.creativetabs;
 
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;

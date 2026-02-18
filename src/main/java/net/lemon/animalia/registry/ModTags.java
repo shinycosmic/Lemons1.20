@@ -1,6 +1,6 @@
-package net.lemon.planetearth.registry;
+package net.lemon.animalia.registry;
 
-import net.lemon.planetearth.Animalia;
+import net.lemon.animalia.Animalia;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;

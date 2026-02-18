@@ -1,6 +1,6 @@
-package net.lemon.planetearth.registry;
+package net.lemon.animalia.registry;
 
-import net.lemon.planetearth.Animalia;
+import net.lemon.animalia.Animalia;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;

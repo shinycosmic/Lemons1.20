@@ -1,6 +1,6 @@
-package net.lemon.planetearth.creativetabs;
+package net.lemon.animalia.creativetabs;
 
-import net.lemon.planetearth.registry.ModItems;
+import net.lemon.animalia.registry.ModItems;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.registries.RegistryObject;

@@ -1,4 +1,4 @@
-package net.lemon.planetearth.datagen;
+package net.lemon.animalia.datagen;
 
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;

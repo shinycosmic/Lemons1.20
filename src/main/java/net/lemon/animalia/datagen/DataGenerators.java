@@ -1,6 +1,6 @@
-package net.lemon.planetearth.datagen;
+package net.lemon.animalia.datagen;
 
-import net.lemon.planetearth.Animalia;
+import net.lemon.animalia.Animalia;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;

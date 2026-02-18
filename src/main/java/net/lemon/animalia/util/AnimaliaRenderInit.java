@@ -1,4 +1,4 @@
-package net.lemon.planetearth.util;
+package net.lemon.animalia.util;
 
 public class AnimaliaRenderInit {
     public static void init() {
