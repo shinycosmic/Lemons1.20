@@ -24,10 +24,18 @@ public class ModItemModelProvider extends ItemModelProvider {
      */
     @Override
     protected void registerModels() {
-        //Item generators
+        //Raws generators
         simpleItem(ModItems.RAW_ICEFISH);
+        simpleItem(ModItems.RAW_FISH);
+
+        //Misc
+        simpleItem(ModItems.FISH_EGG);
+
+        //Buckets
+        simpleItem(ModItems.CHILEANSEABASS_BUCKET);
 
         //spawn egg generators
+        withExistingParent(ModItems.CHILEANSEABASS_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
     }
 
     private ItemModelBuilder simpleItem(RegistryObject<Item> item) {

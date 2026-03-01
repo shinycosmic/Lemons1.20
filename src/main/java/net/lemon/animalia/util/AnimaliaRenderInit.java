@@ -1,8 +1,12 @@
 package net.lemon.animalia.util;
 
+import net.lemon.animalia.entity.render.ChileanSeaBassRenderer;
+import net.lemon.animalia.registry.ModEntities;
+import net.minecraft.client.renderer.entity.EntityRenderers;
+
 public class AnimaliaRenderInit {
     public static void init() {
         //put render initializers here
-//        EntityRenderers.register(ModEntities.OCELLATED_PAMPAS_SNAKE.get(), SnakeRenderer::new);
+        EntityRenderers.register(ModEntities.CHILEANSEABASS.get(), ChileanSeaBassRenderer::new);
     }
 }

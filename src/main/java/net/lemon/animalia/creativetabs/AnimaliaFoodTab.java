@@ -10,7 +10,8 @@ import java.util.List;
 public class AnimaliaFoodTab {
     public static final List<RegistryObject<? extends Item>> FOOD_ITEMS = List.of(
             //Raws
-            ModItems.RAW_ICEFISH
+            ModItems.RAW_ICEFISH,
+            ModItems.RAW_FISH
 
             //Cooked
     );
