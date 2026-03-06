@@ -2,6 +2,7 @@ package net.lemon.animalia.entity.bases;
 
 import net.lemon.animalia.entity.aimove.BottomDwellingMoveHelperController;
 import net.lemon.animalia.entity.ai.FishBreedGoal;
+import net.lemon.animalia.entity.bases.interfaces.IActivityTime;
 import net.lemon.animalia.item.FishEggItem;
 import net.lemon.animalia.registry.ModItems;
 import net.minecraft.core.BlockPos;
@@ -21,6 +22,7 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.animal.AbstractFish;
+import net.minecraft.world.entity.animal.AbstractSchoolingFish;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -33,7 +35,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 
-public abstract class FishBase extends AbstractFish {
+public abstract class FishBase extends AbstractFish implements IActivityTime {
     private static final EntityDataAccessor<Integer> AGE = SynchedEntityData.defineId(FishBase.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Integer> GENDER = SynchedEntityData.defineId(FishBase.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Integer> VAR_COLOR = SynchedEntityData.defineId(FishBase.class, EntityDataSerializers.INT);
@@ -43,6 +45,10 @@ public abstract class FishBase extends AbstractFish {
     private int inLove;
     @Nullable
     private UUID loveCause;
+    //TODO bring schooling into this consolidated base
+    @Nullable
+    private FishBase leader;
+    private int schoolSize = 1;
 
     public FishBase(EntityType<? extends AbstractFish> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
@@ -57,6 +63,8 @@ public abstract class FishBase extends AbstractFish {
 
         super.customServerAiStep();
     }
+
+    abstract public String getScientificName();
 
     @Override
     protected void defineSynchedData() {

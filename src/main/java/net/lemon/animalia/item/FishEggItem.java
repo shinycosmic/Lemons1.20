@@ -58,6 +58,20 @@ public class FishEggItem extends Item {
     }
 
     @Override
+    public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltipComp, TooltipFlag isAdvanced) {
+        super.appendHoverText(stack, level, tooltipComp, isAdvanced);
+        EntityType<?> type = getEntity(stack);
+
+        if (type != null && level != null) {
+            Entity entity = type.create(level);
+
+            if (entity instanceof FishBase fish) {
+                tooltipComp.add(Component.literal(fish.getScientificName()).withStyle(net.minecraft.ChatFormatting.GRAY, net.minecraft.ChatFormatting.ITALIC));
+            }
+        }
+    }
+
+    @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
         ItemStack stack = player.getItemInHand(hand);
 

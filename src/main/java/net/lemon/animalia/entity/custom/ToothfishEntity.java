@@ -4,7 +4,9 @@ import com.eliotlash.mclib.math.functions.classic.Sin;
 import net.lemon.animalia.entity.ai.BottomDwellingGoal;
 import net.lemon.animalia.entity.ai.FishFrySwimmingGoal;
 import net.lemon.animalia.entity.aimove.BottomDwellingMoveHelperController;
+import net.lemon.animalia.entity.bases.ActivityTime;
 import net.lemon.animalia.entity.bases.FishBase;
+import net.lemon.animalia.entity.bases.interfaces.IActivityTime;
 import net.lemon.animalia.registry.ModEntities;
 import net.lemon.animalia.registry.ModItems;
 import net.minecraft.nbt.CompoundTag;
@@ -46,6 +48,19 @@ public class ToothfishEntity extends FishBase implements GeoEntity {
     public ToothfishEntity(EntityType<? extends AbstractFish> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
         this.moveControl = new BottomDwellingMoveHelperController(this);
+    }
+
+    @Override
+    public String getScientificName() {
+        if(this.getType() == ModEntities.CHILEANSEABASS.get()) {
+            return "Dissostichus eleginoides";
+        }
+        return "didnt work";
+    }
+
+    @Override
+    public ActivityTime activityTime() {
+        return ActivityTime.NONE;
     }
 
     public static AttributeSupplier setAttributes() {
