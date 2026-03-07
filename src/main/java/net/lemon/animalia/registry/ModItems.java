@@ -1,6 +1,7 @@
 package net.lemon.animalia.registry;
 
 import net.lemon.animalia.Animalia;
+import net.lemon.animalia.item.AnimaliaBucketItem;
 import net.lemon.animalia.item.FishEggItem;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
@@ -31,6 +32,7 @@ public class ModItems {
 
     //Buckets
     public static final RegistryObject<Item> CHILEANSEABASS_BUCKET = registerBucket("chileanseabass_bucket", ModEntities.CHILEANSEABASS);
+    public static final RegistryObject<Item> ELEGINOPS_MACLOVINUS_BUCKET = registerBucket("eleginops_maclovinus_bucket", ModEntities.ELEGINOPS_MACLOVINUS);
 
 
     //Misc
@@ -38,6 +40,7 @@ public class ModItems {
 
     //Spawn Eggs
     public static final RegistryObject<Item> CHILEANSEABASS_SPAWN_EGG = registerSpawnEgg("chileanseabass_spawn_egg", ModEntities.CHILEANSEABASS, 0x4D5267, 0xA5A8B0);
+    public static final RegistryObject<Item> ELEGINOPS_MACLOVINUS_SPAWN_EGG = registerSpawnEgg("eleginops_maclovinus_spawn_egg", ModEntities.ELEGINOPS_MACLOVINUS, 0x927A60, 0xFDEDD4);
 
 
     //Supplier Helper Methods
@@ -45,7 +48,7 @@ public class ModItems {
         return ITEMS.register(name, () -> new ForgeSpawnEggItem(type, backgroundColor, highlightColor, new Item.Properties()));
     }
     public static RegistryObject<Item> registerBucket(String name, Supplier<? extends EntityType<?>> type) {
-        return ITEMS.register(name, () -> new MobBucketItem(type, () -> Fluids.WATER, () -> SoundEvents.BUCKET_EMPTY_FISH, new Item.Properties().stacksTo(1).craftRemainder(Items.BUCKET)));
+        return ITEMS.register(name, () -> new AnimaliaBucketItem(type, () -> Fluids.WATER, () -> SoundEvents.BUCKET_EMPTY_FISH, new Item.Properties().stacksTo(1).craftRemainder(Items.BUCKET)));
     }
 
     public static void register(IEventBus eventBus) {

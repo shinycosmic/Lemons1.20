@@ -18,6 +18,7 @@ public class ModEntities {
 
     /// REGISTER ENTITIES BELOW
     public static final RegistryObject<EntityType<ToothfishEntity>> CHILEANSEABASS = registerEntityType("chileanseabass", ToothfishEntity::new, MobCategory.CREATURE, 0.9f, 0.9f);
+    public static final RegistryObject<EntityType<ToothfishEntity>> ELEGINOPS_MACLOVINUS = registerEntityType("eleginops_maclovinus", ToothfishEntity::new, MobCategory.CREATURE, 0.9f, 0.9f);
 
 
     //Supplier Helper Methods

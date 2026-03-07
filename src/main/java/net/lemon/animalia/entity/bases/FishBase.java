@@ -89,6 +89,7 @@ public abstract class FishBase extends AbstractFish implements IActivityTime {
         compoundTag.putInt("Age", this.getAge());
         compoundTag.putInt("BucketGender", this.getGender());
         compoundTag.putInt("BucketVarColor", this.getVarColor());
+        compoundTag.putBoolean("BucketBaby", this.isBaby());
     }
 
     @Override

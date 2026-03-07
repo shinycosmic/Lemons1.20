@@ -54,6 +54,8 @@ public class ToothfishEntity extends FishBase implements GeoEntity {
     public String getScientificName() {
         if(this.getType() == ModEntities.CHILEANSEABASS.get()) {
             return "Dissostichus eleginoides";
+        } else if (this.getType() == ModEntities.ELEGINOPS_MACLOVINUS.get()) {
+            return "Eleginops maclovinus";
         }
         return "didnt work";
     }
@@ -79,6 +81,8 @@ public class ToothfishEntity extends FishBase implements GeoEntity {
     public ItemStack getBucketItemStack() {
         if(this.getType() == ModEntities.CHILEANSEABASS.get()) {
             return new ItemStack(ModItems.CHILEANSEABASS_BUCKET.get());
+        } else if(this.getType() == ModEntities.ELEGINOPS_MACLOVINUS.get()) {
+            return new ItemStack(ModItems.ELEGINOPS_MACLOVINUS_BUCKET.get());
         }
         return new ItemStack(Items.SALMON_BUCKET);
     }
@@ -103,9 +107,20 @@ public class ToothfishEntity extends FishBase implements GeoEntity {
     private <T extends GeoAnimatable> PlayState predicate(AnimationState<T> animationState) {
         if(!this.isInWater()) {
             return PlayState.CONTINUE;
+        } else if(this.isBaby()) {
+            animationState.getController().setAnimation(RawAnimation.begin().then("animation.notothen.swim", Animation.LoopType.LOOP));
+            return PlayState.CONTINUE;
         }
-        animationState.getController().setAnimation(RawAnimation.begin().then("animation.notothen.swim", Animation.LoopType.LOOP));
+        animationState.getController().setAnimation(RawAnimation.begin().then(this.getSwimAnim(), Animation.LoopType.LOOP));
         return PlayState.CONTINUE;
+    }
+
+    public String getSwimAnim() {
+        if(this.getType() == ModEntities.CHILEANSEABASS.get()) {
+            return "animation.notothen.swim";
+        } else { //ModEntities.ELEGINOPS_MACLOVINUS.get()
+            return "animation.eleginops.swim";
+        }
     }
 
     @Override

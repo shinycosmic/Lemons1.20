@@ -17,5 +17,6 @@ public class ModEventBusEvents {
     @SubscribeEvent
     public static void registerAttributes(EntityAttributeCreationEvent event) {
         event.put(ModEntities.CHILEANSEABASS.get(), ToothfishEntity.setAttributes());
+        event.put(ModEntities.ELEGINOPS_MACLOVINUS.get(), ToothfishEntity.setAttributes());
     }
 }

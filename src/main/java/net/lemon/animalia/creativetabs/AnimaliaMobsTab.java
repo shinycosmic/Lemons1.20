@@ -10,7 +10,8 @@ import java.util.List;
 public class AnimaliaMobsTab {
     public static final List<RegistryObject<? extends Item>> SPAWN_EGGS = List.of(
             //Spawn Eggs
-            ModItems.CHILEANSEABASS_SPAWN_EGG
+            ModItems.CHILEANSEABASS_SPAWN_EGG,
+            ModItems.ELEGINOPS_MACLOVINUS_SPAWN_EGG
 
     );
 
