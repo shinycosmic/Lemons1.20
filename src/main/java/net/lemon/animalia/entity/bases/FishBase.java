@@ -236,10 +236,16 @@ public abstract class FishBase extends AbstractFish implements IActivityTime {
     }
 
     /***
-     * cannibalized from Animal class. Used to set breeding Item
+     * cannibalized from Animal class. Used to set Food Item (to heal/grow)
      * @return
      */
     public abstract TagKey<Item> getFoodTag();
+
+    /***
+     * Used to set breeding Item
+     * @return
+     */
+    public abstract boolean isBreedingItem(ItemStack stack);
 
     public boolean isFood(ItemStack stack) {
         return stack.is(getFoodTag());
@@ -302,14 +308,15 @@ public abstract class FishBase extends AbstractFish implements IActivityTime {
 
     public InteractionResult mobInteract(Player player, InteractionHand hand) {
         ItemStack itemstack = player.getItemInHand(hand);
-        if (this.isFood(itemstack)) {
-            int i = this.getAge();
-            if (!this.level().isClientSide && i == 0 && this.canFallInLove()) {
-                this.usePlayerItem(player, hand, itemstack);
-                this.setInLove(player);
-                return InteractionResult.SUCCESS;
-            }
+        int i = this.getAge();
 
+        if (!this.level().isClientSide && i == 0 && this.canFallInLove() && this.isBreedingItem(itemstack)) {
+            this.usePlayerItem(player, hand, itemstack);
+            this.setInLove(player);
+            return InteractionResult.SUCCESS;
+        }
+
+        if (this.isFood(itemstack)) {
             this.usePlayerItem(player, hand, itemstack);
             this.heal((float) Objects.requireNonNull(itemstack.getFoodProperties(this)).getNutrition());
 

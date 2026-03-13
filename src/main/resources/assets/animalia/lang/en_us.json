@@ -1,21 +1,24 @@
 {
-  "creativetab.animalia_food": "Animalia Foods",
-  "creativetab.animalia_mobs": "Animalia Mobs",
+  "creativetab.animalia_food": "Wildlife Explorers Foods",
+  "creativetab.animalia_mobs": "Wildlife Explorers Mobs",
 
   "item.animalia.raw_icefish": "Raw Icefish",
   "item.animalia.raw_fish": "Raw Fish",
 
-  "item.animalia.chileanseabass_bucket": "Bucket of Chilean Sea Bass",
+  "item.animalia.amphipod": "Amphipod",
+  "item.animalia.gigantocypris": "Giant Ostracod",
+
+  "item.animalia.dissostichus_eleginoides_bucket": "Bucket of Chilean Sea Bass",
   "item.animalia.eleginops_maclovinus_bucket": "Bucket of Patagonian Blennie",
 
   "item.animalia.fish_egg": "Fish Roe",
   "item.animalia.fish_egg.species": "%s Roe",
 
-  "item.animalia.chileanseabass_spawn_egg": "Chilean Sea Bass Spawn Egg",
+  "item.animalia.dissostichus_eleginoides_spawn_egg": "Chilean Sea Bass Spawn Egg",
   "item.animalia.eleginops_maclovinus_spawn_egg": "Patagonian Blennie Spawn Egg",
 
-  "entity.animalia.chileanseabass": "Chilean Sea Bass",
+  "entity.animalia.dissostichus_eleginoides": "Chilean Sea Bass",
   "entity.animalia.eleginops_maclovinus": "Patagonian Blennie",
 
-  "tooltip.animalia.baby": "Baby"
+  "tooltip.animalia.baby": "Juvenile"
 }

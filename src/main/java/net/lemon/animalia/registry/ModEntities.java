@@ -17,7 +17,7 @@ public class ModEntities {
     public static final DeferredRegister<EntityType<?>> ENTITY_TYPES = DeferredRegister.create(ForgeRegistries.ENTITY_TYPES, Animalia.MODID);
 
     /// REGISTER ENTITIES BELOW
-    public static final RegistryObject<EntityType<ToothfishEntity>> CHILEANSEABASS = registerEntityType("chileanseabass", ToothfishEntity::new, MobCategory.CREATURE, 0.9f, 0.9f);
+    public static final RegistryObject<EntityType<ToothfishEntity>> CHILEANSEABASS = registerEntityType("dissostichus_eleginoides", ToothfishEntity::new, MobCategory.CREATURE, 0.9f, 0.9f);
     public static final RegistryObject<EntityType<ToothfishEntity>> ELEGINOPS_MACLOVINUS = registerEntityType("eleginops_maclovinus", ToothfishEntity::new, MobCategory.CREATURE, 0.9f, 0.9f);
 
 

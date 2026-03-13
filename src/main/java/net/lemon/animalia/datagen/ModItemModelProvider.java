@@ -28,6 +28,10 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItems.RAW_ICEFISH);
         simpleItem(ModItems.RAW_FISH);
 
+        //Animal Items
+        simpleItem(ModItems.AMPHIPOD);
+        simpleItem(ModItems.GIGANTOCYPRIS);
+
         //Misc
         simpleItem(ModItems.FISH_EGG);
 

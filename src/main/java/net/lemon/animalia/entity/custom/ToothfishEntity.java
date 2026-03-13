@@ -162,6 +162,18 @@ public class ToothfishEntity extends FishBase implements GeoEntity {
         return ItemTags.FISHES;
     }
 
+    /***
+     * Eleginops maclovinus: Amphipod
+     * Dissostichus eleginoides: Any Fish
+     */
+    @Override
+    public boolean isBreedingItem(ItemStack stack) {
+        if(this.getType() == ModEntities.ELEGINOPS_MACLOVINUS.get()) {
+            return stack.is(ModItems.AMPHIPOD.get());
+        }
+        return stack.is(getFoodTag());
+    }
+
     @Override
     public InteractionResult mobInteract(Player pPlayer, InteractionHand pHand) {
         return super.mobInteract(pPlayer, pHand);

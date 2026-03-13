@@ -11,9 +11,13 @@ public class AnimaliaFoodTab {
     public static final List<RegistryObject<? extends Item>> FOOD_ITEMS = List.of(
             //Raws
             ModItems.RAW_ICEFISH,
-            ModItems.RAW_FISH
+            ModItems.RAW_FISH,
 
             //Cooked
+
+            //Other|Breeding
+            ModItems.AMPHIPOD,
+            ModItems.GIGANTOCYPRIS
     );
 
     public static void displayItems(CreativeModeTab.Output output) {
