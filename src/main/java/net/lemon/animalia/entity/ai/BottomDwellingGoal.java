@@ -1,10 +1,8 @@
 package net.lemon.animalia.entity.ai;
 
-import net.lemon.animalia.entity.bases.FishBase;
-import net.lemon.animalia.entity.bases.interfaces.IActivityTime;
+import net.lemon.animalia.entity.bases.AnimaliaBreedableWater;
 import net.minecraft.core.BlockPos;
 import net.minecraft.tags.FluidTags;
-import net.minecraft.world.entity.AgeableMob;
 import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.ai.goal.RandomSwimmingGoal;
 import net.minecraft.world.phys.Vec3;
@@ -28,7 +26,7 @@ public class BottomDwellingGoal extends RandomSwimmingGoal {
 
     @Override
     public boolean canUse() {
-        return fish instanceof FishBase f && super.canUse() && fish.isInWater() && f.activityChecker(f);
+        return fish instanceof AnimaliaBreedableWater f && super.canUse() && fish.isInWater() && f.activityChecker(f);
     }
 
     /***

@@ -1,7 +1,7 @@
 package net.lemon.animalia.entity.ai;
 
 import net.lemon.animalia.entity.bases.AnimaliaEggTypes;
-import net.lemon.animalia.entity.bases.FishBase;
+import net.lemon.animalia.entity.bases.AnimaliaBreedableWater;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.ai.targeting.TargetingConditions;
@@ -14,19 +14,19 @@ import java.util.List;
 
 public class FishBreedGoal extends Goal {
     private static final TargetingConditions PARTNER_TARGETING = TargetingConditions.forNonCombat().range(8.0D).ignoreLineOfSight();
-    protected FishBase fish;
+    protected AnimaliaBreedableWater fish;
     private AnimaliaEggTypes eggType;
-    private final Class<? extends FishBase> partnerClass;
+    private final Class<? extends AnimaliaBreedableWater> partnerClass;
     protected Level level;
     @Nullable
-    protected FishBase partner;
+    protected AnimaliaBreedableWater partner;
     private int loveTime;
     private final double speedModifier;
 
-    public FishBreedGoal(FishBase fish, double speedMod) {
+    public FishBreedGoal(AnimaliaBreedableWater fish, double speedMod) {
         this(fish, speedMod, fish.getClass());
     }
-    public FishBreedGoal(FishBase fish, double speedMod, Class<? extends FishBase> partnerClass) {
+    public FishBreedGoal(AnimaliaBreedableWater fish, double speedMod, Class<? extends AnimaliaBreedableWater> partnerClass) {
         this.fish = fish;
         this.partnerClass = partnerClass;
         this.level = fish.level();
@@ -64,12 +64,12 @@ public class FishBreedGoal extends Goal {
     }
 
     @Nullable
-    private FishBase getFreePartner() {
-        List<? extends FishBase> list = this.level.getNearbyEntities(this.partnerClass, PARTNER_TARGETING, this.fish, this.fish.getBoundingBox().inflate(8.0D));
+    private AnimaliaBreedableWater getFreePartner() {
+        List<? extends AnimaliaBreedableWater> list = this.level.getNearbyEntities(this.partnerClass, PARTNER_TARGETING, this.fish, this.fish.getBoundingBox().inflate(8.0D));
         double d0 = Double.MAX_VALUE;
-        FishBase fish0 = null;
+        AnimaliaBreedableWater fish0 = null;
 
-        for(FishBase fish1 : list) {
+        for(AnimaliaBreedableWater fish1 : list) {
             if (this.fish.canMate(fish1) && this.fish.distanceToSqr(fish1) < d0) {
                 fish0 = fish1;
                 d0 = this.fish.distanceToSqr(fish1);

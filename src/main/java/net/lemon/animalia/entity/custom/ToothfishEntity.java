@@ -45,9 +45,14 @@ import software.bernie.geckolib.core.object.PlayState;
 public class ToothfishEntity extends FishBase implements GeoEntity {
     private AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
 
-    public ToothfishEntity(EntityType<? extends AbstractFish> pEntityType, Level pLevel) {
+    public ToothfishEntity(EntityType<? extends FishBase> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
         this.moveControl = new BottomDwellingMoveHelperController(this);
+    }
+
+    @Override
+    public boolean useSmoothControl() {
+        return false;
     }
 
     @Override
@@ -70,11 +75,6 @@ public class ToothfishEntity extends FishBase implements GeoEntity {
                 .add(Attributes.MAX_HEALTH, 4D)
                 .add(Attributes.MOVEMENT_SPEED, 0.4f)
                 .build();
-    }
-
-    @Override
-    protected SoundEvent getFlopSound() {
-        return SoundEvents.SALMON_FLOP;
     }
 
     @Override
