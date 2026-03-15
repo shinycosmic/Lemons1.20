@@ -24,10 +24,14 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Pose;
 import net.minecraft.world.entity.ai.control.SmoothSwimmingLookControl;
 import net.minecraft.world.entity.ai.control.SmoothSwimmingMoveControl;
+import net.minecraft.world.entity.ai.goal.PanicGoal;
+import net.minecraft.world.entity.ai.goal.TemptGoal;
+import net.minecraft.world.entity.ai.goal.TryFindWaterGoal;
 import net.minecraft.world.entity.animal.WaterAnimal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
@@ -70,7 +74,10 @@ public abstract class AnimaliaBreedableWater extends WaterAnimal implements IAct
 
     @Override
     protected void registerGoals() {
-        this.goalSelector.addGoal(3, new FishBreedGoal(this, 1.0D));
+        this.goalSelector.addGoal(0, new TryFindWaterGoal(this));
+        this.goalSelector.addGoal(1, new PanicGoal(this, 1.5D));
+        this.goalSelector.addGoal(1, new TemptGoal(this, 1.0D, this.foodIngredients(), false));
+        this.goalSelector.addGoal(2, new FishBreedGoal(this, 1.0D));
         super.registerGoals();
     }
 
@@ -222,6 +229,10 @@ public abstract class AnimaliaBreedableWater extends WaterAnimal implements IAct
      * @return
      */
     public abstract TagKey<Item> getFoodTag();
+
+    public Ingredient foodIngredients() {
+        return Ingredient.of(getFoodTag());
+    }
 
     /***
      * Used to set breeding Item

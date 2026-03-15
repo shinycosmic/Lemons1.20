@@ -1,7 +1,5 @@
 package net.lemon.animalia.entity.bases;
 
-import net.lemon.animalia.entity.ai.FishBreedGoal;
-import net.lemon.animalia.item.FishEggItem;
 import net.lemon.animalia.registry.ModItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -40,7 +38,7 @@ public abstract class FishBase extends AnimaliaBreedableWater implements Bucketa
     public FishBase(EntityType<? extends FishBase> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
         this.setPathfindingMalus(BlockPathTypes.WATER, 0.0f);
-        this.setCanPickUpLoot(true);
+        this.setCanPickUpLoot(false);
     }
 
     public boolean requiresCustomPersistence() {
@@ -74,7 +72,6 @@ public abstract class FishBase extends AnimaliaBreedableWater implements Bucketa
 
     @Override
     protected void registerGoals() {
-        this.goalSelector.addGoal(0, new PanicGoal(this, 1.25D));
         this.goalSelector.addGoal(2, new AvoidEntityGoal<>(this, Player.class, 8.0F, 1.6D, 1.4D, EntitySelector.NO_SPECTATORS::test));
         this.goalSelector.addGoal(4, new RandomSwimmingGoal(this, 1.0D, 10));
         super.registerGoals();
@@ -190,6 +187,26 @@ public abstract class FishBase extends AnimaliaBreedableWater implements Bucketa
             this.setGender(this.random.nextInt(2));
         }
         return super.finalizeSpawn(level, difficulty, reason, spawnData, dataTag);
+    }
+
+    /**
+     * Taken from AbstractFish
+     */
+    static class FishSwimGoal extends RandomSwimmingGoal {
+        private final FishBase fish;
+
+        public FishSwimGoal(FishBase pFish) {
+            super(pFish, 1.0D, 40);
+            this.fish = pFish;
+        }
+
+        /**
+         * Returns whether execution should begin. You can also read and cache any state necessary for execution in this
+         * method as well.
+         */
+        public boolean canUse() {
+            return this.fish.canRandomSwim() && super.canUse();
+        }
     }
 
     //TODO HANDLE DAY_NIGHT ACTIVITY

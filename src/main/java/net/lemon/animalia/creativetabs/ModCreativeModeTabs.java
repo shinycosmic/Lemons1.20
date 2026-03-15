@@ -30,6 +30,14 @@ public class ModCreativeModeTabs {
                         AnimaliaMobsTab.displayItems(output);
                     })
                     .build());
+    public static final RegistryObject<CreativeModeTab> ANIMALIA_MISC = CREATIVE_MODE_TABS.register("animalia_misc",
+            () -> CreativeModeTab.builder().icon(() -> new ItemStack(Items.NAUTILUS_SHELL))
+                    .title(Component.translatable("creativetab.animalia_misc"))
+                    .displayItems((param, output) -> {
+                        AnimaliaMiscTab.displayItems(output);
+                    })
+                    .build());
+
     public static void register(IEventBus eventBus) {
         CREATIVE_MODE_TABS.register(eventBus);
     }

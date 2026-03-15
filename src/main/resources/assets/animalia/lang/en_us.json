@@ -1,6 +1,9 @@
 {
   "creativetab.animalia_food": "Wildlife Explorers Foods",
   "creativetab.animalia_mobs": "Wildlife Explorers Mobs",
+  "creativetab.animalia_misc": "Wildlife Explorers Misc",
+
+  "block.animalia.filter_trap": "Filter Trap",
 
   "item.animalia.raw_icefish": "Raw Icefish",
   "item.animalia.raw_fish": "Raw Fish",
@@ -20,5 +23,6 @@
   "entity.animalia.dissostichus_eleginoides": "Chilean Sea Bass",
   "entity.animalia.eleginops_maclovinus": "Patagonian Blennie",
 
-  "tooltip.animalia.baby": "Juvenile"
+  "tooltip.animalia.baby": "Juvenile",
+  "container.animalia.filter_trap": "Filter Trap"
 }

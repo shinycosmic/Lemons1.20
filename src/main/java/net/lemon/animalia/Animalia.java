@@ -1,10 +1,11 @@
 package net.lemon.animalia;
 
 import com.mojang.logging.LogUtils;
-import net.lemon.animalia.registry.ModItems;
+import net.lemon.animalia.registry.*;
 import net.lemon.animalia.creativetabs.ModCreativeModeTabs;
-import net.lemon.animalia.registry.ModEntities;
+import net.lemon.animalia.screens.FilterTrapScreen;
 import net.lemon.animalia.util.AnimaliaRenderInit;
+import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
@@ -34,6 +35,9 @@ public class Animalia {
         //register classes
         ModCreativeModeTabs.register(modEventBus);
         ModItems.register(modEventBus);
+        ModBlocks.register(modEventBus);
+        ModBlockEntities.register(modEventBus);
+        ModMenuTypes.register(modEventBus);
         ModEntities.register(modEventBus);
 
         GeckoLib.initialize();
@@ -63,9 +67,9 @@ public class Animalia {
     @Mod.EventBusSubscriber(modid = MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
     public static class ClientModEvents {
         @SubscribeEvent
-        public static void onClientSetup(FMLClientSetupEvent event)
-        {
+        public static void onClientSetup(FMLClientSetupEvent event) {
             AnimaliaRenderInit.init();
+            MenuScreens.register(ModMenuTypes.FILTER_TRAP_MENU.get(), FilterTrapScreen::new);
         }
     }
 }

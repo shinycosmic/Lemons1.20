@@ -1,5 +1,6 @@
 package net.lemon.animalia.datagen;
 
+import net.lemon.animalia.datagen.loot.ModBlockLootTables;
 import net.lemon.animalia.datagen.loot.ModEntityLootTables;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.loot.LootTableProvider;
@@ -12,7 +13,8 @@ import java.util.Set;
 public class ModLootTableProvider {
     public static LootTableProvider create(PackOutput output) {
         return new LootTableProvider(output, Set.of(), List.of(
-                new LootTableProvider.SubProviderEntry(ModEntityLootTables::new, LootContextParamSets.ENTITY)
+                new LootTableProvider.SubProviderEntry(ModEntityLootTables::new, LootContextParamSets.ENTITY),
+                new LootTableProvider.SubProviderEntry(ModBlockLootTables::new, LootContextParamSets.BLOCK)
         ));
     }
 }

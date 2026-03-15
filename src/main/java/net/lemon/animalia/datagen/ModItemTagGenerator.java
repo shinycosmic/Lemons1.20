@@ -1,6 +1,7 @@
 package net.lemon.animalia.datagen;
 
 import net.lemon.animalia.registry.ModItems;
+import net.lemon.animalia.util.ModTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;
@@ -19,6 +20,7 @@ public class ModItemTagGenerator extends ItemTagsProvider {
     protected void addTags(HolderLookup.Provider pProvider) {
         tag(ItemTags.FISHES).add(ModItems.RAW_FISH.get());
         tag(ItemTags.FISHES).add(ModItems.RAW_ICEFISH.get());
-
+        tag(ModTags.Items.CRUSTACEAN).add(ModItems.AMPHIPOD.get());
+        tag(ModTags.Items.CRUSTACEAN).add(ModItems.GIGANTOCYPRIS.get());
     }
 }
