@@ -73,7 +73,7 @@ public abstract class FishBase extends AnimaliaBreedableWater implements Bucketa
     @Override
     protected void registerGoals() {
         this.goalSelector.addGoal(2, new AvoidEntityGoal<>(this, Player.class, 8.0F, 1.6D, 1.4D, EntitySelector.NO_SPECTATORS::test));
-        this.goalSelector.addGoal(4, new RandomSwimmingGoal(this, 1.0D, 10));
+        this.goalSelector.addGoal(4, new FishSwimGoal(this));
         super.registerGoals();
     }
 
@@ -95,7 +95,7 @@ public abstract class FishBase extends AnimaliaBreedableWater implements Bucketa
         return SoundEvents.BUCKET_FILL_FISH;
     }
 
-    protected boolean canRandomSwim() {
+    public boolean canRandomSwim() {
         return true;
     }
 
