@@ -35,7 +35,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.logging.Filter;
 
 public class FilterTrapBlock extends BaseEntityBlock implements SimpleWaterloggedBlock {
-    public static final VoxelShape SHAPE = Block.box(1.5, 0, 1.5, 14.5, 7, 14.5);
+    public static final VoxelShape SHAPE = Block.box(1, 0, 1, 15, 9, 15);
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
     public FilterTrapBlock(Properties props) {
         super(props);

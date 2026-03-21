@@ -35,14 +35,18 @@ public abstract class FishBase extends AnimaliaBreedableWater implements Bucketa
     private FishBase leader;
     private int schoolSize = 1;
 
-    public FishBase(EntityType<? extends FishBase> pEntityType, Level pLevel) {
-        super(pEntityType, pLevel);
+    public FishBase(EntityType<? extends FishBase> entityType, Level level) {
+        super(entityType, level);
         this.setPathfindingMalus(BlockPathTypes.WATER, 0.0f);
         this.setCanPickUpLoot(false);
     }
 
     public boolean requiresCustomPersistence() {
         return super.requiresCustomPersistence() || this.fromBucket();
+    }
+
+    public boolean isActuallyMoving() {
+        return this.getDeltaMovement().lengthSqr() > 1.0E-6;
     }
 
     public boolean removeWhenFarAway(double pDistanceToClosestPlayer) {
@@ -73,7 +77,7 @@ public abstract class FishBase extends AnimaliaBreedableWater implements Bucketa
     @Override
     protected void registerGoals() {
         this.goalSelector.addGoal(2, new AvoidEntityGoal<>(this, Player.class, 8.0F, 1.6D, 1.4D, EntitySelector.NO_SPECTATORS::test));
-        this.goalSelector.addGoal(4, new FishSwimGoal(this));
+        this.goalSelector.addGoal(4, new RandomSwimmingGoal(this, 1.0D, 10));
         super.registerGoals();
     }
 

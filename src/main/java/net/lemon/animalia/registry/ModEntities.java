@@ -1,6 +1,7 @@
 package net.lemon.animalia.registry;
 
 import net.lemon.animalia.Animalia;
+import net.lemon.animalia.entity.custom.CongolliEntity;
 import net.lemon.animalia.entity.custom.ToothfishEntity;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -19,6 +20,7 @@ public class ModEntities {
     /// REGISTER ENTITIES BELOW
     public static final RegistryObject<EntityType<ToothfishEntity>> CHILEANSEABASS = registerEntityType("dissostichus_eleginoides", ToothfishEntity::new, MobCategory.CREATURE, 0.9f, 0.9f);
     public static final RegistryObject<EntityType<ToothfishEntity>> ELEGINOPS_MACLOVINUS = registerEntityType("eleginops_maclovinus", ToothfishEntity::new, MobCategory.CREATURE, 0.9f, 0.9f);
+    public static final RegistryObject<EntityType<CongolliEntity>> PSEUDAPHRITIS_URVILLII = registerEntityType("pseudaphritis_urvillii", CongolliEntity::new, MobCategory.CREATURE, 0.9f, 0.9f);
 
 
     //Supplier Helper Methods

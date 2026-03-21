@@ -42,6 +42,8 @@ public class ModItemModelProvider extends ItemModelProvider {
         //spawn egg generators
         withExistingParent(ModItems.CHILEANSEABASS_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
         withExistingParent(ModItems.ELEGINOPS_MACLOVINUS_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
+        withExistingParent(ModItems.PSEUDAPHRITIS_URVILLII_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
+
     }
 
     private ItemModelBuilder simpleItem(RegistryObject<Item> item) {

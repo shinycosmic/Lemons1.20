@@ -133,6 +133,22 @@ public class FilterTrapBlockEntity extends BlockEntity implements MenuProvider {
         dropTimer = pTag.getInt("filter_trap.dropTimer");
     }
 
+    public ItemStack getRenderStack() {
+        if(!itemHandler.getStackInSlot(OUTPUT_SLOT1).isEmpty()) {
+            return itemHandler.getStackInSlot(OUTPUT_SLOT1);
+        } else if(!itemHandler.getStackInSlot(OUTPUT_SLOT2).isEmpty()) {
+            return itemHandler.getStackInSlot(OUTPUT_SLOT2);
+        } else if(!itemHandler.getStackInSlot(OUTPUT_SLOT3).isEmpty()) {
+            return itemHandler.getStackInSlot(OUTPUT_SLOT3);
+        } else if(!itemHandler.getStackInSlot(OUTPUT_SLOT4).isEmpty()) {
+            return itemHandler.getStackInSlot(OUTPUT_SLOT4);
+        } else if(!itemHandler.getStackInSlot(OUTPUT_SLOT5).isEmpty()) {
+            return itemHandler.getStackInSlot(OUTPUT_SLOT5);
+        } else {
+            return null;
+        }
+    }
+
     public void tick(Level level1, BlockPos pos, BlockState state1) {
         if(placedInWater()) {
             timer++;

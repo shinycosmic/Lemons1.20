@@ -1,6 +1,7 @@
 package net.lemon.animalia.events;
 
 import net.lemon.animalia.Animalia;
+import net.lemon.animalia.entity.custom.CongolliEntity;
 import net.lemon.animalia.entity.custom.ToothfishEntity;
 import net.lemon.animalia.registry.ModEntities;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
@@ -18,5 +19,6 @@ public class ModEventBusEvents {
     public static void registerAttributes(EntityAttributeCreationEvent event) {
         event.put(ModEntities.CHILEANSEABASS.get(), ToothfishEntity.setAttributes());
         event.put(ModEntities.ELEGINOPS_MACLOVINUS.get(), ToothfishEntity.setAttributes());
+        event.put(ModEntities.PSEUDAPHRITIS_URVILLII.get(), CongolliEntity.setAttributes());
     }
 }

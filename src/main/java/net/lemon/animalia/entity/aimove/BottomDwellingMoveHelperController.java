@@ -4,13 +4,14 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.control.MoveControl;
+import net.minecraft.world.entity.ai.control.SmoothSwimmingMoveControl;
 import net.minecraft.world.phys.Vec3;
 
-public class BottomDwellingMoveHelperController extends MoveControl {
+public class BottomDwellingMoveHelperController extends SmoothSwimmingMoveControl {
     private final Mob fish;
 
     public BottomDwellingMoveHelperController(Mob mob) {
-        super(mob);
+        super(mob, 85, 10, 0.1F, 0.5F, false);
         this.fish = mob;
     }
 
@@ -61,9 +62,16 @@ public class BottomDwellingMoveHelperController extends MoveControl {
              * Lower Maximum change to make rotation speed slower
              */
             if (dx != 0.0D || dz != 0.0D) {
-                float f1 = (float)(Mth.atan2(dz, dx) * (double)(180F / (float)Math.PI)) - 90.0F;
-                this.fish.setYRot(this.rotlerp(this.fish.getYRot(), f1, 15.0F));
+                // Smooth horizontal yaw
+                float targetYaw = (float)(Math.atan2(dz, dx) * (180.0 / Math.PI)) - 90.0F;
+                this.fish.setYRot(rotlerp(this.fish.getYRot(), targetYaw, 15.0F));
                 this.fish.yBodyRot = this.fish.getYRot();
+                this.fish.yHeadRot = this.fish.getYRot();
+
+                // Smooth pitch toward target
+                float targetPitch = -(float)(Math.atan2(dy, horizontalDist) * (180.0 / Math.PI));
+                targetPitch = Mth.clamp(Mth.wrapDegrees(targetPitch), -85.0F, 85.0F); // max pitch
+                this.fish.setXRot(rotlerp(this.fish.getXRot(), targetPitch, 5.0F));
             }
         } else {
             this.fish.setSpeed(0.0F);

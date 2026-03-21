@@ -1,7 +1,7 @@
 package net.lemon.animalia.datagen;
 
 import net.lemon.animalia.registry.ModItems;
-import net.lemon.animalia.util.ModTags;
+import net.lemon.animalia.registry.ModTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;

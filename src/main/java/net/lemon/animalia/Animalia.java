@@ -6,6 +6,8 @@ import net.lemon.animalia.creativetabs.ModCreativeModeTabs;
 import net.lemon.animalia.screens.FilterTrapScreen;
 import net.lemon.animalia.util.AnimaliaRenderInit;
 import net.minecraft.client.gui.screens.MenuScreens;
+import net.minecraft.client.renderer.ItemBlockRenderTypes;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
@@ -69,6 +71,7 @@ public class Animalia {
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event) {
             AnimaliaRenderInit.init();
+            ItemBlockRenderTypes.setRenderLayer(ModBlocks.FILTER_TRAP.get(), RenderType.cutout());
             MenuScreens.register(ModMenuTypes.FILTER_TRAP_MENU.get(), FilterTrapScreen::new);
         }
     }
