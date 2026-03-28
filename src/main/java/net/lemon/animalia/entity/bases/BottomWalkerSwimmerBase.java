@@ -330,6 +330,11 @@ public abstract class BottomWalkerSwimmerBase extends FishBase {
             } else {
                 this.mob.setZza(0.0F);
             }
+
+            if (mob.onGround()) {
+                Vec3 vel = mob.getDeltaMovement();
+                mob.setDeltaMovement(vel.x, 0, vel.z); // lock vertical motion
+            }
         }
     }
 

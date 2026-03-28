@@ -7,6 +7,9 @@ import net.lemon.animalia.registry.ModEntities;
 import net.lemon.animalia.registry.ModTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.Mth;
@@ -36,13 +39,14 @@ import software.bernie.geckolib.core.object.PlayState;
 import java.util.Random;
 
 public class CongolliEntity extends BottomWalkerSwimmerBase implements GeoEntity {
+    private static final EntityDataAccessor<Boolean> IDLE_SAND = SynchedEntityData.defineId(CongolliEntity.class, EntityDataSerializers.BOOLEAN);
     private AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
     private int dartTicks = 2000;
     private int dartCooldown = 0;
-    private int ambientTicks = 2000;
-    private int animLength = 15;
+    private int ambientTicks;
+    private int idleSandLength = 30;
     private boolean isDarting = false;
-    private boolean isAttacking = false;
+    private int sandTimer = idleSandLength;
 
 
     private final Random rand = new Random();
@@ -125,11 +129,46 @@ public class CongolliEntity extends BottomWalkerSwimmerBase implements GeoEntity
             ambientTicks = ambientTicks - rand.nextInt(3);
         }
 
-        //handle sand animation
-        if(!(ambientTicks > 0)) {
-            this.isAttacking = true;
+        //handle sand state
+        if(!this.level().isClientSide) {
+            if (ambientTicks <= 0 && !getIsIdleSand() && isWalking()) {
+                sandTimer = idleSandLength;
+                this.setIsIdleSand(true);
+            }
+            if (sandTimer > 0 && getIsIdleSand()) {
+                sandTimer--;
+            } else if(getIsIdleSand()){
+                ambientTicks = rand.nextInt(1000)+300;
+                this.setIsIdleSand(false);
+            }
         }
 
+    }
+
+    private void setIsIdleSand(boolean bool) {
+        this.entityData.set(IDLE_SAND, bool);
+    }
+
+    private boolean getIsIdleSand() {
+        return this.entityData.get(IDLE_SAND);
+    }
+
+    @Override
+    protected void defineSynchedData() {
+        super.defineSynchedData();
+        this.entityData.define(IDLE_SAND, false);
+    }
+
+    @Override
+    public void addAdditionalSaveData(CompoundTag pCompound) {
+        super.addAdditionalSaveData(pCompound);
+        pCompound.putBoolean("IdleSand", this.getIsIdleSand());
+    }
+
+    @Override
+    public void readAdditionalSaveData(CompoundTag pCompound) {
+        super.readAdditionalSaveData(pCompound);
+        this.setIsIdleSand(pCompound.getBoolean("IdleSand"));
     }
 
     @Override
@@ -147,19 +186,21 @@ public class CongolliEntity extends BottomWalkerSwimmerBase implements GeoEntity
 
         if (this.isWalking()) {
             if (this.isActuallyMoving()) {
-                controller.setAnimation(RawAnimation.begin()
-                        .then("swim", Animation.LoopType.LOOP));
+                controller.setAnimation(RawAnimation.begin().then("swim", Animation.LoopType.LOOP));
+                return PlayState.CONTINUE;
             } else {
-                controller.setAnimation(RawAnimation.begin()
-                        .then("alert", Animation.LoopType.LOOP));
+                if(this.getIsIdleSand()) {
+                    controller.setAnimation(RawAnimation.begin().then("sand", Animation.LoopType.LOOP));
+                    return PlayState.CONTINUE;
+                }
+                controller.setAnimation(RawAnimation.begin().then("alert", Animation.LoopType.LOOP));
+                return PlayState.CONTINUE;
             }
         } else {
-            // SWIMMING / DEFAULT IDLE
-            controller.setAnimation(RawAnimation.begin()
-                    .then("swim", Animation.LoopType.LOOP));
+            // SWIMMING
+            controller.setAnimation(RawAnimation.begin().then("swim", Animation.LoopType.LOOP));
+            return PlayState.CONTINUE;
         }
-
-        return PlayState.CONTINUE;
     }
 
     @Override
@@ -179,6 +220,7 @@ public class CongolliEntity extends BottomWalkerSwimmerBase implements GeoEntity
             if(dataTag.contains("BucketGender")) this.setGender(dataTag.getInt("BucketGender"));
             if(dataTag.contains("BucketVarColor")) this.setVarColor(dataTag.getInt("BucketVarColor"));
         }
+        this.ambientTicks = rand.nextInt(1000)+1000;
         return super.finalizeSpawn(level, difficulty, reason, spawnData, dataTag);
     }
 }
