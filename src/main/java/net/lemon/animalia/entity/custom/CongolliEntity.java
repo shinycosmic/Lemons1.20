@@ -22,11 +22,13 @@ import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.control.SmoothSwimmingLookControl;
 import net.minecraft.world.entity.ai.control.SmoothSwimmingMoveControl;
+import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
+import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.GeoEntity;
@@ -61,6 +63,11 @@ public class CongolliEntity extends BottomWalkerSwimmerBase implements GeoEntity
     @Override
     protected void registerGoals() {
         super.registerGoals();
+        this.goalSelector.getAvailableGoals().removeIf(
+                g -> g.getGoal() instanceof BottomWalkerStrollGoal
+        );
+        this.goalSelector.addGoal(4, new BurstGoal(this));
+
 
     }
 
@@ -222,5 +229,86 @@ public class CongolliEntity extends BottomWalkerSwimmerBase implements GeoEntity
         }
         this.ambientTicks = rand.nextInt(1000)+1000;
         return super.finalizeSpawn(level, difficulty, reason, spawnData, dataTag);
+    }
+
+    public int getRestCooldown() {
+        return 100;
+    }
+
+    public double getBurstPower() {
+        return 0.22D;
+    }
+
+    public double getRandomUpBoost() {
+        return this.getRandom().nextDouble() * 0.13D;
+    }
+
+    private boolean isNearGround() {
+        AABB box = this.getBoundingBox().move(0, -0.1, 0);
+        return !this.level().noCollision(this, box);
+    }
+
+    //Quick Hops instead of regular swimming
+    static class BurstGoal extends Goal {
+        private final CongolliEntity mob;
+        private int cooldown;
+        private boolean stopped;
+
+        public BurstGoal(CongolliEntity mob) {
+            this.mob = mob;
+            this.cooldown = mob.getRestCooldown();
+            this.stopped = true;
+        }
+
+        @Override
+        public boolean canUse() {
+            return mob.isWalking() && mob.isInWater() && mob.isNearGround();
+        }
+
+        @Override
+        public boolean canContinueToUse() {
+            return mob.isWalking() && mob.isInWater();
+        }
+
+        @Override
+        public void stop() {
+            this.stopped = true;
+            this.cooldown = mob.getRestCooldown();
+        }
+
+        @Override
+        public void tick() {
+            if(stopped) {
+                if(--cooldown <= 0 && mob.isNearGround() && mob.isWalking() && mob.isActuallyMoving()) {
+                    burst();
+                }
+            } else  {
+                if(mob.isNearGround()) {
+                    stopped = true;
+                    cooldown = mob.getRestCooldown();
+
+                    mob.setDeltaMovement(Vec3.ZERO);
+                }
+            }
+        }
+
+        private void burst() {
+            float angle = mob.getYRot();
+            double rad = Math.toRadians(angle);
+            double strength = mob.getBurstPower();
+
+            double dx = Math.cos(rad) * strength;
+            double dz = Math.sin(rad) * strength;
+            double dy = mob.getRandomUpBoost();
+
+            mob.setDeltaMovement(dx, dy, dz);
+            mob.hasImpulse = true;
+
+            mob.setYRot(angle);
+            this.stopped = false;
+
+
+
+        }
     }
 }
