@@ -4,6 +4,7 @@ import net.lemon.animalia.entity.bases.ActivityTime;
 import net.lemon.animalia.entity.bases.BottomWalkerSwimmerBase;
 import net.lemon.animalia.entity.bases.FishBase;
 import net.lemon.animalia.registry.ModEntities;
+import net.lemon.animalia.registry.ModItems;
 import net.lemon.animalia.registry.ModTags;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -96,8 +97,8 @@ public class CongolliEntity extends BottomWalkerSwimmerBase implements GeoEntity
 
     @Override
     public ItemStack getBucketItemStack() {
-        return new ItemStack(Items.SALMON_BUCKET);
-    } //TODO
+        return new ItemStack(ModItems.PSEUDAPHRITIS_URVILLII_BUCKET.get());
+    }
 
     public static AttributeSupplier setAttributes() {
         return Mob.createMobAttributes()

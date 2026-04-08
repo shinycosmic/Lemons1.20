@@ -33,6 +33,8 @@ public class ModItems {
     //Buckets
     public static final RegistryObject<Item> CHILEANSEABASS_BUCKET = registerBucket("dissostichus_eleginoides_bucket", ModEntities.CHILEANSEABASS);
     public static final RegistryObject<Item> ELEGINOPS_MACLOVINUS_BUCKET = registerBucket("eleginops_maclovinus_bucket", ModEntities.ELEGINOPS_MACLOVINUS);
+    public static final RegistryObject<Item> PSEUDAPHRITIS_URVILLII_BUCKET = registerBucket("pseudaphritis_urvillii_bucket", ModEntities.PSEUDAPHRITIS_URVILLII);
+
 
 
     //Misc

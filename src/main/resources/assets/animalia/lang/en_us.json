@@ -3,7 +3,7 @@
   "creativetab.animalia_mobs": "Wildlife Explorers Mobs",
   "creativetab.animalia_misc": "Wildlife Explorers Misc",
 
-  "block.animalia.filter_trap": "Filter Trap",
+  "block.animalia.filter_trap": "Water Trap",
 
   "item.animalia.raw_icefish": "Raw Icefish",
   "item.animalia.raw_fish": "Raw Fish",
@@ -13,6 +13,7 @@
 
   "item.animalia.dissostichus_eleginoides_bucket": "Bucket of Chilean Sea Bass",
   "item.animalia.eleginops_maclovinus_bucket": "Bucket of Patagonian Blennie",
+  "item.animalia.pseudaphritis_urvillii_bucket": "Bucket of Congolli",
 
   "item.animalia.fish_egg": "Fish Roe",
   "item.animalia.fish_egg.species": "%s Roe",
@@ -26,5 +27,5 @@
   "entity.animalia.pseudaphritis_urvillii": "Congolli",
 
   "tooltip.animalia.baby": "Juvenile",
-  "container.animalia.filter_trap": "Filter Trap"
+  "container.animalia.filter_trap": "Water Trap"
 }
