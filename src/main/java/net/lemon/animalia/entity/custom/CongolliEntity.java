@@ -5,24 +5,20 @@ import net.lemon.animalia.entity.bases.BottomWalkerSwimmerBase;
 import net.lemon.animalia.entity.bases.FishBase;
 import net.lemon.animalia.registry.ModEntities;
 import net.lemon.animalia.registry.ModTags;
-import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
-import net.minecraft.util.Mth;
 import net.minecraft.world.DifficultyInstance;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.MobSpawnType;
-import net.minecraft.world.entity.SpawnGroupData;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.control.SmoothSwimmingLookControl;
 import net.minecraft.world.entity.ai.control.SmoothSwimmingMoveControl;
 import net.minecraft.world.entity.ai.goal.Goal;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -36,6 +32,7 @@ import software.bernie.geckolib.core.animatable.GeoAnimatable;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.core.animatable.instance.SingletonAnimatableInstanceCache;
 import software.bernie.geckolib.core.animation.*;
+import software.bernie.geckolib.core.animation.AnimationState;
 import software.bernie.geckolib.core.object.PlayState;
 
 import java.util.Random;
@@ -43,12 +40,10 @@ import java.util.Random;
 public class CongolliEntity extends BottomWalkerSwimmerBase implements GeoEntity {
     private static final EntityDataAccessor<Boolean> IDLE_SAND = SynchedEntityData.defineId(CongolliEntity.class, EntityDataSerializers.BOOLEAN);
     private AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
-    private int dartTicks = 2000;
-    private int dartCooldown = 0;
     private int ambientTicks;
     private int idleSandLength = 30;
-    private boolean isDarting = false;
     private int sandTimer = idleSandLength;
+    private int panicCooldown = 0;
 
 
     private final Random rand = new Random();
@@ -67,6 +62,7 @@ public class CongolliEntity extends BottomWalkerSwimmerBase implements GeoEntity
                 g -> g.getGoal() instanceof BottomWalkerStrollGoal
         );
         this.goalSelector.addGoal(4, new BurstGoal(this));
+        this.goalSelector.addGoal(6, new BurstPanicGoal(this));
 
 
     }
@@ -131,9 +127,14 @@ public class CongolliEntity extends BottomWalkerSwimmerBase implements GeoEntity
     @Override
     public void aiStep() {
         super.aiStep();
+        if (panicCooldown > 0) panicCooldown--;
 
         if(ambientTicks > 0) {
             ambientTicks = ambientTicks - rand.nextInt(3);
+        }
+
+        if(this.isWalking()) {
+            this.getNavigation().stop();
         }
 
         //handle sand state
@@ -150,6 +151,15 @@ public class CongolliEntity extends BottomWalkerSwimmerBase implements GeoEntity
             }
         }
 
+    }
+
+    @Override
+    public void travel(Vec3 vec) {
+        if (this.isWalking()) {
+            super.travel(Vec3.ZERO);
+            return;
+        }
+        super.travel(vec);
     }
 
     private void setIsIdleSand(boolean bool) {
@@ -231,21 +241,99 @@ public class CongolliEntity extends BottomWalkerSwimmerBase implements GeoEntity
         return super.finalizeSpawn(level, difficulty, reason, spawnData, dataTag);
     }
 
+    @Override
+    public boolean isActuallyMoving() {
+        Vec3 vel = getDeltaMovement();
+        return vel.x * vel.x + vel.z * vel.z > 1.0E-6; // ignore vertical
+    }
+
     public int getRestCooldown() {
         return 100;
     }
 
     public double getBurstPower() {
-        return 0.22D;
+        return 0.17D;
     }
 
     public double getRandomUpBoost() {
-        return this.getRandom().nextDouble() * 0.13D;
+        return this.getRandom().nextDouble() * 1D;
     }
 
     private boolean isNearGround() {
         AABB box = this.getBoundingBox().move(0, -0.1, 0);
         return !this.level().noCollision(this, box);
+    }
+
+    private boolean isDirectionBlocked(double dx, double dz, CongolliEntity mob) {
+        AABB box = mob.getBoundingBox().move(dx * 0.5, 0, dz * 0.5);
+        return !mob.level().noCollision(mob, box);
+    }
+
+    public void burst(CongolliEntity mob, @Nullable Vec3 threatPos) {
+        float baseYaw = mob.getYRot();
+        float[] offsets = {
+                0F,
+                10F, -10F,
+                25F, -25F,
+                45F, -45F,
+                70F, -70F,
+                110F, -110F,
+                180F
+        };
+
+        float bestAngle = baseYaw;
+        double bestScore = Double.NEGATIVE_INFINITY;
+
+        for (float offset : offsets) {
+            float angle = baseYaw + offset;
+            double rad = Math.toRadians(angle);
+
+            double dx = -Math.sin(rad);
+            double dz =  Math.cos(rad);
+
+            Vec3 dir = new Vec3(dx, 0, dz);
+
+            double score = 0;
+            if (threatPos != null) {
+                Vec3 away = mob.position().subtract(threatPos).normalize();
+                score += dir.dot(away) * 3.0;
+            }
+            if (isDirectionBlocked(dx, dz, mob)) {
+                score -= 8.0;
+            }
+            Vec3 forwardCheck = dir.scale(1.5);
+            if (!isDirectionBlocked(forwardCheck.x, forwardCheck.z, mob)) {
+                score += 2.0;
+            }
+            if (threatPos == null) {
+                double forwardDot = dir.dot(new Vec3(-Math.sin(Math.toRadians(baseYaw)), 0, Math.cos(Math.toRadians(baseYaw))));
+                if (forwardDot > 0) {
+                    score += forwardDot * 2.0;
+                } else {
+                    score -= 1.0;
+                }
+            }
+            score += (mob.getRandom().nextFloat() - 0.5) * 0.2;
+
+            if (score > bestScore) {
+                bestScore = score;
+                bestAngle = angle;
+            }
+        }
+        double rad = Math.toRadians(bestAngle);
+        double strength = mob.getBurstPower();
+
+        double dx = -Math.sin(rad) * strength;
+        double dz = Math.cos(rad) * strength;
+        double dy = mob.getRandomUpBoost();
+
+        mob.setDeltaMovement(dx, dy, dz);
+        mob.hasImpulse = true;
+
+        mob.setYRot(bestAngle);
+        mob.setYHeadRot(bestAngle);
+        mob.yRotO = bestAngle;
+        mob.yHeadRotO = bestAngle;
     }
 
     //Quick Hops instead of regular swimming
@@ -279,36 +367,75 @@ public class CongolliEntity extends BottomWalkerSwimmerBase implements GeoEntity
         @Override
         public void tick() {
             if(stopped) {
-                if(--cooldown <= 0 && mob.isNearGround() && mob.isWalking() && mob.isActuallyMoving()) {
-                    burst();
+                if(--cooldown <= 0 && mob.isNearGround() && mob.isWalking() && !mob.isActuallyMoving()) {
+                    mob.burst(mob, null);
+                    this.stopped = false;
                 }
             } else  {
                 if(mob.isNearGround()) {
                     stopped = true;
                     cooldown = mob.getRestCooldown();
-
-                    mob.setDeltaMovement(Vec3.ZERO);
                 }
             }
         }
+    }
 
-        private void burst() {
-            float angle = mob.getYRot();
-            double rad = Math.toRadians(angle);
-            double strength = mob.getBurstPower();
+    static class BurstPanicGoal extends Goal {
+        private final CongolliEntity mob;
+        private int panicTime;
+        protected boolean isRunning;
 
-            double dx = Math.cos(rad) * strength;
-            double dz = Math.sin(rad) * strength;
-            double dy = mob.getRandomUpBoost();
+        public BurstPanicGoal(CongolliEntity mob) {
+            this.mob = mob;
+        }
 
-            mob.setDeltaMovement(dx, dy, dz);
-            mob.hasImpulse = true;
+        @Override
+        public boolean canUse() {
+            if (!shouldPanic()) return false;
+            if(!this.mob.isWalking()) return false;
+            if (mob.panicCooldown > 0) return false;
+            return true;
+        }
 
-            mob.setYRot(angle);
-            this.stopped = false;
+        protected boolean shouldPanic() {
+            if (mob.getLastHurtByMob() != null || mob.isFreezing() || mob.isOnFire()) {
+                return true;
+            }
+            return !mob.level().getEntitiesOfClass(Player.class, mob.getBoundingBox().inflate(0.3)).isEmpty();
+        }
 
+        @Override
+        public void start() {
+            this.isRunning = true;
+            this.panicTime = 20 + mob.getRandom().nextInt(20);
+            mob.panicCooldown = 80;
 
+            triggerBurst();
+        }
 
+        @Override
+        public void stop() {
+            this.isRunning = false;
+            this.panicTime = 0;
+        }
+
+        @Override
+        public boolean canContinueToUse() {
+            return this.isRunning && panicTime > 0 && mob.isInWater();
+        }
+
+        @Override
+        public void tick() {
+            panicTime--;
+        }
+
+        private void triggerBurst() {
+            Player player = mob.level().getNearestPlayer(mob, 4.0);
+            if(player != null) {
+                mob.burst(mob, player.position());
+            } else {
+                mob.burst(mob, null);
+            }
         }
     }
 }
