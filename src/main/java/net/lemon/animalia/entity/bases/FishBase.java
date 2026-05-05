@@ -92,6 +92,20 @@ public abstract class FishBase extends AnimaliaBreedableWater implements Bucketa
     }
 
     public void loadFromBucketTag(CompoundTag pTag) {
+        if(pTag != null) {
+            if(pTag.contains("BucketVarSize")) {
+                this.setVarSizeMultiplier(pTag.getFloat("BucketVarSize"));
+            }
+            if(pTag.contains("Age")) {
+                this.setAge(pTag.getInt("Age"));
+            }
+            if(pTag.contains("BucketGender")) {
+                this.setGender(pTag.getInt("BucketGender"));
+            }
+            if(pTag.contains("BucketVarColor")){
+                this.setVarColor(pTag.getInt("BucketVarColor"));
+            }
+        }
         Bucketable.loadDefaultDataFromBucketTag(this, pTag);
     }
 

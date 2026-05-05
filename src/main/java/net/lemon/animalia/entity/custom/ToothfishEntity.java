@@ -185,20 +185,6 @@ public class ToothfishEntity extends FishBase implements GeoEntity {
             this.setVarColor(1);
             this.setVarSizeMultiplier(this.genVarSizeMultiplier());
         }
-        if(dataTag != null) {
-            if(dataTag.contains("BucketVarSize")) {
-                this.setVarSizeMultiplier(dataTag.getFloat("BucketVarSize"));
-            }
-            if(dataTag.contains("Age")) {
-                this.setAge(dataTag.getInt("Age"));
-            }
-            if(dataTag.contains("BucketGender")) {
-                this.setGender(dataTag.getInt("BucketGender"));
-            }
-            if(dataTag.contains("BucketVarColor")){
-                this.setVarColor(dataTag.getInt("BucketVarColor"));
-            }
-        }
         return super.finalizeSpawn(level, difficulty, reason, spawnData, dataTag);
     }
 }

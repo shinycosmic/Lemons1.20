@@ -1,7 +1,11 @@
 package net.lemon.animalia.item;
 
 import net.lemon.animalia.entity.bases.FishBase;
+import net.lemon.animalia.entity.custom.BettaEntity;
+import net.lemon.animalia.entity.custom.traits.BettaTraits;
+import net.lemon.animalia.util.ColorUtil;
 import net.minecraft.ChatFormatting;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.Entity;
@@ -30,11 +34,22 @@ public class AnimaliaBucketItem extends MobBucketItem {
             Entity entity = type.create(level);
 
             if (entity instanceof FishBase fish) {
+                tooltipComp.add(Component.literal(fish.getScientificName()).withStyle(ChatFormatting.GRAY, net.minecraft.ChatFormatting.ITALIC));
+
                 if (stack.hasTag() && stack.getTag().getBoolean("BucketBaby")) {
                     tooltipComp.add(Component.translatable("tooltip.animalia.baby").withStyle(ChatFormatting.GRAY));
                 }
+                if (stack.hasTag() && stack.getTag().contains("BucketBettaName") && entity instanceof BettaEntity) {
+                    CompoundTag pTag = stack.getTag();
+                    ColorUtil primaryColor = ColorUtil.fromId(pTag.getInt("PrimaryColor"));
+                    ColorUtil secondaryColor = ColorUtil.fromId(pTag.getInt("SecondaryColor"));
+                    BettaTraits.PatternPreset pattern = BettaTraits.PatternPreset.fromId(pTag.getInt("PatternPreset"));
+                    BettaTraits.CaudalPreset caudalPreset = BettaTraits.CaudalPreset.fromId(pTag.getInt("CaudalPreset"));
+                    Boolean isSpecial = pTag.getBoolean("SpecialVariant");
+                    String specialName = pTag.getString("BucketBettaName");
 
-                tooltipComp.add(Component.literal(fish.getScientificName()).withStyle(net.minecraft.ChatFormatting.GRAY, net.minecraft.ChatFormatting.ITALIC));
+                    tooltipComp.add(BettaEntity.resolveName(pattern,primaryColor, secondaryColor, caudalPreset, specialName, isSpecial));
+                }
             }
         }
     }

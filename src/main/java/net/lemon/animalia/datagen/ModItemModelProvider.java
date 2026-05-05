@@ -38,6 +38,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         //Buckets
         simpleItem(ModItems.CHILEANSEABASS_BUCKET);
         simpleItem(ModItems.ELEGINOPS_MACLOVINUS_BUCKET);
+        simpleItem(ModItems.PSEUDAPHRITIS_URVILLII_BUCKET);
 
         //spawn egg generators
         withExistingParent(ModItems.CHILEANSEABASS_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));

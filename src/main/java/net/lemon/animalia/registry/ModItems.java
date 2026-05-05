@@ -2,6 +2,7 @@ package net.lemon.animalia.registry;
 
 import net.lemon.animalia.Animalia;
 import net.lemon.animalia.item.AnimaliaBucketItem;
+import net.lemon.animalia.item.BettaFishEggItem;
 import net.lemon.animalia.item.FishEggItem;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
@@ -39,6 +40,7 @@ public class ModItems {
 
     //Misc
     public static final RegistryObject<Item> FISH_EGG = ITEMS.register("fish_egg", () -> new FishEggItem(new Item.Properties()));
+    public static final RegistryObject<Item> BETTA_FISH_EGG = ITEMS.register("betta_fish_egg", () -> new BettaFishEggItem(new Item.Properties()));
 
     //Animal Items
     public static final RegistryObject<Item> AMPHIPOD = ITEMS.register("amphipod", () -> new Item(new Item.Properties()));
