@@ -54,9 +54,6 @@ import java.util.Map;
 public class BettaEntity extends FishBase implements GeoEntity {
     private AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
     public BettaTraits traits;
-    private ColorUtil storedParentColor;
-    private BettaTraits.PatternPreset parentPattern;
-    private BettaTraits.CaudalPreset parentCaudal;
     private static final EntityDataAccessor<Integer> PRIMARY_COLOR = SynchedEntityData.defineId(BettaEntity.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Integer> SECONDARY_COLOR = SynchedEntityData.defineId(BettaEntity.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Integer> THIRD_COLOR = SynchedEntityData.defineId(BettaEntity.class, EntityDataSerializers.INT);
@@ -69,20 +66,20 @@ public class BettaEntity extends FishBase implements GeoEntity {
     private static final EntityDataAccessor<Integer> PELVIC_PRESET = SynchedEntityData.defineId(BettaEntity.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Boolean> SPECIAL_VARIANT = SynchedEntityData.defineId(BettaEntity.class, EntityDataSerializers.BOOLEAN);
     private static final Map<String, String> BETTA_SPECIALS = ImmutableMap.<String, String>builder()
-            .put("dragon_tall_hm_tall_tall_dragon_white_black_n_y", "silver_dragon")
-            .put("dragon_tall_rose_tall_tall_dragon_white_yellow_n_y", "gold_dragon")
-            .put("solid_tall_hm_tall_tall_bicolor_pink_white_n_n", "cotton_candy")
-            .put("dragon_medium_hm_medium_medium_dragon_turquoise_black_n_y", "emerald_alien")
-            .put("dragon_medium_hm_medium_medium_dragon_pink_black_n_y", "copper_alien")
-            .put("dragon_medium_hm_medium_medium_dragon_blue_black_n_y", "blue_alien")
+            .put("dragon_tall_hm_tall_tall_dragon_white_black_x_y", "silver_dragon")
+            .put("dragon_tall_rose_tall_tall_dragon_white_yellow_x_y", "gold_dragon")
+            .put("solid_tall_hm_tall_tall_bicolor_pink_white_x_n", "cotton_candy")
+            .put("dragon_medium_hm_medium_medium_dragon_turquoise_black_x_y", "emerald_alien")
+            .put("dragon_medium_hm_medium_medium_dragon_pink_black_x_y", "copper_alien")
+            .put("dragon_medium_hm_medium_medium_dragon_blue_black_x_y", "blue_alien")
             .put("marble_medium_hm_medium_short_marble_red_blue_white_y", "koi")
-            .put("solid_tall_hm_tall_medium_bicolor_black_yellow_n_n", "black_mustard_gas")
-            .put("solid_tall_hm_tall_medium_bicolor_blue_yellow_n_n", "blue_mustard_gas")
+            .put("solid_tall_hm_tall_medium_bicolor_black_yellow_x_n", "black_mustard_gas")
+            .put("solid_tall_hm_tall_medium_bicolor_blue_yellow_x_n", "blue_mustard_gas")
             .put("marble_medium_hm_short_short_marble_black_turquoise_black_n", "green_galaxy")
-            .put("solid_tall_rose_tall_tall_butterfly_brown_yellow_n_y", "chocolate_rostail")
-            .put("solid_tall_crown_tall_tall_solid_black_blue_n_n", "black_orchid")
+            .put("solid_tall_rose_tall_tall_butterfly_brown_yellow_x_y", "chocolate_rostail")
+            .put("solid_tall_crown_tall_tall_solid_black_blue_x_n", "black_orchid")
             .put("marble_medium_hm_medium_short_marble_black_white_black_n", "samurai")
-            .put("marble_medium_spade_short_short_marble_blue_white_n_y", "coelacanth").build();
+            .put("marble_medium_spade_short_short_marble_blue_white_white_y", "coelacanth").build();
 
 
     public BettaEntity(EntityType<? extends FishBase> entityType, Level level) {
@@ -187,11 +184,11 @@ public class BettaEntity extends FishBase implements GeoEntity {
     }
 
     public ColorUtil getSecondaryColor() {
-        return ColorUtil.fromId(this.entityData.get(PRIMARY_COLOR));
+        return ColorUtil.fromId(this.entityData.get(SECONDARY_COLOR));
     }
 
     public ColorUtil getThirdColor() {
-        return ColorUtil.fromId(this.entityData.get(PRIMARY_COLOR));
+        return ColorUtil.fromId(this.entityData.get(THIRD_COLOR));
     }
 
     public BettaTraits.PatternPreset getPatternPreset() {
@@ -240,11 +237,8 @@ public class BettaEntity extends FishBase implements GeoEntity {
         this.entityData.set(ANAL_PRESET, pCompound.getInt("AnalPreset"));
         this.entityData.set(PELVIC_PRESET, pCompound.getInt("PelvicPreset"));
         this.entityData.set(SPECIAL_VARIANT, pCompound.getBoolean("SpecialVariant"));
-        this.storedParentColor = ColorUtil.fromId(pCompound.getInt("StoredParentColor"));
-        this.parentPattern = BettaTraits.PatternPreset.fromId(pCompound.getInt("ParentPattern"));
-        this.parentCaudal = BettaTraits.CaudalPreset.fromId(pCompound.getInt("ParentCaudal"));
 
-        buildTraits(parentPattern, parentCaudal, storedParentColor);
+        buildTraits();
     }
 
     @Override
@@ -260,9 +254,6 @@ public class BettaEntity extends FishBase implements GeoEntity {
         pCompound.putInt("AnalPreset", this.entityData.get(ANAL_PRESET));
         pCompound.putInt("PelvicPreset", this.entityData.get(PELVIC_PRESET));
         pCompound.putBoolean("SpecialVariant", this.entityData.get(SPECIAL_VARIANT));
-        pCompound.putInt("StoredParentColor", this.storedParentColor.getId());
-        pCompound.putInt("ParentPattern", this.parentPattern.getId());
-        pCompound.putInt("ParentCaudal", this.parentCaudal.getId());
         super.addAdditionalSaveData(pCompound);
     }
 
@@ -295,9 +286,6 @@ public class BettaEntity extends FishBase implements GeoEntity {
         compoundTag.putInt("AnalPreset", this.entityData.get(ANAL_PRESET));
         compoundTag.putInt("PelvicPreset", this.entityData.get(PELVIC_PRESET));
         compoundTag.putBoolean("SpecialVariant", this.entityData.get(SPECIAL_VARIANT));
-        compoundTag.putInt("StoredParentColor", this.storedParentColor.getId());
-        compoundTag.putInt("ParentPattern", this.parentPattern.getId());
-        compoundTag.putInt("ParentCaudal", this.parentCaudal.getId());
         compoundTag.putString("BucketBettaName", this.isSpecialVariant() ? this.traits.specialTexture : "n");
         super.saveToBucketTag(stack);
     }
@@ -338,18 +326,9 @@ public class BettaEntity extends FishBase implements GeoEntity {
             if(pTag.contains("SpecialVariant")){
                 this.entityData.set(SPECIAL_VARIANT, pTag.getBoolean("SpecialVariant"));
             }
-            if(pTag.contains("StoredParentColor")){
-                this.storedParentColor = ColorUtil.fromId(pTag.getInt("StoredParentColor"));
-            }
-            if(pTag.contains("ParentPattern")){
-                this.parentPattern = BettaTraits.PatternPreset.fromId(pTag.getInt("ParentPattern"));
-            }
-            if(pTag.contains("ParentCaudal")){
-                this.parentCaudal = BettaTraits.CaudalPreset.fromId(pTag.getInt("ParentCaudal"));
-            }
         }
 
-        this.buildTraits(parentPattern, parentCaudal, storedParentColor);
+        this.buildTraits();
 
         super.loadFromBucketTag(pTag);
     }
@@ -358,7 +337,7 @@ public class BettaEntity extends FishBase implements GeoEntity {
     @Override
     public @Nullable SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, MobSpawnType reason, @Nullable SpawnGroupData spawnData, @Nullable CompoundTag dataTag) {
         if (reason == MobSpawnType.BUCKET) { // by bucket, skip and load from bucket
-            buildTraits(parentPattern, parentCaudal, storedParentColor);
+            buildTraits();
         } else if(reason == MobSpawnType.SPAWN_EGG) {
             buildTraitsRandom();
         } else {
@@ -376,13 +355,10 @@ public class BettaEntity extends FishBase implements GeoEntity {
     //GENE INHERITANCE WOOOO!!!
 
     /**
-     * This method takes the parent stored for breeding cases
-     * It will resolve attribute rules and also resolve special texture checks
-     * @param parentPattern
-     * @param parentCaudal
-     * @param storedParentColor
+     * Resolves attribute rules and builds the traits object.
+     * Also resolves special texture checks.
      */
-    public void buildTraits(BettaTraits.PatternPreset parentPattern, BettaTraits.CaudalPreset parentCaudal, ColorUtil storedParentColor) {
+    public void buildTraits() {
         resolveAttributes();
 
         this.traits = new BettaTraits(
@@ -390,8 +366,7 @@ public class BettaEntity extends FishBase implements GeoEntity {
                 getThirdColor(), getPatternPreset(),
                 this.isButterfly(), getBodyPreset(),
                 getDorsalPreset(), getCaudalPreset(),
-                getAnalPreset(), getPelvicPreset(),
-                parentPattern, parentCaudal, storedParentColor
+                getAnalPreset(), getPelvicPreset()
         );
 
         this.traits.specialTexture = checkSpecialVariant(this.traits);
@@ -416,7 +391,7 @@ public class BettaEntity extends FishBase implements GeoEntity {
         this.entityData.set(THIRD_COLOR, ColorUtil.values()[(int)(Math.random() * ColorUtil.values().length)].getId());
         this.entityData.set(IS_BUTTERFLY, Math.random() < 0.5);
 
-        buildTraits(null, null, null);
+        buildTraits();
     }
 
     /**
@@ -435,7 +410,7 @@ public class BettaEntity extends FishBase implements GeoEntity {
         this.entityData.set(THIRD_COLOR, ColorUtil.NONE.getId());
         this.entityData.set(IS_BUTTERFLY, false);
 
-        buildTraits(null, null, null);
+        buildTraits();
     }
 
     public static Component resolveName(BettaTraits.PatternPreset pp, ColorUtil pc, ColorUtil sc, BettaTraits.CaudalPreset cc, String specialTexture, boolean isSpecial) {
@@ -483,15 +458,16 @@ public class BettaEntity extends FishBase implements GeoEntity {
         switch (pattern){
             case SOLID, BICOLOR:
                 body = BettaTraits.BodyPreset.SOLID;
-                thirdColor = ColorUtil.NONE;
                 isButterflyCheck = false;
                 break;
             case MULTICOLOR:
+                body = BettaTraits.BodyPreset.MARBLE;
                 isButterflyCheck = true;
+                if(thirdColor == ColorUtil.NONE) thirdColor = primaryColor;
                 break;
             case CAMBODIAN:
+                body = BettaTraits.BodyPreset.SOLID;
                 primaryColor = ColorUtil.WHITE;
-                thirdColor = ColorUtil.NONE;
                 break;
             case MARBLE:
                 body = BettaTraits.BodyPreset.MARBLE;
@@ -500,16 +476,13 @@ public class BettaEntity extends FishBase implements GeoEntity {
             case BUTTERFLY:
                 body = BettaTraits.BodyPreset.SOLID;
                 isButterflyCheck = true;
-                thirdColor = ColorUtil.NONE;
                 break;
             case PIEBALD:
                 body = BettaTraits.BodyPreset.PIEBALD;
                 primaryColor = ColorUtil.WHITE;
-                thirdColor = ColorUtil.NONE;
                 break;
             case DRAGON:
                 body = BettaTraits.BodyPreset.DRAGON;
-                thirdColor = ColorUtil.NONE;
                 break;
         }
 
@@ -553,7 +526,6 @@ public class BettaEntity extends FishBase implements GeoEntity {
         isButterfly = this.random.nextInt(2) == 1 ? fish.traits.isButterfly : isButterfly;
 
         //handle mutations
-        passedBody = tryMutateBody(this.traits, fish.traits, passedBody, passedPrimary, passedSecondary);
         passedDorsal = tryMutateDorsal(this.traits, fish.traits,passedDorsal);
         passedCaudal = tryMutateCaudal(this.traits, fish.traits,passedCaudal);
         passedAnal = tryMutateAnal(this.traits, fish.traits, passedAnal);
@@ -572,8 +544,7 @@ public class BettaEntity extends FishBase implements GeoEntity {
         BettaTraits babyTraits = new BettaTraits(
                 passedPrimary, passedSecondary, passedThird,
                 passedPattern, isButterfly, passedBody, passedDorsal,
-                passedCaudal, passedAnal, passedPelvic,
-                parentPattern, parentCaudal, storedParentColor
+                passedCaudal, passedAnal, passedPelvic
         );
 
         //call in-trait attribute resolver to pass correct traits to the item NBT
@@ -597,9 +568,6 @@ public class BettaEntity extends FishBase implements GeoEntity {
         eggTag.putInt("PelvicPreset", babyTraits.pelvicPreset.getId());
         eggTag.putBoolean("SpecialVariant", babyTraits.isSpecialVariant);
         eggTag.putString("SpecialName", babyTraits.isSpecialVariant ? babyTraits.specialTexture : "n");
-        eggTag.putInt("StoredParentColor", babyTraits.storedParentColor.getId());
-        eggTag.putInt("ParentPattern", babyTraits.parentPattern.getId());
-        eggTag.putInt("ParentCaudal", babyTraits.parentCaudal.getId());
 
         this.spawnAtLocation(egg);
     }
@@ -623,47 +591,6 @@ public class BettaEntity extends FishBase implements GeoEntity {
                 break;
             case TALL:
                 mutatedTrait = BettaTraits.DorsalPreset.MEDIUM;
-        }
-
-        return mutatedTrait;
-
-    }
-
-    private BettaTraits.BodyPreset tryMutateBody(BettaTraits traits, BettaTraits traits1, BettaTraits.BodyPreset passedBody, ColorUtil colorP, ColorUtil colorS) {
-        boolean shouldMutate = Math.random() < 0.03;
-        if(!shouldMutate) return passedBody;
-        double rand = Math.random();
-        BettaTraits.BodyPreset mutatedTrait = passedBody;
-        BettaTraits.PatternPreset parentPatt1 = traits.patternPreset;
-        BettaTraits.PatternPreset parentPatt2 = traits1.patternPreset;
-
-        switch (passedBody) {
-            case SOLID:
-                mutatedTrait = rand < 0.8 ? BettaTraits.BodyPreset.PIEBALD : BettaTraits.BodyPreset.DRAGON;
-                break;
-            case MARBLE:
-                mutatedTrait = rand < 0.7 ? BettaTraits.BodyPreset.SOLID : BettaTraits.BodyPreset.DRAGON;
-                break;
-            case PIEBALD:
-                mutatedTrait = rand < 0.6 ? BettaTraits.BodyPreset.SOLID : BettaTraits.BodyPreset.MARBLE;
-                break;
-            case DRAGON:
-                mutatedTrait = rand < 0.5 ? BettaTraits.BodyPreset.SOLID : BettaTraits.BodyPreset.MARBLE;
-
-        }
-
-        //pattern based mutation override for Piebald
-        if(colorP == ColorUtil.WHITE || colorS == ColorUtil.WHITE) {
-            if (parentPatt1 == BettaTraits.PatternPreset.BICOLOR || parentPatt2 == BettaTraits.PatternPreset.BICOLOR) {
-                mutatedTrait = rand < 0.5 ? mutatedTrait : BettaTraits.BodyPreset.PIEBALD;
-            } else if (parentPatt1 == BettaTraits.PatternPreset.MULTICOLOR || parentPatt2 == BettaTraits.PatternPreset.MULTICOLOR) {
-                mutatedTrait = rand < 0.5 ? mutatedTrait : BettaTraits.BodyPreset.PIEBALD;
-            }
-        }
-
-        //Mutation from dual cambodian parents results in Piebald
-        if (parentPatt1 == BettaTraits.PatternPreset.CAMBODIAN && parentPatt2 == BettaTraits.PatternPreset.CAMBODIAN) {
-            mutatedTrait = rand < 0.2 ? mutatedTrait : BettaTraits.BodyPreset.PIEBALD;
         }
 
         return mutatedTrait;
@@ -791,7 +718,7 @@ public class BettaEntity extends FishBase implements GeoEntity {
                 mutatedTrait = BettaTraits.PelvicPreset.SHORT;
                 break;
             case MEDIUM:
-                mutatedTrait = rand < 0.5 ? BettaTraits.PelvicPreset.SHORT : BettaTraits.PelvicPreset.MEDIUM;
+                mutatedTrait = rand < 0.5 ? BettaTraits.PelvicPreset.SHORT : BettaTraits.PelvicPreset.TALL;
                 break;
             case TALL:
                 mutatedTrait = BettaTraits.PelvicPreset.MEDIUM;
@@ -804,68 +731,75 @@ public class BettaEntity extends FishBase implements GeoEntity {
     private BettaTraits.PatternPreset tryMutatePattern(BettaTraits traits, BettaTraits traits1, BettaTraits.PatternPreset passedPattern, ColorUtil colorP, ColorUtil colorS, ColorUtil thirdColor) {
         boolean shouldMutate = Math.random() < 0.03;
         if(!shouldMutate) return passedPattern;
-        double rand = Math.random();
-        BettaTraits.PatternPreset mutatedTrait = passedPattern;
         BettaTraits.PatternPreset p1Pattern = traits.patternPreset;
         BettaTraits.PatternPreset p2Pattern = traits1.patternPreset;
 
-        //Dragon - super rare, so overrides following checks
-        if(rand < 0.1) {
-            if(passedPattern == BettaTraits.PatternPreset.MARBLE) { // Both share mutatable from Marble, so checked first
+        //Dragon - super rare, overrides all other checks
+        if(Math.random() < 0.1) {
+            if(passedPattern == BettaTraits.PatternPreset.MARBLE) {
                 return Math.random() < 0.5 ? BettaTraits.PatternPreset.DRAGON : BettaTraits.PatternPreset.MULTICOLOR;
-            } else { // Not marble, so lets check the branch paths
-                if(passedPattern == BettaTraits.PatternPreset.MULTICOLOR) {
-                    return BettaTraits.PatternPreset.DRAGON;
-                } else if (passedPattern == BettaTraits.PatternPreset.BICOLOR || passedPattern == BettaTraits.PatternPreset.BUTTERFLY) {
-                    return BettaTraits.PatternPreset.MULTICOLOR;
-                }
+            } else if(passedPattern == BettaTraits.PatternPreset.MULTICOLOR) {
+                return BettaTraits.PatternPreset.DRAGON;
             }
-
         }
 
-        //Solid
+        //Multicolor - very rare, from Bicolor, Marble, Butterfly
+        if(Math.random() < 0.1 && colorP != colorS) {
+            if(passedPattern == BettaTraits.PatternPreset.BICOLOR || passedPattern == BettaTraits.PatternPreset.MARBLE ||
+                    passedPattern == BettaTraits.PatternPreset.BUTTERFLY) {
+                return BettaTraits.PatternPreset.MULTICOLOR;
+            }
+        }
+
+        //Build candidate pool for remaining patterns
+        List<BettaTraits.PatternPreset> candidates = new ArrayList<>();
+
+        //Solid: from Butterfly when Primary==Secondary, from Cambodian when Secondary==White
         if(passedPattern == BettaTraits.PatternPreset.BUTTERFLY && colorP == colorS) {
-            return BettaTraits.PatternPreset.SOLID;
-
+            candidates.add(BettaTraits.PatternPreset.SOLID);
         } else if(passedPattern == BettaTraits.PatternPreset.CAMBODIAN && colorS == ColorUtil.WHITE && colorP == colorS) {
-            return BettaTraits.PatternPreset.SOLID;
+            candidates.add(BettaTraits.PatternPreset.SOLID);
         }
 
-        //Cambodian
+        //Cambodian: from Bicolor, Solid, Piebald, Butterfly when Primary==White and Primary!=Secondary
         if(colorP == ColorUtil.WHITE && colorP != colorS && (
                 passedPattern == BettaTraits.PatternPreset.BICOLOR || passedPattern == BettaTraits.PatternPreset.SOLID ||
                 passedPattern == BettaTraits.PatternPreset.PIEBALD || passedPattern == BettaTraits.PatternPreset.BUTTERFLY)) {
-            return BettaTraits.PatternPreset.CAMBODIAN;
+            candidates.add(BettaTraits.PatternPreset.CAMBODIAN);
         }
 
-        //Piebald
+        //Piebald: from Cambodian, Bicolor, Marble, Butterfly when Secondary==White
         if(colorS == ColorUtil.WHITE && colorP != colorS && (
                 passedPattern == BettaTraits.PatternPreset.BICOLOR || passedPattern == BettaTraits.PatternPreset.MARBLE ||
-                        passedPattern == BettaTraits.PatternPreset.CAMBODIAN || passedPattern == BettaTraits.PatternPreset.BUTTERFLY)) {
-            return BettaTraits.PatternPreset.PIEBALD;
+                passedPattern == BettaTraits.PatternPreset.CAMBODIAN || passedPattern == BettaTraits.PatternPreset.BUTTERFLY)) {
+            candidates.add(BettaTraits.PatternPreset.PIEBALD);
         }
 
-        //Marble
+        //Marble: from Butterfly, Bicolor, Multicolor, Dragon when Primary!=Secondary and ThirdColor is White or None
         if(colorP != colorS && (thirdColor == ColorUtil.WHITE || thirdColor == ColorUtil.NONE)) {
             if(passedPattern == BettaTraits.PatternPreset.BUTTERFLY || passedPattern == BettaTraits.PatternPreset.BICOLOR ||
                 passedPattern == BettaTraits.PatternPreset.MULTICOLOR || passedPattern == BettaTraits.PatternPreset.DRAGON) {
-                return BettaTraits.PatternPreset.MARBLE;
+                candidates.add(BettaTraits.PatternPreset.MARBLE);
             }
         }
 
-        //Bicolor and Butterfly, Solid parent case -> current passedPattern must come from one parent, so fine to check here
-        if(colorP != colorS) { // colors not the same
+        //Bicolor/Butterfly: from Any when Primary!=Secondary. Solid parent biases toward Bicolor.
+        if(colorP != colorS) {
             if(p1Pattern == BettaTraits.PatternPreset.SOLID || p2Pattern == BettaTraits.PatternPreset.SOLID) {
-                // higher chance of Bicolor if one Solid parent
-                mutatedTrait = Math.random() > 0.2 ? BettaTraits.PatternPreset.BICOLOR : BettaTraits.PatternPreset.BUTTERFLY;
-            } else { // any other parent or passedPattern -> equal chance
-                mutatedTrait = Math.random() > 0.5 ? BettaTraits.PatternPreset.BICOLOR : BettaTraits.PatternPreset.BUTTERFLY;
+                candidates.add(BettaTraits.PatternPreset.BICOLOR);
+                candidates.add(BettaTraits.PatternPreset.BICOLOR); // weighted: 2/3 Bicolor, 1/3 Butterfly
+                candidates.add(BettaTraits.PatternPreset.BUTTERFLY);
+            } else {
+                candidates.add(BettaTraits.PatternPreset.BICOLOR);
+                candidates.add(BettaTraits.PatternPreset.BUTTERFLY);
             }
         }
 
-        //I think the only case a mutation here fails is if primary and secondary colors are equal
-        return mutatedTrait;
+        if(!candidates.isEmpty()) {
+            return candidates.get((int)(Math.random() * candidates.size()));
+        }
 
+        return passedPattern;
     }
 
     private ColorUtil tryMutateColor(ColorUtil p1Color, ColorUtil p2Color, ColorUtil passedColor, ColorUtil passedotherColor) {
@@ -999,6 +933,8 @@ public class BettaEntity extends FishBase implements GeoEntity {
     }
 
     private String getSpecialKey(BettaTraits t) {
+        boolean usesThirdColor = (t.patternPreset == BettaTraits.PatternPreset.MARBLE ||
+                                  t.patternPreset == BettaTraits.PatternPreset.MULTICOLOR);
         return t.bodyPreset.name().toLowerCase()
                 + "_" + t.dorsalPreset.name().toLowerCase()
                 + "_" + t.caudalPreset.name().toLowerCase()
@@ -1007,7 +943,7 @@ public class BettaEntity extends FishBase implements GeoEntity {
                 + "_" + t.patternPreset.name().toLowerCase()
                 + "_" + t.primaryColor.name().toLowerCase()
                 + "_" + t.secondaryColor.name().toLowerCase()
-                + "_" + (t.thirdColor != ColorUtil.NONE ? t.thirdColor.name().toLowerCase() : "n")
+                + "_" + (usesThirdColor ? t.thirdColor.name().toLowerCase() : "x")
                 + "_" + (t.isButterfly ? "y" : "n");
     }
 
@@ -1047,17 +983,8 @@ public class BettaEntity extends FishBase implements GeoEntity {
             if(itemTag.contains("SpecialVariant")){
                 this.entityData.set(SPECIAL_VARIANT, itemTag.getBoolean("SpecialVariant"));
             }
-            if(itemTag.contains("StoredParentColor")){
-                this.storedParentColor = ColorUtil.fromId(itemTag.getInt("StoredParentColor"));
-            }
-            if(itemTag.contains("ParentPattern")){
-                this.parentPattern = BettaTraits.PatternPreset.fromId(itemTag.getInt("ParentPattern"));
-            }
-            if(itemTag.contains("ParentCaudal")){
-                this.parentCaudal = BettaTraits.CaudalPreset.fromId(itemTag.getInt("ParentCaudal"));
-            }
         }
-        this.buildTraits(parentPattern, parentCaudal, storedParentColor);
+        this.buildTraits();
     }
 
     //Helper Methods

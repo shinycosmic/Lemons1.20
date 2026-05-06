@@ -162,7 +162,7 @@ public class BettaTraits {
     // Colors
     public ColorUtil primaryColor;
     public final ColorUtil secondaryColor;
-    public final ColorUtil thirdColor;
+    public ColorUtil thirdColor;
 
     // Pattern
     public final PatternPreset patternPreset;
@@ -183,13 +183,6 @@ public class BettaTraits {
     public final PelvicPreset pelvicPreset;
     public BodyPreset bodyPreset;
 
-    // Grandfather Gene
-    public final PatternPreset parentPattern;
-    public final CaudalPreset parentCaudal;
-    public final ColorUtil storedParentColor;
-
-    public final boolean useParentGene = Math.random() <= 0.01;
-
     // Special textures
     public boolean isSpecialVariant = false;
     public String specialTexture;
@@ -204,10 +197,7 @@ public class BettaTraits {
             DorsalPreset dorsalPreset,
             CaudalPreset caudalPreset,
             AnalPreset analPreset,
-            PelvicPreset pelvicPreset,
-            PatternPreset parentPattern,
-            CaudalPreset parentCaudal,
-            ColorUtil storedParentColor
+            PelvicPreset pelvicPreset
     ) {
         this.primaryColor = primaryColor;
         this.secondaryColor = secondaryColor;
@@ -219,9 +209,6 @@ public class BettaTraits {
         this.caudalPreset = caudalPreset;
         this.analPreset = analPreset;
         this.pelvicPreset = pelvicPreset;
-        this.parentCaudal = parentCaudal;
-        this.parentPattern = parentPattern;
-        this.storedParentColor = storedParentColor;
     }
 
     /***
@@ -234,13 +221,17 @@ public class BettaTraits {
                 this.isButterfly = false;
                 break;
             case MULTICOLOR:
+                this.bodyPreset = BettaTraits.BodyPreset.MARBLE;
                 this.isButterfly = true;
+                if(this.thirdColor == ColorUtil.NONE) this.thirdColor = this.primaryColor;
                 break;
             case CAMBODIAN:
+                this.bodyPreset = BettaTraits.BodyPreset.SOLID;
                 this.primaryColor = ColorUtil.WHITE;
                 break;
             case MARBLE:
                 this.bodyPreset = BettaTraits.BodyPreset.MARBLE;
+                if(this.thirdColor == ColorUtil.NONE) this.thirdColor = this.primaryColor;
                 break;
             case BUTTERFLY:
                 this.bodyPreset = BettaTraits.BodyPreset.SOLID;
@@ -248,7 +239,7 @@ public class BettaTraits {
                 break;
             case PIEBALD:
                 this.bodyPreset = BettaTraits.BodyPreset.PIEBALD;
-                primaryColor = ColorUtil.WHITE;
+                this.primaryColor = ColorUtil.WHITE;
                 break;
             case DRAGON:
                 this.bodyPreset = BettaTraits.BodyPreset.DRAGON;
