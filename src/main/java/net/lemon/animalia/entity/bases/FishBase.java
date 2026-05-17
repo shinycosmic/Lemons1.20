@@ -210,7 +210,7 @@ public abstract class FishBase extends AnimaliaBreedableWater implements Bucketa
     /**
      * Taken from AbstractFish
      */
-    static class FishSwimGoal extends RandomSwimmingGoal {
+    public static class FishSwimGoal extends RandomSwimmingGoal {
         private final FishBase fish;
 
         public FishSwimGoal(FishBase pFish) {

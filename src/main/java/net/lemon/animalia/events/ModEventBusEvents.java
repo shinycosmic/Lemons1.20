@@ -1,6 +1,7 @@
 package net.lemon.animalia.events;
 
 import net.lemon.animalia.Animalia;
+import net.lemon.animalia.entity.custom.BettaEntity;
 import net.lemon.animalia.entity.custom.CongolliEntity;
 import net.lemon.animalia.entity.custom.ToothfishEntity;
 import net.lemon.animalia.registry.ModEntities;
@@ -20,5 +21,6 @@ public class ModEventBusEvents {
         event.put(ModEntities.CHILEANSEABASS.get(), ToothfishEntity.setAttributes());
         event.put(ModEntities.ELEGINOPS_MACLOVINUS.get(), ToothfishEntity.setAttributes());
         event.put(ModEntities.PSEUDAPHRITIS_URVILLII.get(), CongolliEntity.setAttributes());
+        event.put(ModEntities.BETTA_SPLENDENS.get(), BettaEntity.setAttributes());
     }
 }

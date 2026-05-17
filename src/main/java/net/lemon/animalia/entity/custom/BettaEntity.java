@@ -22,16 +22,17 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.MobSpawnType;
-import net.minecraft.world.entity.SpawnGroupData;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.control.SmoothSwimmingMoveControl;
+import net.minecraft.world.entity.ai.goal.AvoidEntityGoal;
+import net.minecraft.world.entity.ai.goal.RandomSwimmingGoal;
+import net.minecraft.world.entity.animal.AbstractFish;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -45,6 +46,7 @@ import software.bernie.geckolib.core.animatable.GeoAnimatable;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.core.animatable.instance.SingletonAnimatableInstanceCache;
 import software.bernie.geckolib.core.animation.*;
+import software.bernie.geckolib.core.animation.AnimationState;
 import software.bernie.geckolib.core.object.PlayState;
 
 import java.util.*;
@@ -111,12 +113,13 @@ public class BettaEntity extends FishBase implements GeoEntity {
 
     @Override
     public ItemStack getBucketItemStack() {
-        return new ItemStack(Items.SALMON_BUCKET);
+        return new ItemStack(ModItems.BETTA_SPLENDENS_BUCKET.get());
     }
 
     @Override
     protected void registerGoals() {
-        this.goalSelector.addGoal(1, new PelagicRandomSwimGoal(this, 1.0D));
+        this.goalSelector.addGoal(2, new AvoidEntityGoal<>(this, Player.class, 8.0F, 1.6D, 1.4D, EntitySelector.NO_SPECTATORS::test));
+        this.goalSelector.addGoal(4, new FishBase.FishSwimGoal(this));
         this.goalSelector.addGoal(2, new FishFrySwimmingGoal(this, 1.0D, 40));
         super.registerGoals();
     }
@@ -135,7 +138,7 @@ public class BettaEntity extends FishBase implements GeoEntity {
         if(!this.isInWater()) {
             return PlayState.CONTINUE;
         } else if(this.isBaby()) {
-            animationState.getController().setAnimation(RawAnimation.begin().then("animation.betta.swim", Animation.LoopType.LOOP));
+            animationState.getController().setAnimation(RawAnimation.begin().then("betta.swim", Animation.LoopType.LOOP));
             return PlayState.CONTINUE;
         }
         animationState.getController().setAnimation(RawAnimation.begin().then(this.getSwimAnim(), Animation.LoopType.LOOP));
@@ -143,7 +146,7 @@ public class BettaEntity extends FishBase implements GeoEntity {
     }
 
     public String getSwimAnim() {
-        return "animation.betta.swim";
+        return "betta.swim";
     }
 
     @Override
@@ -259,6 +262,7 @@ public class BettaEntity extends FishBase implements GeoEntity {
 
     @Override
     protected void defineSynchedData() {
+        super.defineSynchedData();
         this.entityData.define(PRIMARY_COLOR, 0);
         this.entityData.define(SECONDARY_COLOR, 0);
         this.entityData.define(THIRD_COLOR, 0);
@@ -376,6 +380,24 @@ public class BettaEntity extends FishBase implements GeoEntity {
 
     }
 
+    public BettaTraits getTraitsClient() {
+        if(this.traits == null) {
+            this.traits = new BettaTraits(
+                    getPrimaryColor(), getSecondaryColor(),
+                    getThirdColor(), getPatternPreset(),
+                    this.isButterfly(), getBodyPreset(),
+                    getDorsalPreset(), getCaudalPreset(),
+                    getAnalPreset(), getPelvicPreset()
+            );
+
+            this.traits.specialTexture = checkSpecialVariant(this.traits);
+            if(this.traits.specialTexture != null) {
+                this.traits.isSpecialVariant = true;
+            }
+        }
+        return this.traits;
+    }
+
     /**
      * For spawn egg spawns
      */
@@ -386,9 +408,9 @@ public class BettaEntity extends FishBase implements GeoEntity {
         this.entityData.set(CAUDAL_PRESET, BettaTraits.CaudalPreset.values()[(int)(Math.random() * BettaTraits.CaudalPreset.values().length)].getId());
         this.entityData.set(ANAL_PRESET, BettaTraits.AnalPreset.values()[(int)(Math.random() * BettaTraits.AnalPreset.values().length)].getId());
         this.entityData.set(PELVIC_PRESET, BettaTraits.PelvicPreset.values()[(int)(Math.random() * BettaTraits.PelvicPreset.values().length)].getId());
-        this.entityData.set(PRIMARY_COLOR, ColorUtil.values()[(int)(Math.random() * ColorUtil.values().length)].getId());
-        this.entityData.set(SECONDARY_COLOR, ColorUtil.values()[(int)(Math.random() * ColorUtil.values().length)].getId());
-        this.entityData.set(THIRD_COLOR, ColorUtil.values()[(int)(Math.random() * ColorUtil.values().length)].getId());
+        this.entityData.set(PRIMARY_COLOR, ColorUtil.randomNonNone(this.random).getId());
+        this.entityData.set(SECONDARY_COLOR, ColorUtil.randomNonNone(this.random).getId());
+        this.entityData.set(THIRD_COLOR, ColorUtil.randomNonNone(this.random).getId());
         this.entityData.set(IS_BUTTERFLY, Math.random() < 0.5);
 
         buildTraits();
@@ -891,7 +913,7 @@ public class BettaEntity extends FishBase implements GeoEntity {
         switch (passedPattern) {
             case MULTICOLOR, MARBLE:
                 if (passedThirdColor == colorS || passedThirdColor == colorP) {
-                    mutatedTrait = ColorUtil.values()[(int)(Math.random() * ColorUtil.values().length)];
+                    mutatedTrait = ColorUtil.randomNonNone(this.random);
                 }
                 break;
             default:

@@ -12,7 +12,8 @@ public class AnimaliaMobsTab {
             //Spawn Eggs
             ModItems.CHILEANSEABASS_SPAWN_EGG,
             ModItems.ELEGINOPS_MACLOVINUS_SPAWN_EGG,
-            ModItems.PSEUDAPHRITIS_URVILLII_SPAWN_EGG
+            ModItems.PSEUDAPHRITIS_URVILLII_SPAWN_EGG,
+            ModItems.BETTA_SPLENDENS_SPAWN_EGG
 
     );
 

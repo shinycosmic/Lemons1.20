@@ -1,0 +1,51 @@
+{
+	"format_version": "1.8.0",
+	"animations": {
+		"betta.swim": {
+			"loop": true,
+			"bones": {
+				"main": {
+					"rotation": {
+						"vector": ["-0+math.sin(query.anim_time*149-100)*-0.1", "-0+math.sin(query.anim_time*149-100)*-2", "0+math.sin(query.anim_time*149)*1"]
+					}
+				},
+				"dorsal": {
+					"rotation": {
+						"vector": ["-0+math.sin(query.anim_time*120-60)*5", 0, "0+math.sin(query.anim_time*120-60)*8"]
+					}
+				},
+				"caudal": {
+					"rotation": {
+						"vector": [0, "-0+math.sin(query.anim_time*140-20)*25", 0]
+					}
+				},
+				"anal": {
+					"rotation": {
+						"vector": ["-0+math.sin(query.anim_time*120-60)*4", 0, "0-math.sin(query.anim_time*120-60)*10"]
+					}
+				},
+				"leftPelvic": {
+					"rotation": {
+						"vector": ["-0-math.sin(query.anim_time*150-80)*-7", 0, "0-math.sin(query.anim_time*150-100)*-10"]
+					}
+				},
+				"leftPectoral": {
+					"rotation": {
+						"vector": ["-0-math.sin(query.anim_time*150-80)*-8", "-0+math.sin(query.anim_time*150-100)*27", "0+math.sin(query.anim_time*150-20)*23"]
+					}
+				},
+				"rightPectoral": {
+					"rotation": {
+						"vector": ["-0-math.sin(query.anim_time*150-80)*-8", "-0-math.sin(query.anim_time*150-100)*27", "0-math.sin(query.anim_time*150-20)*23"]
+					}
+				},
+				"rightPelvic": {
+					"rotation": {
+						"vector": ["-0-math.sin(query.anim_time*150-80)*-7", 0, "0+math.sin(query.anim_time*150-100)*-10"]
+					}
+				}
+			}
+		}
+	},
+	"geckolib_format_version": 2
+}

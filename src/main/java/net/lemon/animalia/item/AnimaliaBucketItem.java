@@ -39,6 +39,7 @@ public class AnimaliaBucketItem extends MobBucketItem {
                 if (stack.hasTag() && stack.getTag().getBoolean("BucketBaby")) {
                     tooltipComp.add(Component.translatable("tooltip.animalia.baby").withStyle(ChatFormatting.GRAY));
                 }
+                //Only for Betta fish
                 if (stack.hasTag() && stack.getTag().contains("BucketBettaName") && entity instanceof BettaEntity) {
                     CompoundTag pTag = stack.getTag();
                     ColorUtil primaryColor = ColorUtil.fromId(pTag.getInt("PrimaryColor"));

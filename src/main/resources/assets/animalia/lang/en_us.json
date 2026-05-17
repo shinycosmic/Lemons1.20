@@ -14,6 +14,7 @@
   "item.animalia.dissostichus_eleginoides_bucket": "Bucket of Chilean Sea Bass",
   "item.animalia.eleginops_maclovinus_bucket": "Bucket of Patagonian Blennie",
   "item.animalia.pseudaphritis_urvillii_bucket": "Bucket of Congolli",
+  "item.animalia.betta_splendens_bucket": "Bucket of Betta",
 
   "item.animalia.fish_egg": "Fish Roe",
   "item.animalia.fish_egg.species": "%s Roe",
@@ -22,6 +23,7 @@
   "item.animalia.dissostichus_eleginoides_spawn_egg": "Chilean Sea Bass Spawn Egg",
   "item.animalia.eleginops_maclovinus_spawn_egg": "Patagonian Blennie Spawn Egg",
   "item.animalia.pseudaphritis_urvillii_spawn_egg": "Congolli Spawn Egg",
+  "item.animalia.betta_splendens_spawn_egg": "Betta Spawn Egg",
 
   "entity.animalia.dissostichus_eleginoides": "Chilean Sea Bass",
   "entity.animalia.eleginops_maclovinus": "Patagonian Blennie",

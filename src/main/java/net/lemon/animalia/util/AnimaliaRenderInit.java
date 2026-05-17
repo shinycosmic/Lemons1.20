@@ -1,5 +1,6 @@
 package net.lemon.animalia.util;
 
+import net.lemon.animalia.entity.render.BettaSplendensRenderer;
 import net.lemon.animalia.entity.render.ChileanSeaBassRenderer;
 import net.lemon.animalia.entity.render.EleginopsMaclovinusRenderer;
 import net.lemon.animalia.entity.render.PseudaphritisUrvilliiRenderer;
@@ -12,5 +13,6 @@ public class AnimaliaRenderInit {
         EntityRenderers.register(ModEntities.CHILEANSEABASS.get(), ChileanSeaBassRenderer::new);
         EntityRenderers.register(ModEntities.ELEGINOPS_MACLOVINUS.get(), EleginopsMaclovinusRenderer::new);
         EntityRenderers.register(ModEntities.PSEUDAPHRITIS_URVILLII.get(), PseudaphritisUrvilliiRenderer::new);
+        EntityRenderers.register(ModEntities.BETTA_SPLENDENS.get(), BettaSplendensRenderer::new);
     }
 }
