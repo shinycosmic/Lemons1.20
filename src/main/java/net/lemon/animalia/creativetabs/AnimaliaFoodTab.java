@@ -17,7 +17,8 @@ public class AnimaliaFoodTab {
 
             //Other|Breeding
             ModItems.AMPHIPOD,
-            ModItems.GIGANTOCYPRIS
+            ModItems.GIGANTOCYPRIS,
+            ModItems.FISH_FOOD
     );
 
     public static void displayItems(CreativeModeTab.Output output) {

@@ -37,6 +37,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.SpawnEggItem;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.phys.Vec3;
@@ -69,10 +70,10 @@ public class BettaEntity extends FishBase implements GeoEntity {
     private static final EntityDataAccessor<Boolean> SPECIAL_VARIANT = SynchedEntityData.defineId(BettaEntity.class, EntityDataSerializers.BOOLEAN);
     private static final Map<String, String> BETTA_SPECIALS = ImmutableMap.<String, String>builder()
             .put("dragon_tall_hm_tall_tall_dragon_white_black_x_y", "silver_dragon")
-            .put("dragon_tall_rose_tall_tall_dragon_white_yellow_x_y", "gold_dragon")
+            .put("dragon_tall_hm_tall_tall_dragon_white_yellow_x_y", "gold_dragon")
             .put("solid_tall_hm_tall_tall_bicolor_pink_white_x_n", "cotton_candy")
             .put("dragon_medium_hm_medium_medium_dragon_turquoise_black_x_y", "emerald_alien")
-            .put("dragon_medium_hm_medium_medium_dragon_pink_black_x_y", "copper_alien")
+            .put("dragon_medium_hm_medium_medium_dragon_brown_black_x_y", "copper_alien")
             .put("dragon_medium_hm_medium_medium_dragon_blue_black_x_y", "blue_alien")
             .put("marble_medium_hm_medium_short_marble_red_blue_white_y", "koi")
             .put("solid_tall_hm_tall_medium_bicolor_black_yellow_x_n", "black_mustard_gas")
@@ -81,7 +82,15 @@ public class BettaEntity extends FishBase implements GeoEntity {
             .put("solid_tall_rose_tall_tall_butterfly_brown_yellow_x_y", "chocolate_rostail")
             .put("solid_tall_crown_tall_tall_solid_black_blue_x_n", "black_orchid")
             .put("marble_medium_hm_medium_short_marble_black_white_black_n", "samurai")
-            .put("marble_medium_spade_short_short_marble_blue_white_white_y", "coelacanth").build();
+            .put("marble_medium_hm_medium_short_marble_black_white_red_y", "vampire_samurai")
+            .put("marble_tall_hm_tall_tall_marble_blue_orange_red_y", "fancy")
+            .put("marble_tall_hm_tall_tall_marble_blue_yellow_red_y", "fancy_gold_dust")
+            .put("dragon_tall_hm_tall_tall_dragon_blue_orange_red_y", "fancy_gold_dust")
+            .put("marble_tall_hm_tall_tall_marble_blue_black_blue_n", "avatar")
+            .put("marble_tall_hm_tall_tall_marble_blue_black_red_y", "avatar_nebula")
+            .put("marble_tall_hm_tall_tall_marble_blue_black_red_n", "avatar_fancy")
+            .put("marble_medium_hm_medium_short_marble_orange_yellow_black_y", "tiger_koi")
+            .put("marble_medium_spade_short_short_marble_blue_white_blue_y", "coelacanth").build();
 
 
     public BettaEntity(EntityType<? extends FishBase> entityType, Level level) {
@@ -171,17 +180,25 @@ public class BettaEntity extends FishBase implements GeoEntity {
      */
     @Override
     public boolean isBreedingItem(ItemStack stack) {
-        if(this.getType() == ModEntities.ELEGINOPS_MACLOVINUS.get()) {
-            return stack.is(ModItems.AMPHIPOD.get());
-        }
         return stack.is(getFoodTag());
     }
 
     @Override
     public InteractionResult mobInteract(Player pPlayer, InteractionHand pHand) {
+        ItemStack stack = pPlayer.getItemInHand(pHand);
+        if (stack.getItem() instanceof SpawnEggItem egg &&
+                egg.getType(stack.getTag()) == this.getType()) {
+            return InteractionResult.FAIL;
+        }
         return super.mobInteract(pPlayer, pHand);
     }
 
+    @Override
+    protected void onOffspringSpawnedFromEgg(Player pPlayer, Mob pChild) {
+        super.onOffspringSpawnedFromEgg(pPlayer, pChild);
+    }
+
+    
     public ColorUtil getPrimaryColor() {
         return ColorUtil.fromId(this.entityData.get(PRIMARY_COLOR));
     }
@@ -295,7 +312,13 @@ public class BettaEntity extends FishBase implements GeoEntity {
     }
 
     @Override
+    public void onSyncedDataUpdated(List<SynchedEntityData.DataValue<?>> pDataValues) {
+        super.onSyncedDataUpdated(pDataValues);
+    }
+
+    @Override
     public void loadFromBucketTag(CompoundTag pTag) {
+        super.loadFromBucketTag(pTag);
         if(pTag != null) {
             if(pTag.contains("PrimaryColor")) {
                 this.entityData.set(PRIMARY_COLOR, pTag.getInt("PrimaryColor"));
@@ -331,20 +354,17 @@ public class BettaEntity extends FishBase implements GeoEntity {
                 this.entityData.set(SPECIAL_VARIANT, pTag.getBoolean("SpecialVariant"));
             }
         }
-
         this.buildTraits();
-
-        super.loadFromBucketTag(pTag);
     }
 
-    //TODO finish finalize spawn and create trait object by pulling from NBT, call build traits after reading in NBT
     @Override
     public @Nullable SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, MobSpawnType reason, @Nullable SpawnGroupData spawnData, @Nullable CompoundTag dataTag) {
-        if (reason == MobSpawnType.BUCKET) { // by bucket, skip and load from bucket
-            buildTraits();
-        } else if(reason == MobSpawnType.SPAWN_EGG) {
-            buildTraitsRandom();
-        } else {
+        System.out.println("DEBUG SPAWN REASON: "+reason);
+        if(reason == MobSpawnType.SPAWN_EGG) {
+            //buildTraitsRandom();
+            buildTraitsSpecial();
+            System.out.println("DEBUG @!@@@@ REACHED HERE");
+        } else if(reason != MobSpawnType.BUCKET){
             buildTraitsWild();
         }
 
@@ -376,24 +396,25 @@ public class BettaEntity extends FishBase implements GeoEntity {
         this.traits.specialTexture = checkSpecialVariant(this.traits);
         if(this.traits.specialTexture != null) {
             this.traits.isSpecialVariant = true;
+            this.entityData.set(SPECIAL_VARIANT, true);
+        } else {
+            this.entityData.set(SPECIAL_VARIANT, false);
         }
 
     }
 
     public BettaTraits getTraitsClient() {
-        if(this.traits == null) {
-            this.traits = new BettaTraits(
-                    getPrimaryColor(), getSecondaryColor(),
-                    getThirdColor(), getPatternPreset(),
-                    this.isButterfly(), getBodyPreset(),
-                    getDorsalPreset(), getCaudalPreset(),
-                    getAnalPreset(), getPelvicPreset()
-            );
+        this.traits = new BettaTraits(
+                getPrimaryColor(), getSecondaryColor(),
+                getThirdColor(), getPatternPreset(),
+                this.isButterfly(), getBodyPreset(),
+                getDorsalPreset(), getCaudalPreset(),
+                getAnalPreset(), getPelvicPreset()
+        );
 
-            this.traits.specialTexture = checkSpecialVariant(this.traits);
-            if(this.traits.specialTexture != null) {
-                this.traits.isSpecialVariant = true;
-            }
+        this.traits.specialTexture = checkSpecialVariant(this.traits);
+        if(this.traits.specialTexture != null) {
+            this.traits.isSpecialVariant = true;
         }
         return this.traits;
     }
@@ -431,6 +452,25 @@ public class BettaEntity extends FishBase implements GeoEntity {
         this.entityData.set(SECONDARY_COLOR, allowed[(int)(Math.random() * allowed.length)].getId());
         this.entityData.set(THIRD_COLOR, ColorUtil.NONE.getId());
         this.entityData.set(IS_BUTTERFLY, false);
+        this.entityData.set(SPECIAL_VARIANT, false);
+
+        buildTraits();
+    }
+    /**
+     * for Testing special variants
+     */
+    public void buildTraitsSpecial(){
+        ColorUtil[] allowed = {ColorUtil.ORANGE, ColorUtil.BLACK, ColorUtil.YELLOW};
+        this.entityData.set(PATTERN_PRESET, BettaTraits.PatternPreset.MARBLE.getId());
+        this.entityData.set(BODY_PRESET, BettaTraits.BodyPreset.MARBLE.getId());
+        this.entityData.set(DORSAL_PRESET, BettaTraits.DorsalPreset.MEDIUM.getId());
+        this.entityData.set(CAUDAL_PRESET, BettaTraits.CaudalPreset.HM.getId());
+        this.entityData.set(ANAL_PRESET, BettaTraits.AnalPreset.MEDIUM.getId());
+        this.entityData.set(PELVIC_PRESET, BettaTraits.PelvicPreset.SHORT.getId());
+        this.entityData.set(PRIMARY_COLOR, ColorUtil.RED.getId());
+        this.entityData.set(SECONDARY_COLOR, ColorUtil.BLUE.getId());
+        this.entityData.set(THIRD_COLOR, ColorUtil.WHITE.getId());
+        this.entityData.set(IS_BUTTERFLY, true);
 
         buildTraits();
     }

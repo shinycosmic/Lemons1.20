@@ -7,15 +7,15 @@ public enum ColorUtil {
     NONE(0,0xFFFFFF),
     BLUE(1,0x0080FF),
     YELLOW(2,0xFFB909),
-    WHITE(3,0xFFD9D9),
+    WHITE(3,0xF1F1F1),
     BLACK(4,0x212121),
     ORANGE(5,0xFF9900),
     TURQUOISE(6,0x06CFC5),
-    GREEN(7,0x3EDE63),
+    GREEN(7,0x57820C),
     LAVENDER(8,0x9575CD),
     PURPLE(9,0x2F1759),
     PINK(10,0xFF5690),
-    BROWN(11,0x6D4C41),
+    BROWN(11,0x4F2519),
     RED(12,0xFF0000);
     public final int rgb;
     public final int id;

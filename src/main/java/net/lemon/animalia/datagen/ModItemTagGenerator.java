@@ -20,6 +20,7 @@ public class ModItemTagGenerator extends ItemTagsProvider {
     protected void addTags(HolderLookup.Provider pProvider) {
         tag(ItemTags.FISHES).add(ModItems.RAW_FISH.get());
         tag(ItemTags.FISHES).add(ModItems.RAW_ICEFISH.get());
+        tag(ItemTags.FISHES).add(ModItems.FISH_FOOD.get());
         tag(ModTags.Items.CRUSTACEAN).add(ModItems.AMPHIPOD.get());
         tag(ModTags.Items.CRUSTACEAN).add(ModItems.GIGANTOCYPRIS.get());
     }

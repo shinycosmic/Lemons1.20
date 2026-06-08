@@ -7,9 +7,13 @@
 
   "item.animalia.raw_icefish": "Raw Icefish",
   "item.animalia.raw_fish": "Raw Fish",
+  "item.animalia.fish_food": "Fish Food",
+  "item.animalia.raw_venison": "Raw Venison",
 
   "item.animalia.amphipod": "Amphipod",
   "item.animalia.gigantocypris": "Giant Ostracod",
+  "item.animalia.tadpole": "Tadpole",
+  "item.animalia.artemia": "Brine Shrimp",
 
   "item.animalia.dissostichus_eleginoides_bucket": "Bucket of Chilean Sea Bass",
   "item.animalia.eleginops_maclovinus_bucket": "Bucket of Patagonian Blennie",
@@ -44,6 +48,13 @@
   "entity.animalia.betta_splendens.chocolate_rosetail": "Chocolate Rosetail Betta",
   "entity.animalia.betta_splendens.black_orchid": "Black Orchid Betta",
   "entity.animalia.betta_splendens.samurai": "Samurai Galaxy Betta",
+  "entity.animalia.betta_splendens.vampire_samurai": "Vampire Samurai Betta",
+  "entity.animalia.betta_splendens.fancy": "Fancy Betta",
+  "entity.animalia.betta_splendens.fancy_gold_dust": "Fancy Gold-dusted Betta",
+  "entity.animalia.betta_splendens.avatar": "Avatar Betta",
+  "entity.animalia.betta_splendens.avatar_nebula": "Nebula Avatar Betta",
+  "entity.animalia.betta_splendens.avatar_fancy": "Fancy Avatar Betta",
+  "entity.animalia.betta_splendens.tiger_koi": "Tiger Koi Betta",
   "entity.animalia.betta_splendens.coelacanth": "Fancy Coelacanth Betta",
   "entity.animalia.betta_splendens_preset.veil": "Veiltail",
   "entity.animalia.betta_splendens_preset.crown": "Crowntail",

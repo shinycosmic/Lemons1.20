@@ -6,46 +6,53 @@
 			"bones": {
 				"main": {
 					"rotation": {
-						"vector": ["-0+math.sin(query.anim_time*149-100)*-0.1", "-0+math.sin(query.anim_time*149-100)*-2", "0+math.sin(query.anim_time*149)*1"]
+						"vector": ["-0+math.sin(query.anim_time*249-100)*-0.5", "-0+math.sin(query.anim_time*249-100)*-2", "0+math.sin(query.anim_time*249)*1.5"]
 					}
 				},
 				"dorsal": {
 					"rotation": {
-						"vector": ["-0+math.sin(query.anim_time*120-60)*5", 0, "0+math.sin(query.anim_time*120-60)*8"]
+						"vector": ["-0+math.sin(query.anim_time*120-60)*5", 0, "0+math.sin(query.anim_time*120-60)*5"]
 					}
 				},
 				"caudal": {
 					"rotation": {
-						"vector": [0, "-0+math.sin(query.anim_time*140-20)*25", 0]
+						"vector": [0, "-0+math.sin(query.anim_time*240-20)*5", 0]
 					}
 				},
 				"anal": {
 					"rotation": {
-						"vector": ["-0+math.sin(query.anim_time*120-60)*4", 0, "0-math.sin(query.anim_time*120-60)*10"]
+						"vector": ["-0+math.sin(query.anim_time*120-60)*4", 0, "0-math.sin(query.anim_time*120-60)*5"]
 					}
 				},
 				"leftPelvic": {
 					"rotation": {
-						"vector": ["-0-math.sin(query.anim_time*150-80)*-7", 0, "0-math.sin(query.anim_time*150-100)*-10"]
+						"vector": ["-0-math.sin(query.anim_time*150-80)*7", 0, "0-math.sin(query.anim_time*150-100)*5"]
 					}
 				},
 				"leftPectoral": {
 					"rotation": {
-						"vector": ["-0-math.sin(query.anim_time*150-80)*-8", "-0+math.sin(query.anim_time*150-100)*27", "0+math.sin(query.anim_time*150-20)*23"]
+						"vector": [
+							"-0.7244-math.sin(query.anim_time*350-80)*-8",
+							"15.2054+math.sin(query.anim_time*350-100)*27",
+							"-3.102+math.sin(query.anim_time*350-20)*23"
+						]
 					}
 				},
 				"rightPectoral": {
 					"rotation": {
-						"vector": ["-0-math.sin(query.anim_time*150-80)*-8", "-0-math.sin(query.anim_time*150-100)*27", "0-math.sin(query.anim_time*150-20)*23"]
+						"vector": [
+							"-0.8251-math.sin(query.anim_time*350-80)*-8",
+							"-16.4294-math.sin(query.anim_time*350-100)*27",
+							"3.3743-math.sin(query.anim_time*350-20)*23"
+						]
 					}
 				},
 				"rightPelvic": {
 					"rotation": {
-						"vector": ["-0-math.sin(query.anim_time*150-80)*-7", 0, "0+math.sin(query.anim_time*150-100)*-10"]
+						"vector": ["-0-math.sin(query.anim_time*150-80)*-7", 0, "0+math.sin(query.anim_time*150-100)*-5"]
 					}
 				}
 			}
 		}
-	},
-	"geckolib_format_version": 2
+	}
 }

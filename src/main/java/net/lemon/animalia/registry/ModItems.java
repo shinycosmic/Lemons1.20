@@ -1,9 +1,11 @@
 package net.lemon.animalia.registry;
 
+import com.google.errorprone.annotations.Var;
 import net.lemon.animalia.Animalia;
 import net.lemon.animalia.item.AnimaliaBucketItem;
 import net.lemon.animalia.item.BettaFishEggItem;
 import net.lemon.animalia.item.FishEggItem;
+import net.lemon.animalia.item.VariantizedSpawnEggItem;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.EntityType;
@@ -30,6 +32,8 @@ public class ModItems {
     //Foods
     public static final RegistryObject<Item> RAW_ICEFISH = ITEMS.register("raw_icefish", () -> new Item(new Item.Properties().food(ModFoods.RAW_ICEFISH)));
     public static final RegistryObject<Item> RAW_FISH = ITEMS.register("raw_fish", () -> new Item(new Item.Properties().food(ModFoods.RAW_FISH)));
+    public static final RegistryObject<Item> FISH_FOOD = ITEMS.register("fish_food", () -> new Item(new Item.Properties().food(ModFoods.FISH_FOOD)));
+
 
     //Buckets
     public static final RegistryObject<Item> CHILEANSEABASS_BUCKET = registerBucket("dissostichus_eleginoides_bucket", ModEntities.CHILEANSEABASS);
@@ -51,11 +55,14 @@ public class ModItems {
     public static final RegistryObject<Item> CHILEANSEABASS_SPAWN_EGG = registerSpawnEgg("dissostichus_eleginoides_spawn_egg", ModEntities.CHILEANSEABASS, 0x4D5267, 0xA5A8B0);
     public static final RegistryObject<Item> ELEGINOPS_MACLOVINUS_SPAWN_EGG = registerSpawnEgg("eleginops_maclovinus_spawn_egg", ModEntities.ELEGINOPS_MACLOVINUS, 0x927A60, 0xFDEDD4);
     public static final RegistryObject<Item> PSEUDAPHRITIS_URVILLII_SPAWN_EGG = registerSpawnEgg("pseudaphritis_urvillii_spawn_egg", ModEntities.PSEUDAPHRITIS_URVILLII, 0xceaf63, 0x384436);
-    public static final RegistryObject<Item> BETTA_SPLENDENS_SPAWN_EGG = registerSpawnEgg("betta_splendens_spawn_egg", ModEntities.BETTA_SPLENDENS, 0xF12D03, 0x608EE9);
+    public static final RegistryObject<Item> BETTA_SPLENDENS_SPAWN_EGG = registerSpecialSpawnEgg("betta_splendens_spawn_egg", ModEntities.BETTA_SPLENDENS, 0xF12D03, 0x608EE9);
 
     //Supplier Helper Methods
     public static <T extends Mob> RegistryObject<Item> registerSpawnEgg(String name, Supplier<EntityType<T>> type, int backgroundColor, int highlightColor) {
         return ITEMS.register(name, () -> new ForgeSpawnEggItem(type, backgroundColor, highlightColor, new Item.Properties()));
+    }
+    public static <T extends Mob> RegistryObject<Item> registerSpecialSpawnEgg(String name, Supplier<EntityType<T>> type, int backgroundColor, int highlightColor) {
+        return ITEMS.register(name, () -> new VariantizedSpawnEggItem(type, backgroundColor, highlightColor, new Item.Properties()));
     }
     public static RegistryObject<Item> registerBucket(String name, Supplier<? extends EntityType<?>> type) {
         return ITEMS.register(name, () -> new AnimaliaBucketItem(type, () -> Fluids.WATER, () -> SoundEvents.BUCKET_EMPTY_FISH, new Item.Properties().stacksTo(1).craftRemainder(Items.BUCKET)));

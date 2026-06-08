@@ -7,4 +7,6 @@ public class ModFoods {
             .nutrition(4).saturationMod(2.5f).build();
     public static final FoodProperties RAW_FISH = new FoodProperties.Builder()
             .nutrition(2).saturationMod(1.0f).build();
+    public static final FoodProperties FISH_FOOD = new FoodProperties.Builder()
+            .nutrition(1).saturationMod(1.0f).build();
 }
