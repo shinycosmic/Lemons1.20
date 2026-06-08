@@ -169,18 +169,14 @@ public class BettaEntity extends FishBase implements GeoEntity {
         super.travel(pTravelVector);
     }
 
-    //TODO eats fish food
     @Override
     public TagKey<Item> getFoodTag() {
         return ItemTags.FISHES;
     }
 
-    /***
-     * TODO breeds with fish food
-     */
     @Override
     public boolean isBreedingItem(ItemStack stack) {
-        return stack.is(getFoodTag());
+        return stack.is(ModItems.FISH_FOOD.get());
     }
 
     @Override
@@ -198,7 +194,7 @@ public class BettaEntity extends FishBase implements GeoEntity {
         super.onOffspringSpawnedFromEgg(pPlayer, pChild);
     }
 
-    
+
     public ColorUtil getPrimaryColor() {
         return ColorUtil.fromId(this.entityData.get(PRIMARY_COLOR));
     }
@@ -559,7 +555,7 @@ public class BettaEntity extends FishBase implements GeoEntity {
      * Breeding helper method, takes both parent's traits objects and randomly decides what to pass on before calling build traits
      * we can pass on any of the following: Pattern, Colors, Fins. IsButterfly resolved here, Body resolved in resolveAttributes()
      * job here is to audit color and inheritance rules
-     */ //TODO need to override spawn child from breeding, and dropItemEgg
+     */
     public void passGenes(ServerLevel level, BettaEntity fish) {
         BettaTraits p2 = fish.traits;
         //begin by passing on this' traits, will change based on random number
