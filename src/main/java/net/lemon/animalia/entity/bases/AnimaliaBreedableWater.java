@@ -10,12 +10,10 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.Mth;
-import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
@@ -44,6 +42,8 @@ public abstract class AnimaliaBreedableWater extends WaterAnimal implements IAct
     private static final EntityDataAccessor<Integer> GENDER = SynchedEntityData.defineId(AnimaliaBreedableWater.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Integer> VAR_COLOR = SynchedEntityData.defineId(AnimaliaBreedableWater.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Float> VAR_SIZE_MULTIPLIER = SynchedEntityData.defineId(AnimaliaBreedableWater.class, EntityDataSerializers.FLOAT);
+    private static final EntityDataAccessor<Boolean> IS_EATING = SynchedEntityData.defineId(AnimaliaBreedableWater.class, EntityDataSerializers.BOOLEAN);
+    private int eatTicks = 0;
     public int cooldown = 0;
     public int growthTicks = -12000;
     private int inLove;
@@ -92,6 +92,15 @@ public abstract class AnimaliaBreedableWater extends WaterAnimal implements IAct
         this.entityData.define(GENDER, 0);
         this.entityData.define(VAR_COLOR, 0);
         this.entityData.define(VAR_SIZE_MULTIPLIER, 1.0f);
+        this.entityData.define(IS_EATING, false);
+    }
+
+    public boolean isEating() {
+        return this.entityData.get(IS_EATING);
+    }
+
+    public void setEating(boolean eating) {
+        this.entityData.set(IS_EATING, eating);
     }
 
     @Override
@@ -140,6 +149,8 @@ public abstract class AnimaliaBreedableWater extends WaterAnimal implements IAct
     public void setGender(int i) {
         this.entityData.set(GENDER, i);
     }
+
+    public int getEatLength() { return 20; }
 
     public boolean onHideableBlock(AnimaliaBreedableWater mob) {
         BlockPos pos = mob.blockPosition().below();
@@ -199,7 +210,15 @@ public abstract class AnimaliaBreedableWater extends WaterAnimal implements IAct
             --this.cooldown;
         }
 
-        if (this.getAge() != 0) {
+        if (!this.level().isClientSide && this.eatTicks > 0) {
+            --this.eatTicks;
+            if (this.eatTicks <= 0) {
+                this.setEating(false);
+            }
+        }
+
+
+            if (this.getAge() != 0) {
             this.inLove = 0;
         }
 
@@ -344,6 +363,8 @@ public abstract class AnimaliaBreedableWater extends WaterAnimal implements IAct
         if (this.isFood(itemstack)) {
             this.usePlayerItem(player, hand, itemstack);
             this.heal((float) Objects.requireNonNull(itemstack.getFoodProperties(this)).getNutrition());
+            this.setEating(true);
+            this.eatTicks = getEatLength();
 
             if (this.level().isClientSide) {
                 return InteractionResult.CONSUME;

@@ -106,13 +106,22 @@ public class ToothfishEntity extends FishBase implements GeoEntity {
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
         controllers.add(new AnimationController<>(this, "controller", 0, this::predicate));
+        controllers.add(new AnimationController<>(this, "eat_controller", 0, this::eatPredicate));
+    }
+
+    private <T extends GeoAnimatable> PlayState eatPredicate(AnimationState<T> state) {
+        if (this.isEating()) {
+            state.getController().setAnimation(RawAnimation.begin().then("eat", Animation.LoopType.PLAY_ONCE));
+            return PlayState.CONTINUE;
+        }
+        return PlayState.STOP;
     }
 
     private <T extends GeoAnimatable> PlayState predicate(AnimationState<T> animationState) {
         if(!this.isInWater()) {
             return PlayState.CONTINUE;
         } else if(this.isBaby()) {
-            animationState.getController().setAnimation(RawAnimation.begin().then("animation.notothen.swim", Animation.LoopType.LOOP));
+            animationState.getController().setAnimation(RawAnimation.begin().then(this.getSwimAnim(), Animation.LoopType.LOOP));
             return PlayState.CONTINUE;
         }
         animationState.getController().setAnimation(RawAnimation.begin().then(this.getSwimAnim(), Animation.LoopType.LOOP));
@@ -120,13 +129,7 @@ public class ToothfishEntity extends FishBase implements GeoEntity {
     }
 
     public String getSwimAnim() {
-        if(this.getType() == ModEntities.CHILEANSEABASS.get()) {
-            return "animation.notothen.swim";
-        } else if(this.getType() == ModEntities.ELEGINOPS_MACLOVINUS.get()){ //ModEntities.ELEGINOPS_MACLOVINUS.get()
-            return "animation.eleginops.swim";
-        } else {
-            return "swim";
-        }
+        return "swim";
     }
 
     @Override
