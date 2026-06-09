@@ -99,7 +99,7 @@ public class BettaFishEggItem extends FishEggItem {
         if (!(entity instanceof BettaEntity baby))
             return InteractionResultHolder.fail(stack);
 
-        baby.setAge(-24000); // make baby
+        baby.setAge(-12000); // make baby
         baby.syncTraits(compoundTag);
         baby.setVarSizeMultiplier(baby.genVarSizeMultiplier());
         baby.setGender(baby.getRandom().nextInt(2));
@@ -147,7 +147,7 @@ public class BettaFishEggItem extends FishEggItem {
         baby.moveTo(x, y, z, 0.0F, 0.0F);
 
         // Make baby
-        baby.setAge(-24000);
+        baby.setAge(-12000);
         baby.syncTraits(compoundTag);
         baby.setVarSizeMultiplier(baby.genVarSizeMultiplier());
         baby.setGender(baby.getRandom().nextInt(2));

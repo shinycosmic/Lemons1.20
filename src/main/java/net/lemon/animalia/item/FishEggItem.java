@@ -88,7 +88,7 @@ public class FishEggItem extends Item {
         if (!(entity instanceof FishBase baby))
             return InteractionResultHolder.fail(stack);
 
-        baby.setAge(-24000); // make baby
+        baby.setAge(-12000); // make baby
         baby.setVarSizeMultiplier(baby.genVarSizeMultiplier());
         baby.setGender(baby.getRandom().nextInt(2));
         baby.copyPosition(player);
@@ -133,7 +133,7 @@ public class FishEggItem extends Item {
         baby.moveTo(x, y, z, 0.0F, 0.0F);
 
         // Make baby
-        baby.setAge(-24000);
+        baby.setAge(-12000);
         baby.setVarSizeMultiplier(baby.genVarSizeMultiplier());
         baby.setGender(baby.getRandom().nextInt(2));
         baby.setPersistenceRequired();

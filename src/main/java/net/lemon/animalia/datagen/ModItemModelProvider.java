@@ -42,12 +42,14 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItems.ELEGINOPS_MACLOVINUS_BUCKET);
         simpleItem(ModItems.PSEUDAPHRITIS_URVILLII_BUCKET);
         simpleItem(ModItems.BETTA_SPLENDENS_BUCKET);
+        simpleItem(ModItems.PERCOPHIS_BRASILIENSIS_BUCKET);
 
         //spawn egg generators
         withExistingParent(ModItems.CHILEANSEABASS_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
         withExistingParent(ModItems.ELEGINOPS_MACLOVINUS_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
         withExistingParent(ModItems.PSEUDAPHRITIS_URVILLII_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
         withExistingParent(ModItems.BETTA_SPLENDENS_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
+        withExistingParent(ModItems.PERCOPHIS_BRASILIENSIS_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
 
     }
 

@@ -16,7 +16,7 @@
 				},
 				"caudal": {
 					"rotation": {
-						"vector": [0, "-0+math.sin(query.anim_time*240-20)*5", 0]
+						"vector": [0, "-0+math.sin(query.anim_time*240-80)*25", 0]
 					}
 				},
 				"anal": {

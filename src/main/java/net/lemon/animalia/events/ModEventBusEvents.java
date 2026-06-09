@@ -22,5 +22,6 @@ public class ModEventBusEvents {
         event.put(ModEntities.ELEGINOPS_MACLOVINUS.get(), ToothfishEntity.setAttributes());
         event.put(ModEntities.PSEUDAPHRITIS_URVILLII.get(), CongolliEntity.setAttributes());
         event.put(ModEntities.BETTA_SPLENDENS.get(), BettaEntity.setAttributes());
+        event.put(ModEntities.PERCOPHIS_BRASILIENSIS.get(), ToothfishEntity.setAttributes());
     }
 }

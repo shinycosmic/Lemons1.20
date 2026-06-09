@@ -29,6 +29,7 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.ai.control.SmoothSwimmingLookControl;
 import net.minecraft.world.entity.ai.control.SmoothSwimmingMoveControl;
 import net.minecraft.world.entity.ai.goal.AvoidEntityGoal;
 import net.minecraft.world.entity.ai.goal.RandomSwimmingGoal;
@@ -95,7 +96,8 @@ public class BettaEntity extends FishBase implements GeoEntity {
 
     public BettaEntity(EntityType<? extends FishBase> entityType, Level level) {
         super(entityType, level);
-        this.moveControl = new SmoothSwimmingMoveControl(this, 85, 10, 0.2f, 0.1f, true);
+        this.moveControl = new SmoothSwimmingMoveControl(this, 85, 10, 0.02F, 0.1F, true);
+        this.lookControl = new SmoothSwimmingLookControl(this, 10);
     }
 
     @Override
@@ -115,22 +117,14 @@ public class BettaEntity extends FishBase implements GeoEntity {
 
     public static AttributeSupplier setAttributes() {
         return Mob.createMobAttributes()
-                .add(Attributes.MAX_HEALTH, 3D)
-                .add(Attributes.MOVEMENT_SPEED, 0.4f)
+                .add(Attributes.MAX_HEALTH, 2D)
+                .add(Attributes.MOVEMENT_SPEED, 1.25f)
                 .build();
     }
 
     @Override
     public ItemStack getBucketItemStack() {
         return new ItemStack(ModItems.BETTA_SPLENDENS_BUCKET.get());
-    }
-
-    @Override
-    protected void registerGoals() {
-        this.goalSelector.addGoal(2, new AvoidEntityGoal<>(this, Player.class, 8.0F, 1.6D, 1.4D, EntitySelector.NO_SPECTATORS::test));
-        this.goalSelector.addGoal(4, new FishBase.FishSwimGoal(this));
-        this.goalSelector.addGoal(2, new FishFrySwimmingGoal(this, 1.0D, 40));
-        super.registerGoals();
     }
 
     @Override
@@ -353,13 +347,12 @@ public class BettaEntity extends FishBase implements GeoEntity {
         this.buildTraits();
     }
 
+    //TODO DEBUG special variants
     @Override
     public @Nullable SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, MobSpawnType reason, @Nullable SpawnGroupData spawnData, @Nullable CompoundTag dataTag) {
-        System.out.println("DEBUG SPAWN REASON: "+reason);
         if(reason == MobSpawnType.SPAWN_EGG) {
-            //buildTraitsRandom();
-            buildTraitsSpecial();
-            System.out.println("DEBUG @!@@@@ REACHED HERE");
+            buildTraitsRandom();
+//            buildTraitsSpecial();
         } else if(reason != MobSpawnType.BUCKET){
             buildTraitsWild();
         }
@@ -459,13 +452,13 @@ public class BettaEntity extends FishBase implements GeoEntity {
         ColorUtil[] allowed = {ColorUtil.ORANGE, ColorUtil.BLACK, ColorUtil.YELLOW};
         this.entityData.set(PATTERN_PRESET, BettaTraits.PatternPreset.MARBLE.getId());
         this.entityData.set(BODY_PRESET, BettaTraits.BodyPreset.MARBLE.getId());
-        this.entityData.set(DORSAL_PRESET, BettaTraits.DorsalPreset.MEDIUM.getId());
+        this.entityData.set(DORSAL_PRESET, BettaTraits.DorsalPreset.TALL.getId());
         this.entityData.set(CAUDAL_PRESET, BettaTraits.CaudalPreset.HM.getId());
-        this.entityData.set(ANAL_PRESET, BettaTraits.AnalPreset.MEDIUM.getId());
-        this.entityData.set(PELVIC_PRESET, BettaTraits.PelvicPreset.SHORT.getId());
-        this.entityData.set(PRIMARY_COLOR, ColorUtil.RED.getId());
-        this.entityData.set(SECONDARY_COLOR, ColorUtil.BLUE.getId());
-        this.entityData.set(THIRD_COLOR, ColorUtil.WHITE.getId());
+        this.entityData.set(ANAL_PRESET, BettaTraits.AnalPreset.TALL.getId());
+        this.entityData.set(PELVIC_PRESET, BettaTraits.PelvicPreset.TALL.getId());
+        this.entityData.set(PRIMARY_COLOR, ColorUtil.BLUE.getId());
+        this.entityData.set(SECONDARY_COLOR, allowed[(int)(Math.random() * allowed.length)].getId());
+        this.entityData.set(THIRD_COLOR, ColorUtil.RED.getId());
         this.entityData.set(IS_BUTTERFLY, true);
 
         buildTraits();

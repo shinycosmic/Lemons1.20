@@ -45,7 +45,7 @@ public abstract class AnimaliaBreedableWater extends WaterAnimal implements IAct
     private static final EntityDataAccessor<Integer> VAR_COLOR = SynchedEntityData.defineId(AnimaliaBreedableWater.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Float> VAR_SIZE_MULTIPLIER = SynchedEntityData.defineId(AnimaliaBreedableWater.class, EntityDataSerializers.FLOAT);
     public int cooldown = 0;
-    public int growthTicks = -24000;
+    public int growthTicks = -12000;
     private int inLove;
     @Nullable
     private UUID loveCause;

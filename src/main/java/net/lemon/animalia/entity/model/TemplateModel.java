@@ -12,7 +12,7 @@
 //import software.bernie.geckolib.model.GeoModel;
 //import software.bernie.geckolib.model.data.EntityModelData;
 //
-///// IMPORTANT NOTE, DO NOT FORGET TO CHANGE THE SNAKEENTITY INSIDE THE <>
+
 //public class TemplateModel extends GeoModel<Entity> {
 //    /***
 //     *  Set the location of the geckolib model

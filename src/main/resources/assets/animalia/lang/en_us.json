@@ -19,6 +19,7 @@
   "item.animalia.eleginops_maclovinus_bucket": "Bucket of Patagonian Blennie",
   "item.animalia.pseudaphritis_urvillii_bucket": "Bucket of Congolli",
   "item.animalia.betta_splendens_bucket": "Bucket of Betta",
+  "item.animalia.percophis_brasiliensis_bucket": "Bucket of Brazilian Flathead",
 
   "item.animalia.fish_egg": "Fish Roe",
   "item.animalia.fish_egg.species": "%s Roe",
@@ -28,10 +29,13 @@
   "item.animalia.eleginops_maclovinus_spawn_egg": "Patagonian Blennie Spawn Egg",
   "item.animalia.pseudaphritis_urvillii_spawn_egg": "Congolli Spawn Egg",
   "item.animalia.betta_splendens_spawn_egg": "Betta Spawn Egg",
+  "item.animalia.percophis_brasiliensis_spawn_egg": "Brazilian Flathead Spawn Egg",
 
   "entity.animalia.dissostichus_eleginoides": "Chilean Sea Bass",
   "entity.animalia.eleginops_maclovinus": "Patagonian Blennie",
   "entity.animalia.pseudaphritis_urvillii": "Congolli",
+  "entity.animalia.percophis_brasiliensis": "Brazilian Flathead",
+
   "entity.animalia.betta_splendens.twoComp": "%s %s Betta",
   "entity.animalia.betta_splendens.threeComp": "%s %s %s Betta",
   "entity.animalia.betta_splendens.fourComp": "%s %s %s %s Betta",

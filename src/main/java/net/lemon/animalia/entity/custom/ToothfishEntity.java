@@ -61,6 +61,8 @@ public class ToothfishEntity extends FishBase implements GeoEntity {
             return "Dissostichus eleginoides";
         } else if (this.getType() == ModEntities.ELEGINOPS_MACLOVINUS.get()) {
             return "Eleginops maclovinus";
+        } else if (this.getType() == ModEntities.PERCOPHIS_BRASILIENSIS.get()) {
+            return "Percophis brasiliensis";
         }
         return "didnt work";
     }
@@ -83,6 +85,8 @@ public class ToothfishEntity extends FishBase implements GeoEntity {
             return new ItemStack(ModItems.CHILEANSEABASS_BUCKET.get());
         } else if(this.getType() == ModEntities.ELEGINOPS_MACLOVINUS.get()) {
             return new ItemStack(ModItems.ELEGINOPS_MACLOVINUS_BUCKET.get());
+        } else if(this.getType() == ModEntities.PERCOPHIS_BRASILIENSIS.get()) {
+            return new ItemStack(ModItems.PERCOPHIS_BRASILIENSIS_BUCKET.get());
         }
         return new ItemStack(Items.SALMON_BUCKET);
     }
@@ -118,8 +122,10 @@ public class ToothfishEntity extends FishBase implements GeoEntity {
     public String getSwimAnim() {
         if(this.getType() == ModEntities.CHILEANSEABASS.get()) {
             return "animation.notothen.swim";
-        } else { //ModEntities.ELEGINOPS_MACLOVINUS.get()
+        } else if(this.getType() == ModEntities.ELEGINOPS_MACLOVINUS.get()){ //ModEntities.ELEGINOPS_MACLOVINUS.get()
             return "animation.eleginops.swim";
+        } else {
+            return "swim";
         }
     }
 
@@ -165,6 +171,7 @@ public class ToothfishEntity extends FishBase implements GeoEntity {
     /***
      * Eleginops maclovinus: Amphipod
      * Dissostichus eleginoides: Any Fish
+     * Percophis brasiliensis: Any Fish
      */
     @Override
     public boolean isBreedingItem(ItemStack stack) {
