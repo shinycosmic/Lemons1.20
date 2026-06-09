@@ -41,12 +41,13 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 public class FilterTrapBlockEntity extends BlockEntity implements MenuProvider {
-    private final ItemStackHandler itemHandler = new ItemStackHandler(5);
+    private final ItemStackHandler itemHandler = new ItemStackHandler(6);
     private static final int OUTPUT_SLOT1 = 0;
     private static final int OUTPUT_SLOT2 = 1;
     private static final int OUTPUT_SLOT3 = 2;
     private static final int OUTPUT_SLOT4 = 3;
     private static final int OUTPUT_SLOT5 = 4;
+    private static final int FUEL_SLOT = 5;
     private LazyOptional<IItemHandler> lazyItemHandler = LazyOptional.empty();
     protected final ContainerData data;
     private int timer = 0;
@@ -150,17 +151,31 @@ public class FilterTrapBlockEntity extends BlockEntity implements MenuProvider {
     }
 
     public void tick(Level level1, BlockPos pos, BlockState state1) {
-        if(placedInWater()) {
+        if(placedInWater() && hasFuel()) {
             timer++;
             setChanged(level1, pos, state1);
 
-            if(timer >= dropTimer) {
-                addDropToInventory(getDrop());
+            if (timer >= dropTimer) {
+                ItemStack drop = getDrop();
+                if (!drop.isEmpty()) {
+                    addDropToInventory(drop);
+                    consumeFuel();
+                }
                 resetTimer();
             }
         } else {
             resetTimer();
         }
+    }
+
+    private boolean hasFuel() {
+        ItemStack fuel = itemHandler.getStackInSlot(FUEL_SLOT);
+        return !fuel.isEmpty() && fuel.is(net.minecraft.tags.ItemTags.FISHES);
+    }
+
+    private void consumeFuel() {
+        itemHandler.extractItem(FUEL_SLOT, 1, false);
+        setChanged();
     }
 
     private static final ResourceLocation LOOT_TABLE = new ResourceLocation("animalia", "drops/filter_trap");

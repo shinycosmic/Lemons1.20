@@ -38,6 +38,7 @@ public class FilterTrapMenu extends AbstractContainerMenu {
             this.addSlot(new SlotItemHandler(iItemHandler, 2,80,31));
             this.addSlot(new SlotItemHandler(iItemHandler, 3,98,31));
             this.addSlot(new SlotItemHandler(iItemHandler, 4,116,31));
+            this.addSlot(new SlotItemHandler(iItemHandler, 5, 80, 55)); //TODO adjust to fit
         });
         addDataSlots(data);
     }
@@ -55,7 +56,7 @@ public class FilterTrapMenu extends AbstractContainerMenu {
     private static final int VANILLA_SLOT_COUNT = HOTBAR_SLOT_COUNT + PLAYER_INVENTORY_SLOT_COUNT;
     private static final int VANILLA_FIRST_SLOT_INDEX = 0;
     private static final int TE_INVENTORY_FIRST_SLOT_INDEX = VANILLA_FIRST_SLOT_INDEX + VANILLA_SLOT_COUNT;
-    private static final int TE_INVENTORY_SLOT_COUNT = 5;  // must be the number of slots you have!
+    private static final int TE_INVENTORY_SLOT_COUNT = 6;  // must be the number of slots you have!
     @Override
     public ItemStack quickMoveStack(Player playerIn, int pIndex) {
         Slot sourceSlot = slots.get(pIndex);
