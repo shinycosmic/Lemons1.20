@@ -45,7 +45,12 @@ public abstract class AnimaliaBreedableWater extends WaterAnimal implements IAct
     private static final EntityDataAccessor<Integer> VAR_COLOR = SynchedEntityData.defineId(AnimaliaBreedableWater.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Float> VAR_SIZE_MULTIPLIER = SynchedEntityData.defineId(AnimaliaBreedableWater.class, EntityDataSerializers.FLOAT);
     private static final EntityDataAccessor<Boolean> IS_EATING = SynchedEntityData.defineId(AnimaliaBreedableWater.class, EntityDataSerializers.BOOLEAN);
+    private static final EntityDataAccessor<Boolean> IS_HIDING = SynchedEntityData.defineId(AnimaliaBreedableWater.class, EntityDataSerializers.BOOLEAN);
+
     private int eatTicks = 0;
+    private int hideTicks = 0;
+    private int hideCooldown = 0;
+    public boolean wantsToHide = false;
     public int cooldown = 0;
     public int growthTicks = -12000;
     private int inLove;
@@ -95,6 +100,7 @@ public abstract class AnimaliaBreedableWater extends WaterAnimal implements IAct
         this.entityData.define(VAR_COLOR, 0);
         this.entityData.define(VAR_SIZE_MULTIPLIER, 1.0f);
         this.entityData.define(IS_EATING, false);
+        this.entityData.define(IS_HIDING, false);
     }
 
     public boolean isEating() {
@@ -160,6 +166,38 @@ public abstract class AnimaliaBreedableWater extends WaterAnimal implements IAct
         return blockState.is(BlockTags.DIRT) || blockState.is(BlockTags.SAND);
     }
 
+    public boolean canHide() {
+        return false;
+    }
+
+    public int getHideLength() {
+        return 100;
+    }
+
+    public int getHideCooldown() {
+        return 600 + random.nextInt(2000);
+    }
+
+    public int getHideTicks() {
+        return this.hideTicks;
+    }
+
+    public boolean isHiding() {
+        return this.entityData.get(IS_HIDING);
+    }
+
+    public void setHiding(boolean hiding) {
+        this.entityData.set(IS_HIDING, hiding);
+    }
+
+    /***
+     * Override this method to add special conditions such as hiding in plants.
+     * @return
+     */
+    public boolean canStartHiding() {
+        return this.canHide() && !this.isHiding() && this.hideTicks <= 0;
+    }
+
     /***
      * Override this to get a variant size. Default is random of 0.7 to 1.5 of base. Set base value in the renderer.
      * If there is NO random sizing for a creature, override this method to return 1, and set base value in the renderer.
@@ -177,6 +215,10 @@ public abstract class AnimaliaBreedableWater extends WaterAnimal implements IAct
         pCompound.putInt("Gender", this.getGender());
         pCompound.putInt("VarColor", this.getVarColor());
         pCompound.putInt("InLove", this.inLove);
+        pCompound.putInt("HideTicks", this.hideTicks);
+        pCompound.putInt("HideCooldown", this.hideCooldown);
+        pCompound.putBoolean("WantsToHide", this.wantsToHide);
+        pCompound.putBoolean("IsHiding", this.isHiding());
         if (this.loveCause != null) {
             pCompound.putUUID("LoveCause", this.loveCause);
         }
@@ -190,6 +232,10 @@ public abstract class AnimaliaBreedableWater extends WaterAnimal implements IAct
         this.setAge(pCompound.getInt("Age"));
         this.setGender(pCompound.getInt("Gender"));
         this.setVarColor(pCompound.getInt("VarColor"));
+        this.hideTicks = pCompound.getInt("HideTicks");
+        this.hideCooldown = pCompound.getInt("HideCooldown");
+        this.wantsToHide = pCompound.getBoolean("WantsToHide");
+        this.setHiding(pCompound.getBoolean("IsHiding"));
         if (!pCompound.contains("VarSize")) {
             this.setVarSizeMultiplier(this.genVarSizeMultiplier());
         } else {
@@ -218,9 +264,37 @@ public abstract class AnimaliaBreedableWater extends WaterAnimal implements IAct
                 this.setEating(false);
             }
         }
+        //TODO Implement Mastacembelus as a test for this AI, we need to override some methods, and apply hiding animation playing logic.
+        // Also need to add logic to bottom swimmers with smooth swimming to target the ground when wanting to hide.
+        if(!this.level().isClientSide && this.canHide()) {
+            if(this.hideCooldown > 0) {
+                --this.hideCooldown;
+            }
+            if(this.isHiding()){
+                --this.hideTicks;
+                this.getNavigation().stop();
+
+                if (this.hideTicks <= 0) {
+                    this.setHiding(false);
+                    this.hideCooldown = this.getHideCooldown();
+                }
+            } else if (this.wantsToHide) {
+                if(this.onGround() && this.onHideableBlock(this)) {
+                    this.setHiding(true);
+                    this.hideTicks = this.getHideLength();
+                    this.getNavigation().stop();
+                    this.wantsToHide = false;
+                } else if (this.onGround()) {
+                    this.wantsToHide = false;
+                    this.hideCooldown = (int) (this.getHideCooldown()*0.25f);
+                }
+            } else if (this.canStartHiding()) {
+                this.wantsToHide = true;
+            }
+        }
 
 
-            if (this.getAge() != 0) {
+        if (this.getAge() != 0) {
             this.inLove = 0;
         }
 

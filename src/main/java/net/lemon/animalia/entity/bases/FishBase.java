@@ -8,6 +8,7 @@ import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.tags.FluidTags;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -117,6 +118,13 @@ public abstract class FishBase extends AnimaliaBreedableWater implements Bucketa
         return true;
     }
 
+    public float getSwimSpeed() {
+        if(this.isHiding()){
+            return 0f;
+        }
+        return 1.0f;
+    };
+
     public SoundEvent getFlopSound() {
         return SoundEvents.COD_FLOP;
     }
@@ -168,6 +176,17 @@ public abstract class FishBase extends AnimaliaBreedableWater implements Bucketa
             }
         }
 
+        if (!this.level().isClientSide && this.wantsToHide && !this.isHiding() && this.isInWater() && !this.onGround() && this.canHide()) {
+            if (this.getNavigation().isDone()) {
+                BlockPos floor = this.blockPosition();
+                while (this.level().getFluidState(floor.below()).is(FluidTags.WATER)
+                        && floor.getY() > this.level().getMinBuildHeight()) {
+                    floor = floor.below();
+                }
+                this.getNavigation().moveTo(this.getX(), floor.getY() + 0.5, this.getZ(), 1.0);
+            }
+        }
+
         super.aiStep();
     }
 
@@ -179,7 +198,7 @@ public abstract class FishBase extends AnimaliaBreedableWater implements Bucketa
     public void travel(Vec3 pTravelVector) {
         if (this.isEffectiveAi() && this.isInWater()) {
             this.moveRelative(0.01F, pTravelVector);
-            this.move(MoverType.SELF, this.getDeltaMovement());
+            this.move(MoverType.SELF, this.getDeltaMovement().scale(this.getSwimSpeed()));
             this.setDeltaMovement(this.getDeltaMovement().scale(0.9D));
             if (this.getTarget() == null) {
                 this.setDeltaMovement(this.getDeltaMovement().add(0.0D, -0.005D, 0.0D));

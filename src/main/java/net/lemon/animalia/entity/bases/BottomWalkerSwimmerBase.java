@@ -82,8 +82,6 @@ public abstract class BottomWalkerSwimmerBase extends FishBase {
         return -0.008;
     }
 
-    public abstract float getSwimSpeed();
-
     @Override
     public boolean canRandomSwim() {
         return !this.isWalking() && !this.wantsToWalk;
@@ -184,6 +182,11 @@ public abstract class BottomWalkerSwimmerBase extends FishBase {
     }
 
     @Override
+    public boolean canStartHiding() {
+        return super.canStartHiding() && this.isInWater() && this.isWalking() && this.onGround();
+    }
+
+    @Override
     public void addAdditionalSaveData(CompoundTag pCompound) {
         super.addAdditionalSaveData(pCompound);
         pCompound.putInt("StateTime", this.stateTime);
@@ -201,7 +204,7 @@ public abstract class BottomWalkerSwimmerBase extends FishBase {
     public void travel(Vec3 pTravelVector) {
         if (this.isEffectiveAi() && this.isInWater() && this.isWalking()) {
             this.moveRelative(0.01f, pTravelVector);
-            this.move(MoverType.SELF, this.getDeltaMovement());
+            this.move(MoverType.SELF, this.getDeltaMovement().scale(this.getSwimSpeed()));
             this.setDeltaMovement(this.getDeltaMovement().scale(0.9D));
         } else {
             super.travel(pTravelVector);
