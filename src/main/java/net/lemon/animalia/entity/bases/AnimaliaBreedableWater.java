@@ -22,6 +22,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityDimensions;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Pose;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.control.SmoothSwimmingLookControl;
 import net.minecraft.world.entity.ai.control.SmoothSwimmingMoveControl;
 import net.minecraft.world.entity.ai.goal.PanicGoal;
@@ -196,6 +197,19 @@ public abstract class AnimaliaBreedableWater extends WaterAnimal implements IAct
      */
     public boolean canStartHiding() {
         return this.canHide() && !this.isHiding() && this.hideTicks <= 0;
+    }
+
+    public float getSwimSpeed() {
+        if(this.isHiding()){
+            return 0f;
+        }
+        return 1.0f;
+    };
+
+    public boolean isFast() {
+        double speed = this.getDeltaMovement().horizontalDistance();
+        double baseSpeed = this.getAttributeValue(Attributes.MOVEMENT_SPEED);
+        return speed > baseSpeed * 1.5;
     }
 
     /***

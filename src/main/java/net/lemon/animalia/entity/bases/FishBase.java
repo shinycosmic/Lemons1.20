@@ -118,13 +118,6 @@ public abstract class FishBase extends AnimaliaBreedableWater implements Bucketa
         return true;
     }
 
-    public float getSwimSpeed() {
-        if(this.isHiding()){
-            return 0f;
-        }
-        return 1.0f;
-    };
-
     public SoundEvent getFlopSound() {
         return SoundEvents.COD_FLOP;
     }
