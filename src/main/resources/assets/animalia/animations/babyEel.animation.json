@@ -1,0 +1,36 @@
+{
+	"format_version": "1.8.0",
+	"animations": {
+		"swim": {
+			"loop": true,
+			"bones": {
+				"main": {
+					"rotation": {
+						"vector": [0, "-0-math.sin(query.anim_time*800)*5", 0]
+					}
+				},
+				"tail": {
+					"rotation": {
+						"vector": [0, "-0-math.sin(query.anim_time*800-50)*10", 0]
+					},
+					"position": {
+						"vector": [0, 0, -0.175]
+					}
+				},
+				"tail2": {
+					"rotation": {
+						"vector": [0, "-0-math.sin(query.anim_time*800-100)*10", 0]
+					},
+					"position": {
+						"vector": [0, 0, -0.125]
+					}
+				},
+				"tail3": {
+					"rotation": {
+						"vector": [0, "-0-math.sin(query.anim_time*800-150)*20", 0]
+					}
+				}
+			}
+		}
+	}
+}
