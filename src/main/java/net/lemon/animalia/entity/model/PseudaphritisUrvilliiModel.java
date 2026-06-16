@@ -19,7 +19,7 @@ public class PseudaphritisUrvilliiModel extends GeoModel<CongolliEntity> {
 
     public ResourceLocation getTextureResource(CongolliEntity object) {
         if(object.isBaby()) {
-            return new ResourceLocation(Animalia.MODID, "textures/entity/babynotothen.png");
+            return new ResourceLocation(Animalia.MODID, "textures/entity/babyGenericNotothen.png");
         }
         return new ResourceLocation(Animalia.MODID, "textures/entity/pseudaphritisurvillii.png");
     }
