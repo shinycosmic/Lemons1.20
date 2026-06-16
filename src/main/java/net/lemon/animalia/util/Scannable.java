@@ -1,4 +1,5 @@
 package net.lemon.animalia.util;
+import net.minecraft.network.chat.Component;
 
 public interface Scannable {
     /***
@@ -12,7 +13,8 @@ public interface Scannable {
      * Breeding Item -> Entity
      * Ingame Trivia -> Interface
      * App -> Interface
-     * Trigger -> Interface
+     * Trigger -> Entity
+     * Order Name -> Interface
      */
 
     enum AppName {
@@ -26,5 +28,18 @@ public interface Scannable {
      */
     AppName getApp();
 
+    /***
+     *  getTrivia, return a translatable component
+     */
+    Component getTrivia();
 
+    /***
+     * getFamily, return a translatable component
+     */
+    Component getFamily();
+
+    /***
+     * getOrder, return a translatable component
+     */
+    Component getOrder();
 }
