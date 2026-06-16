@@ -38,7 +38,7 @@ public class FilterTrapMenu extends AbstractContainerMenu {
             this.addSlot(new SlotItemHandler(iItemHandler, 2,80,31));
             this.addSlot(new SlotItemHandler(iItemHandler, 3,98,31));
             this.addSlot(new SlotItemHandler(iItemHandler, 4,116,31));
-            this.addSlot(new SlotItemHandler(iItemHandler, 5, 80, 55)); //TODO adjust to fit
+            this.addSlot(new SlotItemHandler(iItemHandler, 5, 80, 55));
         });
         addDataSlots(data);
     }
