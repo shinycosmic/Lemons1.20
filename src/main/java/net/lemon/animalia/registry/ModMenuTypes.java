@@ -1,7 +1,7 @@
 package net.lemon.animalia.registry;
 
 import net.lemon.animalia.Animalia;
-import net.lemon.animalia.screens.FilterTrapMenu;
+import net.lemon.animalia.client.screens.FilterTrapMenu;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraftforge.common.extensions.IForgeMenuType;

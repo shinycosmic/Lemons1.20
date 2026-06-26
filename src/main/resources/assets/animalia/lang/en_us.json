@@ -91,5 +91,10 @@
   "util.animalia.color.lavender": "Lavender",
   "util.animalia.color.purple": "Purple",
   "util.animalia.color.pink": "Pink",
-  "util.animalia.color.brown": "Brown"
+  "util.animalia.color.brown": "Brown",
+
+  "gui.animalia.holonet": "Holonet",
+  "gui.animalia.holonet.fish_compendium": "Fish Compendium",
+  "gui.animalia.holonet.field_guide": "Field Guide",
+  "gui.animalia.holonet.splash": "App Home"
 }

@@ -1,4 +1,4 @@
-package net.lemon.animalia.screens;
+package net.lemon.animalia.client.screens;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.lemon.animalia.Animalia;

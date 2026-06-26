@@ -1,4 +1,4 @@
-package net.lemon.animalia.screens;
+package net.lemon.animalia.client.screens;
 
 import net.lemon.animalia.block.entities.FilterTrapBlockEntity;
 import net.lemon.animalia.registry.ModBlocks;
@@ -12,7 +12,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.items.SlotItemHandler;
-import org.jetbrains.annotations.Nullable;
 
 public class FilterTrapMenu extends AbstractContainerMenu {
     public final FilterTrapBlockEntity blockEntity;
