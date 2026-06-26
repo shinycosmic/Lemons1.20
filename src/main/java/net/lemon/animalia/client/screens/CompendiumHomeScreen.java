@@ -14,9 +14,9 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 public class CompendiumHomeScreen extends Screen {
 
     // PLACEHOLDER TEXTURES
-    private static final ResourceLocation FISH_BACKGROUND = new ResourceLocation(Animalia.MODID, "textures/gui/holonet/fish_transparent.png");
-    private static final ResourceLocation FIELD_BACKGROUND = new ResourceLocation(Animalia.MODID, "textures/gui/holonet/field_transparent.png");
-    private static final ResourceLocation BORDER = new ResourceLocation(Animalia.MODID, "textures/gui/holonet/holonet.png");
+    private static final ResourceLocation FISH_BACKGROUND = new ResourceLocation(Animalia.MODID, "textures/gui/fish_transparent.png");
+    private static final ResourceLocation FIELD_BACKGROUND = new ResourceLocation(Animalia.MODID, "textures/gui/field_transparent.png");
+    private static final ResourceLocation BORDER = new ResourceLocation(Animalia.MODID, "textures/gui/holonet.png");
 
     private static final int BG_WIDTH = 390;
     private static final int BG_HEIGHT = 245;
