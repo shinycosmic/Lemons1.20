@@ -2,7 +2,7 @@ package net.lemon.animalia;
 
 import com.mojang.logging.LogUtils;
 import net.lemon.animalia.registry.*;
-import net.lemon.animalia.creativetabs.ModCreativeModeTabs;
+import net.lemon.animalia.registry.creativetabs.ModCreativeModeTabs;
 import net.lemon.animalia.client.screens.FilterTrapScreen;
 import net.lemon.animalia.util.AnimaliaRenderInit;
 import net.minecraft.client.gui.screens.MenuScreens;

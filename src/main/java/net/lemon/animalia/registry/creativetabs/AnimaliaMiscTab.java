@@ -1,9 +1,7 @@
-package net.lemon.animalia.creativetabs;
+package net.lemon.animalia.registry.creativetabs;
 
 import net.lemon.animalia.registry.ModBlocks;
-import net.lemon.animalia.registry.ModItems;
 import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.registries.RegistryObject;
 

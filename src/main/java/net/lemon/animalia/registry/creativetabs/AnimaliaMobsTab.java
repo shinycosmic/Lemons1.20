@@ -1,4 +1,4 @@
-package net.lemon.animalia.creativetabs;
+package net.lemon.animalia.registry.creativetabs;
 
 import net.lemon.animalia.registry.ModItems;
 import net.minecraft.world.item.CreativeModeTab;

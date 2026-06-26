@@ -1,4 +1,4 @@
-package net.lemon.animalia.events;
+package net.lemon.animalia.registry.events;
 
 import net.lemon.animalia.Animalia;
 import net.minecraftforge.api.distmarker.Dist;
