@@ -13,7 +13,6 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 @OnlyIn(Dist.CLIENT)
 public class HolonetHomeScreen extends Screen {
 
-    // PLACEHOLDER TEXTURE — replace with final hologram phone background
     private static final ResourceLocation BACKGROUND = new ResourceLocation(Animalia.MODID, "textures/gui/holonet_transparent.png");
     private static final ResourceLocation BORDER = new ResourceLocation(Animalia.MODID, "textures/gui/holonet.png");
     private static final ResourceLocation FISH_ICON = new ResourceLocation(Animalia.MODID, "textures/gui/fish_compendium_icon.png");
@@ -42,8 +41,8 @@ public class HolonetHomeScreen extends Screen {
         int bgY = (this.height - BG_HEIGHT) / 2;
 
         // Draw phone background
-        graphics.blit(BACKGROUND, bgX, bgY, 0, 0, BG_WIDTH, BG_HEIGHT, BG_WIDTH, BG_HEIGHT);
-        graphics.blit(BORDER, bgX, bgY, 0, 0, BG_WIDTH, BG_HEIGHT, BG_WIDTH, BG_HEIGHT);
+        graphics.blit(BACKGROUND, bgX, bgY, 0, 0, BG_WIDTH, BG_HEIGHT, BG_WIDTH, (int) (BG_HEIGHT*1.5));
+        graphics.blit(BORDER, bgX, bgY, 0, 0, BG_WIDTH, BG_HEIGHT, BG_WIDTH, (int) (BG_HEIGHT*1.5));
 
         // Calculate icon positions (centered within background)
         int totalWidth = (ICON_SIZE * 2) + ICON_SPACING;
