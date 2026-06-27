@@ -16,8 +16,8 @@ public class HolonetHomeScreen extends Screen {
     // PLACEHOLDER TEXTURE — replace with final hologram phone background
     private static final ResourceLocation BACKGROUND = new ResourceLocation(Animalia.MODID, "textures/gui/holonet_transparent.png");
     private static final ResourceLocation BORDER = new ResourceLocation(Animalia.MODID, "textures/gui/holonet.png");
-    private static final ResourceLocation FISH_ICON = new ResourceLocation(Animalia.MODID, "textures/gui/icon_fish_compendium.png");
-    private static final ResourceLocation FIELD_ICON = new ResourceLocation(Animalia.MODID, "textures/gui/icon_field_guide.png");
+    private static final ResourceLocation FISH_ICON = new ResourceLocation(Animalia.MODID, "textures/gui/fish_compendium_icon.png");
+    private static final ResourceLocation FIELD_ICON = new ResourceLocation(Animalia.MODID, "textures/gui/field_guide_icon.png");
 
     private static final int BG_WIDTH = 390;
     private static final int BG_HEIGHT = 245;
