@@ -76,6 +76,10 @@ public class HolonetHomeScreen extends Screen {
 
     @Override
     public boolean mouseClicked(double mouseX, double mouseY, int button) {
+        if(button == 1) {
+            this.onClose();;
+            return true;
+        }
         int bgX = (this.width - BG_WIDTH) / 2;
         int bgY = (this.height - BG_HEIGHT) / 2;
         int totalWidth = (ICON_SIZE * 2) + ICON_SPACING;
