@@ -19,7 +19,7 @@ public class CompendiumHomeScreen extends Screen {
     public static final ResourceLocation BACK_BUTTON_TEXTURE = new ResourceLocation(Animalia.MODID, "textures/gui/back_button.png");
 
     private static final int BACK_BUTTON_SIZE = 16;
-    private static final int BACK_BUTTON_BOTTOM_MARGIN = 12;
+    private static final int BACK_BUTTON_BOTTOM_MARGIN = 36;
     private static final int BG_WIDTH = 390;
     private static final int BG_HEIGHT = 245;
 
@@ -49,8 +49,8 @@ public class CompendiumHomeScreen extends Screen {
     @Override
     public void render(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
         ResourceLocation bg = app == Scannable.AppName.FISH ? FISH_BACKGROUND : FIELD_BACKGROUND;
-        graphics.blit(bg, bgX, bgY, 0, 0, BG_WIDTH, BG_HEIGHT, BG_WIDTH, BG_HEIGHT);
-        graphics.blit(BORDER, bgX, bgY, 0, 0, BG_WIDTH, BG_HEIGHT, BG_WIDTH, BG_HEIGHT);
+        graphics.blit(bg, bgX, bgY, 0, 0, BG_WIDTH, BG_HEIGHT, BG_WIDTH, (int) (BG_HEIGHT*1.6));
+        graphics.blit(BORDER, bgX, bgY, 0, 0, BG_WIDTH, BG_HEIGHT, BG_WIDTH, (int) (BG_HEIGHT*1.6));
         graphics.blit(BACK_BUTTON_TEXTURE, backBtnX, backBtnY, 0, 0, BACK_BUTTON_SIZE, BACK_BUTTON_SIZE, BACK_BUTTON_SIZE, BACK_BUTTON_SIZE);
         // Hover highlight on back button
         if (isOverBackButton(mouseX, mouseY)) {

@@ -41,8 +41,8 @@ public class HolonetHomeScreen extends Screen {
         int bgY = (this.height - BG_HEIGHT) / 2;
 
         // Draw phone background
-        graphics.blit(BACKGROUND, bgX, bgY, 0, 0, BG_WIDTH, BG_HEIGHT, BG_WIDTH, (int) (BG_HEIGHT*1.5));
-        graphics.blit(BORDER, bgX, bgY, 0, 0, BG_WIDTH, BG_HEIGHT, BG_WIDTH, (int) (BG_HEIGHT*1.5));
+        graphics.blit(BACKGROUND, bgX, bgY, 0, 0, BG_WIDTH, BG_HEIGHT, BG_WIDTH, (int) (BG_HEIGHT*1.6));
+        graphics.blit(BORDER, bgX, bgY, 0, 0, BG_WIDTH, BG_HEIGHT, BG_WIDTH, (int) (BG_HEIGHT*1.6));
 
         // Calculate icon positions (centered within background)
         int totalWidth = (ICON_SIZE * 2) + ICON_SPACING;
