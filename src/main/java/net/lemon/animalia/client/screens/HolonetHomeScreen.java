@@ -50,11 +50,10 @@ public class HolonetHomeScreen extends Screen {
         int iconY = bgY + (BG_HEIGHT - ICON_SIZE) / 2;
 
         // Fish Compendium icon
-        int fishX = startX;
-        graphics.blit(FISH_ICON, fishX, iconY, 0, 0, ICON_SIZE, ICON_SIZE, ICON_SIZE, ICON_SIZE);
+        graphics.blit(FISH_ICON, startX, iconY, 0, 0, ICON_SIZE, ICON_SIZE, ICON_SIZE, ICON_SIZE);
         graphics.drawCenteredString(this.font,
                 Component.translatable("gui.animalia.holonet.fish_compendium"),
-                fishX + ICON_SIZE / 2, iconY + ICON_SIZE + 4, 0xFFFFFF);
+                startX + ICON_SIZE / 2, iconY + ICON_SIZE + 4, 0xFFFFFF);
 
         // Field Guide icon
         int fieldX = startX + ICON_SIZE + ICON_SPACING;
@@ -64,8 +63,8 @@ public class HolonetHomeScreen extends Screen {
                 fieldX + ICON_SIZE / 2, iconY + ICON_SIZE + 4, 0xFFFFFF);
 
         // Hover highlight
-        if (isOver(mouseX, mouseY, fishX, iconY)) {
-            graphics.fill(fishX - 2, iconY - 2, fishX + ICON_SIZE + 2, iconY + ICON_SIZE + 2, 0x44FFFFFF);
+        if (isOver(mouseX, mouseY, startX, iconY)) {
+            graphics.fill(startX - 2, iconY - 2, startX + ICON_SIZE + 2, iconY + ICON_SIZE + 2, 0x44FFFFFF);
         }
         if (isOver(mouseX, mouseY, fieldX, iconY)) {
             graphics.fill(fieldX - 2, iconY - 2, fieldX + ICON_SIZE + 2, iconY + ICON_SIZE + 2, 0x44FFFFFF);
@@ -77,7 +76,7 @@ public class HolonetHomeScreen extends Screen {
     @Override
     public boolean mouseClicked(double mouseX, double mouseY, int button) {
         if(button == 1) {
-            this.onClose();;
+            this.onClose();
             return true;
         }
         int bgX = (this.width - BG_WIDTH) / 2;
@@ -86,10 +85,9 @@ public class HolonetHomeScreen extends Screen {
         int startX = bgX + (BG_WIDTH - totalWidth) / 2;
         int iconY = bgY + (BG_HEIGHT - ICON_SIZE) / 2;
 
-        int fishX = startX;
         int fieldX = startX + ICON_SIZE + ICON_SPACING;
 
-        if (isOver((int) mouseX, (int) mouseY, fishX, iconY)) {
+        if (isOver((int) mouseX, (int) mouseY, startX, iconY)) {
             Minecraft.getInstance().setScreen(new CompendiumHomeScreen(Scannable.AppName.FISH, this));
             return true;
         }
