@@ -1,6 +1,7 @@
 package net.lemon.animalia.client.screens;
 
 import net.lemon.animalia.Animalia;
+import net.lemon.animalia.player.network.ClientDiscoveryCache;
 import net.lemon.animalia.util.HolonetEntities;
 import net.lemon.animalia.util.Scannable;
 import net.minecraft.client.Minecraft;
@@ -8,8 +9,10 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.EntityType;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,24 +33,21 @@ public class OrderListScreen extends Screen {
     private static final int BG_HEIGHT = 245;
     private static final int BACK_BUTTON_SIZE = 16;
     private static final int BACK_BUTTON_BOTTOM_MARGIN = 36;
-
-    // Scroll panel dimensions (relative to bgX/bgY)
     private static final int PANEL_LEFT = 40;
     private static final int PANEL_TOP = 80;
     private static final int PANEL_WIDTH = 150;
     private static final int PANEL_HEIGHT = 160;
-
-    // Row dimensions
+    private static final int BAR_WIDTH = 60;
+    private static final int BAR_HEIGHT = 6;
     private static final int ROW_HEIGHT = 20;
     private static final int ROW_PADDING = 4;
-
-    // Scrollbar
     private static final int SCROLLBAR_WIDTH = 6;
-
-    // Colors
     private static final int FISH_SCROLLBAR_COLOR = 0xFF1A3A5C;  // darker blue
     private static final int FIELD_SCROLLBAR_COLOR = 0xFF5C3A1A; // darker orange
     private static final int SCROLLBAR_TRACK_COLOR = 0x44000000; // semi-transparent black
+    private static final int FISH_BAR_COLOR = 0xFF1A8A5C;
+    private static final int FIELD_BAR_COLOR = 0xFF8A5C1A;
+    private static final int BAR_BG_COLOR = 0x44000000;
 
     private final Scannable.AppName app;
     private final Screen parent;
@@ -123,6 +123,20 @@ public class OrderListScreen extends Screen {
             // Draw order name with drop shadow
             int textY = rowY + (ROW_HEIGHT - this.font.lineHeight) / 2;
             graphics.drawString(this.font, orders.get(i), rowX + 8, textY, 0xFFFFFF, true);
+
+            //Draw Progress Bar
+            int discovered = getDiscoveredCountForOrder(orders.get(i));
+            int total = HolonetEntities.getForOrder(app, orders.get(i)).size();
+            int barX = rowRight - BAR_WIDTH - 8;
+            int barY = rowY + (ROW_HEIGHT - BAR_HEIGHT) / 2;
+            graphics.fill(barX, barY, barX + BAR_WIDTH, barY + BAR_HEIGHT, BAR_BG_COLOR);
+            if (total > 0) {
+                int fillWidth = (int) ((float) discovered / total * BAR_WIDTH);
+                int barColor = app == Scannable.AppName.FISH ? FISH_BAR_COLOR : FIELD_BAR_COLOR;
+                graphics.fill(barX, barY, barX + fillWidth, barY + BAR_HEIGHT, barColor);
+            }
+            String progress = discovered + "/" + total;
+            graphics.drawString(this.font, progress, barX - this.font.width(progress) - 4, textY, 0xAAAAAA, true);
         }
 
         graphics.disableScissor();
@@ -240,6 +254,17 @@ public class OrderListScreen extends Screen {
             return true;
         }
         return super.mouseScrolled(mouseX, mouseY, delta);
+    }
+
+    private int getDiscoveredCountForOrder(String order) {
+        int count = 0;
+        for (EntityType<?> type : HolonetEntities.getForOrder(app, order)) {
+            ResourceLocation id = ForgeRegistries.ENTITY_TYPES.getKey(type);
+            if (ClientDiscoveryCache.isDiscovered(id)) {
+                count++;
+            }
+        }
+        return count;
     }
 
     @Override
