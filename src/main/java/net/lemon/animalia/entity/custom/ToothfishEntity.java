@@ -9,7 +9,10 @@ import net.lemon.animalia.entity.bases.FishBase;
 import net.lemon.animalia.entity.bases.interfaces.IActivityTime;
 import net.lemon.animalia.registry.ModEntities;
 import net.lemon.animalia.registry.ModItems;
+import net.lemon.animalia.util.HolonetEntities;
+import net.lemon.animalia.util.Scannable;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
@@ -42,7 +45,7 @@ import software.bernie.geckolib.core.animatable.instance.SingletonAnimatableInst
 import software.bernie.geckolib.core.animation.*;
 import software.bernie.geckolib.core.object.PlayState;
 
-public class ToothfishEntity extends FishBase implements GeoEntity {
+public class ToothfishEntity extends FishBase implements GeoEntity, Scannable {
     private AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
 
     public ToothfishEntity(EntityType<? extends FishBase> entityType, Level level) {
@@ -196,5 +199,47 @@ public class ToothfishEntity extends FishBase implements GeoEntity {
             this.setVarSizeMultiplier(this.genVarSizeMultiplier());
         }
         return super.finalizeSpawn(level, difficulty, reason, spawnData, dataTag);
+    }
+
+    @Override
+    public AppName getApp() {
+        return AppName.FISH;
+    }
+
+    @Override
+    public Component getTrivia() {
+        if (this.getType() == ModEntities.CHILEANSEABASS.get()) {
+            return Component.translatable("trivia.animalia.dissostichus_eleginoides");
+        } else if (this.getType() == ModEntities.ELEGINOPS_MACLOVINUS.get()) {
+            return Component.translatable("trivia.animalia.eleginops_maclovinus");
+        } else if (this.getType() == ModEntities.PERCOPHIS_BRASILIENSIS.get()){
+            return Component.translatable("trivia.animalia.percophis_brasiliensis");
+        } else {
+            return Component.translatable("debug.animalia.trivia");
+        }
+    }
+
+    @Override
+    public Component getFamily() {
+        if (this.getType() == ModEntities.CHILEANSEABASS.get()) {
+            return Component.translatable("family.animalia.nototheniidae");
+        } else if (this.getType() == ModEntities.ELEGINOPS_MACLOVINUS.get()) {
+            return Component.translatable("family.animalia.eleginopidae");
+        } else if (this.getType() == ModEntities.PERCOPHIS_BRASILIENSIS.get()){
+            return Component.translatable("family.animalia.percophidae");
+        } else {
+            return Component.translatable("debug.animalia.family");
+        }
+    }
+
+    @Override
+    public Component getOrder() {
+        return Component.translatable("order.animalia.perciformes");
+    }
+
+    public static void registerHolonet(){
+        HolonetEntities.register(ModEntities.CHILEANSEABASS, Scannable.AppName.FISH, "Perciformes");
+        HolonetEntities.register(ModEntities.ELEGINOPS_MACLOVINUS, Scannable.AppName.FISH, "Perciformes");
+        HolonetEntities.register(ModEntities.PERCOPHIS_BRASILIENSIS, Scannable.AppName.FISH, "Perciformes");
     }
 }

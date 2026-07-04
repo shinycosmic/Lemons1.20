@@ -42,4 +42,12 @@ public interface Scannable {
      * getOrder, return a translatable component
      */
     Component getOrder();
+
+    /***
+     * the registry method, this is called to make sure Holonet recognizes this creature
+     * Every Scannable creature must also have this method
+     */
+//    static void registerHolonet() {
+//        return;
+//    }
 }

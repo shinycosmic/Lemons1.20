@@ -53,6 +53,7 @@ public class Animalia {
 
     private void commonSetup(final FMLCommonSetupEvent event) {
         ModNetwork.register();
+        HolonetSetup.init();
     }
 
     // Add the example block item to the building blocks tab

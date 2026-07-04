@@ -1,6 +1,5 @@
-package net.lemon.animalia.registry;
+package net.lemon.animalia.util;
 
-import net.lemon.animalia.util.Scannable;
 import net.minecraft.world.entity.EntityType;
 import net.minecraftforge.registries.RegistryObject;
 

@@ -98,5 +98,18 @@
   "gui.animalia.holonet": "Holonet",
   "gui.animalia.holonet.fish_compendium": "Fish Compendium",
   "gui.animalia.holonet.field_guide": "Field Guide",
-  "gui.animalia.holonet.splash": "App Home"
+  "gui.animalia.holonet.splash": "App Home",
+
+  "order.animalia.perciformes": "Perciformes",
+
+  "family.animalia.percophidae": "Percophidae",
+  "family.animalia.eleginopidae": "Eleginopidae",
+  "family.animalia.nototheniidae": "Nototheniidae",
+
+  "trivia.animalia.dissostichus_eleginoides": "The Chilean Sea Bass, also known as the Patagonian Toothfish is an icefish that lives in the southern cold oceans at depths of 45 to over 3000 meters deep.",
+  "trivia.animalia.percophis_brasiliensis": "The Brazilian Flathead is considered to be the most basal member of Notothenioidei. It lives off the coast of Brazil and Argentina.",
+  "trivia.animalia.eleginops_maclovinus": "The Patagonian Blennie is known to live in estuarine and coastal habitats off Argentina and Chile.",
+
+  "debug.animalia.trivia": "If this value displays, there is a bug [trivia]",
+  "debug.animalia.family": "if this text appears, there is a bug [family]"
 }
