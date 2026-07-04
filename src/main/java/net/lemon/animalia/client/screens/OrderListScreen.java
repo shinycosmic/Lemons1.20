@@ -202,7 +202,7 @@ public class OrderListScreen extends Screen {
                 if (mouseX >= panelX && mouseX <= panelX + contentWidth
                         && mouseY >= rowY && mouseY <= rowY + ROW_HEIGHT
                         && mouseY >= panelY && mouseY <= panelBottom) {
-                    // TODO: Minecraft.getInstance().setScreen(new OrderGridScreen(app, orders.get(i), this));
+                    Minecraft.getInstance().setScreen(new OrderGridScreen(app, orders.get(i), this));
                     return true;
                 }
             }
