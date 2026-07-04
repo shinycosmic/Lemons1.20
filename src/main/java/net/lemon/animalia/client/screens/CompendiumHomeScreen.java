@@ -2,6 +2,7 @@ package net.lemon.animalia.client.screens;
 
 import net.lemon.animalia.Animalia;
 import net.lemon.animalia.entity.bases.FishBase;
+import net.lemon.animalia.player.network.ClientDiscoveryCache;
 import net.lemon.animalia.util.HolonetEntities;
 import net.lemon.animalia.util.IsGenetic;
 import net.lemon.animalia.util.Scannable;
@@ -16,6 +17,7 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.registries.ForgeRegistries;
 import org.joml.Quaternionf;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.core.animation.AnimationController;
@@ -101,7 +103,12 @@ public class CompendiumHomeScreen extends Screen {
         }
 
         int totalSpecies = HolonetEntities.getTotalCount(app);
-        int discovered = getDiscoveredCount();
+        int discovered = 0;
+        for (EntityType<?> type : HolonetEntities.getAllForApp(app)) {
+            if (ClientDiscoveryCache.isDiscovered(ForgeRegistries.ENTITY_TYPES.getKey(type))) {
+                discovered++;
+            }
+        }
 
         int barX = bgX + (BG_WIDTH - BAR_WIDTH) / 2;
         int barY = bgY + BG_HEIGHT - 70;
