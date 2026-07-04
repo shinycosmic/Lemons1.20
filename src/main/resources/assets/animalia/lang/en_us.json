@@ -111,5 +111,7 @@
   "trivia.animalia.eleginops_maclovinus": "The Patagonian Blennie is known to live in estuarine and coastal habitats off Argentina and Chile.",
 
   "debug.animalia.trivia": "If this value displays, there is a bug [trivia]",
-  "debug.animalia.family": "if this text appears, there is a bug [family]"
+  "debug.animalia.family": "if this text appears, there is a bug [family]",
+  "tooltip.animalia.holonet.action": "Right-click",
+  "tooltip.animalia.holonet.desc": "to use."
 }
