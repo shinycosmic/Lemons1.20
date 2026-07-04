@@ -1,6 +1,7 @@
 package net.lemon.animalia;
 
 import com.mojang.logging.LogUtils;
+import net.lemon.animalia.player.network.ModNetwork;
 import net.lemon.animalia.registry.*;
 import net.lemon.animalia.registry.creativetabs.ModCreativeModeTabs;
 import net.lemon.animalia.client.screens.FilterTrapScreen;
@@ -51,7 +52,7 @@ public class Animalia {
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
-
+        ModNetwork.register();
     }
 
     // Add the example block item to the building blocks tab
