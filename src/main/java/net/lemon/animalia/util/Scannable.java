@@ -1,5 +1,6 @@
 package net.lemon.animalia.util;
 import net.minecraft.network.chat.Component;
+import org.joml.Quaternionf;
 
 public interface Scannable {
     /***
@@ -50,4 +51,15 @@ public interface Scannable {
 //    static void registerHolonet() {
 //        return;
 //    }
+
+    default Quaternionf getRotforGUI() {
+        return new Quaternionf().rotateZ((float) Math.PI).rotateY((float) Math.toRadians(140));
+    }
+    default int getScaleforGUI() {
+        return 14;
+    }
+
+    default int getYOffsetForGUI() {
+        return 0;
+    }
 }

@@ -203,19 +203,6 @@ public abstract class FishBase extends AnimaliaBreedableWater implements Bucketa
 
     }
 
-    public Quaternionf getRotforGUI() {
-        return new Quaternionf().rotateZ((float) Math.PI).rotateY((float) Math.toRadians(140));
-    }
-
-    public int getScaleforGUI() {
-        float h = this.getBbHeight();
-        return (int) (20f / h);
-    }
-
-    public int getYOffsetForGUI() {
-        return 0;
-    }
-
     public void setForcedInWater(boolean inWater) {
         this.wasTouchingWater = inWater;
     }
