@@ -48,7 +48,6 @@ public class OrderGridScreen extends Screen {
     private static final int LOCKED_CELL_COLOR = 0xBB888888;
     private static final int LOCKED_BORDER_COLOR = 0x55000000;
     private static final int HOVER_HIGHLIGHT = 0x44FFFFFF;
-    private static final int TITLE_COLOR = 0x00FFCC;
     private static final int PAGE_TEXT_COLOR = 0xAAAAAA;
 
     private final Scannable.AppName app;
@@ -89,7 +88,8 @@ public class OrderGridScreen extends Screen {
     @Override
     public void render(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
         CompendiumHomeScreen.renderHelper(graphics, app, FISH_BACKGROUND, FIELD_BACKGROUND, bgX, bgY, BG_WIDTH, BG_HEIGHT, BORDER);
-        graphics.drawCenteredString(this.font, order, bgX + BG_WIDTH / 2, bgY + 35, TITLE_COLOR);
+        int color = app == Scannable.AppName.FISH ? 0x00FFCC : 0xC04000;
+        graphics.drawCenteredString(this.font, order, bgX + BG_WIDTH / 2, bgY + 35, color);
 
         int pageStart = currentPage * CELLS_PER_PAGE;
         int pageEnd = Math.min(pageStart + CELLS_PER_PAGE, species.size());
@@ -199,9 +199,6 @@ public class OrderGridScreen extends Screen {
         Scannable scannable = (Scannable) dummy;
         Quaternionf rotation = scannable.getRotforGUI();
         int yOffset = scannable.getYOffsetForGUI();
-        float entityHeight = dummy.getBbHeight();
-        float entityWidth = dummy.getBbWidth();
-        float maxDimension = Math.max(entityHeight, entityWidth);
         int scale = Math.min(scannable.getScaleforGUI(), 128);
 
         int renderX = cellX + CELL_SIZE * 3 / 7;

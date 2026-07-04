@@ -80,7 +80,8 @@ public class CompendiumHomeScreen extends Screen {
         }
 
         String key = app == Scannable.AppName.FISH ? "gui.animalia.holonet.fish_compendium" : "gui.animalia.holonet.field_guide";
-        graphics.drawCenteredString(this.font, Component.translatable(key), bgX + BG_WIDTH / 2, bgY + 30, 0x00FFCC);
+        int color = app == Scannable.AppName.FISH ? 0x00FFCC : 0xC04000;
+        graphics.drawCenteredString(this.font, Component.translatable(key), bgX + BG_WIDTH / 2, bgY + 35, color);
         if (featuredEntity != null) {
             if (featuredEntity instanceof GeoEntity geo) {
                 geo.getAnimatableInstanceCache().getManagerForId(featuredEntity.getId())
@@ -92,7 +93,7 @@ public class CompendiumHomeScreen extends Screen {
             float rotZ = (float) Mth.lerp((float) mouseY / this.width, Math.PI, Math.PI + 0.2);
             Quaternionf rotation = new Quaternionf().rotateY(rotY).rotateZ(rotZ);
             int entityX = bgX + BG_WIDTH / 2;
-            int entityY = bgY + BG_HEIGHT / 2 + 30;
+            int entityY = bgY + BG_HEIGHT / 2 + 5;
             int scale = 40;
 
             if (featuredEntity instanceof Scannable scannable) {
@@ -123,9 +124,7 @@ public class CompendiumHomeScreen extends Screen {
 
         String progress = discovered + " / " + totalSpecies;
         graphics.drawCenteredString(this.font, progress, bgX + BG_WIDTH / 2, barY - 12, 0xFFFFFF);
-
-        // --- "Tap anywhere" text ---
-        graphics.drawCenteredString(this.font, Component.translatable("gui.animalia.tap"), bgX + BG_WIDTH / 2, barY + BAR_HEIGHT + 8, 0xAAAAAA);
+        //graphics.drawCenteredString(this.font, Component.translatable("gui.animalia.tap"), bgX + BG_WIDTH / 2, barY + BAR_HEIGHT + 8, 0xAAAAAA);
         super.render(graphics, mouseX, mouseY, partialTick);
     }
 
