@@ -7,6 +7,9 @@ import net.lemon.animalia.entity.ai.PelagicRandomSwimGoal;
 import net.lemon.animalia.entity.bases.AnimaliaBreedableWater;
 import net.lemon.animalia.item.BettaFishEggItem;
 import net.lemon.animalia.item.FishEggItem;
+import net.lemon.animalia.util.HolonetEntities;
+import net.lemon.animalia.util.IsGenetic;
+import net.lemon.animalia.util.Scannable;
 import net.minecraft.network.chat.Component;
 import net.lemon.animalia.entity.bases.ActivityTime;
 import net.lemon.animalia.entity.bases.FishBase;
@@ -55,7 +58,7 @@ import java.util.*;
 import java.util.Arrays;
 import java.util.Map;
 
-public class BettaEntity extends FishBase implements GeoEntity {
+public class BettaEntity extends FishBase implements GeoEntity, IsGenetic, Scannable {
     private AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
     public BettaTraits traits;
     private static final EntityDataAccessor<Integer> PRIMARY_COLOR = SynchedEntityData.defineId(BettaEntity.class, EntityDataSerializers.INT);
@@ -108,6 +111,31 @@ public class BettaEntity extends FishBase implements GeoEntity {
     @Override
     public String getScientificName() {
         return "Betta splendens";
+    }
+
+    public static void registerHolonet(){
+        HolonetEntities.register(ModEntities.BETTA_SPLENDENS, Scannable.AppName.FISH, "Anabantiformes");
+    }
+
+
+    @Override
+    public AppName getApp() {
+        return AppName.FISH;
+    }
+
+    @Override
+    public Component getTrivia() {
+        return Component.translatable("trivia.animalia.betta_splendens");
+    }
+
+    @Override
+    public Component getFamily() {
+        return Component.translatable("family.animalia.osphronemidae");
+    }
+
+    @Override
+    public Component getOrder() {
+        return Component.translatable("order.animalia.anabantiformes");
     }
 
     @Override

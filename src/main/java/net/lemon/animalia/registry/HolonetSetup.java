@@ -1,5 +1,6 @@
 package net.lemon.animalia.registry;
 
+import net.lemon.animalia.entity.custom.BettaEntity;
 import net.lemon.animalia.entity.custom.CongolliEntity;
 import net.lemon.animalia.entity.custom.ToothfishEntity;
 // import net.lemon.animalia.entity.custom.CongolliEntity;
@@ -15,6 +16,6 @@ public class HolonetSetup {
     public static void init() {
         ToothfishEntity.registerHolonet();
          CongolliEntity.registerHolonet();
-        // BettaEntity.registerHolonet();
+         BettaEntity.registerHolonet();
     }
 }

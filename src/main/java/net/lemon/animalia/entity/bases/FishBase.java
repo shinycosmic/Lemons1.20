@@ -28,6 +28,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
+import org.joml.Quaternionf;
 
 public abstract class FishBase extends AnimaliaBreedableWater implements Bucketable {
     private static final EntityDataAccessor<Boolean> FROM_BUCKET = SynchedEntityData.defineId(FishBase.class, EntityDataSerializers.BOOLEAN);
@@ -200,6 +201,23 @@ public abstract class FishBase extends AnimaliaBreedableWater implements Bucketa
             super.travel(pTravelVector);
         }
 
+    }
+
+    public Quaternionf getRotforGUI() {
+        return new Quaternionf().rotateZ((float) Math.PI).rotateY((float) Math.toRadians(140));
+    }
+
+    public int getScaleforGUI() {
+        float h = this.getBbHeight();
+        return (int) (20f / h);
+    }
+
+    public int getYOffsetForGUI() {
+        return 0;
+    }
+
+    public void setForcedInWater(boolean inWater) {
+        this.wasTouchingWater = inWater;
     }
 
     public InteractionResult mobInteract(Player player, InteractionHand hand) {

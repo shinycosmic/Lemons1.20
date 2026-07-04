@@ -116,6 +116,7 @@
   "trivia.animalia.percophis_brasiliensis": "The Brazilian Flathead is considered to be the most basal member of Notothenioidei. It lives off the coast of Brazil and Argentina.",
   "trivia.animalia.eleginops_maclovinus": "The Patagonian Blennie is known to live in estuarine and coastal habitats off Argentina and Chile.",
   "trivia.animalia.pseudaphritis_urvillii": "The Congoli is a fish endemic to the estuaries of south Australia. It is a carnivorous ambush predator.",
+  "trivia.animalia.betta_splendens":"The Betta fish is a popular aquarium trade fish known for the striking colors and patterns it can have. The wild versions are duller in appearance.",
 
   "debug.animalia.trivia": "If this value displays, there is a bug [trivia]",
   "debug.animalia.family": "if this text appears, there is a bug [family]",
