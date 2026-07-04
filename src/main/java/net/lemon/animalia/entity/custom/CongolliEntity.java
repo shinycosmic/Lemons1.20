@@ -6,7 +6,10 @@ import net.lemon.animalia.entity.bases.FishBase;
 import net.lemon.animalia.registry.ModEntities;
 import net.lemon.animalia.registry.ModItems;
 import net.lemon.animalia.registry.ModTags;
+import net.lemon.animalia.util.HolonetEntities;
+import net.lemon.animalia.util.Scannable;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -38,7 +41,7 @@ import software.bernie.geckolib.core.object.PlayState;
 
 import java.util.Random;
 
-public class CongolliEntity extends BottomWalkerSwimmerBase implements GeoEntity {
+public class CongolliEntity extends BottomWalkerSwimmerBase implements GeoEntity, Scannable {
     private static final EntityDataAccessor<Boolean> IDLE_SAND = SynchedEntityData.defineId(CongolliEntity.class, EntityDataSerializers.BOOLEAN);
     private AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
     private int ambientTicks;
@@ -335,6 +338,30 @@ public class CongolliEntity extends BottomWalkerSwimmerBase implements GeoEntity
         mob.setYHeadRot(bestAngle);
         mob.yRotO = bestAngle;
         mob.yHeadRotO = bestAngle;
+    }
+
+    @Override
+    public AppName getApp() {
+        return AppName.FISH;
+    }
+
+    @Override
+    public Component getTrivia() {
+        return Component.translatable("trivia.animalia.pseudaphritis_urvillii");
+    }
+
+    @Override
+    public Component getFamily() {
+        return Component.translatable("family.animalia.pseudaphritidae");
+    }
+
+    @Override
+    public Component getOrder() {
+        return Component.translatable("order.animalia.perciformes");
+    }
+
+    public static void registerHolonet(){
+        HolonetEntities.register(ModEntities.PSEUDAPHRITIS_URVILLII, Scannable.AppName.FISH, "Perciformes");
     }
 
     //Quick Hops instead of regular swimming
