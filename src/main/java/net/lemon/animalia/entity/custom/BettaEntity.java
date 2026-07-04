@@ -117,7 +117,6 @@ public class BettaEntity extends FishBase implements GeoEntity, IsGenetic, Scann
         HolonetEntities.register(ModEntities.BETTA_SPLENDENS, Scannable.AppName.FISH, "Anabantiformes");
     }
 
-
     @Override
     public AppName getApp() {
         return AppName.FISH;

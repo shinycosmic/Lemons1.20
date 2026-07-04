@@ -79,52 +79,36 @@ public class OrderListScreen extends Screen {
 
     @Override
     public void render(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
-        // Draw background layers
         ResourceLocation bg = app == Scannable.AppName.FISH ? FISH_BACKGROUND : FIELD_BACKGROUND;
         graphics.blit(bg, bgX, bgY, 0, 0, BG_WIDTH, BG_HEIGHT, BG_WIDTH, (int) (BG_HEIGHT * 1.6));
         graphics.blit(BORDER, bgX, bgY, 0, 0, BG_WIDTH, BG_HEIGHT, BG_WIDTH, (int) (BG_HEIGHT * 1.6));
         graphics.drawCenteredString(this.font, Component.translatable("gui.animalia.holonet.order_list"), bgX + BG_WIDTH / 2, bgY + 40, 0x00FFCC);
 
-        // Scroll panel bounds (absolute screen coordinates)
+        // Scroll panel
         int panelX = bgX + PANEL_LEFT;
         int panelY = bgY + PANEL_TOP;
         int panelRight = panelX + PANEL_WIDTH;
         int panelBottom = panelY + PANEL_HEIGHT;
-
-        // Content area (excluding scrollbar)
         int contentWidth = PANEL_WIDTH - SCROLLBAR_WIDTH - 4;
-
-        // Total content height
         int totalContentHeight = orders.size() * (ROW_HEIGHT + ROW_PADDING);
         int maxScroll = Math.max(0, totalContentHeight - PANEL_HEIGHT);
-
-        // Clamp scroll
         scrollOffset = Math.max(0, Math.min(scrollOffset, maxScroll));
-
-        // Enable scissor for scroll panel
         graphics.enableScissor(panelX, panelY, panelRight - SCROLLBAR_WIDTH - 4, panelBottom);
 
-        // Render order rows
+        // Render each row
         for (int i = 0; i < orders.size(); i++) {
             int rowY = panelY + i * (ROW_HEIGHT + ROW_PADDING) - (int) scrollOffset;
-
-            // Skip rows outside visible area (optimization)
             if (rowY + ROW_HEIGHT < panelY || rowY > panelBottom) continue;
-
             int rowX = panelX;
             int rowRight = panelX + contentWidth;
-
-            // Hover highlight
             if (mouseX >= rowX && mouseX <= rowRight && mouseY >= rowY && mouseY <= rowY + ROW_HEIGHT
                     && mouseY >= panelY && mouseY <= panelBottom) {
                 graphics.fill(rowX, rowY, rowRight, rowY + ROW_HEIGHT, 0x44FFFFFF);
             }
 
-            // Draw order name with drop shadow
             int textY = rowY + (ROW_HEIGHT - this.font.lineHeight) / 2;
             graphics.drawString(this.font, orders.get(i), rowX + 8, textY, 0xFFFFFF, true);
 
-            //Draw Progress Bar
             int discovered = getDiscoveredCountForOrder(orders.get(i));
             int total = HolonetEntities.getForOrder(app, orders.get(i)).size();
             int barX = rowRight - BAR_WIDTH - 8;
@@ -144,11 +128,7 @@ public class OrderListScreen extends Screen {
         // Render scrollbar (if content overflows)
         if (totalContentHeight > PANEL_HEIGHT) {
             int scrollbarX = panelRight - SCROLLBAR_WIDTH;
-
-            // Track
             graphics.fill(scrollbarX, panelY, scrollbarX + SCROLLBAR_WIDTH, panelBottom, SCROLLBAR_TRACK_COLOR);
-
-            // Thumb
             float thumbRatio = (float) PANEL_HEIGHT / totalContentHeight;
             int thumbHeight = Math.max(15, (int) (PANEL_HEIGHT * thumbRatio));
             int thumbY = panelY + (int) ((scrollOffset / maxScroll) * (PANEL_HEIGHT - thumbHeight));
@@ -157,7 +137,6 @@ public class OrderListScreen extends Screen {
             graphics.fill(scrollbarX, thumbY, scrollbarX + SCROLLBAR_WIDTH, thumbY + thumbHeight, thumbColor);
         }
 
-        // Back button (fixed, outside scroll area)
         graphics.blit(BACK_BUTTON_TEXTURE, backBtnX, backBtnY, 0, 0,
                 BACK_BUTTON_SIZE, BACK_BUTTON_SIZE, BACK_BUTTON_SIZE, BACK_BUTTON_SIZE);
         if (isOverBackButton(mouseX, mouseY)) {
@@ -177,13 +156,11 @@ public class OrderListScreen extends Screen {
         }
 
         if (button == 0) {
-            // Back button
             if (isOverBackButton((int) mouseX, (int) mouseY)) {
                 goBack();
                 return true;
             }
 
-            // Check scrollbar drag
             int panelX = bgX + PANEL_LEFT;
             int panelY = bgY + PANEL_TOP;
             int panelRight = panelX + PANEL_WIDTH;
