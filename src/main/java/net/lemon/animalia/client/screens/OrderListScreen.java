@@ -33,8 +33,8 @@ public class OrderListScreen extends Screen {
 
     // Scroll panel dimensions (relative to bgX/bgY)
     private static final int PANEL_LEFT = 40;
-    private static final int PANEL_TOP = 20;
-    private static final int PANEL_WIDTH = 310;
+    private static final int PANEL_TOP = 80;
+    private static final int PANEL_WIDTH = 150;
     private static final int PANEL_HEIGHT = 160;
 
     // Row dimensions
@@ -83,6 +83,7 @@ public class OrderListScreen extends Screen {
         ResourceLocation bg = app == Scannable.AppName.FISH ? FISH_BACKGROUND : FIELD_BACKGROUND;
         graphics.blit(bg, bgX, bgY, 0, 0, BG_WIDTH, BG_HEIGHT, BG_WIDTH, (int) (BG_HEIGHT * 1.6));
         graphics.blit(BORDER, bgX, bgY, 0, 0, BG_WIDTH, BG_HEIGHT, BG_WIDTH, (int) (BG_HEIGHT * 1.6));
+        graphics.drawCenteredString(this.font, Component.translatable("gui.animalia.holonet.order_list"), bgX + BG_WIDTH / 2, bgY + 40, 0x00FFCC);
 
         // Scroll panel bounds (absolute screen coordinates)
         int panelX = bgX + PANEL_LEFT;

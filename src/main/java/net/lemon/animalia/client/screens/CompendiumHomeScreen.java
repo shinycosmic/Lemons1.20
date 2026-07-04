@@ -60,9 +60,9 @@ public class CompendiumHomeScreen extends Screen {
         // TODO: Render random 3D fish model with mouse-driven rotation
         // TODO: Render progress bar (X / Total discovered)
 
-        String title = app == Scannable.AppName.FISH ? "Fish Compendium" : "Field Guide";
-        graphics.drawCenteredString(this.font, title, this.width / 2, this.height / 2 - 40, 0x00FFCC);
-        graphics.drawCenteredString(this.font, "Tap anywhere to continue", this.width / 2, this.height / 2 + 40, 0xAAAAAA);
+        String key = app == Scannable.AppName.FISH ? "gui.animalia.holonet.fish_compendium" : "gui.animalia.holonet.field_guide";
+        graphics.drawCenteredString(this.font, Component.translatable(key), this.width / 2, this.height / 2 - 80, 0x00FFCC);
+        graphics.drawCenteredString(this.font, Component.translatable("gui.animalia.tap"), this.width / 2, this.height / 2 + 60, 0xAAAAAA);
 
         super.render(graphics, mouseX, mouseY, partialTick);
     }

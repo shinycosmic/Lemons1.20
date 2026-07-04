@@ -100,6 +100,8 @@
   "gui.animalia.holonet.field_guide": "Field Guide",
   "gui.animalia.holonet.splash": "App Home",
   "gui.animalia.holonet.orders": "Orders",
+  "gui.animalia.holonet.order_list": "Contents by Order",
+  "gui.animalia.tap": "Tap anywhere to continue",
 
   "order.animalia.perciformes": "Perciformes",
   "order.animalia.anabantiformes": "Anabantiformes",
