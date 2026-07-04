@@ -118,6 +118,15 @@ public class BettaEntity extends FishBase implements GeoEntity, IsGenetic, Scann
     }
 
     @Override
+    public int getScaleforGUI() {
+        if (this.getType() == ModEntities.BETTA_SPLENDENS.get()) {
+            return 128;
+        } else {
+            return Scannable.super.getScaleforGUI();
+        }
+    }
+
+    @Override
     public AppName getApp() {
         return AppName.FISH;
     }

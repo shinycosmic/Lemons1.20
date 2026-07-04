@@ -53,10 +53,10 @@ public interface Scannable {
 //    }
 
     default Quaternionf getRotforGUI() {
-        return new Quaternionf().rotateZ((float) Math.PI).rotateY((float) Math.toRadians(140));
+        return new Quaternionf().rotateZ((float) Math.PI).rotateY((float) Math.toRadians(130));
     }
     default int getScaleforGUI() {
-        return 14;
+        return 54;
     }
 
     default int getYOffsetForGUI() {

@@ -16,10 +16,13 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Mob;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.joml.Quaternionf;
+import software.bernie.geckolib.animatable.GeoEntity;
+import software.bernie.geckolib.core.animation.AnimationController;
 
 import java.util.HashMap;
 import java.util.List;
@@ -188,15 +191,22 @@ public class OrderGridScreen extends Screen {
     private void renderEntityInCell(GuiGraphics graphics, EntityType<?> entityType, int cellX, int cellY) {
         LivingEntity dummy = cachedDummies.get(entityType);
         if (dummy == null) return;
+
+        //fully freeze entity because we cache them
+        if(dummy instanceof GeoEntity geo) {
+            geo.getAnimatableInstanceCache().getManagerForId(dummy.getId())
+                    .getAnimationControllers().values().forEach(AnimationController::forceAnimationReset);
+        }
+
         Scannable scannable = (Scannable) dummy;
         Quaternionf rotation = scannable.getRotforGUI();
         int yOffset = scannable.getYOffsetForGUI();
         float entityHeight = dummy.getBbHeight();
         float entityWidth = dummy.getBbWidth();
         float maxDimension = Math.max(entityHeight, entityWidth);
-        int scale = Math.min(scannable.getScaleforGUI(), 24);
+        int scale = Math.min(scannable.getScaleforGUI(), 128);
 
-        int renderX = cellX + CELL_SIZE / 2;
+        int renderX = cellX + CELL_SIZE * 3 / 7;
         int renderY = cellY + CELL_SIZE - 4 + yOffset;
 
         InventoryScreen.renderEntityInInventory(graphics, renderX, renderY, scale, rotation, null, dummy);
@@ -317,7 +327,6 @@ public class OrderGridScreen extends Screen {
             if (dummy instanceof IsGenetic genetic) {
                 genetic.buildTraitsRandom();
             }
-
             cachedDummies.put(entityType, dummy);
         }
     }

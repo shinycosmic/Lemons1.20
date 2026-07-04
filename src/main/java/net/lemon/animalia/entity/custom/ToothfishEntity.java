@@ -240,11 +240,11 @@ public class ToothfishEntity extends FishBase implements GeoEntity, Scannable {
     @Override
     public int getScaleforGUI() {
         if (this.getType() == ModEntities.CHILEANSEABASS.get()) {
-            return 14;
+            return 22;
         } else if (this.getType() == ModEntities.ELEGINOPS_MACLOVINUS.get()) {
-            return 18;
+            return 42;
         } else if (this.getType() == ModEntities.PERCOPHIS_BRASILIENSIS.get()){
-            return 18;
+            return 46;
         } else {
             return Scannable.super.getScaleforGUI();
         }

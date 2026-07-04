@@ -360,6 +360,15 @@ public class CongolliEntity extends BottomWalkerSwimmerBase implements GeoEntity
         return Component.translatable("order.animalia.perciformes");
     }
 
+    @Override
+    public int getScaleforGUI() {
+        if (this.getType() == ModEntities.PSEUDAPHRITIS_URVILLII.get()) {
+            return 60;
+        } else {
+            return Scannable.super.getScaleforGUI();
+        }
+    }
+
     public static void registerHolonet(){
         HolonetEntities.register(ModEntities.PSEUDAPHRITIS_URVILLII, Scannable.AppName.FISH, "Perciformes");
     }
