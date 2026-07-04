@@ -32,6 +32,6 @@ public class HolonetItem extends Item {
     public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltipComp, TooltipFlag isAdvanced) {
         super.appendHoverText(stack, level, tooltipComp, isAdvanced);
         tooltipComp.add(Component.empty()
-                .append(Component.translatable("tooltip.animalia.holonet.action").withStyle(ChatFormatting.BOLD, ChatFormatting.BLUE))
+                .append(Component.translatable("tooltip.animalia.holonet.action").withStyle(ChatFormatting.BOLD, ChatFormatting.AQUA))
                 .append(Component.translatable("tooltip.animalia.holonet.desc").withStyle(ChatFormatting.GRAY)));    }
 }

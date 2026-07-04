@@ -117,5 +117,5 @@
   "debug.animalia.trivia": "If this value displays, there is a bug [trivia]",
   "debug.animalia.family": "if this text appears, there is a bug [family]",
   "tooltip.animalia.holonet.action": "Right-click",
-  "tooltip.animalia.holonet.desc": "to use."
+  "tooltip.animalia.holonet.desc": " to use."
 }
