@@ -79,7 +79,7 @@ public class CompendiumHomeScreen extends Screen {
             return true;
         }
         if (button == 0) {
-            // TODO: Minecraft.getInstance().setScreen(new OrderListScreen(app, this));
+            Minecraft.getInstance().setScreen(new OrderListScreen(app, this));
             return true;
         }
 
