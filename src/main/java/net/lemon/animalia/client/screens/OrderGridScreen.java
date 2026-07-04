@@ -36,10 +36,10 @@ public class OrderGridScreen extends Screen {
     private static final int BG_HEIGHT = 245;
     private static final int BACK_BUTTON_SIZE = 16;
     private static final int BACK_BUTTON_BOTTOM_MARGIN = 36;
-    private static final int GRID_COLS = 5;
-    private static final int GRID_ROWS = 5;
-    private static final int CELLS_PER_PAGE = GRID_COLS * GRID_ROWS; // 25
-    private static final int CELL_SIZE = 32;
+    private static final int GRID_COLS = 7;
+    private static final int GRID_ROWS = 3;
+    private static final int CELLS_PER_PAGE = GRID_COLS * GRID_ROWS; // 21
+    private static final int CELL_SIZE = 42;
     private static final int CELL_PADDING = 4;
     private static final int GRID_TOP_OFFSET = 55;
     private static final int LOCKED_CELL_COLOR = 0xBB888888;
@@ -194,7 +194,7 @@ public class OrderGridScreen extends Screen {
         float entityHeight = dummy.getBbHeight();
         float entityWidth = dummy.getBbWidth();
         float maxDimension = Math.max(entityHeight, entityWidth);
-        int scale = (int) (12f / maxDimension);
+        int scale = Math.min(scannable.getScaleforGUI(), 24);
 
         int renderX = cellX + CELL_SIZE / 2;
         int renderY = cellY + CELL_SIZE - 4 + yOffset;
