@@ -183,23 +183,21 @@ public class OrderGridScreen extends Screen {
         if (dummy == null) return;
 
         Quaternionf rotation;
-        int scale;
-        int yOffset;
+        int yOffset = 0;
 
         if (dummy instanceof FishBase fish) {
             rotation = fish.getRotforGUI();
-            scale = fish.getScaleforGUI();
             yOffset = fish.getYOffsetForGUI();
         } else {
             rotation = new Quaternionf().rotateZ((float) Math.PI).rotateY((float) Math.toRadians(140));
-            float entityHeight = dummy.getBbHeight();
-            scale = (int) (20f / entityHeight);
-            yOffset = 0;
         }
+        float entityHeight = dummy.getBbHeight();
+        float entityWidth = dummy.getBbWidth();
+        float maxDimension = Math.max(entityHeight, entityWidth);
+        int scale = (int) (12f / maxDimension);
 
         int renderX = cellX + CELL_SIZE / 2;
         int renderY = cellY + CELL_SIZE - 4 + yOffset;
-        scale = Math.min(scale, 18);
 
         InventoryScreen.renderEntityInInventory(graphics, renderX, renderY, scale, rotation, null, dummy);
     }
@@ -312,8 +310,9 @@ public class OrderGridScreen extends Screen {
 
             if (dummy instanceof FishBase fish) {
                 fish.setForcedInWater(true);
-                fish.setOnGround(true);
             }
+
+            dummy.setOnGround(true);
 
             if (dummy instanceof IsGenetic genetic) {
                 genetic.buildTraitsRandom();
