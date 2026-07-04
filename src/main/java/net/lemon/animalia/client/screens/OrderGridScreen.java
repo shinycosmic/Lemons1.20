@@ -1,11 +1,13 @@
 package net.lemon.animalia.client.screens;
 
 import net.lemon.animalia.Animalia;
+import net.lemon.animalia.entity.bases.AnimaliaBreedableWater;
 import net.lemon.animalia.entity.bases.FishBase;
 import net.lemon.animalia.player.network.ClientDiscoveryCache;
 import net.lemon.animalia.util.HolonetEntities;
 import net.lemon.animalia.util.IsGenetic;
 import net.lemon.animalia.util.Scannable;
+import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
@@ -90,7 +92,7 @@ public class OrderGridScreen extends Screen {
 
         int pageStart = currentPage * CELLS_PER_PAGE;
         int pageEnd = Math.min(pageStart + CELLS_PER_PAGE, species.size());
-        Component hoveredTooltip = null;
+        List<Component> hoveredTooltip = null;
         int tooltipX = 0, tooltipY = 0;
 
         for (int i = pageStart; i < pageEnd; i++) {
@@ -111,7 +113,12 @@ public class OrderGridScreen extends Screen {
                     graphics.fill(cellX, cellY, cellX + CELL_SIZE, cellY + CELL_SIZE, HOVER_HIGHLIGHT);
 
                     // Tooltip: common name
-                    hoveredTooltip = entityType.getDescription();
+                    LivingEntity dummy = cachedDummies.get(entityType);
+                    if(dummy instanceof AnimaliaBreedableWater water) {
+                        hoveredTooltip = List.of(entityType.getDescription(), Component.literal(water.getScientificName()).withStyle(ChatFormatting.ITALIC, ChatFormatting.GRAY));
+                    } else {
+                        hoveredTooltip = List.of(entityType.getDescription());
+                    }
                     tooltipX = mouseX;
                     tooltipY = mouseY;
                 }
@@ -127,7 +134,7 @@ public class OrderGridScreen extends Screen {
                 graphics.drawString(this.font, questionMark, textX, textY, 0xFFFFFF, true);
                 if (isMouseOverCell(mouseX, mouseY, cellX, cellY)) {
                     graphics.fill(cellX, cellY, cellX + CELL_SIZE, cellY + CELL_SIZE, HOVER_HIGHLIGHT);
-                    hoveredTooltip = Component.literal("???");
+                    hoveredTooltip = List.of(Component.literal("???"));
                     tooltipX = mouseX;
                     tooltipY = mouseY;
                 }
@@ -172,7 +179,7 @@ public class OrderGridScreen extends Screen {
         }
 
         if (hoveredTooltip != null) {
-            graphics.renderTooltip(this.font, hoveredTooltip, tooltipX, tooltipY);
+            graphics.renderComponentTooltip(this.font, hoveredTooltip, tooltipX, tooltipY);
         }
 
         super.render(graphics, mouseX, mouseY, partialTick);
@@ -181,16 +188,9 @@ public class OrderGridScreen extends Screen {
     private void renderEntityInCell(GuiGraphics graphics, EntityType<?> entityType, int cellX, int cellY) {
         LivingEntity dummy = cachedDummies.get(entityType);
         if (dummy == null) return;
-
-        Quaternionf rotation;
-        int yOffset = 0;
-
-        if (dummy instanceof FishBase fish) {
-            rotation = fish.getRotforGUI();
-            yOffset = fish.getYOffsetForGUI();
-        } else {
-            rotation = new Quaternionf().rotateZ((float) Math.PI).rotateY((float) Math.toRadians(140));
-        }
+        Scannable scannable = (Scannable) dummy;
+        Quaternionf rotation = scannable.getRotforGUI();
+        int yOffset = scannable.getYOffsetForGUI();
         float entityHeight = dummy.getBbHeight();
         float entityWidth = dummy.getBbWidth();
         float maxDimension = Math.max(entityHeight, entityWidth);

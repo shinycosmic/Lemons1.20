@@ -237,6 +237,19 @@ public class ToothfishEntity extends FishBase implements GeoEntity, Scannable {
         return Component.translatable("order.animalia.perciformes");
     }
 
+    @Override
+    public int getScaleforGUI() {
+        if (this.getType() == ModEntities.CHILEANSEABASS.get()) {
+            return 14;
+        } else if (this.getType() == ModEntities.ELEGINOPS_MACLOVINUS.get()) {
+            return 18;
+        } else if (this.getType() == ModEntities.PERCOPHIS_BRASILIENSIS.get()){
+            return 18;
+        } else {
+            return Scannable.super.getScaleforGUI();
+        }
+    }
+
     public static void registerHolonet(){
         HolonetEntities.register(ModEntities.CHILEANSEABASS, Scannable.AppName.FISH, "Perciformes");
         HolonetEntities.register(ModEntities.ELEGINOPS_MACLOVINUS, Scannable.AppName.FISH, "Perciformes");
