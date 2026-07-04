@@ -35,7 +35,7 @@ public class OrderListScreen extends Screen {
     private static final int BACK_BUTTON_BOTTOM_MARGIN = 36;
     private static final int PANEL_LEFT = 40;
     private static final int PANEL_TOP = 80;
-    private static final int PANEL_WIDTH = 150;
+    private static final int PANEL_WIDTH = 240;
     private static final int PANEL_HEIGHT = 160;
     private static final int BAR_WIDTH = 60;
     private static final int BAR_HEIGHT = 6;
