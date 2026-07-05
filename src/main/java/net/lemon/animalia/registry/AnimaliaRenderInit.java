@@ -1,7 +1,6 @@
-package net.lemon.animalia.util;
+package net.lemon.animalia.registry;
 
 import net.lemon.animalia.entity.render.*;
-import net.lemon.animalia.registry.ModEntities;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 
 public class AnimaliaRenderInit {
@@ -12,5 +11,6 @@ public class AnimaliaRenderInit {
         EntityRenderers.register(ModEntities.PSEUDAPHRITIS_URVILLII.get(), PseudaphritisUrvilliiRenderer::new);
         EntityRenderers.register(ModEntities.BETTA_SPLENDENS.get(), BettaSplendensRenderer::new);
         EntityRenderers.register(ModEntities.PERCOPHIS_BRASILIENSIS.get(), PercophisBrasiliensisRenderer::new);
+        EntityRenderers.register(ModEntities.SYNBRANCHUS_MARMORATUS.get(), SynbranchusMarmoratusRenderer::new);
     }
 }

@@ -171,14 +171,27 @@ public abstract class AnimaliaBreedableWater extends WaterAnimal implements IAct
         return false;
     }
 
+    /***
+     * Length of hide animation/how long hide lasts for
+     * @return
+     */
     public int getHideLength() {
         return 100;
     }
 
+    /***
+     * When can it start hiding again?
+     * @return
+     */
     public int getHideCooldown() {
         return 600 + random.nextInt(2000);
     }
 
+    /***
+     * ticker that tracks length in hiding
+     * for the first X ticks of hiding, we play the transition toHide animation, and we will play the leaveHide animation as soon as hideticks is up
+     * @return
+     */
     public int getHideTicks() {
         return this.hideTicks;
     }

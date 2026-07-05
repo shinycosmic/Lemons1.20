@@ -4,6 +4,7 @@ import net.lemon.animalia.Animalia;
 import net.lemon.animalia.entity.bases.AnimaliaBreedableWater;
 import net.lemon.animalia.entity.custom.BettaEntity;
 import net.lemon.animalia.entity.custom.CongolliEntity;
+import net.lemon.animalia.entity.custom.SynbranchusEntity;
 import net.lemon.animalia.entity.custom.ToothfishEntity;
 import net.lemon.animalia.player.HolonetCapability;
 import net.lemon.animalia.player.HolonetCapabilityProvider;
@@ -39,6 +40,7 @@ public class ModEventBusEvents {
         event.put(ModEntities.PSEUDAPHRITIS_URVILLII.get(), CongolliEntity.setAttributes());
         event.put(ModEntities.BETTA_SPLENDENS.get(), BettaEntity.setAttributes());
         event.put(ModEntities.PERCOPHIS_BRASILIENSIS.get(), ToothfishEntity.setAttributes());
+        event.put(ModEntities.SYNBRANCHUS_MARMORATUS.get(), SynbranchusEntity.setAttributes());
     }
 
     @SubscribeEvent

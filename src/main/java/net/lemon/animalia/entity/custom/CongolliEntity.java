@@ -201,7 +201,7 @@ public class CongolliEntity extends BottomWalkerSwimmerBase implements GeoEntity
         AnimationController<T> controller = animationState.getController();
 
         if(this.isBaby()) {
-            controller.setAnimation(RawAnimation.begin().then("animation.notothen.swim", Animation.LoopType.LOOP));
+            controller.setAnimation(RawAnimation.begin().then("swim", Animation.LoopType.LOOP));
             return PlayState.CONTINUE;
         }
 

@@ -14,7 +14,8 @@ public class AnimaliaMobsTab {
             ModItems.ELEGINOPS_MACLOVINUS_SPAWN_EGG,
             ModItems.PSEUDAPHRITIS_URVILLII_SPAWN_EGG,
             ModItems.BETTA_SPLENDENS_SPAWN_EGG,
-            ModItems.PERCOPHIS_BRASILIENSIS_SPAWN_EGG
+            ModItems.PERCOPHIS_BRASILIENSIS_SPAWN_EGG,
+            ModItems.SYNBRANCHUS_MARMORATUS_SPAWN_EGG
 
     );
 
