@@ -47,14 +47,23 @@ public abstract class AnimaliaBreedableWater extends WaterAnimal implements IAct
     private static final EntityDataAccessor<Float> VAR_SIZE_MULTIPLIER = SynchedEntityData.defineId(AnimaliaBreedableWater.class, EntityDataSerializers.FLOAT);
     private static final EntityDataAccessor<Boolean> IS_EATING = SynchedEntityData.defineId(AnimaliaBreedableWater.class, EntityDataSerializers.BOOLEAN);
     private static final EntityDataAccessor<Boolean> IS_HIDING = SynchedEntityData.defineId(AnimaliaBreedableWater.class, EntityDataSerializers.BOOLEAN);
+    private static final EntityDataAccessor<Integer> HIDE_PHASE = SynchedEntityData.defineId(AnimaliaBreedableWater.class, EntityDataSerializers.INT);
 
     private int eatTicks = 0;
     private int hideTicks = 0;
     private int hideCooldown = 0;
+    private int burrowingTicks = 0;
+    private int surfacingTicks = 0;
     public boolean wantsToHide = false;
     public int cooldown = 0;
     public int growthTicks = -12000;
     private int inLove;
+
+    //Constants for hiding logic
+    public static final int PHASE_NONE = 0;
+    public static final int PHASE_BURROWING = 1;
+    public static final int PHASE_BURROWED = 2;
+    public static final int PHASE_SURFACING = 3;
     @Nullable
     private UUID loveCause;
 
@@ -102,6 +111,7 @@ public abstract class AnimaliaBreedableWater extends WaterAnimal implements IAct
         this.entityData.define(VAR_SIZE_MULTIPLIER, 1.0f);
         this.entityData.define(IS_EATING, false);
         this.entityData.define(IS_HIDING, false);
+        this.entityData.define(HIDE_PHASE, 0);
     }
 
     public boolean isEating() {
@@ -196,6 +206,24 @@ public abstract class AnimaliaBreedableWater extends WaterAnimal implements IAct
         return this.hideTicks;
     }
 
+    public int getHidePhase() {
+        return this.entityData.get(HIDE_PHASE);
+    }
+
+    public void setHidePhase(int phase) {
+        this.entityData.set(HIDE_PHASE, phase);
+    }
+
+    /** Override in subclass. Ticks for the burrowing-in animation. */
+    public int getBurrowingLength() {
+        return 20;
+    }
+
+    /** Override in subclass. Ticks for the surfacing animation. */
+    public int getSurfacingLength() {
+        return 20;
+    }
+
     public boolean isHiding() {
         return this.entityData.get(IS_HIDING);
     }
@@ -209,7 +237,7 @@ public abstract class AnimaliaBreedableWater extends WaterAnimal implements IAct
      * @return
      */
     public boolean canStartHiding() {
-        return this.canHide() && !this.isHiding() && this.hideTicks <= 0;
+        return this.canHide() && !this.isHiding() && this.hideCooldown <= 0;
     }
 
     public float getSwimSpeed() {
@@ -242,8 +270,11 @@ public abstract class AnimaliaBreedableWater extends WaterAnimal implements IAct
         pCompound.putInt("Gender", this.getGender());
         pCompound.putInt("VarColor", this.getVarColor());
         pCompound.putInt("InLove", this.inLove);
+        pCompound.putInt("HidePhase", this.getHidePhase());
         pCompound.putInt("HideTicks", this.hideTicks);
         pCompound.putInt("HideCooldown", this.hideCooldown);
+        pCompound.putInt("BurrowingTicks", this.burrowingTicks);
+        pCompound.putInt("SurfacingTicks", this.surfacingTicks);
         pCompound.putBoolean("WantsToHide", this.wantsToHide);
         pCompound.putBoolean("IsHiding", this.isHiding());
         if (this.loveCause != null) {
@@ -259,8 +290,11 @@ public abstract class AnimaliaBreedableWater extends WaterAnimal implements IAct
         this.setAge(pCompound.getInt("Age"));
         this.setGender(pCompound.getInt("Gender"));
         this.setVarColor(pCompound.getInt("VarColor"));
+        this.setHidePhase(pCompound.getInt("HidePhase"));
         this.hideTicks = pCompound.getInt("HideTicks");
         this.hideCooldown = pCompound.getInt("HideCooldown");
+        this.burrowingTicks = pCompound.getInt("BurrowingTicks");
+        this.surfacingTicks = pCompound.getInt("SurfacingTicks");
         this.wantsToHide = pCompound.getBoolean("WantsToHide");
         this.setHiding(pCompound.getBoolean("IsHiding"));
         if (!pCompound.contains("VarSize")) {
@@ -274,6 +308,15 @@ public abstract class AnimaliaBreedableWater extends WaterAnimal implements IAct
         if (this.isInvulnerableTo(source)) {
             return false;
         } else {
+            if (!this.level().isClientSide && this.getHidePhase() != PHASE_NONE) {
+                this.setHidePhase(PHASE_NONE);
+                this.setHiding(false);
+                this.hideTicks = 0;
+                this.burrowingTicks = 0;
+                this.surfacingTicks = 0;
+                this.wantsToHide = false;
+                this.hideCooldown = this.getHideCooldown();
+            }
             this.inLove = 0;
             return super.hurt(source, amount);
         }
@@ -293,30 +336,60 @@ public abstract class AnimaliaBreedableWater extends WaterAnimal implements IAct
         }
         //TODO Implement Mastacembelus as a test for this AI, we need to override some methods, and apply hiding animation playing logic.
         // Also need to add logic to bottom swimmers with smooth swimming to target the ground when wanting to hide.
-        if(!this.level().isClientSide && this.canHide()) {
-            if(this.hideCooldown > 0) {
+        if (!this.level().isClientSide && this.canHide()) {
+            if (this.hideCooldown > 0) {
                 --this.hideCooldown;
             }
-            if(this.isHiding()){
-                --this.hideTicks;
-                this.getNavigation().stop();
 
-                if (this.hideTicks <= 0) {
-                    this.setHiding(false);
-                    this.hideCooldown = this.getHideCooldown();
-                }
-            } else if (this.wantsToHide) {
-                if(this.onGround() && this.onHideableBlock(this)) {
-                    this.setHiding(true);
-                    this.hideTicks = this.getHideLength();
+            int phase = this.getHidePhase();
+
+            switch (phase) {
+                case PHASE_NONE:
+                    // Entry: triggered by FishHideGoal or legacy aiStep trigger
+                    if (this.wantsToHide) {
+                        if (this.onGround() && this.onHideableBlock(this)) {
+                            this.setHidePhase(PHASE_BURROWING);
+                            this.setHiding(true);
+                            this.burrowingTicks = this.getBurrowingLength();
+                            this.getNavigation().stop();
+                            this.wantsToHide = false;
+                        } else if (this.onGround()) {
+                            // On ground but wrong block — abort
+                            this.wantsToHide = false;
+                            this.hideCooldown = (int) (this.getHideCooldown() * 0.25f);
+                        }
+                    } else if (this.canStartHiding()) {
+                        this.wantsToHide = true;
+                    }
+                    break;
+
+                case PHASE_BURROWING:
                     this.getNavigation().stop();
-                    this.wantsToHide = false;
-                } else if (this.onGround()) {
-                    this.wantsToHide = false;
-                    this.hideCooldown = (int) (this.getHideCooldown()*0.25f);
-                }
-            } else if (this.canStartHiding()) {
-                this.wantsToHide = true;
+                    --this.burrowingTicks;
+                    if (this.burrowingTicks <= 0) {
+                        this.setHidePhase(PHASE_BURROWED);
+                        this.hideTicks = this.getHideLength();
+                    }
+                    break;
+
+                case PHASE_BURROWED:
+                    this.getNavigation().stop();
+                    --this.hideTicks;
+                    if (this.hideTicks <= 0) {
+                        this.setHidePhase(PHASE_SURFACING);
+                        this.surfacingTicks = this.getSurfacingLength();
+                    }
+                    break;
+
+                case PHASE_SURFACING:
+                    this.getNavigation().stop();
+                    --this.surfacingTicks;
+                    if (this.surfacingTicks <= 0) {
+                        this.setHidePhase(PHASE_NONE);
+                        this.setHiding(false);
+                        this.hideCooldown = this.getHideCooldown();
+                    }
+                    break;
             }
         }
 

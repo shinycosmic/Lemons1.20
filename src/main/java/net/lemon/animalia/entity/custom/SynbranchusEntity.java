@@ -1,6 +1,8 @@
 package net.lemon.animalia.entity.custom;
 
+import net.lemon.animalia.entity.ai.FishHideGoal;
 import net.lemon.animalia.entity.bases.ActivityTime;
+import net.lemon.animalia.entity.bases.AnimaliaBreedableWater;
 import net.lemon.animalia.entity.bases.BottomWalkerSwimmerBase;
 import net.lemon.animalia.entity.bases.FishBase;
 import net.lemon.animalia.registry.ModEntities;
@@ -55,6 +57,22 @@ public class SynbranchusEntity extends BottomWalkerSwimmerBase implements GeoEnt
             return 0.4f;
         }
         return 0.6f;
+    }
+
+    @Override
+    protected void registerGoals() {
+        super.registerGoals();
+        this.goalSelector.addGoal(3, new FishHideGoal(this));
+    }
+
+    @Override
+    public int getBurrowingLength() {
+        return 50;
+    }
+
+    @Override
+    public int getSurfacingLength() {
+        return 60;
     }
 
     @Override
@@ -146,36 +164,42 @@ public class SynbranchusEntity extends BottomWalkerSwimmerBase implements GeoEnt
         controllers.add(new AnimationController<>(this, "controller", 10, this::predicate));
     }
 
-    private <T extends GeoAnimatable> PlayState predicate(AnimationState<T> animationState) {
-        AnimationController<T> controller = animationState.getController();
-
+    private <E extends GeoAnimatable> PlayState predicate(AnimationState<E> animationState) {
         if(this.isBaby()) {
-            controller.setAnimation(RawAnimation.begin().then("swim", Animation.LoopType.LOOP));
+            animationState.getController().setAnimation(RawAnimation.begin().then("swim", Animation.LoopType.LOOP));
             return PlayState.CONTINUE;
         }
 
-        //TODO need to make sure this check is correct
-        if(!this.isHiding() && this.wantsToHide && this.onGround()) {
-            controller.setAnimation(RawAnimation.begin().then("burrowing", Animation.LoopType.HOLD_ON_LAST_FRAME));
-            return PlayState.CONTINUE;
-        } else if (this.isHiding() && this.getHideTicks() > 0) {
-            controller.setAnimation(RawAnimation.begin().then("burrowed", Animation.LoopType.LOOP));
-            return PlayState.CONTINUE;
-        } else if(this.isHiding() && this.getHideTicks() <= 0) {
-            controller.setAnimation(RawAnimation.begin().then("surfacing", Animation.LoopType.PLAY_ONCE));
+        int phase = this.getHidePhase();
+
+        // BURROWING
+        if(phase == AnimaliaBreedableWater.PHASE_BURROWING) {
+            animationState.getController().setAnimation(RawAnimation.begin().then("burrowing", Animation.LoopType.HOLD_ON_LAST_FRAME));
             return PlayState.CONTINUE;
         }
 
-        if (this.isWalking()) { //TODO we sould freeze the swim animation on the tick if the animal is not moving
-            if (this.isActuallyMoving()) {
-                controller.setAnimation(RawAnimation.begin().then("swim", Animation.LoopType.LOOP));
+        // BURROWED
+        if(phase == AnimaliaBreedableWater.PHASE_BURROWED) {
+            animationState.getController().setAnimation(RawAnimation.begin().then("burrowed", Animation.LoopType.LOOP));
+            return PlayState.CONTINUE;
+        }
+
+        // SURFACING
+        if(phase == AnimaliaBreedableWater.PHASE_SURFACING) {
+            animationState.getController().setAnimation(RawAnimation.begin().then("surfacing", Animation.LoopType.HOLD_ON_LAST_FRAME));
+            return PlayState.CONTINUE;
+        }
+
+        if(this.isWalking()) {
+            if(this.isActuallyMoving()) {
+                animationState.getController().setAnimation(RawAnimation.begin().then("swim", Animation.LoopType.LOOP));
                 return PlayState.CONTINUE;
             } else {
                 return PlayState.STOP;
             }
         } else {
             // SWIMMING
-            controller.setAnimation(RawAnimation.begin().then("swim", Animation.LoopType.LOOP));
+            animationState.getController().setAnimation(RawAnimation.begin().then("swim", Animation.LoopType.LOOP));
             return PlayState.CONTINUE;
         }
     }
