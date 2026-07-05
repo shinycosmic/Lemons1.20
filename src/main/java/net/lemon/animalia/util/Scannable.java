@@ -62,4 +62,6 @@ public interface Scannable {
     default int getYOffsetForGUI() {
         return 0;
     }
+
+    default boolean hasDimorphism() { return false; }
 }

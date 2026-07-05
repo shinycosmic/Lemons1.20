@@ -251,7 +251,7 @@ public class OrderGridScreen extends Screen {
                     EntityType<?> entityType = species.get(i);
                     ResourceLocation entityId = ForgeRegistries.ENTITY_TYPES.getKey(entityType);
                     if (ClientDiscoveryCache.isDiscovered(entityId)) {
-                        // TODO: Minecraft.getInstance().setScreen(new CreatureDetailScreen(app, entityType, this));
+                        Minecraft.getInstance().setScreen(new CreatureDetailScreen(app, entityType, this));
                     }
                     return true;
                 }
