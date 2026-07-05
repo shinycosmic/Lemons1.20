@@ -73,6 +73,11 @@ public class SynbranchusEntity extends BottomWalkerSwimmerBase implements GeoEnt
     }
 
     @Override
+    public boolean useSmoothControl() {
+        return true;
+    }
+
+    @Override
     public int getScaleforGUI() {
         if (this.getType() == ModEntities.SYNBRANCHUS_MARMORATUS.get()) {
             return 60;

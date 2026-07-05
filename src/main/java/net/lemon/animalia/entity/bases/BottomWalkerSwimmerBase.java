@@ -115,8 +115,8 @@ public abstract class BottomWalkerSwimmerBase extends FishBase {
                 }
             }
 
-            //switch from walking to swimming
-            if(!(this.stateTime > 0) && this.isWalking()) {
+            //switch from walking to swimming, cannot switch if also hiding
+            if(!(this.stateTime > 0) && this.isWalking() && !this.isHiding()) {
                 this.setWalking(false);
                 this.stateTime = this.getSwimTime();
             }
