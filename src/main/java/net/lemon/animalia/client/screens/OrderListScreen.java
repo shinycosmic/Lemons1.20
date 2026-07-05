@@ -118,7 +118,7 @@ public class OrderListScreen extends Screen {
                 graphics.fill(barX, barY, barX + fillWidth, barY + BAR_HEIGHT, barColor);
             }
             String progress = discovered + "/" + total;
-            graphics.drawString(this.font, progress, barX - this.font.width(progress) - 4, textY, 0xAAAAAA, true);
+            graphics.drawString(this.font, progress, barX - this.font.width(progress) - 4, textY, 0xFFFFFF, true);
         }
 
         graphics.disableScissor();

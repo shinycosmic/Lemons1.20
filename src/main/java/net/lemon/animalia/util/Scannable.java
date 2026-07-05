@@ -1,5 +1,6 @@
 package net.lemon.animalia.util;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.entity.LivingEntity;
 import org.joml.Quaternionf;
 
 public interface Scannable {
@@ -56,7 +57,19 @@ public interface Scannable {
         return new Quaternionf().rotateZ((float) Math.PI).rotateY((float) Math.toRadians(130));
     }
     default int getScaleforGUI() {
-        return 54;
+        return 50;
+    }
+
+    /***
+     * Override to add multipliers
+     * @return
+     */
+    default int getScaleforDetailGUI() {
+        if(this instanceof LivingEntity living) {
+            float maxDim = Math.max(living.getBbHeight(), living.getBbWidth());
+            return (int) (50f / maxDim);
+        }
+        return 50;
     }
 
     default int getYOffsetForGUI() {

@@ -141,13 +141,10 @@ public class CreatureDetailScreen extends Screen {
             float rotZ = (float) Mth.lerp((float) mouseY / this.width, Math.PI, Math.PI + 0.2);
             Quaternionf rotation = new Quaternionf().rotateY(rotY).rotateZ(rotZ);
 
-            int entityX = bgX + MODEL_AREA_WIDTH / 2 + 10;
+            int entityX = bgX + MODEL_AREA_WIDTH / 2 + 40;
             int entityY = bgY + BG_HEIGHT / 2 + 40;
-            int scale = 50;
-
-            if (displayEntity instanceof Scannable scannable) {
-                scale = Math.min(scannable.getScaleforGUI() * 4, 80);
-            }
+            float maxDim = Math.max(displayEntity.getBbHeight(), displayEntity.getBbWidth());
+            int scale = (int) (50F/maxDim);
 
             InventoryScreen.renderEntityInInventory(graphics, entityX, entityY, scale, rotation, null, displayEntity);
         }
@@ -177,12 +174,12 @@ public class CreatureDetailScreen extends Screen {
         // Common name (top center)
         if (displayEntity != null) {
             graphics.drawCenteredString(this.font, entityType.getDescription().copy().withStyle(ChatFormatting.BOLD),
-                    bgX + BG_WIDTH / 2, bgY + 25, 0xFFFFFF);
+                    bgX + BG_WIDTH / 2, bgY + 35, 0xFFFFFF);
         }
 
         // Info panel (right side)
         int infoX = bgX + INFO_LEFT_OFFSET;
-        int infoY = bgY + INFO_TOP_OFFSET;
+        int infoY = bgY + INFO_TOP_OFFSET + 10;
 
         if (displayEntity instanceof AnimaliaBreedableWater abw && displayEntity instanceof Scannable scannable) {
             graphics.drawString(this.font, Component.literal("> ").append(scannable.getOrder()), infoX, infoY, 0xFFFFFF, true);

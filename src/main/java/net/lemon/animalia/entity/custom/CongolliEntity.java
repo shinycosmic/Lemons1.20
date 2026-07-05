@@ -369,6 +369,12 @@ public class CongolliEntity extends BottomWalkerSwimmerBase implements GeoEntity
         }
     }
 
+    @Override
+    public int getScaleforDetailGUI() {
+        int currScale = Scannable.super.getScaleforDetailGUI();
+        return (int) (currScale * 1.6f);
+    }
+
     public static void registerHolonet(){
         HolonetEntities.register(ModEntities.PSEUDAPHRITIS_URVILLII, Scannable.AppName.FISH, "Perciformes");
     }

@@ -250,6 +250,16 @@ public class ToothfishEntity extends FishBase implements GeoEntity, Scannable {
         }
     }
 
+    @Override
+    public int getScaleforDetailGUI() {
+        int currScale = Scannable.super.getScaleforDetailGUI();
+        if(this.getType() == ModEntities.ELEGINOPS_MACLOVINUS.get()) {
+            currScale *= 1.6f;
+        }
+
+        return currScale;
+    }
+
     public static void registerHolonet(){
         HolonetEntities.register(ModEntities.CHILEANSEABASS, Scannable.AppName.FISH, "Perciformes");
         HolonetEntities.register(ModEntities.ELEGINOPS_MACLOVINUS, Scannable.AppName.FISH, "Perciformes");
