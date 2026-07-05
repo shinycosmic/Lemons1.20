@@ -85,12 +85,12 @@ public class CongolliEntity extends BottomWalkerSwimmerBase implements GeoEntity
 
     @Override
     public TagKey<Item> getFoodTag() {
-        return ItemTags.FISHES;
+        return ModTags.Items.CRUSTACEAN;
     }
 
     @Override
-    public boolean isBreedingItem(ItemStack stack) {
-        return stack.is(ModTags.Items.CRUSTACEAN);
+    public Item getBreedingItem() {
+        return ModItems.AMPHIPOD.get();
     }
 
     @Override

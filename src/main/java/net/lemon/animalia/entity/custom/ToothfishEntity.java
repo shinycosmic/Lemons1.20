@@ -176,15 +176,15 @@ public class ToothfishEntity extends FishBase implements GeoEntity, Scannable {
 
     /***
      * Eleginops maclovinus: Amphipod
-     * Dissostichus eleginoides: Any Fish
-     * Percophis brasiliensis: Any Fish
+     * Dissostichus eleginoides: Raw Fish
+     * Percophis brasiliensis: Raw Fish
      */
     @Override
-    public boolean isBreedingItem(ItemStack stack) {
+    public Item getBreedingItem() {
         if(this.getType() == ModEntities.ELEGINOPS_MACLOVINUS.get()) {
-            return stack.is(ModItems.AMPHIPOD.get());
+            return ModItems.AMPHIPOD.get();
         }
-        return stack.is(getFoodTag());
+        return ModItems.RAW_FISH.get();
     }
 
     @Override

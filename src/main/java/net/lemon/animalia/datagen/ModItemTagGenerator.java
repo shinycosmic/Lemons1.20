@@ -23,5 +23,6 @@ public class ModItemTagGenerator extends ItemTagsProvider {
         tag(ItemTags.FISHES).add(ModItems.FISH_FOOD.get());
         tag(ModTags.Items.CRUSTACEAN).add(ModItems.AMPHIPOD.get());
         tag(ModTags.Items.CRUSTACEAN).add(ModItems.GIGANTOCYPRIS.get());
+        tag(ModTags.Items.CRUSTACEAN).add(ModItems.FISH_FOOD.get());
     }
 }

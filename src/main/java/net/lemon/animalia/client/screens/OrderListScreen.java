@@ -83,7 +83,6 @@ public class OrderListScreen extends Screen {
         int color = app == Scannable.AppName.FISH ? 0x00FFCC : 0xC04000;
         graphics.drawCenteredString(this.font, Component.translatable("gui.animalia.holonet.order_list"), bgX + BG_WIDTH / 2, bgY + 40, color);
 
-        // Scroll panel
         int panelX = bgX + PANEL_LEFT;
         int panelY = bgY + PANEL_TOP;
         int panelRight = panelX + PANEL_WIDTH;
@@ -148,7 +147,6 @@ public class OrderListScreen extends Screen {
 
     @Override
     public boolean mouseClicked(double mouseX, double mouseY, int button) {
-        // Right-click → go back
         if (button == 1) {
             goBack();
             return true;
@@ -216,7 +214,6 @@ public class OrderListScreen extends Screen {
 
     @Override
     public boolean mouseScrolled(double mouseX, double mouseY, double delta) {
-        // Only scroll if mouse is within panel
         int panelX = bgX + PANEL_LEFT;
         int panelY = bgY + PANEL_TOP;
         int panelRight = panelX + PANEL_WIDTH;

@@ -344,10 +344,18 @@ public abstract class AnimaliaBreedableWater extends WaterAnimal implements IAct
     }
 
     /***
-     * Used to set breeding Item
+     * Used to check breeding item
      * @return
      */
-    public abstract boolean isBreedingItem(ItemStack stack);
+    public boolean isBreedingItem(ItemStack stack) {
+        return stack.is(getBreedingItem());
+    }
+
+    /***
+     * Used to set breedingItem
+     * @return
+     */
+    public abstract Item getBreedingItem();
 
     public boolean isFood(ItemStack stack) {
         return stack.is(getFoodTag());

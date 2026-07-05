@@ -205,8 +205,8 @@ public class BettaEntity extends FishBase implements GeoEntity, IsGenetic, Scann
     }
 
     @Override
-    public boolean isBreedingItem(ItemStack stack) {
-        return stack.is(ModItems.FISH_FOOD.get());
+    public Item getBreedingItem() {
+        return ModItems.FISH_FOOD.get();
     }
 
     @Override
