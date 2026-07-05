@@ -24,8 +24,6 @@ import software.bernie.geckolib.core.animation.AnimationController;
 
 import java.util.Random;
 
-import static net.lemon.animalia.player.network.ClientDiscoveryCache.getDiscoveredCount;
-
 @OnlyIn(Dist.CLIENT)
 public class CompendiumHomeScreen extends Screen {
 

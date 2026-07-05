@@ -15,6 +15,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @OnlyIn(Dist.CLIENT)
@@ -35,12 +36,12 @@ public class OrderListScreen extends Screen {
     private static final int BACK_BUTTON_BOTTOM_MARGIN = 36;
     private static final int PANEL_LEFT = 40;
     private static final int PANEL_TOP = 80;
-    private static final int PANEL_WIDTH = 240;
-    private static final int PANEL_HEIGHT = 160;
+    private static final int PANEL_WIDTH = 300;
+    private static final int PANEL_HEIGHT = 140;
     private static final int BAR_WIDTH = 60;
     private static final int BAR_HEIGHT = 6;
-    private static final int ROW_HEIGHT = 20;
-    private static final int ROW_PADDING = 4;
+    private static final int ROW_HEIGHT = 14;
+    private static final int ROW_PADDING = 2;
     private static final int SCROLLBAR_WIDTH = 6;
     private static final int FISH_SCROLLBAR_COLOR = 0xFF1A3A5C;  // darker blue
     private static final int FIELD_SCROLLBAR_COLOR = 0xFF5C3A1A; // darker orange
@@ -66,6 +67,7 @@ public class OrderListScreen extends Screen {
         this.app = app;
         this.parent = parent;
         this.orders = new ArrayList<>(HolonetEntities.getForApp(app).keySet());
+        Collections.sort(this.orders);
     }
 
     @Override
