@@ -33,6 +33,8 @@ Adding Entities:
 - add geo.json to assets -> geo
 - add animation file to assets -> animations
 - add texture file to assets ->textures -> entity
+- add wiring to be picked up by the Holonet (HolonetSetup)
+- Adjust sizing and positioning via Scannable interface overridable methods for Holonet
 
 May need new AI or Bases with the above
 
