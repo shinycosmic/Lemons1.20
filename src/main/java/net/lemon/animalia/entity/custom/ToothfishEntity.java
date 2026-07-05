@@ -254,7 +254,7 @@ public class ToothfishEntity extends FishBase implements GeoEntity, Scannable {
     public int getScaleforDetailGUI() {
         int currScale = Scannable.super.getScaleforDetailGUI();
         if(this.getType() == ModEntities.ELEGINOPS_MACLOVINUS.get()) {
-            currScale *= 1.6f;
+            currScale *= (int) 2f;
         }
 
         return currScale;

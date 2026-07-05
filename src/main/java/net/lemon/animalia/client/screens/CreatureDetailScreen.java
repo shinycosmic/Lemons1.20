@@ -64,6 +64,10 @@ public class CreatureDetailScreen extends Screen {
     private int bgY;
     private int backBtnX;
     private int backBtnY;
+    private float baseRotation = 0;
+    private float baseRotationZ = 0;
+    private boolean isDragging = false;
+    private double lastDragX = 0;
 
     private LivingEntity displayEntity;
     private int currentGender = 0;
@@ -137,14 +141,13 @@ public class CreatureDetailScreen extends Screen {
                         .forEach(AnimationController::forceAnimationReset);
             }
 
-            float rotY = (float) Mth.lerp((float) mouseX / this.width, 0, Math.PI);
-            float rotZ = (float) Mth.lerp((float) mouseY / this.width, Math.PI, Math.PI + 0.2);
-            Quaternionf rotation = new Quaternionf().rotateY(rotY).rotateZ(rotZ);
-
             int entityX = bgX + MODEL_AREA_WIDTH / 2 + 40;
             int entityY = bgY + BG_HEIGHT / 2 + 40;
-            float maxDim = Math.max(displayEntity.getBbHeight(), displayEntity.getBbWidth());
-            int scale = (int) (50F/maxDim);
+            int scale = ((Scannable) displayEntity).getScaleforDetailGUI();
+
+            float rotY = (float) Mth.lerp((float) mouseX / this.width, 0, Math.PI *2f);
+            float rotZ = (float) Mth.lerp((float) mouseY / this.height, Math.PI, Math.PI) + baseRotation;
+            Quaternionf rotation = new Quaternionf().rotateY(rotY).rotateZ(rotZ);
 
             InventoryScreen.renderEntityInInventory(graphics, entityX, entityY, scale, rotation, null, displayEntity);
         }
@@ -251,7 +254,25 @@ public class CreatureDetailScreen extends Screen {
             }
         }
 
+        isDragging = true;
+
         return super.mouseClicked(mouseX, mouseY, button);
+    }
+
+    @Override
+    public boolean mouseDragged(double mouseX, double mouseY, int button, double dragX, double dragY) {
+        if(isDragging && button == 0) {
+            baseRotation += (float) (dragX * 0.02f);
+            baseRotation += (float) (dragY * 0.02f);
+            return true;
+        }
+        return super.mouseDragged(mouseX, mouseY, button, dragX, dragY);
+    }
+
+    @Override
+    public boolean mouseReleased(double mouseX, double mouseY, int button) {
+        if(button == 0) { isDragging = false; }
+        return super.mouseReleased(mouseX, mouseY, button);
     }
 
     private boolean isOverBackButton(int mouseX, int mouseY) {

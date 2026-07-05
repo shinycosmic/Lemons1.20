@@ -89,9 +89,7 @@ public class CompendiumHomeScreen extends Screen {
                         .forEach(AnimationController::forceAnimationReset);
             }
 
-            float rotY = (float) Mth.lerp((float) mouseX / this.width, 0, Math.PI);
-            float rotZ = (float) Mth.lerp((float) mouseY / this.width, Math.PI, Math.PI + 0.2);
-            Quaternionf rotation = new Quaternionf().rotateY(rotY).rotateZ(rotZ);
+            Quaternionf rotation = new Quaternionf().rotateY((float) Math.toRadians(90)).rotateZ((float) Math.PI);
             int entityX = bgX + BG_WIDTH / 2;
             int entityY = bgY + BG_HEIGHT / 2 + 5;
             int scale = 40;
