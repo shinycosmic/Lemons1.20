@@ -463,7 +463,6 @@ public abstract class AnimaliaBreedableWater extends WaterAnimal implements IAct
             this.heal((float) Objects.requireNonNull(itemstack.getFoodProperties(this)).getNutrition());
             this.setEating(true);
             this.eatTicks = getEatLength();
-            //TODO play eat animation upon right clicking with valid food item
             if (this.level().isClientSide) {
                 return InteractionResult.CONSUME;
             }
