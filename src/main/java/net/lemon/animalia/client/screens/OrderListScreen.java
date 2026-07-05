@@ -6,6 +6,7 @@ import net.lemon.animalia.util.HolonetEntities;
 import net.lemon.animalia.util.Scannable;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -77,6 +78,9 @@ public class OrderListScreen extends Screen {
         bgY = (this.height - BG_HEIGHT) / 2;
         backBtnX = bgX + (BG_WIDTH - BACK_BUTTON_SIZE) / 2;
         backBtnY = bgY + BG_HEIGHT - BACK_BUTTON_SIZE - BACK_BUTTON_BOTTOM_MARGIN;
+        this.addRenderableWidget(Button.builder(Component.translatable("gui.animalia.holonet.view_all"), b -> {
+            Minecraft.getInstance().setScreen(new OrderGridScreen(app, null, this));
+        }).pos(bgX + BG_WIDTH - 70, bgY + 20).size(55, 16).build());
     }
 
     @Override

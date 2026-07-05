@@ -69,7 +69,7 @@ public class OrderGridScreen extends Screen {
         this.app = app;
         this.order = order;
         this.parent = parent;
-        this.species = HolonetEntities.getForOrder(app, order);
+        this.species = order != null ? HolonetEntities.getForOrder(app, order) : HolonetEntities.getAllForApp(app);
     }
 
     @Override
@@ -89,7 +89,8 @@ public class OrderGridScreen extends Screen {
     public void render(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
         CompendiumHomeScreen.renderHelper(graphics, app, FISH_BACKGROUND, FIELD_BACKGROUND, bgX, bgY, BG_WIDTH, BG_HEIGHT, BORDER);
         int color = app == Scannable.AppName.FISH ? 0x00FFCC : 0xC04000;
-        graphics.drawCenteredString(this.font, order, bgX + BG_WIDTH / 2, bgY + 35, color);
+        String title = order != null ? order : "All Species";
+        graphics.drawCenteredString(this.font, title, bgX + BG_WIDTH / 2, bgY + 35, color);
 
         int pageStart = currentPage * CELLS_PER_PAGE;
         int pageEnd = Math.min(pageStart + CELLS_PER_PAGE, species.size());
