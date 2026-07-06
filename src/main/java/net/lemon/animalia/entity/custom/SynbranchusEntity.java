@@ -7,6 +7,7 @@ import net.lemon.animalia.entity.bases.BottomWalkerSwimmerBase;
 import net.lemon.animalia.entity.bases.FishBase;
 import net.lemon.animalia.registry.ModEntities;
 import net.lemon.animalia.registry.ModItems;
+import net.lemon.animalia.util.AnimaliaFunctionUtil;
 import net.lemon.animalia.util.HolonetEntities;
 import net.lemon.animalia.util.Scannable;
 import net.minecraft.nbt.CompoundTag;
@@ -37,6 +38,7 @@ import software.bernie.geckolib.core.object.PlayState;
 public class SynbranchusEntity extends BottomWalkerSwimmerBase implements GeoEntity, Scannable {
 
     private AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
+    private static final float SYNBRANCHUS_MARMORATUS_PIXEL = 48;
 
     public SynbranchusEntity(EntityType<? extends FishBase> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
@@ -209,27 +211,24 @@ public class SynbranchusEntity extends BottomWalkerSwimmerBase implements GeoEnt
         return cache;
     }
 
-    @Override
-    public float genVarSizeMultiplier() {
-        float minCm = 70F;
-        float maxCm = 230F;
-        float modeCm = 80F; // most common size
+    public float genVarSize() {
+        float min = 50;
+        float max = 150;
+        float mode = 100f;
 
         float u = this.random.nextFloat();
-        float c = (modeCm - minCm) / (maxCm - minCm);
-
-        float lengthCm;
+        float c = (mode - min) / (max - min);
 
         if (u < c) {
-            lengthCm = minCm + (float)Math.sqrt(u * (maxCm - minCm) * (modeCm - minCm));
+            return min + (float) Math.sqrt(u * (max - min) * (mode - min));
         } else {
-            lengthCm = maxCm - (float)Math.sqrt((1 - u) * (maxCm - minCm) * (maxCm - modeCm));
+            return max - (float) Math.sqrt((1 - u) * (max - min) * (max - mode));
         }
+    }
 
-        // Convert cm to scale (assuming 230cm = scale 1.0) the scale would be the base size without variant sizing.
-        float scale = lengthCm / 150;
-
-        return scale;
+    @Override
+    public float genVarSizeMultiplier() {
+        return AnimaliaFunctionUtil.getScaleForSize(SYNBRANCHUS_MARMORATUS_PIXEL, this.genVarSize());
     }
 
     @Override

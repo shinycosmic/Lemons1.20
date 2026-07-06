@@ -17,7 +17,7 @@ public class ChileanSeaBassRenderer extends GeoEntityRenderer<ToothfishEntity> {
     }
 
     public float scaler(float varSize) {
-        return 1f * varSize;
+        return varSize;
     }
 
     @Override

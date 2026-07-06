@@ -17,7 +17,7 @@ public class SynbranchusMarmoratusRenderer extends GeoEntityRenderer<Synbranchus
     }
 
     public float scaler(float varSize) {
-        return 1f * varSize;
+        return varSize;
     }
 
     @Override

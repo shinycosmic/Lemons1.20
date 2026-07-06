@@ -4,6 +4,7 @@ import net.lemon.animalia.entity.ai.FishBreedGoal;
 import net.lemon.animalia.entity.bases.interfaces.IActivityTime;
 import net.lemon.animalia.item.FishEggItem;
 import net.lemon.animalia.registry.ModItems;
+import net.lemon.animalia.util.AnimaliaFunctionUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
@@ -259,8 +260,26 @@ public abstract class AnimaliaBreedableWater extends WaterAnimal implements IAct
      * @return
      */
     public float genVarSizeMultiplier() {
-        float value = 1.0f + (float) random.nextGaussian() * 0.25f;
-        return Mth.clamp(value, 0.7f, 1.5f);
+        return 1;
+    }
+
+    /***
+     * Override this to get a random CM length, default 70cm - 2.3m
+     * @param
+     */
+    public float genVarSize() {
+        float min = 70f;
+        float max = 230f;
+        float mode = 80f;
+
+        float u = this.random.nextFloat();
+        float c = (mode - min) / (max - min);
+
+        if (u < c) {
+            return min + (float) Math.sqrt(u * (max - min) * (mode - min));
+        } else {
+            return max - (float) Math.sqrt((1 - u) * (max - min) * (max - mode));
+        }
     }
 
     @Override

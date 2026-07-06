@@ -1,21 +1,18 @@
 package net.lemon.animalia.entity.custom;
 
-import com.eliotlash.mclib.math.functions.classic.Sin;
 import net.lemon.animalia.entity.ai.BottomDwellingGoal;
 import net.lemon.animalia.entity.ai.FishFrySwimmingGoal;
 import net.lemon.animalia.entity.aimove.BottomDwellingMoveHelperController;
 import net.lemon.animalia.entity.bases.ActivityTime;
 import net.lemon.animalia.entity.bases.FishBase;
-import net.lemon.animalia.entity.bases.interfaces.IActivityTime;
 import net.lemon.animalia.registry.ModEntities;
 import net.lemon.animalia.registry.ModItems;
+import net.lemon.animalia.util.AnimaliaFunctionUtil;
 import net.lemon.animalia.util.HolonetEntities;
 import net.lemon.animalia.util.Scannable;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.sounds.SoundEvent;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.DifficultyInstance;
@@ -27,9 +24,6 @@ import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.SpawnGroupData;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.ai.goal.AvoidEntityGoal;
-import net.minecraft.world.entity.ai.goal.RandomSwimmingGoal;
-import net.minecraft.world.entity.animal.AbstractFish;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -47,6 +41,7 @@ import software.bernie.geckolib.core.object.PlayState;
 
 public class ToothfishEntity extends FishBase implements GeoEntity, Scannable {
     private AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
+    private static final float DISSOSTUCHUS_ELEGINOIDES_PIXEL = 37;
 
     public ToothfishEntity(EntityType<? extends FishBase> entityType, Level level) {
         super(entityType, level);
@@ -146,27 +141,24 @@ public class ToothfishEntity extends FishBase implements GeoEntity, Scannable {
         super.travel(pTravelVector);
     }
 
-    @Override
-    public float genVarSizeMultiplier() {
-        float minCm = 70F;
-        float maxCm = 230F;
-        float modeCm = 80F; // most common size
+    public float genVarSize() {
+        float min = 70f;
+        float max = 230f;
+        float mode = 80f;
 
         float u = this.random.nextFloat();
-        float c = (modeCm - minCm) / (maxCm - minCm);
-
-        float lengthCm;
+        float c = (mode - min) / (max - min);
 
         if (u < c) {
-            lengthCm = minCm + (float)Math.sqrt(u * (maxCm - minCm) * (modeCm - minCm));
+            return min + (float) Math.sqrt(u * (max - min) * (mode - min));
         } else {
-            lengthCm = maxCm - (float)Math.sqrt((1 - u) * (maxCm - minCm) * (maxCm - modeCm));
+            return max - (float) Math.sqrt((1 - u) * (max - min) * (max - mode));
         }
+    }
 
-        // Convert cm to scale (assuming 230cm = scale 1.0) the scale would be the base size without variant sizing.
-        float scale = lengthCm / 230;
-
-        return scale;
+    @Override
+    public float genVarSizeMultiplier() {
+        return AnimaliaFunctionUtil.getScaleForSize(DISSOSTUCHUS_ELEGINOIDES_PIXEL, this.genVarSize());
     }
 
     @Override
