@@ -4,54 +4,49 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.entity.LivingEntity;
 
 /**
- * Stores a ring buffer of yaw deltas, then applies delayed rotation
- * to successive bones in a chain — creating a "trailing" effect.
+ * Records entity body yaw over time. Each tail bone samples
+ * "where was the entity facing N ticks ago" and applies the difference
+ * as a trailing rotation.
  */
 public class ChainBuffer {
     private final float[] yawHistory;
-    private int index = 0;
-    private float prevYaw = 0;
+    private final int length;
+    private int head = 0;
+    private boolean filled = false;
 
-    /**
-     * @param bufferLength how many ticks of history to store.
-     *                     Higher = smoother/more delay between segments.
-     */
     public ChainBuffer(int bufferLength) {
+        this.length = bufferLength;
         this.yawHistory = new float[bufferLength];
     }
 
-    /**
-     * Call once per tick (client-side only) to record the entity's yaw delta.
-     */
     public void tick(LivingEntity entity) {
-        float currentYaw = entity.yBodyRot;
-        float delta = Mth.degreesDifference(prevYaw, currentYaw);
-        prevYaw = currentYaw;
-        yawHistory[index] = delta;
-        index = (index + 1) % yawHistory.length;
+        yawHistory[head] = entity.yBodyRot;
+        head = (head + 1) % length;
+        if (!filled && head == 0) filled = true;
     }
 
     /**
-     * Gets the accumulated yaw offset for a given bone in the chain.
+     * Returns the yaw offset (in radians) for a bone in the chain.
      *
-     * @param boneIndex     which bone in the chain (0 = first tail segment, 1 = second, etc.)
-     * @param boneCount     total bones in the chain
-     * @param maxAngle      clamp: max degrees any single bone can rotate
-     * @param intensity     multiplier for the effect strength (1.0 = normal)
-     * @return rotation in radians to apply to this bone's Y axis
+     * @param boneIndex  0-based index in the tail chain
+     * @param boneCount  total number of tail bones
+     * @param maxAngle   max degrees of rotation per bone
+     * @param delay      ticks of delay between each bone (e.g. 3 = each bone is 3 ticks behind the previous)
      */
-    public float getRotationForBone(int boneIndex, int boneCount, float maxAngle, float intensity) {
-        int samplesPerBone = Math.max(1, yawHistory.length / boneCount);
-        int lookbackStart = (boneIndex + 1) * samplesPerBone;
+    public float getChainRotation(int boneIndex, int boneCount, float maxAngle, int delay, LivingEntity entity) {
+        if (!filled && head < delay * (boneIndex + 1)) return 0f;
 
-        float accumulated = 0;
-        for (int i = 0; i < samplesPerBone; i++) {
-            int histIdx = (index - lookbackStart - i + yawHistory.length * 2) % yawHistory.length;
-            accumulated += yawHistory[histIdx];
-        }
+        // How far back in history this bone should look
+        int lookback = delay * (boneIndex + 1);
+        int histIndex = ((head - 1 - lookback) % length + length) % length;
 
-        accumulated *= intensity / samplesPerBone;
-        accumulated = Mth.clamp(accumulated, -maxAngle, maxAngle);
-        return accumulated * ((float) Math.PI / 180F); // degrees to radians
+        // Difference between where the entity is NOW and where it WAS
+        float currentYaw = entity.yBodyRot;
+        float pastYaw = yawHistory[histIndex];
+        float diff = Mth.degreesDifference(currentYaw, pastYaw);
+
+        // Clamp and convert to radians
+        diff = Mth.clamp(diff, -maxAngle, maxAngle);
+        return diff * ((float) Math.PI / 180F);
     }
 }
