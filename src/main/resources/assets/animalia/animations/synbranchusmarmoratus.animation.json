@@ -100,7 +100,7 @@
 				}
 			}
 		},
-		"burrowing ": {
+		"burrowing": {
 			"animation_length": 2.5,
 			"bones": {
 				"main": {

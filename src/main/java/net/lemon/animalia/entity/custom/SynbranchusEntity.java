@@ -40,21 +40,11 @@ public class SynbranchusEntity extends BottomWalkerSwimmerBase implements GeoEnt
 
     private AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
     private static final float SYNBRANCHUS_MARMORATUS_PIXEL = 48;
-    public ChainBuffer tailBuffer;
 
     public SynbranchusEntity(EntityType<? extends FishBase> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
         this.moveControl = new SmoothSwimmingMoveControl(this, 85, 10, 0.02F, 0.1F, true);
         this.lookControl = new SmoothSwimmingLookControl(this, 10);
-        this.tailBuffer = new ChainBuffer(0.3f);
-    }
-
-    @Override
-    public void aiStep() {
-        super.aiStep();
-        if (this.level().isClientSide && !this.isDeadOrDying()) {
-            this.tailBuffer.tick(this);
-        }
     }
 
     public static AttributeSupplier setAttributes() {
@@ -101,11 +91,6 @@ public class SynbranchusEntity extends BottomWalkerSwimmerBase implements GeoEnt
     @Override
     public Item getBreedingItem() {
         return null; //TODO NEED TO MAKE TADPOLE ITEM
-    }
-
-    @Override
-    public boolean useSmoothControl() {
-        return true;
     }
 
     @Override
