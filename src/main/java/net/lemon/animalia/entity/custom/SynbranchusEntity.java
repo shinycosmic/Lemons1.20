@@ -40,11 +40,25 @@ public class SynbranchusEntity extends BottomWalkerSwimmerBase implements GeoEnt
 
     private AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
     private static final float SYNBRANCHUS_MARMORATUS_PIXEL = 48;
+    private int stillTicks = 0;
+    private static final int FREEZE_DELAY = 10;
 
     public SynbranchusEntity(EntityType<? extends FishBase> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
         this.moveControl = new SmoothSwimmingMoveControl(this, 85, 10, 0.02F, 0.1F, true);
         this.lookControl = new SmoothSwimmingLookControl(this, 10);
+    }
+
+    @Override
+    public void aiStep() {
+        super.aiStep();
+        if (this.level().isClientSide) {
+            if (this.isActuallyMoving()) {
+                this.stillTicks = 0;
+            } else {
+                this.stillTicks++;
+            }
+        }
     }
 
     public static AttributeSupplier setAttributes() {
@@ -189,9 +203,8 @@ public class SynbranchusEntity extends BottomWalkerSwimmerBase implements GeoEnt
             return PlayState.CONTINUE;
         }
 
-        // Normal swim — freeze frame when not moving
         animationState.getController().setAnimation(RawAnimation.begin().then("swim", Animation.LoopType.LOOP));
-        if(this.isActuallyMoving()) {
+        if (this.stillTicks < FREEZE_DELAY) {
             animationState.getController().setAnimationSpeed(1.0);
         } else {
             animationState.getController().setAnimationSpeed(0.0);
