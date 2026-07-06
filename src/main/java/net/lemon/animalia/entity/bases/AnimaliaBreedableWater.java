@@ -115,6 +115,14 @@ public abstract class AnimaliaBreedableWater extends WaterAnimal implements IAct
         this.entityData.define(HIDE_PHASE, 0);
     }
 
+    @Override
+    public void onSyncedDataUpdated(EntityDataAccessor<?> key) {
+        if (VAR_SIZE_MULTIPLIER.equals(key)) {
+            this.refreshDimensions();
+        }
+        super.onSyncedDataUpdated(key);
+    }
+
     public boolean isEating() {
         return this.entityData.get(IS_EATING);
     }
@@ -152,6 +160,7 @@ public abstract class AnimaliaBreedableWater extends WaterAnimal implements IAct
     /// Call this from classes to set a multiplier
     public void setVarSizeMultiplier(float sizeMult) {
         this.entityData.set(VAR_SIZE_MULTIPLIER, sizeMult);
+        this.refreshDimensions();
     }
 
     public int getVarColor() {
@@ -252,6 +261,11 @@ public abstract class AnimaliaBreedableWater extends WaterAnimal implements IAct
         double speed = this.getDeltaMovement().horizontalDistance();
         double baseSpeed = this.getAttributeValue(Attributes.MOVEMENT_SPEED);
         return speed > baseSpeed * 1.5;
+    }
+
+    @Override
+    public EntityDimensions getDimensions(Pose pose) {
+        return super.getDimensions(pose).scale(this.getVarSizeMultiplier());
     }
 
     /***
