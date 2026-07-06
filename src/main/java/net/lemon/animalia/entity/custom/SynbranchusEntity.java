@@ -8,6 +8,7 @@ import net.lemon.animalia.entity.bases.FishBase;
 import net.lemon.animalia.registry.ModEntities;
 import net.lemon.animalia.registry.ModItems;
 import net.lemon.animalia.util.AnimaliaFunctionUtil;
+import net.lemon.animalia.util.ChainBuffer;
 import net.lemon.animalia.util.HolonetEntities;
 import net.lemon.animalia.util.Scannable;
 import net.minecraft.nbt.CompoundTag;
@@ -39,11 +40,21 @@ public class SynbranchusEntity extends BottomWalkerSwimmerBase implements GeoEnt
 
     private AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
     private static final float SYNBRANCHUS_MARMORATUS_PIXEL = 48;
+    public ChainBuffer tailBuffer;
 
     public SynbranchusEntity(EntityType<? extends FishBase> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
         this.moveControl = new SmoothSwimmingMoveControl(this, 85, 10, 0.02F, 0.1F, true);
         this.lookControl = new SmoothSwimmingLookControl(this, 10);
+        this.tailBuffer = new ChainBuffer(60);
+    }
+
+    @Override
+    public void aiStep() {
+        super.aiStep();
+        if (this.level().isClientSide && !this.isDeadOrDying()) {
+            this.tailBuffer.tick(this);
+        }
     }
 
     public static AttributeSupplier setAttributes() {
@@ -166,7 +177,7 @@ public class SynbranchusEntity extends BottomWalkerSwimmerBase implements GeoEnt
         controllers.add(new AnimationController<>(this, "controller", 10, this::predicate));
     }
 
-    private <E extends GeoAnimatable> PlayState predicate(AnimationState<E> animationState) {
+    private PlayState predicate(AnimationState animationState) {
         if(this.isBaby()) {
             animationState.getController().setAnimation(RawAnimation.begin().then("swim", Animation.LoopType.LOOP));
             return PlayState.CONTINUE;
@@ -176,34 +187,31 @@ public class SynbranchusEntity extends BottomWalkerSwimmerBase implements GeoEnt
 
         // BURROWING
         if(phase == AnimaliaBreedableWater.PHASE_BURROWING) {
+            animationState.getController().setAnimationSpeed(1.0);
             animationState.getController().setAnimation(RawAnimation.begin().then("burrowing", Animation.LoopType.HOLD_ON_LAST_FRAME));
             return PlayState.CONTINUE;
         }
-
         // BURROWED
         if(phase == AnimaliaBreedableWater.PHASE_BURROWED) {
+            animationState.getController().setAnimationSpeed(1.0);
             animationState.getController().setAnimation(RawAnimation.begin().then("burrowed", Animation.LoopType.LOOP));
             return PlayState.CONTINUE;
         }
-
         // SURFACING
         if(phase == AnimaliaBreedableWater.PHASE_SURFACING) {
+            animationState.getController().setAnimationSpeed(1.0);
             animationState.getController().setAnimation(RawAnimation.begin().then("surfacing", Animation.LoopType.HOLD_ON_LAST_FRAME));
             return PlayState.CONTINUE;
         }
 
-        if(this.isWalking()) {
-            if(this.isActuallyMoving()) {
-                animationState.getController().setAnimation(RawAnimation.begin().then("swim", Animation.LoopType.LOOP));
-                return PlayState.CONTINUE;
-            } else {
-                return PlayState.STOP;
-            }
+        // Normal swim — freeze frame when not moving
+        animationState.getController().setAnimation(RawAnimation.begin().then("swim", Animation.LoopType.LOOP));
+        if(this.isActuallyMoving()) {
+            animationState.getController().setAnimationSpeed(1.0);
         } else {
-            // SWIMMING
-            animationState.getController().setAnimation(RawAnimation.begin().then("swim", Animation.LoopType.LOOP));
-            return PlayState.CONTINUE;
+            animationState.getController().setAnimationSpeed(0.0);
         }
+        return PlayState.CONTINUE;
     }
 
     @Override

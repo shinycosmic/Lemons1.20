@@ -289,13 +289,17 @@ public abstract class AnimaliaBreedableWater extends WaterAnimal implements IAct
         pCompound.putInt("Gender", this.getGender());
         pCompound.putInt("VarColor", this.getVarColor());
         pCompound.putInt("InLove", this.inLove);
-        pCompound.putInt("HidePhase", this.getHidePhase());
-        pCompound.putInt("HideTicks", this.hideTicks);
-        pCompound.putInt("HideCooldown", this.hideCooldown);
-        pCompound.putInt("BurrowingTicks", this.burrowingTicks);
-        pCompound.putInt("SurfacingTicks", this.surfacingTicks);
-        pCompound.putBoolean("WantsToHide", this.wantsToHide);
-        pCompound.putBoolean("IsHiding", this.isHiding());
+
+        if(this.canHide()) {
+            pCompound.putInt("HidePhase", this.getHidePhase());
+            pCompound.putInt("HideTicks", this.hideTicks);
+            pCompound.putInt("HideCooldown", this.hideCooldown);
+            pCompound.putInt("BurrowingTicks", this.burrowingTicks);
+            pCompound.putInt("SurfacingTicks", this.surfacingTicks);
+            pCompound.putBoolean("WantsToHide", this.wantsToHide);
+            pCompound.putBoolean("IsHiding", this.isHiding());
+        }
+
         if (this.loveCause != null) {
             pCompound.putUUID("LoveCause", this.loveCause);
         }
@@ -309,13 +313,21 @@ public abstract class AnimaliaBreedableWater extends WaterAnimal implements IAct
         this.setAge(pCompound.getInt("Age"));
         this.setGender(pCompound.getInt("Gender"));
         this.setVarColor(pCompound.getInt("VarColor"));
-        this.setHidePhase(pCompound.getInt("HidePhase"));
-        this.hideTicks = pCompound.getInt("HideTicks");
-        this.hideCooldown = pCompound.getInt("HideCooldown");
-        this.burrowingTicks = pCompound.getInt("BurrowingTicks");
-        this.surfacingTicks = pCompound.getInt("SurfacingTicks");
-        this.wantsToHide = pCompound.getBoolean("WantsToHide");
-        this.setHiding(pCompound.getBoolean("IsHiding"));
+
+        if(this.canHide()) {
+            this.setHiding(pCompound.getBoolean("IsHiding"));
+            this.setHidePhase(PHASE_NONE);
+            this.setHiding(false);
+            this.hideTicks = 0;
+            this.burrowingTicks = 0;
+            this.surfacingTicks = 0;
+            this.wantsToHide = false;
+            // Give a short cooldown so it doesn't immediately re-burrow on spawn
+            this.hideCooldown = pCompound.getInt("HideCooldown") > 0
+                    ? pCompound.getInt("HideCooldown")
+                    : (this.canHide() ? 100 + random.nextInt(200) : 0);
+        }
+
         if (!pCompound.contains("VarSize")) {
             this.setVarSizeMultiplier(this.genVarSizeMultiplier());
         } else {
