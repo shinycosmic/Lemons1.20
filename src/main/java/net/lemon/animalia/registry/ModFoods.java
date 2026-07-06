@@ -9,4 +9,6 @@ public class ModFoods {
             .nutrition(2).saturationMod(1.0f).build();
     public static final FoodProperties FISH_FOOD = new FoodProperties.Builder()
             .nutrition(1).saturationMod(1.0f).build();
+    public static final FoodProperties RAW_VENISON = new FoodProperties.Builder()
+            .nutrition(3).saturationMod(2.0f).build();
 }

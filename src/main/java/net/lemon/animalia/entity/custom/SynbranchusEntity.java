@@ -104,13 +104,13 @@ public class SynbranchusEntity extends BottomWalkerSwimmerBase implements GeoEnt
 
     @Override
     public Item getBreedingItem() {
-        return null; //TODO NEED TO MAKE TADPOLE ITEM
+        return ModItems.TADPOLE.get();
     }
 
     @Override
     public int getScaleforGUI() {
         if (this.getType() == ModEntities.SYNBRANCHUS_MARMORATUS.get()) {
-            return 60;
+            return 18;
         } else {
             return Scannable.super.getScaleforGUI();
         }
@@ -119,7 +119,7 @@ public class SynbranchusEntity extends BottomWalkerSwimmerBase implements GeoEnt
     @Override
     public int getScaleforDetailGUI() {
         int currScale = Scannable.super.getScaleforDetailGUI();
-        return (int) (currScale * 1.8f);
+        return (int) (currScale * 0.6f);
     }
 
     public static void registerHolonet(){

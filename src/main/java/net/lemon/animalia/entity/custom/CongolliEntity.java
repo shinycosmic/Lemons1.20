@@ -372,7 +372,7 @@ public class CongolliEntity extends BottomWalkerSwimmerBase implements GeoEntity
     @Override
     public int getScaleforDetailGUI() {
         int currScale = Scannable.super.getScaleforDetailGUI();
-        return (int) (currScale * 1.8f);
+        return (int) (currScale * 1.4f);
     }
 
     public static void registerHolonet(){

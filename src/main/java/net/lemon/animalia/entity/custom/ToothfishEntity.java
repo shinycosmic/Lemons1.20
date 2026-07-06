@@ -236,7 +236,7 @@ public class ToothfishEntity extends FishBase implements GeoEntity, Scannable {
         } else if (this.getType() == ModEntities.ELEGINOPS_MACLOVINUS.get()) {
             return 42;
         } else if (this.getType() == ModEntities.PERCOPHIS_BRASILIENSIS.get()){
-            return 46;
+            return 84;
         } else {
             return Scannable.super.getScaleforGUI();
         }
@@ -246,6 +246,8 @@ public class ToothfishEntity extends FishBase implements GeoEntity, Scannable {
     public int getScaleforDetailGUI() {
         int currScale = Scannable.super.getScaleforDetailGUI();
         if(this.getType() == ModEntities.ELEGINOPS_MACLOVINUS.get()) {
+            currScale *= (int) 2f;
+        } else if(this.getType() == ModEntities.PERCOPHIS_BRASILIENSIS.get()) {
             currScale *= (int) 2f;
         }
 

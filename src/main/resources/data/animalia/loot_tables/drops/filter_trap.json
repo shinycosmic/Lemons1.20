@@ -19,6 +19,32 @@
         },
         {
           "type": "minecraft:item",
+          "name": "animalia:artemia",
+          "weight": 20,
+          "conditions": [
+            {
+              "condition": "minecraft:location_check",
+              "predicate": {
+                "tag": "minecraft:is_overworld"
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "animalia:tadpole",
+          "weight": 20,
+          "conditions": [
+            {
+              "condition": "minecraft:location_check",
+              "predicate": {
+                "tag": "minecraft:is_swamp"
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
           "name": "animalia:gigantocypris",
           "weight": 1,
           "conditions": [

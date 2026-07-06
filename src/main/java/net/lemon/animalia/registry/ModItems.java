@@ -29,6 +29,8 @@ public class ModItems {
     public static final RegistryObject<Item> RAW_ICEFISH = ITEMS.register("raw_icefish", () -> new Item(new Item.Properties().food(ModFoods.RAW_ICEFISH)));
     public static final RegistryObject<Item> RAW_FISH = ITEMS.register("raw_fish", () -> new Item(new Item.Properties().food(ModFoods.RAW_FISH)));
     public static final RegistryObject<Item> FISH_FOOD = ITEMS.register("fish_food", () -> new Item(new Item.Properties().food(ModFoods.FISH_FOOD)));
+    public static final RegistryObject<Item> RAW_VENISON = ITEMS.register("raw_venison", () -> new Item(new Item.Properties().food(ModFoods.RAW_VENISON)));
+
 
 
     //Buckets
@@ -56,6 +58,8 @@ public class ModItems {
     //Animal Items
     public static final RegistryObject<Item> AMPHIPOD = ITEMS.register("amphipod", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> GIGANTOCYPRIS = ITEMS.register("gigantocypris", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> ARTEMIA = ITEMS.register("artemia", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> TADPOLE = ITEMS.register("tadpole", () -> new Item(new Item.Properties()));
 
     //Spawn Eggs
     public static final RegistryObject<Item> CHILEANSEABASS_SPAWN_EGG = registerSpawnEgg("dissostichus_eleginoides_spawn_egg", ModEntities.CHILEANSEABASS, 0x4D5267, 0xA5A8B0);

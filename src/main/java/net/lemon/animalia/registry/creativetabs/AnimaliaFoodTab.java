@@ -12,12 +12,15 @@ public class AnimaliaFoodTab {
             //Raws
             ModItems.RAW_ICEFISH,
             ModItems.RAW_FISH,
+            ModItems.RAW_VENISON,
 
             //Cooked
 
             //Other|Breeding
             ModItems.AMPHIPOD,
             ModItems.GIGANTOCYPRIS,
+            ModItems.ARTEMIA,
+            ModItems.TADPOLE,
             ModItems.FISH_FOOD
     );
 
