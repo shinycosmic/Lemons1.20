@@ -2,11 +2,13 @@ package net.lemon.animalia.entity.render;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.lemon.animalia.Animalia;
+import net.lemon.animalia.entity.custom.SynbranchusEntity;
 import net.lemon.animalia.entity.custom.ToothfishEntity;
 import net.lemon.animalia.entity.model.ChileanSeaBassModel;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.resources.ResourceLocation;
+import software.bernie.geckolib.cache.object.BakedGeoModel;
 import software.bernie.geckolib.renderer.GeoEntityRenderer;
 
 public class ChileanSeaBassRenderer extends GeoEntityRenderer<ToothfishEntity> {
@@ -16,18 +18,18 @@ public class ChileanSeaBassRenderer extends GeoEntityRenderer<ToothfishEntity> {
         super(context, new ChileanSeaBassModel());
     }
 
-    public float scaler(float varSize) {
-        return varSize;
+    public float scaler() {
+        return 1;
     }
 
     @Override
     public void render(ToothfishEntity entity, float entityYaw, float partialTick, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight) {
-        if(entity.isBaby()) {
-            poseStack.scale(babyMult, babyMult, babyMult);
-        } else {
-            poseStack.scale(scaler(entity.getVarSizeMultiplier()), scaler( entity.getVarSizeMultiplier()), scaler(entity.getVarSizeMultiplier()));
-        }
-
         super.render(entity, entityYaw, partialTick, poseStack, bufferSource, packedLight);
+    }
+
+    @Override
+    public void scaleModelForRender(float widthScale, float heightScale, PoseStack poseStack, ToothfishEntity animatable, BakedGeoModel model, boolean isReRender, float partialTick, int packedLight, int packedOverlay) {
+        float scale = animatable.isBaby() ? babyMult : animatable.getVarSizeMultiplier();
+        super.scaleModelForRender(scale, scale, poseStack, animatable, model, isReRender, partialTick, packedLight, packedOverlay);
     }
 }

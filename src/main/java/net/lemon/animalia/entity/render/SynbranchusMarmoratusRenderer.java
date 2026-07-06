@@ -7,6 +7,7 @@ import net.lemon.animalia.entity.model.ChileanSeaBassModel;
 import net.lemon.animalia.entity.model.SynbranchusMarmoratusModel;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
+import software.bernie.geckolib.cache.object.BakedGeoModel;
 import software.bernie.geckolib.renderer.GeoEntityRenderer;
 
 public class SynbranchusMarmoratusRenderer extends GeoEntityRenderer<SynbranchusEntity> {
@@ -16,18 +17,18 @@ public class SynbranchusMarmoratusRenderer extends GeoEntityRenderer<Synbranchus
         super(context, new SynbranchusMarmoratusModel());
     }
 
-    public float scaler(float varSize) {
-        return varSize;
+    public float scaler() {
+        return 1;
     }
 
     @Override
     public void render(SynbranchusEntity entity, float entityYaw, float partialTick, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight) {
-        if(entity.isBaby()) {
-            poseStack.scale(babyMult, babyMult, babyMult);
-        } else {
-            poseStack.scale(scaler(entity.getVarSizeMultiplier()), scaler( entity.getVarSizeMultiplier()), scaler(entity.getVarSizeMultiplier()));
-        }
-
         super.render(entity, entityYaw, partialTick, poseStack, bufferSource, packedLight);
+    }
+
+    @Override
+    public void scaleModelForRender(float widthScale, float heightScale, PoseStack poseStack, SynbranchusEntity animatable, BakedGeoModel model, boolean isReRender, float partialTick, int packedLight, int packedOverlay) {
+        float scale = animatable.isBaby() ? babyMult : animatable.getVarSizeMultiplier();
+        super.scaleModelForRender(scale, scale, poseStack, animatable, model, isReRender, partialTick, packedLight, packedOverlay);
     }
 }

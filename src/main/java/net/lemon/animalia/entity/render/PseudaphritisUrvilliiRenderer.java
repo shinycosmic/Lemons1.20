@@ -9,6 +9,7 @@ import net.lemon.animalia.entity.model.PseudaphritisUrvilliiModel;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.util.Mth;
+import software.bernie.geckolib.cache.object.BakedGeoModel;
 import software.bernie.geckolib.renderer.GeoEntityRenderer;
 
 public class PseudaphritisUrvilliiRenderer extends GeoEntityRenderer<CongolliEntity> {
@@ -18,19 +19,19 @@ public class PseudaphritisUrvilliiRenderer extends GeoEntityRenderer<CongolliEnt
         super(context, new PseudaphritisUrvilliiModel());
     }
 
-    public float scaler(float varSize) {
+    public float scaler() {
         return 0.473f;
     }
 
     @Override
     public void render(CongolliEntity entity, float entityYaw, float partialTick, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight) {
-        if(entity.isBaby()) {
-            poseStack.scale(babyMult, babyMult, babyMult);
-        } else {
-            poseStack.scale(scaler(entity.getVarSizeMultiplier()), scaler( entity.getVarSizeMultiplier()), scaler(entity.getVarSizeMultiplier()));
-        }
-
         super.render(entity, entityYaw, partialTick, poseStack, bufferSource, packedLight);
+    }
+
+    @Override
+    public void scaleModelForRender(float widthScale, float heightScale, PoseStack poseStack, CongolliEntity animatable, BakedGeoModel model, boolean isReRender, float partialTick, int packedLight, int packedOverlay) {
+        float scale = animatable.isBaby() ? babyMult : this.scaler();
+        super.scaleModelForRender(scale, scale, poseStack, animatable, model, isReRender, partialTick, packedLight, packedOverlay);
     }
 
     @Override
