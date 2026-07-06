@@ -53,7 +53,7 @@ public class SynbranchusMarmoratusModel extends GeoModel<SynbranchusEntity> {
             for (int i = 0; i < tailBones.length; i++) {
                 CoreGeoBone bone = this.getAnimationProcessor().getBone(tailBones[i]);
                 if (bone != null) {
-                    float trailRot = animatable.tailBuffer.getChainRotation(i, tailBones.length, 15f, 3, animatable);
+                    float trailRot = animatable.tailBuffer.getRotation(i, tailBones.length, 12f, 2.0f);
                     bone.setRotY(bone.getRotY() + trailRot);
                 }
             }

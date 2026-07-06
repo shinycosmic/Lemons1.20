@@ -46,7 +46,7 @@ public class SynbranchusEntity extends BottomWalkerSwimmerBase implements GeoEnt
         super(pEntityType, pLevel);
         this.moveControl = new SmoothSwimmingMoveControl(this, 85, 10, 0.02F, 0.1F, true);
         this.lookControl = new SmoothSwimmingLookControl(this, 10);
-        this.tailBuffer = new ChainBuffer(60);
+        this.tailBuffer = new ChainBuffer(0.3f);
     }
 
     @Override
