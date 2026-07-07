@@ -29,6 +29,7 @@ public class ModEntities {
     public static final RegistryObject<EntityType<BettaEntity>> BETTA_SPLENDENS = registerEntityType("betta_splendens", BettaEntity::new, MobCategory.CREATURE, 0.3f, 0.3f);
     public static final RegistryObject<EntityType<ToothfishEntity>> PERCOPHIS_BRASILIENSIS = registerEntityType("percophis_brasiliensis", ToothfishEntity::new, MobCategory.CREATURE, 0.5f, 0.5f);
     public static final RegistryObject<EntityType<SynbranchusEntity>> SYNBRANCHUS_MARMORATUS = registerEntityType("synbranchus_marmoratus", SynbranchusEntity::new, MobCategory.CREATURE, 0.9f, 0.5f);
+    public static final RegistryObject<EntityType<SynbranchusEntity>> CHAUDHURIA_CAUDATA = registerEntityType("chaudhuria_caudata", SynbranchusEntity::new, MobCategory.CREATURE, 0.6f, 0.5f);
 
 
 

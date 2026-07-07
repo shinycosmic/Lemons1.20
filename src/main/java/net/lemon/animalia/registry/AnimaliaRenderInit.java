@@ -12,5 +12,6 @@ public class AnimaliaRenderInit {
         EntityRenderers.register(ModEntities.BETTA_SPLENDENS.get(), BettaSplendensRenderer::new);
         EntityRenderers.register(ModEntities.PERCOPHIS_BRASILIENSIS.get(), PercophisBrasiliensisRenderer::new);
         EntityRenderers.register(ModEntities.SYNBRANCHUS_MARMORATUS.get(), SynbranchusMarmoratusRenderer::new);
+        EntityRenderers.register(ModEntities.CHAUDHURIA_CAUDATA.get(), ChaudhuriaCaudataRenderer::new);
     }
 }

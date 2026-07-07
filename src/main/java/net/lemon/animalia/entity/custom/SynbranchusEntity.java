@@ -26,6 +26,7 @@ import net.minecraft.world.entity.ai.control.SmoothSwimmingLookControl;
 import net.minecraft.world.entity.ai.control.SmoothSwimmingMoveControl;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import org.jetbrains.annotations.Nullable;
@@ -40,6 +41,8 @@ public class SynbranchusEntity extends BottomWalkerSwimmerBase implements GeoEnt
 
     private AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
     private static final float SYNBRANCHUS_MARMORATUS_PIXEL = 48;
+    private static final float CHAUDHURIA_CAUDATA_PIXEL = 30;
+
     private int stillTicks = 0;
     private static final int FREEZE_DELAY = 10;
 
@@ -94,7 +97,12 @@ public class SynbranchusEntity extends BottomWalkerSwimmerBase implements GeoEnt
 
     @Override
     public String getScientificName() {
-        return "Synbranchus marmoratus";
+        if(this.getType() == ModEntities.SYNBRANCHUS_MARMORATUS.get()) {
+            return "Synbranchus marmoratus";
+        } else if(this.getType() == ModEntities.CHAUDHURIA_CAUDATA.get()) {
+            return "Chaudhuria caudata";
+        }
+        return "didn't work";
     }
 
     @Override
@@ -104,26 +112,33 @@ public class SynbranchusEntity extends BottomWalkerSwimmerBase implements GeoEnt
 
     @Override
     public Item getBreedingItem() {
-        return ModItems.TADPOLE.get();
+        if(this.getType() == ModEntities.SYNBRANCHUS_MARMORATUS.get()) {
+            return ModItems.TADPOLE.get();
+        } else if(this.getType() == ModEntities.CHAUDHURIA_CAUDATA.get()) {
+            return ModItems.FISH_FOOD.get();
+        }
+        return ModItems.FISH_FOOD.get();
     }
 
     @Override
     public int getScaleforGUI() {
         if (this.getType() == ModEntities.SYNBRANCHUS_MARMORATUS.get()) {
             return 18;
-        } else {
-            return Scannable.super.getScaleforGUI();
+        } else if (this.getType() == ModEntities.CHAUDHURIA_CAUDATA.get()) {
+            return 24;
         }
+        return Scannable.super.getScaleforGUI();
     }
 
     @Override
     public int getScaleforDetailGUI() {
         int currScale = Scannable.super.getScaleforDetailGUI();
-        return (int) (currScale * 0.6f);
+        return (int) (currScale * 0.8f);
     }
 
     public static void registerHolonet(){
         HolonetEntities.register(ModEntities.SYNBRANCHUS_MARMORATUS, Scannable.AppName.FISH, "Synbranchiformes");
+        HolonetEntities.register(ModEntities.CHAUDHURIA_CAUDATA, Scannable.AppName.FISH, "Synbranchiformes");
     }
 
     @Override
@@ -138,12 +153,22 @@ public class SynbranchusEntity extends BottomWalkerSwimmerBase implements GeoEnt
 
     @Override
     public Component getTrivia() {
-        return Component.translatable("trivia.animalia.synbranchus_marmoratus");
+        if (this.getType() == ModEntities.SYNBRANCHUS_MARMORATUS.get()) {
+            return Component.translatable("trivia.animalia.synbranchus_marmoratus");
+        } else if (this.getType() == ModEntities.CHAUDHURIA_CAUDATA.get()) {
+            return Component.translatable("trivia.animalia.chaudhuria_caudata");
+        }
+        return Component.translatable("debug.animalia.trivia");
     }
 
     @Override
     public Component getFamily() {
-        return Component.translatable("family.animalia.synbranchidae");
+        if (this.getType() == ModEntities.SYNBRANCHUS_MARMORATUS.get()) {
+            return Component.translatable("family.animalia.synbranchidae");
+        } else if (this.getType() == ModEntities.CHAUDHURIA_CAUDATA.get()) {
+            return Component.translatable("family.animalia.chaudhuriidae");
+        }
+        return Component.translatable("debug.animalia.family");
     }
 
     @Override
@@ -153,7 +178,12 @@ public class SynbranchusEntity extends BottomWalkerSwimmerBase implements GeoEnt
 
     @Override
     public ItemStack getBucketItemStack() {
-        return new ItemStack(ModItems.SYNBRANCHUS_MARMORATUS_BUCKET.get());
+        if (this.getType() == ModEntities.SYNBRANCHUS_MARMORATUS.get()) {
+            return new ItemStack(ModItems.SYNBRANCHUS_MARMORATUS_BUCKET.get());
+        } else if (this.getType() == ModEntities.CHAUDHURIA_CAUDATA.get()) {
+            return new ItemStack(ModItems.CHAUDHURIA_CAUDATA_BUCKET.get());
+        }
+        return new ItemStack(Items.SALMON_BUCKET);
     }
 
     @Override
@@ -204,10 +234,10 @@ public class SynbranchusEntity extends BottomWalkerSwimmerBase implements GeoEnt
         }
 
         animationState.getController().setAnimation(RawAnimation.begin().then("swim", Animation.LoopType.LOOP));
-        if (this.stillTicks < FREEZE_DELAY) {
-            animationState.getController().setAnimationSpeed(1.0);
+        if (this.stillTicks >= FREEZE_DELAY) {
+            animationState.getController().setAnimationSpeed(0.01);
         } else {
-            animationState.getController().setAnimationSpeed(0.0);
+            animationState.getController().setAnimationSpeed(1.0);
         }
         return PlayState.CONTINUE;
     }
@@ -217,11 +247,7 @@ public class SynbranchusEntity extends BottomWalkerSwimmerBase implements GeoEnt
         return cache;
     }
 
-    public float genVarSize() {
-        float min = 50;
-        float max = 150;
-        float mode = 100f;
-
+    public float genVarSize(float min, float max, float mode) {
         float u = this.random.nextFloat();
         float c = (mode - min) / (max - min);
 
@@ -234,7 +260,10 @@ public class SynbranchusEntity extends BottomWalkerSwimmerBase implements GeoEnt
 
     @Override
     public float genVarSizeMultiplier() {
-        return AnimaliaFunctionUtil.getScaleForSize(SYNBRANCHUS_MARMORATUS_PIXEL, this.genVarSize());
+        if (this.getType() == ModEntities.CHAUDHURIA_CAUDATA.get()) {
+            return AnimaliaFunctionUtil.getScaleForSize(CHAUDHURIA_CAUDATA_PIXEL, this.genVarSize(15, 18, 25));
+        }
+        return AnimaliaFunctionUtil.getScaleForSize(SYNBRANCHUS_MARMORATUS_PIXEL, this.genVarSize(50, 150, 80));
     }
 
     @Override

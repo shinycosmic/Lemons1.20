@@ -43,7 +43,7 @@ public class ModItems {
 //    public static final RegistryObject<Item> CYGNODRACO_MAWSONI_BUCKET = registerBucket("cygnodraco_mawsoni_bucket", ModEntities.CYGNODRACO_MAWSONI);
 //    public static final RegistryObject<Item> CHAENOCEPHALUS_ACERATUS_BUCKET = registerBucket("chaenocephalus_aceratus_bucket", ModEntities.CHAENOCEPHALUS_ACERATUS);
     public static final RegistryObject<Item> SYNBRANCHUS_MARMORATUS_BUCKET = registerBucket("synbranchus_marmoratus_bucket", ModEntities.SYNBRANCHUS_MARMORATUS);
-//    public static final RegistryObject<Item> CHAUDHURIA_CAUDATA_BUCKET = registerBucket("chaudhuria_caudata_bucket", ModEntities.CHAUDHURIA_CAUDATA);
+    public static final RegistryObject<Item> CHAUDHURIA_CAUDATA_BUCKET = registerBucket("chaudhuria_caudata_bucket", ModEntities.CHAUDHURIA_CAUDATA);
 
 
     public static final RegistryObject<Item> BETTA_SPLENDENS_BUCKET = registerBucket("betta_splendens_bucket", ModEntities.BETTA_SPLENDENS);
@@ -71,7 +71,7 @@ public class ModItems {
 //    public static final RegistryObject<Item> CYGNODRACO_MAWSONI_SPAWN_EGG = registerSpawnEgg("cygnodraco_mawsoni_spawn_egg", ModEntities.CYGNODRACO_MAWSONI, 0x6e5540, 0xfff0cd);
 //    public static final RegistryObject<Item> CHAENOCEPHALUS_ACERATUS_SPAWN_EGG = registerSpawnEgg("chaenocephalus_aceratus_spawn_egg", ModEntities.CHAENOCEPHALUS_ACERATUS, 0x6e5540, 0xfff0cd);
     public static final RegistryObject<Item> SYNBRANCHUS_MARMORATUS_SPAWN_EGG = registerSpawnEgg("synbranchus_marmoratus_spawn_egg", ModEntities.SYNBRANCHUS_MARMORATUS, 0xa39023, 0x2e2110);
-//    public static final RegistryObject<Item> CHAUDHURIA_CAUDATA_SPAWN_EGG = registerSpawnEgg("chaudhuria_caudata_spawn_egg", ModEntities.CHAUDHURIA_CAUDATA, 0x6e5540, 0xfff0cd);
+    public static final RegistryObject<Item> CHAUDHURIA_CAUDATA_SPAWN_EGG = registerSpawnEgg("chaudhuria_caudata_spawn_egg", ModEntities.CHAUDHURIA_CAUDATA, 0x977757, 0x9f604e);
 
 
 

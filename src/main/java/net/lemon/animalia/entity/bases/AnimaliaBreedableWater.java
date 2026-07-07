@@ -278,14 +278,10 @@ public abstract class AnimaliaBreedableWater extends WaterAnimal implements IAct
     }
 
     /***
-     * Override this to get a random CM length, default 70cm - 2.3m
+     * Override this to get a random CM length, min = minimum cm, max = maximum cm, mode = most common average
      * @param
      */
-    public float genVarSize() {
-        float min = 70f;
-        float max = 230f;
-        float mode = 80f;
-
+    public float genVarSize(float min, float max, float mode) {
         float u = this.random.nextFloat();
         float c = (mode - min) / (max - min);
 

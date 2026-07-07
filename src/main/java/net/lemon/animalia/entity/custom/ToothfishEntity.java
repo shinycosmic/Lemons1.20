@@ -141,11 +141,7 @@ public class ToothfishEntity extends FishBase implements GeoEntity, Scannable {
         super.travel(pTravelVector);
     }
 
-    public float genVarSize() {
-        float min = 70f;
-        float max = 230f;
-        float mode = 80f;
-
+    public float genVarSize(float min, float max, float mode) {
         float u = this.random.nextFloat();
         float c = (mode - min) / (max - min);
 
@@ -158,7 +154,7 @@ public class ToothfishEntity extends FishBase implements GeoEntity, Scannable {
 
     @Override
     public float genVarSizeMultiplier() {
-        return AnimaliaFunctionUtil.getScaleForSize(DISSOSTUCHUS_ELEGINOIDES_PIXEL, this.genVarSize());
+        return AnimaliaFunctionUtil.getScaleForSize(DISSOSTUCHUS_ELEGINOIDES_PIXEL, this.genVarSize(70, 230, 80));
     }
 
     @Override

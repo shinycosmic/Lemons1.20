@@ -25,7 +25,7 @@ public class FishHideGoal extends Goal {
 
     @Override
     public boolean canUse() {
-        return mob.canStartHiding();
+        return mob.canStartHiding() && !mob.isBaby();
     }
 
     @Override

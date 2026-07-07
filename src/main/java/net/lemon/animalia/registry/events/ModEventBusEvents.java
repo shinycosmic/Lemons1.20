@@ -41,6 +41,7 @@ public class ModEventBusEvents {
         event.put(ModEntities.BETTA_SPLENDENS.get(), BettaEntity.setAttributes());
         event.put(ModEntities.PERCOPHIS_BRASILIENSIS.get(), ToothfishEntity.setAttributes());
         event.put(ModEntities.SYNBRANCHUS_MARMORATUS.get(), SynbranchusEntity.setAttributes());
+        event.put(ModEntities.CHAUDHURIA_CAUDATA.get(), SynbranchusEntity.setAttributes());
     }
 
     @SubscribeEvent
