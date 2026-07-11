@@ -15,5 +15,6 @@ public class HolonetSetup {
         BettaEntity.registerHolonet();
         SynbranchusEntity.registerHolonet();
         MastacembelusEntity.registerHolonet();
+        RakthamichthysEntity.registerHolonet();
     }
 }

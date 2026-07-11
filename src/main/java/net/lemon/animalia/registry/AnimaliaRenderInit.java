@@ -18,6 +18,7 @@ public class AnimaliaRenderInit {
         EntityRenderers.register(ModEntities.MASTACEMBELUS_BRICHARDI.get(), MastacembelusBrichardiRenderer::new);
         EntityRenderers.register(ModEntities.MACROGNATHUS_SIAMENSIS.get(), MacrognathusSiamensisRenderer::new);
         EntityRenderers.register(ModEntities.SINOBDELLA_SINENSIS.get(), SinobdellaSinensisRenderer::new);
+        EntityRenderers.register(ModEntities.RAKTHAMICHTHYS_INDICUS.get(), RakthamichthysIndicusRenderer::new);
 
     }
 }
