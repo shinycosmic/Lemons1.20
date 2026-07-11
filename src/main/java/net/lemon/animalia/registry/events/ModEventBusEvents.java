@@ -78,11 +78,11 @@ public class ModEventBusEvents {
         @SubscribeEvent
         public static void onEntityInteract(PlayerInteractEvent.EntityInteract event) {
             if (event.getSide().isClient()) return;
-            if (event.getTarget() instanceof Scannable) {
+            if (event.getTarget() instanceof Scannable scannable) {
                 Player player = event.getEntity();
                 player.getCapability(HolonetCapabilityProvider.HOLONET_CAPABILITY).ifPresent(cap -> {
                     ResourceLocation id = ForgeRegistries.ENTITY_TYPES.getKey(event.getTarget().getType());
-                    int gender = ((AnimaliaBreedableWater) event.getTarget()).getGender();
+                    int gender = scannable.hasDimorphism() ? ((AnimaliaBreedableWater) event.getTarget()).getGender() : -1;
                     if (cap.discover(id, gender)) {
                         ModNetwork.sendToPlayer((ServerPlayer) player, new DiscoverSpeciesPacket(id, gender));
                     }
@@ -93,11 +93,11 @@ public class ModEventBusEvents {
         @SubscribeEvent
         public static void onAttackEntity(AttackEntityEvent event) {
             if (event.getEntity().level().isClientSide()) return;
-            if (event.getTarget() instanceof Scannable) {
+            if (event.getTarget() instanceof Scannable scannable) {
                 Player player = event.getEntity();
                 player.getCapability(HolonetCapabilityProvider.HOLONET_CAPABILITY).ifPresent(cap -> {
                     ResourceLocation id = ForgeRegistries.ENTITY_TYPES.getKey(event.getTarget().getType());
-                    int gender = ((AnimaliaBreedableWater) event.getTarget()).getGender();
+                    int gender = scannable.hasDimorphism() ? ((AnimaliaBreedableWater) event.getTarget()).getGender() : -1;
                     if (cap.discover(id, gender)) {
                         ModNetwork.sendToPlayer((ServerPlayer) player, new DiscoverSpeciesPacket(id, gender));
                     }
