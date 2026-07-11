@@ -50,6 +50,11 @@ public class FishHideGoal extends Goal {
             mob.getNavigation().stop();
             mob.getMoveControl().setWantedPosition(mob.getX(), mob.getY(), mob.getZ(), 0);
             mob.setDeltaMovement(mob.getDeltaMovement().multiply(0, 1, 0));
+
+            mob.setYRot(mob.yRotO);
+            mob.yBodyRot = mob.yBodyRotO;
+            mob.yHeadRot = mob.yHeadRotO;
+            mob.setXRot(mob.xRotO);
         }
     }
 
