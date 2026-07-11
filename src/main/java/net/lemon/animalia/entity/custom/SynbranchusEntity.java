@@ -133,7 +133,7 @@ public class SynbranchusEntity extends BottomWalkerSwimmerBase implements GeoEnt
     @Override
     public int getScaleforDetailGUI() {
         int currScale = Scannable.super.getScaleforDetailGUI();
-        return (int) (currScale * 0.8f);
+        return (int) (currScale * 0.6f);
     }
 
     public static void registerHolonet(){

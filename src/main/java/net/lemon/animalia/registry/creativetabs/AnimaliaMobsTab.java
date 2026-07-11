@@ -20,7 +20,8 @@ public class AnimaliaMobsTab {
             ModItems.MASTACEMBELUS_ARMATUS_SPAWN_EGG,
             ModItems.MASTACEMBELUS_ERYTHROTAENIA_SPAWN_EGG,
             ModItems.MASTACEMBELUS_BRICHARDI_SPAWN_EGG,
-            ModItems.MACROGNATHUS_SIAMENSIS_SPAWN_EGG
+            ModItems.MACROGNATHUS_SIAMENSIS_SPAWN_EGG,
+            ModItems.SINOBDELLA_SINENSIS_SPAWN_EGG
 
 
     );

@@ -44,6 +44,7 @@ public class ModEventBusEvents {
         event.put(ModEntities.MASTACEMBELUS_ERYTHROTAENIA.get(), MastacembelusEntity.setAttributes());
         event.put(ModEntities.MACROGNATHUS_SIAMENSIS.get(), MastacembelusEntity.setAttributes());
         event.put(ModEntities.MASTACEMBELUS_BRICHARDI.get(), MastacembelusEntity.setAttributes());
+        event.put(ModEntities.SINOBDELLA_SINENSIS.get(), MastacembelusEntity.setAttributes());
     }
 
     @SubscribeEvent

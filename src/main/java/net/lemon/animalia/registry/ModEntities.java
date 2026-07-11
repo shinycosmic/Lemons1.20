@@ -31,7 +31,7 @@ public class ModEntities {
     public static final RegistryObject<EntityType<MastacembelusEntity>> MASTACEMBELUS_ERYTHROTAENIA = registerEntityType("mastacembelus_erythrotaenia", MastacembelusEntity::new, MobCategory.CREATURE, 0.7f, 0.3f);
     public static final RegistryObject<EntityType<MastacembelusEntity>> MACROGNATHUS_SIAMENSIS = registerEntityType("macrognathus_siamensis", MastacembelusEntity::new, MobCategory.CREATURE, 0.4f, 0.3f);
     public static final RegistryObject<EntityType<MastacembelusEntity>> MASTACEMBELUS_BRICHARDI = registerEntityType("mastacembelus_brichardi", MastacembelusEntity::new, MobCategory.CREATURE, 0.4f, 0.3f);
-//    public static final RegistryObject<EntityType<MastacembelusEntity>> SINOBDELLA_SINENSIS = registerEntityType("sinobdella_sinensis", MastacembelusEntity::new, MobCategory.CREATURE, 0.7f, 0.3f);
+    public static final RegistryObject<EntityType<MastacembelusEntity>> SINOBDELLA_SINENSIS = registerEntityType("sinobdella_sinensis", MastacembelusEntity::new, MobCategory.CREATURE, 0.4f, 0.3f);
 
 
 

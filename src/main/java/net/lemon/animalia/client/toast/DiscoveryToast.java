@@ -29,8 +29,8 @@ public class DiscoveryToast implements Toast {
         }
         guiGraphics.blit(BACKGROUND, 0, 0, 0, 0, this.width(), this.height());
         guiGraphics.renderItem(ICON, 8, 8);
-        guiGraphics.drawString(toastComponent.getMinecraft().font, this.entityName, 30, 18, 0xFFFFFF, false);
-        guiGraphics.drawString(toastComponent.getMinecraft().font, TITLE, 30, 7, 0xFFFF00, false);
+        guiGraphics.drawString(toastComponent.getMinecraft().font, this.entityName, 30, 7, 0xFFFFFF, false);
+        guiGraphics.drawString(toastComponent.getMinecraft().font, TITLE, 30, 18, 0xFFFF00, false);
 
         return (double)(timeSinceLastVisible - this.lastChanged) >= 5000.0 * toastComponent.getNotificationDisplayTimeMultiplier()
                 ? Visibility.HIDE : Visibility.SHOW;

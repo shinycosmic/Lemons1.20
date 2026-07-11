@@ -80,6 +80,8 @@ public class MastacembelusEntity extends FishBase implements GeoEntity, Scannabl
             return "Macrognathus siamensis";
         } else if (this.getType() == ModEntities.MASTACEMBELUS_BRICHARDI.get()) {
             return "Mastacembelus brichardi";
+        } else if (this.getType() == ModEntities.SINOBDELLA_SINENSIS.get()) {
+            return "Sinobdella sinensis";
         }
         return "didnt work";
     }
@@ -120,6 +122,8 @@ public class MastacembelusEntity extends FishBase implements GeoEntity, Scannabl
             return ModItems.RAW_FISH.get();
         } else if(this.getType() == ModEntities.MASTACEMBELUS_BRICHARDI.get()) {
             return ModItems.ARTEMIA.get();
+        } else if(this.getType() == ModEntities.SINOBDELLA_SINENSIS.get()) {
+            return ModItems.ARTEMIA.get();
         }
         return ModItems.FISH_FOOD.get();
     }
@@ -144,6 +148,8 @@ public class MastacembelusEntity extends FishBase implements GeoEntity, Scannabl
             return Component.translatable("trivia.animalia.macrognathus_siamensis");
         } else if (this.getType() == ModEntities.MASTACEMBELUS_BRICHARDI.get()) {
             return Component.translatable("trivia.animalia.mastacembelus_brichardi");
+        } else if (this.getType() == ModEntities.SINOBDELLA_SINENSIS.get()) {
+            return Component.translatable("trivia.animalia.sinobdella_sinensis");
         }
         return Component.translatable("debug.animalia.trivia");
     }
@@ -168,9 +174,10 @@ public class MastacembelusEntity extends FishBase implements GeoEntity, Scannabl
             return 90;
         } else if (this.getType() == ModEntities.MASTACEMBELUS_BRICHARDI.get()){
             return 88;
-        } else {
-            return Scannable.super.getScaleforGUI();
+        } else if (this.getType() == ModEntities.SINOBDELLA_SINENSIS.get()){
+            return 88;
         }
+        return Scannable.super.getScaleforGUI();
     }
 
     @Override
@@ -181,9 +188,11 @@ public class MastacembelusEntity extends FishBase implements GeoEntity, Scannabl
         } else if(this.getType() == ModEntities.MASTACEMBELUS_ERYTHROTAENIA.get()) {
             currScale *= 1.6f;
         } else if(this.getType() == ModEntities.MACROGNATHUS_SIAMENSIS.get()) {
-            currScale *= 2.8f;
+            currScale *= 1.75f;
         } else if(this.getType() == ModEntities.MASTACEMBELUS_BRICHARDI.get()) {
-            currScale *= 2.55f;
+            currScale *= 1.75f;
+        } else if(this.getType() == ModEntities.SINOBDELLA_SINENSIS.get()) {
+            currScale *= 1.7f;
         }
 
         return currScale;
@@ -200,6 +209,8 @@ public class MastacembelusEntity extends FishBase implements GeoEntity, Scannabl
             offset = -1;
         } else if(this.getType() == ModEntities.MASTACEMBELUS_BRICHARDI.get()) {
             offset = -8;
+        } else if(this.getType() == ModEntities.SINOBDELLA_SINENSIS.get()) {
+            offset = -5;
         }
 
         return offset;
@@ -210,6 +221,8 @@ public class MastacembelusEntity extends FishBase implements GeoEntity, Scannabl
         HolonetEntities.register(ModEntities.MASTACEMBELUS_ERYTHROTAENIA, Scannable.AppName.FISH, "Synbranchiformes");
         HolonetEntities.register(ModEntities.MACROGNATHUS_SIAMENSIS, Scannable.AppName.FISH, "Synbranchiformes");
         HolonetEntities.register(ModEntities.MASTACEMBELUS_BRICHARDI, Scannable.AppName.FISH, "Synbranchiformes");
+        HolonetEntities.register(ModEntities.SINOBDELLA_SINENSIS, Scannable.AppName.FISH, "Synbranchiformes");
+
     }
 
     @Override
@@ -222,6 +235,8 @@ public class MastacembelusEntity extends FishBase implements GeoEntity, Scannabl
             return new ItemStack(ModItems.MACROGNATHUS_SIAMENSIS_BUCKET.get());
         } else if (this.getType() == ModEntities.MASTACEMBELUS_BRICHARDI.get()) {
             return new ItemStack(ModItems.MASTACEMBELUS_BRICHARDI_BUCKET.get());
+        } else if (this.getType() == ModEntities.SINOBDELLA_SINENSIS.get()) {
+            return new ItemStack(ModItems.SINOBDELLA_SINENSIS_BUCKET.get());
         }
         return new ItemStack(Items.SALMON_BUCKET);
     }
