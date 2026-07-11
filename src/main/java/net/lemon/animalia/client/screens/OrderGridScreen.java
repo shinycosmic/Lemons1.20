@@ -202,7 +202,7 @@ public class OrderGridScreen extends Screen {
         int yOffset = scannable.getYOffsetForGUI();
         int scale = Math.min(scannable.getScaleforGUI(), 128);
 
-        int renderX = cellX + CELL_SIZE * 3 / 7;
+        int renderX = cellX + CELL_SIZE * 3 / 7 + scannable.getXOffsetForGUI();
         int renderY = cellY + CELL_SIZE - 4 + yOffset;
 
         InventoryScreen.renderEntityInInventory(graphics, renderX, renderY, scale, rotation, null, dummy);
