@@ -77,4 +77,6 @@ public interface Scannable {
     }
 
     default boolean hasDimorphism() { return false; }
+
+    default int getXOffsetForGUI() { return 0; }
 }

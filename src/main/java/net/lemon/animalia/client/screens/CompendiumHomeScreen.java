@@ -88,9 +88,13 @@ public class CompendiumHomeScreen extends Screen {
             }
 
             Quaternionf rotation = new Quaternionf().rotateY((float) Math.toRadians(90)).rotateZ((float) Math.PI);
-            int entityX = bgX + BG_WIDTH / 2;
             int entityY = bgY + BG_HEIGHT / 2 + 5;
             int scale = 40;
+            int entityX = bgX + BG_WIDTH / 2;
+            if (featuredEntity instanceof Scannable scannable) {
+                scale = Math.min(scannable.getScaleforGUI() * 3, 60);
+                entityX += scannable.getXOffsetForGUI();
+            }
 
             if (featuredEntity instanceof Scannable scannable) {
                 scale = Math.min(scannable.getScaleforGUI() * 3, 60);
