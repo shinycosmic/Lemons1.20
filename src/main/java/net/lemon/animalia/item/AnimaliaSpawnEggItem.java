@@ -46,6 +46,13 @@ public class AnimaliaSpawnEggItem extends ForgeSpawnEggItem {
     }
 
     @Override
+    public Component getName(ItemStack stack) {
+        EntityType<?> type = this.getType(stack.getTag());
+        return Component.translatable("item.animalia.spawn_egg", type.getDescription());
+    }
+
+
+    @Override
     public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltipComp, TooltipFlag isAdvanced) {
         super.appendHoverText(stack, level, tooltipComp, isAdvanced);
         EntityType<?> type = this.getType(stack.getTag());

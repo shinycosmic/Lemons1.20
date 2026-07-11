@@ -26,6 +26,12 @@ public class AnimaliaBucketItem extends MobBucketItem {
     }
 
     @Override
+    public Component getName(ItemStack stack) {
+        EntityType<?> type = this.getFishType();
+        return Component.translatable("item.animalia.bucket", type.getDescription());
+    }
+
+    @Override
     public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltipComp, TooltipFlag isAdvanced) {
         super.appendHoverText(stack, level, tooltipComp, isAdvanced);
         EntityType<?> type = getFishType();
