@@ -1,0 +1,28 @@
+{
+	"format_version": "1.8.0",
+	"animations": {
+		"swim": {
+			"loop": true,
+			"bones": {
+				"frontLeftFin": {
+					"rotation": {
+						"vector": [
+							"-3.4522-math.sin(query.anim_time*260/0.5+50)*15",
+							"13.1516-math.sin(query.anim_time*260/0.5-50)*25",
+							"-4.6094+math.sin(query.anim_time*260/0.5-100)*20"
+						]
+					}
+				},
+				"frontRightFin": {
+					"rotation": {
+						"vector": [
+							"-2.0835-math.sin(query.anim_time*260/0.5+50)*-15",
+							"-9.0319-math.sin(query.anim_time*260/0.5-50)*25",
+							"2.8871+math.sin(query.anim_time*260/0.5-100)*20"
+						]
+					}
+				}
+			}
+		}
+	}
+}
