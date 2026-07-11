@@ -36,7 +36,7 @@ public class AnimaliaSpawnEggItem extends ForgeSpawnEggItem {
         AnimaliaSpawnEggItem.registerScientificName(ModEntities.MASTACEMBELUS_ARMATUS, "Mastacembelus armatus");
         AnimaliaSpawnEggItem.registerScientificName(ModEntities.MASTACEMBELUS_ERYTHROTAENIA, "Mastacembelus erythrotaenia");
         AnimaliaSpawnEggItem.registerScientificName(ModEntities.MACROGNATHUS_SIAMENSIS, "Macrognathus siamensis");
-        AnimaliaSpawnEggItem.registerScientificName(ModEntities.MACROGNATHUS_SIAMENSIS, "Mastacembelus brichardi");
+        AnimaliaSpawnEggItem.registerScientificName(ModEntities.MASTACEMBELUS_BRICHARDI, "Mastacembelus brichardi");
         AnimaliaSpawnEggItem.registerScientificName(ModEntities.BETTA_SPLENDENS, "Betta splendens");
     }
 

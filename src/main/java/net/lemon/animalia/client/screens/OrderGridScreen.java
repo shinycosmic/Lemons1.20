@@ -38,7 +38,7 @@ public class OrderGridScreen extends Screen {
     private static final int BG_WIDTH = 390;
     private static final int BG_HEIGHT = 245;
     private static final int BACK_BUTTON_SIZE = 16;
-    private static final int BACK_BUTTON_BOTTOM_MARGIN = 36;
+    private static final int BACK_BUTTON_BOTTOM_MARGIN = 38;
     private static final int GRID_COLS = 7;
     private static final int GRID_ROWS = 3;
     private static final int CELLS_PER_PAGE = GRID_COLS * GRID_ROWS; // 21

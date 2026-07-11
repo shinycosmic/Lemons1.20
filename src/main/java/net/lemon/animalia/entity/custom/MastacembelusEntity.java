@@ -79,6 +79,8 @@ public class MastacembelusEntity extends FishBase implements GeoEntity, Scannabl
             return "Mastacembelus erythrotaenia";
         } else if (this.getType() == ModEntities.MACROGNATHUS_SIAMENSIS.get()) {
             return "Macrognathus siamensis";
+        } else if (this.getType() == ModEntities.MASTACEMBELUS_BRICHARDI.get()) {
+            return "Mastacembelus brichardi";
         }
         return "didnt work";
     }
@@ -117,6 +119,8 @@ public class MastacembelusEntity extends FishBase implements GeoEntity, Scannabl
     public Item getBreedingItem() {
         if(this.getType() == ModEntities.MASTACEMBELUS_ARMATUS.get()) {
             return ModItems.RAW_FISH.get();
+        } else if(this.getType() == ModEntities.MASTACEMBELUS_BRICHARDI.get()) {
+            return ModItems.ARTEMIA.get();
         }
         return ModItems.FISH_FOOD.get();
     }
@@ -138,7 +142,9 @@ public class MastacembelusEntity extends FishBase implements GeoEntity, Scannabl
         } else if (this.getType() == ModEntities.MASTACEMBELUS_ERYTHROTAENIA.get()) {
             return Component.translatable("trivia.animalia.mastacembelus_erythrotaenia");
         } else if (this.getType() == ModEntities.MACROGNATHUS_SIAMENSIS.get()) {
-            return Component.translatable("trivia.animalia.macroganthus_siamensis");
+            return Component.translatable("trivia.animalia.macrognathus_siamensis");
+        } else if (this.getType() == ModEntities.MASTACEMBELUS_BRICHARDI.get()) {
+            return Component.translatable("trivia.animalia.mastacembelus_brichardi");
         }
         return Component.translatable("debug.animalia.trivia");
     }
@@ -156,11 +162,13 @@ public class MastacembelusEntity extends FishBase implements GeoEntity, Scannabl
     @Override
     public int getScaleforGUI() {
         if (this.getType() == ModEntities.MASTACEMBELUS_ARMATUS.get()) {
-            return 22;
+            return 54;
         } else if (this.getType() == ModEntities.MASTACEMBELUS_ERYTHROTAENIA.get()) {
-            return 42;
+            return 50;
         } else if (this.getType() == ModEntities.MACROGNATHUS_SIAMENSIS.get()){
-            return 84;
+            return 90;
+        } else if (this.getType() == ModEntities.MASTACEMBELUS_BRICHARDI.get()){
+            return 88;
         } else {
             return Scannable.super.getScaleforGUI();
         }
@@ -170,20 +178,39 @@ public class MastacembelusEntity extends FishBase implements GeoEntity, Scannabl
     public int getScaleforDetailGUI() {
         int currScale = Scannable.super.getScaleforDetailGUI();
         if(this.getType() == ModEntities.MASTACEMBELUS_ARMATUS.get()) {
-            currScale *= (int) 2f;
+            currScale *= 1.6f;
         } else if(this.getType() == ModEntities.MASTACEMBELUS_ERYTHROTAENIA.get()) {
-            currScale *= (int) 2f;
+            currScale *= 1.6f;
         } else if(this.getType() == ModEntities.MACROGNATHUS_SIAMENSIS.get()) {
-            currScale *= (int) 2f;
+            currScale *= 2.8f;
+        } else if(this.getType() == ModEntities.MASTACEMBELUS_BRICHARDI.get()) {
+            currScale *= 2.55f;
         }
 
         return currScale;
+    }
+
+    @Override
+    public int getXOffsetForGUI() {
+        int offset = 0;
+        if(this.getType() == ModEntities.MASTACEMBELUS_ARMATUS.get()) {
+            offset = -5;
+        } else if(this.getType() == ModEntities.MASTACEMBELUS_ERYTHROTAENIA.get()) {
+            offset = -5;
+        } else if(this.getType() == ModEntities.MACROGNATHUS_SIAMENSIS.get()) {
+            offset = -1;
+        } else if(this.getType() == ModEntities.MASTACEMBELUS_BRICHARDI.get()) {
+            offset = -8;
+        }
+
+        return offset;
     }
 
     public static void registerHolonet(){
         HolonetEntities.register(ModEntities.MASTACEMBELUS_ARMATUS, Scannable.AppName.FISH, "Synbranchiformes");
         HolonetEntities.register(ModEntities.MASTACEMBELUS_ERYTHROTAENIA, Scannable.AppName.FISH, "Synbranchiformes");
         HolonetEntities.register(ModEntities.MACROGNATHUS_SIAMENSIS, Scannable.AppName.FISH, "Synbranchiformes");
+        HolonetEntities.register(ModEntities.MASTACEMBELUS_BRICHARDI, Scannable.AppName.FISH, "Synbranchiformes");
     }
 
     @Override
@@ -194,6 +221,8 @@ public class MastacembelusEntity extends FishBase implements GeoEntity, Scannabl
             return new ItemStack(ModItems.MASTACEMBELUS_ERYTHROTAENIA_BUCKET.get());
         } else if (this.getType() == ModEntities.MACROGNATHUS_SIAMENSIS.get()) {
             return new ItemStack(ModItems.MACROGNATHUS_SIAMENSIS_BUCKET.get());
+        } else if (this.getType() == ModEntities.MASTACEMBELUS_BRICHARDI.get()) {
+            return new ItemStack(ModItems.MASTACEMBELUS_BRICHARDI_BUCKET.get());
         }
         return new ItemStack(Items.SALMON_BUCKET);
     }

@@ -16,7 +16,7 @@ public class MastacembelusErythrotaeniaRenderer extends GeoEntityRenderer<Mastac
     }
 
     public float scaler() {
-        return 1;
+        return 0.37f;
     }
 
     @Override

@@ -10,6 +10,7 @@ import net.minecraft.resources.ResourceLocation;
 public class DiscoveryToast implements Toast {
     private static final ResourceLocation BACKGROUND = new ResourceLocation("textures/gui/toasts.png");
     private static final Component TITLE = Component.translatable("toast.animalia.discovered");
+    //TODO add holonet icon to this discovered toast
     private final Component entityName;
     private long lastChanged;
     private boolean changed;
@@ -25,8 +26,8 @@ public class DiscoveryToast implements Toast {
             this.changed = false;
         }
         guiGraphics.blit(BACKGROUND, 0, 0, 0, 0, this.width(), this.height());
-        guiGraphics.drawString(toastComponent.getMinecraft().font, this.entityName, 30, 18, 0xFFFFFF, false);
-        guiGraphics.drawString(toastComponent.getMinecraft().font, TITLE, 30, 7, 0xFFFF00, false);
+        guiGraphics.drawString(toastComponent.getMinecraft().font, this.entityName, 30, 7, 0xFFFFFF, false);
+        guiGraphics.drawString(toastComponent.getMinecraft().font, TITLE, 30, 18, 0xFFFF00, false);
 
         return (double)(timeSinceLastVisible - this.lastChanged) >= 5000.0 * toastComponent.getNotificationDisplayTimeMultiplier()
                 ? Visibility.HIDE : Visibility.SHOW;

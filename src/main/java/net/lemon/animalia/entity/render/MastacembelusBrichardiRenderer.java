@@ -2,23 +2,24 @@ package net.lemon.animalia.entity.render;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.lemon.animalia.entity.custom.MastacembelusEntity;
-import net.lemon.animalia.entity.custom.SynbranchusEntity;
 import net.lemon.animalia.entity.model.MastacembelusArmatusModel;
-import net.lemon.animalia.entity.model.SynbranchusMarmoratusModel;
+import net.lemon.animalia.entity.model.MastacembelusBrichardiModel;
+import net.lemon.animalia.entity.render.layer.MastacembelusBrichardiFinLayer;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import software.bernie.geckolib.cache.object.BakedGeoModel;
 import software.bernie.geckolib.renderer.GeoEntityRenderer;
 
-public class MastacembelusArmatusRenderer extends GeoEntityRenderer<MastacembelusEntity> {
+public class MastacembelusBrichardiRenderer extends GeoEntityRenderer<MastacembelusEntity> {
     private float babyMult = 0.3f;
 
-    public MastacembelusArmatusRenderer(EntityRendererProvider.Context context) {
-        super(context, new MastacembelusArmatusModel());
+    public MastacembelusBrichardiRenderer(EntityRendererProvider.Context context) {
+        super(context, new MastacembelusBrichardiModel());
+        this.addRenderLayer(new MastacembelusBrichardiFinLayer(this));
     }
 
     public float scaler() {
-        return 0.34f;
+        return 0.2f;
     }
 
     @Override

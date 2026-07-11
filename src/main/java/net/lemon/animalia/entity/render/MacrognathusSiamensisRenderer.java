@@ -16,7 +16,7 @@ public class MacrognathusSiamensisRenderer extends GeoEntityRenderer<Mastacembel
     }
 
     public float scaler() {
-        return 1;
+        return 0.27f;
     }
 
     @Override

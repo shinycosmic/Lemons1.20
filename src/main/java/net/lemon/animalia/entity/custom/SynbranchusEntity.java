@@ -123,7 +123,7 @@ public class SynbranchusEntity extends BottomWalkerSwimmerBase implements GeoEnt
     @Override
     public int getScaleforGUI() {
         if (this.getType() == ModEntities.SYNBRANCHUS_MARMORATUS.get()) {
-            return 18;
+            return 15;
         } else if (this.getType() == ModEntities.CHAUDHURIA_CAUDATA.get()) {
             return 24;
         }

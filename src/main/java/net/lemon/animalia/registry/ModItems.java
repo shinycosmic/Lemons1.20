@@ -47,6 +47,8 @@ public class ModItems {
     public static final RegistryObject<Item> MASTACEMBELUS_ARMATUS_BUCKET = registerBucket("mastacembelus_armatus_bucket", ModEntities.MASTACEMBELUS_ARMATUS);
     public static final RegistryObject<Item> MASTACEMBELUS_ERYTHROTAENIA_BUCKET = registerBucket("mastacembelus_erythrotaenia_bucket", ModEntities.MASTACEMBELUS_ERYTHROTAENIA);
     public static final RegistryObject<Item> MACROGNATHUS_SIAMENSIS_BUCKET = registerBucket("macrognathus_siamensis_bucket", ModEntities.MACROGNATHUS_SIAMENSIS);
+    public static final RegistryObject<Item> MASTACEMBELUS_BRICHARDI_BUCKET = registerBucket("mastacembelus_brichardi_bucket", ModEntities.MASTACEMBELUS_BRICHARDI);
+//    public static final RegistryObject<Item> SINOBDELLA_SINENSIS_BUCKET = registerBucket("sinobdella_sinensis_bucket", ModEntities.SINOBDELLA_SINENSIS);
 
 
     public static final RegistryObject<Item> BETTA_SPLENDENS_BUCKET = registerBucket("betta_splendens_bucket", ModEntities.BETTA_SPLENDENS);
@@ -78,6 +80,8 @@ public class ModItems {
     public static final RegistryObject<Item> MASTACEMBELUS_ARMATUS_SPAWN_EGG = registerSpawnEgg("mastacembelus_armatus_spawn_egg", ModEntities.MASTACEMBELUS_ARMATUS, 0xbd8741, 0x4c392b);
     public static final RegistryObject<Item> MASTACEMBELUS_ERYTHROTAENIA_SPAWN_EGG = registerSpawnEgg("mastacembelus_erythrotaenia_spawn_egg", ModEntities.MASTACEMBELUS_ERYTHROTAENIA, 0x394046, 0xb7241d);
     public static final RegistryObject<Item> MACROGNATHUS_SIAMENSIS_SPAWN_EGG = registerSpawnEgg("macrognathus_siamensis_spawn_egg", ModEntities.MACROGNATHUS_SIAMENSIS, 0x483e34, 0xdcc96c);
+    public static final RegistryObject<Item> MASTACEMBELUS_BRICHARDI_SPAWN_EGG = registerSpawnEgg("mastacembelus_brichardi_spawn_egg", ModEntities.MASTACEMBELUS_BRICHARDI, 0xe6c2e8, 0xf5f0ff);
+//    public static final RegistryObject<Item> SINOBDELLA_SINENSIS_SPAWN_EGG = registerSpawnEgg("sinobdella_sinensis_spawn_egg", ModEntities.SINOBDELLA_SINENSIS, 0x483e34, 0xdcc96c);
 
 
 

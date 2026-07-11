@@ -45,7 +45,7 @@ public class CreatureDetailScreen extends Screen {
     private static final int BG_WIDTH = 390;
     private static final int BG_HEIGHT = 245;
     private static final int BACK_BUTTON_SIZE = 16;
-    private static final int BACK_BUTTON_BOTTOM_MARGIN = 36;
+    private static final int BACK_BUTTON_BOTTOM_MARGIN = 38;
     private static final int MODEL_AREA_WIDTH = 160;
     private static final int INFO_LEFT_OFFSET = 175;
     private static final int INFO_TOP_OFFSET = 40;
