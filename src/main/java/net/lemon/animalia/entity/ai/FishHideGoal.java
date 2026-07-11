@@ -1,31 +1,57 @@
 package net.lemon.animalia.entity.ai;
 
+import net.lemon.animalia.entity.bases.ActivityTime;
 import net.lemon.animalia.entity.bases.AnimaliaBreedableWater;
 import net.minecraft.world.entity.ai.goal.Goal;
 
 import java.util.EnumSet;
 
-/**
- * HidingGoal — a Goal that initiates and locks movement during the hiding behavior.
- *
- * The actual hiding state machine (hideTicks, hideCooldown, transition to ground)
- * remains in AnimaliaBreedableWater.aiStep() so that save/load mid-hide works correctly.
- * This Goal handles:
- *   1. Deciding WHEN to start hiding (canUse → canStartHiding())
- *   2. Locking MOVE + LOOK flags so other goals don't interrupt
- *   3. Stopping navigation each tick while the mob is actively hiding
- */
 public class FishHideGoal extends Goal {
     private final AnimaliaBreedableWater mob;
+    private final ActivityTime activeTime;
+
+    private static final float INACTIVE_PERIOD_CHANCE = 0.8F;
+    private static final float ACTIVE_PERIOD_CHANCE = 0.05F;
 
     public FishHideGoal(AnimaliaBreedableWater mob) {
+        this(mob, ActivityTime.NONE);
+    }
+
+    public FishHideGoal(AnimaliaBreedableWater mob, ActivityTime activeTime) {
         this.mob = mob;
+        this.activeTime = activeTime;
         this.setFlags(EnumSet.of(Goal.Flag.MOVE, Goal.Flag.LOOK));
     }
 
     @Override
     public boolean canUse() {
-        return mob.canStartHiding() && !mob.isBaby();
+        if (!mob.canStartHiding() || mob.isBaby()) {
+            return false;
+        }
+        return passesTimeGate();
+    }
+
+    private boolean passesTimeGate() {
+        if (activeTime == ActivityTime.NONE) {
+            return true;
+        }
+
+        boolean isDaytime = mob.level().isDay();
+        boolean isInactivePeriod;
+
+        switch (activeTime) {
+            case NOCTURNAL:
+                isInactivePeriod = isDaytime;
+                break;
+            case DIURNAL:
+                isInactivePeriod = !isDaytime;
+                break;
+            default:
+                return true;
+        }
+
+        float chance = isInactivePeriod ? INACTIVE_PERIOD_CHANCE : ACTIVE_PERIOD_CHANCE;
+        return mob.getRandom().nextFloat() < chance;
     }
 
     @Override
@@ -35,7 +61,6 @@ public class FishHideGoal extends Goal {
 
     @Override
     public boolean isInterruptable() {
-        // Don't let panic or other goals yank the mob out mid-burrow
         return !mob.isHiding();
     }
 
@@ -60,7 +85,5 @@ public class FishHideGoal extends Goal {
 
     @Override
     public void stop() {
-        // State cleanup is handled by aiStep() when hideTicks expires.
-        // Nothing extra needed here.
     }
 }

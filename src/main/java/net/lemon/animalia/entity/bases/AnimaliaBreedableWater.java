@@ -161,8 +161,8 @@ public abstract class AnimaliaBreedableWater extends WaterAnimal implements IAct
     /// Override this to control how long to grow into adult
     public void setBaby(boolean condition) {
         this.setAge(condition ? this.growthTicks : 0);
+        this.refreshDimensions();
     }
-
     public AnimaliaEggTypes getEggType() {
         return AnimaliaEggTypes.ITEM_EGG;
     }
@@ -279,7 +279,11 @@ public abstract class AnimaliaBreedableWater extends WaterAnimal implements IAct
 
     @Override
     public EntityDimensions getDimensions(Pose pose) {
-        return super.getDimensions(pose).scale(this.getVarSizeMultiplier());
+        float scale = this.getVarSizeMultiplier();
+        if (this.isBaby()) {
+            scale *= getBabyScale();
+        }
+        return super.getDimensions(pose).scale(scale);
     }
 
     /***
@@ -377,6 +381,10 @@ public abstract class AnimaliaBreedableWater extends WaterAnimal implements IAct
         }
     }
 
+    public float getBabyScale() {
+        return 0.3f;
+    }
+
     @Override
     public void aiStep() {
         if (!this.level().isClientSide && this.cooldown > 0) {
@@ -389,8 +397,6 @@ public abstract class AnimaliaBreedableWater extends WaterAnimal implements IAct
                 this.setEating(false);
             }
         }
-        //TODO Implement Mastacembelus as a test for this AI, we need to override some methods, and apply hiding animation playing logic.
-        // Also need to add logic to bottom swimmers with smooth swimming to target the ground when wanting to hide.
         if (!this.level().isClientSide && this.canHide()) {
             if (this.hideCooldown > 0) {
                 --this.hideCooldown;
@@ -457,6 +463,9 @@ public abstract class AnimaliaBreedableWater extends WaterAnimal implements IAct
         if (i < 0) {
             ++i;
             this.setAge(i);
+            if (i == 0) {
+                this.refreshDimensions();
+            }
         } else if (i > 0) {
             --i;
             this.setAge(i);
