@@ -12,16 +12,6 @@
 						"vector": [0, 0, "0+math.sin(query.anim_time*260/0.5)*0.05"]
 					}
 				},
-				"head": {
-					"rotation": {
-						"vector": [0, "-0-math.sin(query.anim_time*260-50)*-1", 0]
-					}
-				},
-				"jaw": {
-					"rotation": {
-						"vector": ["1.55-math.sin(query.anim_time*360-50)*-2", 0, 0]
-					}
-				},
 				"tail": {
 					"rotation": {
 						"vector": [0, "-0-math.sin(query.anim_time*360+50)*1", 0]
