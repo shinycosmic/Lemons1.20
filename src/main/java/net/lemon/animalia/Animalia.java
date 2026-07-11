@@ -1,6 +1,7 @@
 package net.lemon.animalia;
 
 import com.mojang.logging.LogUtils;
+import net.lemon.animalia.item.AnimaliaSpawnEggItem;
 import net.lemon.animalia.player.network.ModNetwork;
 import net.lemon.animalia.registry.*;
 import net.lemon.animalia.registry.creativetabs.ModCreativeModeTabs;
@@ -54,6 +55,7 @@ public class Animalia {
     private void commonSetup(final FMLCommonSetupEvent event) {
         ModNetwork.register();
         HolonetSetup.init();
+        AnimaliaSpawnEggItem.registerScientificNames();
     }
 
     // Add the example block item to the building blocks tab
