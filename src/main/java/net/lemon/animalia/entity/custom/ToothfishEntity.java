@@ -40,6 +40,7 @@ import software.bernie.geckolib.core.animation.*;
 import software.bernie.geckolib.core.object.PlayState;
 
 public class ToothfishEntity extends FishBase implements GeoEntity, Scannable {
+
     private AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
     private static final float DISSOSTUCHUS_ELEGINOIDES_PIXEL = 37;
 

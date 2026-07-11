@@ -1,10 +1,7 @@
 package net.lemon.animalia.registry;
 
 import net.lemon.animalia.Animalia;
-import net.lemon.animalia.entity.custom.BettaEntity;
-import net.lemon.animalia.entity.custom.CongolliEntity;
-import net.lemon.animalia.entity.custom.SynbranchusEntity;
-import net.lemon.animalia.entity.custom.ToothfishEntity;
+import net.lemon.animalia.entity.custom.*;
 import net.lemon.animalia.entity.render.BettaSplendensRenderer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -30,6 +27,9 @@ public class ModEntities {
     public static final RegistryObject<EntityType<ToothfishEntity>> PERCOPHIS_BRASILIENSIS = registerEntityType("percophis_brasiliensis", ToothfishEntity::new, MobCategory.CREATURE, 0.5f, 0.5f);
     public static final RegistryObject<EntityType<SynbranchusEntity>> SYNBRANCHUS_MARMORATUS = registerEntityType("synbranchus_marmoratus", SynbranchusEntity::new, MobCategory.CREATURE, 0.9f, 0.5f);
     public static final RegistryObject<EntityType<SynbranchusEntity>> CHAUDHURIA_CAUDATA = registerEntityType("chaudhuria_caudata", SynbranchusEntity::new, MobCategory.CREATURE, 0.6f, 0.5f);
+    public static final RegistryObject<EntityType<MastacembelusEntity>> MASTACEMBELUS_ARMATUS = registerEntityType("mastacembelus_armatus", MastacembelusEntity::new, MobCategory.CREATURE, 0.7f, 0.3f);
+    public static final RegistryObject<EntityType<MastacembelusEntity>> MASTACEMBELUS_ERYTHROTAENIA = registerEntityType("mastacembelus_erythrotaenia", MastacembelusEntity::new, MobCategory.CREATURE, 0.7f, 0.3f);
+    public static final RegistryObject<EntityType<MastacembelusEntity>> MACROGNATHUS_SIAMENSIS = registerEntityType("macrognathus_siamensis", MastacembelusEntity::new, MobCategory.CREATURE, 0.7f, 0.3f);
 
 
 

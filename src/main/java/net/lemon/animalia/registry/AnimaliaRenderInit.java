@@ -13,5 +13,8 @@ public class AnimaliaRenderInit {
         EntityRenderers.register(ModEntities.PERCOPHIS_BRASILIENSIS.get(), PercophisBrasiliensisRenderer::new);
         EntityRenderers.register(ModEntities.SYNBRANCHUS_MARMORATUS.get(), SynbranchusMarmoratusRenderer::new);
         EntityRenderers.register(ModEntities.CHAUDHURIA_CAUDATA.get(), ChaudhuriaCaudataRenderer::new);
+        EntityRenderers.register(ModEntities.MASTACEMBELUS_ERYTHROTAENIA.get(), MastacembelusErythrotaeniaRenderer::new);
+        EntityRenderers.register(ModEntities.MASTACEMBELUS_ARMATUS.get(), MastacembelusArmatusRenderer::new);
+        EntityRenderers.register(ModEntities.MACROGNATHUS_SIAMENSIS.get(), MacrognathusSiamensisRenderer::new);
     }
 }

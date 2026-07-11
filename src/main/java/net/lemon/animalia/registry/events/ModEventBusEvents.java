@@ -2,10 +2,7 @@ package net.lemon.animalia.registry.events;
 
 import net.lemon.animalia.Animalia;
 import net.lemon.animalia.entity.bases.AnimaliaBreedableWater;
-import net.lemon.animalia.entity.custom.BettaEntity;
-import net.lemon.animalia.entity.custom.CongolliEntity;
-import net.lemon.animalia.entity.custom.SynbranchusEntity;
-import net.lemon.animalia.entity.custom.ToothfishEntity;
+import net.lemon.animalia.entity.custom.*;
 import net.lemon.animalia.player.HolonetCapability;
 import net.lemon.animalia.player.HolonetCapabilityProvider;
 import net.lemon.animalia.player.network.DiscoverSpeciesPacket;
@@ -42,6 +39,9 @@ public class ModEventBusEvents {
         event.put(ModEntities.PERCOPHIS_BRASILIENSIS.get(), ToothfishEntity.setAttributes());
         event.put(ModEntities.SYNBRANCHUS_MARMORATUS.get(), SynbranchusEntity.setAttributes());
         event.put(ModEntities.CHAUDHURIA_CAUDATA.get(), SynbranchusEntity.setAttributes());
+        event.put(ModEntities.MASTACEMBELUS_ARMATUS.get(), MastacembelusEntity.setAttributes());
+        event.put(ModEntities.MASTACEMBELUS_ERYTHROTAENIA.get(), MastacembelusEntity.setAttributes());
+        event.put(ModEntities.MACROGNATHUS_SIAMENSIS.get(), MastacembelusEntity.setAttributes());
     }
 
     @SubscribeEvent

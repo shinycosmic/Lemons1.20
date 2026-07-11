@@ -16,7 +16,10 @@ public class AnimaliaMobsTab {
             ModItems.BETTA_SPLENDENS_SPAWN_EGG,
             ModItems.PERCOPHIS_BRASILIENSIS_SPAWN_EGG,
             ModItems.SYNBRANCHUS_MARMORATUS_SPAWN_EGG,
-            ModItems.CHAUDHURIA_CAUDATA_SPAWN_EGG
+            ModItems.CHAUDHURIA_CAUDATA_SPAWN_EGG,
+            ModItems.MASTACEMBELUS_ARMATUS_SPAWN_EGG,
+            ModItems.MASTACEMBELUS_ERYTHROTAENIA_SPAWN_EGG,
+            ModItems.MACROGNATHUS_SIAMENSIS_SPAWN_EGG
 
 
     );

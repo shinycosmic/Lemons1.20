@@ -49,6 +49,9 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItems.PERCOPHIS_BRASILIENSIS_BUCKET);
         simpleItem(ModItems.SYNBRANCHUS_MARMORATUS_BUCKET);
         simpleItem(ModItems.CHAUDHURIA_CAUDATA_BUCKET);
+        simpleItem(ModItems.MACROGNATHUS_SIAMENSIS_BUCKET);
+        simpleItem(ModItems.MASTACEMBELUS_ARMATUS_BUCKET);
+        simpleItem(ModItems.MASTACEMBELUS_ERYTHROTAENIA_BUCKET);
 
         //spawn egg generators
         withExistingParent(ModItems.CHILEANSEABASS_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
@@ -58,6 +61,9 @@ public class ModItemModelProvider extends ItemModelProvider {
         withExistingParent(ModItems.PERCOPHIS_BRASILIENSIS_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
         withExistingParent(ModItems.SYNBRANCHUS_MARMORATUS_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
         withExistingParent(ModItems.CHAUDHURIA_CAUDATA_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
+        withExistingParent(ModItems.MASTACEMBELUS_ERYTHROTAENIA_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
+        withExistingParent(ModItems.MASTACEMBELUS_ARMATUS_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
+        withExistingParent(ModItems.MACROGNATHUS_SIAMENSIS_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
 
     }
 
