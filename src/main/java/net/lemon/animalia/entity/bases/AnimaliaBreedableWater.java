@@ -123,6 +123,20 @@ public abstract class AnimaliaBreedableWater extends WaterAnimal implements IAct
         super.onSyncedDataUpdated(key);
     }
 
+    @Override
+    public void handleEntityEvent(byte id) {
+        if (id == 18) {
+            for (int i = 0; i < 7; ++i) {
+                double d0 = this.random.nextGaussian() * 0.02D;
+                double d1 = this.random.nextGaussian() * 0.02D;
+                double d2 = this.random.nextGaussian() * 0.02D;
+                this.level().addParticle(ParticleTypes.HEART, this.getRandomX(1.0D), this.getRandomY() + 0.5D, this.getRandomZ(1.0D), d0, d1, d2);
+            }
+        } else {
+            super.handleEntityEvent(id);
+        }
+    }
+
     public boolean isEating() {
         return this.entityData.get(IS_EATING);
     }
@@ -450,11 +464,8 @@ public abstract class AnimaliaBreedableWater extends WaterAnimal implements IAct
 
         if (this.inLove > 0) {
             --this.inLove;
-            if (this.inLove % 10 == 0) {
-                double d0 = this.random.nextGaussian() * 0.02D;
-                double d1 = this.random.nextGaussian() * 0.02D;
-                double d2 = this.random.nextGaussian() * 0.02D;
-                this.level().addParticle(ParticleTypes.HEART, this.getRandomX(1.0D), this.getRandomY() + 0.5D, this.getRandomZ(1.0D), d0, d1, d2);
+            if (!this.level().isClientSide && this.inLove % 10 == 0) {
+                this.level().broadcastEntityEvent(this, (byte)18);
             }
         }
         super.aiStep();
