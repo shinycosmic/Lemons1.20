@@ -17,6 +17,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.common.capabilities.RegisterCapabilitiesEvent;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
+import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -76,6 +77,21 @@ public class ModEventBusEvents {
         @SubscribeEvent
         public static void onEntityInteract(PlayerInteractEvent.EntityInteract event) {
             if (event.getSide().isClient()) return;
+            if (event.getTarget() instanceof Scannable) {
+                Player player = event.getEntity();
+                player.getCapability(HolonetCapabilityProvider.HOLONET_CAPABILITY).ifPresent(cap -> {
+                    ResourceLocation id = ForgeRegistries.ENTITY_TYPES.getKey(event.getTarget().getType());
+                    int gender = ((AnimaliaBreedableWater) event.getTarget()).getGender();
+                    if (cap.discover(id, gender)) {
+                        ModNetwork.sendToPlayer((ServerPlayer) player, new DiscoverSpeciesPacket(id, gender));
+                    }
+                });
+            }
+        }
+
+        @SubscribeEvent
+        public static void onAttackEntity(AttackEntityEvent event) {
+            if (event.getEntity().level().isClientSide()) return;
             if (event.getTarget() instanceof Scannable) {
                 Player player = event.getEntity();
                 player.getCapability(HolonetCapabilityProvider.HOLONET_CAPABILITY).ifPresent(cap -> {
