@@ -26,7 +26,7 @@ public class MastacembelusBrichardiFinLayer extends GeoRenderLayer<Mastacembelus
         RenderType transparentType = RenderType.entityTranslucent(FIN);
         VertexConsumer vc = bufferSource.getBuffer(transparentType);
 
-        this.getRenderer().reRender(bakedModel, poseStack, bufferSource, animatable, transparentType, vc, partialTick, packedLight, packedOverlay, 1.0f, 1.0f, 1.0f, 0.75f);
+        this.getRenderer().reRender(bakedModel, poseStack, bufferSource, animatable, transparentType, vc, partialTick, packedLight, packedOverlay, 1.0f, 1.0f, 1.0f, 0.5f);
     }
 
 }
