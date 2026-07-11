@@ -16,12 +16,11 @@ import net.minecraftforge.common.ForgeSpawnEggItem;
 import java.util.Optional;
 import java.util.function.Supplier;
 
-public class VariantizedSpawnEggItem extends ForgeSpawnEggItem {
+public class VariantizedSpawnEggItem extends AnimaliaSpawnEggItem {
     public VariantizedSpawnEggItem(Supplier<? extends EntityType<? extends Mob>> type, int backgroundColor, int highlightColor, Properties props) {
         super(type, backgroundColor, highlightColor, props);
     }
 
-    // Stop spawn eggs from calling vanilla method, breaking gene inheritance mobs
     @Override
     public Optional<Mob> spawnOffspringFromSpawnEgg(Player pPlayer, Mob pMob, EntityType<? extends Mob> pEntityType, ServerLevel level, Vec3 pPos, ItemStack stack) {
         return Optional.empty();

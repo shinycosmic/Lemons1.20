@@ -89,7 +89,7 @@ public class ModItems {
 
     //Supplier Helper Methods
     public static <T extends Mob> RegistryObject<Item> registerSpawnEgg(String name, Supplier<EntityType<T>> type, int backgroundColor, int highlightColor) {
-        return ITEMS.register(name, () -> new ForgeSpawnEggItem(type, backgroundColor, highlightColor, new Item.Properties()));
+        return ITEMS.register(name, () -> new AnimaliaSpawnEggItem(type, backgroundColor, highlightColor, new Item.Properties()));
     }
     public static <T extends Mob> RegistryObject<Item> registerSpecialSpawnEgg(String name, Supplier<EntityType<T>> type, int backgroundColor, int highlightColor) {
         return ITEMS.register(name, () -> new VariantizedSpawnEggItem(type, backgroundColor, highlightColor, new Item.Properties()));
