@@ -1,5 +1,6 @@
 package net.lemon.animalia.client.screens;
 
+import com.mojang.blaze3d.platform.Lighting;
 import net.lemon.animalia.Animalia;
 import net.lemon.animalia.entity.bases.AnimaliaBreedableWater;
 import net.lemon.animalia.entity.bases.FishBase;
@@ -205,7 +206,9 @@ public class OrderGridScreen extends Screen {
         int renderX = cellX + CELL_SIZE * 3 / 7 + scannable.getXOffsetForGUI();
         int renderY = cellY + CELL_SIZE - 4 + yOffset;
 
+        Lighting.setupForFlatItems();
         InventoryScreen.renderEntityInInventory(graphics, renderX, renderY, scale, rotation, null, dummy);
+        Lighting.setupFor3DItems();
     }
 
     @Override
