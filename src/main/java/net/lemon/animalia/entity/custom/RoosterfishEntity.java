@@ -57,7 +57,7 @@ public class RoosterfishEntity extends FishBase implements GeoEntity, Scannable 
     protected void registerGoals() {
         super.registerGoals();
         this.goalSelector.getAvailableGoals().removeIf(g -> g.getGoal() instanceof AvoidEntityGoal);
-        this.startleGoal = new WaterStartleGoal(this, 5.0F, 1.8D, 50);
+        this.startleGoal = new WaterStartleGoal(this, 10.0F, 2D, 100);
         this.goalSelector.addGoal(2, this.startleGoal);
         this.goalSelector.addGoal(3, new RandomSprintGoal(this));
     }
@@ -103,7 +103,7 @@ public class RoosterfishEntity extends FishBase implements GeoEntity, Scannable 
         if(this.isStartled()) {
             System.out.println("[DEBUG] Is currently startled");
         }
-        return this.isStartled() ? 3f : 2f;
+        return this.isStartled() ? 4.5f : 2f;
     }
 
     @Override
@@ -154,7 +154,7 @@ public class RoosterfishEntity extends FishBase implements GeoEntity, Scannable 
     @Override
     public int getScaleforGUI() {
         if (this.getType() == ModEntities.NEMATISTIUS_PECTORALIS.get()) {
-            return 24;
+            return 18;
         }
         return Scannable.super.getScaleforGUI();
     }
@@ -162,7 +162,7 @@ public class RoosterfishEntity extends FishBase implements GeoEntity, Scannable 
     @Override
     public int getScaleforDetailGUI() {
         int currScale = Scannable.super.getScaleforDetailGUI();
-        return (int) (currScale * 1f);
+        return (int) (currScale * 0.8f);
     }
 
     public static void registerHolonet() {
@@ -172,7 +172,7 @@ public class RoosterfishEntity extends FishBase implements GeoEntity, Scannable 
     @Override
     public float genVarSizeMultiplier() {
         if (this.getType() == ModEntities.NEMATISTIUS_PECTORALIS.get()) {
-            return AnimaliaFunctionUtil.getScaleForSize(NEMATISTIUS_PECTORALIS_PIXEL, this.genVarSize(160, 200, 180));
+            return AnimaliaFunctionUtil.getScaleForSize(NEMATISTIUS_PECTORALIS_PIXEL, this.genVarSize(160, 250, 180));
         }
         return 1;
     }

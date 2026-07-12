@@ -25,26 +25,4 @@ public class AnimaliaFunctionUtil {
         return desiredCm / (modelPixelLength * CM_PER_PIXEL);
     }
 
-    public static void renderEntityFlat(GuiGraphics graphics, int x, int y, int scale, Quaternionf rotation, LivingEntity entity) {
-        graphics.pose().pushPose();
-        graphics.pose().translate(x, y, 50.0);
-        graphics.pose().mulPoseMatrix(new Matrix4f().scaling(scale, scale, -scale));
-        graphics.pose().mulPose(rotation);
-
-        Lighting.setupForFlatItems();
-
-        EntityRenderDispatcher dispatcher = Minecraft.getInstance().getEntityRenderDispatcher();
-        dispatcher.setRenderShadow(false);
-        dispatcher.overrideCameraOrientation(new Quaternionf());
-
-        MultiBufferSource.BufferSource bufferSource = Minecraft.getInstance().renderBuffers().bufferSource();
-        RenderSystem.runAsFancy(() -> {
-            dispatcher.render(entity, 0, 0, 0, 0.0F, 1.0F, graphics.pose(), bufferSource, 15728880);
-        });
-        bufferSource.endBatch();
-
-        dispatcher.setRenderShadow(true);
-        graphics.pose().popPose();
-        Lighting.setupFor3DItems();
-    }
 }

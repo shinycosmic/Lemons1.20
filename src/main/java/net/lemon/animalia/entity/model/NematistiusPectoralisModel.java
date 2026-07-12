@@ -57,13 +57,5 @@ public class NematistiusPectoralisModel extends GeoModel<RoosterfishEntity> {
         whole.setRotX(pitch);
         whole.setRotZ(-yaw/2);
 
-        dorsal.setRotZ(-yaw*1.5f);
-        pelvicLeft.setRotZ(yaw*0.8f);
-        pelvicRight.setRotZ(yaw*0.8f);
-        tail.setRotY(yaw*0.2f);
-        tail2.setRotY(yaw*0.3f);
-        tail3.setRotY(yaw*0.4f);
-        tail4.setRotY(yaw*0.5f);
-
     }
 }

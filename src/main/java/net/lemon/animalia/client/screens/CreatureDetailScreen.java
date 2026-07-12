@@ -150,9 +150,8 @@ public class CreatureDetailScreen extends Screen {
             float rotZ = (float) Mth.lerp((float) mouseY / this.height, Math.PI, Math.PI) + baseRotation;
             Quaternionf rotation = new Quaternionf().rotateY(rotY).rotateZ(rotZ);
 
-            Lighting.setupForFlatItems();
+            Lighting.setupForEntityInInventory();
             InventoryScreen.renderEntityInInventory(graphics, entityX, entityY, scale, rotation, null, displayEntity);
-            Lighting.setupFor3DItems();
         }
         if (hasDimorphism) {
             int btnX = bgX + GENDER_BTN_LEFT;

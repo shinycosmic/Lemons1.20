@@ -4,6 +4,7 @@ import com.mojang.blaze3d.platform.Lighting;
 import net.lemon.animalia.Animalia;
 import net.lemon.animalia.entity.bases.FishBase;
 import net.lemon.animalia.player.network.ClientDiscoveryCache;
+import net.lemon.animalia.util.AnimaliaFunctionUtil;
 import net.lemon.animalia.util.HolonetEntities;
 import net.lemon.animalia.util.IsGenetic;
 import net.lemon.animalia.util.Scannable;
@@ -101,9 +102,8 @@ public class CompendiumHomeScreen extends Screen {
                 scale = Math.min(scannable.getScaleforGUI() * 3, 60);
             }
 
-            Lighting.setupForFlatItems();
+            Lighting.setupForEntityInInventory();
             InventoryScreen.renderEntityInInventory(graphics, entityX, entityY, scale, rotation, null, featuredEntity);
-            Lighting.setupFor3DItems();
         }
 
         int totalSpecies = HolonetEntities.getTotalCount(app);
@@ -203,7 +203,5 @@ public class CompendiumHomeScreen extends Screen {
         if (featuredEntity instanceof IsGenetic genetic) {
             genetic.buildTraitsRandom();
         }
-
-        featuredEntity.discard();
     }
 }
