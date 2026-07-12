@@ -6,24 +6,34 @@ import net.lemon.animalia.entity.bases.FishBase;
 import net.lemon.animalia.registry.ModEntities;
 import net.lemon.animalia.registry.ModItems;
 import net.lemon.animalia.registry.ModTags;
+import net.lemon.animalia.util.AnimaliaFunctionUtil;
 import net.lemon.animalia.util.HolonetEntities;
 import net.lemon.animalia.util.Scannable;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.SpawnGroupData;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.ai.control.SmoothSwimmingLookControl;
+import net.minecraft.world.entity.ai.control.SmoothSwimmingMoveControl;
 import net.minecraft.world.entity.ai.goal.AvoidEntityGoal;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.ServerLevelAccessor;
+import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.GeoEntity;
+import software.bernie.geckolib.core.animatable.GeoAnimatable;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.core.animatable.instance.SingletonAnimatableInstanceCache;
 import software.bernie.geckolib.core.animation.*;
@@ -32,6 +42,7 @@ import software.bernie.geckolib.core.object.PlayState;
 public class RoosterfishEntity extends FishBase implements GeoEntity, Scannable {
 
     private static final EntityDataAccessor<Boolean> IS_STARTLED = SynchedEntityData.defineId(RoosterfishEntity.class, EntityDataSerializers.BOOLEAN);
+    private static final float NEMATISTIUS_PECTORALIS_PIXEL = 41;
 
     private AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
     private int startleCooldown = 0;
@@ -39,6 +50,8 @@ public class RoosterfishEntity extends FishBase implements GeoEntity, Scannable 
 
     public RoosterfishEntity(EntityType<? extends FishBase> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
+        this.moveControl = new SmoothSwimmingMoveControl(this, 85, 10, 0.02F, 0.1F, true);
+        this.lookControl = new SmoothSwimmingLookControl(this, 10);
     }
 
     protected void registerGoals() {
@@ -48,6 +61,8 @@ public class RoosterfishEntity extends FishBase implements GeoEntity, Scannable 
         this.goalSelector.addGoal(2, this.startleGoal);
         this.goalSelector.addGoal(3, new RandomSprintGoal(this));
     }
+
+    public int getEatLength() { return 5; }
 
     @Override
     protected void defineSynchedData() {
@@ -80,12 +95,15 @@ public class RoosterfishEntity extends FishBase implements GeoEntity, Scannable 
     public static AttributeSupplier setAttributes() {
         return Mob.createMobAttributes()
                 .add(Attributes.MAX_HEALTH, 6D)
-                .add(Attributes.MOVEMENT_SPEED, 0.5f)
+                .add(Attributes.MOVEMENT_SPEED, 0.8f)
                 .build();
     }
 
     public float getSwimSpeed() {
-        return this.isStartled() ? 1.6f : 1.0f;
+        if(this.isStartled()) {
+            System.out.println("[DEBUG] Is currently startled");
+        }
+        return this.isStartled() ? 3f : 2f;
     }
 
     @Override
@@ -130,17 +148,40 @@ public class RoosterfishEntity extends FishBase implements GeoEntity, Scannable 
 
     @Override
     public ItemStack getBucketItemStack() {
-        return ItemStack.EMPTY; // TODO: wire to ModItems.ROOSTERFISH_BUCKET.get()
+        return new ItemStack(ModItems.NEMATISTIUS_PECTORALIS_BUCKET.get());
+    }
+
+    @Override
+    public int getScaleforGUI() {
+        if (this.getType() == ModEntities.NEMATISTIUS_PECTORALIS.get()) {
+            return 24;
+        }
+        return Scannable.super.getScaleforGUI();
+    }
+
+    @Override
+    public int getScaleforDetailGUI() {
+        int currScale = Scannable.super.getScaleforDetailGUI();
+        return (int) (currScale * 1f);
     }
 
     public static void registerHolonet() {
-        // TODO: uncomment once ModEntities.ROOSTERFISH exists
-        // HolonetEntities.register(ModEntities.ROOSTERFISH, Scannable.AppName.FISH, "Carangiformes");
+         HolonetEntities.register(ModEntities.NEMATISTIUS_PECTORALIS, Scannable.AppName.FISH, "Carangiformes");
+    }
+
+    @Override
+    public float genVarSizeMultiplier() {
+        if (this.getType() == ModEntities.NEMATISTIUS_PECTORALIS.get()) {
+            return AnimaliaFunctionUtil.getScaleForSize(NEMATISTIUS_PECTORALIS_PIXEL, this.genVarSize(160, 200, 180));
+        }
+        return 1;
     }
 
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
         controllers.add(new AnimationController<>(this, "controller", 10, this::predicate));
+        controllers.add(new AnimationController<>(this, "eat_controller", 0, this::eatPredicate));
+
     }
 
     private PlayState predicate(AnimationState animationState) {
@@ -157,9 +198,26 @@ public class RoosterfishEntity extends FishBase implements GeoEntity, Scannable 
         return PlayState.CONTINUE;
     }
 
+    private <T extends GeoAnimatable> PlayState eatPredicate(AnimationState<T> state) {
+        if (this.isEating() && !this.isBaby()) {
+            state.getController().setAnimation(RawAnimation.begin().then("eat", Animation.LoopType.PLAY_ONCE));
+            return PlayState.CONTINUE;
+        }
+        return PlayState.STOP;
+    }
+
     @Override
     public AnimatableInstanceCache getAnimatableInstanceCache() {
         return cache;
+    }
+
+    @Override
+    public @Nullable SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, MobSpawnType reason, @Nullable SpawnGroupData spawnData, @Nullable CompoundTag dataTag) {
+        if (reason != MobSpawnType.BUCKET) {
+            this.setVarColor(1);
+            this.setVarSizeMultiplier(this.genVarSizeMultiplier());
+        }
+        return super.finalizeSpawn(level, difficulty, reason, spawnData, dataTag);
     }
 
     static class RandomSprintGoal extends Goal {

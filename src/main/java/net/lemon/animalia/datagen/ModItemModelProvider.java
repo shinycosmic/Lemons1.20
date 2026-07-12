@@ -55,6 +55,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItems.MASTACEMBELUS_BRICHARDI_BUCKET);
         simpleItem(ModItems.SINOBDELLA_SINENSIS_BUCKET);
         simpleItem(ModItems.RAKTHAMICHTHYS_INDICUS_BUCKET);
+        simpleItem(ModItems.NEMATISTIUS_PECTORALIS_BUCKET);
 
 
         //spawn egg generators
@@ -71,6 +72,8 @@ public class ModItemModelProvider extends ItemModelProvider {
         withExistingParent(ModItems.MACROGNATHUS_SIAMENSIS_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
         withExistingParent(ModItems.SINOBDELLA_SINENSIS_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
         withExistingParent(ModItems.RAKTHAMICHTHYS_INDICUS_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
+        withExistingParent(ModItems.NEMATISTIUS_PECTORALIS_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
+
 
     }
 

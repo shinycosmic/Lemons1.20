@@ -52,6 +52,9 @@ public class MastacembelusEntity extends FishBase implements GeoEntity, Scannabl
     }
 
     @Override
+    public int getEatLength() { return 10; }
+
+    @Override
     protected void registerGoals() {
         this.goalSelector.addGoal(1, new BottomDwellingGoal(this, 1.0D, 160, 8, 4));
         this.goalSelector.addGoal(2, new FishFrySwimmingGoal(this, 1.0D, 40));
@@ -219,8 +222,8 @@ public class MastacembelusEntity extends FishBase implements GeoEntity, Scannabl
     public static void registerHolonet(){
         HolonetEntities.register(ModEntities.MASTACEMBELUS_ARMATUS, Scannable.AppName.FISH, "Synbranchiformes");
         HolonetEntities.register(ModEntities.MASTACEMBELUS_ERYTHROTAENIA, Scannable.AppName.FISH, "Synbranchiformes");
-        HolonetEntities.register(ModEntities.MACROGNATHUS_SIAMENSIS, Scannable.AppName.FISH, "Synbranchiformes");
         HolonetEntities.register(ModEntities.MASTACEMBELUS_BRICHARDI, Scannable.AppName.FISH, "Synbranchiformes");
+        HolonetEntities.register(ModEntities.MACROGNATHUS_SIAMENSIS, Scannable.AppName.FISH, "Synbranchiformes");
         HolonetEntities.register(ModEntities.SINOBDELLA_SINENSIS, Scannable.AppName.FISH, "Synbranchiformes");
 
     }

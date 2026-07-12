@@ -46,6 +46,7 @@ public class ModEventBusEvents {
         event.put(ModEntities.MASTACEMBELUS_BRICHARDI.get(), MastacembelusEntity.setAttributes());
         event.put(ModEntities.SINOBDELLA_SINENSIS.get(), MastacembelusEntity.setAttributes());
         event.put(ModEntities.RAKTHAMICHTHYS_INDICUS.get(), RakthamichthysEntity.setAttributes());
+        event.put(ModEntities.NEMATISTIUS_PECTORALIS.get(), RoosterfishEntity.setAttributes());
     }
 
     @SubscribeEvent

@@ -53,6 +53,9 @@ public class SynbranchusEntity extends BottomWalkerSwimmerBase implements GeoEnt
     }
 
     @Override
+    public int getEatLength() { return 10; }
+
+    @Override
     public void aiStep() {
         super.aiStep();
         if (this.level().isClientSide) {
@@ -254,17 +257,6 @@ public class SynbranchusEntity extends BottomWalkerSwimmerBase implements GeoEnt
     @Override
     public AnimatableInstanceCache getAnimatableInstanceCache() {
         return cache;
-    }
-
-    public float genVarSize(float min, float max, float mode) {
-        float u = this.random.nextFloat();
-        float c = (mode - min) / (max - min);
-
-        if (u < c) {
-            return min + (float) Math.sqrt(u * (max - min) * (mode - min));
-        } else {
-            return max - (float) Math.sqrt((1 - u) * (max - min) * (max - mode));
-        }
     }
 
     @Override

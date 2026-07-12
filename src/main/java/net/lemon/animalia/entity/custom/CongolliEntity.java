@@ -235,12 +235,6 @@ public class CongolliEntity extends BottomWalkerSwimmerBase implements GeoEntity
             this.setVarColor(1);
             this.setVarSizeMultiplier(this.genVarSizeMultiplier());
         }
-        if(dataTag != null) {
-            if(dataTag.contains("BucketVarSize")) this.setVarSizeMultiplier(dataTag.getFloat("BucketVarSize"));
-            if(dataTag.contains("Age")) this.setAge(dataTag.getInt("Age"));
-            if(dataTag.contains("BucketGender")) this.setGender(dataTag.getInt("BucketGender"));
-            if(dataTag.contains("BucketVarColor")) this.setVarColor(dataTag.getInt("BucketVarColor"));
-        }
         this.ambientTicks = rand.nextInt(1000)+1000;
         return super.finalizeSpawn(level, difficulty, reason, spawnData, dataTag);
     }

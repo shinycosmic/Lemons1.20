@@ -114,7 +114,7 @@ public class RakthamichthysEntity extends BottomWalkerSwimmerBase implements Geo
 
     @Override
     public ItemStack getBucketItemStack() {
-        return null;
+        return new ItemStack(ModItems.RAKTHAMICHTHYS_INDICUS_BUCKET.get());
     }
 
     @Override
@@ -169,12 +169,6 @@ public class RakthamichthysEntity extends BottomWalkerSwimmerBase implements Geo
         if (reason != MobSpawnType.BUCKET) {
             this.setVarColor(1);
             this.setVarSizeMultiplier(this.genVarSizeMultiplier());
-        }
-        if(dataTag != null) {
-            if(dataTag.contains("BucketVarSize")) this.setVarSizeMultiplier(dataTag.getFloat("BucketVarSize"));
-            if(dataTag.contains("Age")) this.setAge(dataTag.getInt("Age"));
-            if(dataTag.contains("BucketGender")) this.setGender(dataTag.getInt("BucketGender"));
-            if(dataTag.contains("BucketVarColor")) this.setVarColor(dataTag.getInt("BucketVarColor"));
         }
         return super.finalizeSpawn(level, difficulty, reason, spawnData, dataTag);
     }

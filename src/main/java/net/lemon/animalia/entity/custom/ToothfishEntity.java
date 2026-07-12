@@ -142,17 +142,6 @@ public class ToothfishEntity extends FishBase implements GeoEntity, Scannable {
         super.travel(pTravelVector);
     }
 
-    public float genVarSize(float min, float max, float mode) {
-        float u = this.random.nextFloat();
-        float c = (mode - min) / (max - min);
-
-        if (u < c) {
-            return min + (float) Math.sqrt(u * (max - min) * (mode - min));
-        } else {
-            return max - (float) Math.sqrt((1 - u) * (max - min) * (max - mode));
-        }
-    }
-
     @Override
     public float genVarSizeMultiplier() {
         return AnimaliaFunctionUtil.getScaleForSize(DISSOSTUCHUS_ELEGINOIDES_PIXEL, this.genVarSize(70, 230, 80));
