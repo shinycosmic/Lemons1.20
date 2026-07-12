@@ -106,21 +106,16 @@ public class WaterStartleGoal extends Goal {
         Vec3 mobPos = this.mob.position();
         Vec3 threatPos = this.threat.position();
 
-        // Direction vector pointing away from the threat
         Vec3 fleeDir = mobPos.subtract(threatPos).normalize();
 
-        // Add slight randomness for organic-looking movement
         double randX = (this.mob.getRandom().nextDouble() - 0.5) * 0.4;
         double randY = (this.mob.getRandom().nextDouble() - 0.5) * 0.3;
         double randZ = (this.mob.getRandom().nextDouble() - 0.5) * 0.4;
         fleeDir = fleeDir.add(randX, randY, randZ).normalize();
 
-        // Target a point 8-12 blocks away in the flee direction
         double distance = 8.0 + this.mob.getRandom().nextDouble() * 4.0;
         Vec3 target = mobPos.add(fleeDir.scale(distance));
 
-        // Drive MoveControl at speedMultiplier × base attribute speed
-        double fleeSpeed = this.mob.getAttributeValue(Attributes.MOVEMENT_SPEED) * this.speedMultiplier;
-        this.mob.getMoveControl().setWantedPosition(target.x, target.y, target.z, fleeSpeed);
+        this.mob.getNavigation().moveTo(target.x, target.y, target.z, this.speedMultiplier);
     }
 }
