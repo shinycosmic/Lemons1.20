@@ -283,7 +283,13 @@ public abstract class AnimaliaBreedableWater extends WaterAnimal implements IAct
         if (this.isBaby()) {
             scale *= getBabyScale();
         }
-        return super.getDimensions(pose).scale(scale);
+        EntityDimensions scaled = super.getDimensions(pose).scale(scale);
+        // Clamp minimum dimensions to prevent derendering and interaction issues
+        float minSize = 0.2f;
+        return EntityDimensions.scalable(
+                Math.max(scaled.width, minSize),
+                Math.max(scaled.height, minSize)
+        );
     }
 
     /***
