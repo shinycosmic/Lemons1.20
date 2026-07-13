@@ -17,5 +17,6 @@ public class HolonetSetup {
         MastacembelusEntity.registerHolonet();
         RakthamichthysEntity.registerHolonet();
         RoosterfishEntity.registerHolonet();
+        ToxotesEntity.registerHolonet();
     }
 }

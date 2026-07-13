@@ -18,7 +18,7 @@ public class RakthamichthysIndicusRenderer extends GeoEntityRenderer<Rakthamicht
     }
 
     public float scaler() {
-        return 0.18f;
+        return 0.15f;
     }
 
     @Override

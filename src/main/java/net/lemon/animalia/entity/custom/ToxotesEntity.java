@@ -11,10 +11,6 @@ import net.lemon.animalia.util.HolonetEntities;
 import net.lemon.animalia.util.Scannable;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.syncher.EntityDataAccessor;
-import net.minecraft.network.syncher.EntityDataSerializers;
-import net.minecraft.network.syncher.SynchedEntityData;
-import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.entity.EntityType;
@@ -26,7 +22,6 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.control.SmoothSwimmingLookControl;
 import net.minecraft.world.entity.ai.control.SmoothSwimmingMoveControl;
 import net.minecraft.world.entity.ai.goal.AvoidEntityGoal;
-import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -39,57 +34,16 @@ import software.bernie.geckolib.core.animatable.instance.SingletonAnimatableInst
 import software.bernie.geckolib.core.animation.*;
 import software.bernie.geckolib.core.object.PlayState;
 
-public class RoosterfishEntity extends FishBase implements GeoEntity, Scannable {
-
-    private static final EntityDataAccessor<Boolean> IS_STARTLED = SynchedEntityData.defineId(RoosterfishEntity.class, EntityDataSerializers.BOOLEAN);
-    private static final float NEMATISTIUS_PECTORALIS_PIXEL = 41;
+public class ToxotesEntity extends FishBase implements GeoEntity, Scannable {
 
     private AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
-    private int startleCooldown = 0;
-    private WaterStartleGoal startleGoal;
+    private static final float TOXOTES_CHATAREUS_PIXEL = 19;
 
-    public RoosterfishEntity(EntityType<? extends FishBase> pEntityType, Level pLevel) {
-        super(pEntityType, pLevel);
+
+    public ToxotesEntity(EntityType<? extends FishBase> entityType, Level level) {
+        super(entityType, level);
         this.moveControl = new SmoothSwimmingMoveControl(this, 85, 10, 0.02F, 0.1F, true);
         this.lookControl = new SmoothSwimmingLookControl(this, 10);
-    }
-
-    protected void registerGoals() {
-        super.registerGoals();
-        this.goalSelector.getAvailableGoals().removeIf(g -> g.getGoal() instanceof AvoidEntityGoal);
-        this.startleGoal = new WaterStartleGoal(this, 10.0F, 2D, 100);
-        this.goalSelector.addGoal(2, this.startleGoal);
-        this.goalSelector.addGoal(3, new RandomSprintGoal(this));
-    }
-
-    public int getEatLength() { return 5; }
-
-    @Override
-    protected void defineSynchedData() {
-        super.defineSynchedData();
-        this.entityData.define(IS_STARTLED, false);
-    }
-
-    public boolean isStartled() {
-        return this.entityData.get(IS_STARTLED);
-    }
-
-    public void setStartled(boolean startled) {
-        this.entityData.set(IS_STARTLED, startled);
-    }
-
-    @Override
-    public void aiStep() {
-        super.aiStep();
-        if (!this.level().isClientSide) {
-            if (startleCooldown > 0) startleCooldown--;
-
-            if (startleGoal.isActive() && !isStartled()) {
-                setStartled(true);
-            } else if (!startleGoal.isActive() && isStartled() && startleCooldown <= 0) {
-                setStartled(false);
-            }
-        }
     }
 
     public static AttributeSupplier setAttributes() {
@@ -100,22 +54,28 @@ public class RoosterfishEntity extends FishBase implements GeoEntity, Scannable 
     }
 
     public float getSwimSpeed() {
-        return this.isStartled() ? 4.5f : 2f;
+        return 0.8f;
     }
+
+    protected void registerGoals() {
+        super.registerGoals();
+    }
+
+    public int getEatLength() { return 5; }
 
     @Override
     public String getScientificName() {
-        return "Nematistius pectoralis";
+        return "Toxotes chatareus";
     }
 
     @Override
     public TagKey<Item> getFoodTag() {
-        return ItemTags.FISHES;
+        return ModTags.Items.INVERTEBRATE;
     }
 
     @Override
     public Item getBreedingItem() {
-        return ModItems.RAW_FISH.get();
+        return ModItems.FISH_FOOD.get();
     }
 
     @Override
@@ -130,12 +90,12 @@ public class RoosterfishEntity extends FishBase implements GeoEntity, Scannable 
 
     @Override
     public Component getTrivia() {
-        return Component.translatable("trivia.animalia.nematistius_pectoralis");
+        return Component.translatable("trivia.animalia.toxotes_chatareus");
     }
 
     @Override
     public Component getFamily() {
-        return Component.translatable("family.animalia.nematistiidae");
+        return Component.translatable("family.animalia.toxotidae");
     }
 
     @Override
@@ -145,13 +105,13 @@ public class RoosterfishEntity extends FishBase implements GeoEntity, Scannable 
 
     @Override
     public ItemStack getBucketItemStack() {
-        return new ItemStack(ModItems.NEMATISTIUS_PECTORALIS_BUCKET.get());
+        return new ItemStack(ModItems.TOXOTES_CHATAREUS_BUCKET.get());
     }
 
     @Override
     public int getScaleforGUI() {
-        if (this.getType() == ModEntities.NEMATISTIUS_PECTORALIS.get()) {
-            return 18;
+        if (this.getType() == ModEntities.TOXOTES_CHATAREUS.get()) {
+            return 30;
         }
         return Scannable.super.getScaleforGUI();
     }
@@ -159,17 +119,17 @@ public class RoosterfishEntity extends FishBase implements GeoEntity, Scannable 
     @Override
     public int getScaleforDetailGUI() {
         int currScale = Scannable.super.getScaleforDetailGUI();
-        return (int) (currScale * 0.8f);
+        return (int) (currScale * 0.6f);
     }
 
     public static void registerHolonet() {
-         HolonetEntities.register(ModEntities.NEMATISTIUS_PECTORALIS, Scannable.AppName.FISH, "Carangiformes");
+        HolonetEntities.register(ModEntities.TOXOTES_CHATAREUS, Scannable.AppName.FISH, "Carangiformes");
     }
 
     @Override
     public float genVarSizeMultiplier() {
-        if (this.getType() == ModEntities.NEMATISTIUS_PECTORALIS.get()) {
-            return AnimaliaFunctionUtil.getScaleForSize(NEMATISTIUS_PECTORALIS_PIXEL, this.genVarSize(160, 250, 180));
+        if (this.getType() == ModEntities.TOXOTES_CHATAREUS.get()) {
+            return AnimaliaFunctionUtil.getScaleForSize(TOXOTES_CHATAREUS_PIXEL, 40);
         }
         return 1;
     }
@@ -192,11 +152,8 @@ public class RoosterfishEntity extends FishBase implements GeoEntity, Scannable 
             return PlayState.CONTINUE;
         }
 
-        if (this.isStartled()) {
-            animationState.getController().setAnimation(RawAnimation.begin().then("swimfast", Animation.LoopType.LOOP));
-        } else {
-            animationState.getController().setAnimation(RawAnimation.begin().then("swim", Animation.LoopType.LOOP));
-        }
+        animationState.getController().setAnimation(RawAnimation.begin().then("swim", Animation.LoopType.LOOP));
+
         return PlayState.CONTINUE;
     }
 
@@ -220,46 +177,5 @@ public class RoosterfishEntity extends FishBase implements GeoEntity, Scannable 
             this.setVarSizeMultiplier(this.genVarSizeMultiplier());
         }
         return super.finalizeSpawn(level, difficulty, reason, spawnData, dataTag);
-    }
-
-    static class RandomSprintGoal extends Goal {
-        private final RoosterfishEntity fish;
-        private int cooldown;
-        private int duration;
-
-        public RandomSprintGoal(RoosterfishEntity fish) {
-            this.fish = fish;
-            this.cooldown = getRandomCooldown();
-        }
-
-        private int getRandomCooldown() {
-            return 100 + fish.getRandom().nextInt(200);
-        }
-
-        @Override
-        public boolean canUse() {
-            if (!fish.isInWater()) return false;
-            if (fish.isStartled()) return false;
-            if (fish.startleCooldown > 0) return false;
-            return --cooldown <= 0;
-        }
-
-        @Override
-        public void start() {
-            fish.setStartled(true);
-            this.duration = 40 + fish.getRandom().nextInt(60);
-        }
-
-        @Override
-        public boolean canContinueToUse() {
-            return --duration > 0 && fish.isInWater();
-        }
-
-        @Override
-        public void stop() {
-            fish.setStartled(false);
-            fish.startleCooldown = 30;
-            this.cooldown = getRandomCooldown();
-        }
     }
 }

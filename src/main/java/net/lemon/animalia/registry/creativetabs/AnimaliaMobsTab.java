@@ -23,7 +23,8 @@ public class AnimaliaMobsTab {
             ModItems.MACROGNATHUS_SIAMENSIS_SPAWN_EGG,
             ModItems.SINOBDELLA_SINENSIS_SPAWN_EGG,
             ModItems.RAKTHAMICHTHYS_INDICUS_SPAWN_EGG,
-            ModItems.NEMATISTIUS_PECTORALIS_SPAWN_EGG
+            ModItems.NEMATISTIUS_PECTORALIS_SPAWN_EGG,
+            ModItems.TOXOTES_CHATAREUS_SPAWN_EGG
 
 
     );

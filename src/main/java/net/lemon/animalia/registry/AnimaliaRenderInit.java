@@ -1,5 +1,6 @@
 package net.lemon.animalia.registry;
 
+import net.lemon.animalia.entity.custom.ToxotesEntity;
 import net.lemon.animalia.entity.render.*;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 
@@ -20,6 +21,8 @@ public class AnimaliaRenderInit {
         EntityRenderers.register(ModEntities.SINOBDELLA_SINENSIS.get(), SinobdellaSinensisRenderer::new);
         EntityRenderers.register(ModEntities.RAKTHAMICHTHYS_INDICUS.get(), RakthamichthysIndicusRenderer::new);
         EntityRenderers.register(ModEntities.NEMATISTIUS_PECTORALIS.get(), NematistiusPectoralisRenderer::new);
+        EntityRenderers.register(ModEntities.TOXOTES_CHATAREUS.get(), ToxotesChatareusRenderer::new);
+
 
 
     }

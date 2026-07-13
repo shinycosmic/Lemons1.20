@@ -53,7 +53,7 @@ public class ModItems {
     public static final RegistryObject<Item> SINOBDELLA_SINENSIS_BUCKET = registerBucket("sinobdella_sinensis_bucket", ModEntities.SINOBDELLA_SINENSIS);
     public static final RegistryObject<Item> RAKTHAMICHTHYS_INDICUS_BUCKET = registerBucket("rakthamichthys_indicus_bucket", ModEntities.RAKTHAMICHTHYS_INDICUS);
     public static final RegistryObject<Item> NEMATISTIUS_PECTORALIS_BUCKET = registerBucket("nematistius_pectoralis_bucket", ModEntities.NEMATISTIUS_PECTORALIS);
-//    public static final RegistryObject<Item> TOXOTES_CHATAREUS_BUCKET = registerBucket("toxotes_chatareus_bucket", ModEntities.TOXOTES_CHATAREUS);
+    public static final RegistryObject<Item> TOXOTES_CHATAREUS_BUCKET = registerBucket("toxotes_chatareus_bucket", ModEntities.TOXOTES_CHATAREUS);
 //    public static final RegistryObject<Item> LEPTOBRAMA_MUELLERI_BUCKET = registerBucket("leptobrama_muelleri_bucket", ModEntities.LEPTOBRAMA_MUELLERI);
 
 
@@ -90,7 +90,7 @@ public class ModItems {
     public static final RegistryObject<Item> SINOBDELLA_SINENSIS_SPAWN_EGG = registerSpawnEgg("sinobdella_sinensis_spawn_egg", ModEntities.SINOBDELLA_SINENSIS, 0xf2d5af, 0x614a3c);
     public static final RegistryObject<Item> RAKTHAMICHTHYS_INDICUS_SPAWN_EGG = registerSpawnEgg("rakthamichthys_indicus_spawn_egg", ModEntities.RAKTHAMICHTHYS_INDICUS, 0xab2f1e, 0xea7f49);
     public static final RegistryObject<Item> NEMATISTIUS_PECTORALIS_SPAWN_EGG = registerSpawnEgg("nematistius_pectoralis_spawn_egg", ModEntities.NEMATISTIUS_PECTORALIS, 0x7d8a90, 0x282629);
-//    public static final RegistryObject<Item> TOXOTES_CHATAREUS_SPAWN_EGG = registerSpawnEgg("toxotes_chatareus_spawn_egg", ModEntities.TOXOTES_CHATAREUS, 0x7d8a90, 0x282629);
+    public static final RegistryObject<Item> TOXOTES_CHATAREUS_SPAWN_EGG = registerSpawnEgg("toxotes_chatareus_spawn_egg", ModEntities.TOXOTES_CHATAREUS, 0xd6d6d6, 0x111110);
 //    public static final RegistryObject<Item> LEPTOBRAMA_MUELLERI_SPAWN_EGG = registerSpawnEgg("leptobrama_muelleri_spawn_egg", ModEntities.LEPTOBRAMA_MUELLERI, 0x7d8a90, 0x282629);
 
 

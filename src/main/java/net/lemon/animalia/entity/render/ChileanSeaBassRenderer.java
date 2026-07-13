@@ -18,10 +18,6 @@ public class ChileanSeaBassRenderer extends GeoEntityRenderer<ToothfishEntity> {
         super(context, new ChileanSeaBassModel());
     }
 
-    public float scaler() {
-        return 1;
-    }
-
     @Override
     public void render(ToothfishEntity entity, float entityYaw, float partialTick, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight) {
         super.render(entity, entityYaw, partialTick, poseStack, bufferSource, packedLight);

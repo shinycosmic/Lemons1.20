@@ -23,7 +23,7 @@ public class BettaSplendensRenderer extends GeoEntityRenderer<BettaEntity> {
     }
 
     public float scaler() {
-        return 0.4f;
+        return 0.35f;
     }
 
     @Override

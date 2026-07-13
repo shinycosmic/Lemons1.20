@@ -17,10 +17,6 @@ public class SynbranchusMarmoratusRenderer extends GeoEntityRenderer<Synbranchus
         super(context, new SynbranchusMarmoratusModel());
     }
 
-    public float scaler() {
-        return 1;
-    }
-
     @Override
     public void render(SynbranchusEntity entity, float entityYaw, float partialTick, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight) {
         super.render(entity, entityYaw, partialTick, poseStack, bufferSource, packedLight);

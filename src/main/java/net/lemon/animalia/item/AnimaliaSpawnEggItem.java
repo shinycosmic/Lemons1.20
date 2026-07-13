@@ -41,6 +41,7 @@ public class AnimaliaSpawnEggItem extends ForgeSpawnEggItem {
         AnimaliaSpawnEggItem.registerScientificName(ModEntities.RAKTHAMICHTHYS_INDICUS, "Rakthamichthys indicus");
         AnimaliaSpawnEggItem.registerScientificName(ModEntities.BETTA_SPLENDENS, "Betta splendens");
         AnimaliaSpawnEggItem.registerScientificName(ModEntities.NEMATISTIUS_PECTORALIS, "Nematistius pectoralis");
+        AnimaliaSpawnEggItem.registerScientificName(ModEntities.TOXOTES_CHATAREUS, "Toxotes chatareus");
     }
 
     public AnimaliaSpawnEggItem(Supplier<? extends EntityType<? extends Mob>> type, int backgroundColor, int highlightColor, Properties props) {
