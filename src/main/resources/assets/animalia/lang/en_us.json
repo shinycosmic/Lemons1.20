@@ -147,5 +147,7 @@
   "debug.animalia.family": "if this text appears, there is a bug [family]",
   "tooltip.animalia.holonet.action": "Right-click",
   "tooltip.animalia.holonet.desc": " to use.",
-  "toast.animalia.discovered": "discovered!"
+  "toast.animalia.discovered": "discovered!",
+  "key.animalia.open_holonet": "Open Holonet",
+  "key.categories.animalia": "Wildlife Explorers"
 }
