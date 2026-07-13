@@ -56,9 +56,10 @@ public class MastacembelusEntity extends FishBase implements GeoEntity, Scannabl
 
     @Override
     protected void registerGoals() {
-        this.goalSelector.addGoal(1, new BottomDwellingGoal(this, 1.0D, 160, 8, 4));
-        this.goalSelector.addGoal(2, new FishFrySwimmingGoal(this, 1.0D, 40));
-        this.goalSelector.addGoal(3, new FishHideGoal(this, this.activityTime()));        super.registerGoals();
+        this.goalSelector.addGoal(5, new FishFrySwimmingGoal(this, 1.0D, 40));
+        this.goalSelector.addGoal(5, new FishHideGoal(this, this.activityTime()));        super.registerGoals();
+        this.goalSelector.addGoal(7, new BottomDwellingGoal(this, 1.0D, 160, 8, 4));
+
     }
 
     @Override

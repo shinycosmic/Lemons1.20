@@ -65,7 +65,7 @@ public class CongolliEntity extends BottomWalkerSwimmerBase implements GeoEntity
         this.goalSelector.getAvailableGoals().removeIf(
                 g -> g.getGoal() instanceof BottomWalkerStrollGoal
         );
-        this.goalSelector.addGoal(4, new BurstGoal(this));
+        this.goalSelector.addGoal(6, new BurstGoal(this));
         this.goalSelector.addGoal(6, new BurstPanicGoal(this));
 
 

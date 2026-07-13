@@ -58,8 +58,8 @@ public class RoosterfishEntity extends FishBase implements GeoEntity, Scannable 
         super.registerGoals();
         this.goalSelector.getAvailableGoals().removeIf(g -> g.getGoal() instanceof AvoidEntityGoal);
         this.startleGoal = new WaterStartleGoal(this, 10.0F, 2D, 100);
-        this.goalSelector.addGoal(2, this.startleGoal);
-        this.goalSelector.addGoal(3, new RandomSprintGoal(this));
+        this.goalSelector.addGoal(4, this.startleGoal);
+        this.goalSelector.addGoal(6, new RandomSprintGoal(this));
     }
 
     public int getEatLength() { return 5; }

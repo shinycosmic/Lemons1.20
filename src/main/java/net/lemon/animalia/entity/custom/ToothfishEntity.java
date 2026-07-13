@@ -92,8 +92,8 @@ public class ToothfishEntity extends FishBase implements GeoEntity, Scannable {
 
     @Override
     protected void registerGoals() {
-        this.goalSelector.addGoal(1, new BottomDwellingGoal(this, 1.0D, 160, 8, 4));
-        this.goalSelector.addGoal(2, new FishFrySwimmingGoal(this, 1.0D, 40));
+        this.goalSelector.addGoal(5, new FishFrySwimmingGoal(this, 1.0D, 40));
+        this.goalSelector.addGoal(7, new BottomDwellingGoal(this, 1.0D, 160, 8, 4));
         super.registerGoals();
     }
 

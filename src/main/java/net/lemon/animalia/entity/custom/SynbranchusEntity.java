@@ -85,7 +85,7 @@ public class SynbranchusEntity extends BottomWalkerSwimmerBase implements GeoEnt
     @Override
     protected void registerGoals() {
         super.registerGoals();
-        this.goalSelector.addGoal(3, new FishHideGoal(this));
+        this.goalSelector.addGoal(5, new FishHideGoal(this));
     }
 
     @Override
