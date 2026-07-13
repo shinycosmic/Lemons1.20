@@ -90,7 +90,7 @@ public abstract class BottomWalkerSwimmerBase extends FishBase {
     @Override
     protected void registerGoals() {
         super.registerGoals();
-        this.goalSelector.addGoal(4, new BottomWalkerStrollGoal(this, 1.0D));
+        this.goalSelector.addGoal(7, new BottomWalkerStrollGoal(this, 1.0D));
     }
 
     @Override
