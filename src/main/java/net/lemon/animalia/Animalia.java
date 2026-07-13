@@ -1,6 +1,7 @@
 package net.lemon.animalia;
 
 import com.mojang.logging.LogUtils;
+import net.lemon.animalia.registry.ModLootModifiers;
 import net.lemon.animalia.item.AnimaliaSpawnEggItem;
 import net.lemon.animalia.player.network.ModNetwork;
 import net.lemon.animalia.registry.*;
@@ -43,6 +44,7 @@ public class Animalia {
         ModBlockEntities.register(modEventBus);
         ModMenuTypes.register(modEventBus);
         ModEntities.register(modEventBus);
+        ModLootModifiers.register(modEventBus);
 
         GeckoLib.initialize();
 

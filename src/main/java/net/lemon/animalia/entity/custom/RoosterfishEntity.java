@@ -100,9 +100,6 @@ public class RoosterfishEntity extends FishBase implements GeoEntity, Scannable 
     }
 
     public float getSwimSpeed() {
-        if(this.isStartled()) {
-            System.out.println("[DEBUG] Is currently startled");
-        }
         return this.isStartled() ? 4.5f : 2f;
     }
 

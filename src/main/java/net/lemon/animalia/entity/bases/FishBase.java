@@ -244,5 +244,4 @@ public abstract class FishBase extends AnimaliaBreedableWater implements Bucketa
         }
     }
 
-    //TODO HANDLE DAY_NIGHT ACTIVITY
 }
