@@ -12,9 +12,9 @@ public class AnimaliaFoodTab {
             //Raws
             ModItems.RAW_ICEFISH,
             ModItems.RAW_FISH,
+            ModItems.COOKED_FISH,
             ModItems.RAW_VENISON,
-
-            //Cooked
+            ModItems.COOKED_VENISON,
 
             //Other|Breeding
             ModItems.AMPHIPOD,

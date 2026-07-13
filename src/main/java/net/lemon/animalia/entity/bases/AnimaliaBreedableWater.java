@@ -604,10 +604,11 @@ public abstract class AnimaliaBreedableWater extends WaterAnimal implements IAct
             this.setInLove(player);
             return InteractionResult.SUCCESS;
         }
+        float healAmount = itemstack.getFoodProperties(this) != null ? Objects.requireNonNull(itemstack.getFoodProperties(this)).getNutrition() : 2;
 
         if (this.isFood(itemstack)) {
             this.usePlayerItem(player, hand, itemstack);
-            this.heal((float) Objects.requireNonNull(itemstack.getFoodProperties(this)).getNutrition());
+            this.heal(healAmount);
             this.setEating(true);
             this.eatTicks = getEatLength();
             if (this.level().isClientSide) {

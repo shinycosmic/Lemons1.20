@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "##",
+    "##"
+  ],
+  "key": {
+    "#": {
+      "tag": "animalia:invertebrate"
+    }
+  },
+  "result": {
+    "count": 4,
+    "item": "animalia:fish_food"
+  }
+}

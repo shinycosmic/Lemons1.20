@@ -15,6 +15,8 @@
   "item.animalia.raw_fish": "Raw Fish",
   "item.animalia.fish_food": "Fish Food",
   "item.animalia.raw_venison": "Raw Venison",
+  "item.animalia.cooked_venison": "Cooked Venison",
+  "item.animalia.cooked_fish": "Cooked Fish",
 
   "item.animalia.amphipod": "Amphipod",
   "item.animalia.gigantocypris": "Giant Ostracod",
@@ -136,7 +138,7 @@
   "trivia.animalia.mastacembelus_brichardi": "Blind Spiny Eels are a rare species of Mastacembelus found in the Congo River. They typically prey on small invertebrates. As they are blind, they use their strong senses to hunt.",
   "trivia.animalia.sinobdella_sinensis": "This species is native to southern China, Taiwan, and Vietnam. It is moderately sized, growing up to 38cm in total length. They prey on small invertebrates.",
   "trivia.animalia.rakthamichthys_indicus": "These are blind swamp eels endemic to India. They live underground, in streams throughout caves. This fish has a bright red coloration and incredibly reduced eyes.",
-  "trivia.animalia.nematistius_pectoralis": "",
+  "trivia.animalia.nematistius_pectoralis": "Roosterfish are fast-moving pelagic predators with uniquely long spines on their dorsal fins. They are large, able to reach over 1.6m in length and are a popular sport fish.",
 
   "debug.animalia.trivia": "If this value displays, there is a bug [trivia]",
   "debug.animalia.family": "if this text appears, there is a bug [family]",

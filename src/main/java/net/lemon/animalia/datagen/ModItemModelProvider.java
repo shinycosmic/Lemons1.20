@@ -24,10 +24,12 @@ public class ModItemModelProvider extends ItemModelProvider {
      */
     @Override
     protected void registerModels() {
-        //Raws generators
+        //Food generators
         simpleItem(ModItems.RAW_ICEFISH);
         simpleItem(ModItems.RAW_FISH);
         simpleItem(ModItems.RAW_VENISON);
+        simpleItem(ModItems.COOKED_FISH);
+        simpleItem(ModItems.COOKED_VENISON);
 
         //Animal Items
         simpleItem(ModItems.AMPHIPOD);
