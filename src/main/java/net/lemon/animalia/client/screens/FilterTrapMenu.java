@@ -4,6 +4,7 @@ import net.lemon.animalia.block.entities.FilterTrapBlockEntity;
 import net.lemon.animalia.registry.ModBlocks;
 import net.lemon.animalia.registry.ModMenuTypes;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.*;
@@ -11,7 +12,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
-import net.minecraftforge.items.SlotItemHandler;
 
 public class FilterTrapMenu extends AbstractContainerMenu {
     public final FilterTrapBlockEntity blockEntity;
@@ -32,12 +32,10 @@ public class FilterTrapMenu extends AbstractContainerMenu {
         addPlayerHotbar(inv);
         addPlayerInventory(inv);
         this.blockEntity.getCapability(ForgeCapabilities.ITEM_HANDLER).ifPresent(iItemHandler -> {
-            this.addSlot(new SlotItemHandler(iItemHandler, 0,44, 31));
-            this.addSlot(new SlotItemHandler(iItemHandler, 1,62,31));
-            this.addSlot(new SlotItemHandler(iItemHandler, 2,80,31));
-            this.addSlot(new SlotItemHandler(iItemHandler, 3,98,31));
-            this.addSlot(new SlotItemHandler(iItemHandler, 4,116,31));
-            this.addSlot(new SlotItemHandler(iItemHandler, 5, 80, 55));
+            for (int i = 0; i < 5; i++) {
+                this.addSlot(new AnimaliaSlot(iItemHandler, i, 44 + (i * 18), 31, AnimaliaSlot.DENY_ALL));
+            }
+            this.addSlot(new AnimaliaSlot(iItemHandler, 5, 80, 55, stack -> stack.is(ItemTags.FISHES)));
         });
         addDataSlots(data);
     }
