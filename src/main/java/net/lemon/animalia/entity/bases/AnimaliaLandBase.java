@@ -488,7 +488,15 @@ public abstract class AnimaliaLandBase extends Animal {
     public InteractionResult mobInteract(Player player, InteractionHand hand) {
         ItemStack itemstack = player.getItemInHand(hand);
         int i = this.getAge();
-        float healAmount = itemstack.getFoodProperties(this) != null ? Objects.requireNonNull(itemstack.getFoodProperties(this)).getNutrition() : 2;
+
+        if (!this.level().isClientSide && i == 0 && this.canFallInLove() && this.isBreedingItem(itemstack)) {
+            this.usePlayerItem(player, hand, itemstack);
+            this.setInLove(player);
+            return InteractionResult.SUCCESS;
+        }
+
+        float healAmount = itemstack.getFoodProperties(this) != null
+                ? Objects.requireNonNull(itemstack.getFoodProperties(this)).getNutrition() : 2;
         if (this.isFood(itemstack)) {
             this.usePlayerItem(player, hand, itemstack);
             this.heal(healAmount);
