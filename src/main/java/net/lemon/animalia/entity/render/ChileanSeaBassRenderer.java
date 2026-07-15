@@ -1,6 +1,7 @@
 package net.lemon.animalia.entity.render;
 
 import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.math.Axis;
 import net.lemon.animalia.Animalia;
 import net.lemon.animalia.entity.custom.SynbranchusEntity;
 import net.lemon.animalia.entity.custom.ToothfishEntity;
@@ -27,5 +28,14 @@ public class ChileanSeaBassRenderer extends GeoEntityRenderer<ToothfishEntity> {
     public void scaleModelForRender(float widthScale, float heightScale, PoseStack poseStack, ToothfishEntity animatable, BakedGeoModel model, boolean isReRender, float partialTick, int packedLight, int packedOverlay) {
         float scale = animatable.isBaby() ? babyMult : animatable.getVarSizeMultiplier();
         super.scaleModelForRender(scale, scale, poseStack, animatable, model, isReRender, partialTick, packedLight, packedOverlay);
+    }
+
+    @Override
+    protected void applyRotations(ToothfishEntity animatable, PoseStack poseStack, float ageInTicks, float rotationYaw, float partialTick) {
+        super.applyRotations(animatable, poseStack, ageInTicks, rotationYaw, partialTick);
+        if (!animatable.isInWater()) {
+            poseStack.mulPose(Axis.ZP.rotationDegrees(90.0F));
+            poseStack.translate(0.0F, -animatable.getBbWidth() * 0.5F, 0.0F);
+        }
     }
 }

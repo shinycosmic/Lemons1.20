@@ -3,6 +3,7 @@ package net.lemon.animalia.entity.render;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import net.lemon.animalia.entity.custom.CongolliEntity;
+import net.lemon.animalia.entity.custom.MastacembelusEntity;
 import net.lemon.animalia.entity.custom.ToothfishEntity;
 import net.lemon.animalia.entity.model.EleginopsMaclovinusModel;
 import net.lemon.animalia.entity.model.PseudaphritisUrvilliiModel;
@@ -37,5 +38,9 @@ public class PseudaphritisUrvilliiRenderer extends GeoEntityRenderer<CongolliEnt
     @Override
     protected void applyRotations(CongolliEntity animatable, PoseStack poseStack, float ageInTicks, float rotationYaw, float partialTick) {
         super.applyRotations(animatable, poseStack, ageInTicks, rotationYaw, partialTick);
+        if (!animatable.isInWater()) {
+            poseStack.mulPose(Axis.ZP.rotationDegrees(90.0F));
+            poseStack.translate(0.0F, -animatable.getBbWidth() * 0.5F, 0.0F);
+        }
     }
 }
