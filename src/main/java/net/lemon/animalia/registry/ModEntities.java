@@ -2,7 +2,7 @@ package net.lemon.animalia.registry;
 
 import net.lemon.animalia.Animalia;
 import net.lemon.animalia.entity.custom.*;
-import net.lemon.animalia.entity.render.BettaSplendensRenderer;
+import net.lemon.animalia.entity.projectile.WaterSpitProjectile;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
@@ -37,6 +37,9 @@ public class ModEntities {
     public static final RegistryObject<EntityType<ToxotesEntity>> TOXOTES_CHATAREUS = registerEntityType("toxotes_chatareus", ToxotesEntity::new, MobCategory.CREATURE, 0.6f, 0.6f);
 
 
+    /// REGISTER OTHER ENTITIES BELOW
+    public static final RegistryObject<EntityType<WaterSpitProjectile>> WATER_SPIT = ENTITY_TYPES.register("water_spit",
+            () -> EntityType.Builder.<WaterSpitProjectile>of(WaterSpitProjectile::new, MobCategory.MISC).sized(0.25F, 0.25F).clientTrackingRange(4).updateInterval(10).build("water_spit"));
 
     //Supplier Helper Methods
     public static <T extends Entity> RegistryObject<EntityType<T>> registerEntityType(String name, EntityType.EntityFactory<T> factory, MobCategory category, float width, float height) {

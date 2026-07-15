@@ -24,6 +24,8 @@ public class AnimaliaRenderInit {
         EntityRenderers.register(ModEntities.TOXOTES_CHATAREUS.get(), ToxotesChatareusRenderer::new);
 
 
+        ///  OTHER RENDERS
+        EntityRenderers.register(ModEntities.WATER_SPIT.get(), WaterSpitRenderer::new);
 
     }
 }

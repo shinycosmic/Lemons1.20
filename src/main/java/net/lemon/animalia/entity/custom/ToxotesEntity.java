@@ -1,5 +1,6 @@
 package net.lemon.animalia.entity.custom;
 
+import net.lemon.animalia.entity.ai.ArcherfishShootGoal;
 import net.lemon.animalia.entity.ai.WaterStartleGoal;
 import net.lemon.animalia.entity.bases.ActivityTime;
 import net.lemon.animalia.entity.bases.FishBase;
@@ -11,6 +12,9 @@ import net.lemon.animalia.util.HolonetEntities;
 import net.lemon.animalia.util.Scannable;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.entity.EntityType;
@@ -38,12 +42,33 @@ public class ToxotesEntity extends FishBase implements GeoEntity, Scannable {
 
     private AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
     private static final float TOXOTES_CHATAREUS_PIXEL = 19;
+    private static final EntityDataAccessor<Boolean> IS_SHOOTING = SynchedEntityData.defineId(ToxotesEntity.class, EntityDataSerializers.BOOLEAN);
 
 
     public ToxotesEntity(EntityType<? extends FishBase> entityType, Level level) {
         super(entityType, level);
         this.moveControl = new SmoothSwimmingMoveControl(this, 85, 10, 0.02F, 0.1F, true);
         this.lookControl = new SmoothSwimmingLookControl(this, 10);
+    }
+
+    @Override
+    protected void defineSynchedData() {
+        super.defineSynchedData();
+        this.entityData.define(IS_SHOOTING, false);
+    }
+
+    public boolean isShooting() {
+        return this.entityData.get(IS_SHOOTING);
+    }
+
+    public void setShooting(boolean shooting) {
+        this.entityData.set(IS_SHOOTING, shooting);
+    }
+
+    @Override
+    protected void registerGoals() {
+        this.goalSelector.addGoal(1, new ArcherfishShootGoal(this, 200, 400));
+        super.registerGoals();
     }
 
     public static AttributeSupplier setAttributes() {
@@ -55,10 +80,6 @@ public class ToxotesEntity extends FishBase implements GeoEntity, Scannable {
 
     public float getSwimSpeed() {
         return 0.8f;
-    }
-
-    protected void registerGoals() {
-        super.registerGoals();
     }
 
     public int getEatLength() { return 5; }
@@ -138,7 +159,7 @@ public class ToxotesEntity extends FishBase implements GeoEntity, Scannable {
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
         controllers.add(new AnimationController<>(this, "controller", 10, this::predicate));
         controllers.add(new AnimationController<>(this, "eat_controller", 0, this::eatPredicate));
-
+        controllers.add(new AnimationController<>(this, "shoot_controller", 0, this::shootPredicate));
     }
 
     private PlayState predicate(AnimationState animationState) {
@@ -152,6 +173,11 @@ public class ToxotesEntity extends FishBase implements GeoEntity, Scannable {
             return PlayState.CONTINUE;
         }
 
+        if (this.isShooting()) {
+            animationState.getController().setAnimation(RawAnimation.begin().then("idle", Animation.LoopType.LOOP));
+            return PlayState.CONTINUE;
+        }
+
         animationState.getController().setAnimation(RawAnimation.begin().then("swim", Animation.LoopType.LOOP));
 
         return PlayState.CONTINUE;
@@ -160,6 +186,14 @@ public class ToxotesEntity extends FishBase implements GeoEntity, Scannable {
     private <T extends GeoAnimatable> PlayState eatPredicate(AnimationState<T> state) {
         if (this.isEating() && !this.isBaby()) {
             state.getController().setAnimation(RawAnimation.begin().then("eat", Animation.LoopType.PLAY_ONCE));
+            return PlayState.CONTINUE;
+        }
+        return PlayState.STOP;
+    }
+
+    private <T extends GeoAnimatable> PlayState shootPredicate(AnimationState<T> state) {
+        if (this.isShooting() && !this.isBaby()) {
+            state.getController().setAnimation(RawAnimation.begin().then("shoot", Animation.LoopType.PLAY_ONCE));
             return PlayState.CONTINUE;
         }
         return PlayState.STOP;
