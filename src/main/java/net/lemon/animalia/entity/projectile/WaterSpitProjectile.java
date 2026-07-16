@@ -21,7 +21,7 @@ import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 
 public class WaterSpitProjectile extends Projectile {
-    private static final ResourceLocation LOOT_TABLE = new ResourceLocation(Animalia.MODID, "gameplay/archerfish_spit");
+    private static final ResourceLocation LOOT_TABLE = new ResourceLocation(Animalia.MODID, "drops/archerfish_spit");
     private static final int MAX_LIFETIME = 60;
     private int life = 0;
 

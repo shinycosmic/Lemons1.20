@@ -90,6 +90,7 @@ public class ArcherfishShootGoal extends Goal {
                 break;
             case SHOOTING:
                 tickShooting();
+                System.out.println("[DEBUG] JUST SHOT WATER");
                 break;
         }
     }
