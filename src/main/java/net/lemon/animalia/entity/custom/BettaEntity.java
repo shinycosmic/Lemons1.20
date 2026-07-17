@@ -398,8 +398,8 @@ public class BettaEntity extends FishBase implements GeoEntity, IsGenetic, Scann
     @Override
     public @Nullable SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, MobSpawnType reason, @Nullable SpawnGroupData spawnData, @Nullable CompoundTag dataTag) {
         if(reason == MobSpawnType.SPAWN_EGG) {
-            buildTraitsRandom();
-//            buildTraitsSpecial();
+//            buildTraitsRandom();
+            buildTraitsWild();
         } else if(reason != MobSpawnType.BUCKET){
             buildTraitsWild();
         }

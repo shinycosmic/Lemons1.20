@@ -2,19 +2,14 @@ package net.lemon.animalia.registry;
 
 import net.lemon.animalia.Animalia;
 import net.lemon.animalia.entity.custom.*;
-import net.lemon.animalia.entity.projectile.WaterSpitProjectile;
+import net.lemon.animalia.entity.projectiles.WaterSpitProjectile;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
-import net.minecraft.world.item.Item;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
-
-import java.util.HashMap;
-import java.util.Map;
-import java.util.function.Supplier;
 
 public class ModEntities {
     public static final DeferredRegister<EntityType<?>> ENTITY_TYPES = DeferredRegister.create(ForgeRegistries.ENTITY_TYPES, Animalia.MODID);

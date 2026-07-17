@@ -1,7 +1,7 @@
 package net.lemon.animalia.entity.ai;
 
 import net.lemon.animalia.entity.custom.ToxotesEntity;
-import net.lemon.animalia.entity.projectile.WaterSpitProjectile;
+import net.lemon.animalia.entity.projectiles.WaterSpitProjectile;
 import net.lemon.animalia.registry.ModEntities;
 import net.lemon.animalia.registry.ModTags;
 import net.minecraft.core.BlockPos;

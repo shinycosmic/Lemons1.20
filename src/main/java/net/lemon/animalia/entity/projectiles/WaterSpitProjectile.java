@@ -1,4 +1,4 @@
-package net.lemon.animalia.entity.projectile;
+package net.lemon.animalia.entity.projectiles;
 
 import net.lemon.animalia.Animalia;
 import net.lemon.animalia.registry.ModEntities;

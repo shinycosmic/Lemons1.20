@@ -33,6 +33,12 @@ public class ModNetwork {
                 .decoder(SyncAllDiscoveriesPacket::new)
                 .consumerMainThread(SyncAllDiscoveriesPacket::handle)
                 .add();
+
+        CHANNEL.messageBuilder(MarkLoadedFirstTimePacket.class, packetId++, NetworkDirection.PLAY_TO_SERVER)
+                .encoder(MarkLoadedFirstTimePacket::encode)
+                .decoder(MarkLoadedFirstTimePacket::new)
+                .consumerMainThread(MarkLoadedFirstTimePacket::handle)
+                .add();
     }
 
     /**

@@ -65,7 +65,7 @@ public class HolonetWelcomeScreen extends Screen {
         // Title
         graphics.drawCenteredString(this.font,
                 Component.translatable("gui.animalia.holonet.welcome.title"),
-                bgX + BG_WIDTH / 2, bgY + 30, 0x00FFCC);
+                bgX + BG_WIDTH / 2, bgY + 40, 0xFFFFFF);
 
         // Instructional text lines
         int textX = bgX + BG_WIDTH / 2;
@@ -74,16 +74,16 @@ public class HolonetWelcomeScreen extends Screen {
 
         graphics.drawCenteredString(this.font,
                 Component.translatable("gui.animalia.holonet.welcome.line1"),
-                textX, textY, 0xCCCCCC);
+                textX, textY, 0xFFFFFF);
         graphics.drawCenteredString(this.font,
                 Component.translatable("gui.animalia.holonet.welcome.line2"),
-                textX, textY + lineSpacing, 0xCCCCCC);
+                textX, textY + lineSpacing, 0xFFFFFF);
         graphics.drawCenteredString(this.font,
                 Component.translatable("gui.animalia.holonet.welcome.line3"),
-                textX, textY + lineSpacing * 2, 0xCCCCCC);
+                textX, textY + lineSpacing * 2, 0xFFFFFF);
         graphics.drawCenteredString(this.font,
                 Component.translatable("gui.animalia.holonet.welcome.line4"),
-                textX, textY + lineSpacing * 3, 0xCCCCCC);
+                textX, textY + lineSpacing * 3, 0xFFFFFF);
 
         // Loading bar / Start button area
         int barX = bgX + (BG_WIDTH - BAR_WIDTH) / 2;

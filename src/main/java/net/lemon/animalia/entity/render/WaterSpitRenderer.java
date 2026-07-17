@@ -3,7 +3,7 @@ package net.lemon.animalia.entity.render;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
-import net.lemon.animalia.entity.projectile.WaterSpitProjectile;
+import net.lemon.animalia.entity.projectiles.WaterSpitProjectile;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRenderer;
