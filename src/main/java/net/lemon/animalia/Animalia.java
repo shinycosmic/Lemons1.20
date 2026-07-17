@@ -3,7 +3,7 @@ package net.lemon.animalia;
 import com.mojang.logging.LogUtils;
 import net.lemon.animalia.registry.ModLootModifiers;
 import net.lemon.animalia.item.AnimaliaSpawnEggItem;
-import net.lemon.animalia.player.network.ModNetwork;
+import net.lemon.animalia.client.player.network.ModNetwork;
 import net.lemon.animalia.registry.*;
 import net.lemon.animalia.registry.creativetabs.ModCreativeModeTabs;
 import net.lemon.animalia.client.screens.FilterTrapScreen;

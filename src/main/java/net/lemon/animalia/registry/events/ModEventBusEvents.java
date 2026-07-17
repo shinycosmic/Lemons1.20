@@ -3,11 +3,11 @@ package net.lemon.animalia.registry.events;
 import net.lemon.animalia.Animalia;
 import net.lemon.animalia.entity.bases.AnimaliaBreedableWater;
 import net.lemon.animalia.entity.custom.*;
-import net.lemon.animalia.player.HolonetCapability;
-import net.lemon.animalia.player.HolonetCapabilityProvider;
-import net.lemon.animalia.player.network.DiscoverSpeciesPacket;
-import net.lemon.animalia.player.network.ModNetwork;
-import net.lemon.animalia.player.network.SyncAllDiscoveriesPacket;
+import net.lemon.animalia.client.player.HolonetCapability;
+import net.lemon.animalia.client.player.HolonetCapabilityProvider;
+import net.lemon.animalia.client.player.network.DiscoverSpeciesPacket;
+import net.lemon.animalia.client.player.network.ModNetwork;
+import net.lemon.animalia.client.player.network.SyncAllDiscoveriesPacket;
 import net.lemon.animalia.registry.ModEntities;
 import net.lemon.animalia.util.Scannable;
 import net.minecraft.resources.ResourceLocation;
@@ -114,7 +114,7 @@ public class ModEventBusEvents {
         public static void onPlayerLogin(PlayerEvent.PlayerLoggedInEvent event) {
             ServerPlayer player = (ServerPlayer) event.getEntity();
             player.getCapability(HolonetCapabilityProvider.HOLONET_CAPABILITY).ifPresent(cap -> {
-                ModNetwork.sendToPlayer(player, new SyncAllDiscoveriesPacket(cap.getAll()));
+                ModNetwork.sendToPlayer(player, new SyncAllDiscoveriesPacket(cap.getAll(), cap.isLoadedFirstTime()));
             });
         }
     }

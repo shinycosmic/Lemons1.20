@@ -4,10 +4,10 @@ import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.suggestion.SuggestionProvider;
-import net.lemon.animalia.player.HolonetCapabilityProvider;
-import net.lemon.animalia.player.network.DiscoverSpeciesPacket;
-import net.lemon.animalia.player.network.ModNetwork;
-import net.lemon.animalia.player.network.SyncAllDiscoveriesPacket;
+import net.lemon.animalia.client.player.HolonetCapabilityProvider;
+import net.lemon.animalia.client.player.network.DiscoverSpeciesPacket;
+import net.lemon.animalia.client.player.network.ModNetwork;
+import net.lemon.animalia.client.player.network.SyncAllDiscoveriesPacket;
 import net.lemon.animalia.util.HolonetEntities;
 import net.lemon.animalia.util.Scannable;
 import net.minecraft.commands.CommandSourceStack;
@@ -39,8 +39,7 @@ public class ModCommands {
                             ServerPlayer player = context.getSource().getPlayerOrException();
                             player.getCapability(HolonetCapabilityProvider.HOLONET_CAPABILITY).ifPresent(cap -> {
                                 cap.replaceAll(new HashSet<>());
-                                ModNetwork.sendToPlayer(player, new SyncAllDiscoveriesPacket(cap.getAll()));
-                            });
+                                new SyncAllDiscoveriesPacket(cap.getAll(), cap.isLoadedFirstTime());                           });
                             player.sendSystemMessage(Component.literal("Holonet discoveries reset."));
                             return 1;
                         })
@@ -56,7 +55,7 @@ public class ModCommands {
                                         cap.discover(id, 1);
                                     }
                                 }
-                                ModNetwork.sendToPlayer(player, new SyncAllDiscoveriesPacket(cap.getAll()));
+                                ModNetwork.sendToPlayer(player, new SyncAllDiscoveriesPacket(cap.getAll(), cap.isLoadedFirstTime()));
                             });
                             player.sendSystemMessage(Component.literal("All Holonet entries discovered."));
                             return 1;

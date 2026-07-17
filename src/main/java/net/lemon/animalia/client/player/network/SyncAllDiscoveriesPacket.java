@@ -1,4 +1,4 @@
-package net.lemon.animalia.player.network;
+package net.lemon.animalia.client.player.network;
 
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraftforge.network.NetworkEvent;
@@ -7,16 +7,14 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.function.Supplier;
 
-/**
- * Server → Client: sends the player's entire discovery set on login or dimension change.
- * Replaces the client cache completely.
- */
 public class SyncAllDiscoveriesPacket {
 
     private final Set<String> discoveries;
+    private final boolean hasSeenWelcome;
 
-    public SyncAllDiscoveriesPacket(Set<String> discoveries) {
+    public SyncAllDiscoveriesPacket(Set<String> discoveries, boolean hasSeenWelcome) {
         this.discoveries = discoveries;
+        this.hasSeenWelcome = hasSeenWelcome;
     }
 
     /** Decoder constructor — reads from network buffer. */
@@ -26,6 +24,7 @@ public class SyncAllDiscoveriesPacket {
         for (int i = 0; i < size; i++) {
             discoveries.add(buf.readUtf());
         }
+        this.hasSeenWelcome = buf.readBoolean();
     }
 
     /** Encodes this packet into the network buffer. */
@@ -34,12 +33,14 @@ public class SyncAllDiscoveriesPacket {
         for (String key : discoveries) {
             buf.writeUtf(key);
         }
+        buf.writeBoolean(hasSeenWelcome);
     }
 
     /** Handles the packet on the client thread. */
     public void handle(Supplier<NetworkEvent.Context> ctx) {
         ctx.get().enqueueWork(() -> {
             ClientDiscoveryCache.replaceAll(discoveries);
+            ClientWelcomeCache.set(hasSeenWelcome);
         });
         ctx.get().setPacketHandled(true);
     }

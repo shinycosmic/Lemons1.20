@@ -1,4 +1,4 @@
-package net.lemon.animalia.player.network;
+package net.lemon.animalia.client.player.network;
 
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
@@ -8,13 +8,6 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-/**
- * Client-side mirror of the player's discovery state.
- * Updated by packets from the server. Read by GUI screens to determine
- * which species are unlocked.
- *
- * This is a static cache — only one player per client, so no instance needed.
- */
 @OnlyIn(Dist.CLIENT)
 public class ClientDiscoveryCache {
 

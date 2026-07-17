@@ -1,4 +1,4 @@
-package net.lemon.animalia.player;
+package net.lemon.animalia.client.player;
 
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
@@ -19,6 +19,7 @@ import java.util.stream.Collectors;
 public class HolonetCapability {
 
     private final Set<String> discovered = new HashSet<>();
+    private boolean loadedFirstTime = false;
 
     /**
      * Discovers a species+gender combo. Returns true if this is a NEW discovery.
@@ -57,6 +58,7 @@ public class HolonetCapability {
 
     public void copyFrom(HolonetCapability other) {
         replaceAll(other.getAll());
+        this.loadedFirstTime = other.isLoadedFirstTime();
     }
 
     public CompoundTag serializeNBT() {
@@ -66,6 +68,7 @@ public class HolonetCapability {
             list.add(StringTag.valueOf(key));
         }
         tag.put("discovered", list);
+        setLoadedFirstTime(tag.getBoolean("loadedFirstTime"));
         return tag;
     }
 
@@ -75,5 +78,13 @@ public class HolonetCapability {
         for (int i = 0; i < list.size(); i++) {
             discovered.add(list.getString(i));
         }
+    }
+
+    public boolean isLoadedFirstTime() {
+        return loadedFirstTime;
+    }
+
+    public void setLoadedFirstTime(boolean loadedFirstTime) {
+        this.loadedFirstTime = loadedFirstTime;
     }
 }

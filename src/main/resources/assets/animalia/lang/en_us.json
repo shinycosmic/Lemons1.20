@@ -149,5 +149,13 @@
   "tooltip.animalia.holonet.desc": " to use.",
   "toast.animalia.discovered": "discovered!",
   "key.animalia.open_holonet": "Open Holonet",
-  "key.categories.animalia": "Wildlife Explorers"
+  "key.categories.animalia": "Wildlife Explorers",
+  "gui.animalia.holonet.welcome.start": "Start!",
+  "gui.animalia.holonet.welcome.setting_up": "Setting up your Holonet",
+  "gui.animalia.holonet.welcome.title": "Welcome to your Holonet!",
+  "gui.animalia.holonet.welcome": "Holonet",
+  "gui.animalia.holonet.welcome.line1": "This is a wildlife explorer's catalog of species you discover.",
+  "gui.animalia.holonet.welcome.line4": "Field Guid App: All other creatures",
+  "gui.animalia.holonet.welcome.line3": "Fish Compendium: True to its name... Fish!",
+  "gui.animalia.holonet.welcome.line2": "Scan creatures by left or right clicking them."
 }

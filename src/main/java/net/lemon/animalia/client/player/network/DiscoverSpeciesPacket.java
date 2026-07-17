@@ -1,4 +1,4 @@
-package net.lemon.animalia.player.network;
+package net.lemon.animalia.client.player.network;
 
 import net.lemon.animalia.client.toast.DiscoveryToast;
 import net.minecraft.client.Minecraft;
@@ -12,10 +12,6 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.function.Supplier;
 
-/**
- * Server → Client: notifies the client of a single new discovery.
- * Plays XP orb sound as audio feedback.
- */
 public class DiscoverSpeciesPacket {
 
     private final ResourceLocation entityType;

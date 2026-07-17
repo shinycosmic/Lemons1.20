@@ -1,4 +1,4 @@
-package net.lemon.animalia.player.network;
+package net.lemon.animalia.client.player.network;
 
 import net.lemon.animalia.Animalia;
 import net.minecraft.resources.ResourceLocation;
@@ -8,9 +8,6 @@ import net.minecraftforge.network.NetworkRegistry;
 import net.minecraftforge.network.PacketDistributor;
 import net.minecraftforge.network.simple.SimpleChannel;
 
-/**
- * Registers the mod's network channel and all packet types.
- */
 public class ModNetwork {
 
     private static final String PROTOCOL_VERSION = "1";

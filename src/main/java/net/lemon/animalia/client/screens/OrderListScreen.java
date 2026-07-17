@@ -1,7 +1,7 @@
 package net.lemon.animalia.client.screens;
 
 import net.lemon.animalia.Animalia;
-import net.lemon.animalia.player.network.ClientDiscoveryCache;
+import net.lemon.animalia.client.player.network.ClientDiscoveryCache;
 import net.lemon.animalia.util.HolonetEntities;
 import net.lemon.animalia.util.Scannable;
 import net.minecraft.client.Minecraft;
