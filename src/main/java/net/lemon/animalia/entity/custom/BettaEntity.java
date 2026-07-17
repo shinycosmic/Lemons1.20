@@ -133,6 +133,12 @@ public class BettaEntity extends FishBase implements GeoEntity, IsGenetic, Scann
     }
 
     @Override
+    public void setBaby(boolean condition) {
+        this.setAge(condition ? -4000 : 0);
+        this.refreshDimensions();
+    }
+
+    @Override
     public AppName getApp() {
         return AppName.FISH;
     }

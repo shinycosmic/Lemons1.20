@@ -14,7 +14,7 @@ import software.bernie.geckolib.cache.object.BakedGeoModel;
 import software.bernie.geckolib.renderer.GeoEntityRenderer;
 
 public class BettaSplendensRenderer extends GeoEntityRenderer<BettaEntity> {
-    private float babyMult = 0.3f;
+    private float babyMult = 0.15f;
     private static final ResourceLocation BASE_TEXTURE = new ResourceLocation(Animalia.MODID, "textures/entity/betta/betta_base.png");
 
     public BettaSplendensRenderer(EntityRendererProvider.Context context) {
