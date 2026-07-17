@@ -25,7 +25,7 @@ public class HolonetCapability {
      * Discovers a species+gender combo. Returns true if this is a NEW discovery.
      */
     public boolean discover(ResourceLocation entityType, int gender) {
-        return discovered.add(entityType.toString() + "_" + gender);
+        return this.discovered.add(entityType.toString() + "_" + gender);
     }
 
     /**
@@ -33,7 +33,7 @@ public class HolonetCapability {
      */
     public boolean isDiscovered(ResourceLocation entityType) {
         String prefix = entityType.toString();
-        return discovered.stream().anyMatch(key -> key.startsWith(prefix));
+        return this.discovered.stream().anyMatch(key -> key.startsWith(prefix));
     }
 
     /**
@@ -41,19 +41,19 @@ public class HolonetCapability {
      */
     public Set<Integer> getDiscoveredGenders(ResourceLocation entityType) {
         String prefix = entityType.toString() + "_";
-        return discovered.stream()
+        return this.discovered.stream()
                 .filter(key -> key.startsWith(prefix))
                 .map(key -> Integer.parseInt(key.substring(prefix.length())))
                 .collect(Collectors.toSet());
     }
 
     public Set<String> getAll() {
-        return discovered;
+        return this.discovered;
     }
 
     public void replaceAll(Set<String> entries) {
-        discovered.clear();
-        discovered.addAll(entries);
+        this.discovered.clear();
+        this.discovered.addAll(entries);
     }
 
     public void copyFrom(HolonetCapability other) {
@@ -64,24 +64,25 @@ public class HolonetCapability {
     public CompoundTag serializeNBT() {
         CompoundTag tag = new CompoundTag();
         ListTag list = new ListTag();
-        for (String key : discovered) {
+        for (String key : this.discovered) {
             list.add(StringTag.valueOf(key));
         }
         tag.put("discovered", list);
-        setLoadedFirstTime(tag.getBoolean("loadedFirstTime"));
+        tag.putBoolean("loadedFirstTime", this.loadedFirstTime);
         return tag;
     }
 
     public void deserializeNBT(CompoundTag tag) {
-        discovered.clear();
+        this.discovered.clear();
         ListTag list = tag.getList("discovered", Tag.TAG_STRING);
         for (int i = 0; i < list.size(); i++) {
-            discovered.add(list.getString(i));
+            this.discovered.add(list.getString(i));
         }
+        this.loadedFirstTime = tag.getBoolean("loadedFirstTime");
     }
 
     public boolean isLoadedFirstTime() {
-        return loadedFirstTime;
+        return this.loadedFirstTime;
     }
 
     public void setLoadedFirstTime(boolean loadedFirstTime) {
