@@ -138,10 +138,6 @@ public class CompendiumHomeScreen extends Screen {
             entityX -= scannable.getXOffsetForGUI();
         }
 
-        if (featuredEntity instanceof Scannable scannable) {
-            scale = Math.min(scannable.getScaleforGUI() * 3, 60);
-        }
-
         boolean discovered = ClientDiscoveryCache.isDiscovered(ForgeRegistries.ENTITY_TYPES.getKey(featuredType));
         if (!discovered) {
             RenderSystem.setShaderColor(0.0F, 0.0F, 0.0F, 1.0F);
