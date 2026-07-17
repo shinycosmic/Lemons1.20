@@ -1,6 +1,7 @@
 package net.lemon.animalia.client.screens;
 
 import com.mojang.blaze3d.platform.Lighting;
+import com.mojang.blaze3d.systems.RenderSystem;
 import net.lemon.animalia.Animalia;
 import net.lemon.animalia.entity.bases.FishBase;
 import net.lemon.animalia.player.network.ClientDiscoveryCache;
@@ -82,29 +83,8 @@ public class CompendiumHomeScreen extends Screen {
         String key = app == Scannable.AppName.FISH ? "gui.animalia.holonet.fish_compendium" : "gui.animalia.holonet.field_guide";
         int color = app == Scannable.AppName.FISH ? 0x00FFCC : 0xC04000;
         graphics.drawCenteredString(this.font, Component.translatable(key), bgX + BG_WIDTH / 2, bgY + 35, color);
-        if (featuredEntity != null) {
-            if (featuredEntity instanceof GeoEntity geo) {
-                geo.getAnimatableInstanceCache().getManagerForId(featuredEntity.getId())
-                        .getAnimationControllers().values()
-                        .forEach(AnimationController::forceAnimationReset);
-            }
 
-            Quaternionf rotation = new Quaternionf().rotateY((float) Math.toRadians(90)).rotateZ((float) Math.PI);
-            int entityY = bgY + BG_HEIGHT / 2 + 5;
-            int scale = 40;
-            int entityX = bgX + BG_WIDTH / 2;
-            if (featuredEntity instanceof Scannable scannable) {
-                scale = Math.min(scannable.getScaleforGUI() * 3, 60);
-                entityX -= scannable.getXOffsetForGUI();
-            }
-
-            if (featuredEntity instanceof Scannable scannable) {
-                scale = Math.min(scannable.getScaleforGUI() * 3, 60);
-            }
-
-            Lighting.setupForEntityInInventory();
-            InventoryScreen.renderEntityInInventory(graphics, entityX, entityY, scale, rotation, null, featuredEntity);
-        }
+        renderFeaturedEntity(graphics);
 
         int totalSpecies = HolonetEntities.getTotalCount(app);
         int discovered = 0;
@@ -135,6 +115,44 @@ public class CompendiumHomeScreen extends Screen {
         ResourceLocation bg = app == Scannable.AppName.FISH ? fishBackground : fieldBackground;
         graphics.blit(bg, bgX, bgY, 0, 0, bgWidth, bgHeight, bgWidth, (int) (bgHeight *1.6));
         graphics.blit(border, bgX, bgY, 0, 0, bgWidth, bgHeight, bgWidth, (int) (bgHeight *1.6));
+    }
+
+    /**
+     * Renders the featured entity, blacked out as a silhouette if not yet discovered.
+     */
+    private void renderFeaturedEntity(GuiGraphics graphics) {
+        if (featuredEntity == null) return;
+
+        if (featuredEntity instanceof GeoEntity geo) {
+            geo.getAnimatableInstanceCache().getManagerForId(featuredEntity.getId())
+                    .getAnimationControllers().values()
+                    .forEach(AnimationController::forceAnimationReset);
+        }
+
+        Quaternionf rotation = new Quaternionf().rotateY((float) Math.toRadians(90)).rotateZ((float) Math.PI);
+        int entityY = bgY + BG_HEIGHT / 2 + 5;
+        int scale = 40;
+        int entityX = bgX + BG_WIDTH / 2;
+        if (featuredEntity instanceof Scannable scannable) {
+            scale = Math.min(scannable.getScaleforGUI() * 3, 60);
+            entityX -= scannable.getXOffsetForGUI();
+        }
+
+        if (featuredEntity instanceof Scannable scannable) {
+            scale = Math.min(scannable.getScaleforGUI() * 3, 60);
+        }
+
+        boolean discovered = ClientDiscoveryCache.isDiscovered(ForgeRegistries.ENTITY_TYPES.getKey(featuredType));
+        if (!discovered) {
+            RenderSystem.setShaderColor(0.0F, 0.0F, 0.0F, 1.0F);
+        }
+
+        Lighting.setupForEntityInInventory();
+        InventoryScreen.renderEntityInInventory(graphics, entityX, entityY, scale, rotation, null, featuredEntity);
+
+        if (!discovered) {
+            RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
+        }
     }
 
     @Override
