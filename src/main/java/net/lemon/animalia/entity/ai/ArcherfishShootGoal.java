@@ -165,6 +165,7 @@ public class ArcherfishShootGoal extends Goal {
         spit.setPos(eyePos.x, eyePos.y, eyePos.z);
         spit.setDeltaMovement(direction.scale(1.2));
         level.addFreshEntity(spit);
+        this.mob.playSound(net.minecraft.sounds.SoundEvents.FISHING_BOBBER_SPLASH, 0.5F, 1.2F + this.mob.getRandom().nextFloat() * 0.3F);
     }
 
     /***
