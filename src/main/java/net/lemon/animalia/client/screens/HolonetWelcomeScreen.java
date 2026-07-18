@@ -27,7 +27,7 @@ public class HolonetWelcomeScreen extends Screen {
     private static final int BUTTON_HOVER_COLOR = 0x44FFFFFF;
 
     /** Time in ticks for the loading bar to fill (7 seconds = 140 ticks). */
-    private static final int LOAD_TICKS = 140;
+    private static final int LOAD_TICKS = 60;
 
     private int bgX;
     private int bgY;
@@ -101,7 +101,7 @@ public class HolonetWelcomeScreen extends Screen {
             // "Setting Up" text above the bar
             graphics.drawCenteredString(this.font,
                     Component.translatable("gui.animalia.holonet.welcome.setting_up"),
-                    bgX + BG_WIDTH / 2, barY - 14, 0xAAAAAA);
+                    bgX + BG_WIDTH / 2, barY - 14, 0xFFFFFF);
         } else {
             // Draw "Start" button
             graphics.fill(barX, barY, barX + BAR_WIDTH, barY + BAR_HEIGHT, BAR_FILL_COLOR);

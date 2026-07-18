@@ -39,7 +39,8 @@ public class ModCommands {
                             ServerPlayer player = context.getSource().getPlayerOrException();
                             player.getCapability(HolonetCapabilityProvider.HOLONET_CAPABILITY).ifPresent(cap -> {
                                 cap.replaceAll(new HashSet<>());
-                                new SyncAllDiscoveriesPacket(cap.getAll(), cap.isLoadedFirstTime());                           });
+                                ModNetwork.sendToPlayer(player, new SyncAllDiscoveriesPacket(cap.getAll(), cap.isLoadedFirstTime()));
+                            });
                             player.sendSystemMessage(Component.literal("Holonet discoveries reset."));
                             return 1;
                         })
