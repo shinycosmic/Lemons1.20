@@ -66,7 +66,6 @@ public class ChaenocephalusEntity extends BottomWalkerSwimmerBase implements Geo
     private static final int GUARD_DURATION = 6000;
     private static final int NEST_COOLDOWN = 12000;
 
-
     private AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
     private int CHAENOCEPHALUS_ACERATUS_PIXEL = 19;
     private int CYGNODRACO_MAWSONI_PIXEL = 19;
@@ -77,6 +76,7 @@ public class ChaenocephalusEntity extends BottomWalkerSwimmerBase implements Geo
     private int nestCooldown;
     private int guardDirectionTicks;
     private boolean wantsToNest;
+    private int wantsToNestTimeout;
     @Nullable
     private BlockPos nestPos;
 
@@ -252,6 +252,7 @@ public class ChaenocephalusEntity extends BottomWalkerSwimmerBase implements Geo
             this.getNavigation().stop();
         } else {
             this.wantsToNest = true;
+            this.wantsToNestTimeout = 200;
             this.wantsToWalk = true;
         }
     }
@@ -275,7 +276,10 @@ public class ChaenocephalusEntity extends BottomWalkerSwimmerBase implements Geo
         int phase = this.getNestPhase();
 
         if (this.wantsToNest && phase == NEST_PHASE_IDLE) {
-            if (this.isWalking() && this.onGround() && this.isOnValidSubstrate()) {
+            this.wantsToNestTimeout--;
+            if (this.wantsToNestTimeout <= 0) {
+                this.wantsToNest = false;
+            } else if (this.isWalking() && this.onGround() && this.isOnValidSubstrate()) {
                 this.wantsToNest = false;
                 this.setNestPhase(NEST_PHASE_NESTING);
                 this.nestMakingTicks = NEST_MAKING_TICKS;
