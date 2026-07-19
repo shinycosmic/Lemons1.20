@@ -432,6 +432,7 @@ public class ChaenocephalusEntity extends BottomWalkerSwimmerBase implements Geo
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
         controllers.add(new AnimationController<>(this, "controller", 10, this::predicate));
+        controllers.add(new AnimationController<>(this, "flop_controller", 0, this::flopPredicate));
         controllers.add(new AnimationController<>(this, "eat_controller", 0, this::eatPredicate));
     }
 
@@ -480,6 +481,14 @@ public class ChaenocephalusEntity extends BottomWalkerSwimmerBase implements Geo
 
         controller.setAnimation(RawAnimation.begin().then("swim", Animation.LoopType.LOOP));
         return PlayState.CONTINUE;
+    }
+
+    private <T extends GeoAnimatable> PlayState flopPredicate(AnimationState<T> state) {
+        if (!this.isInWater()) {
+            state.getController().setAnimation(RawAnimation.begin().then("flop", Animation.LoopType.LOOP));
+            return PlayState.CONTINUE;
+        }
+        return PlayState.STOP;
     }
 
     private <T extends GeoAnimatable> PlayState eatPredicate(AnimationState<T> state) {

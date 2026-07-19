@@ -158,8 +158,17 @@ public class ToxotesEntity extends FishBase implements GeoEntity, Scannable {
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
         controllers.add(new AnimationController<>(this, "controller", 10, this::predicate));
+        controllers.add(new AnimationController<>(this, "flop_controller", 0, this::predicate));
         controllers.add(new AnimationController<>(this, "eat_controller", 0, this::eatPredicate));
         controllers.add(new AnimationController<>(this, "shoot_controller", 0, this::shootPredicate));
+    }
+
+    private <T extends GeoAnimatable> PlayState flopPredicate(AnimationState<T> state) {
+        if (!this.isInWater()) {
+            state.getController().setAnimation(RawAnimation.begin().then("flop", Animation.LoopType.LOOP));
+            return PlayState.CONTINUE;
+        }
+        return PlayState.STOP;
     }
 
     private PlayState predicate(AnimationState animationState) {

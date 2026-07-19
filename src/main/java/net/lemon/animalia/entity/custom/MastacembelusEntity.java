@@ -248,7 +248,16 @@ public class MastacembelusEntity extends FishBase implements GeoEntity, Scannabl
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
         controllers.add(new AnimationController<>(this, "controller", 0, this::predicate));
+        controllers.add(new AnimationController<>(this, "flop_controller", 0, this::predicate));
         controllers.add(new AnimationController<>(this, "eat_controller", 0, this::eatPredicate));
+    }
+
+    private <T extends GeoAnimatable> PlayState flopPredicate(AnimationState<T> state) {
+        if (!this.isInWater()) {
+            state.getController().setAnimation(RawAnimation.begin().then("flop", Animation.LoopType.LOOP));
+            return PlayState.CONTINUE;
+        }
+        return PlayState.STOP;
     }
 
     private PlayState predicate(AnimationState animationState) {
