@@ -5,15 +5,12 @@ import net.lemon.animalia.entity.bases.BottomWalkerSwimmerBase;
 import net.lemon.animalia.entity.bases.FishBase;
 import net.lemon.animalia.registry.ModEntities;
 import net.lemon.animalia.registry.ModItems;
-import net.lemon.animalia.registry.ModTags;
 import net.lemon.animalia.util.AnimaliaFunctionUtil;
 import net.lemon.animalia.util.HolonetEntities;
 import net.lemon.animalia.util.Scannable;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.syncher.EntityDataAccessor;
-import net.minecraft.network.syncher.EntityDataSerializers;
-import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.entity.EntityType;
@@ -22,8 +19,6 @@ import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.SpawnGroupData;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.ai.control.SmoothSwimmingLookControl;
-import net.minecraft.world.entity.ai.control.SmoothSwimmingMoveControl;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -38,64 +33,40 @@ import software.bernie.geckolib.core.object.PlayState;
 
 import java.util.Random;
 
-public class PogonophryneEntity extends BottomWalkerSwimmerBase implements GeoEntity, Scannable {
-    private static final EntityDataAccessor<Boolean> IDLE_REST = SynchedEntityData.defineId(PogonophryneEntity.class, EntityDataSerializers.BOOLEAN);
+public class ChaenocephalusEntity extends BottomWalkerSwimmerBase implements GeoEntity, Scannable {
     private AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
 
-    private int restTicks; // How long is this animal resting
     private int cooldown;
-    private int POGONOPHRYNE_MARMORATA_PIXEL = 19;
+    private int CHAENOCEPHALUS_ACERATUS_PIXEL = 19;
+    private int CYGNODRACO_MAWSONI_PIXEL = 19;
 
     private final Random rand = new Random();
 
-    public PogonophryneEntity(EntityType<? extends FishBase> pEntityType, Level pLevel) {
+    public ChaenocephalusEntity(EntityType<? extends FishBase> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
-        this.moveControl = new SmoothSwimmingMoveControl(this, 85, 10, 0.2f, 0.1f, true);
-        this.lookControl = new SmoothSwimmingLookControl(this, 10);
     }
 
     @Override
     public String getScientificName() {
-        if(this.getType() == ModEntities.POGONOPHRYNE_MARMORATA.get()) {
-            return "Pogonophryne marmorata";
+        if(this.getType() == ModEntities.CHAENOCEPHALUS_ACERATUS.get()) {
+            return "Chaenocephalus aceratus";
         }
         return "";
     }
 
     @Override
-    public float getSwimSpeed() {
-        if(this.isBaby()) {
-            return 1.2f;
-        }
-        if(this.getIsResting() && this.isWalking()) {
-            return 0;
-        }
-        if(this.isWalking()) {
-            return 0.6f;
-        }
-        return 0.4f;
-    }
-
-    @Override
     public TagKey<Item> getFoodTag() {
-        return ModTags.Items.CRUSTACEAN;
+        return ItemTags.FISHES;
     }
 
     @Override
     public Item getBreedingItem() {
-        return ModItems.AMPHIPOD.get();
+        return ModItems.RAW_ICEFISH.get();
     }
 
     @Override
     public ActivityTime activityTime() {
         return ActivityTime.NONE;
-    }
-
-    public static AttributeSupplier setAttributes() {
-        return Mob.createMobAttributes()
-                .add(Attributes.MAX_HEALTH, 3D)
-                .add(Attributes.MOVEMENT_SPEED, 0.3f)
-                .build();
     }
 
     @Override
@@ -105,12 +76,18 @@ public class PogonophryneEntity extends BottomWalkerSwimmerBase implements GeoEn
 
     @Override
     public Component getTrivia() {
-        return Component.translatable("trivia.animalia.pogonophryne_marmorata");
+        if (this.getType() == ModEntities.CHAENOCEPHALUS_ACERATUS.get()) {
+            return Component.translatable("trivia.animalia.chaenocephalus_aceratus");
+        }
+        return Component.translatable("debug.animalia.trivia");
     }
 
     @Override
     public Component getFamily() {
-        return Component.translatable("family.animalia.harpagiferidae");
+        if (this.getType() == ModEntities.CHAENOCEPHALUS_ACERATUS.get()) {
+            return Component.translatable("family.animalia.channichthyidae");
+        }
+        return Component.translatable("debug.animalia.family");
     }
 
     @Override
@@ -119,8 +96,35 @@ public class PogonophryneEntity extends BottomWalkerSwimmerBase implements GeoEn
     }
 
     @Override
+    public ItemStack getBucketItemStack() {
+        return new ItemStack(ModItems.CHAENOCEPHALUS_ACERATUS_BUCKET.get());
+    }
+
+    @Override
+    public float getSwimSpeed() {
+        if(this.isBaby()) {
+            return 1.2f;
+        }
+        //if guarding nest, speed mult=0
+//        if(this.getIsResting() && this.isWalking()) {
+//            return 0;
+//        }
+        if(this.isWalking()) {
+            return 0.6f;
+        }
+        return 0.4f;
+    }
+
+    public static AttributeSupplier setAttributes() {
+        return Mob.createMobAttributes()
+                .add(Attributes.MAX_HEALTH, 4D)
+                .add(Attributes.MOVEMENT_SPEED, 0.4f)
+                .build();
+    }
+
+    @Override
     public int getScaleforGUI() {
-        if (this.getType() == ModEntities.POGONOPHRYNE_MARMORATA.get()) {
+        if (this.getType() == ModEntities.CHAENOCEPHALUS_ACERATUS.get()) {
             return 40;
         } else {
             return Scannable.super.getScaleforGUI();
@@ -134,31 +138,21 @@ public class PogonophryneEntity extends BottomWalkerSwimmerBase implements GeoEn
     }
 
     public static void registerHolonet(){
-        HolonetEntities.register(ModEntities.POGONOPHRYNE_MARMORATA, Scannable.AppName.FISH, "Perciformes");
+        HolonetEntities.register(ModEntities.CHAENOCEPHALUS_ACERATUS, Scannable.AppName.FISH, "Perciformes");
     }
 
     @Override
     public float genVarSizeMultiplier() {
-        if (this.getType() == ModEntities.POGONOPHRYNE_MARMORATA.get()) {
-            return AnimaliaFunctionUtil.getScaleForSize(POGONOPHRYNE_MARMORATA_PIXEL, 29);
+        if (this.getType() == ModEntities.CHAENOCEPHALUS_ACERATUS.get()) {
+            return AnimaliaFunctionUtil.getScaleForSize(CHAENOCEPHALUS_ACERATUS_PIXEL, this.genVarSize(34, 50, 40));
         }
         return 1;
-    }
-
-    @Override
-    public ItemStack getBucketItemStack() {
-        return new ItemStack(ModItems.POGONOPHRYNE_MARMORATA_BUCKET.get());
     }
 
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
         controllers.add(new AnimationController<>(this, "controller", 10, this::predicate));
         controllers.add(new AnimationController<>(this, "eat_controller", 0, this::eatPredicate));
-    }
-
-    @Override
-    public AnimatableInstanceCache getAnimatableInstanceCache() {
-        return cache;
     }
 
     private <T extends GeoAnimatable> PlayState predicate(AnimationState<T> animationState) {
@@ -168,13 +162,7 @@ public class PogonophryneEntity extends BottomWalkerSwimmerBase implements GeoEn
             controller.setAnimation(RawAnimation.begin().then("swim", Animation.LoopType.LOOP));
             return PlayState.CONTINUE;
         }
-
-        if (this.isWalking()) {
-            if(this.getIsResting()) {
-                controller.setAnimation(RawAnimation.begin().then("resting", Animation.LoopType.LOOP));
-                return PlayState.CONTINUE;
-            }
-        }
+        //Guarding animations, there are right and left transitions.
         // SWIMMING
         controller.setAnimation(RawAnimation.begin().then("swim", Animation.LoopType.LOOP));
         return PlayState.CONTINUE;
@@ -189,52 +177,8 @@ public class PogonophryneEntity extends BottomWalkerSwimmerBase implements GeoEn
     }
 
     @Override
-    protected void defineSynchedData() {
-        super.defineSynchedData();
-        this.entityData.define(IDLE_REST, false);
-    }
-
-    @Override
-    public void addAdditionalSaveData(CompoundTag pCompound) {
-        super.addAdditionalSaveData(pCompound);
-        pCompound.putBoolean("IdleRest", this.getIsResting());
-    }
-
-    @Override
-    public void readAdditionalSaveData(CompoundTag pCompound) {
-        super.readAdditionalSaveData(pCompound);
-        this.setIsResting(pCompound.getBoolean("IdleRest"));
-    }
-
-    private void setIsResting(boolean bool) {
-        this.entityData.set(IDLE_REST, bool);
-    }
-
-    private boolean getIsResting() {
-        return this.entityData.get(IDLE_REST);
-    }
-
-    @Override
-    public void aiStep() {
-        super.aiStep();
-        if(cooldown > 0) {
-            cooldown = cooldown - rand.nextInt(3);
-        }
-
-        if(!this.level().isClientSide) {
-            if(!this.isBaby()) {
-                if (cooldown <= 0 && isWalking()) {
-                    restTicks = 600 + rand.nextInt(2000);
-                    this.setIsResting(true);
-                }
-                if (restTicks > 0 && getIsResting()) {
-                    restTicks--;
-                } else if (getIsResting()) {
-                    cooldown = rand.nextInt(2000) + 600;
-                    this.setIsResting(false);
-                }
-            }
-        }
+    public AnimatableInstanceCache getAnimatableInstanceCache() {
+        return cache;
     }
 
     @Override
@@ -244,7 +188,7 @@ public class PogonophryneEntity extends BottomWalkerSwimmerBase implements GeoEn
             this.setVarSizeMultiplier(this.genVarSizeMultiplier());
         }
         this.cooldown = rand.nextInt(1000)+1000;
-        this.restTicks = 0;
+
         return super.finalizeSpawn(level, difficulty, reason, spawnData, dataTag);
     }
 }

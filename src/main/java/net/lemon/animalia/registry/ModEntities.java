@@ -31,6 +31,8 @@ public class ModEntities {
     public static final RegistryObject<EntityType<RoosterfishEntity>> NEMATISTIUS_PECTORALIS = registerEntityType("nematistius_pectoralis", RoosterfishEntity::new, MobCategory.CREATURE, 0.8f, 0.6f);
     public static final RegistryObject<EntityType<ToxotesEntity>> TOXOTES_CHATAREUS = registerEntityType("toxotes_chatareus", ToxotesEntity::new, MobCategory.CREATURE, 0.6f, 0.6f);
     public static final RegistryObject<EntityType<PogonophryneEntity>> POGONOPHRYNE_MARMORATA = registerEntityType("pogonophryne_marmorata", PogonophryneEntity::new, MobCategory.CREATURE, 0.5f, 0.3f);
+    public static final RegistryObject<EntityType<ChaenocephalusEntity>> CHAENOCEPHALUS_ACERATUS = registerEntityType("chaenocephalus_aceratus", ChaenocephalusEntity::new, MobCategory.CREATURE, 0.5f, 0.3f);
+    public static final RegistryObject<EntityType<ChaenocephalusEntity>> CYGNODRACO_MAWSONI = registerEntityType("cygnodraco_mawsoni", ChaenocephalusEntity::new, MobCategory.CREATURE, 0.5f, 0.3f);
 
 
     /// REGISTER OTHER ENTITIES BELOW
