@@ -67,7 +67,7 @@ public class ChaenocephalusEntity extends BottomWalkerSwimmerBase implements Geo
     private static final int NEST_COOLDOWN = 12000;
 
     private AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
-    private int CHAENOCEPHALUS_ACERATUS_PIXEL = 19;
+    private int CHAENOCEPHALUS_ACERATUS_PIXEL = 37;
     private int CYGNODRACO_MAWSONI_PIXEL = 19;
     private final Random rand = new Random();
 
@@ -490,7 +490,7 @@ public class ChaenocephalusEntity extends BottomWalkerSwimmerBase implements Geo
     }
 
     private <T extends GeoAnimatable> PlayState flopPredicate(AnimationState<T> state) {
-        if (!this.isInWater()) {
+        if (!this.isInWater() && !this.isBaby()) {
             state.getController().setAnimation(RawAnimation.begin().then("flop", Animation.LoopType.LOOP));
             return PlayState.CONTINUE;
         }

@@ -105,12 +105,12 @@ public class ToothfishEntity extends FishBase implements GeoEntity, Scannable {
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
         controllers.add(new AnimationController<>(this, "controller", 0, this::predicate));
-        controllers.add(new AnimationController<>(this, "flop_controller", 0, this::predicate));
+        controllers.add(new AnimationController<>(this, "flop_controller", 0, this::flopPredicate));
         controllers.add(new AnimationController<>(this, "eat_controller", 0, this::eatPredicate));
     }
 
     private <T extends GeoAnimatable> PlayState flopPredicate(AnimationState<T> state) {
-        if (!this.isInWater()) {
+        if (!this.isInWater() && !this.isBaby()) {
             state.getController().setAnimation(RawAnimation.begin().then("flop", Animation.LoopType.LOOP));
             return PlayState.CONTINUE;
         }
@@ -126,9 +126,7 @@ public class ToothfishEntity extends FishBase implements GeoEntity, Scannable {
     }
 
     private <T extends GeoAnimatable> PlayState predicate(AnimationState<T> animationState) {
-        if(!this.isInWater()) {
-            return PlayState.CONTINUE;
-        } else if(this.isBaby()) {
+        if(this.isBaby()) {
             animationState.getController().setAnimation(RawAnimation.begin().then(this.getSwimAnim(), Animation.LoopType.LOOP));
             return PlayState.CONTINUE;
         }

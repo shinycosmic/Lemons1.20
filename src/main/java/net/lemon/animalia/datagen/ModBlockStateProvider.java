@@ -21,7 +21,6 @@ public class ModBlockStateProvider extends BlockStateProvider {
      */
     protected void registerStatesAndModels() {
         simpleBlockWithItem(ModBlocks.FILTER_TRAP.get(), new ModelFile.UncheckedModelFile(modLoc("block/filter_trap")));
-        simpleBlockWithItem(ModBlocks.MOUND_NEST.get(), new ModelFile.UncheckedModelFile(modLoc("block/mound_nest")));
 
     }
 
