@@ -22,6 +22,7 @@ import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -38,6 +39,7 @@ import software.bernie.geckolib.core.animation.*;
 import software.bernie.geckolib.core.animation.AnimationState;
 import software.bernie.geckolib.core.object.PlayState;
 
+import java.util.EnumSet;
 import java.util.Random;
 
 public class ChaenocephalusEntity extends BottomWalkerSwimmerBase implements GeoEntity, Scannable {
@@ -129,8 +131,61 @@ public class ChaenocephalusEntity extends BottomWalkerSwimmerBase implements Geo
     }
 
     @Override
-    public boolean canHide() {
-        return false;
+    public AppName getApp() {
+        return AppName.FISH;
+    }
+
+    @Override
+    public Component getTrivia() {
+        if (this.getType() == ModEntities.CHAENOCEPHALUS_ACERATUS.get()) {
+            return Component.translatable("trivia.animalia.chaenocephalus_aceratus");
+        }
+        return Component.translatable("debug.animalia.trivia");
+    }
+
+    @Override
+    public Component getFamily() {
+        if (this.getType() == ModEntities.CHAENOCEPHALUS_ACERATUS.get()) {
+            return Component.translatable("family.animalia.channichthyidae");
+        }
+        return Component.translatable("debug.animalia.family");
+    }
+
+    @Override
+    public Component getOrder() {
+        return Component.translatable("order.animalia.perciformes");
+    }
+
+    @Override
+    public ItemStack getBucketItemStack() {
+        return new ItemStack(ModItems.CHAENOCEPHALUS_ACERATUS_BUCKET.get());
+    }
+
+    @Override
+    public int getScaleforGUI() {
+        if (this.getType() == ModEntities.CHAENOCEPHALUS_ACERATUS.get()) {
+            return 40;
+        } else {
+            return Scannable.super.getScaleforGUI();
+        }
+    }
+
+    @Override
+    public int getScaleforDetailGUI() {
+        int currScale = Scannable.super.getScaleforDetailGUI();
+        return (int) (currScale * 0.9f);
+    }
+
+    public static void registerHolonet() {
+        HolonetEntities.register(ModEntities.CHAENOCEPHALUS_ACERATUS, Scannable.AppName.FISH, "Perciformes");
+    }
+
+    @Override
+    public float genVarSizeMultiplier() {
+        if (this.getType() == ModEntities.CHAENOCEPHALUS_ACERATUS.get()) {
+            return AnimaliaFunctionUtil.getScaleForSize(CHAENOCEPHALUS_ACERATUS_PIXEL, this.genVarSize(34, 50, 40));
+        }
+        return 1;
     }
 
     @Override
@@ -364,64 +419,6 @@ public class ChaenocephalusEntity extends BottomWalkerSwimmerBase implements Geo
     }
 
     @Override
-    public AppName getApp() {
-        return AppName.FISH;
-    }
-
-    @Override
-    public Component getTrivia() {
-        if (this.getType() == ModEntities.CHAENOCEPHALUS_ACERATUS.get()) {
-            return Component.translatable("trivia.animalia.chaenocephalus_aceratus");
-        }
-        return Component.translatable("debug.animalia.trivia");
-    }
-
-    @Override
-    public Component getFamily() {
-        if (this.getType() == ModEntities.CHAENOCEPHALUS_ACERATUS.get()) {
-            return Component.translatable("family.animalia.channichthyidae");
-        }
-        return Component.translatable("debug.animalia.family");
-    }
-
-    @Override
-    public Component getOrder() {
-        return Component.translatable("order.animalia.perciformes");
-    }
-
-    @Override
-    public ItemStack getBucketItemStack() {
-        return new ItemStack(ModItems.CHAENOCEPHALUS_ACERATUS_BUCKET.get());
-    }
-
-    @Override
-    public int getScaleforGUI() {
-        if (this.getType() == ModEntities.CHAENOCEPHALUS_ACERATUS.get()) {
-            return 40;
-        } else {
-            return Scannable.super.getScaleforGUI();
-        }
-    }
-
-    @Override
-    public int getScaleforDetailGUI() {
-        int currScale = Scannable.super.getScaleforDetailGUI();
-        return (int) (currScale * 0.9f);
-    }
-
-    public static void registerHolonet() {
-        HolonetEntities.register(ModEntities.CHAENOCEPHALUS_ACERATUS, Scannable.AppName.FISH, "Perciformes");
-    }
-
-    @Override
-    public float genVarSizeMultiplier() {
-        if (this.getType() == ModEntities.CHAENOCEPHALUS_ACERATUS.get()) {
-            return AnimaliaFunctionUtil.getScaleForSize(CHAENOCEPHALUS_ACERATUS_PIXEL, this.genVarSize(34, 50, 40));
-        }
-        return 1;
-    }
-
-    @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
         controllers.add(new AnimationController<>(this, "controller", 10, this::predicate));
         controllers.add(new AnimationController<>(this, "eat_controller", 0, this::eatPredicate));
@@ -526,5 +523,36 @@ public class ChaenocephalusEntity extends BottomWalkerSwimmerBase implements Geo
             this.setVarSizeMultiplier(this.genVarSizeMultiplier());
         }
         return super.finalizeSpawn(level, difficulty, reason, spawnData, dataTag);
+    }
+
+    @Override
+    protected void registerGoals() {
+        this.goalSelector.addGoal(1, new NestGuardGoal(this));
+        super.registerGoals();
+    }
+
+    public static class NestGuardGoal extends Goal {
+        private final ChaenocephalusEntity fish;
+
+        public NestGuardGoal(ChaenocephalusEntity fish) {
+            this.fish = fish;
+            this.setFlags(EnumSet.of(Goal.Flag.MOVE, Goal.Flag.LOOK));
+        }
+
+        @Override
+        public boolean canUse() {
+            int phase = this.fish.getNestPhase();
+            return phase == NEST_PHASE_NESTING || phase == NEST_PHASE_GUARDING;
+        }
+
+        @Override
+        public boolean canContinueToUse() {
+            return this.canUse();
+        }
+
+        @Override
+        public void tick() {
+            this.fish.getNavigation().stop();
+        }
     }
 }
