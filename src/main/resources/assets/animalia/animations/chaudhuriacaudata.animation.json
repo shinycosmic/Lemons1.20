@@ -691,7 +691,7 @@
 		"animation": {
 			"loop": true
 		},
-		"beached": {
+		"flop": {
 			"loop": true,
 			"bones": {
 				"main": {

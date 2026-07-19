@@ -1,7 +1,7 @@
 {
 	"format_version": "1.8.0",
 	"animations": {
-		"beached": {
+		"flop": {
 			"loop": true,
 			"bones": {
 				"tail7": {

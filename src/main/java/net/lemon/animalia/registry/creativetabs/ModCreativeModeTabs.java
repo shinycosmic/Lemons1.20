@@ -24,14 +24,14 @@ public class ModCreativeModeTabs {
                     .build());
 
     public static final RegistryObject<CreativeModeTab> ANIMALIA_MOBS = CREATIVE_MODE_TABS.register("animalia_mobs",
-            () -> CreativeModeTab.builder().icon(() -> new ItemStack(Items.TROPICAL_FISH))
+            () -> CreativeModeTab.builder().icon(() -> new ItemStack(ModItems.CHAENOCEPHALUS_ACERATUS_SPAWN_EGG.get()))
                     .title(Component.translatable("creativetab.animalia_mobs"))
                     .displayItems((param, output) -> {
                         AnimaliaMobsTab.displayItems(output);
                     })
                     .build());
     public static final RegistryObject<CreativeModeTab> ANIMALIA_MISC = CREATIVE_MODE_TABS.register("animalia_misc",
-            () -> CreativeModeTab.builder().icon(() -> new ItemStack(Items.NAUTILUS_SHELL))
+            () -> CreativeModeTab.builder().icon(() -> new ItemStack(ModItems.HOLONET.get()))
                     .title(Component.translatable("creativetab.animalia_misc"))
                     .displayItems((param, output) -> {
                         AnimaliaMiscTab.displayItems(output);

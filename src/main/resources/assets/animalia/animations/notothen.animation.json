@@ -107,20 +107,14 @@
 			"bones": {
 				"main": {
 					"rotation": {
-						"0.0": {
-							"vector": ["-0+math.sin(query.anim_time*149-100)*-0.1", "-0+math.sin(query.anim_time*149-100)*-2", "0+math.sin(query.anim_time*149)*1"]
-						},
-						"1.4167": {
-							"vector": ["1.9134+math.sin(query.anim_time*149-100)*-0.1", "1.7779+math.sin(query.anim_time*149-100)*-2", "-89.1971+math.sin(query.anim_time*149)*1"]
-						}
+						"vector": [
+							"-2.0683+math.sin(query.anim_time*149-100)*-0.1",
+							"-1.8712+math.sin(query.anim_time*149-100)*-2",
+							"-90.0033+math.sin(query.anim_time*149)*1"
+						]
 					},
 					"position": {
-						"0.0": {
-							"vector": ["0+math.sin(query.anim_time*149)*-0.15", 0, "0+math.sin(query.anim_time*149-50)*0.59"]
-						},
-						"1.4167": {
-							"vector": ["6.0156+math.sin(query.anim_time*149)*-0.15", 1.94408, "0.1936+math.sin(query.anim_time*149-50)*0.59"]
-						}
+						"vector": ["5.9962+math.sin(query.anim_time*149)*-0.15", 1.99999, "-0.2098+math.sin(query.anim_time*149-50)*0.59"]
 					}
 				},
 				"body": {

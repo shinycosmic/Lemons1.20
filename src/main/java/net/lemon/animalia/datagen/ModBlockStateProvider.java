@@ -34,8 +34,9 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
     private void multifaceBlock(Block block, String name, ResourceLocation texture) {
         ModelFile model = models().withExistingParent(name, mcLoc("block/glow_lichen"))
-                .texture("all", texture)
-                .texture("particle", texture);
+                .texture("glow_lichen", texture)
+                .texture("particle", texture)
+                .renderType("cutout");
 
         MultiPartBlockStateBuilder builder = getMultipartBuilder(block);
 
@@ -52,6 +53,6 @@ public class ModBlockStateProvider extends BlockStateProvider {
         builder.part().modelFile(model).rotationY(90).uvLock(true).addModel()
                 .condition(MultifaceBlock.getFaceProperty(Direction.EAST), true).end();
 
-        simpleBlockItem(block, model);
+        itemModels().withExistingParent(name, new ResourceLocation("item/generated")).texture("layer0", texture);
     }
 }
