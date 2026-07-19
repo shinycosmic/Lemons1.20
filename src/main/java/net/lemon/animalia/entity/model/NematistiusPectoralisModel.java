@@ -36,7 +36,7 @@ public class NematistiusPectoralisModel extends GeoModel<RoosterfishEntity> {
     @Override
     public void setCustomAnimations(RoosterfishEntity animatable, long instanceId, AnimationState<RoosterfishEntity> animationState) {
         super.setCustomAnimations(animatable, instanceId, animationState);
-        if(animatable.isBaby()) {
+        if(animatable.isBaby() || !animatable.isInWater()) {
             return;
         }
 

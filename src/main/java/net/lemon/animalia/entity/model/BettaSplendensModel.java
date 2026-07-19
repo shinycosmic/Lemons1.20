@@ -26,6 +26,7 @@ public class BettaSplendensModel extends GeoModel<BettaEntity> {
     @Override
     public void setCustomAnimations(BettaEntity animatable, long instanceId, AnimationState<BettaEntity> animationState) {
         super.setCustomAnimations(animatable, instanceId, animationState);
+        if(!animatable.isInWater()) return;
 
         CoreGeoBone whole = this.getAnimationProcessor().getBone("main");
         CoreGeoBone dorsal = this.getAnimationProcessor().getBone("dorsal");

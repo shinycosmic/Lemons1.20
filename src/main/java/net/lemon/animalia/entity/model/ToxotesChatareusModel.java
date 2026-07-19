@@ -34,8 +34,7 @@ public class ToxotesChatareusModel extends GeoModel<ToxotesEntity> {
     @Override
     public void setCustomAnimations(ToxotesEntity animatable, long instanceId, AnimationState<ToxotesEntity> animationState) {
         super.setCustomAnimations(animatable, instanceId, animationState);
-
-        if(animatable.isBaby()) {
+        if(animatable.isBaby() || !animatable.isInWater()) {
             return;
         }
 
