@@ -476,6 +476,12 @@ public class ChaenocephalusEntity extends BottomWalkerSwimmerBase implements Geo
                     controller.setAnimation(RawAnimation.begin().then("rotatingBR", Animation.LoopType.PLAY_ONCE));
                     break;
             }
+
+            return PlayState.CONTINUE;
+        }
+
+        if(this.isWalking() && !this.isActuallyMoving()) {
+            controller.setAnimation(RawAnimation.begin().then("idle", Animation.LoopType.PLAY_ONCE));
             return PlayState.CONTINUE;
         }
 

@@ -29,13 +29,4 @@ public class ToxotesChatareusRenderer extends GeoEntityRenderer<ToxotesEntity> {
         float scale = animatable.isBaby() ? babyMult : animatable.getVarSizeMultiplier();
         super.scaleModelForRender(scale, scale, poseStack, animatable, model, isReRender, partialTick, packedLight, packedOverlay);
     }
-
-    @Override
-    protected void applyRotations(ToxotesEntity animatable, PoseStack poseStack, float ageInTicks, float rotationYaw, float partialTick) {
-        super.applyRotations(animatable, poseStack, ageInTicks, rotationYaw, partialTick);
-        if (!animatable.isInWater()) {
-            poseStack.mulPose(Axis.ZP.rotationDegrees(90.0F));
-            poseStack.translate(0.0F, -animatable.getBbWidth() * 0.5F, 0.0F);
-        }
-    }
 }

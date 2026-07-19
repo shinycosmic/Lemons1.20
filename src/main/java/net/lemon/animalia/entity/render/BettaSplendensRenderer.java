@@ -49,9 +49,5 @@ public class BettaSplendensRenderer extends GeoEntityRenderer<BettaEntity> {
     @Override
     protected void applyRotations(BettaEntity animatable, PoseStack poseStack, float ageInTicks, float rotationYaw, float partialTick) {
         super.applyRotations(animatable, poseStack, ageInTicks, rotationYaw, partialTick);
-        if (!animatable.isInWater()) {
-            poseStack.mulPose(Axis.ZP.rotationDegrees(90.0F));
-            poseStack.translate(0.0F, -animatable.getBbWidth() * 0.5F, 0.0F);
-        }
     }
 }
