@@ -41,6 +41,10 @@
   "entity.animalia.rakthamichthys_indicus": "Malabar Swamp Eel",
   "entity.animalia.nematistius_pectoralis": "Roosterfish",
   "entity.animalia.toxotes_chatareus": "Common Archerfish",
+  "entity.animalia.pogonophryne_marmorata": "Marbled Plunderfish",
+  "entity.animalia.histiodraco_velifer": "Sailfin Plunderfish",
+  "entity.animalia.cygnodraco_mawsoni": "Mawson's Dragonfish",
+  "entity.animalia.chaenocephalus_aceratus": "Blackfin Icefish",
 
   "entity.animalia.betta_splendens.twoComp": "%s %s Betta",
   "entity.animalia.betta_splendens.threeComp": "%s %s %s Betta",
@@ -114,6 +118,7 @@
   "order.animalia.anabantiformes": "Anabantiformes",
   "order.animalia.synbranchiformes": "Synbranchiformes",
   "order.animalia.carangiformes": "Carangiformes",
+  "order.animalia.siluriformes": "Siluriformes",
 
   "family.animalia.percophidae": "Percophidae",
   "family.animalia.eleginopidae": "Eleginopidae",
@@ -126,6 +131,7 @@
   "family.animalia.indostomidae": "Indostomidae",
   "family.animalia.nematistiidae": "Nematistiidae",
   "family.animalia.toxotidae": "Toxotidae",
+  "family.animalia.harpagiferidae": "Harpagiferidae",
 
   "trivia.animalia.dissostichus_eleginoides": "The Chilean Sea Bass, also known as the Patagonian Toothfish is an icefish that lives in the southern cold oceans at depths of 45 to over 3000 meters deep.",
   "trivia.animalia.percophis_brasiliensis": "The Brazilian Flathead is considered to be the most basal member of Notothenioidei. It lives off the coast of Brazil and Argentina.",
@@ -142,6 +148,7 @@
   "trivia.animalia.rakthamichthys_indicus": "These are blind swamp eels endemic to India. They live underground, in streams throughout caves. This fish has a bright red coloration and incredibly reduced eyes.",
   "trivia.animalia.nematistius_pectoralis": "Roosterfish are fast-moving pelagic predators with uniquely long spines on their dorsal fins. They are large, able to reach over 1.6m in length and are a popular sport fish.",
   "trivia.animalia.toxotes_chatareus": "Archerfish are able to spit streams of water to knock insects into the water. They are able to hit distances of over 1m. Their diet typically consists of zooplankton and invertebrates.",
+  "trivia.animalia.pogonophryne_marmorata": "This species of plunderfish is found in cold and deep antarctic waters. They have a flattened head and a mental barbel, which it uses as a sensory mechanism to find prey.",
 
   "debug.animalia.trivia": "If this value displays, there is a bug [trivia]",
   "debug.animalia.family": "if this text appears, there is a bug [family]",

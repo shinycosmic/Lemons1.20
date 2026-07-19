@@ -13,8 +13,8 @@ public class AnimaliaMobsTab {
             ModItems.CHILEANSEABASS_SPAWN_EGG,
             ModItems.ELEGINOPS_MACLOVINUS_SPAWN_EGG,
             ModItems.PSEUDAPHRITIS_URVILLII_SPAWN_EGG,
-            ModItems.BETTA_SPLENDENS_SPAWN_EGG,
             ModItems.PERCOPHIS_BRASILIENSIS_SPAWN_EGG,
+            ModItems.POGONOPHRYNE_MARMORATA_SPAWN_EGG,
             ModItems.SYNBRANCHUS_MARMORATUS_SPAWN_EGG,
             ModItems.CHAUDHURIA_CAUDATA_SPAWN_EGG,
             ModItems.MASTACEMBELUS_ARMATUS_SPAWN_EGG,
@@ -24,7 +24,8 @@ public class AnimaliaMobsTab {
             ModItems.SINOBDELLA_SINENSIS_SPAWN_EGG,
             ModItems.RAKTHAMICHTHYS_INDICUS_SPAWN_EGG,
             ModItems.NEMATISTIUS_PECTORALIS_SPAWN_EGG,
-            ModItems.TOXOTES_CHATAREUS_SPAWN_EGG
+            ModItems.TOXOTES_CHATAREUS_SPAWN_EGG,
+            ModItems.BETTA_SPLENDENS_SPAWN_EGG
 
 
     );

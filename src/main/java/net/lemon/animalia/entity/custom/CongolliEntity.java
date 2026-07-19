@@ -67,8 +67,6 @@ public class CongolliEntity extends BottomWalkerSwimmerBase implements GeoEntity
         );
         this.goalSelector.addGoal(6, new BurstGoal(this));
         this.goalSelector.addGoal(6, new BurstPanicGoal(this));
-
-
     }
 
     private boolean isOnSeafloor() {

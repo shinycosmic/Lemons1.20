@@ -48,6 +48,7 @@ public class ModEventBusEvents {
         event.put(ModEntities.RAKTHAMICHTHYS_INDICUS.get(), RakthamichthysEntity.setAttributes());
         event.put(ModEntities.NEMATISTIUS_PECTORALIS.get(), RoosterfishEntity.setAttributes());
         event.put(ModEntities.TOXOTES_CHATAREUS.get(), ToxotesEntity.setAttributes());
+        event.put(ModEntities.POGONOPHRYNE_MARMORATA.get(), PogonophryneEntity.setAttributes());
 
     }
 
