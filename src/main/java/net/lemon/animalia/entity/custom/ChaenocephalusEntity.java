@@ -304,6 +304,13 @@ public class ChaenocephalusEntity extends BottomWalkerSwimmerBase implements Geo
                 break;
 
             case NEST_PHASE_GUARDING:
+                if (this.nestPos != null && !(this.level().getBlockState(this.nestPos).getBlock() instanceof MoundNestBlock)) {
+                    this.nestPos = null;
+                    this.setNestPhase(NEST_PHASE_IDLE);
+                    this.setGuardDirection(GUARD_DIR_CENTER);
+                    this.nestCooldown = 200 + rand.nextInt(400);
+                    break;
+                }
                 this.getNavigation().stop();
                 this.setDeltaMovement(this.getDeltaMovement().multiply(0, 1, 0));
                 this.tickGuardRotation();
