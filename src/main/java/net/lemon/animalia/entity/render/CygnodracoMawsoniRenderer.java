@@ -1,22 +1,19 @@
 package net.lemon.animalia.entity.render;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.math.Axis;
 import net.lemon.animalia.entity.custom.ChaenocephalusEntity;
-import net.lemon.animalia.entity.custom.SynbranchusEntity;
 import net.lemon.animalia.entity.model.ChaenocephalusAceratusModel;
 import net.lemon.animalia.entity.model.CygnodracoMawsoniModel;
-import net.lemon.animalia.entity.model.SynbranchusMarmoratusModel;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import software.bernie.geckolib.cache.object.BakedGeoModel;
 import software.bernie.geckolib.renderer.GeoEntityRenderer;
 
-public class ChaenocephalusAceratusRenderer extends GeoEntityRenderer<ChaenocephalusEntity> {
+public class CygnodracoMawsoniRenderer extends GeoEntityRenderer<ChaenocephalusEntity> {
     private float babyMult = 0.3f;
 
-    public ChaenocephalusAceratusRenderer(EntityRendererProvider.Context context) {
-        super(context, new ChaenocephalusAceratusModel());
+    public CygnodracoMawsoniRenderer(EntityRendererProvider.Context context) {
+        super(context, new CygnodracoMawsoniModel());
     }
 
     @Override

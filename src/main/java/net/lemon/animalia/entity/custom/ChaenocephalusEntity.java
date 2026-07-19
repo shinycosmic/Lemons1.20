@@ -23,7 +23,6 @@ import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.Goal;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -71,7 +70,7 @@ public class ChaenocephalusEntity extends BottomWalkerSwimmerBase implements Geo
 
     private AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
     private int CHAENOCEPHALUS_ACERATUS_PIXEL = 37;
-    private int CYGNODRACO_MAWSONI_PIXEL = 19;
+    private int CYGNODRACO_MAWSONI_PIXEL = 31;
     private final Random rand = new Random();
 
     private int nestMakingTicks;
@@ -115,6 +114,8 @@ public class ChaenocephalusEntity extends BottomWalkerSwimmerBase implements Geo
     public String getScientificName() {
         if (this.getType() == ModEntities.CHAENOCEPHALUS_ACERATUS.get()) {
             return "Chaenocephalus aceratus";
+        } else if (this.getType() == ModEntities.CYGNODRACO_MAWSONI.get()) {
+            return "Cygnodraco mawsoni";
         }
         return "";
     }
@@ -143,6 +144,8 @@ public class ChaenocephalusEntity extends BottomWalkerSwimmerBase implements Geo
     public Component getTrivia() {
         if (this.getType() == ModEntities.CHAENOCEPHALUS_ACERATUS.get()) {
             return Component.translatable("trivia.animalia.chaenocephalus_aceratus");
+        } else if (this.getType() == ModEntities.CYGNODRACO_MAWSONI.get()) {
+            return Component.translatable("trivia.animalia.cygnodraco_mawsoni");
         }
         return Component.translatable("debug.animalia.trivia");
     }
@@ -151,6 +154,8 @@ public class ChaenocephalusEntity extends BottomWalkerSwimmerBase implements Geo
     public Component getFamily() {
         if (this.getType() == ModEntities.CHAENOCEPHALUS_ACERATUS.get()) {
             return Component.translatable("family.animalia.channichthyidae");
+        } else if (this.getType() == ModEntities.CYGNODRACO_MAWSONI.get()) {
+            return Component.translatable("family.animalia.bathydraconidae");
         }
         return Component.translatable("debug.animalia.family");
     }
@@ -162,32 +167,42 @@ public class ChaenocephalusEntity extends BottomWalkerSwimmerBase implements Geo
 
     @Override
     public ItemStack getBucketItemStack() {
+        if (this.getType() == ModEntities.CYGNODRACO_MAWSONI.get()) {
+            return new ItemStack(ModItems.CYGNODRACO_MAWSONI_BUCKET.get());
+        }
         return new ItemStack(ModItems.CHAENOCEPHALUS_ACERATUS_BUCKET.get());
     }
 
     @Override
     public int getScaleforGUI() {
         if (this.getType() == ModEntities.CHAENOCEPHALUS_ACERATUS.get()) {
-            return 40;
-        } else {
-            return Scannable.super.getScaleforGUI();
+            return 24;
+        } else if (this.getType() == ModEntities.CYGNODRACO_MAWSONI.get()) {
+            return 28;
         }
+
+        return Scannable.super.getScaleforGUI();
+
     }
 
     @Override
     public int getScaleforDetailGUI() {
         int currScale = Scannable.super.getScaleforDetailGUI();
-        return (int) (currScale * 0.9f);
+        return (int) (currScale * 0.6f);
     }
 
     public static void registerHolonet() {
         HolonetEntities.register(ModEntities.CHAENOCEPHALUS_ACERATUS, Scannable.AppName.FISH, "Perciformes");
+        HolonetEntities.register(ModEntities.CYGNODRACO_MAWSONI, Scannable.AppName.FISH, "Perciformes");
+
     }
 
     @Override
     public float genVarSizeMultiplier() {
         if (this.getType() == ModEntities.CHAENOCEPHALUS_ACERATUS.get()) {
             return AnimaliaFunctionUtil.getScaleForSize(CHAENOCEPHALUS_ACERATUS_PIXEL, this.genVarSize(45, 65, 60));
+        } else if (this.getType() == ModEntities.CYGNODRACO_MAWSONI.get()) {
+            return AnimaliaFunctionUtil.getScaleForSize(CYGNODRACO_MAWSONI_PIXEL, this.genVarSize(41, 55, 45));
         }
         return 1;
     }
@@ -234,7 +249,7 @@ public class ChaenocephalusEntity extends BottomWalkerSwimmerBase implements Geo
 
     public static AttributeSupplier setAttributes() {
         return Mob.createMobAttributes()
-                .add(Attributes.MAX_HEALTH, 4D)
+                .add(Attributes.MAX_HEALTH, 3D)
                 .add(Attributes.MOVEMENT_SPEED, 0.4f)
                 .build();
     }

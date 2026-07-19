@@ -40,7 +40,7 @@ public class WaterSpitRenderer extends EntityRenderer<WaterSpitProjectile> {
         vertex(consumer, matrix, normal, packedLight, -halfSize, halfSize, 0, 0);
 
         poseStack.popPose();
-        if(entity.tickCount <= 1) return;
+        if(entity.tickCount <= 1 && !entity.isRemoved()) return;
         super.render(entity, entityYaw, partialTick, poseStack, bufferSource, packedLight);
     }
 

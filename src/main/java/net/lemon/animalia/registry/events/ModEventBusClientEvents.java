@@ -26,7 +26,8 @@ public class ModEventBusClientEvents {
                 || screen instanceof CompendiumHomeScreen
                 || screen instanceof OrderListScreen
                 || screen instanceof OrderGridScreen
-                || screen instanceof CreatureDetailScreen) {
+                || screen instanceof CreatureDetailScreen
+                    || screen instanceof HolonetWelcomeScreen) {
                 event.setCanceled(true);
             }
         }

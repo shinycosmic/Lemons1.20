@@ -21,7 +21,7 @@ public class ChileanSeaBassRenderer extends GeoEntityRenderer<ToothfishEntity> {
 
     @Override
     public void render(ToothfishEntity entity, float entityYaw, float partialTick, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight) {
-        if(entity.tickCount <= 1) return;
+        if(entity.tickCount <= 1 && !entity.isRemoved()) return;
         super.render(entity, entityYaw, partialTick, poseStack, bufferSource, packedLight);
     }
 

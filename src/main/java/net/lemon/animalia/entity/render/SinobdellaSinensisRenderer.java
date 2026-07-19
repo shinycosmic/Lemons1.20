@@ -23,7 +23,7 @@ public class SinobdellaSinensisRenderer extends GeoEntityRenderer<MastacembelusE
 
     @Override
     public void render(MastacembelusEntity entity, float entityYaw, float partialTick, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight) {
-        if(entity.tickCount <= 1) return;
+        if(entity.tickCount <= 1 && !entity.isRemoved()) return;
         super.render(entity, entityYaw, partialTick, poseStack, bufferSource, packedLight);
     }
 

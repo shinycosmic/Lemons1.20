@@ -154,8 +154,8 @@
   "trivia.animalia.nematistius_pectoralis": "Roosterfish are fast-moving pelagic predators with uniquely long spines on their dorsal fins. They are large, able to reach over 1.6m in length and are a popular sport fish.",
   "trivia.animalia.toxotes_chatareus": "Archerfish are able to spit streams of water to knock insects into the water. They are able to hit distances of over 1m. Their diet typically consists of zooplankton and invertebrates.",
   "trivia.animalia.pogonophryne_marmorata": "This species of plunderfish is found in cold and deep antarctic waters. They have a flattened head and a mental barbel, which it uses as a sensory mechanism to find prey.",
-  "trivia.animalia.chaenocephalus_aceratus": "",
-  "trivia.animalia.cygnodraco_mawsoni": "",
+  "trivia.animalia.chaenocephalus_aceratus": "The blackfin icefish lives on the Antarctic continental shelf. They have translucent blood and they lack haemoglobin. Male icefish are known to guard their nests after breeding.",
+  "trivia.animalia.cygnodraco_mawsoni": "This species of dragonfish lives around the Antarctic continental shelf. They are a demersal species that feeds on other smaller fish and invertebrates. They can be found at depths of up to 300m.",
 
   "debug.animalia.trivia": "If this value displays, there is a bug [trivia]",
   "debug.animalia.family": "if this text appears, there is a bug [family]",

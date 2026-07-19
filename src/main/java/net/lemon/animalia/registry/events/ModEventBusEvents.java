@@ -50,6 +50,7 @@ public class ModEventBusEvents {
         event.put(ModEntities.TOXOTES_CHATAREUS.get(), ToxotesEntity.setAttributes());
         event.put(ModEntities.POGONOPHRYNE_MARMORATA.get(), PogonophryneEntity.setAttributes());
         event.put(ModEntities.CHAENOCEPHALUS_ACERATUS.get(), ChaenocephalusEntity.setAttributes());
+        event.put(ModEntities.CYGNODRACO_MAWSONI.get(), ChaenocephalusEntity.setAttributes());
 
     }
 

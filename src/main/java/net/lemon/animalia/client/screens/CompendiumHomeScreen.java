@@ -215,5 +215,7 @@ public class CompendiumHomeScreen extends Screen {
         if (featuredEntity instanceof IsGenetic genetic) {
             genetic.buildTraitsRandom();
         }
+
+        featuredEntity.discard();
     }
 }

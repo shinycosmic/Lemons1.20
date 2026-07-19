@@ -324,6 +324,7 @@ public class OrderGridScreen extends Screen {
             if (dummy instanceof IsGenetic genetic) {
                 genetic.buildTraitsRandom();
             }
+            dummy.discard();
             cachedDummies.put(entityType, dummy);
         }
     }
