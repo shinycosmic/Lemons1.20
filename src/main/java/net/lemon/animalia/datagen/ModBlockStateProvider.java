@@ -2,10 +2,14 @@ package net.lemon.animalia.datagen;
 
 import net.lemon.animalia.Animalia;
 import net.lemon.animalia.registry.ModBlocks;
+import net.minecraft.core.Direction;
 import net.minecraft.data.PackOutput;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.MultifaceBlock;
 import net.minecraftforge.client.model.generators.BlockStateProvider;
 import net.minecraftforge.client.model.generators.ModelFile;
+import net.minecraftforge.client.model.generators.MultiPartBlockStateBuilder;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.RegistryObject;
 
@@ -21,10 +25,33 @@ public class ModBlockStateProvider extends BlockStateProvider {
      */
     protected void registerStatesAndModels() {
         simpleBlockWithItem(ModBlocks.FILTER_TRAP.get(), new ModelFile.UncheckedModelFile(modLoc("block/filter_trap")));
-
+        multifaceBlock(ModBlocks.ALGAE_MAT.get(), "algae_mat", modLoc("block/algae_mat"));
     }
 
     private void blockWithItem(RegistryObject<Block> blockRegistryObject) {
         simpleBlockWithItem(blockRegistryObject.get(), cubeAll(blockRegistryObject.get()));
+    }
+
+    private void multifaceBlock(Block block, String name, ResourceLocation texture) {
+        ModelFile model = models().withExistingParent(name, mcLoc("block/glow_lichen"))
+                .texture("all", texture)
+                .texture("particle", texture);
+
+        MultiPartBlockStateBuilder builder = getMultipartBuilder(block);
+
+        builder.part().modelFile(model).rotationX(270).uvLock(true).addModel()
+                .condition(MultifaceBlock.getFaceProperty(Direction.UP), true).end();
+        builder.part().modelFile(model).rotationX(90).uvLock(true).addModel()
+                .condition(MultifaceBlock.getFaceProperty(Direction.DOWN), true).end();
+        builder.part().modelFile(model).addModel()
+                .condition(MultifaceBlock.getFaceProperty(Direction.NORTH), true).end();
+        builder.part().modelFile(model).rotationY(180).uvLock(true).addModel()
+                .condition(MultifaceBlock.getFaceProperty(Direction.SOUTH), true).end();
+        builder.part().modelFile(model).rotationY(270).uvLock(true).addModel()
+                .condition(MultifaceBlock.getFaceProperty(Direction.WEST), true).end();
+        builder.part().modelFile(model).rotationY(90).uvLock(true).addModel()
+                .condition(MultifaceBlock.getFaceProperty(Direction.EAST), true).end();
+
+        simpleBlockItem(block, model);
     }
 }

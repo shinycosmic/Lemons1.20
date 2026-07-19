@@ -1,12 +1,14 @@
 package net.lemon.animalia.registry;
 
 import net.lemon.animalia.Animalia;
+import net.lemon.animalia.block.AlgaeMatBlock;
 import net.lemon.animalia.block.FilterTrapBlock;
 import net.lemon.animalia.block.MoundNestBlock;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -21,7 +23,7 @@ public class ModBlocks {
 
     public static final RegistryObject<Block> FILTER_TRAP = registerBlock("filter_trap", () -> new FilterTrapBlock(BlockBehaviour.Properties.copy(Blocks.STONE).noOcclusion()));
     public static final RegistryObject<Block> MOUND_NEST = registerBlock("mound_nest", () -> new MoundNestBlock(BlockBehaviour.Properties.copy(Blocks.SAND).noOcclusion().noLootTable()));
-
+    public static final RegistryObject<Block> ALGAE_MAT = registerBlock("algae_mat", () -> new AlgaeMatBlock(BlockBehaviour.Properties.copy(Blocks.GLOW_LICHEN).noOcclusion().noCollission().sound(SoundType.VINE)));
     private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block) {
         RegistryObject<T> toReturn = BLOCKS.register(name, block);
         registerBlockItem(name, toReturn);

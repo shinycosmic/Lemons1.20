@@ -12,7 +12,8 @@ import java.util.List;
 public class AnimaliaMiscTab {
     public static final List<RegistryObject<? extends Block>> MISC_BLOCKS = List.of(
             //Interactables
-            ModBlocks.FILTER_TRAP
+            ModBlocks.FILTER_TRAP,
+            ModBlocks.ALGAE_MAT
 
     );
 

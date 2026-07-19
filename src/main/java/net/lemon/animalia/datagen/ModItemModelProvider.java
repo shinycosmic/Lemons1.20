@@ -91,4 +91,10 @@ public class ModItemModelProvider extends ItemModelProvider {
                 new ResourceLocation("item/generated")).texture("layer0",
                 new ResourceLocation(Animalia.MODID, "item/" + item.getId().getPath()));
     }
+
+    private ItemModelBuilder blockSpriteItem(RegistryObject<Item> item, String blockTextureName) {
+        return withExistingParent(item.getId().getPath(),
+                new ResourceLocation("item/generated")).texture("layer0",
+                new ResourceLocation(Animalia.MODID, "block/" + blockTextureName));
+    }
 }

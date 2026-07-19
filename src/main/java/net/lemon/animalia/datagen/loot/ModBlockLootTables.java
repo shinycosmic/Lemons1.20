@@ -26,6 +26,7 @@ public class ModBlockLootTables extends BlockLootSubProvider {
     @Override
     protected void generate() {
         this.dropSelf(ModBlocks.FILTER_TRAP.get());
+        this.add(ModBlocks.ALGAE_MAT.get(), block -> createMultifaceBlockDrops(block, HAS_SHEARS));
     }
 
     @Override
