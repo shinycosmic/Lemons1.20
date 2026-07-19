@@ -187,7 +187,7 @@ public class ChaenocephalusEntity extends BottomWalkerSwimmerBase implements Geo
     @Override
     public float genVarSizeMultiplier() {
         if (this.getType() == ModEntities.CHAENOCEPHALUS_ACERATUS.get()) {
-            return AnimaliaFunctionUtil.getScaleForSize(CHAENOCEPHALUS_ACERATUS_PIXEL, this.genVarSize(34, 50, 40));
+            return AnimaliaFunctionUtil.getScaleForSize(CHAENOCEPHALUS_ACERATUS_PIXEL, this.genVarSize(45, 65, 60));
         }
         return 1;
     }
@@ -330,7 +330,7 @@ public class ChaenocephalusEntity extends BottomWalkerSwimmerBase implements Geo
                         if (this.nipCooldown <= 0) {
                             target.hurt(this.damageSources().mobAttack(this), 1.0F);
                             this.startEating();
-                            this.nipCooldown = 20;
+                            this.nipCooldown = 40;
                             break;
                         }
                     }
