@@ -767,6 +767,56 @@
 					}
 				}
 			}
+		},
+		"idle": {
+			"loop": true,
+			"bones": {
+				"main": {
+					"rotation": {
+						"vector": [-4.5, 0, 0]
+					}
+				},
+				"tail": {
+					"rotation": {
+						"vector": [-1.25, "-1-math.sin(query.anim_time*100)*1.5", 0]
+					}
+				},
+				"tail2": {
+					"rotation": {
+						"vector": [0, "-1-math.sin(query.anim_time*100)*1.5", 0]
+					}
+				},
+				"tail3": {
+					"rotation": {
+						"vector": [0, "0.25-math.sin(query.anim_time*100)*6", 0]
+					}
+				},
+				"tail4": {
+					"rotation": {
+						"vector": [0, "-1-math.sin(query.anim_time*100)*1.5", 0]
+					}
+				},
+				"frontLeftFin": {
+					"rotation": {
+						"vector": ["-82.5462-math.sin(query.anim_time*50-100)*0.5", -10.549, -83.7248]
+					}
+				},
+				"frontRightFin": {
+					"rotation": {
+						"vector": ["-82.5707-math.sin(query.anim_time*50-70)*-0.5", 10.4493, 84.4684]
+					}
+				},
+				"backRightFin": {
+					"rotation": {
+						"vector": [0, 0, 36.75]
+					}
+				},
+				"backLeftFin": {
+					"rotation": {
+						"vector": [0, 0, -36.75]
+					}
+				}
+			}
 		}
 	}
 }
