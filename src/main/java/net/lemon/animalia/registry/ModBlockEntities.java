@@ -18,7 +18,7 @@ public class ModBlockEntities {
                     BlockEntityType.Builder.of(FilterTrapBlockEntity::new, ModBlocks.FILTER_TRAP.get()).build(null));
 
     public static final RegistryObject<BlockEntityType<MoundNestBlockEntity>> MOUND_NEST_BE =
-            BLOCK_ENTITIES.register("filter_trap_be", () ->
+            BLOCK_ENTITIES.register("mound_nest_be", () ->
                     BlockEntityType.Builder.of(MoundNestBlockEntity::new, ModBlocks.MOUND_NEST.get()).build(null));
 
     public static void register(IEventBus bus) {
