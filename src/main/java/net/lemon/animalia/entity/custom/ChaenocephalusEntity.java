@@ -23,6 +23,7 @@ import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.Goal;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -30,6 +31,7 @@ import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.AABB;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.core.animatable.GeoAnimatable;
@@ -40,6 +42,7 @@ import software.bernie.geckolib.core.animation.AnimationState;
 import software.bernie.geckolib.core.object.PlayState;
 
 import java.util.EnumSet;
+import java.util.List;
 import java.util.Random;
 
 public class ChaenocephalusEntity extends BottomWalkerSwimmerBase implements GeoEntity, Scannable {
@@ -77,6 +80,7 @@ public class ChaenocephalusEntity extends BottomWalkerSwimmerBase implements Geo
     private int guardDirectionTicks;
     private boolean wantsToNest;
     private int wantsToNestTimeout;
+    private int nipCooldown;
     @Nullable
     private BlockPos nestPos;
 
@@ -317,6 +321,20 @@ public class ChaenocephalusEntity extends BottomWalkerSwimmerBase implements Geo
                 this.nestGuardTicks--;
                 if (this.nestGuardTicks <= 0) {
                     this.setNestPhase(NEST_PHASE_HATCHING);
+                }
+                if (this.nestPos != null) {
+                    List<Player> players = this.level().getEntitiesOfClass(Player.class,
+                            new AABB(this.nestPos).inflate(0.1, 0.5, 0.1));
+                    for (Player player : players) {
+                        if (this.nipCooldown <= 0) {
+                            player.hurt(this.damageSources().mobAttack(this), 1.0F);
+                            this.startEating();
+                            this.nipCooldown = 20;
+                        }
+                    }
+                }
+                if (this.nipCooldown > 0) {
+                    this.nipCooldown--;
                 }
                 break;
 

@@ -145,6 +145,11 @@ public abstract class AnimaliaBreedableWater extends WaterAnimal implements IAct
         this.entityData.set(IS_EATING, eating);
     }
 
+    public void startEating() {
+        this.setEating(true);
+        this.eatTicks = this.getEatLength();
+    }
+
     @Override
     public boolean isBaby() {
         return this.getAge() < 0;
@@ -615,8 +620,7 @@ public abstract class AnimaliaBreedableWater extends WaterAnimal implements IAct
         if (this.isFood(itemstack)) {
             this.usePlayerItem(player, hand, itemstack);
             this.heal(healAmount);
-            this.setEating(true);
-            this.eatTicks = getEatLength();
+            this.startEating();
             if (this.level().isClientSide) {
                 return InteractionResult.CONSUME;
             }
