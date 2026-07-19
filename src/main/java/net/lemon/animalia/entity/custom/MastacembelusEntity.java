@@ -246,6 +246,11 @@ public class MastacembelusEntity extends FishBase implements GeoEntity, Scannabl
     }
 
     @Override
+    public boolean shouldJumpOnFlop() {
+        return false;
+    }
+
+    @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
         controllers.add(new AnimationController<>(this, "controller", 0, this::predicate));
         controllers.add(new AnimationController<>(this, "flop_controller", 0, this::flopPredicate));

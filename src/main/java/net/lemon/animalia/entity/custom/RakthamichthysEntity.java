@@ -136,6 +136,11 @@ public class RakthamichthysEntity extends BottomWalkerSwimmerBase implements Geo
         HolonetEntities.register(ModEntities.RAKTHAMICHTHYS_INDICUS, Scannable.AppName.FISH, "Synbranchiformes");
     }
 
+    @Override
+    public boolean shouldJumpOnFlop() {
+        return false;
+    }
+
     public int getWalkTime() {
         return 800 + random.nextInt(2000); // 10-20 seconds default
     }

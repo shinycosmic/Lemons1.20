@@ -150,6 +150,10 @@ public abstract class AnimaliaBreedableWater extends WaterAnimal implements IAct
         this.eatTicks = this.getEatLength();
     }
 
+    public boolean shouldJumpOnFlop() {
+        return true;
+    }
+
     @Override
     public boolean isBaby() {
         return this.getAge() < 0;

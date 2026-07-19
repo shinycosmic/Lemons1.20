@@ -190,6 +190,11 @@ public class SynbranchusEntity extends BottomWalkerSwimmerBase implements GeoEnt
     }
 
     @Override
+    public boolean shouldJumpOnFlop() {
+        return false;
+    }
+
+    @Override
     public boolean canHide() {
         return true;
     }
