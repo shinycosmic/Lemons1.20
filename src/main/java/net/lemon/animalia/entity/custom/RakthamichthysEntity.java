@@ -148,20 +148,16 @@ public class RakthamichthysEntity extends BottomWalkerSwimmerBase implements Geo
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
         controllers.add(new AnimationController<>(this, "controller", 10, this::predicate));
-        controllers.add(new AnimationController<>(this, "flop_controller", 0, this::flopPredicate));
-    }
-
-    private <T extends GeoAnimatable> PlayState flopPredicate(AnimationState<T> state) {
-        if (!this.isInWater() && !this.isBaby()) {
-            state.getController().setAnimation(RawAnimation.begin().then("flop", Animation.LoopType.LOOP));
-            return PlayState.CONTINUE;
-        }
-        return PlayState.STOP;
     }
 
     private PlayState predicate(AnimationState animationState) {
         if(this.isBaby()) {
             animationState.getController().setAnimation(RawAnimation.begin().then("swim", Animation.LoopType.LOOP));
+            return PlayState.CONTINUE;
+        }
+
+        if (!this.isInWater() && !this.isBaby()) {
+            animationState.getController().setAnimation(RawAnimation.begin().then("flop", Animation.LoopType.LOOP));
             return PlayState.CONTINUE;
         }
 

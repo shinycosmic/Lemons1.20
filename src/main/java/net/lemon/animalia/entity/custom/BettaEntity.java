@@ -183,24 +183,19 @@ public class BettaEntity extends FishBase implements GeoEntity, IsGenetic, Scann
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
         controllers.add(new AnimationController<>(this, "controller", 0, this::predicate));
-        controllers.add(new AnimationController<>(this, "flop_controller", 0, this::flopPredicate));
-    }
-
-    private <T extends GeoAnimatable> PlayState flopPredicate(AnimationState<T> state) {
-        if (!this.isInWater() && !this.isBaby()) {
-            state.getController().setAnimation(RawAnimation.begin().then("flop", Animation.LoopType.LOOP));
-            return PlayState.CONTINUE;
-        }
-        return PlayState.STOP;
     }
 
     private <T extends GeoAnimatable> PlayState predicate(AnimationState<T> animationState) {
-        if(!this.isInWater()) {
-            return PlayState.CONTINUE;
-        } else if(this.isBaby()) {
+        if(this.isBaby()) {
             animationState.getController().setAnimation(RawAnimation.begin().then("betta.swim", Animation.LoopType.LOOP));
             return PlayState.CONTINUE;
         }
+
+        if (!this.isInWater() && !this.isBaby()) {
+            animationState.getController().setAnimation(RawAnimation.begin().then("flop", Animation.LoopType.LOOP));
+            return PlayState.CONTINUE;
+        }
+
         animationState.getController().setAnimation(RawAnimation.begin().then(this.getSwimAnim(), Animation.LoopType.LOOP));
         return PlayState.CONTINUE;
     }
