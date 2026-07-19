@@ -176,7 +176,7 @@ public class RoosterfishEntity extends FishBase implements GeoEntity, Scannable 
 
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
-        controllers.add(new AnimationController<>(this, "controller", 10, this::predicate));
+        controllers.add(new AnimationController<>(this, "controller", 5, this::predicate));
         controllers.add(new AnimationController<>(this, "eat_controller", 0, this::eatPredicate));
     }
 
