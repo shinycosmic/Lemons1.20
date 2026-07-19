@@ -1,0 +1,6 @@
+{
+  "variants": {
+    "waterlogged=true": { "model": "animalia:block/mound_nest" },
+    "waterlogged=false": { "model": "animalia:block/mound_nest" }
+  }
+}
