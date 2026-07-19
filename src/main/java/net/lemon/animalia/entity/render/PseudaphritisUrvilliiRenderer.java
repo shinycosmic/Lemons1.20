@@ -26,6 +26,7 @@ public class PseudaphritisUrvilliiRenderer extends GeoEntityRenderer<CongolliEnt
 
     @Override
     public void render(CongolliEntity entity, float entityYaw, float partialTick, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight) {
+        if(entity.tickCount <= 1) return;
         super.render(entity, entityYaw, partialTick, poseStack, bufferSource, packedLight);
     }
 

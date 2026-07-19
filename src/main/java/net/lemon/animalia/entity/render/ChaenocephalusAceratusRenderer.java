@@ -20,6 +20,8 @@ public class ChaenocephalusAceratusRenderer extends GeoEntityRenderer<Chaenoceph
 
     @Override
     public void render(ChaenocephalusEntity entity, float entityYaw, float partialTick, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight) {
+        if(entity.tickCount <= 1) return;
+        if(entity.tickCount <= 1) return;
         super.render(entity, entityYaw, partialTick, poseStack, bufferSource, packedLight);
     }
 

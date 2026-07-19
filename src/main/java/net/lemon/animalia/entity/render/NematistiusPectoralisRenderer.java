@@ -21,6 +21,7 @@ public class NematistiusPectoralisRenderer extends GeoEntityRenderer<Roosterfish
 
     @Override
     public void render(RoosterfishEntity entity, float entityYaw, float partialTick, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight) {
+        if(entity.tickCount <= 1) return;
         super.render(entity, entityYaw, partialTick, poseStack, bufferSource, packedLight);
     }
 
