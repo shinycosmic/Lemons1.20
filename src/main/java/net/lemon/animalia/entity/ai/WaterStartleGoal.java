@@ -6,6 +6,7 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.pathfinder.Path;
 import net.minecraft.world.phys.Vec3;
 
 import java.util.EnumSet;
@@ -46,9 +47,13 @@ public class WaterStartleGoal extends Goal {
 
         // Check for nearby players
         Player nearestPlayer = this.mob.level().getNearestPlayer(this.mob, this.triggerDistance);
-        if (nearestPlayer != null && !nearestPlayer.isSpectator() && !nearestPlayer.isCreative()) {
-            this.threat = nearestPlayer;
-            return true;
+        if (nearestPlayer != null && !nearestPlayer.isSpectator() && !nearestPlayer.isCreative() && mob.hasLineOfSight(nearestPlayer)) {
+            Path path = mob.getNavigation().createPath(nearestPlayer, 0);
+
+            if (path != null && path.canReach()) {
+                this.threat = nearestPlayer;
+                return true;
+            }
         }
 
         // Check for nearby hostile mobs

@@ -30,7 +30,7 @@ public class MoundNestBlock extends BaseEntityBlock implements SimpleWaterlogged
 
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 
-    private static final VoxelShape SHAPE = Block.box(2, 0, 2, 14, 3, 14);
+    private static final VoxelShape SHAPE = Block.box(4, 0, 4, 12, 3, 12);
 
     public MoundNestBlock(Properties properties) {
         super(properties);
