@@ -10,10 +10,18 @@
           "weight": 20,
           "conditions": [
             {
-              "condition": "minecraft:location_check",
-              "predicate": {
-                "tag": "minecraft:is_ocean"
-              }
+              "condition": "minecraft:alternative",
+              "terms": [
+                { "condition": "minecraft:location_check", "predicate": { "biome": "minecraft:ocean" } },
+                { "condition": "minecraft:location_check", "predicate": { "biome": "minecraft:deep_ocean" } },
+                { "condition": "minecraft:location_check", "predicate": { "biome": "minecraft:warm_ocean" } },
+                { "condition": "minecraft:location_check", "predicate": { "biome": "minecraft:lukewarm_ocean" } },
+                { "condition": "minecraft:location_check", "predicate": { "biome": "minecraft:deep_lukewarm_ocean" } },
+                { "condition": "minecraft:location_check", "predicate": { "biome": "minecraft:cold_ocean" } },
+                { "condition": "minecraft:location_check", "predicate": { "biome": "minecraft:deep_cold_ocean" } },
+                { "condition": "minecraft:location_check", "predicate": { "biome": "minecraft:frozen_ocean" } },
+                { "condition": "minecraft:location_check", "predicate": { "biome": "minecraft:deep_frozen_ocean" } }
+              ]
             }
           ]
         },
@@ -25,7 +33,7 @@
             {
               "condition": "minecraft:location_check",
               "predicate": {
-                "tag": "minecraft:is_overworld"
+                "dimension": "minecraft:overworld"
               }
             }
           ]
@@ -36,10 +44,12 @@
           "weight": 20,
           "conditions": [
             {
-              "condition": "minecraft:location_check",
-              "predicate": {
-                "tag": "minecraft:is_swamp"
-              }
+              "condition": "minecraft:alternative",
+              "terms": [
+                { "condition": "minecraft:location_check", "predicate": { "biome": "minecraft:river" } },
+                { "condition": "minecraft:location_check", "predicate": { "biome": "minecraft:swamp" } },
+                { "condition": "minecraft:location_check", "predicate": { "biome": "minecraft:mangrove_swamp" } }
+              ]
             }
           ]
         },
