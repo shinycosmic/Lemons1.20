@@ -1,6 +1,8 @@
 package net.lemon.animalia.entity.bases;
 
 import net.lemon.animalia.entity.ai.FishBreedGoal;
+import net.lemon.animalia.entity.bases.interfaces.IActivityTime;
+import net.lemon.animalia.entity.bases.interfaces.IFoodEater;
 import net.lemon.animalia.item.FishEggItem;
 import net.lemon.animalia.registry.ModItems;
 import net.minecraft.core.BlockPos;
@@ -35,7 +37,7 @@ import java.util.Objects;
 
 import static net.lemon.animalia.entity.bases.AnimaliaBreedableWater.*;
 
-public abstract class AnimaliaLandBase extends Animal {
+public abstract class AnimaliaLandBase extends Animal implements IActivityTime, IFoodEater {
     private static final EntityDataAccessor<Integer> GENDER = SynchedEntityData.defineId(AnimaliaLandBase.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Integer> VAR_COLOR = SynchedEntityData.defineId(AnimaliaLandBase.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Float> VAR_SIZE_MULTIPLIER = SynchedEntityData.defineId(AnimaliaLandBase.class, EntityDataSerializers.FLOAT);
@@ -141,6 +143,11 @@ public abstract class AnimaliaLandBase extends Animal {
 
     public void setEating(boolean eating) {
         this.entityData.set(IS_EATING, eating);
+    }
+
+    public void startEating() {
+        this.setEating(true);
+        this.eatTicks = this.getEatLength();
     }
 
     public float getVarSizeMultiplier() {
@@ -500,8 +507,7 @@ public abstract class AnimaliaLandBase extends Animal {
         if (this.isFood(itemstack)) {
             this.usePlayerItem(player, hand, itemstack);
             this.heal(healAmount);
-            this.setEating(true);
-            this.eatTicks = getEatLength();
+            this.startEating();
             if (this.level().isClientSide) {
                 return InteractionResult.CONSUME;
             }

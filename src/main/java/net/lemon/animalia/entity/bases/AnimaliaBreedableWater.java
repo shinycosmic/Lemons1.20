@@ -2,6 +2,7 @@ package net.lemon.animalia.entity.bases;
 
 import net.lemon.animalia.entity.ai.FishBreedGoal;
 import net.lemon.animalia.entity.bases.interfaces.IActivityTime;
+import net.lemon.animalia.entity.bases.interfaces.IFoodEater;
 import net.lemon.animalia.item.FishEggItem;
 import net.lemon.animalia.registry.ModItems;
 import net.lemon.animalia.util.AnimaliaFunctionUtil;
@@ -41,7 +42,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Objects;
 import java.util.UUID;
 
-public abstract class AnimaliaBreedableWater extends WaterAnimal implements IActivityTime {
+public abstract class AnimaliaBreedableWater extends WaterAnimal implements IActivityTime, IFoodEater {
     private static final EntityDataAccessor<Integer> AGE = SynchedEntityData.defineId(AnimaliaBreedableWater.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Integer> GENDER = SynchedEntityData.defineId(AnimaliaBreedableWater.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Integer> VAR_COLOR = SynchedEntityData.defineId(AnimaliaBreedableWater.class, EntityDataSerializers.INT);
