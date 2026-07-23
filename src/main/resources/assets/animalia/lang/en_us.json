@@ -172,5 +172,12 @@
   "gui.animalia.holonet.welcome.line4": "Field Guid App: All other creatures",
   "gui.animalia.holonet.welcome.line3": "Fish Compendium: True to its name... Fish!",
   "gui.animalia.holonet.welcome.line2": "Scan creatures by left or right clicking them.",
-  "gui.animalia.holonet.by_order": "By Order"
+  "gui.animalia.holonet.by_order": "By Order",
+  "gui.animalia.holonet.tutorials": "Tutorials",
+  "gui.animalia.holonet.tutorial.scanning": "Scanning Creatures",
+  "gui.animalia.holonet.tutorial.scanning.body": "Scan living creatures by left or right clicking them. \nSome animals are particularly rare. Good luck trying to find them all!",
+  "gui.animalia.holonet.tutorial.gene_inheritance": "Gene Inheritance",
+  "gui.animalia.holonet.tutorial.gene_inheritance.body": "A few creatures are able to pass on their traits to their offspring with this system. The Betta fish will be the example here. Breeding two different parents will result in children with combined traits. \nMutations can also occur at a 10% rate. Some mutatable traits have prerequisite parent traits, while others can appear from any parent trait.",
+  "gui.animalia.holonet.tutorial.filter_trap": "The Filter Trap",
+  "gui.animalia.holonet.tutorial.filter_trap.body": "This device is used to catch small creatures used as breeding items for your other animals. \nAll you need to do is place it in water, and insert fish meat or fish food. \nThen wait as the trap fills up. Different critters can be caught in different biomes in this way."
 }

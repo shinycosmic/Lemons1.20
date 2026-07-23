@@ -17,6 +17,7 @@ public class HolonetHomeScreen extends Screen {
     private static final ResourceLocation BORDER = new ResourceLocation(Animalia.MODID, "textures/gui/holonet.png");
     private static final ResourceLocation FISH_ICON = new ResourceLocation(Animalia.MODID, "textures/gui/fish_compendium_icon.png");
     private static final ResourceLocation FIELD_ICON = new ResourceLocation(Animalia.MODID, "textures/gui/field_guide_icon.png");
+    private static final ResourceLocation TUTORIAL_ICON = new ResourceLocation(Animalia.MODID, "textures/gui/tutorial_icon.png");
 
     private static final int BG_WIDTH = 390;
     private static final int BG_HEIGHT = 245;
@@ -45,7 +46,7 @@ public class HolonetHomeScreen extends Screen {
         graphics.blit(BORDER, bgX, bgY, 0, 0, BG_WIDTH, BG_HEIGHT, BG_WIDTH, (int) (BG_HEIGHT*1.6));
 
         // Calculate icon positions (centered within background)
-        int totalWidth = (ICON_SIZE * 2) + ICON_SPACING;
+        int totalWidth = (ICON_SIZE * 3) + (ICON_SPACING * 2);
         int startX = bgX + (BG_WIDTH - totalWidth) / 2;
         int iconY = bgY + (BG_HEIGHT - ICON_SIZE) / 2;
 
@@ -61,6 +62,17 @@ public class HolonetHomeScreen extends Screen {
         graphics.drawCenteredString(this.font,
                 Component.translatable("gui.animalia.holonet.field_guide"),
                 fieldX + ICON_SIZE / 2, iconY + ICON_SIZE + 4, 0xFFFFFF);
+
+        // Tutorials icon
+        int tutorialsX = fieldX + ICON_SIZE + ICON_SPACING;
+        graphics.blit(TUTORIAL_ICON, tutorialsX, iconY, 0, 0, ICON_SIZE, ICON_SIZE, ICON_SIZE, ICON_SIZE);
+        graphics.drawCenteredString(this.font,
+                Component.translatable("gui.animalia.holonet.tutorials"),
+                tutorialsX + ICON_SIZE / 2, iconY + ICON_SIZE + 4, 0xFFFFFF);
+
+        if (isOver(mouseX, mouseY, tutorialsX, iconY)) {
+            graphics.fill(tutorialsX - 2, iconY - 2, tutorialsX + ICON_SIZE + 2, iconY + ICON_SIZE + 2, 0x44FFFFFF);
+        }
 
         // Hover highlight
         if (isOver(mouseX, mouseY, startX, iconY)) {
@@ -81,11 +93,12 @@ public class HolonetHomeScreen extends Screen {
         }
         int bgX = (this.width - BG_WIDTH) / 2;
         int bgY = (this.height - BG_HEIGHT) / 2;
-        int totalWidth = (ICON_SIZE * 2) + ICON_SPACING;
+        int totalWidth = (ICON_SIZE * 3) + (ICON_SPACING * 2);
         int startX = bgX + (BG_WIDTH - totalWidth) / 2;
         int iconY = bgY + (BG_HEIGHT - ICON_SIZE) / 2;
 
         int fieldX = startX + ICON_SIZE + ICON_SPACING;
+        int tutorialsX = fieldX + ICON_SIZE + ICON_SPACING;
 
         if (isOver((int) mouseX, (int) mouseY, startX, iconY)) {
             Minecraft.getInstance().setScreen(new CompendiumHomeScreen(Scannable.AppName.FISH, this));
@@ -93,6 +106,10 @@ public class HolonetHomeScreen extends Screen {
         }
         if (isOver((int) mouseX, (int) mouseY, fieldX, iconY)) {
             Minecraft.getInstance().setScreen(new CompendiumHomeScreen(Scannable.AppName.FIELD, this));
+            return true;
+        }
+        if (isOver((int) mouseX, (int) mouseY, tutorialsX, iconY)) {
+            Minecraft.getInstance().setScreen(new TutorialListScreen(this));
             return true;
         }
         return super.mouseClicked(mouseX, mouseY, button);
