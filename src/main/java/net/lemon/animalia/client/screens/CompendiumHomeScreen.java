@@ -161,7 +161,11 @@ public class CompendiumHomeScreen extends Screen {
             return true;
         }
         if (button == 0) {
-            Minecraft.getInstance().setScreen(new OrderListScreen(app, this));
+            if (app == Scannable.AppName.FIELD) {
+                Minecraft.getInstance().setScreen(new OrderGridScreen(app, null, this));
+            } else {
+                Minecraft.getInstance().setScreen(new OrderListScreen(app, this));
+            }
             return true;
         }
 

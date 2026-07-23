@@ -11,6 +11,7 @@ import net.lemon.animalia.util.Scannable;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.InventoryScreen;
 import net.minecraft.network.chat.Component;
@@ -82,6 +83,11 @@ public class OrderGridScreen extends Screen {
         gridStartY = bgY + GRID_TOP_OFFSET;
         backBtnX = bgX + (BG_WIDTH - BACK_BUTTON_SIZE) / 2;
         backBtnY = bgY + BG_HEIGHT - BACK_BUTTON_SIZE - BACK_BUTTON_BOTTOM_MARGIN;
+        if (app == Scannable.AppName.FIELD && order == null) {
+            this.addRenderableWidget(Button.builder(Component.translatable("gui.animalia.holonet.by_order"), b -> {
+                Minecraft.getInstance().setScreen(new OrderListScreen(app, this));
+            }).pos(bgX + BG_WIDTH - 90, bgY + 35).size(55, 16).build());
+        }
         buildDummyCache();
     }
 

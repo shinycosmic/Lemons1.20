@@ -171,5 +171,6 @@
   "gui.animalia.holonet.welcome.line1": "This is a wildlife explorer's catalog of species you discover.",
   "gui.animalia.holonet.welcome.line4": "Field Guid App: All other creatures",
   "gui.animalia.holonet.welcome.line3": "Fish Compendium: True to its name... Fish!",
-  "gui.animalia.holonet.welcome.line2": "Scan creatures by left or right clicking them."
+  "gui.animalia.holonet.welcome.line2": "Scan creatures by left or right clicking them.",
+  "gui.animalia.holonet.by_order": "By Order"
 }
