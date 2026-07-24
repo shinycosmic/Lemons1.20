@@ -18,7 +18,7 @@ public class EatDroppedItemsGoal<T extends PathfinderMob & IFoodEater> extends G
     private final float searchRange;
 
     private static final double EAT_DISTANCE_SQR = 2.0D;
-    private static final int EAT_COOLDOWN_TICKS = 100;
+    private static final int EAT_COOLDOWN_TICKS = 40;
 
     private ItemEntity targetItem;
     private int eatCooldown;
@@ -37,9 +37,6 @@ public class EatDroppedItemsGoal<T extends PathfinderMob & IFoodEater> extends G
             return false;
         }
         if (this.mob.isEating()) {
-            return false;
-        }
-        if (!this.mob.isBaby() && this.mob.getHealth() >= this.mob.getMaxHealth()) {
             return false;
         }
         this.targetItem = this.findNearestFoodItem();
@@ -63,8 +60,11 @@ public class EatDroppedItemsGoal<T extends PathfinderMob & IFoodEater> extends G
 
         if (this.mob.distanceToSqr(this.targetItem) < EAT_DISTANCE_SQR) {
             this.eatItem();
-        } else if (this.mob.tickCount % 10 == 0) {
+            System.out.println("[DEBUG] ATE item at: "+ this.targetItem);
+        } else if (this.mob.tickCount % 10 == 0) { //TODO this line will not work because ticks are not guaranteed to land on evens or any number for that matter, the fish also does not swim closer, it keeps a distance for some reason only swimming to stay at that same distance from the item. it then perpetually looks at the item, doing nothing.
+            //TODO the mob's navigation.isDone() also returns true while it is still locked onto the item. it no longer moves. but it has not reached its target pos, even though it is within 2 blocks from it.
             this.mob.getNavigation().moveTo(this.targetItem, this.speedMultiplier);
+            System.out.println("[DEBUG] Looking at item at: "+ this.targetItem);
         }
     }
 
