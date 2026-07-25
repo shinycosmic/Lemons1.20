@@ -10,6 +10,7 @@ import net.lemon.animalia.client.player.network.ModNetwork;
 import net.lemon.animalia.client.player.network.SyncAllDiscoveriesPacket;
 import net.lemon.animalia.util.HolonetEntities;
 import net.lemon.animalia.util.Scannable;
+import net.minecraft.ChatFormatting;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.commands.SharedSuggestionProvider;
@@ -41,7 +42,7 @@ public class ModCommands {
                                 cap.replaceAll(new HashSet<>());
                                 ModNetwork.sendToPlayer(player, new SyncAllDiscoveriesPacket(cap.getAll(), cap.isLoadedFirstTime()));
                             });
-                            player.sendSystemMessage(Component.literal("Holonet discoveries reset."));
+                            player.sendSystemMessage(Component.translatable("commands.animalia.holonet.reset"));
                             return 1;
                         })
                 )
@@ -52,13 +53,14 @@ public class ModCommands {
                                 for (Scannable.AppName app : Scannable.AppName.values()) {
                                     for (EntityType<?> entityType : HolonetEntities.getAllForApp(app)) {
                                         ResourceLocation id = ForgeRegistries.ENTITY_TYPES.getKey(entityType);
+                                        cap.discover(id, -1);
                                         cap.discover(id, 0);
                                         cap.discover(id, 1);
                                     }
                                 }
                                 ModNetwork.sendToPlayer(player, new SyncAllDiscoveriesPacket(cap.getAll(), cap.isLoadedFirstTime()));
                             });
-                            player.sendSystemMessage(Component.literal("All Holonet entries discovered."));
+                            player.sendSystemMessage(Component.translatable("commands.animalia.holonet.discoverall"));
                             return 1;
                         })
                 )
@@ -82,26 +84,26 @@ public class ModCommands {
 
         // Validate: must be a registered Holonet entity
         if (!isRegisteredHolonetEntity(id)) {
-            player.sendSystemMessage(Component.literal("§cInvalid entity: " + id + " is not registered in the Holonet."));
+            player.sendSystemMessage(Component.translatable("commands.animalia.holonet.invalid", id.toString()).withStyle(ChatFormatting.RED));
             return 0;
         }
 
         player.getCapability(HolonetCapabilityProvider.HOLONET_CAPABILITY).ifPresent(cap -> {
             if (gender == -1) {
+                cap.discover(id, -1);
                 cap.discover(id, 0);
                 cap.discover(id, 1);
-                ModNetwork.sendToPlayer(player, new DiscoverSpeciesPacket(id, 0));
-                ModNetwork.sendToPlayer(player, new DiscoverSpeciesPacket(id, 1));
+                ModNetwork.sendToPlayer(player, new SyncAllDiscoveriesPacket(cap.getAll(), cap.isLoadedFirstTime()));
+                ModNetwork.sendToPlayer(player, new DiscoverSpeciesPacket(id, -1));
             } else {
                 cap.discover(id, gender);
                 ModNetwork.sendToPlayer(player, new DiscoverSpeciesPacket(id, gender));
             }
         });
 
-        String msg = gender == -1
-                ? "Discovered: " + id + " (both genders)"
-                : "Discovered: " + id + " (gender " + gender + ")";
-        player.sendSystemMessage(Component.literal(msg));
+        EntityType<?> type = ForgeRegistries.ENTITY_TYPES.getValue(id);
+        Component name = type != null ? type.getDescription() : Component.literal(id.toString());
+        player.sendSystemMessage(Component.translatable("commands.animalia.holonet.discovered", name));
         return 1;
     }
 
