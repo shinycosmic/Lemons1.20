@@ -32,8 +32,7 @@ public class EatDroppedItemsGoal<T extends PathfinderMob & IFoodEater> extends G
 
     @Override
     public boolean canUse() {
-        if (this.eatCooldown > 0) {
-            --this.eatCooldown;
+        if (this.eatCooldown > this.mob.tickCount) {
             return false;
         }
         if (this.mob.isEating()) {
@@ -60,10 +59,8 @@ public class EatDroppedItemsGoal<T extends PathfinderMob & IFoodEater> extends G
 
         if (this.mob.distanceToSqr(this.targetItem) < EAT_DISTANCE_SQR) {
             this.eatItem();
-            System.out.println("[DEBUG] ATE item at: "+ this.targetItem);
         } else {
             this.mob.getNavigation().moveTo(this.targetItem, this.speedMultiplier);
-            System.out.println("[DEBUG] Looking at item at: "+ this.targetItem);
         }
     }
 
@@ -87,7 +84,7 @@ public class EatDroppedItemsGoal<T extends PathfinderMob & IFoodEater> extends G
             this.targetItem.discard();
         }
 
-        this.eatCooldown = EAT_COOLDOWN_TICKS;
+        this.eatCooldown = this.mob.tickCount + EAT_COOLDOWN_TICKS;
         this.targetItem = null;
     }
 

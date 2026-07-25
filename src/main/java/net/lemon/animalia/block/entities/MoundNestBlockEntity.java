@@ -72,8 +72,8 @@ public class MoundNestBlockEntity extends BlockEntity {
         super.load(tag);
         this.hasEgg = tag.getBoolean("HasEgg");
         if (tag.contains("EggSpecies")) {
-            String id = tag.getString("EggSpecies");
-            this.eggSpecies = ForgeRegistries.ENTITY_TYPES.getValue(new ResourceLocation(id));
+            ResourceLocation key = ResourceLocation.tryParse(tag.getString("EggSpecies"));
+            this.eggSpecies = key == null ? null : ForgeRegistries.ENTITY_TYPES.getValue(key);
         }
     }
 }

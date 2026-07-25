@@ -54,7 +54,9 @@ public class FishEggItem extends Item {
         }
         String id = stack.getTag().getString("Species");
         if(id.isEmpty()) return null;
-        return ForgeRegistries.ENTITY_TYPES.getValue(new ResourceLocation(id));
+        ResourceLocation key = ResourceLocation.tryParse(id);
+        if (key == null) return null;
+        return ForgeRegistries.ENTITY_TYPES.getValue(key);
     }
 
     @Override

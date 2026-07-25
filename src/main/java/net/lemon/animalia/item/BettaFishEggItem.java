@@ -39,12 +39,7 @@ public class BettaFishEggItem extends FishEggItem {
 
     @Nullable
     public static EntityType<?> getEntity(ItemStack stack) {
-        if(!stack.hasTag() || stack.getTag() == null) {
-            return null;
-        }
-        String id = stack.getTag().getString("Species");
-        if(id.isEmpty()) return null;
-        return ForgeRegistries.ENTITY_TYPES.getValue(new ResourceLocation(id));
+        return FishEggItem.getEntity(stack);
     }
 
     @Override
