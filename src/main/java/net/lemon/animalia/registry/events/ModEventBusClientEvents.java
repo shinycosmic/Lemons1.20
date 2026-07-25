@@ -23,11 +23,13 @@ public class ModEventBusClientEvents {
         if(event.getOverlay() == VanillaGuiOverlay.CROSSHAIR.type()) {
             Screen screen = Minecraft.getInstance().screen;
             if(screen instanceof HolonetHomeScreen
-                || screen instanceof CompendiumHomeScreen
-                || screen instanceof OrderListScreen
-                || screen instanceof OrderGridScreen
-                || screen instanceof CreatureDetailScreen
-                    || screen instanceof HolonetWelcomeScreen) {
+                    || screen instanceof CompendiumHomeScreen
+                    || screen instanceof OrderListScreen
+                    || screen instanceof OrderGridScreen
+                    || screen instanceof CreatureDetailScreen
+                    || screen instanceof HolonetWelcomeScreen
+                    || screen instanceof TutorialListScreen
+                    || screen instanceof TutorialPageScreen) {
                 event.setCanceled(true);
             }
         }
