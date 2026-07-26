@@ -1,9 +1,9 @@
 package net.lemon.animalia.entity.ai;
 
 import net.lemon.animalia.entity.bases.FishBase;
+import net.minecraft.commands.arguments.EntityAnchorArgument;
 import net.minecraft.core.BlockPos;
 import net.minecraft.tags.FluidTags;
-import net.minecraft.util.Mth;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -12,27 +12,14 @@ import net.minecraft.world.phys.Vec3;
 
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.EnumSet;
 import java.util.List;
 
 /**
- * Boid-based schooling goal for fish. While active, this goal owns the fish's movement:
- * each tick it computes a target direction from three local rules (separation, alignment,
- * cohesion) plus an optional depth bias, lerps velocity toward it, and rotates the fish
- * to face its motion. Smooth coordinated turns emerge from the velocity inertia — no
- * leader, no pathfinding.
+ * Boid schooling for fish. Each tick it adds a clamped steering nudge on top of normal
+ * swimming, so schooling fish keep their usual speed, wandering, and pathfinding.
  *
- * <p>The goal claims {@link Goal.Flag#MOVE} at low priority, so higher-priority behaviors
- * (panic, breed, tempt, graze) preempt schooling and it resumes when they finish. A fish
- * with no schoolmates in view fails {@code canUse()} and wanders normally — schools form
- * when wandering individuals happen upon each other.</p>
- *
- * <p>When a threat (see {@link FishBase#isThreat(LivingEntity)}) enters range, cohesion and
- * alignment are suppressed and a flee vector dominates, scattering the school radially.
- * Cohesion reconverges the survivors once the threat leaves.</p>
- *
- * <p>Social behaviors (grazing, hiding, idle displays) are handled separately by the
- * {@link SchoolSignal} system on FishBase. This goal only handles movement.</p>
+ * <p>Boid forces only act between fish sharing the same school leader.
+ * Membership (join, promote, defect, lost-contact) is maintained during the periodic scan.</p>
  */
 public class SchoolBoidGoal extends Goal {
 
@@ -40,38 +27,42 @@ public class SchoolBoidGoal extends Goal {
     private static final double SEPARATION_RANGE = 1.5;
     private static final double THREAT_RADIUS = 5.0;
 
-    private static final double W_COHESION = 1.5;
-    private static final double W_ALIGNMENT = 2.0;
-    private static final double W_SEPARATION = 3.5;
-    private static final double W_DEPTH = 0.5;
-    private static final double W_DEPTH_FORCED = 5.0;
+    private static final double COHESION_INFLUENCE = 0.05;
+    private static final double ALIGNMENT_INFLUENCE = 0.4;
+    private static final double SEPARATION_INFLUENCE = 0.25;
+    private static final double DEPTH_INFLUENCE = 0.1;
 
-    private static final double INERTIA = 0.1;
-    private static final double FLEE_INERTIA = 0.5;
-    private static final double FLEE_SPEED_MULTIPLIER = 1.5;
-    private static final double Y_FLATTEN = 0.2;
+    private static final double MAX_DELTA_FACTOR = 0.075;
+    private static final double FLEE_DELTA_MULTIPLIER = 2.0;
 
     private static final int SCAN_INTERVAL = 10;
-    private static int MAX_NEIGHBORS;
     private static final int DEPTH_COMFORT_RANGE = 8;
 
+    private static final int LOST_CONTACT_SCANS = 20;
+    private static final int REJOIN_COOLDOWN_MIN = 600;
+    private static final int REJOIN_COOLDOWN_JITTER = 600;
+
     private final FishBase fish;
+    private final int maxNeighbors;
 
     private List<Mob> neighbors = new ArrayList<>();
     private LivingEntity closestThreat;
     private int scanCooldown;
+    private int lonelyScans;
     private Vec3 depthBias = Vec3.ZERO;
     private boolean depthForced;
 
     public SchoolBoidGoal(FishBase fish, int maxNeighbors) {
         this.fish = fish;
-        this. MAX_NEIGHBORS = maxNeighbors;
-        this.setFlags(EnumSet.of(Goal.Flag.MOVE));
+        this.maxNeighbors = maxNeighbors;
     }
 
     @Override
     public boolean canUse() {
         if (!this.fish.isInWater() || !this.fish.isSchoolingFish() || this.fish.isHiding()) {
+            return false;
+        }
+        if (!this.isInSchoolingState(this.fish)) {
             return false;
         }
         if (--this.scanCooldown <= 0) {
@@ -98,11 +89,6 @@ public class SchoolBoidGoal extends Goal {
     }
 
     @Override
-    public void start() {
-        this.fish.getNavigation().stop();
-    }
-
-    @Override
     public void stop() {
         this.neighbors = new ArrayList<>();
         this.closestThreat = null;
@@ -113,49 +99,42 @@ public class SchoolBoidGoal extends Goal {
     public void tick() {
         this.updateDepthBias();
 
-        Vec3 targetDir;
-        double lerpFactor;
-        double speed = Math.max(0.1, this.fish.getAttributeValue(Attributes.MOVEMENT_SPEED));
+        double maxDelta = Math.max(0.1, this.fish.getAttributeValue(Attributes.MOVEMENT_SPEED)) * MAX_DELTA_FACTOR;
+        Vec3 nudge;
 
         if (this.closestThreat != null) {
-            targetDir = this.computeFlee().add(this.computeSeparation().scale(W_SEPARATION)).normalize();
+            this.fish.getNavigation().stop();
+            nudge = this.computeFlee().add(this.computeSeparation().scale(SEPARATION_INFLUENCE));
             if (this.fish.horizontalCollision) {
-                targetDir = targetDir.add(0, 0.8, 0).normalize();
+                nudge = nudge.add(0, 0.8, 0);
             }
-            lerpFactor = FLEE_INERTIA;
-            speed = speed * FLEE_SPEED_MULTIPLIER;
+            maxDelta = maxDelta * FLEE_DELTA_MULTIPLIER;
         } else {
-            Vec3 boid = this.computeCohesion().scale(W_COHESION)
-                    .add(this.computeAlignment().scale(W_ALIGNMENT))
-                    .add(this.computeSeparation().scale(W_SEPARATION))
-                    .add(this.depthBias.scale(this.depthForced ? W_DEPTH_FORCED : W_DEPTH));
-            targetDir = boid.normalize();
-            if (!this.depthForced) {
-                targetDir = new Vec3(targetDir.x, targetDir.y * Y_FLATTEN, targetDir.z).normalize();
-            }
-            lerpFactor = this.depthForced ? FLEE_INERTIA : INERTIA;
+            nudge = this.computeCohesion().scale(COHESION_INFLUENCE)
+                    .add(this.computeAlignment().scale(ALIGNMENT_INFLUENCE))
+                    .add(this.computeSeparation().scale(SEPARATION_INFLUENCE))
+                    .add(this.depthBias.scale(DEPTH_INFLUENCE));
         }
 
-        if (targetDir.lengthSqr() < 1.0E-4) {
+        if (nudge.length() > maxDelta) {
+            nudge = nudge.normalize().scale(maxDelta);
+        }
+        if (nudge.lengthSqr() < 1.0E-7) {
             return;
         }
 
-        Vec3 idealVelocity = targetDir.scale(speed);
-        Vec3 velocity = this.fish.getDeltaMovement().lerp(idealVelocity, lerpFactor);
-        this.fish.setDeltaMovement(velocity);
-        this.faceMovement(velocity);
+        this.fish.addDeltaMovement(nudge);
+        this.faceMovement();
     }
 
-    private void faceMovement(Vec3 velocity) {
+    private void faceMovement() {
+        Vec3 velocity = this.fish.getDeltaMovement();
         if (velocity.lengthSqr() < 1.0E-4) {
             return;
         }
-        float yaw = (float) Math.toDegrees(Mth.atan2(-velocity.x, velocity.z));
-        float pitch = (float) -Math.toDegrees(Mth.atan2(velocity.y, velocity.horizontalDistance()));
-        this.fish.setYRot(yaw);
-        this.fish.setYHeadRot(yaw);
-        this.fish.setYBodyRot(yaw);
-        this.fish.setXRot(pitch);
+        Vec3 target = this.fish.position().add(velocity);
+        this.fish.lookAt(EntityAnchorArgument.Anchor.EYES,
+                new Vec3(target.x, target.y + this.fish.getEyeHeight(), target.z));
     }
 
     private Vec3 computeCohesion() {
@@ -164,7 +143,7 @@ public class SchoolBoidGoal extends Goal {
             center = center.add(neighbor.position());
         }
         center = center.scale(1.0 / this.neighbors.size());
-        return center.subtract(this.fish.position()).normalize();
+        return center.subtract(this.fish.position());
     }
 
     private Vec3 computeAlignment() {
@@ -172,7 +151,8 @@ public class SchoolBoidGoal extends Goal {
         for (Mob neighbor : this.neighbors) {
             avgVelocity = avgVelocity.add(neighbor.getDeltaMovement());
         }
-        return avgVelocity.scale(1.0 / this.neighbors.size()).normalize();
+        avgVelocity = avgVelocity.scale(1.0 / this.neighbors.size());
+        return avgVelocity.subtract(this.fish.getDeltaMovement());
     }
 
     private Vec3 computeSeparation() {
@@ -219,19 +199,82 @@ public class SchoolBoidGoal extends Goal {
     }
 
     private void scanNeighbors() {
-        List<Mob> found = this.fish.level().getEntitiesOfClass(
+        List<Mob> visible = this.fish.level().getEntitiesOfClass(
                 Mob.class,
                 this.fish.getBoundingBox().inflate(VIEW_RADIUS),
-                this::isValidSchoolmate
+                this::isSchoolableFish
         );
 
-        Vec3 fishPos = this.fish.position();
-        found.sort(Comparator.comparingDouble(m -> m.distanceToSqr(fishPos.x, fishPos.y, fishPos.z)));
+        this.updateMembership(visible);
 
-        if (found.size() > MAX_NEIGHBORS) {
-            this.neighbors = new ArrayList<>(found.subList(0, MAX_NEIGHBORS));
+        FishBase leader = this.fish.getSchoolLeader();
+        List<Mob> schoolmates = new ArrayList<>();
+        if (leader != null) {
+            for (Mob mob : visible) {
+                if (mob instanceof FishBase other && other.getSchoolLeader() == leader) {
+                    schoolmates.add(mob);
+                }
+            }
+        }
+
+        this.trackLostContact(schoolmates);
+
+        Vec3 fishPos = this.fish.position();
+        schoolmates.sort(Comparator.comparingDouble(m -> m.distanceToSqr(fishPos.x, fishPos.y, fishPos.z)));
+
+        if (schoolmates.size() > this.maxNeighbors) {
+            this.neighbors = new ArrayList<>(schoolmates.subList(0, this.maxNeighbors));
         } else {
-            this.neighbors = found;
+            this.neighbors = schoolmates;
+        }
+    }
+
+    private void updateMembership(List<Mob> visible) {
+        this.fish.validateSchoolLeader();
+
+        if (this.fish.hasSchool() && !this.fish.isSchoolLeader()
+                && this.fish.getRandom().nextFloat() < this.fish.getSchoolDefectionChance()) {
+            this.fish.leaveSchool();
+            this.fish.setSchoolJoinCooldown(REJOIN_COOLDOWN_MIN + this.fish.getRandom().nextInt(REJOIN_COOLDOWN_JITTER));
+            return;
+        }
+
+        boolean effectivelyLone = !this.fish.hasSchool()
+                || (this.fish.isSchoolLeader() && this.fish.getSchoolSize() <= 1);
+        if (!effectivelyLone || !this.fish.canJoinSchool()) {
+            return;
+        }
+
+        FishBase bestLeader = null;
+        double bestDist = Double.MAX_VALUE;
+        for (Mob mob : visible) {
+            if (mob instanceof FishBase other) {
+                FishBase otherLeader = other.getSchoolLeader();
+                if (otherLeader != null && otherLeader != this.fish && otherLeader.canAcceptSchoolMember()) {
+                    double dist = this.fish.distanceToSqr(mob);
+                    if (dist < bestDist) {
+                        bestDist = dist;
+                        bestLeader = otherLeader;
+                    }
+                }
+            }
+        }
+
+        if (bestLeader != null) {
+            this.fish.joinSchool(bestLeader);
+        } else if (!this.fish.hasSchool() && !visible.isEmpty()) {
+            this.fish.startSchool();
+        }
+    }
+
+    private void trackLostContact(List<Mob> schoolmates) {
+        if (this.fish.hasSchool() && !this.fish.isSchoolLeader() && schoolmates.isEmpty()) {
+            if (++this.lonelyScans >= LOST_CONTACT_SCANS) {
+                this.fish.leaveSchool();
+                this.lonelyScans = 0;
+            }
+        } else {
+            this.lonelyScans = 0;
         }
     }
 
@@ -254,32 +297,34 @@ public class SchoolBoidGoal extends Goal {
         }
     }
 
-    private boolean isValidSchoolmate(Mob other) {
+    private boolean isSchoolableFish(Mob other) {
         return other != this.fish
                 && other.isAlive()
                 && other.isInWater()
-                && this.fish.canSchoolWith(other);
+                && this.fish.canSchoolWith(other)
+                && this.isInSchoolingState(other);
     }
 
-    /**
-     * Whether this fish currently has a threat nearby (scatter mode active).
-     * Used by the signal system to suppress non-critical behaviors.
-     */
+    private boolean isInSchoolingState(Mob mob) {
+        if (mob instanceof FishBase fishMob) {
+            if (fishMob.isBaby() && !fishMob.doesBabySchool()) {
+                return false;
+            }
+            if (fishMob.isInLove() && fishMob.shouldDetachOnBreed()) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     public boolean isThreatened() {
         return this.closestThreat != null;
     }
 
-    /**
-     * The cached list of nearby schoolmates, refreshed every SCAN_INTERVAL ticks.
-     * Reused by the signal broadcast system on FishBase to avoid redundant scans.
-     */
     public List<Mob> getNeighbors() {
         return this.neighbors;
     }
 
-    /**
-     * Whether the school (locally) is moving slowly enough for idle behaviors.
-     */
     public boolean isSchoolDrifting() {
         if (this.fish.getDeltaMovement().lengthSqr() > 0.003) {
             return false;

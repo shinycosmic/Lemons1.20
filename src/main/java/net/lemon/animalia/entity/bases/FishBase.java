@@ -40,6 +40,10 @@ public abstract class FishBase extends AnimaliaBreedableWater implements Bucketa
     @Nullable
     private SchoolBoidGoal schoolBoidGoal;
     @Nullable
+    private FishBase schoolLeader;
+    private int schoolSize;
+    private long schoolJoinCooldownEnd;
+    @Nullable
     private SchoolSignal pendingSignal;
     private int signalData;
     private int signalDelay;
@@ -214,7 +218,7 @@ public abstract class FishBase extends AnimaliaBreedableWater implements Bucketa
             return false;
         }
         if (this.schoolBoidGoal != null && !this.schoolBoidGoal.getNeighbors().isEmpty()) {
-            return this.schoolBoidGoal.isSchoolDrifting();
+            return true;
         }
         return true;
     }
@@ -244,6 +248,14 @@ public abstract class FishBase extends AnimaliaBreedableWater implements Bucketa
         return 20;
     }
 
+    public boolean doesBabySchool() {
+        return false;
+    }
+
+    public boolean shouldDetachOnBreed() {
+        return true;
+    }
+
     public boolean isSchoolingFish() {
         return false;
     }
@@ -261,6 +273,73 @@ public abstract class FishBase extends AnimaliaBreedableWater implements Bucketa
 
     public SchoolDepthBias getSchoolDepthBias() {
         return SchoolDepthBias.NONE;
+    }
+
+    @Nullable
+    public FishBase getSchoolLeader() {
+        return this.schoolLeader;
+    }
+
+    public boolean isSchoolLeader() {
+        return this.schoolLeader == this;
+    }
+
+    public boolean hasSchool() {
+        return this.schoolLeader != null;
+    }
+
+    /** Size of this fish's school, leader included. 0 if lone. */
+    public int getSchoolSize() {
+        return this.schoolLeader == null ? 0 : this.schoolLeader.schoolSize;
+    }
+
+    public boolean canAcceptSchoolMember() {
+        return this.isSchoolLeader() && this.isAlive() && this.schoolSize < this.getMaxSchoolSize();
+    }
+
+    public void startSchool() {
+        this.leaveSchool();
+        this.schoolLeader = this;
+        this.schoolSize = 1;
+    }
+
+    public void joinSchool(FishBase leader) {
+        this.leaveSchool();
+        this.schoolLeader = leader;
+        leader.schoolSize++;
+    }
+
+    public void leaveSchool() {
+        if (this.schoolLeader != null && this.schoolLeader != this) {
+            this.schoolLeader.schoolSize--;
+        }
+        this.schoolLeader = null;
+        this.schoolSize = 0;
+    }
+
+    public void validateSchoolLeader() {
+        if (this.schoolLeader != null && this.schoolLeader != this && !this.schoolLeader.isAlive()) {
+            this.schoolLeader = null;
+        }
+    }
+
+    public boolean canJoinSchool() {
+        return this.level().getGameTime() >= this.schoolJoinCooldownEnd;
+    }
+
+    public void setSchoolJoinCooldown(int ticks) {
+        this.schoolJoinCooldownEnd = this.level().getGameTime() + ticks;
+    }
+
+    /** Chance for a non-leader member to wander off from its school. */
+    public float getSchoolDefectionChance() {
+        return 0.0002f;
+    }
+
+    @Override
+    public void remove(RemovalReason reason) {
+        this.leaveSchool();
+        super.remove(reason);
     }
 
     @Override
