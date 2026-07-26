@@ -52,7 +52,7 @@ public class SchoolBoidGoal extends Goal {
     private static final double Y_FLATTEN = 0.2;
 
     private static final int SCAN_INTERVAL = 10;
-    private static final int MAX_NEIGHBORS = 4;
+    private static final int MAX_NEIGHBORS = 6;
     private static final int DEPTH_COMFORT_RANGE = 8;
 
     private final FishBase fish;
