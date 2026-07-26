@@ -241,7 +241,7 @@ public abstract class FishBase extends AnimaliaBreedableWater implements Bucketa
     }
 
     public boolean isSchoolingFish() {
-        return this.getMaxSchoolSize() > 1;
+        return false;
     }
 
     public boolean canSchoolWith(Mob other) {
