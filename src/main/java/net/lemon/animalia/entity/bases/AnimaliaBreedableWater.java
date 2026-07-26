@@ -1,9 +1,11 @@
 package net.lemon.animalia.entity.bases;
 
+import mezz.jei.api.runtime.IClickableIngredient;
 import net.lemon.animalia.entity.ai.EatDroppedItemsGoal;
 import net.lemon.animalia.entity.ai.FishBreedGoal;
 import net.lemon.animalia.entity.bases.interfaces.IActivityTime;
 import net.lemon.animalia.entity.bases.interfaces.IFoodEater;
+import net.lemon.animalia.entity.bases.interfaces.IIdles;
 import net.lemon.animalia.item.FishEggItem;
 import net.lemon.animalia.registry.ModItems;
 import net.lemon.animalia.util.AnimaliaFunctionUtil;
@@ -43,7 +45,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Objects;
 import java.util.UUID;
 
-public abstract class AnimaliaBreedableWater extends WaterAnimal implements IActivityTime, IFoodEater {
+public abstract class AnimaliaBreedableWater extends WaterAnimal implements IActivityTime, IFoodEater, IIdles {
     private static final EntityDataAccessor<Integer> AGE = SynchedEntityData.defineId(AnimaliaBreedableWater.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Integer> GENDER = SynchedEntityData.defineId(AnimaliaBreedableWater.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Integer> VAR_COLOR = SynchedEntityData.defineId(AnimaliaBreedableWater.class, EntityDataSerializers.INT);
@@ -61,6 +63,7 @@ public abstract class AnimaliaBreedableWater extends WaterAnimal implements IAct
     public int cooldown = 0;
     public int growthTicks = -12000;
     private int inLove;
+    private int idleDisplayTicks;
 
     //Constants for hiding logic
     public static final int PHASE_NONE = 0;
@@ -90,6 +93,16 @@ public abstract class AnimaliaBreedableWater extends WaterAnimal implements IAct
 
     public boolean useSmoothControl() {
         return true;
+    }
+
+    @Override
+    public int getIdleDisplayTicks() {
+        return this.idleDisplayTicks;
+    }
+
+    @Override
+    public void setIdleDisplayTicks(int ticks) {
+        this.idleDisplayTicks = ticks;
     }
 
     @Override
@@ -407,6 +420,10 @@ public abstract class AnimaliaBreedableWater extends WaterAnimal implements IAct
     public void aiStep() {
         if (!this.level().isClientSide && this.cooldown > 0) {
             --this.cooldown;
+        }
+
+        if (!this.level().isClientSide) {
+            this.tickIdleDisplay(this);
         }
 
         if (!this.level().isClientSide && this.eatTicks > 0) {

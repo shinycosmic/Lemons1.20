@@ -1,5 +1,8 @@
 package net.lemon.animalia.entity.bases;
 
+import net.lemon.animalia.entity.ai.SchoolBoidGoal;
+import net.lemon.animalia.entity.ai.SchoolDepthBias;
+import net.lemon.animalia.entity.ai.SchoolSignal;
 import net.lemon.animalia.registry.ModItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -19,6 +22,7 @@ import net.minecraft.world.entity.ai.goal.RandomSwimmingGoal;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.entity.ai.navigation.WaterBoundPathNavigation;
 import net.minecraft.world.entity.animal.Bucketable;
+import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -32,10 +36,14 @@ import org.joml.Quaternionf;
 
 public abstract class FishBase extends AnimaliaBreedableWater implements Bucketable {
     private static final EntityDataAccessor<Boolean> FROM_BUCKET = SynchedEntityData.defineId(FishBase.class, EntityDataSerializers.BOOLEAN);
-    //TODO bring schooling into this consolidated base
+
     @Nullable
-    private FishBase leader;
-    private int schoolSize = 1;
+    private SchoolBoidGoal schoolBoidGoal;
+    @Nullable
+    private SchoolSignal pendingSignal;
+    private int signalData;
+    private int signalDelay;
+    private int signalCooldown;
 
     public FishBase(EntityType<? extends FishBase> entityType, Level level) {
         super(entityType, level);
@@ -80,6 +88,10 @@ public abstract class FishBase extends AnimaliaBreedableWater implements Bucketa
     protected void registerGoals() {
         this.goalSelector.addGoal(3, new AvoidEntityGoal<>(this, Player.class, 8.0F, 1.6D, 1.4D, EntitySelector.NO_SPECTATORS::test));
         this.goalSelector.addGoal(7, new RandomSwimmingGoal(this, 1.2D, 10));
+        if (this.isSchoolingFish()) {
+            this.schoolBoidGoal = new SchoolBoidGoal(this);
+            this.goalSelector.addGoal(5, this.schoolBoidGoal);
+        }
         super.registerGoals();
     }
 
@@ -130,6 +142,79 @@ public abstract class FishBase extends AnimaliaBreedableWater implements Bucketa
     protected void playStepSound(BlockPos pPos, BlockState pBlock) {
     }
 
+    public void broadcastSchoolSignal(SchoolSignal signal) {
+        this.broadcastSchoolSignal(signal, -1);
+    }
+
+    public void broadcastSchoolSignal(SchoolSignal signal, int data) {
+        if (this.schoolBoidGoal == null || this.schoolBoidGoal.isThreatened()) {
+            return;
+        }
+        for (Mob neighbor : this.schoolBoidGoal.getNeighbors()) {
+            if (neighbor instanceof FishBase fishNeighbor) {
+                fishNeighbor.receiveSchoolSignal(signal, data);
+            }
+        }
+    }
+
+    public void receiveSchoolSignal(SchoolSignal signal, int data) {
+        if (this.pendingSignal != null || this.signalCooldown > 0 || this.isHiding()) {
+            return;
+        }
+        this.pendingSignal = signal;
+        this.signalData = data;
+        this.signalDelay = signal.getBaseDelay() + this.random.nextInt(signal.getDelayJitter());
+    }
+
+    protected void tickSchoolSignals() {
+        if (this.signalCooldown > 0) {
+            this.signalCooldown--;
+        }
+        if (this.pendingSignal == null) {
+            return;
+        }
+        if (--this.signalDelay <= 0) {
+            SchoolSignal signal = this.pendingSignal;
+            int data = this.signalData;
+            this.pendingSignal = null;
+            boolean acted = this.random.nextFloat() < signal.getAdoptionChance()
+                    && this.onSchoolSignalReceived(signal, data);
+            if (acted && signal.wavePropagates()) {
+                this.broadcastSchoolSignal(signal, data);
+            }
+            this.signalCooldown = 60 + this.random.nextInt(40);
+        }
+    }
+
+    public boolean onSchoolSignalReceived(SchoolSignal signal, int data) {
+        if (signal == SchoolSignal.IDLE_DISPLAY && this.getIdleDisplayCount() > 0
+                && this.canPlayIdleDisplay()) {
+            int display = data >= 0 && data < this.getIdleDisplayCount()
+                    ? data : this.random.nextInt(this.getIdleDisplayCount());
+            return this.startIdleDisplay(display);
+        }
+        return false;
+    }
+
+    @Override
+    public void onSpontaneousIdleDisplay(int displayId) {
+        if (this.isSchoolingFish()) {
+            this.broadcastSchoolSignal(SchoolSignal.IDLE_DISPLAY, displayId);
+            this.signalCooldown = 60 + this.random.nextInt(40);
+        }
+    }
+
+    @Override
+    public boolean canPlayIdleDisplay() {
+        if (this.isHiding()) {
+            return false;
+        }
+        if (this.schoolBoidGoal != null && !this.schoolBoidGoal.getNeighbors().isEmpty()) {
+            return this.schoolBoidGoal.isSchoolDrifting();
+        }
+        return true;
+    }
+
     @Override
     public boolean canBreatheUnderwater() {
         return true;
@@ -151,6 +236,29 @@ public abstract class FishBase extends AnimaliaBreedableWater implements Bucketa
         super.readAdditionalSaveData(pCompound);
     }
 
+    public int getMaxSchoolSize() {
+        return 10;
+    }
+
+    public boolean isSchoolingFish() {
+        return this.getMaxSchoolSize() > 1;
+    }
+
+    public boolean canSchoolWith(Mob other) {
+        return other.getClass() == this.getClass();
+    }
+
+    public boolean isThreat(LivingEntity entity) {
+        if (entity instanceof Player player) {
+            return !player.isCreative() && !player.isSpectator();
+        }
+        return entity instanceof Monster;
+    }
+
+    public SchoolDepthBias getSchoolDepthBias() {
+        return SchoolDepthBias.NONE;
+    }
+
     @Override
     public void aiStep() {
         if (this.shouldJumpOnFlop() && !this.isInWater() && this.onGround() && this.verticalCollision) {
@@ -158,6 +266,10 @@ public abstract class FishBase extends AnimaliaBreedableWater implements Bucketa
             this.setOnGround(false);
             this.hasImpulse = true;
             this.playSound(this.getFlopSound(), this.getSoundVolume(), this.getVoicePitch());
+        }
+
+        if (!this.level().isClientSide && this.isSchoolingFish()) {
+            this.tickSchoolSignals();
         }
 
         if (this.isAlive()) {

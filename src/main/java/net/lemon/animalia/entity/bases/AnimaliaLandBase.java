@@ -4,6 +4,7 @@ import net.lemon.animalia.entity.ai.EatDroppedItemsGoal;
 import net.lemon.animalia.entity.ai.FishBreedGoal;
 import net.lemon.animalia.entity.bases.interfaces.IActivityTime;
 import net.lemon.animalia.entity.bases.interfaces.IFoodEater;
+import net.lemon.animalia.entity.bases.interfaces.IIdles;
 import net.lemon.animalia.item.FishEggItem;
 import net.lemon.animalia.registry.ModItems;
 import net.minecraft.core.BlockPos;
@@ -38,7 +39,7 @@ import java.util.Objects;
 
 import static net.lemon.animalia.entity.bases.AnimaliaBreedableWater.*;
 
-public abstract class AnimaliaLandBase extends Animal implements IActivityTime, IFoodEater {
+public abstract class AnimaliaLandBase extends Animal implements IActivityTime, IFoodEater, IIdles {
     private static final EntityDataAccessor<Integer> GENDER = SynchedEntityData.defineId(AnimaliaLandBase.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Integer> VAR_COLOR = SynchedEntityData.defineId(AnimaliaLandBase.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Float> VAR_SIZE_MULTIPLIER = SynchedEntityData.defineId(AnimaliaLandBase.class, EntityDataSerializers.FLOAT);
@@ -54,6 +55,7 @@ public abstract class AnimaliaLandBase extends Animal implements IActivityTime, 
     public boolean wantsToHide = false;
     public int cooldown = 0;
     public int growthTicks = -12000;
+    private int idleDisplayTicks;
 
     protected AnimaliaLandBase(EntityType<? extends Animal> entityType, Level level) {
         super(entityType, level);
@@ -359,11 +361,25 @@ public abstract class AnimaliaLandBase extends Animal implements IActivityTime, 
     }
 
     @Override
+    public int getIdleDisplayTicks() {
+        return this.idleDisplayTicks;
+    }
+
+    @Override
+    public void setIdleDisplayTicks(int ticks) {
+        this.idleDisplayTicks = ticks;
+    }
+
+    @Override
     public void aiStep() {
         super.aiStep();
 
         if (!this.level().isClientSide && this.cooldown > 0) {
             --this.cooldown;
+        }
+
+        if (!this.level().isClientSide) {
+            this.tickIdleDisplay(this);
         }
 
         if (!this.level().isClientSide && this.eatTicks > 0) {
