@@ -20,5 +20,6 @@ public class HolonetSetup {
         ToxotesEntity.registerHolonet();
         PogonophryneEntity.registerHolonet();
         ChaenocephalusEntity.registerHolonet();
+        RegSchoolingEntity.registerHolonet();
     }
 }

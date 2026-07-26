@@ -26,6 +26,7 @@ public class AnimaliaRenderInit {
         EntityRenderers.register(ModEntities.POGONOPHRYNE_MARMORATA.get(), PogonophryneMarmorataRenderer::new);
         EntityRenderers.register(ModEntities.CHAENOCEPHALUS_ACERATUS.get(), ChaenocephalusAceratusRenderer::new);
         EntityRenderers.register(ModEntities.CYGNODRACO_MAWSONI.get(), CygnodracoMawsoniRenderer::new);
+        EntityRenderers.register(ModEntities.SCATOPHAGUS_ARGUS.get(), ScatophagusArgusRenderer::new);
 
 
 

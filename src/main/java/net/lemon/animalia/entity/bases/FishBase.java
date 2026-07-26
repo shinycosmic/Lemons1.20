@@ -89,10 +89,14 @@ public abstract class FishBase extends AnimaliaBreedableWater implements Bucketa
         this.goalSelector.addGoal(3, new AvoidEntityGoal<>(this, Player.class, 8.0F, 1.6D, 1.4D, EntitySelector.NO_SPECTATORS::test));
         this.goalSelector.addGoal(7, new RandomSwimmingGoal(this, 1.2D, 10));
         if (this.isSchoolingFish()) {
-            this.schoolBoidGoal = new SchoolBoidGoal(this);
+            this.schoolBoidGoal = new SchoolBoidGoal(this, this.maxNeighbors());
             this.goalSelector.addGoal(5, this.schoolBoidGoal);
         }
         super.registerGoals();
+    }
+
+    public int maxNeighbors() {
+        return 6;
     }
 
     @Override
@@ -237,7 +241,7 @@ public abstract class FishBase extends AnimaliaBreedableWater implements Bucketa
     }
 
     public int getMaxSchoolSize() {
-        return 10;
+        return 20;
     }
 
     public boolean isSchoolingFish() {

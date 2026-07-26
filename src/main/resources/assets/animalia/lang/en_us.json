@@ -124,6 +124,7 @@
   "order.animalia.synbranchiformes": "Synbranchiformes",
   "order.animalia.carangiformes": "Carangiformes",
   "order.animalia.siluriformes": "Siluriformes",
+  "order.animalia.acanthuriformes": "Acanthuriformes",
 
   "family.animalia.percophidae": "Percophidae",
   "family.animalia.eleginopidae": "Eleginopidae",
@@ -139,6 +140,7 @@
   "family.animalia.harpagiferidae": "Harpagiferidae",
   "family.animalia.channichthyidae": "Channichthyidae",
   "family.animalia.bathydraconidae": "Bathydraconidae",
+  "family.animalia.scatophagidae": "Scatophagidae",
 
   "trivia.animalia.dissostichus_eleginoides": "The Chilean Sea Bass, also known as the Patagonian Toothfish is an icefish that lives in the southern cold oceans at depths of 45 to over 3000 meters deep.",
   "trivia.animalia.percophis_brasiliensis": "The Brazilian Flathead is considered to be the most basal member of Notothenioidei. It lives off the coast of Brazil and Argentina.",
@@ -158,9 +160,11 @@
   "trivia.animalia.pogonophryne_marmorata": "This species of plunderfish is found in cold and deep antarctic waters. They have a flattened head and a mental barbel, which it uses as a sensory mechanism to find prey.",
   "trivia.animalia.chaenocephalus_aceratus": "The blackfin icefish lives on the Antarctic continental shelf. They have translucent blood and they lack haemoglobin. Male icefish are known to guard their nests after breeding.",
   "trivia.animalia.cygnodraco_mawsoni": "This species of dragonfish lives around the Antarctic continental shelf. They are a demersal species that feeds on other smaller fish and invertebrates. They can be found at depths of up to 300m.",
+  "trivia.animalia.scatophagus_argus": "",
 
   "debug.animalia.trivia": "If this value displays, there is a bug [trivia]",
   "debug.animalia.family": "if this text appears, there is a bug [family]",
+  "debug.animalia.order": "There is a bug if this text appears [order]",
   "tooltip.animalia.holonet.action": "Right-click",
   "tooltip.animalia.holonet.desc": " to use.",
   "toast.animalia.discovered": "discovered!",

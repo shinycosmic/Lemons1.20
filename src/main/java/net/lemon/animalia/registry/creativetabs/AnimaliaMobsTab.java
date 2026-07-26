@@ -27,7 +27,8 @@ public class AnimaliaMobsTab {
             ModItems.RAKTHAMICHTHYS_INDICUS_SPAWN_EGG,
             ModItems.NEMATISTIUS_PECTORALIS_SPAWN_EGG,
             ModItems.TOXOTES_CHATAREUS_SPAWN_EGG,
-            ModItems.BETTA_SPLENDENS_SPAWN_EGG
+            ModItems.BETTA_SPLENDENS_SPAWN_EGG,
+            ModItems.SCATOPHAGUS_ARGUS_SPAWN_EGG
 
 
     );

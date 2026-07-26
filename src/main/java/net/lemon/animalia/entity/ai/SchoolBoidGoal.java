@@ -52,7 +52,7 @@ public class SchoolBoidGoal extends Goal {
     private static final double Y_FLATTEN = 0.2;
 
     private static final int SCAN_INTERVAL = 10;
-    private static final int MAX_NEIGHBORS = 6;
+    private static int MAX_NEIGHBORS;
     private static final int DEPTH_COMFORT_RANGE = 8;
 
     private final FishBase fish;
@@ -63,8 +63,9 @@ public class SchoolBoidGoal extends Goal {
     private Vec3 depthBias = Vec3.ZERO;
     private boolean depthForced;
 
-    public SchoolBoidGoal(FishBase fish) {
+    public SchoolBoidGoal(FishBase fish, int maxNeighbors) {
         this.fish = fish;
+        this. MAX_NEIGHBORS = maxNeighbors;
         this.setFlags(EnumSet.of(Goal.Flag.MOVE));
     }
 

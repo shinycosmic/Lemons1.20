@@ -64,6 +64,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItems.POGONOPHRYNE_MARMORATA_BUCKET);
         simpleItem(ModItems.CHAENOCEPHALUS_ACERATUS_BUCKET);
         simpleItem(ModItems.CYGNODRACO_MAWSONI_BUCKET);
+        simpleItem(ModItems.SCATOPHAGUS_ARGUS_BUCKET);
 
 
         //spawn egg generators
@@ -85,6 +86,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         withExistingParent(ModItems.POGONOPHRYNE_MARMORATA_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
         withExistingParent(ModItems.CHAENOCEPHALUS_ACERATUS_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
         withExistingParent(ModItems.CYGNODRACO_MAWSONI_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
+        withExistingParent(ModItems.SCATOPHAGUS_ARGUS_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
 
 
 

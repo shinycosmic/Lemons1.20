@@ -45,6 +45,7 @@ public class AnimaliaSpawnEggItem extends ForgeSpawnEggItem {
         AnimaliaSpawnEggItem.registerScientificName(ModEntities.POGONOPHRYNE_MARMORATA, "Pogonophryne marmorata");
         AnimaliaSpawnEggItem.registerScientificName(ModEntities.CHAENOCEPHALUS_ACERATUS, "Chaenocephalus aceratus");
         AnimaliaSpawnEggItem.registerScientificName(ModEntities.CYGNODRACO_MAWSONI, "Cygnodraco mawsoni");
+        AnimaliaSpawnEggItem.registerScientificName(ModEntities.SCATOPHAGUS_ARGUS, "Scatophagus argus");
     }
 
     public AnimaliaSpawnEggItem(Supplier<? extends EntityType<? extends Mob>> type, int backgroundColor, int highlightColor, Properties props) {

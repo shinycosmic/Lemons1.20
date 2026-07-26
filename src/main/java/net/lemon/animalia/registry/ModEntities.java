@@ -34,6 +34,8 @@ public class ModEntities {
     public static final RegistryObject<EntityType<ChaenocephalusEntity>> CHAENOCEPHALUS_ACERATUS = registerEntityType("chaenocephalus_aceratus", ChaenocephalusEntity::new, MobCategory.CREATURE, 0.5f, 0.3f);
     public static final RegistryObject<EntityType<ChaenocephalusEntity>> CYGNODRACO_MAWSONI = registerEntityType("cygnodraco_mawsoni", ChaenocephalusEntity::new, MobCategory.CREATURE, 0.5f, 0.3f);
 
+    public static final RegistryObject<EntityType<RegSchoolingEntity>> SCATOPHAGUS_ARGUS = registerEntityType("scatophagus_argus", RegSchoolingEntity::new, MobCategory.CREATURE, 0.5f, 0.3f);
+
 
     /// REGISTER OTHER ENTITIES BELOW
     public static final RegistryObject<EntityType<WaterSpitProjectile>> WATER_SPIT = ENTITY_TYPES.register("water_spit",
