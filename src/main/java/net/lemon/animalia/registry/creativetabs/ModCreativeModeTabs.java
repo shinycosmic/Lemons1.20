@@ -1,6 +1,7 @@
 package net.lemon.animalia.registry.creativetabs;
 
 import net.lemon.animalia.Animalia;
+import net.lemon.animalia.registry.ModBlocks;
 import net.lemon.animalia.registry.ModItems;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
@@ -35,6 +36,13 @@ public class ModCreativeModeTabs {
                     .title(Component.translatable("creativetab.animalia_misc"))
                     .displayItems((param, output) -> {
                         AnimaliaMiscTab.displayItems(output);
+                    })
+                    .build());
+    public static final RegistryObject<CreativeModeTab> ANIMALIA_PLANTS = CREATIVE_MODE_TABS.register("animalia_plants",
+            () -> CreativeModeTab.builder().icon(() -> new ItemStack(ModBlocks.ALGAE_MAT.get()))
+                    .title(Component.translatable("creativetab.animalia_plants"))
+                    .displayItems((param, output) -> {
+                        AnimaliaPlantsTab.displayItems(output);
                     })
                     .build());
 

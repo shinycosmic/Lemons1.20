@@ -46,7 +46,7 @@ public class ModItemTagGenerator extends ItemTagsProvider {
         tag(ModTags.Items.INVERTEBRATE).add(ModItems.ARTEMIA.get());
         tag(ModTags.Items.INVERTEBRATE).add(ModItems.GIGANTOCYPRIS.get());
         tag(ModTags.Items.INVERTEBRATE).add(ModItems.AMPHIPOD.get());
-        tag(ModTags.Items.INVERTEBRATE).add(Items.SEA_PICKLE);
+        tag(ModTags.Items.INVERTEBRATE).add(ModItems.TERMITE.get());
 
         tag(ModTags.Items.MARINE_PLANT).add(Items.KELP);
         tag(ModTags.Items.MARINE_PLANT).add(Items.SEAGRASS);

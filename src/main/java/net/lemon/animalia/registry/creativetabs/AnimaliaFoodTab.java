@@ -21,7 +21,8 @@ public class AnimaliaFoodTab {
             ModItems.GIGANTOCYPRIS,
             ModItems.ARTEMIA,
             ModItems.TADPOLE,
-            ModItems.FISH_FOOD
+            ModItems.FISH_FOOD,
+            ModItems.TERMITE
     );
 
     public static void displayItems(CreativeModeTab.Output output) {

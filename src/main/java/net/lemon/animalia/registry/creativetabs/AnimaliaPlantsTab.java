@@ -9,20 +9,14 @@ import net.minecraftforge.registries.RegistryObject;
 
 import java.util.List;
 
-public class AnimaliaMiscTab {
-    public static final List<RegistryObject<? extends Block>> MISC_BLOCKS = List.of(
+public class AnimaliaPlantsTab {
+    public static final List<RegistryObject<? extends Block>> PLANTS = List.of(
             //Interactables
-            ModBlocks.FILTER_TRAP
-    );
-
-    public static final List<RegistryObject<? extends Item>> MISC_ITEMS = List.of(
-            //Interactables
-            ModItems.HOLONET
+            ModBlocks.ALGAE_MAT
 
     );
 
     public static void displayItems(CreativeModeTab.Output output) {
-        MISC_ITEMS.forEach(item -> output.accept(item.get()));
-        MISC_BLOCKS.forEach(item -> output.accept(item.get()));
+        PLANTS.forEach(item -> output.accept(item.get()));
     }
 }

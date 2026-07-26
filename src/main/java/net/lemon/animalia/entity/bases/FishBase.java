@@ -48,7 +48,7 @@ public abstract class FishBase extends AnimaliaBreedableWater implements Bucketa
     }
 
     public boolean isActuallyMoving() {
-        return this.getDeltaMovement().lengthSqr() > 1.0E-6;
+        return this.walkAnimation.isMoving();
     }
 
     public boolean removeWhenFarAway(double pDistanceToClosestPlayer) {

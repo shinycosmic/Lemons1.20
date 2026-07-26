@@ -36,6 +36,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItems.GIGANTOCYPRIS);
         simpleItem(ModItems.TADPOLE);
         simpleItem(ModItems.ARTEMIA);
+        simpleItem(ModItems.TERMITE);
 
         //Misc
         simpleItem(ModItems.FISH_EGG);
