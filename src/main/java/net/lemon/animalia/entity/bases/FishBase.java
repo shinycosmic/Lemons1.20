@@ -238,6 +238,10 @@ public abstract class FishBase extends AnimaliaBreedableWater implements Bucketa
         super.readAdditionalSaveData(pCompound);
     }
 
+    public double getSchoolSeparationRange() {
+        return 1.5;
+    }
+
     public int getMaxSchoolSize() {
         return 20;
     }

@@ -24,7 +24,6 @@ import java.util.List;
 public class SchoolBoidGoal extends Goal {
 
     private static final double VIEW_RADIUS = 8.0;
-    private static final double SEPARATION_RANGE = 1.5;
     private static final double THREAT_RADIUS = 5.0;
 
     private static final double COHESION_INFLUENCE = 0.05;
@@ -99,7 +98,8 @@ public class SchoolBoidGoal extends Goal {
     public void tick() {
         this.updateDepthBias();
 
-        double maxDelta = Math.max(0.1, this.fish.getAttributeValue(Attributes.MOVEMENT_SPEED)) * this.fish.getSwimSpeed() * MAX_DELTA_FACTOR;
+        double maxDelta = Math.max(0.1, this.fish.getAttributeValue(Attributes.MOVEMENT_SPEED))
+                * this.fish.getSwimSpeed() * MAX_DELTA_FACTOR;
         Vec3 nudge;
 
         if (this.closestThreat != null) {
@@ -158,9 +158,10 @@ public class SchoolBoidGoal extends Goal {
     private Vec3 computeSeparation() {
         Vec3 push = Vec3.ZERO;
         Vec3 fishPos = this.fish.position();
+        double separationRange = this.fish.getSchoolSeparationRange();
         for (Mob neighbor : this.neighbors) {
             double dist = neighbor.distanceTo(this.fish);
-            if (dist < SEPARATION_RANGE && dist > 0.01) {
+            if (dist < separationRange && dist > 0.01) {
                 Vec3 away = fishPos.subtract(neighbor.position()).normalize();
                 push = push.add(away.scale(1.0 / dist));
             }
