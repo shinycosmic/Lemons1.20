@@ -259,7 +259,7 @@ public abstract class FishBase extends AnimaliaBreedableWater implements Bucketa
     }
 
     public boolean canSchoolWith(Mob other) {
-        return other.getClass() == this.getClass();
+        return other.getType() == this.getType();
     }
 
     public boolean isThreat(LivingEntity entity) {
