@@ -32,7 +32,7 @@ public class SchoolBoidGoal extends Goal {
     private static final double SEPARATION_INFLUENCE = 0.25;
     private static final double DEPTH_INFLUENCE = 0.1;
 
-    private static final double MAX_DELTA_FACTOR = 0.075;
+    private static final double MAX_DELTA_FACTOR = 0.0075;
     private static final double FLEE_DELTA_MULTIPLIER = 2.0;
 
     private static final int SCAN_INTERVAL = 10;
@@ -99,7 +99,7 @@ public class SchoolBoidGoal extends Goal {
     public void tick() {
         this.updateDepthBias();
 
-        double maxDelta = Math.max(0.1, this.fish.getAttributeValue(Attributes.MOVEMENT_SPEED)) * MAX_DELTA_FACTOR;
+        double maxDelta = Math.max(0.1, this.fish.getAttributeValue(Attributes.MOVEMENT_SPEED)) * this.fish.getSwimSpeed() * MAX_DELTA_FACTOR;
         Vec3 nudge;
 
         if (this.closestThreat != null) {
