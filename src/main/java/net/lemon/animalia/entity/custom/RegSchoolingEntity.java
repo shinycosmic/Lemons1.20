@@ -132,7 +132,7 @@ public class RegSchoolingEntity extends FishBase implements GeoEntity, Scannable
     }
 
     public float getSwimSpeed() {
-        return  1.2f;
+        return  0.8f;
     }
 
     @Override
