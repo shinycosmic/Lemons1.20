@@ -214,13 +214,7 @@ public abstract class FishBase extends AnimaliaBreedableWater implements Bucketa
 
     @Override
     public boolean canPlayIdleDisplay() {
-        if (this.isHiding()) {
-            return false;
-        }
-        if (this.schoolBoidGoal != null && !this.schoolBoidGoal.getNeighbors().isEmpty()) {
-            return true;
-        }
-        return true;
+        return !this.isHiding();
     }
 
     @Override

@@ -324,18 +324,4 @@ public class SchoolBoidGoal extends Goal {
     public List<Mob> getNeighbors() {
         return this.neighbors;
     }
-
-    public boolean isSchoolDrifting() {
-        if (this.fish.getDeltaMovement().lengthSqr() > 0.003) {
-            return false;
-        }
-        if (this.neighbors.isEmpty()) {
-            return false;
-        }
-        double avgSpeedSq = 0;
-        for (Mob neighbor : this.neighbors) {
-            avgSpeedSq += neighbor.getDeltaMovement().lengthSqr();
-        }
-        return avgSpeedSq / this.neighbors.size() < 0.003;
-    }
 }
