@@ -41,6 +41,10 @@ public class SchoolBoidGoal extends Goal {
     private static final int REJOIN_COOLDOWN_MIN = 600;
     private static final int REJOIN_COOLDOWN_JITTER = 600;
 
+    private static final double PERSONAL_SPACE_MIN = 0.7;
+    private static final double PERSONAL_SPACE_SPREAD = 0.6;
+    private static final int PERSONAL_SPACE_REROLL_CHANCE = 20;
+
     private final FishBase fish;
     private final int maxNeighbors;
 
@@ -50,10 +54,12 @@ public class SchoolBoidGoal extends Goal {
     private int lonelyScans;
     private Vec3 depthBias = Vec3.ZERO;
     private boolean depthForced;
+    private double personalSpace;
 
     public SchoolBoidGoal(FishBase fish, int maxNeighbors) {
         this.fish = fish;
         this.maxNeighbors = maxNeighbors;
+        this.personalSpace = this.rollPersonalSpace();
     }
 
     @Override
@@ -158,15 +164,20 @@ public class SchoolBoidGoal extends Goal {
     private Vec3 computeSeparation() {
         Vec3 push = Vec3.ZERO;
         Vec3 fishPos = this.fish.position();
-        double separationRange = this.fish.getSchoolSeparationRange();
+        double separationRange = this.fish.getSchoolSeparationRange() * this.personalSpace;
         for (Mob neighbor : this.neighbors) {
             double dist = neighbor.distanceTo(this.fish);
             if (dist < separationRange && dist > 0.01) {
                 Vec3 away = fishPos.subtract(neighbor.position()).normalize();
-                push = push.add(away.scale(1.0 / dist));
+                double strength = (separationRange - dist) / (separationRange * dist);
+                push = push.add(away.scale(strength));
             }
         }
         return push;
+    }
+
+    private double rollPersonalSpace() {
+        return PERSONAL_SPACE_MIN + this.fish.getRandom().nextDouble() * PERSONAL_SPACE_SPREAD;
     }
 
     private Vec3 computeFlee() {
@@ -200,6 +211,10 @@ public class SchoolBoidGoal extends Goal {
     }
 
     private void scanNeighbors() {
+        if (this.fish.getRandom().nextInt(PERSONAL_SPACE_REROLL_CHANCE) == 0) {
+            this.personalSpace = this.rollPersonalSpace();
+        }
+
         List<Mob> visible = this.fish.level().getEntitiesOfClass(
                 Mob.class,
                 this.fish.getBoundingBox().inflate(VIEW_RADIUS),
