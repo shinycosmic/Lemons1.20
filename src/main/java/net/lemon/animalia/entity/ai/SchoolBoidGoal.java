@@ -32,7 +32,6 @@ public class SchoolBoidGoal extends Goal {
     private static final double DEPTH_INFLUENCE = 0.1;
 
     private static final double MAX_DELTA_FACTOR = 0.0075;
-    private static final double FLEE_DELTA_MULTIPLIER = 2.0;
 
     private static final int SCAN_INTERVAL = 10;
     private static final int DEPTH_COMFORT_RANGE = 8;
@@ -114,7 +113,7 @@ public class SchoolBoidGoal extends Goal {
             if (this.fish.horizontalCollision) {
                 nudge = nudge.add(0, 0.8, 0);
             }
-            maxDelta = maxDelta * FLEE_DELTA_MULTIPLIER;
+            maxDelta = maxDelta * this.fish.getSchoolFleeSpeedMultiplier();
         } else {
             nudge = this.computeCohesion().scale(COHESION_INFLUENCE)
                     .add(this.computeAlignment().scale(ALIGNMENT_INFLUENCE))

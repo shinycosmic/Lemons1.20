@@ -104,6 +104,10 @@ public class RegSchoolingEntity extends FishBase implements GeoEntity, Scannable
     public double getSchoolSeparationRange() {
         return 0.8;
     }
+    @Override
+    public double getSchoolFleeSpeedMultiplier() {
+        return 2.5;
+    }
 
     @Override
     public int maxNeighbors() {

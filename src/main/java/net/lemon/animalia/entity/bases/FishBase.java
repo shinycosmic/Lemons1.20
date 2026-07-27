@@ -262,6 +262,10 @@ public abstract class FishBase extends AnimaliaBreedableWater implements Bucketa
         return other.getType() == this.getType();
     }
 
+    public double getSchoolFleeSpeedMultiplier() {
+        return 2.0;
+    }
+
     public boolean isThreat(LivingEntity entity) {
         if (entity instanceof Player player) {
             return !player.isCreative() && !player.isSpectator();
