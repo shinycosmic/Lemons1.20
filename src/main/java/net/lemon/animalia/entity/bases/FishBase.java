@@ -1,8 +1,8 @@
 package net.lemon.animalia.entity.bases;
 
 import net.lemon.animalia.entity.ai.SchoolBoidGoal;
-import net.lemon.animalia.entity.ai.SchoolDepthBias;
-import net.lemon.animalia.entity.ai.SchoolSignal;
+import net.lemon.animalia.entity.ai.utils.SchoolDepthBias;
+import net.lemon.animalia.entity.ai.utils.SchoolSignal;
 import net.lemon.animalia.registry.ModItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -17,7 +17,6 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.goal.AvoidEntityGoal;
-import net.minecraft.world.entity.ai.goal.PanicGoal;
 import net.minecraft.world.entity.ai.goal.RandomSwimmingGoal;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.entity.ai.navigation.WaterBoundPathNavigation;
@@ -32,7 +31,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
-import org.joml.Quaternionf;
 
 public abstract class FishBase extends AnimaliaBreedableWater implements Bucketable {
     private static final EntityDataAccessor<Boolean> FROM_BUCKET = SynchedEntityData.defineId(FishBase.class, EntityDataSerializers.BOOLEAN);

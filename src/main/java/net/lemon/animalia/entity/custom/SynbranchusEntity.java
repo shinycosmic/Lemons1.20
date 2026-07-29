@@ -39,7 +39,7 @@ import software.bernie.geckolib.core.object.PlayState;
 
 public class SynbranchusEntity extends BottomWalkerSwimmerBase implements GeoEntity, Scannable {
 
-    private AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
+    private final AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
     private static final float SYNBRANCHUS_MARMORATUS_PIXEL = 48;
     private static final float CHAUDHURIA_CAUDATA_PIXEL = 30;
 

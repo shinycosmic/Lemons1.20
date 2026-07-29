@@ -58,6 +58,10 @@ public abstract class BottomWalkerSwimmerBase extends FishBase {
         this.entityData.define(IS_WALKING, false);
     }
 
+    public boolean hasSwimToWalkTransition() {
+        return true;
+    }
+
     //use !isWalking() to check for is swimming
     public boolean isWalking() {
         return this.entityData.get(IS_WALKING);
@@ -94,6 +98,11 @@ public abstract class BottomWalkerSwimmerBase extends FishBase {
     }
 
     @Override
+    public boolean isPushedByFluid() {
+        return !this.isWalking();
+    }
+
+    @Override
     public void aiStep() {
         if(!this.level().isClientSide) {
             this.selectNavigator();
@@ -122,7 +131,12 @@ public abstract class BottomWalkerSwimmerBase extends FishBase {
             }
 
             if(!(this.stateTime > 0) && !this.isWalking()) {
-                this.wantsToWalk = true;
+                if(this.hasSwimToWalkTransition()) {
+                    this.wantsToWalk = true;
+                } else {
+                    this.setWalking(true);
+                    this.stateTime = this.getWalkTime();
+                }
             }
 
             // Transition: descend to floor, then switch to walking

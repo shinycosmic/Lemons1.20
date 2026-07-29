@@ -59,7 +59,7 @@ import java.util.Arrays;
 import java.util.Map;
 
 public class BettaEntity extends FishBase implements GeoEntity, IsGenetic, Scannable {
-    private AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
+    private final AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
     public BettaTraits traits;
     private static final EntityDataAccessor<Integer> PRIMARY_COLOR = SynchedEntityData.defineId(BettaEntity.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Integer> SECONDARY_COLOR = SynchedEntityData.defineId(BettaEntity.class, EntityDataSerializers.INT);

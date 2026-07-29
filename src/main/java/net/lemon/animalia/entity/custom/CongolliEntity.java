@@ -43,7 +43,7 @@ import java.util.Random;
 
 public class CongolliEntity extends BottomWalkerSwimmerBase implements GeoEntity, Scannable {
     private static final EntityDataAccessor<Boolean> IDLE_SAND = SynchedEntityData.defineId(CongolliEntity.class, EntityDataSerializers.BOOLEAN);
-    private AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
+    private final AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
     private int ambientTicks;
     private int idleSandLength = 30;
     private int sandTimer = idleSandLength;

@@ -1,4 +1,4 @@
-package net.lemon.animalia.entity.ai;
+package net.lemon.animalia.entity.ai.utils;
 
 public enum SchoolDepthBias {
     NONE,

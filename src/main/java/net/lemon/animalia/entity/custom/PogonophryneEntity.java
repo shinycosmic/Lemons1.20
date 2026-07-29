@@ -40,11 +40,11 @@ import java.util.Random;
 
 public class PogonophryneEntity extends BottomWalkerSwimmerBase implements GeoEntity, Scannable {
     private static final EntityDataAccessor<Boolean> IDLE_REST = SynchedEntityData.defineId(PogonophryneEntity.class, EntityDataSerializers.BOOLEAN);
-    private AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
+    private final AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
 
     private int restTicks; // How long is this animal resting
     private int cooldown;
-    private int POGONOPHRYNE_MARMORATA_PIXEL = 19;
+    private static final int POGONOPHRYNE_MARMORATA_PIXEL = 19;
 
     private final Random rand = new Random();
 

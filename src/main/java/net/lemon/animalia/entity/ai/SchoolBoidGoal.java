@@ -1,5 +1,6 @@
 package net.lemon.animalia.entity.ai;
 
+import net.lemon.animalia.entity.ai.utils.SchoolDepthBias;
 import net.lemon.animalia.entity.bases.FishBase;
 import net.minecraft.commands.arguments.EntityAnchorArgument;
 import net.minecraft.core.BlockPos;

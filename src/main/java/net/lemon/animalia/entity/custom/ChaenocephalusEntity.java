@@ -68,9 +68,9 @@ public class ChaenocephalusEntity extends BottomWalkerSwimmerBase implements Geo
     private static final int GUARD_DURATION = 6000;
     private static final int NEST_COOLDOWN = 12000;
 
-    private AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
-    private int CHAENOCEPHALUS_ACERATUS_PIXEL = 37;
-    private int CYGNODRACO_MAWSONI_PIXEL = 31;
+    private final AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
+    private static final int CHAENOCEPHALUS_ACERATUS_PIXEL = 37;
+    private static final int CYGNODRACO_MAWSONI_PIXEL = 31;
     private final Random rand = new Random();
 
     private int nestMakingTicks;

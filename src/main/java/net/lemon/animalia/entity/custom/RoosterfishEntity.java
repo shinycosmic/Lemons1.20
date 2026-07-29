@@ -42,9 +42,9 @@ import software.bernie.geckolib.core.object.PlayState;
 public class RoosterfishEntity extends FishBase implements GeoEntity, Scannable {
 
     private static final EntityDataAccessor<Boolean> IS_STARTLED = SynchedEntityData.defineId(RoosterfishEntity.class, EntityDataSerializers.BOOLEAN);
-    private static final float NEMATISTIUS_PECTORALIS_PIXEL = 41;
+    private static final int NEMATISTIUS_PECTORALIS_PIXEL = 41;
 
-    private AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
+    private final AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
     private int startleCooldown = 0;
     private WaterStartleGoal startleGoal;
 

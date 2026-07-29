@@ -40,8 +40,8 @@ import software.bernie.geckolib.core.object.PlayState;
 
 public class ToxotesEntity extends FishBase implements GeoEntity, Scannable {
 
-    private AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
-    private static final float TOXOTES_CHATAREUS_PIXEL = 19;
+    private final AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
+    private static final int TOXOTES_CHATAREUS_PIXEL = 19;
     private static final EntityDataAccessor<Boolean> IS_SHOOTING = SynchedEntityData.defineId(ToxotesEntity.class, EntityDataSerializers.BOOLEAN);
 
 

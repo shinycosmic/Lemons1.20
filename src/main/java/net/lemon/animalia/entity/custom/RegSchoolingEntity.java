@@ -26,8 +26,8 @@ import software.bernie.geckolib.core.animation.*;
 import software.bernie.geckolib.core.object.PlayState;
 
 public class RegSchoolingEntity extends FishBase implements GeoEntity, Scannable {
-    private AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
-    private static final float SCATOPHAGUS_ARGUS_PIXEL = 14;
+    private final AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
+    private static final int SCATOPHAGUS_ARGUS_PIXEL = 14;
 
     public RegSchoolingEntity(EntityType<? extends FishBase> entityType, Level level) {
         super(entityType, level);

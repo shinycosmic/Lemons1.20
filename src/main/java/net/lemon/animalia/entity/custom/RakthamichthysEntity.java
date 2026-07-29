@@ -36,7 +36,7 @@ import software.bernie.geckolib.core.object.PlayState;
 
 public class RakthamichthysEntity extends BottomWalkerSwimmerBase implements GeoEntity, Scannable {
 
-    private AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
+    private final AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
     private int stillTicks = 0;
     private static final int FREEZE_DELAY = 10;
 

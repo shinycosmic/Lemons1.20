@@ -55,7 +55,7 @@ public class BottomWalkerNodeEvaluator extends WalkNodeEvaluator {
     @Override
     public BlockPathTypes getBlockPathType(BlockGetter level, int x, int y, int z, Mob mob) {
         BlockPathTypes type = super.getBlockPathType(level, x, y, z, mob);
-        if (level.getFluidState(new BlockPos(x, y, z)).is(FluidTags.WATER)) {
+        if (type == BlockPathTypes.WATER) {
             return BlockPathTypes.WALKABLE;
         }
         return type;
