@@ -9,15 +9,21 @@ import net.lemon.animalia.registry.ModTags;
 import net.lemon.animalia.util.AnimaliaFunctionUtil;
 import net.lemon.animalia.util.HolonetEntities;
 import net.lemon.animalia.util.Scannable;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.SpawnGroupData;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.ServerLevelAccessor;
+import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.core.animatable.GeoAnimatable;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
@@ -101,6 +107,9 @@ public class RegSchoolingEntity extends FishBase implements GeoEntity, Scannable
     }
 
     @Override
+    public int getEatLength() { return 5; }
+
+    @Override
     public double getSchoolSeparationRange() {
         return 0.8;
     }
@@ -110,13 +119,11 @@ public class RegSchoolingEntity extends FishBase implements GeoEntity, Scannable
     }
 
     @Override
-    public int maxNeighbors() {
-        return 2;
-    }
-
-    @Override
     public int getMaxSchoolSize() {
-        return 6;
+        if (this.getType() == ModEntities.SCATOPHAGUS_ARGUS.get()) {
+            return 6;
+        }
+        return super.getMaxSchoolSize();
     }
 
     @Override
@@ -141,7 +148,7 @@ public class RegSchoolingEntity extends FishBase implements GeoEntity, Scannable
     }
 
     public float getSwimSpeed() {
-        return  0.8f;
+        return  1.2f;
     }
 
     @Override
@@ -184,5 +191,14 @@ public class RegSchoolingEntity extends FishBase implements GeoEntity, Scannable
     @Override
     public AnimatableInstanceCache getAnimatableInstanceCache() {
         return cache;
+    }
+
+    @Override
+    public @Nullable SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, MobSpawnType reason, @Nullable SpawnGroupData spawnData, @Nullable CompoundTag dataTag) {
+        if (reason != MobSpawnType.BUCKET) {
+            this.setVarColor(1);
+            this.setVarSizeMultiplier(this.genVarSizeMultiplier());
+        }
+        return super.finalizeSpawn(level, difficulty, reason, spawnData, dataTag);
     }
 }
