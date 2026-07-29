@@ -16,6 +16,7 @@ import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.SpawnGroupData;
 import net.minecraft.world.entity.ai.goal.AvoidEntityGoal;
@@ -25,9 +26,11 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.GeoEntity;
+import software.bernie.geckolib.core.animatable.GeoAnimatable;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.core.animatable.instance.SingletonAnimatableInstanceCache;
-import software.bernie.geckolib.core.animation.AnimatableManager;
+import software.bernie.geckolib.core.animation.*;
+import software.bernie.geckolib.core.object.PlayState;
 
 public class CrayfishEntity extends BottomWalkerSwimmerBase implements GeoEntity, Scannable, ICanThreat {
     private final AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
@@ -133,12 +136,59 @@ public class CrayfishEntity extends BottomWalkerSwimmerBase implements GeoEntity
 
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
+        controllers.add(new AnimationController<>(this, "controller", 10, this::predicate));
+        controllers.add(new AnimationController<>(this, "threat_controller", 5, this::threatPredicate));
+        controllers.add(new AnimationController<>(this, "attack_controller", 0, this::attackPredicate)
+                .triggerableAnim("attack", RawAnimation.begin().then("attack", Animation.LoopType.PLAY_ONCE)));
+    }
 
+    private <T extends GeoAnimatable> PlayState predicate(AnimationState<T> animationState) {
+        AnimationController<T> controller = animationState.getController();
+
+        if (!this.isInWater()) {
+            controller.setAnimation(RawAnimation.begin().then("beach", Animation.LoopType.LOOP));
+            return PlayState.CONTINUE;
+        }
+
+        if (this.isWalking()) {
+            controller.setAnimation(RawAnimation.begin().then("walk", Animation.LoopType.LOOP));
+            return PlayState.CONTINUE;
+        }
+
+        controller.setAnimation(RawAnimation.begin().then("swim", Animation.LoopType.LOOP));
+        return PlayState.CONTINUE;
+    }
+
+    private <T extends GeoAnimatable> PlayState threatPredicate(AnimationState<T> state) {
+        AnimationController<T> controller = state.getController();
+
+        if (this.getThreatPhase() == THREAT_PHASE_DISPLAY) {
+            controller.setAnimation(RawAnimation.begin()
+                    .then("threat_enter", Animation.LoopType.PLAY_ONCE)
+                    .thenLoop("threat_hold"));
+            return PlayState.CONTINUE;
+        }
+
+        if (this.getThreatPhase() == THREAT_PHASE_LEAVING) {
+            controller.setAnimation(RawAnimation.begin().then("threat_exit", Animation.LoopType.PLAY_ONCE));
+            return PlayState.CONTINUE;
+        }
+
+        return PlayState.STOP;
+    }
+
+    private <T extends GeoAnimatable> PlayState attackPredicate(AnimationState<T> state) {
+        return PlayState.STOP;
     }
 
     @Override
     public AnimatableInstanceCache getAnimatableInstanceCache() {
         return cache;
+    }
+
+    @Override
+    public boolean shouldJumpOnFlop() {
+        return false;
     }
 
     @Override
@@ -157,13 +207,36 @@ public class CrayfishEntity extends BottomWalkerSwimmerBase implements GeoEntity
     }
 
     @Override
+    protected void defineSynchedData() {
+        super.defineSynchedData();
+        this.entityData.define(THREAT_PHASE, THREAT_PHASE_NONE);
+    }
+
+    @Override
     public int getThreatPhase() {
-        return 0;
+        return this.entityData.get(THREAT_PHASE);
     }
 
     @Override
     public void setThreatPhase(int phase) {
+        this.entityData.set(THREAT_PHASE, phase);
+    }
 
+    @Override
+    public boolean canStartThreatening() {
+        return !this.isHiding() && this.isWalking() && this.onGround();
+    }
+
+    @Override
+    public void onThreatTick(LivingEntity threat) {
+        if (this.attackCooldown > 0) {
+            this.attackCooldown--;
+            return;
+        }
+        if (this.getBoundingBox().inflate(0.3D).intersects(threat.getBoundingBox())) {
+            this.doHurtTarget(threat);
+            this.attackCooldown = ATTACK_ANIM_TICKS;
+        }
     }
 
     @Override
