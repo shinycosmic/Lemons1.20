@@ -6,7 +6,6 @@ import net.lemon.animalia.entity.bases.BottomWalkerSwimmerBase;
 import net.lemon.animalia.entity.bases.FishBase;
 import net.lemon.animalia.entity.bases.interfaces.ICanThreat;
 import net.lemon.animalia.registry.ModEntities;
-import net.lemon.animalia.util.HolonetEntities;
 import net.lemon.animalia.util.Scannable;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -114,6 +113,14 @@ public class CrayfishEntity extends BottomWalkerSwimmerBase implements GeoEntity
     //TODO
     public static void registerHolonet(){
 //        HolonetEntities.register(ModEntities.PSEUDAPHRITIS_URVILLII, Scannable.AppName.FIELD, "Perciformes");
+    }
+
+    @Override
+    public void aiStep() {
+        super.aiStep();
+        if (!this.level().isClientSide && this.attackCooldown > 0) {
+            this.attackCooldown--;
+        }
     }
 
     @Override
@@ -230,11 +237,11 @@ public class CrayfishEntity extends BottomWalkerSwimmerBase implements GeoEntity
     @Override
     public void onThreatTick(LivingEntity threat) {
         if (this.attackCooldown > 0) {
-            this.attackCooldown--;
             return;
         }
         if (this.getBoundingBox().inflate(0.3D).intersects(threat.getBoundingBox())) {
             this.doHurtTarget(threat);
+            this.triggerAnim("attack_controller", "attack");
             this.attackCooldown = ATTACK_ANIM_TICKS;
         }
     }
