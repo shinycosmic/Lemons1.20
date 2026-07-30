@@ -7,6 +7,7 @@ import net.lemon.animalia.entity.bases.FishBase;
 import net.lemon.animalia.registry.ModEntities;
 import net.lemon.animalia.registry.ModItems;
 import net.lemon.animalia.registry.ModTags;
+import net.lemon.animalia.registry.spawning.SpawnBand;
 import net.lemon.animalia.util.AnimaliaFunctionUtil;
 import net.lemon.animalia.util.HolonetEntities;
 import net.lemon.animalia.util.Scannable;
@@ -76,6 +77,11 @@ public class ToxotesEntity extends FishBase implements GeoEntity, Scannable {
                 .add(Attributes.MAX_HEALTH, 6D)
                 .add(Attributes.MOVEMENT_SPEED, 0.8f)
                 .build();
+    }
+
+    @Override
+    public SpawnBand spawnBand() {
+        return SpawnBand.SHALLOW;
     }
 
     public float getSwimSpeed() {

@@ -9,6 +9,7 @@ import net.lemon.animalia.entity.bases.AnimaliaBreedableWater;
 import net.lemon.animalia.entity.bases.FishBase;
 import net.lemon.animalia.registry.ModEntities;
 import net.lemon.animalia.registry.ModItems;
+import net.lemon.animalia.registry.spawning.SpawnBand;
 import net.lemon.animalia.util.HolonetEntities;
 import net.lemon.animalia.util.Scannable;
 import net.minecraft.nbt.CompoundTag;
@@ -44,6 +45,11 @@ public class MastacembelusEntity extends FishBase implements GeoEntity, Scannabl
     public MastacembelusEntity(EntityType<? extends FishBase> entityType, Level level) {
         super(entityType, level);
         this.moveControl = new BottomDwellingMoveHelperController(this);
+    }
+
+    @Override
+    public SpawnBand spawnBand() {
+        return SpawnBand.FLOOR;
     }
 
     @Override

@@ -7,6 +7,7 @@ import net.lemon.animalia.entity.bases.ActivityTime;
 import net.lemon.animalia.entity.bases.FishBase;
 import net.lemon.animalia.registry.ModEntities;
 import net.lemon.animalia.registry.ModItems;
+import net.lemon.animalia.registry.spawning.SpawnBand;
 import net.lemon.animalia.util.AnimaliaFunctionUtil;
 import net.lemon.animalia.util.HolonetEntities;
 import net.lemon.animalia.util.Scannable;
@@ -64,6 +65,11 @@ public class ToothfishEntity extends FishBase implements GeoEntity, Scannable {
                 .add(Attributes.MAX_HEALTH, 4D)
                 .add(Attributes.MOVEMENT_SPEED, 0.4f)
                 .build();
+    }
+
+    @Override
+    public SpawnBand spawnBand() {
+        return SpawnBand.DEEP;
     }
 
     @Override
