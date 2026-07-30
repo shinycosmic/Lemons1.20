@@ -2,11 +2,12 @@ package net.lemon.animalia.entity.render;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.lemon.animalia.entity.custom.CrayfishEntity;
-import net.lemon.animalia.entity.custom.RegSchoolingEntity;
 import net.lemon.animalia.entity.model.ProcambarusModel;
-import net.lemon.animalia.entity.model.ScatophagusArgusModel;
 import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
+import net.minecraft.resources.ResourceLocation;
+import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.cache.object.BakedGeoModel;
 import software.bernie.geckolib.renderer.GeoEntityRenderer;
 
@@ -21,6 +22,11 @@ public class ProcambarusRenderer extends GeoEntityRenderer<CrayfishEntity> {
     public void render(CrayfishEntity entity, float entityYaw, float partialTick, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight) {
         if(entity.tickCount <= 1 && !entity.isRemoved()) return;
         super.render(entity, entityYaw, partialTick, poseStack, bufferSource, packedLight);
+    }
+
+    @Override
+    public RenderType getRenderType(CrayfishEntity animatable, ResourceLocation texture, @Nullable MultiBufferSource bufferSource, float partialTick) {
+        return RenderType.entityTranslucent(texture);
     }
 
     @Override

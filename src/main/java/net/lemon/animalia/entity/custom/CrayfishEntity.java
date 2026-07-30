@@ -110,7 +110,6 @@ public class CrayfishEntity extends BottomWalkerSwimmerBase implements GeoEntity
         return new ItemStack(ModItems.PROCAMBARUS_ALLENI_BUCKET.get());
     }
 
-    //TODO
     @Override
     public int getScaleforGUI() {
         if (this.getType() == ModEntities.PROCAMBARUS_LUCIFUGUS.get()) {
@@ -159,7 +158,7 @@ public class CrayfishEntity extends BottomWalkerSwimmerBase implements GeoEntity
     @Override
     public float getSwimSpeed() {
         if(this.isWalking()) {
-            return 1.8f;
+            return 0.4f;
         }
         return 0.6f;
     }
