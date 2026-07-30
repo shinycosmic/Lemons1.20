@@ -17,7 +17,7 @@ public class ChaudhuriaCaudataModel extends GeoModel<SynbranchusEntity> {
         if(object.isBaby()) {
             return new ResourceLocation(Animalia.MODID, "textures/entity/babygenericeel.png");
         }
-        return new ResourceLocation(Animalia.MODID, "textures/entity/chaudhuriacaudata.png");
+        return new ResourceLocation(Animalia.MODID, "textures/entity/chaudhuria_caudata.png");
     }
 
     public ResourceLocation getAnimationResource(SynbranchusEntity animatable) {

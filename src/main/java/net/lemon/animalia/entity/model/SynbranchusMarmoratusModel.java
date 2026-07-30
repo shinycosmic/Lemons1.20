@@ -22,7 +22,7 @@ public class SynbranchusMarmoratusModel extends GeoModel<SynbranchusEntity> {
         if(object.isBaby()) {
             return new ResourceLocation(Animalia.MODID, "textures/entity/babygenericeel.png");
         }
-        return new ResourceLocation(Animalia.MODID, "textures/entity/synbranchusmarmoratus.png");
+        return new ResourceLocation(Animalia.MODID, "textures/entity/synbranchus_marmoratus.png");
     }
 
     public ResourceLocation getAnimationResource(SynbranchusEntity animatable) {

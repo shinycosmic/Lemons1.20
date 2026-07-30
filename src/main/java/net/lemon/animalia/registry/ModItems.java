@@ -33,6 +33,7 @@ public class ModItems {
     public static final RegistryObject<Item> COOKED_VENISON = ITEMS.register("cooked_venison", () -> new Item(new Item.Properties().food(ModFoods.COOKED_VENISON)));
     public static final RegistryObject<Item> COOKED_FISH = ITEMS.register("cooked_fish", () -> new Item(new Item.Properties().food(ModFoods.COOKED_FISH)));
     public static final RegistryObject<Item> RAW_CRUSTACEAN = ITEMS.register("raw_crustacean", () -> new Item(new Item.Properties().food(ModFoods.FISH_FOOD)));
+    public static final RegistryObject<Item> COOKED_CRUSTACEAN = ITEMS.register("cooked_crustacean", () -> new Item(new Item.Properties().food(ModFoods.COOKED_FISH)));
 
 
 
@@ -58,9 +59,12 @@ public class ModItems {
 //    public static final RegistryObject<Item> LEPTOBRAMA_MUELLERI_BUCKET = registerBucket("leptobrama_muelleri_bucket", ModEntities.LEPTOBRAMA_MUELLERI);
 //    public static final RegistryObject<Item> PANGASIANODON_GIGAS_BUCKET = registerBucket("pangasianodon_gigas_bucket", ModEntities.PANGASIANODON_GIGAS);
     public static final RegistryObject<Item> SCATOPHAGUS_ARGUS_BUCKET = registerBucket("scatophagus_argus_bucket", ModEntities.SCATOPHAGUS_ARGUS);
-
-
     public static final RegistryObject<Item> BETTA_SPLENDENS_BUCKET = registerBucket("betta_splendens_bucket", ModEntities.BETTA_SPLENDENS);
+    public static final RegistryObject<Item> PROCAMBARUS_CLARKII_BUCKET = registerBucket("procambarus_clarkii_bucket", ModEntities.PROCAMBARUS_CLARKII);
+    public static final RegistryObject<Item> PROCAMBARUS_ALLENI_BUCKET = registerBucket("procambarus_alleni_bucket", ModEntities.PROCAMBARUS_ALLENI);
+    public static final RegistryObject<Item> PROCAMBARUS_VIRGINALIS_BUCKET = registerBucket("procambarus_virginalis_bucket", ModEntities.PROCAMBARUS_VIRGINALIS);
+    public static final RegistryObject<Item> PROCAMBARUS_LUCIFUGUS_BUCKET = registerBucket("procambarus_lucifugus_bucket", ModEntities.PROCAMBARUS_LUCIFUGUS);
+
 
 
 
@@ -104,6 +108,11 @@ public class ModItems {
 //    public static final RegistryObject<Item> PANGASIANODON_GIGAS_SPAWN_EGG = registerSpawnEgg("pangasianodon_gigas_spawn_egg", ModEntities.PANGASIANODON_GIGAS, 0x7d8a90, 0x282629);
     public static final RegistryObject<Item> SCATOPHAGUS_ARGUS_SPAWN_EGG = registerSpawnEgg("scatophagus_argus_spawn_egg", ModEntities.SCATOPHAGUS_ARGUS, 0xe0d738, 0x1c201b);
 
+    //Non Fish Spawn Eggs
+    public static final RegistryObject<Item> PROCAMBARUS_CLARKII_SPAWN_EGG = registerSpawnEgg("procambarus_clarkii_spawn_egg", ModEntities.PROCAMBARUS_CLARKII, 0x932a2a, 0x202522);
+    public static final RegistryObject<Item> PROCAMBARUS_ALLENI_SPAWN_EGG = registerSpawnEgg("procambarus_alleni_spawn_egg", ModEntities.PROCAMBARUS_ALLENI, 0xdb743a, 0x26a5c6);
+    public static final RegistryObject<Item> PROCAMBARUS_VIRGINALIS_SPAWN_EGG = registerSpawnEgg("procambarus_virginalis_spawn_egg", ModEntities.PROCAMBARUS_VIRGINALIS, 0x332b20, 0x8a7346);
+    public static final RegistryObject<Item> PROCAMBARUS_LUCIFUGUS_SPAWN_EGG = registerSpawnEgg("procambarus_lucifugus_spawn_egg", ModEntities.PROCAMBARUS_LUCIFUGUS, 0xab9782, 0xbbb8c9);
 
 
 

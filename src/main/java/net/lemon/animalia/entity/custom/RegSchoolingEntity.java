@@ -21,6 +21,7 @@ import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import org.jetbrains.annotations.Nullable;
@@ -95,7 +96,7 @@ public class RegSchoolingEntity extends FishBase implements GeoEntity, Scannable
         if (this.getType() == ModEntities.SCATOPHAGUS_ARGUS.get()) {
             return new ItemStack(ModItems.SCATOPHAGUS_ARGUS_BUCKET.get());
         }
-        return new ItemStack(ModItems.CHAENOCEPHALUS_ACERATUS_BUCKET.get());
+        return new ItemStack(Items.SALMON_BUCKET);
     }
 
     @Override

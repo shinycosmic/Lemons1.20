@@ -18,7 +18,7 @@ public class RakthamichthysIndicusModel extends GeoModel<RakthamichthysEntity> {
         if(object.isBaby()) {
             return new ResourceLocation(Animalia.MODID, "textures/entity/babygenericeel.png");
         }
-        return new ResourceLocation(Animalia.MODID, "textures/entity/rakthamichthysindicus.png");
+        return new ResourceLocation(Animalia.MODID, "textures/entity/rakthamichthys_indicus.png");
     }
 
     public ResourceLocation getAnimationResource(RakthamichthysEntity animatable) {

@@ -31,11 +31,18 @@ public class ModItemTagGenerator extends ItemTagsProvider {
         tag(ModTags.Items.CRUSTACEAN).add(ModItems.GIGANTOCYPRIS.get());
         tag(ModTags.Items.CRUSTACEAN).add(ModItems.FISH_FOOD.get());
         tag(ModTags.Items.CRUSTACEAN).add(ModItems.ARTEMIA.get());
+        tag(ModTags.Items.CRUSTACEAN).add(ModItems.RAW_CRUSTACEAN.get());
+        tag(ModTags.Items.CRUSTACEAN).add(ModItems.COOKED_CRUSTACEAN.get());
+        tag(ModTags.Items.CRUSTACEAN).add(ModItems.PROCAMBARUS_CLARKII.get());
+        tag(ModTags.Items.CRUSTACEAN).add(ModItems.PROCAMBARUS_ALLENI.get());
+        tag(ModTags.Items.CRUSTACEAN).add(ModItems.PROCAMBARUS_VIRGINALIS.get());
+        tag(ModTags.Items.CRUSTACEAN).add(ModItems.PROCAMBARUS_LUCIFUGUS.get());
 
         tag(ModTags.Items.FISH_FOOD).add(ModItems.ARTEMIA.get());
         tag(ModTags.Items.FISH_FOOD).add(ModItems.FISH_FOOD.get());
         tag(ModTags.Items.FISH_FOOD).add(ModItems.GIGANTOCYPRIS.get());
         tag(ModTags.Items.FISH_FOOD).add(ModItems.AMPHIPOD.get());
+        tag(ModTags.Items.FISH_FOOD).add(ModItems.RAW_CRUSTACEAN.get());
         tag(ModTags.Items.FISH_FOOD).add(Items.KELP);
         tag(ModTags.Items.FISH_FOOD).add(Items.WHEAT_SEEDS);
         tag(ModTags.Items.FISH_FOOD).add(Items.BEETROOT_SEEDS);
@@ -47,6 +54,12 @@ public class ModItemTagGenerator extends ItemTagsProvider {
         tag(ModTags.Items.INVERTEBRATE).add(ModItems.GIGANTOCYPRIS.get());
         tag(ModTags.Items.INVERTEBRATE).add(ModItems.AMPHIPOD.get());
         tag(ModTags.Items.INVERTEBRATE).add(ModItems.TERMITE.get());
+        tag(ModTags.Items.INVERTEBRATE).add(ModItems.RAW_CRUSTACEAN.get());
+        tag(ModTags.Items.INVERTEBRATE).add(ModItems.COOKED_CRUSTACEAN.get());
+        tag(ModTags.Items.INVERTEBRATE).add(ModItems.PROCAMBARUS_CLARKII.get());
+        tag(ModTags.Items.INVERTEBRATE).add(ModItems.PROCAMBARUS_ALLENI.get());
+        tag(ModTags.Items.INVERTEBRATE).add(ModItems.PROCAMBARUS_VIRGINALIS.get());
+        tag(ModTags.Items.INVERTEBRATE).add(ModItems.PROCAMBARUS_LUCIFUGUS.get());
 
         tag(ModTags.Items.MARINE_PLANT).add(Items.KELP);
         tag(ModTags.Items.MARINE_PLANT).add(Items.SEAGRASS);

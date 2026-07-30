@@ -17,7 +17,7 @@ public class SinobdellaSinensisModel extends GeoModel<MastacembelusEntity> {
         if(object.isBaby()) {
             return new ResourceLocation(Animalia.MODID, "textures/entity/babypeacockeel.png");
         }
-        return new ResourceLocation(Animalia.MODID, "textures/entity/sinobdellasinensis.png");
+        return new ResourceLocation(Animalia.MODID, "textures/entity/sinobdella_sinensis.png");
     }
 
     public ResourceLocation getAnimationResource(MastacembelusEntity animatable) {

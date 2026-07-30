@@ -21,7 +21,7 @@ public class ToxotesChatareusModel extends GeoModel<ToxotesEntity> {
         if(object.isBaby()) {
             return new ResourceLocation(Animalia.MODID, "textures/entity/babygenericnotothen.png");
         }
-        return new ResourceLocation(Animalia.MODID, "textures/entity/toxoteschatareus.png");
+        return new ResourceLocation(Animalia.MODID, "textures/entity/toxotes_chatareus.png");
     }
 
     public ResourceLocation getAnimationResource(ToxotesEntity animatable) {

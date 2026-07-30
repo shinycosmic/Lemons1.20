@@ -62,12 +62,18 @@
   "item.animalia.raw_venison": "Raw Venison",
   "item.animalia.cooked_venison": "Cooked Venison",
   "item.animalia.cooked_fish": "Cooked Fish",
+  "item.animalia.raw_crustacean": "Raw Crustacean",
+  "item.animalia.cooked_crustacean": "Cooked Crustacean",
 
   "item.animalia.amphipod": "Amphipod",
   "item.animalia.gigantocypris": "Giant Ostracod",
   "item.animalia.tadpole": "Tadpole",
   "item.animalia.artemia": "Brine Shrimp",
   "item.animalia.termite": "Termite",
+  "item.animalia.procambarus_clarkii": "Red Swamp Crayfish",
+  "item.animalia.procambarus_alleni": "Everglades Crayfish",
+  "item.animalia.procambarus_virginalis": "Marbled Crayfish",
+  "item.animalia.procambarus_lucifugus": "Light-Fleeing Crayfish",
 
   "item.animalia.bucket": "Bucket of %s",
   "item.animalia.spawn_egg": "%s Spawn Egg",
@@ -92,6 +98,10 @@
   "entity.animalia.cygnodraco_mawsoni": "Mawson's Dragonfish",
   "entity.animalia.chaenocephalus_aceratus": "Blackfin Icefish",
   "entity.animalia.scatophagus_argus": "Spotted Scat",
+  "entity.animalia.procambarus_clarkii": "Red Swamp Crayfish",
+  "entity.animalia.procambarus_alleni": "Everglades Crayfish",
+  "entity.animalia.procambarus_virginalis": "Marbled Crayfish",
+  "entity.animalia.procambarus_lucifugus": "Light-Fleeing Crayfish",
 
   "tooltip.animalia.baby": "Juvenile",
   "container.animalia.filter_trap": "Water Trap",
@@ -139,6 +149,10 @@
   "entity.animalia.chaenocephalus_aceratus.scientific": "Chaenocephalus aceratus",
   "entity.animalia.cygnodraco_mawsoni.scientific": "Cygnodraco mawsoni",
   "entity.animalia.scatophagus_argus.scientific": "Scatophagus argus",
+  "entity.animalia.procambarus_clarkii.scientific": "Procambarus clarkii",
+  "entity.animalia.procambarus_virginalis.scientific": "Procambarus virginalis",
+  "entity.animalia.procambarus_alleni.scientific": "Procambarus alleni",
+  "entity.animalia.procambarus_lucifugus.scientific": "Procambarus lucifugus",
 
   "order.animalia.perciformes": "Perciformes",
   "order.animalia.anabantiformes": "Anabantiformes",
@@ -146,6 +160,7 @@
   "order.animalia.carangiformes": "Carangiformes",
   "order.animalia.siluriformes": "Siluriformes",
   "order.animalia.acanthuriformes": "Acanthuriformes",
+  "order.animalia.decapoda": "Decapoda",
 
   "family.animalia.percophidae": "Percophidae",
   "family.animalia.eleginopidae": "Eleginopidae",
@@ -162,6 +177,7 @@
   "family.animalia.channichthyidae": "Channichthyidae",
   "family.animalia.bathydraconidae": "Bathydraconidae",
   "family.animalia.scatophagidae": "Scatophagidae",
+  "family.animalia.cambaridae": "Cambaridae",
 
   "trivia.animalia.dissostichus_eleginoides": "The Chilean Sea Bass, also known as the Patagonian Toothfish is an icefish that lives in the southern cold oceans at depths of 45 to over 3000 meters deep.",
   "trivia.animalia.percophis_brasiliensis": "The Brazilian Flathead is considered to be the most basal member of Notothenioidei. It lives off the coast of Brazil and Argentina.",
@@ -182,6 +198,10 @@
   "trivia.animalia.chaenocephalus_aceratus": "The blackfin icefish lives on the Antarctic continental shelf. They have translucent blood and they lack haemoglobin. Male icefish are known to guard their nests after breeding.",
   "trivia.animalia.cygnodraco_mawsoni": "This species of dragonfish lives around the Antarctic continental shelf. They are a demersal species that feeds on other smaller fish and invertebrates. They can be found at depths of up to 300m.",
   "trivia.animalia.scatophagus_argus": "Spotted Scats are omnivorous freshwater to saltwater fish. Despite the name, eating dung has not been confirmed for this species. They can form small schools.",
+  "trivia.animalia.procambarus_clarkii": "",
+  "trivia.animalia.procambarus_alleni": "",
+  "trivia.animalia.procambarus_virginalis": "",
+  "trivia.animalia.procambarus_lucifugus": "",
 
   "debug.animalia.trivia": "If this value displays, there is a bug [trivia]",
   "debug.animalia.family": "if this text appears, there is a bug [family]",

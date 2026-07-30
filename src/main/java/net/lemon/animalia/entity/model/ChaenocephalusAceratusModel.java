@@ -18,7 +18,7 @@ public class ChaenocephalusAceratusModel extends GeoModel<ChaenocephalusEntity> 
         if(object.isBaby()) {
             return new ResourceLocation(Animalia.MODID, "textures/entity/babygenericnotothen.png");
         }
-        return new ResourceLocation(Animalia.MODID, "textures/entity/chaenocephalusaceratus.png");
+        return new ResourceLocation(Animalia.MODID, "textures/entity/chaenocephalus_aceratus.png");
     }
 
     public ResourceLocation getAnimationResource(ChaenocephalusEntity animatable) {

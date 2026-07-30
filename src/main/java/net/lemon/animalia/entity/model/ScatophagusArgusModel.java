@@ -16,7 +16,7 @@ public class ScatophagusArgusModel extends GeoModel<RegSchoolingEntity> {
     }
 
     public ResourceLocation getTextureResource(RegSchoolingEntity object) {
-        return new ResourceLocation(Animalia.MODID, "textures/entity/scatophagusargus.png");
+        return new ResourceLocation(Animalia.MODID, "textures/entity/scatophagus_argus.png");
     }
 
     public ResourceLocation getAnimationResource(RegSchoolingEntity animatable) {

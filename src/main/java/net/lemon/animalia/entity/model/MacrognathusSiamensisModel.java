@@ -18,7 +18,7 @@ public class MacrognathusSiamensisModel extends GeoModel<MastacembelusEntity> {
         if(object.isBaby()) {
             return new ResourceLocation(Animalia.MODID, "textures/entity/babypeacockeel.png");
         }
-        return new ResourceLocation(Animalia.MODID, "textures/entity/macrognathussiamensis.png");
+        return new ResourceLocation(Animalia.MODID, "textures/entity/macrognathus_siamensis.png");
     }
 
     public ResourceLocation getAnimationResource(MastacembelusEntity animatable) {
