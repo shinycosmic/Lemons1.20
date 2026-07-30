@@ -181,6 +181,9 @@ public class CrayfishEntity extends BottomWalkerSwimmerBase implements GeoEntity
         }
 
         if (this.isWalking()) {
+            if (!this.isActuallyMoving()) {
+                return PlayState.STOP;
+            }
             controller.setAnimation(RawAnimation.begin().then("walk", Animation.LoopType.LOOP));
             return PlayState.CONTINUE;
         }
