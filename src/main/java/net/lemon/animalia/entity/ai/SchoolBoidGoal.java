@@ -26,6 +26,7 @@ public class SchoolBoidGoal extends Goal {
 
     private static final double VIEW_RADIUS = 8.0;
     private static final double THREAT_RADIUS = 5.0;
+    private static final double THREAT_RADIUS_SQR = THREAT_RADIUS * THREAT_RADIUS;
 
     private static final double COHESION_INFLUENCE = 0.05;
     private static final double ALIGNMENT_INFLUENCE = 0.4;
@@ -35,6 +36,7 @@ public class SchoolBoidGoal extends Goal {
     private static final double MAX_DELTA_FACTOR = 0.0075;
 
     private static final int SCAN_INTERVAL = 10;
+    private static final int SCAN_INTERVAL_JITTER = 5;
     private static final int DEPTH_COMFORT_RANGE = 8;
 
     private static final int LOST_CONTACT_SCANS = 20;
@@ -53,13 +55,14 @@ public class SchoolBoidGoal extends Goal {
     private int scanCooldown;
     private int lonelyScans;
     private Vec3 depthBias = Vec3.ZERO;
-    private boolean depthForced;
     private double personalSpace;
+    private double maxDelta;
 
     public SchoolBoidGoal(FishBase fish, int maxNeighbors) {
         this.fish = fish;
         this.maxNeighbors = maxNeighbors;
         this.personalSpace = this.rollPersonalSpace();
+        this.scanCooldown = 1 + fish.getRandom().nextInt(SCAN_INTERVAL);
     }
 
     @Override
@@ -71,9 +74,8 @@ public class SchoolBoidGoal extends Goal {
             return false;
         }
         if (--this.scanCooldown <= 0) {
-            this.scanCooldown = SCAN_INTERVAL;
-            this.scanNeighbors();
-            this.scanThreats();
+            this.scanCooldown = SCAN_INTERVAL + this.fish.getRandom().nextInt(SCAN_INTERVAL_JITTER);
+            this.scan();
         } else {
             this.neighbors.removeIf(m -> !m.isAlive());
             if (this.closestThreat != null && !this.closestThreat.isAlive()) {
@@ -102,10 +104,7 @@ public class SchoolBoidGoal extends Goal {
 
     @Override
     public void tick() {
-        this.updateDepthBias();
-
-        double maxDelta = Math.max(0.1, this.fish.getAttributeValue(Attributes.MOVEMENT_SPEED))
-                * this.fish.getSwimSpeed() * MAX_DELTA_FACTOR;
+        double maxDelta = this.maxDelta;
         Vec3 nudge;
 
         if (this.closestThreat != null) {
@@ -192,7 +191,6 @@ public class SchoolBoidGoal extends Goal {
 
     private void updateDepthBias() {
         this.depthBias = Vec3.ZERO;
-        this.depthForced = false;
 
         SchoolDepthBias bias = this.fish.getSchoolDepthBias();
         if (bias == SchoolDepthBias.NONE) {
@@ -204,22 +202,36 @@ public class SchoolBoidGoal extends Goal {
 
         if (this.fish.level().getFluidState(pos.above(dir * DEPTH_COMFORT_RANGE)).is(FluidTags.WATER)) {
             this.depthBias = new Vec3(0, dir, 0);
-            this.depthForced = true;
         } else if (this.fish.level().getFluidState(pos.above(dir * 2)).is(FluidTags.WATER)) {
             this.depthBias = new Vec3(0, dir * 0.2, 0);
         }
     }
 
-    private void scanNeighbors() {
+    private void scan() {
         if (this.fish.getRandom().nextInt(PERSONAL_SPACE_REROLL_CHANCE) == 0) {
             this.personalSpace = this.rollPersonalSpace();
         }
 
-        List<Mob> visible = this.fish.level().getEntitiesOfClass(
-                Mob.class,
+        List<LivingEntity> nearby = this.fish.level().getEntitiesOfClass(
+                LivingEntity.class,
                 this.fish.getBoundingBox().inflate(VIEW_RADIUS),
-                this::isSchoolableFish
+                e -> e != this.fish && e.isAlive()
         );
+
+        this.closestThreat = null;
+        double closestThreatDist = Double.MAX_VALUE;
+        List<Mob> visible = new ArrayList<>();
+
+        for (LivingEntity entity : nearby) {
+            double dist = this.fish.distanceToSqr(entity);
+            if (dist < THREAT_RADIUS_SQR && dist < closestThreatDist && this.fish.isThreat(entity)) {
+                closestThreatDist = dist;
+                this.closestThreat = entity;
+            }
+            if (entity instanceof Mob mob && this.isSchoolableFish(mob)) {
+                visible.add(mob);
+            }
+        }
 
         this.updateMembership(visible);
 
@@ -243,6 +255,10 @@ public class SchoolBoidGoal extends Goal {
         } else {
             this.neighbors = schoolmates;
         }
+
+        this.updateDepthBias();
+        this.maxDelta = Math.max(0.1, this.fish.getAttributeValue(Attributes.MOVEMENT_SPEED))
+                * this.fish.getSwimSpeed() * MAX_DELTA_FACTOR;
     }
 
     private void updateMembership(List<Mob> visible) {
@@ -291,25 +307,6 @@ public class SchoolBoidGoal extends Goal {
             }
         } else {
             this.lonelyScans = 0;
-        }
-    }
-
-    private void scanThreats() {
-        this.closestThreat = null;
-        double closestDist = Double.MAX_VALUE;
-
-        List<LivingEntity> threats = this.fish.level().getEntitiesOfClass(
-                LivingEntity.class,
-                this.fish.getBoundingBox().inflate(THREAT_RADIUS),
-                e -> e != this.fish && e.isAlive() && this.fish.isThreat(e)
-        );
-
-        for (LivingEntity threat : threats) {
-            double dist = this.fish.distanceToSqr(threat);
-            if (dist < closestDist) {
-                closestDist = dist;
-                this.closestThreat = threat;
-            }
         }
     }
 
