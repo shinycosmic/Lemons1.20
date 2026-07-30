@@ -35,7 +35,7 @@ public class Animalia {
 
     public Animalia(FMLJavaModLoadingContext context) {
         IEventBus modEventBus = context.getModEventBus();
-
+        ModMobCategories.bootstrap();
         //register classes
         ModCreativeModeTabs.register(modEventBus);
         ModItems.register(modEventBus);
