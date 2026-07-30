@@ -36,7 +36,7 @@ public class ThreatGoal extends Goal {
     private int cooldown;
 
     public ThreatGoal(PathfinderMob mob, double threatRange, int maxThreatTicks, int exitTicks, ThreatOutcome outcome) {
-        this(mob, threatRange, maxThreatTicks, exitTicks, outcome, entity -> entity instanceof Player);
+        this(mob, threatRange, maxThreatTicks, exitTicks, outcome, entity -> entity instanceof Player player && !player.isCreative());
     }
 
     public ThreatGoal(PathfinderMob mob, double threatRange, int maxThreatTicks, int exitTicks, ThreatOutcome outcome, Predicate<LivingEntity> threatPredicate) {
