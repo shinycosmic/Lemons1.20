@@ -50,6 +50,16 @@ public class CrayfishEntity extends BottomWalkerSwimmerBase implements GeoEntity
     }
 
     @Override
+    public boolean startsWalking() {
+        return true;
+    }
+
+    @Override
+    public double getSinkSpeed() {
+        return -0.003;
+    }
+
+    @Override
     public String getScientificName() {
         return "";
     }
