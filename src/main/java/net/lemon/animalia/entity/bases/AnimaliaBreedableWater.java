@@ -11,7 +11,9 @@ import net.lemon.animalia.registry.ModItems;
 import net.lemon.animalia.util.AnimaliaFunctionUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.locale.Language;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -89,7 +91,10 @@ public abstract class AnimaliaBreedableWater extends WaterAnimal implements IAct
         super.customServerAiStep();
     }
 
-    abstract public String getScientificName();
+    public String getScientificName() {
+        String key = this.getType().getDescriptionId() + ".scientific";
+        return Language.getInstance().has(key) ? Component.translatable(key).getString() : "";
+    }
 
     public boolean useSmoothControl() {
         return true;

@@ -55,18 +55,6 @@ public class ToothfishEntity extends FishBase implements GeoEntity, Scannable {
     }
 
     @Override
-    public String getScientificName() {
-        if(this.getType() == ModEntities.CHILEANSEABASS.get()) {
-            return "Dissostichus eleginoides";
-        } else if (this.getType() == ModEntities.ELEGINOPS_MACLOVINUS.get()) {
-            return "Eleginops maclovinus";
-        } else if (this.getType() == ModEntities.PERCOPHIS_BRASILIENSIS.get()) {
-            return "Percophis brasiliensis";
-        }
-        return "didnt work";
-    }
-
-    @Override
     public ActivityTime activityTime() {
         return ActivityTime.NONE;
     }

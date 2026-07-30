@@ -111,16 +111,6 @@ public class ChaenocephalusEntity extends BottomWalkerSwimmerBase implements Geo
     }
 
     @Override
-    public String getScientificName() {
-        if (this.getType() == ModEntities.CHAENOCEPHALUS_ACERATUS.get()) {
-            return "Chaenocephalus aceratus";
-        } else if (this.getType() == ModEntities.CYGNODRACO_MAWSONI.get()) {
-            return "Cygnodraco mawsoni";
-        }
-        return "";
-    }
-
-    @Override
     public TagKey<Item> getFoodTag() {
         return ItemTags.FISHES;
     }

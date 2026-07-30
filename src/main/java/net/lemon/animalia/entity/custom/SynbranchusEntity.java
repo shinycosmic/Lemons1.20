@@ -99,16 +99,6 @@ public class SynbranchusEntity extends BottomWalkerSwimmerBase implements GeoEnt
     }
 
     @Override
-    public String getScientificName() {
-        if(this.getType() == ModEntities.SYNBRANCHUS_MARMORATUS.get()) {
-            return "Synbranchus marmoratus";
-        } else if(this.getType() == ModEntities.CHAUDHURIA_CAUDATA.get()) {
-            return "Chaudhuria caudata";
-        }
-        return "didn't work";
-    }
-
-    @Override
     public TagKey<Item> getFoodTag() {
         return ItemTags.FISHES;
     }

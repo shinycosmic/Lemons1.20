@@ -40,14 +40,6 @@ public class RegSchoolingEntity extends FishBase implements GeoEntity, Scannable
     }
 
     @Override
-    public String getScientificName() {
-        if(this.getType() == ModEntities.SCATOPHAGUS_ARGUS.get()) {
-            return "Scatophagus argus";
-        }
-        return "";
-    }
-
-    @Override
     public TagKey<Item> getFoodTag() {
         return ModTags.Items.FISH_FOOD;
     }

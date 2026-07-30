@@ -55,14 +55,6 @@ public class PogonophryneEntity extends BottomWalkerSwimmerBase implements GeoEn
     }
 
     @Override
-    public String getScientificName() {
-        if(this.getType() == ModEntities.POGONOPHRYNE_MARMORATA.get()) {
-            return "Pogonophryne marmorata";
-        }
-        return "";
-    }
-
-    @Override
     public float getSwimSpeed() {
         if(this.isBaby()) {
             return 1.2f;

@@ -85,11 +85,6 @@ public class ToxotesEntity extends FishBase implements GeoEntity, Scannable {
     public int getEatLength() { return 5; }
 
     @Override
-    public String getScientificName() {
-        return "Toxotes chatareus";
-    }
-
-    @Override
     public TagKey<Item> getFoodTag() {
         return ModTags.Items.INVERTEBRATE;
     }

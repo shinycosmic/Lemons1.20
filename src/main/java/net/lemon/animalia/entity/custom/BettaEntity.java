@@ -108,11 +108,6 @@ public class BettaEntity extends FishBase implements GeoEntity, IsGenetic, Scann
         return true;
     }
 
-    @Override
-    public String getScientificName() {
-        return "Betta splendens";
-    }
-
     public static void registerHolonet(){
         HolonetEntities.register(ModEntities.BETTA_SPLENDENS, Scannable.AppName.FISH, "Anabantiformes");
     }

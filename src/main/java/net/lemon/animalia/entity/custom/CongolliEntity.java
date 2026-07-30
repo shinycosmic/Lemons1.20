@@ -74,14 +74,6 @@ public class CongolliEntity extends BottomWalkerSwimmerBase implements GeoEntity
     }
 
     @Override
-    public String getScientificName() {
-        if(this.getType() == ModEntities.PSEUDAPHRITIS_URVILLII.get()) {
-            return "Pseudaphritis urvillii";
-        }
-        return "";
-    }
-
-    @Override
     public TagKey<Item> getFoodTag() {
         return ModTags.Items.CRUSTACEAN;
     }

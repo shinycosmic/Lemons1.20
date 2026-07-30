@@ -74,11 +74,6 @@ public class RakthamichthysEntity extends BottomWalkerSwimmerBase implements Geo
     }
 
     @Override
-    public String getScientificName() {
-        return "Rakthamichthys indicus";
-    }
-
-    @Override
     public TagKey<Item> getFoodTag() {
         return ModTags.Items.FISH_FOOD;
     }

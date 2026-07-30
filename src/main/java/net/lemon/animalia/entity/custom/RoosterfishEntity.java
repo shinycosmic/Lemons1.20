@@ -104,11 +104,6 @@ public class RoosterfishEntity extends FishBase implements GeoEntity, Scannable 
     }
 
     @Override
-    public String getScientificName() {
-        return "Nematistius pectoralis";
-    }
-
-    @Override
     public TagKey<Item> getFoodTag() {
         return ItemTags.FISHES;
     }

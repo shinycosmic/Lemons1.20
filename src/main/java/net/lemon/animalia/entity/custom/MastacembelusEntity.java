@@ -75,22 +75,6 @@ public class MastacembelusEntity extends FishBase implements GeoEntity, Scannabl
     }
 
     @Override
-    public String getScientificName() {
-        if(this.getType() == ModEntities.MASTACEMBELUS_ARMATUS.get()) {
-            return "Mastacembelus armatus";
-        } else if (this.getType() == ModEntities.MASTACEMBELUS_ERYTHROTAENIA.get()) {
-            return "Mastacembelus erythrotaenia";
-        } else if (this.getType() == ModEntities.MACROGNATHUS_SIAMENSIS.get()) {
-            return "Macrognathus siamensis";
-        } else if (this.getType() == ModEntities.MASTACEMBELUS_BRICHARDI.get()) {
-            return "Mastacembelus brichardi";
-        } else if (this.getType() == ModEntities.SINOBDELLA_SINENSIS.get()) {
-            return "Sinobdella sinensis";
-        }
-        return "didnt work";
-    }
-
-    @Override
     public int getBurrowingLength() {
         return 50;
     }
