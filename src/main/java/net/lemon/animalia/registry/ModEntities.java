@@ -38,6 +38,12 @@ public class ModEntities {
     public static final RegistryObject<EntityType<BettaEntity>> BETTA_SPLENDENS = registerEntityType("betta_splendens", BettaEntity::new, MobCategory.CREATURE, 0.3f, 0.3f, BettaEntity::setAttributes);
     public static final RegistryObject<EntityType<RegSchoolingEntity>> SCATOPHAGUS_ARGUS = registerEntityType("scatophagus_argus", RegSchoolingEntity::new, MobCategory.CREATURE, 0.5f, 0.3f, RegSchoolingEntity::setAttributes);
 
+    //Non Fish
+    public static final RegistryObject<EntityType<CrayfishEntity>> PROCAMBARUS_CLARKII = registerEntityType("procambarus_clarkii", CrayfishEntity::new, MobCategory.CREATURE, 0.5f, 0.3f, CrayfishEntity::setAttributes);
+    public static final RegistryObject<EntityType<CrayfishEntity>> PROCAMBARUS_ALLENI = registerEntityType("procambarus_alleni", CrayfishEntity::new, MobCategory.CREATURE, 0.5f, 0.3f, CrayfishEntity::setAttributes);
+    public static final RegistryObject<EntityType<CrayfishEntity>> PROCAMBARUS_VIRGINALIS = registerEntityType("procambarus_virginalis", CrayfishEntity::new, MobCategory.CREATURE, 0.5f, 0.3f, CrayfishEntity::setAttributes);
+    public static final RegistryObject<EntityType<CrayfishEntity>> PROCAMBARUS_LUCIFUGUS = registerEntityType("procambarus_lucifugus", CrayfishEntity::new, MobCategory.CREATURE, 0.5f, 0.3f, CrayfishEntity::setAttributes);
+
 
     /// REGISTER OTHER ENTITIES BELOW
     public static final RegistryObject<EntityType<WaterSpitProjectile>> WATER_SPIT = ENTITY_TYPES.register("water_spit",

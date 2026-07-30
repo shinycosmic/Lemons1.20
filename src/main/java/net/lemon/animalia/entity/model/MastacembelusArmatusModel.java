@@ -17,7 +17,7 @@ public class MastacembelusArmatusModel extends GeoModel<MastacembelusEntity> {
         if(object.isBaby()) {
             return new ResourceLocation(Animalia.MODID, "textures/entity/babypeacockeel.png");
         }
-        return new ResourceLocation(Animalia.MODID, "textures/entity/mastacembelusarmatus.png");
+        return new ResourceLocation(Animalia.MODID, "textures/entity/mastacembelus_armatus.png");
     }
 
     public ResourceLocation getAnimationResource(MastacembelusEntity animatable) {

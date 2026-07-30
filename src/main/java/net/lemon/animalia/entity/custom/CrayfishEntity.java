@@ -6,6 +6,10 @@ import net.lemon.animalia.entity.bases.BottomWalkerSwimmerBase;
 import net.lemon.animalia.entity.bases.FishBase;
 import net.lemon.animalia.entity.bases.interfaces.ICanThreat;
 import net.lemon.animalia.registry.ModEntities;
+import net.lemon.animalia.registry.ModItems;
+import net.lemon.animalia.registry.ModTags;
+import net.lemon.animalia.util.AnimaliaFunctionUtil;
+import net.lemon.animalia.util.HolonetEntities;
 import net.lemon.animalia.util.Scannable;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -14,10 +18,9 @@ import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.DifficultyInstance;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.MobSpawnType;
-import net.minecraft.world.entity.SpawnGroupData;
+import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.AvoidEntityGoal;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -29,11 +32,13 @@ import software.bernie.geckolib.core.animatable.GeoAnimatable;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.core.animatable.instance.SingletonAnimatableInstanceCache;
 import software.bernie.geckolib.core.animation.*;
+import software.bernie.geckolib.core.animation.AnimationState;
 import software.bernie.geckolib.core.object.PlayState;
 
 public class CrayfishEntity extends BottomWalkerSwimmerBase implements GeoEntity, Scannable, ICanThreat {
     private final AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
     private static final EntityDataAccessor<Integer> THREAT_PHASE = SynchedEntityData.defineId(CrayfishEntity.class, EntityDataSerializers.INT);
+    private static final int PROCAMBARUS_PIXEL = 16;
     private static final int EXIT_ANIM_TICKS = 15;
     private static final int ATTACK_ANIM_TICKS = 20;
     private int attackCooldown;
@@ -50,18 +55,13 @@ public class CrayfishEntity extends BottomWalkerSwimmerBase implements GeoEntity
     }
 
     @Override
-    public String getScientificName() {
-        return "";
-    }
-
-    @Override
     public TagKey<Item> getFoodTag() {
-        return null;
+        return ModTags.Items.FISH_FOOD;
     }
 
     @Override
     public Item getBreedingItem() {
-        return null;
+        return ModItems.FISH_FOOD.get();
     }
 
     @Override
@@ -76,28 +76,44 @@ public class CrayfishEntity extends BottomWalkerSwimmerBase implements GeoEntity
 
     @Override
     public Component getTrivia() {
-        return null;
+        if (this.getType() == ModEntities.PROCAMBARUS_CLARKII.get()) {
+            return Component.translatable("trivia.animalia.procambarus_clarkii");
+        } else if (this.getType() == ModEntities.PROCAMBARUS_LUCIFUGUS.get()) {
+            return Component.translatable("trivia.animalia.procambarus_lucifugus");
+        } else if (this.getType() == ModEntities.PROCAMBARUS_VIRGINALIS.get()) {
+            return Component.translatable("trivia.animalia.procambarus_virginalis");
+        } else if (this.getType() == ModEntities.PROCAMBARUS_ALLENI.get()) {
+            return Component.translatable("trivia.animalia.procambarus_alleni");
+        }
+        return Component.translatable("debug.animalia.trivia");
     }
 
     @Override
     public Component getFamily() {
-        return null;
+        return Component.translatable("family.animalia.cambaridae");
     }
 
     @Override
     public Component getOrder() {
-        return null;
+        return Component.translatable("order.animalia.decapoda");
     }
 
     @Override
     public ItemStack getBucketItemStack() {
-        return null;
+        if (this.getType() == ModEntities.PROCAMBARUS_CLARKII.get()) {
+            return new ItemStack(ModItems.PROCAMBARUS_CLARKII_BUCKET.get());
+        } else if (this.getType() == ModEntities.PROCAMBARUS_LUCIFUGUS.get()) {
+            return new ItemStack(ModItems.PROCAMBARUS_LUCIFUGUS_BUCKET.get());
+        } else if (this.getType() == ModEntities.PROCAMBARUS_VIRGINALIS.get()) {
+            return new ItemStack(ModItems.PROCAMBARUS_VIRGINALIS_BUCKET.get());
+        }
+        return new ItemStack(ModItems.PROCAMBARUS_ALLENI_BUCKET.get());
     }
 
     //TODO
     @Override
     public int getScaleforGUI() {
-        if (this.getType() == ModEntities.PSEUDAPHRITIS_URVILLII.get()) {
+        if (this.getType() == ModEntities.PROCAMBARUS_LUCIFUGUS.get()) {
             return 60;
         } else {
             return Scannable.super.getScaleforGUI();
@@ -110,9 +126,19 @@ public class CrayfishEntity extends BottomWalkerSwimmerBase implements GeoEntity
         return (int) (currScale * 1.4f);
     }
 
-    //TODO
+    @Override
+    public float genVarSizeMultiplier() {
+        if (this.getType() == ModEntities.SCATOPHAGUS_ARGUS.get()) {
+            return AnimaliaFunctionUtil.getScaleForSize(PROCAMBARUS_PIXEL, 20);
+        }
+        return 1;
+    }
+
     public static void registerHolonet(){
-//        HolonetEntities.register(ModEntities.PSEUDAPHRITIS_URVILLII, Scannable.AppName.FIELD, "Perciformes");
+        HolonetEntities.register(ModEntities.PROCAMBARUS_CLARKII, Scannable.AppName.FIELD, "Decapoda");
+        HolonetEntities.register(ModEntities.PROCAMBARUS_ALLENI, Scannable.AppName.FIELD, "Decapoda");
+        HolonetEntities.register(ModEntities.PROCAMBARUS_VIRGINALIS, Scannable.AppName.FIELD, "Decapoda");
+        HolonetEntities.register(ModEntities.PROCAMBARUS_LUCIFUGUS, Scannable.AppName.FIELD, "Decapoda");
     }
 
     @Override
@@ -146,14 +172,14 @@ public class CrayfishEntity extends BottomWalkerSwimmerBase implements GeoEntity
         controllers.add(new AnimationController<>(this, "controller", 10, this::predicate));
         controllers.add(new AnimationController<>(this, "threat_controller", 5, this::threatPredicate));
         controllers.add(new AnimationController<>(this, "attack_controller", 0, this::attackPredicate)
-                .triggerableAnim("attack", RawAnimation.begin().then("attack", Animation.LoopType.PLAY_ONCE)));
+                .triggerableAnim("defensiveAttack", RawAnimation.begin().then("defensiveAttack", Animation.LoopType.PLAY_ONCE)));
     }
 
     private <T extends GeoAnimatable> PlayState predicate(AnimationState<T> animationState) {
         AnimationController<T> controller = animationState.getController();
 
         if (!this.isInWater()) {
-            controller.setAnimation(RawAnimation.begin().then("beach", Animation.LoopType.LOOP));
+            controller.setAnimation(RawAnimation.begin().then("beached", Animation.LoopType.LOOP));
             return PlayState.CONTINUE;
         }
 
@@ -171,13 +197,14 @@ public class CrayfishEntity extends BottomWalkerSwimmerBase implements GeoEntity
 
         if (this.getThreatPhase() == THREAT_PHASE_DISPLAY) {
             controller.setAnimation(RawAnimation.begin()
-                    .then("threat_enter", Animation.LoopType.PLAY_ONCE)
-                    .thenLoop("threat_hold"));
+                    .then("stancing", Animation.LoopType.PLAY_ONCE)
+                    .thenLoop("defensiveStance"));
             return PlayState.CONTINUE;
         }
 
+
         if (this.getThreatPhase() == THREAT_PHASE_LEAVING) {
-            controller.setAnimation(RawAnimation.begin().then("threat_exit", Animation.LoopType.PLAY_ONCE));
+            controller.setAnimation(RawAnimation.begin().then("unStancing", Animation.LoopType.PLAY_ONCE));
             return PlayState.CONTINUE;
         }
 
@@ -191,6 +218,14 @@ public class CrayfishEntity extends BottomWalkerSwimmerBase implements GeoEntity
     @Override
     public AnimatableInstanceCache getAnimatableInstanceCache() {
         return cache;
+    }
+
+    public static AttributeSupplier setAttributes() {
+        return Mob.createMobAttributes()
+                .add(Attributes.MAX_HEALTH, 2D)
+                .add(Attributes.MOVEMENT_SPEED, 0.55f)
+                .add(Attributes.ATTACK_DAMAGE, 1)
+                .build();
     }
 
     @Override
@@ -241,7 +276,7 @@ public class CrayfishEntity extends BottomWalkerSwimmerBase implements GeoEntity
         }
         if (this.getBoundingBox().inflate(0.3D).intersects(threat.getBoundingBox())) {
             this.doHurtTarget(threat);
-            this.triggerAnim("attack_controller", "attack");
+            this.triggerAnim("attack_controller", "defensiveAttack");
             this.attackCooldown = ATTACK_ANIM_TICKS;
         }
     }

@@ -27,6 +27,11 @@ public class AnimaliaRenderInit {
         EntityRenderers.register(ModEntities.CHAENOCEPHALUS_ACERATUS.get(), ChaenocephalusAceratusRenderer::new);
         EntityRenderers.register(ModEntities.CYGNODRACO_MAWSONI.get(), CygnodracoMawsoniRenderer::new);
         EntityRenderers.register(ModEntities.SCATOPHAGUS_ARGUS.get(), ScatophagusArgusRenderer::new);
+        EntityRenderers.register(ModEntities.PROCAMBARUS_VIRGINALIS.get(), ProcambarusRenderer::new);
+        EntityRenderers.register(ModEntities.PROCAMBARUS_ALLENI.get(), ProcambarusRenderer::new);
+        EntityRenderers.register(ModEntities.PROCAMBARUS_CLARKII.get(), ProcambarusRenderer::new);
+        EntityRenderers.register(ModEntities.PROCAMBARUS_LUCIFUGUS.get(), ProcambarusRenderer::new);
+
 
 
 

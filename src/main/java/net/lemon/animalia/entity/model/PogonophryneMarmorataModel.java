@@ -18,7 +18,7 @@ public class PogonophryneMarmorataModel extends GeoModel<PogonophryneEntity> {
         if(object.isBaby()) {
             return new ResourceLocation(Animalia.MODID, "textures/entity/babygenericnotothen.png");
         }
-        return new ResourceLocation(Animalia.MODID, "textures/entity/pogonophrynemarmorata.png");
+        return new ResourceLocation(Animalia.MODID, "textures/entity/pogonophryne_marmorata.png");
     }
 
     public ResourceLocation getAnimationResource(PogonophryneEntity animatable) {

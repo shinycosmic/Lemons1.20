@@ -23,7 +23,7 @@ public class NematistiusPectoralisModel extends GeoModel<RoosterfishEntity> {
         if(object.isBaby()) {
             return new ResourceLocation(Animalia.MODID, "textures/entity/babyroosterfish.png");
         }
-        return new ResourceLocation(Animalia.MODID, "textures/entity/nematistiuspectoralis.png");
+        return new ResourceLocation(Animalia.MODID, "textures/entity/nematistius_pectoralis.png");
     }
 
     public ResourceLocation getAnimationResource(RoosterfishEntity animatable) {

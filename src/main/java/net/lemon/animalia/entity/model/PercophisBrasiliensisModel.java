@@ -17,7 +17,7 @@ public class PercophisBrasiliensisModel extends GeoModel<ToothfishEntity> {
         if(object.isBaby()) {
             return new ResourceLocation(Animalia.MODID, "textures/entity/babygenericnotothen.png");
         }
-        return new ResourceLocation(Animalia.MODID, "textures/entity/percophisbrasiliensis.png");
+        return new ResourceLocation(Animalia.MODID, "textures/entity/percophis_brasiliensis.png");
     }
 
     public ResourceLocation getAnimationResource(ToothfishEntity animatable) {

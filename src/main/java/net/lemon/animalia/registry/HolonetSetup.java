@@ -10,6 +10,7 @@ import net.lemon.animalia.entity.custom.*;
 public class HolonetSetup {
 
     public static void init() {
+        //Fish
         ToothfishEntity.registerHolonet();
         CongolliEntity.registerHolonet();
         BettaEntity.registerHolonet();
@@ -21,5 +22,8 @@ public class HolonetSetup {
         PogonophryneEntity.registerHolonet();
         ChaenocephalusEntity.registerHolonet();
         RegSchoolingEntity.registerHolonet();
+
+        //Field Guide
+        CrayfishEntity.registerHolonet();
     }
 }

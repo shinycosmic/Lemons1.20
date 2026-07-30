@@ -28,8 +28,10 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItems.RAW_ICEFISH);
         simpleItem(ModItems.RAW_FISH);
         simpleItem(ModItems.RAW_VENISON);
+        simpleItem(ModItems.RAW_CRUSTACEAN);
         simpleItem(ModItems.COOKED_FISH);
         simpleItem(ModItems.COOKED_VENISON);
+        simpleItem(ModItems.COOKED_CRUSTACEAN);
 
         //Animal Items
         simpleItem(ModItems.AMPHIPOD);
@@ -65,6 +67,10 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItems.CHAENOCEPHALUS_ACERATUS_BUCKET);
         simpleItem(ModItems.CYGNODRACO_MAWSONI_BUCKET);
         simpleItem(ModItems.SCATOPHAGUS_ARGUS_BUCKET);
+        simpleItem(ModItems.PROCAMBARUS_CLARKII_BUCKET);
+        simpleItem(ModItems.PROCAMBARUS_LUCIFUGUS_BUCKET);
+        simpleItem(ModItems.PROCAMBARUS_ALLENI_BUCKET);
+        simpleItem(ModItems.PROCAMBARUS_VIRGINALIS_BUCKET);
 
 
         //spawn egg generators
@@ -87,6 +93,10 @@ public class ModItemModelProvider extends ItemModelProvider {
         withExistingParent(ModItems.CHAENOCEPHALUS_ACERATUS_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
         withExistingParent(ModItems.CYGNODRACO_MAWSONI_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
         withExistingParent(ModItems.SCATOPHAGUS_ARGUS_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
+        withExistingParent(ModItems.PROCAMBARUS_ALLENI_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
+        withExistingParent(ModItems.PROCAMBARUS_CLARKII_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
+        withExistingParent(ModItems.PROCAMBARUS_LUCIFUGUS_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
+        withExistingParent(ModItems.PROCAMBARUS_VIRGINALIS_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
 
 
 

@@ -17,7 +17,7 @@ public class MastacembelusBrichardiModel extends GeoModel<MastacembelusEntity> {
         if(object.isBaby()) {
             return new ResourceLocation(Animalia.MODID, "textures/entity/babygenericeel.png");
         }
-        return new ResourceLocation(Animalia.MODID, "textures/entity/mastacembelusbrichardi.png");
+        return new ResourceLocation(Animalia.MODID, "textures/entity/mastacembelus_brichardi.png");
     }
 
     public ResourceLocation getAnimationResource(MastacembelusEntity animatable) {

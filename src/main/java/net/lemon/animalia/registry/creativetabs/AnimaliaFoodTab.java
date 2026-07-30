@@ -15,6 +15,8 @@ public class AnimaliaFoodTab {
             ModItems.COOKED_FISH,
             ModItems.RAW_VENISON,
             ModItems.COOKED_VENISON,
+            ModItems.RAW_CRUSTACEAN,
+            ModItems.COOKED_CRUSTACEAN,
 
             //Other|Breeding
             ModItems.AMPHIPOD,
@@ -22,7 +24,11 @@ public class AnimaliaFoodTab {
             ModItems.ARTEMIA,
             ModItems.TADPOLE,
             ModItems.FISH_FOOD,
-            ModItems.TERMITE
+            ModItems.TERMITE,
+            ModItems.PROCAMBARUS_CLARKII,
+            ModItems.PROCAMBARUS_ALLENI,
+            ModItems.PROCAMBARUS_VIRGINALIS,
+            ModItems.PROCAMBARUS_LUCIFUGUS
     );
 
     public static void displayItems(CreativeModeTab.Output output) {
