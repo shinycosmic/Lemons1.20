@@ -39,8 +39,8 @@ public class CrayfishEntity extends BottomWalkerSwimmerBase implements GeoEntity
     private final AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
     private static final EntityDataAccessor<Integer> THREAT_PHASE = SynchedEntityData.defineId(CrayfishEntity.class, EntityDataSerializers.INT);
     private static final int PROCAMBARUS_PIXEL = 16;
-    private static final int EXIT_ANIM_TICKS = 15;
-    private static final int ATTACK_ANIM_TICKS = 20;
+    private static final int EXIT_ANIM_TICKS = 20;
+    private static final int ATTACK_ANIM_TICKS = 10;
     private int attackCooldown;
 
     public CrayfishEntity(EntityType<? extends FishBase> pEntityType, Level pLevel) {
