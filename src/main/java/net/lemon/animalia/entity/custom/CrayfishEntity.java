@@ -167,7 +167,7 @@ public class CrayfishEntity extends BottomWalkerSwimmerBase implements GeoEntity
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
         controllers.add(new AnimationController<>(this, "controller", 10, this::predicate));
-        controllers.add(new AnimationController<>(this, "threat_controller", 5, this::threatPredicate));
+        controllers.add(new AnimationController<>(this, "threat_controller", 0, this::threatPredicate));
         controllers.add(new AnimationController<>(this, "attack_controller", 0, this::attackPredicate)
                 .triggerableAnim("defensiveAttack", RawAnimation.begin().then("defensiveAttack", Animation.LoopType.PLAY_ONCE)));
     }
