@@ -128,10 +128,7 @@ public class CrayfishEntity extends BottomWalkerSwimmerBase implements GeoEntity
 
     @Override
     public float genVarSizeMultiplier() {
-        if (this.getType() == ModEntities.SCATOPHAGUS_ARGUS.get()) {
-            return AnimaliaFunctionUtil.getScaleForSize(PROCAMBARUS_PIXEL, 20);
-        }
-        return 1;
+        return AnimaliaFunctionUtil.getScaleForSize(PROCAMBARUS_PIXEL, 20);
     }
 
     public static void registerHolonet(){
