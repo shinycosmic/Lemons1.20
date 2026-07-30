@@ -55,6 +55,11 @@ public class CrayfishEntity extends BottomWalkerSwimmerBase implements GeoEntity
     }
 
     @Override
+    public int getStrollInterval() {
+        return 40;
+    }
+
+    @Override
     public TagKey<Item> getFoodTag() {
         return ModTags.Items.FISH_FOOD;
     }

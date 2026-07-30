@@ -94,7 +94,7 @@ public abstract class BottomWalkerSwimmerBase extends FishBase {
     @Override
     protected void registerGoals() {
         super.registerGoals();
-        this.goalSelector.addGoal(7, new BottomWalkerStrollGoal(this, 1.0D));
+        this.goalSelector.addGoal(7, new BottomWalkerStrollGoal(this, 1.0D, getStrollInterval()));
     }
 
     @Override
@@ -176,6 +176,10 @@ public abstract class BottomWalkerSwimmerBase extends FishBase {
         this.currentRoll = this.currentRoll + (targetRoll - this.currentRoll) * 0.05F;
     }
 
+    public int getStrollInterval() {
+        return 120;
+    }
+
     /** Strongly prefer underwater positions, reject land */
     @Override
     public float getWalkTargetValue(BlockPos pPos, LevelReader pLevel) {
@@ -248,8 +252,8 @@ public abstract class BottomWalkerSwimmerBase extends FishBase {
 
     public class BottomWalkerStrollGoal extends RandomStrollGoal {
 
-        public BottomWalkerStrollGoal(PathfinderMob pMob, double pSpeedModifier) {
-            super(pMob, pSpeedModifier);
+        public BottomWalkerStrollGoal(PathfinderMob pMob, double pSpeedModifier, int pInterval) {
+            super(pMob, pSpeedModifier, pInterval);
         }
 
         @Override
