@@ -255,6 +255,7 @@ public abstract class BottomWalkerSwimmerBase extends FishBase {
         @Override
         protected Vec3 getPosition() {
             Vec3 pos = DefaultRandomPos.getPos(this.mob, 10, 3);
+            System.out.println("[Stroll] getPos=" + pos);
             if (pos == null) return null;
 
             BlockPos floor = BlockPos.containing(pos);
@@ -267,10 +268,18 @@ public abstract class BottomWalkerSwimmerBase extends FishBase {
         }
         @Override
         public boolean canUse() {
+            boolean sup = super.canUse();
+            System.out.println("[Stroll] side=" + (this.mob.level().isClientSide ? "CLIENT" : "SERVER")
+                    + " walking=" + BottomWalkerSwimmerBase.this.isWalking()
+                    + " ground=" + BottomWalkerSwimmerBase.this.onGround()
+                    + " nav=" + this.mob.getNavigation().getClass().getSimpleName()
+                    + " stableHere=" + this.mob.getNavigation().isStableDestination(this.mob.blockPosition())
+                    + " noAction=" + this.mob.getNoActionTime()
+                    + " super=" + sup);
             return BottomWalkerSwimmerBase.this.isWalking()
                     && BottomWalkerSwimmerBase.this.isInWater()
                     && BottomWalkerSwimmerBase.this.onGround()
-                    && super.canUse();
+                    && sup;
         }
     }
 
