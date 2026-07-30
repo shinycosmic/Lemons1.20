@@ -261,6 +261,10 @@ public class CrayfishEntity extends BottomWalkerSwimmerBase implements GeoEntity
         this.entityData.set(THREAT_PHASE, phase);
     }
 
+    public boolean startsWalking() {
+        return true;
+    }
+
     @Override
     public boolean canStartThreatening() {
         return !this.isHiding() && this.isWalking() && this.onGround();
