@@ -33,26 +33,7 @@ public class ModEventBusEvents {
      */
     @SubscribeEvent
     public static void registerAttributes(EntityAttributeCreationEvent event) {
-        event.put(ModEntities.CHILEANSEABASS.get(), ToothfishEntity.setAttributes());
-        event.put(ModEntities.ELEGINOPS_MACLOVINUS.get(), ToothfishEntity.setAttributes());
-        event.put(ModEntities.PSEUDAPHRITIS_URVILLII.get(), CongolliEntity.setAttributes());
-        event.put(ModEntities.BETTA_SPLENDENS.get(), BettaEntity.setAttributes());
-        event.put(ModEntities.PERCOPHIS_BRASILIENSIS.get(), ToothfishEntity.setAttributes());
-        event.put(ModEntities.SYNBRANCHUS_MARMORATUS.get(), SynbranchusEntity.setAttributes());
-        event.put(ModEntities.CHAUDHURIA_CAUDATA.get(), SynbranchusEntity.setAttributes());
-        event.put(ModEntities.MASTACEMBELUS_ARMATUS.get(), MastacembelusEntity.setAttributes());
-        event.put(ModEntities.MASTACEMBELUS_ERYTHROTAENIA.get(), MastacembelusEntity.setAttributes());
-        event.put(ModEntities.MACROGNATHUS_SIAMENSIS.get(), MastacembelusEntity.setAttributes());
-        event.put(ModEntities.MASTACEMBELUS_BRICHARDI.get(), MastacembelusEntity.setAttributes());
-        event.put(ModEntities.SINOBDELLA_SINENSIS.get(), MastacembelusEntity.setAttributes());
-        event.put(ModEntities.RAKTHAMICHTHYS_INDICUS.get(), RakthamichthysEntity.setAttributes());
-        event.put(ModEntities.NEMATISTIUS_PECTORALIS.get(), RoosterfishEntity.setAttributes());
-        event.put(ModEntities.TOXOTES_CHATAREUS.get(), ToxotesEntity.setAttributes());
-        event.put(ModEntities.POGONOPHRYNE_MARMORATA.get(), PogonophryneEntity.setAttributes());
-        event.put(ModEntities.CHAENOCEPHALUS_ACERATUS.get(), ChaenocephalusEntity.setAttributes());
-        event.put(ModEntities.CYGNODRACO_MAWSONI.get(), ChaenocephalusEntity.setAttributes());
-        event.put(ModEntities.SCATOPHAGUS_ARGUS.get(), RegSchoolingEntity.setAttributes());
-
+        ModEntities.ATTRIBUTE_SUPPLIERS.forEach((type, attributes) -> event.put(type.get(), attributes.get()));
     }
 
     @SubscribeEvent
