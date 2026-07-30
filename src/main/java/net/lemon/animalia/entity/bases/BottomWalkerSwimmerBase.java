@@ -1,6 +1,7 @@
 package net.lemon.animalia.entity.bases;
 
 import net.lemon.animalia.entity.navigation.WaterBottomPathNavigation;
+import net.lemon.animalia.registry.spawning.SpawnBand;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -161,7 +162,7 @@ public abstract class BottomWalkerSwimmerBase extends FishBase {
 
             // Prevent stepping out of water
             BlockPos pos = this.blockPosition();
-            if (this.level().getBlockState(pos.above()).getFluidState().is(Fluids.EMPTY)) {
+            if (!this.canLeaveWater() && this.level().getBlockState(pos.above()).getFluidState().is(Fluids.EMPTY)) {
                 this.setMaxUpStep(0);
             } else {
                 this.setMaxUpStep(1.0F);
@@ -180,10 +181,13 @@ public abstract class BottomWalkerSwimmerBase extends FishBase {
         return 120;
     }
 
-    /** Strongly prefer underwater positions, reject land */
+    /** Strongly prefer underwater positions, reject land unless allowed */
     @Override
     public float getWalkTargetValue(BlockPos pPos, LevelReader pLevel) {
-        return pLevel.getFluidState(pPos.above()).is(FluidTags.WATER) ? 10.0F : -1.0F;
+        if (pLevel.getFluidState(pPos.above()).is(FluidTags.WATER)) {
+            return 10.0F;
+        }
+        return this.canLeaveWater() ? 0.0F : -1.0F;
     }
 
     public void selectNavigator() {
@@ -250,6 +254,17 @@ public abstract class BottomWalkerSwimmerBase extends FishBase {
         return spawnData;
     }
 
+    @Override
+    public SpawnBand spawnBand() {
+        return SpawnBand.FLOOR;
+    }
+
+    /** Override in subclass. Whether this bottom walker may path onto dry land. */
+    public boolean canLeaveWater() {
+        return false;
+    }
+
+
     public class BottomWalkerStrollGoal extends RandomStrollGoal {
 
         public BottomWalkerStrollGoal(PathfinderMob pMob, double pSpeedModifier, int pInterval) {
@@ -259,7 +274,6 @@ public abstract class BottomWalkerSwimmerBase extends FishBase {
         @Override
         protected Vec3 getPosition() {
             Vec3 pos = DefaultRandomPos.getPos(this.mob, 10, 3);
-            System.out.println("[Stroll] getPos=" + pos);
             if (pos == null) return null;
 
             BlockPos floor = BlockPos.containing(pos);
@@ -272,18 +286,10 @@ public abstract class BottomWalkerSwimmerBase extends FishBase {
         }
         @Override
         public boolean canUse() {
-            boolean sup = super.canUse();
-            System.out.println("[Stroll] side=" + (this.mob.level().isClientSide ? "CLIENT" : "SERVER")
-                    + " walking=" + BottomWalkerSwimmerBase.this.isWalking()
-                    + " ground=" + BottomWalkerSwimmerBase.this.onGround()
-                    + " nav=" + this.mob.getNavigation().getClass().getSimpleName()
-                    + " stableHere=" + this.mob.getNavigation().isStableDestination(this.mob.blockPosition())
-                    + " noAction=" + this.mob.getNoActionTime()
-                    + " super=" + sup);
             return BottomWalkerSwimmerBase.this.isWalking()
                     && BottomWalkerSwimmerBase.this.isInWater()
                     && BottomWalkerSwimmerBase.this.onGround()
-                    && sup;
+                    && super.canUse();
         }
     }
 

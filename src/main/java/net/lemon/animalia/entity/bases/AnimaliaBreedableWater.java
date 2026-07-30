@@ -8,6 +8,7 @@ import net.lemon.animalia.entity.bases.interfaces.IFoodEater;
 import net.lemon.animalia.entity.bases.interfaces.IIdles;
 import net.lemon.animalia.item.FishEggItem;
 import net.lemon.animalia.registry.ModItems;
+import net.lemon.animalia.registry.spawning.SpawnBand;
 import net.lemon.animalia.util.AnimaliaFunctionUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
@@ -25,10 +26,7 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityDimensions;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.Pose;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.control.SmoothSwimmingLookControl;
 import net.minecraft.world.entity.ai.control.SmoothSwimmingMoveControl;
@@ -41,6 +39,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
 
@@ -667,5 +666,25 @@ public abstract class AnimaliaBreedableWater extends WaterAnimal implements IAct
         ItemStack egg = new ItemStack(getEggItem());
         FishEggItem.setEntity(egg, this.getType());
         this.spawnAtLocation(egg);
+    }
+
+    public SpawnBand spawnBand() {
+        return SpawnBand.OPEN_WATER;
+    }
+
+    @Override
+    public boolean checkSpawnRules(LevelAccessor level, MobSpawnType reason) {
+        if (reason != MobSpawnType.NATURAL && reason != MobSpawnType.CHUNK_GENERATION) {
+            return super.checkSpawnRules(level, reason);
+        }
+        return this.spawnBand().test(level, this.blockPosition()) && this.checkSpawnTime();
+    }
+
+    private boolean checkSpawnTime() {
+        return switch (this.activityTime()) {
+            case DIURNAL -> this.level().isDay();
+            case NOCTURNAL -> this.level().isNight();
+            default -> true;
+        };
     }
 }
