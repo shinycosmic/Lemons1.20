@@ -5,6 +5,7 @@ import net.lemon.animalia.registry.ModTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
+import net.minecraft.data.tags.BiomeTagsProvider;
 import net.minecraft.data.tags.TagsProvider;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.Biomes;
@@ -13,11 +14,10 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.concurrent.CompletableFuture;
 
-public class ModBiomeTagGenerator extends TagsProvider<Biome> {
+public class ModBiomeTagGenerator extends BiomeTagsProvider {
 
-    public ModBiomeTagGenerator(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider,
-                                @Nullable ExistingFileHelper existingFileHelper) {
-        super(output, Registries.BIOME, lookupProvider, Animalia.MODID, existingFileHelper);
+    public ModBiomeTagGenerator(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, ExistingFileHelper existingFileHelper) {
+        super(output, lookupProvider, Animalia.MODID, existingFileHelper);
     }
 
     @Override

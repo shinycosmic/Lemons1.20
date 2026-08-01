@@ -55,13 +55,13 @@ public class ModSpawns {
                 BiomeSelector.in(Biomes.RIVER));
         add(ModEntities.RAKTHAMICHTHYS_INDICUS, 3, 1, 1,
                 BiomeSelector.in(Biomes.LUSH_CAVES, Biomes.DRIPSTONE_CAVES));
-        add(ModEntities.NEMATISTIUS_PECTORALIS, 6, 2, 4,
+        add(ModEntities.NEMATISTIUS_PECTORALIS, 2, 1, 1,
                 BiomeSelector.in(Biomes.LUKEWARM_OCEAN));
-        add(ModEntities.TOXOTES_CHATAREUS, 8, 3, 5,
+        add(ModEntities.TOXOTES_CHATAREUS, 3, 1, 2,
                 BiomeSelector.in(Biomes.MANGROVE_SWAMP));
         add(ModEntities.BETTA_SPLENDENS, 8, 1, 1,
                 BiomeSelector.in(Biomes.MANGROVE_SWAMP));
-        add(ModEntities.SCATOPHAGUS_ARGUS, 6, 3, 6,
+        add(ModEntities.SCATOPHAGUS_ARGUS, 6, 1, 6,
                 BiomeSelector.in(Biomes.MANGROVE_SWAMP, Biomes.RIVER));
 
         add(ModEntities.PROCAMBARUS_CLARKII, 6, 1, 2,

@@ -43,7 +43,7 @@ public enum SpawnBand {
         @Override
         public boolean test(LevelAccessor level, BlockPos pos) {
             int seaLevel = level.getSeaLevel();
-            return pos.getY() >= seaLevel - 32 && pos.getY() <= seaLevel
+            return pos.getY() >= seaLevel - 28 && pos.getY() <= seaLevel
                     && isWater(level, pos)
                     && solidBelow(level, pos);
         }
@@ -52,7 +52,7 @@ public enum SpawnBand {
         @Override
         public boolean test(LevelAccessor level, BlockPos pos) {
             int seaLevel = level.getSeaLevel();
-            return pos.getY() >= seaLevel - 128 && pos.getY() < seaLevel - 32
+            return pos.getY() >= seaLevel - 128 && pos.getY() < seaLevel - 28
                     && isWater(level, pos)
                     && solidBelow(level, pos);
         }
