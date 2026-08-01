@@ -45,7 +45,7 @@ public abstract class BottomWalkerSwimmerBase extends FishBase {
         if(pLevel != null) {
             this.selectNavigator();
         }
-        this.stateTime = this.startsWalking() ? this.getWalkTime() : this.getSwimTime();
+        this.stateTime = this.getSwimTime();
     }
 
     @Override
@@ -244,13 +244,9 @@ public abstract class BottomWalkerSwimmerBase extends FishBase {
     @Override
     public @Nullable SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, MobSpawnType reason, @Nullable SpawnGroupData spawnData, @Nullable CompoundTag dataTag) {
         spawnData = super.finalizeSpawn(level, difficulty, reason, spawnData, dataTag);
-        if (this.startsWalking()) {
-            this.setWalking(true);
-            this.stateTime = this.getWalkTime();
-        } else {
-            this.setWalking(false);
-            this.stateTime = this.getSwimTime();
-        }
+        this.setWalking(false);
+        this.stateTime = this.getSwimTime();
+
         return spawnData;
     }
 

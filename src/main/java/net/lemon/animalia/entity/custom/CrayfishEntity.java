@@ -51,7 +51,7 @@ public class CrayfishEntity extends BottomWalkerSwimmerBase implements GeoEntity
     protected void registerGoals() {
         super.registerGoals();
         this.goalSelector.getAvailableGoals().removeIf(g -> g.getGoal() instanceof AvoidEntityGoal);
-        this.goalSelector.addGoal(2, new ThreatGoal(this, 5.0D, 200, EXIT_ANIM_TICKS, ThreatGoal.ThreatOutcome.FLEE));
+        //this.goalSelector.addGoal(2, new ThreatGoal(this, 5.0D, 200, EXIT_ANIM_TICKS, ThreatGoal.ThreatOutcome.FLEE));
     }
 
     @Override
@@ -157,15 +157,15 @@ public class CrayfishEntity extends BottomWalkerSwimmerBase implements GeoEntity
 
     @Override
     public int getSwimTime() {
-        return 500 + random.nextInt(1000);
+        return 100 + random.nextInt(100);
     }
 
     @Override
     public float getSwimSpeed() {
         if(this.isWalking()) {
-            return 0.4f;
+            return 0.8f;
         }
-        return 0.6f;
+        return 1.5f;
     }
 
     @Override
@@ -227,7 +227,7 @@ public class CrayfishEntity extends BottomWalkerSwimmerBase implements GeoEntity
     public static AttributeSupplier setAttributes() {
         return Mob.createMobAttributes()
                 .add(Attributes.MAX_HEALTH, 2D)
-                .add(Attributes.MOVEMENT_SPEED, 0.55f)
+                .add(Attributes.MOVEMENT_SPEED, 0.4f)
                 .add(Attributes.ATTACK_DAMAGE, 1)
                 .build();
     }
@@ -268,6 +268,7 @@ public class CrayfishEntity extends BottomWalkerSwimmerBase implements GeoEntity
         this.entityData.set(THREAT_PHASE, phase);
     }
 
+    @Override
     public boolean startsWalking() {
         return true;
     }
