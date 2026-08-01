@@ -72,7 +72,7 @@ public class BiomeSelector {
                                           List<TagKey<Biome>> tags, List<ResourceKey<Biome>> biomes) {
         List<HolderSet<Biome>> parts = new ArrayList<>();
         for (TagKey<Biome> tag : tags) {
-            parts.add(lookup.getOrThrow(tag));
+            parts.add(lookup.get(tag).orElseGet(() -> HolderSet.emptyNamed(lookup, tag)));
         }
         if (!biomes.isEmpty()) {
             List<Holder<Biome>> direct = new ArrayList<>();
