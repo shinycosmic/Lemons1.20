@@ -748,7 +748,9 @@ public abstract class AnimaliaBreedableWater extends WaterAnimal implements IAct
 
     @Override
     public @Nullable SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, MobSpawnType reason, @Nullable SpawnGroupData spawnData, @Nullable CompoundTag dataTag) {
-        this.setGender(this.random.nextInt(2));
+        if(reason != MobSpawnType.BUCKET) {
+            this.setGender(this.random.nextInt(2));
+        }
         if((reason == MobSpawnType.NATURAL || reason == MobSpawnType.CHUNK_GENERATION) && this.random.nextFloat() < 0.05f) {
             this.setBaby(true);
         }
