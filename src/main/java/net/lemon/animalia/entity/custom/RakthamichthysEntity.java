@@ -7,6 +7,7 @@ import net.lemon.animalia.entity.bases.FishBase;
 import net.lemon.animalia.registry.ModEntities;
 import net.lemon.animalia.registry.ModItems;
 import net.lemon.animalia.registry.ModTags;
+import net.lemon.animalia.registry.spawning.SpawnBand;
 import net.lemon.animalia.util.HolonetEntities;
 import net.lemon.animalia.util.Scannable;
 import net.minecraft.nbt.CompoundTag;
@@ -168,6 +169,11 @@ public class RakthamichthysEntity extends BottomWalkerSwimmerBase implements Geo
     @Override
     public AnimatableInstanceCache getAnimatableInstanceCache() {
         return cache;
+    }
+
+    @Override
+    public SpawnBand spawnBand() {
+        return SpawnBand.ANY_FLOOR;
     }
 
     @Override

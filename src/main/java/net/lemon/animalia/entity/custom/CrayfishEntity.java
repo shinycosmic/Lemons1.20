@@ -8,6 +8,7 @@ import net.lemon.animalia.entity.bases.interfaces.ICanThreat;
 import net.lemon.animalia.registry.ModEntities;
 import net.lemon.animalia.registry.ModItems;
 import net.lemon.animalia.registry.ModTags;
+import net.lemon.animalia.registry.spawning.SpawnBand;
 import net.lemon.animalia.util.AnimaliaFunctionUtil;
 import net.lemon.animalia.util.HolonetEntities;
 import net.lemon.animalia.util.Scannable;
@@ -295,5 +296,10 @@ public class CrayfishEntity extends BottomWalkerSwimmerBase implements GeoEntity
             this.setVarSizeMultiplier(this.genVarSizeMultiplier());
         }
         return super.finalizeSpawn(level, difficulty, reason, spawnData, dataTag);
+    }
+
+    @Override
+    public SpawnBand spawnBand() {
+        return SpawnBand.ANY_FLOOR;
     }
 }
