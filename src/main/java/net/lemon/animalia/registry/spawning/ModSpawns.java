@@ -67,7 +67,7 @@ public class ModSpawns {
         add(ModEntities.PROCAMBARUS_CLARKII, 6, 1, 2,
                 BiomeSelector.in(Biomes.SWAMP, Biomes.RIVER));
         add(ModEntities.PROCAMBARUS_ALLENI, 5, 1, 2,
-                BiomeSelector.in(Biomes.SWAMP));
+                BiomeSelector.in(Biomes.SWAMP, Biomes.MANGROVE_SWAMP));
         add(ModEntities.PROCAMBARUS_VIRGINALIS, 4, 1, 1,
                 BiomeSelector.in(Biomes.RIVER));
         add(ModEntities.PROCAMBARUS_LUCIFUGUS, 3, 1, 1,

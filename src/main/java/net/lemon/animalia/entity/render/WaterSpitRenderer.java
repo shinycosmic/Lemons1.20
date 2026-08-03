@@ -14,7 +14,7 @@ import org.joml.Matrix3f;
 import org.joml.Matrix4f;
 
 public class WaterSpitRenderer extends EntityRenderer<WaterSpitProjectile> {
-    private static final ResourceLocation TEXTURE = new ResourceLocation("minecraft", "textures/particle/bubble_pop_0.png");
+    private static final ResourceLocation TEXTURE = new ResourceLocation("minecraft", "textures/particle/bubble.png");
 
     public WaterSpitRenderer(EntityRendererProvider.Context context) {
         super(context);
