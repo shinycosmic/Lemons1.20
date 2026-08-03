@@ -1,15 +1,14 @@
 package net.lemon.animalia.entity.bases;
 
-import mezz.jei.api.runtime.IClickableIngredient;
 import net.lemon.animalia.entity.ai.EatDroppedItemsGoal;
 import net.lemon.animalia.entity.ai.FishBreedGoal;
 import net.lemon.animalia.entity.bases.interfaces.IActivityTime;
 import net.lemon.animalia.entity.bases.interfaces.IFoodEater;
+import net.lemon.animalia.entity.bases.interfaces.IGrazer;
 import net.lemon.animalia.entity.bases.interfaces.IIdles;
 import net.lemon.animalia.item.FishEggItem;
 import net.lemon.animalia.registry.ModItems;
 import net.lemon.animalia.registry.spawning.SpawnBand;
-import net.lemon.animalia.util.AnimaliaFunctionUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.locale.Language;
@@ -46,16 +45,19 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Objects;
 import java.util.UUID;
 
-public abstract class AnimaliaBreedableWater extends WaterAnimal implements IActivityTime, IFoodEater, IIdles {
+public abstract class AnimaliaBreedableWater extends WaterAnimal implements IActivityTime, IFoodEater, IIdles, IGrazer {
     private static final EntityDataAccessor<Integer> AGE = SynchedEntityData.defineId(AnimaliaBreedableWater.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Integer> GENDER = SynchedEntityData.defineId(AnimaliaBreedableWater.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Integer> VAR_COLOR = SynchedEntityData.defineId(AnimaliaBreedableWater.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Float> VAR_SIZE_MULTIPLIER = SynchedEntityData.defineId(AnimaliaBreedableWater.class, EntityDataSerializers.FLOAT);
     private static final EntityDataAccessor<Boolean> IS_EATING = SynchedEntityData.defineId(AnimaliaBreedableWater.class, EntityDataSerializers.BOOLEAN);
+    private static final EntityDataAccessor<Boolean> IS_GRAZING = SynchedEntityData.defineId(AnimaliaBreedableWater.class, EntityDataSerializers.BOOLEAN);
     private static final EntityDataAccessor<Boolean> IS_HIDING = SynchedEntityData.defineId(AnimaliaBreedableWater.class, EntityDataSerializers.BOOLEAN);
     private static final EntityDataAccessor<Integer> HIDE_PHASE = SynchedEntityData.defineId(AnimaliaBreedableWater.class, EntityDataSerializers.INT);
 
     private int eatTicks = 0;
+    private int grazeTicks = 0;
+    private int grazeUrgeUntil;
     private int hideTicks = 0;
     private int hideCooldown = 0;
     private int burrowingTicks = 0;
@@ -131,6 +133,7 @@ public abstract class AnimaliaBreedableWater extends WaterAnimal implements IAct
         this.entityData.define(VAR_COLOR, 0);
         this.entityData.define(VAR_SIZE_MULTIPLIER, 1.0f);
         this.entityData.define(IS_EATING, false);
+        this.entityData.define(IS_GRAZING, false);
         this.entityData.define(IS_HIDING, false);
         this.entityData.define(HIDE_PHASE, 0);
     }
@@ -223,6 +226,46 @@ public abstract class AnimaliaBreedableWater extends WaterAnimal implements IAct
     }
 
     public int getEatLength() { return 20; }
+
+    public boolean isGrazing() {
+        return this.entityData.get(IS_GRAZING);
+    }
+
+    public void setGrazing(boolean grazing) {
+        this.entityData.set(IS_GRAZING, grazing);
+    }
+
+    public void startGrazing() {
+        this.setGrazing(true);
+        this.grazeTicks = this.getGrazeLength();
+    }
+
+    public boolean canGraze() {
+        return this.isInWater() && !this.isHiding() && !this.isEating() && !this.isInLove();
+    }
+
+    public boolean wantsToGraze() {
+        return this.tickCount < this.grazeUrgeUntil;
+    }
+
+    public void urgeGraze(int ticks) {
+        this.grazeUrgeUntil = this.tickCount + ticks;
+    }
+
+    public void clearGrazeUrge() {
+        this.grazeUrgeUntil = 0;
+    }
+
+    public void onGrazeStart() {
+    }
+
+    public void onSpontaneousGraze() {
+    }
+
+    public void onGrazeStop() {
+    }
+
+    public int getGrazeLength() { return 20; }
 
     public boolean onHideableBlock(AnimaliaBreedableWater mob) {
         BlockPos pos = mob.blockPosition().below();
@@ -436,6 +479,14 @@ public abstract class AnimaliaBreedableWater extends WaterAnimal implements IAct
                 this.setEating(false);
             }
         }
+
+        if (!this.level().isClientSide && this.grazeTicks > 0) {
+            --this.grazeTicks;
+            if (this.grazeTicks <= 0) {
+                this.setGrazing(false);
+            }
+        }
+
         if (!this.level().isClientSide && this.canHide()) {
             if (this.hideCooldown > 0) {
                 --this.hideCooldown;
