@@ -23,7 +23,7 @@ public class ModBlocks {
 
     public static final RegistryObject<Block> FILTER_TRAP = registerBlock("filter_trap", () -> new FilterTrapBlock(BlockBehaviour.Properties.copy(Blocks.STONE).noOcclusion()));
     public static final RegistryObject<Block> MOUND_NEST = registerBlock("mound_nest", () -> new MoundNestBlock(BlockBehaviour.Properties.copy(Blocks.SAND).noOcclusion().noLootTable()));
-    public static final RegistryObject<Block> ALGAE_MAT = registerBlock("algae_mat", () -> new AlgaeMatBlock(BlockBehaviour.Properties.copy(Blocks.GLOW_LICHEN).noOcclusion().noCollission().sound(SoundType.VINE)));
+    public static final RegistryObject<Block> ALGAE_MAT = registerBlock("algae_mat", () -> new AlgaeMatBlock(BlockBehaviour.Properties.copy(Blocks.GLOW_LICHEN).noOcclusion().noCollission().sound(SoundType.VINE).lightLevel(state -> 0)));
     private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block) {
         RegistryObject<T> toReturn = BLOCKS.register(name, block);
         registerBlockItem(name, toReturn);
