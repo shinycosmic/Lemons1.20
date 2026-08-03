@@ -3,6 +3,7 @@ package net.lemon.animalia.entity.bases;
 import net.lemon.animalia.entity.ai.SchoolBoidGoal;
 import net.lemon.animalia.entity.ai.utils.SchoolDepthBias;
 import net.lemon.animalia.entity.ai.utils.SchoolSignal;
+import net.lemon.animalia.entity.bases.interfaces.IGrazer;
 import net.lemon.animalia.registry.ModItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -34,7 +35,9 @@ import org.jetbrains.annotations.Nullable;
 
 public abstract class FishBase extends AnimaliaBreedableWater implements Bucketable {
     private static final EntityDataAccessor<Boolean> FROM_BUCKET = SynchedEntityData.defineId(FishBase.class, EntityDataSerializers.BOOLEAN);
+    private static final int GRAZE_URGE_TICKS = 200;
 
+    private boolean invisToBoid;
     @Nullable
     private SchoolBoidGoal schoolBoidGoal;
     @Nullable
@@ -46,6 +49,7 @@ public abstract class FishBase extends AnimaliaBreedableWater implements Bucketa
     private int signalData;
     private int signalDelay;
     private int signalCooldown;
+
 
     public FishBase(EntityType<? extends FishBase> entityType, Level level) {
         super(entityType, level);
@@ -193,6 +197,12 @@ public abstract class FishBase extends AnimaliaBreedableWater implements Bucketa
     }
 
     public boolean onSchoolSignalReceived(SchoolSignal signal, int data) {
+        if (signal == SchoolSignal.GRAZE
+                && this.canGraze() && this.findGrazeBlock() != null) {
+            this.urgeGraze(GRAZE_URGE_TICKS);
+            return true;
+        }
+
         if (signal == SchoolSignal.IDLE_DISPLAY && this.getIdleDisplayCount() > 0
                 && this.canPlayIdleDisplay()) {
             int display = data >= 0 && data < this.getIdleDisplayCount()
@@ -260,6 +270,35 @@ public abstract class FishBase extends AnimaliaBreedableWater implements Bucketa
         return other.getType() == this.getType();
     }
 
+    @Override
+    public void onGrazeStart() {
+        if (this.isSchoolingFish()) {
+            this.setInvisToBoid(true);
+            this.leaveSchool();
+        }
+    }
+
+    @Override
+    public void onSpontaneousGraze() {
+        if (this.isSchoolingFish()) {
+            this.broadcastSchoolSignal(SchoolSignal.GRAZE);
+            this.signalCooldown = 60 + this.random.nextInt(40);
+        }
+    }
+
+    @Override
+    public void onGrazeStop() {
+        this.setInvisToBoid(false);
+    }
+
+    public boolean isInvisToBoid() {
+        return this.invisToBoid;
+    }
+
+    public void setInvisToBoid(boolean invis) {
+        this.invisToBoid = invis;
+    }
+
     public double getSchoolFleeSpeedMultiplier() {
         return 2.0;
     }
@@ -310,7 +349,7 @@ public abstract class FishBase extends AnimaliaBreedableWater implements Bucketa
     }
 
     public void leaveSchool() {
-        if (this.schoolLeader != null && this.schoolLeader != this) {
+        if (this.schoolLeader != null && this.schoolLeader != this && this.schoolLeader.isSchoolLeader()) {
             this.schoolLeader.schoolSize--;
         }
         this.schoolLeader = null;
@@ -318,7 +357,8 @@ public abstract class FishBase extends AnimaliaBreedableWater implements Bucketa
     }
 
     public void validateSchoolLeader() {
-        if (this.schoolLeader != null && this.schoolLeader != this && !this.schoolLeader.isAlive()) {
+        if (this.schoolLeader != null && this.schoolLeader != this
+                && (!this.schoolLeader.isAlive() || !this.schoolLeader.isSchoolLeader())) {
             this.schoolLeader = null;
         }
     }
