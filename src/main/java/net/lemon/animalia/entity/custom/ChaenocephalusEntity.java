@@ -232,7 +232,7 @@ public class ChaenocephalusEntity extends BottomWalkerSwimmerBase implements Geo
             return 0;
         }
         if (this.isWalking()) {
-            return 0.6f;
+            return 1f;
         }
         return 0.4f;
     }

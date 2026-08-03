@@ -451,14 +451,6 @@ public abstract class FishBase extends AnimaliaBreedableWater implements Bucketa
         return ModItems.FISH_EGG.get();
     }
 
-    @Override
-    public @Nullable SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, MobSpawnType reason, @Nullable SpawnGroupData spawnData, @Nullable CompoundTag dataTag) {
-        if(reason != MobSpawnType.BUCKET) {
-            this.setGender(this.random.nextInt(2));
-        }
-        return super.finalizeSpawn(level, difficulty, reason, spawnData, dataTag);
-    }
-
     /**
      * Taken from AbstractFish
      */

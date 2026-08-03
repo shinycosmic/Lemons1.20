@@ -57,6 +57,13 @@ public enum SpawnBand {
                     && solidBelow(level, pos);
         }
     },
+    ANY_FLOOR {
+        @Override
+        public boolean test(LevelAccessor level, BlockPos pos) {
+            return isWater(level, pos)
+                    && solidBelow(level, pos);
+        }
+    },
     LOWLAND {
         @Override
         public boolean test(LevelAccessor level, BlockPos pos) {
