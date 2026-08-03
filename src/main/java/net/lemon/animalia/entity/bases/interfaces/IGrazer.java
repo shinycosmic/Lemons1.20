@@ -24,6 +24,10 @@ public interface IGrazer {
         return 6;
     }
 
+    default int getGrazeCount() {
+        return 3;
+    }
+
     /** Squared distance from the block center at which the graze animation can begin. */
     default double getGrazeReachSqr() {
         return 4.0D;

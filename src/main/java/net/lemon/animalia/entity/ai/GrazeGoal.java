@@ -19,7 +19,6 @@ public class GrazeGoal<T extends PathfinderMob & IGrazer & IFoodEater> extends G
     private final double speedMultiplier;
 
     private static final float HEAL_AMOUNT = 2.0F;
-    private static final int GRAZE_COUNT = 3;
     private static final int INTERVAL_TICKS = 20;
     private static final int INTERVAL_JITTER = 15;
     private static final int GRAZE_COOLDOWN_TICKS = 400;
@@ -84,7 +83,7 @@ public class GrazeGoal<T extends PathfinderMob & IGrazer & IFoodEater> extends G
     @Override
     public void start() {
         this.mob.clearGrazeUrge();
-        this.grazesRemaining = GRAZE_COUNT;
+        this.grazesRemaining = this.mob.getGrazeCount();
         this.nextGrazeTime = 0;
         this.inReach = false;
         this.fed = false;
