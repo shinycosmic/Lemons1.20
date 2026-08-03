@@ -1,5 +1,6 @@
 package net.lemon.animalia.datagen;
 
+import net.lemon.animalia.registry.ModBlocks;
 import net.lemon.animalia.registry.ModItems;
 import net.lemon.animalia.registry.ModTags;
 import net.minecraft.core.HolderLookup;
@@ -61,6 +62,8 @@ public class ModItemTagGenerator extends ItemTagsProvider {
 
         tag(ModTags.Items.MARINE_PLANT).add(Items.KELP);
         tag(ModTags.Items.MARINE_PLANT).add(Items.SEAGRASS);
+        tag(ModTags.Items.MARINE_PLANT).add(ModBlocks.ALGAE_MAT.get().asItem());
+
 
         tag(ModTags.Items.DUROPHAGOUS).add(Items.HORN_CORAL);
         tag(ModTags.Items.DUROPHAGOUS).add(Items.HORN_CORAL_BLOCK);
