@@ -227,6 +227,11 @@ public abstract class AnimaliaBreedableWater extends WaterAnimal implements IAct
 
     public int getEatLength() { return 20; }
 
+    @Override
+    public boolean isGrazableBlock(BlockState state) {
+        return false;
+    }
+
     public boolean isGrazing() {
         return this.entityData.get(IS_GRAZING);
     }

@@ -67,7 +67,7 @@ public class SchoolBoidGoal extends Goal {
 
     @Override
     public boolean canUse() {
-        if (!this.fish.isInWater() || !this.fish.isSchoolingFish() || this.fish.isHiding()) {
+        if (!this.fish.isInWater() || !this.fish.isSchoolingFish() || this.fish.isHiding() || this.fish.isInvisToBoid()) {
             return false;
         }
         if (!this.isInSchoolingState(this.fish)) {
@@ -314,6 +314,7 @@ public class SchoolBoidGoal extends Goal {
         return other != this.fish
                 && other.isAlive()
                 && other.isInWater()
+                && !(other instanceof FishBase otherFish && otherFish.isInvisToBoid())
                 && this.fish.canSchoolWith(other)
                 && this.isInSchoolingState(other);
     }
