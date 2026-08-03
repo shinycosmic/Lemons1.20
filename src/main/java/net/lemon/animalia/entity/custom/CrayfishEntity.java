@@ -50,8 +50,7 @@ public class CrayfishEntity extends BottomWalkerSwimmerBase implements GeoEntity
     @Override
     protected void registerGoals() {
         super.registerGoals();
-        this.goalSelector.getAvailableGoals().removeIf(g -> g.getGoal() instanceof AvoidEntityGoal);
-        //this.goalSelector.addGoal(2, new ThreatGoal(this, 5.0D, 200, EXIT_ANIM_TICKS, ThreatGoal.ThreatOutcome.FLEE));
+        this.goalSelector.addGoal(2, new ThreatGoal(this, 5.0D, 200, EXIT_ANIM_TICKS, ThreatGoal.ThreatOutcome.FLEE));
     }
 
     @Override
@@ -118,16 +117,15 @@ public class CrayfishEntity extends BottomWalkerSwimmerBase implements GeoEntity
     @Override
     public int getScaleforGUI() {
         if (this.getType() == ModEntities.PROCAMBARUS_LUCIFUGUS.get()) {
-            return 60;
-        } else {
-            return Scannable.super.getScaleforGUI();
+            return 40;
         }
+        return 40;
     }
 
     @Override
     public int getScaleforDetailGUI() {
         int currScale = Scannable.super.getScaleforDetailGUI();
-        return (int) (currScale * 1.4f);
+        return currScale;
     }
 
     @Override
@@ -152,7 +150,7 @@ public class CrayfishEntity extends BottomWalkerSwimmerBase implements GeoEntity
 
     @Override
     public int getWalkTime() {
-        return 4000 + random.nextInt(1000);
+        return 400 + random.nextInt(500);
     }
 
     @Override
@@ -163,7 +161,7 @@ public class CrayfishEntity extends BottomWalkerSwimmerBase implements GeoEntity
     @Override
     public float getSwimSpeed() {
         if(this.isWalking()) {
-            return 0.8f;
+            return 0.9f;
         }
         return 1.5f;
     }

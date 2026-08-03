@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "#"
+  ],
+  "key": {
+    "#": {
+      "tag": "animalia:crustacean"
+    }
+  },
+  "result": {
+    "count": 1,
+    "item": "animalia:raw_crustacean"
+  }
+}

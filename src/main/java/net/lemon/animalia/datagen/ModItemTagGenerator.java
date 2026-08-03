@@ -29,10 +29,8 @@ public class ModItemTagGenerator extends ItemTagsProvider {
 
         tag(ModTags.Items.CRUSTACEAN).add(ModItems.AMPHIPOD.get());
         tag(ModTags.Items.CRUSTACEAN).add(ModItems.GIGANTOCYPRIS.get());
-        tag(ModTags.Items.CRUSTACEAN).add(ModItems.FISH_FOOD.get());
         tag(ModTags.Items.CRUSTACEAN).add(ModItems.ARTEMIA.get());
         tag(ModTags.Items.CRUSTACEAN).add(ModItems.RAW_CRUSTACEAN.get());
-        tag(ModTags.Items.CRUSTACEAN).add(ModItems.COOKED_CRUSTACEAN.get());
         tag(ModTags.Items.CRUSTACEAN).add(ModItems.PROCAMBARUS_CLARKII.get());
         tag(ModTags.Items.CRUSTACEAN).add(ModItems.PROCAMBARUS_ALLENI.get());
         tag(ModTags.Items.CRUSTACEAN).add(ModItems.PROCAMBARUS_VIRGINALIS.get());
