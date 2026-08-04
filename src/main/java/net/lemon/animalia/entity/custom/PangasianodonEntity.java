@@ -157,7 +157,7 @@ public class PangasianodonEntity extends FishBase implements GeoEntity, Scannabl
 
     private <T extends GeoAnimatable> PlayState predicate(AnimationState<T> animationState) {
         if (!this.isInWater() && !this.isBaby()) {
-            animationState.getController().setAnimation(RawAnimation.begin().then("beached", Animation.LoopType.LOOP));
+            animationState.getController().setAnimation(RawAnimation.begin().then("flop", Animation.LoopType.LOOP));
             return PlayState.CONTINUE;
         }
 
