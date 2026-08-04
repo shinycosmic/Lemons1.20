@@ -5,6 +5,7 @@ import net.lemon.animalia.entity.ai.utils.SchoolDepthBias;
 import net.lemon.animalia.entity.ai.utils.SchoolSignal;
 import net.lemon.animalia.entity.bases.interfaces.IGrazer;
 import net.lemon.animalia.registry.ModItems;
+import net.lemon.animalia.registry.spawning.SpawnBand;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;

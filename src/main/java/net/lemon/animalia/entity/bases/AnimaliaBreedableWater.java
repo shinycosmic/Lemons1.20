@@ -727,7 +727,7 @@ public abstract class AnimaliaBreedableWater extends WaterAnimal implements IAct
     }
 
     public SpawnBand spawnBand() {
-        return SpawnBand.OPEN_WATER;
+        return SpawnBand.ANY_WATER;
     }
 
     @Override
