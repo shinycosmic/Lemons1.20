@@ -24,7 +24,7 @@ public class WaterSpitRenderer extends EntityRenderer<WaterSpitProjectile> {
     public void render(WaterSpitProjectile entity, float entityYaw, float partialTick, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight) {
         poseStack.pushPose();
 
-        // Billboard — always face the camera
+        // Billboard - always face the camera
         poseStack.mulPose(this.entityRenderDispatcher.cameraOrientation());
         poseStack.mulPose(Axis.YP.rotationDegrees(180.0F));
 

@@ -8,7 +8,7 @@ import java.util.*;
 /**
  * Static registry mapping AppName → Order → List of EntityTypes.
  * Populated via registerHolonet() calls from each entity class during commonSetup.
- * Zero runtime cost — no entity instantiation needed.
+ * Zero runtime cost - no entity instantiation needed.
  */
 public class HolonetEntities {
 

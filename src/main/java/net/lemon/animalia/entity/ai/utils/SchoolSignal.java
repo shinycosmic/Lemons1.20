@@ -4,25 +4,25 @@ public enum SchoolSignal {
 
     /**
      * A cosmetic idle animation (fin flare, body shimmer, etc).
-     * Low prerequisite — any fish can perform this if it has the ability to
+     * Low prerequisite - any fish can perform this if it has the ability to
      */
     IDLE_DISPLAY,
 
     /**
      * Grazing on a block (coral, algae, sponge, etc).
-     * Requires a valid graze target nearby — fish that can't find one ignore the signal.
+     * Requires a valid graze target nearby - fish that can't find one ignore the signal.
      */
     GRAZE,
 
     /**
      * Burrowing/hiding in the substrate.
-     * Requires ground contact and a valid block below — fish that can't hide ignore the signal.
+     * Requires ground contact and a valid block below - fish that can't hide ignore the signal.
      */
     HIDE,
 
     /**
      * Resting at the current position (hovering in place, reduced movement).
-     * Low prerequisite — mainly requires the school to be moving slowly.
+     * Low prerequisite - mainly requires the school to be moving slowly.
      */
     REST;
 

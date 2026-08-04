@@ -15,7 +15,7 @@ public interface IGrazer {
     /** Trigger one playthrough of the graze animation. */
     void startGrazing();
 
-    /** Ticks one graze animation playthrough lasts — override to match the clip. */
+    /** Ticks one graze animation playthrough lasts - override to match the clip. */
     default int getGrazeLength() {
         return 20;
     }

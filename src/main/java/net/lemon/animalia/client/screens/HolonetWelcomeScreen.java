@@ -131,7 +131,7 @@ public class HolonetWelcomeScreen extends Screen {
                 return true;
             }
         }
-        // During loading, only Esc closes — block all clicks
+        // During loading, only Esc closes - block all clicks
         return true;
     }
 

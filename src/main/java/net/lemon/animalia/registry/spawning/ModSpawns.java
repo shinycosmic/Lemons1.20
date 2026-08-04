@@ -11,7 +11,7 @@ import java.util.List;
 
 /**
  * The natural spawn table. One line per species (or more, for per-region weights).
- * Consumed by datagen only — the game ships the generated biome modifier JSONs.
+ * Consumed by datagen only - the game ships the generated biome modifier JSONs.
  */
 public class ModSpawns {
     public static final List<SpawnEntry> ENTRIES = new ArrayList<>();

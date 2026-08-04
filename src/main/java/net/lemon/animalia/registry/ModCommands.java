@@ -67,9 +67,9 @@ public class ModCommands {
                 .then(Commands.literal("discover")
                         .then(Commands.argument("entity", ResourceLocationArgument.id())
                                 .suggests(HOLONET_ENTITY_SUGGESTIONS)
-                                // No gender provided — discover both
+                                // No gender provided - discover both
                                 .executes(context -> discoverEntity(context, -1))
-                                // Gender provided — discover only that one
+                                // Gender provided - discover only that one
                                 .then(Commands.argument("gender", IntegerArgumentType.integer(0, 1))
                                         .executes(context -> discoverEntity(context, IntegerArgumentType.getInteger(context, "gender")))
                                 )

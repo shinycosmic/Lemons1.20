@@ -4,6 +4,7 @@ import net.lemon.animalia.entity.ai.EatDroppedItemsGoal;
 import net.lemon.animalia.entity.ai.FishBreedGoal;
 import net.lemon.animalia.entity.bases.interfaces.IActivityTime;
 import net.lemon.animalia.entity.bases.interfaces.IFoodEater;
+import net.lemon.animalia.entity.bases.interfaces.IGrazer;
 import net.lemon.animalia.entity.bases.interfaces.IIdles;
 import net.lemon.animalia.item.FishEggItem;
 import net.lemon.animalia.registry.ModItems;
@@ -41,14 +42,17 @@ import java.util.Objects;
 
 import static net.lemon.animalia.entity.bases.AnimaliaBreedableWater.*;
 
-public abstract class AnimaliaLandBase extends Animal implements IActivityTime, IFoodEater, IIdles {
+public abstract class AnimaliaLandBase extends Animal implements IActivityTime, IFoodEater, IIdles, IGrazer {
     private static final EntityDataAccessor<Integer> GENDER = SynchedEntityData.defineId(AnimaliaLandBase.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Integer> VAR_COLOR = SynchedEntityData.defineId(AnimaliaLandBase.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Float> VAR_SIZE_MULTIPLIER = SynchedEntityData.defineId(AnimaliaLandBase.class, EntityDataSerializers.FLOAT);
     private static final EntityDataAccessor<Boolean> IS_EATING = SynchedEntityData.defineId(AnimaliaLandBase.class, EntityDataSerializers.BOOLEAN);
     private static final EntityDataAccessor<Boolean> IS_HIDING = SynchedEntityData.defineId(AnimaliaLandBase.class, EntityDataSerializers.BOOLEAN);
     private static final EntityDataAccessor<Integer> HIDE_PHASE = SynchedEntityData.defineId(AnimaliaLandBase.class, EntityDataSerializers.INT);
+    private static final EntityDataAccessor<Boolean> IS_GRAZING = SynchedEntityData.defineId(AnimaliaLandBase.class, EntityDataSerializers.BOOLEAN);
 
+    private int grazeTicks = 0;
+    private int grazeUrgeUntil;
     private int eatTicks = 0;
     private int hideTicks = 0;
     private int hideCooldown = 0;
@@ -74,6 +78,7 @@ public abstract class AnimaliaLandBase extends Animal implements IActivityTime, 
         this.entityData.define(VAR_COLOR, 0);
         this.entityData.define(VAR_SIZE_MULTIPLIER, 1.0f);
         this.entityData.define(IS_EATING, false);
+        this.entityData.define(IS_GRAZING, false);
         this.entityData.define(IS_HIDING, false);
         this.entityData.define(HIDE_PHASE, 0);
     }
@@ -111,7 +116,6 @@ public abstract class AnimaliaLandBase extends Animal implements IActivityTime, 
 
     /***
      * Used to check breeding item
-     * @return
      */
     public boolean isBreedingItem(ItemStack stack) {
         return stack.is(getBreedingItem());
@@ -119,7 +123,6 @@ public abstract class AnimaliaLandBase extends Animal implements IActivityTime, 
 
     /***
      * Used to set breedingItem
-     * @return
      */
     public abstract Item getBreedingItem();
 
@@ -130,7 +133,6 @@ public abstract class AnimaliaLandBase extends Animal implements IActivityTime, 
 
     /***
      * cannibalized from Animal class. Used to set Food Item (to heal/grow)
-     * @return
      */
     public abstract TagKey<Item> getFoodTag();
 
@@ -157,6 +159,40 @@ public abstract class AnimaliaLandBase extends Animal implements IActivityTime, 
     public void startEating() {
         this.setEating(true);
         this.eatTicks = this.getEatLength();
+    }
+
+    @Override
+    public boolean isGrazableBlock(BlockState state) {
+        return false;
+    }
+
+    public boolean isGrazing() {
+        return this.entityData.get(IS_GRAZING);
+    }
+
+    public void setGrazing(boolean grazing) {
+        this.entityData.set(IS_GRAZING, grazing);
+    }
+
+    public void startGrazing() {
+        this.setGrazing(true);
+        this.grazeTicks = this.getGrazeLength();
+    }
+
+    public boolean canGraze() {
+        return this.onGround() && !this.isInWater() && !this.isHiding() && !this.isEating() && !this.isInLove();
+    }
+
+    public boolean wantsToGraze() {
+        return this.tickCount < this.grazeUrgeUntil;
+    }
+
+    public void urgeGraze(int ticks) {
+        this.grazeUrgeUntil = this.tickCount + ticks;
+    }
+
+    public void clearGrazeUrge() {
+        this.grazeUrgeUntil = 0;
     }
 
     public float getVarSizeMultiplier() {
@@ -199,7 +235,6 @@ public abstract class AnimaliaLandBase extends Animal implements IActivityTime, 
 
     /***
      * Length of hide animation/how long hide lasts for
-     * @return
      */
     public int getHideLength() {
         return 100;
@@ -207,7 +242,6 @@ public abstract class AnimaliaLandBase extends Animal implements IActivityTime, 
 
     /***
      * When can it start hiding again?
-     * @return
      */
     public int getHideCooldown() {
         return 600 + random.nextInt(2000);
@@ -216,7 +250,6 @@ public abstract class AnimaliaLandBase extends Animal implements IActivityTime, 
     /***
      * ticker that tracks length in hiding
      * for the first X ticks of hiding, we play the transition toHide animation, and we will play the leaveHide animation as soon as hideticks is up
-     * @return
      */
     public int getHideTicks() {
         return this.hideTicks;
@@ -250,7 +283,6 @@ public abstract class AnimaliaLandBase extends Animal implements IActivityTime, 
 
     /***
      * Override this method to add special conditions such as hiding in plants.
-     * @return
      */
     public boolean canStartHiding() {
         return this.canHide() && !this.isHiding() && this.hideCooldown <= 0;
@@ -393,6 +425,14 @@ public abstract class AnimaliaLandBase extends Animal implements IActivityTime, 
                 this.setEating(false);
             }
         }
+
+        if (!this.level().isClientSide && this.grazeTicks > 0) {
+            --this.grazeTicks;
+            if (this.grazeTicks <= 0) {
+                this.setGrazing(false);
+            }
+        }
+
         if (!this.level().isClientSide && this.canHide()) {
             if (this.hideCooldown > 0) {
                 --this.hideCooldown;
@@ -410,7 +450,7 @@ public abstract class AnimaliaLandBase extends Animal implements IActivityTime, 
                             this.getNavigation().stop();
                             this.wantsToHide = false;
                         } else if (this.onGround()) {
-                            // On ground but wrong block — abort
+                            // On ground but wrong block - abort
                             this.wantsToHide = false;
                             this.hideCooldown = (int) (this.getHideCooldown() * 0.25f);
                         }

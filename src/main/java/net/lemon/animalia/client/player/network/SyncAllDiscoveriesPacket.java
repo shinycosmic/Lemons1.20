@@ -17,7 +17,7 @@ public class SyncAllDiscoveriesPacket {
         this.hasSeenWelcome = hasSeenWelcome;
     }
 
-    /** Decoder constructor — reads from network buffer. */
+    /** Decoder constructor - reads from network buffer. */
     public SyncAllDiscoveriesPacket(FriendlyByteBuf buf) {
         int size = buf.readVarInt();
         this.discoveries = new HashSet<>(size);

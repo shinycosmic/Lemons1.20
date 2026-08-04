@@ -23,7 +23,7 @@ public class DiscoverSpeciesPacket {
         this.gender = gender;
     }
 
-    /** Decoder constructor — reads from network buffer. */
+    /** Decoder constructor - reads from network buffer. */
     public DiscoverSpeciesPacket(FriendlyByteBuf buf) {
         this.entityType = buf.readResourceLocation();
         this.gender = buf.readVarInt();

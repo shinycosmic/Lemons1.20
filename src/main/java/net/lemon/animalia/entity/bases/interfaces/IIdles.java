@@ -26,7 +26,7 @@ public interface IIdles {
     /**
      * Perform idle display #displayId (0-based). Override to trigger GeckoLib
      * animations via triggerAnim on a controller with triggerable anims.
-     * Do not call directly — use {@link #startIdleDisplay(int)}.
+     * Do not call directly - use {@link #startIdleDisplay(int)}.
      */
     default void performIdleDisplay(int displayId) {
     }

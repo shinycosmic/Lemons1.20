@@ -512,7 +512,7 @@ public abstract class AnimaliaBreedableWater extends WaterAnimal implements IAct
                             this.getNavigation().stop();
                             this.wantsToHide = false;
                         } else if (this.onGround()) {
-                            // On ground but wrong block — abort
+                            // On ground but wrong block - abort
                             this.wantsToHide = false;
                             this.hideCooldown = (int) (this.getHideCooldown() * 0.25f);
                         }
