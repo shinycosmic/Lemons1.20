@@ -105,7 +105,7 @@ public class ModItems {
     public static final RegistryObject<Item> NEMATISTIUS_PECTORALIS_SPAWN_EGG = registerSpawnEgg("nematistius_pectoralis_spawn_egg", ModEntities.NEMATISTIUS_PECTORALIS, 0x7d8a90, 0x282629);
     public static final RegistryObject<Item> TOXOTES_CHATAREUS_SPAWN_EGG = registerSpawnEgg("toxotes_chatareus_spawn_egg", ModEntities.TOXOTES_CHATAREUS, 0xd6d6d6, 0x111110);
 //    public static final RegistryObject<Item> LEPTOBRAMA_MUELLERI_SPAWN_EGG = registerSpawnEgg("leptobrama_muelleri_spawn_egg", ModEntities.LEPTOBRAMA_MUELLERI, 0x7d8a90, 0x282629);
-    public static final RegistryObject<Item> PANGASIANODON_GIGAS_SPAWN_EGG = registerSpawnEgg("pangasianodon_gigas_spawn_egg", ModEntities.PANGASIANODON_GIGAS, 0x7d8a90, 0x282629);
+    public static final RegistryObject<Item> PANGASIANODON_GIGAS_SPAWN_EGG = registerSpawnEgg("pangasianodon_gigas_spawn_egg", ModEntities.PANGASIANODON_GIGAS, 0x384643, 0xb4ccc0);
     public static final RegistryObject<Item> SCATOPHAGUS_ARGUS_SPAWN_EGG = registerSpawnEgg("scatophagus_argus_spawn_egg", ModEntities.SCATOPHAGUS_ARGUS, 0xe0d738, 0x1c201b);
 
     //Non Fish Spawn Eggs

@@ -37,7 +37,7 @@ import software.bernie.geckolib.core.object.PlayState;
 public class PangasianodonEntity extends FishBase implements GeoEntity, Scannable {
     private final AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
 
-    private static final int PANGASIANODON_GIGAS_PIXEL = 19;
+    private static final int PANGASIANODON_GIGAS_PIXEL = 49;
 
     public PangasianodonEntity(EntityType<? extends FishBase> entityType, Level level) {
         super(entityType, level);
@@ -48,7 +48,7 @@ public class PangasianodonEntity extends FishBase implements GeoEntity, Scannabl
         if(this.isBaby()) {
             return 1.2f;
         }
-        return 0.4f;
+        return 1.2f;
     }
 
     public static AttributeSupplier setAttributes() {
@@ -102,7 +102,7 @@ public class PangasianodonEntity extends FishBase implements GeoEntity, Scannabl
     @Override
     public int getScaleforGUI() {
         if (this.getType() == ModEntities.PANGASIANODON_GIGAS.get()) {
-            return 40;
+            return 18;
         } else {
             return Scannable.super.getScaleforGUI();
         }
@@ -111,7 +111,16 @@ public class PangasianodonEntity extends FishBase implements GeoEntity, Scannabl
     @Override
     public int getScaleforDetailGUI() {
         int currScale = Scannable.super.getScaleforDetailGUI();
-        return (int) (currScale * 0.6f);
+        return (int) (currScale * 0.65f);
+    }
+
+    @Override
+    public int getXOffsetForGUI() {
+        int offset = 0;
+        if(this.getType() == ModEntities.PANGASIANODON_GIGAS.get()) {
+            offset = -5;
+        }
+        return offset;
     }
 
     public static void registerHolonet(){
@@ -121,7 +130,7 @@ public class PangasianodonEntity extends FishBase implements GeoEntity, Scannabl
     @Override
     public float genVarSizeMultiplier() {
         if (this.getType() == ModEntities.PANGASIANODON_GIGAS.get()) {
-            return AnimaliaFunctionUtil.getScaleForSize(PANGASIANODON_GIGAS_PIXEL, this.genVarSize(230, 300, 250));
+            return AnimaliaFunctionUtil.getScaleForSize(PANGASIANODON_GIGAS_PIXEL, this.genVarSize(230, 300, 280));
         }
         return 1;
     }
@@ -129,6 +138,11 @@ public class PangasianodonEntity extends FishBase implements GeoEntity, Scannabl
     @Override
     public ItemStack getBucketItemStack() {
         return new ItemStack(ModItems.PANGASIANODON_GIGAS_BUCKET.get());
+    }
+
+    @Override
+    public double getGrazeReachSqr() {
+        return 0.4d;
     }
 
     @Override
@@ -157,11 +171,11 @@ public class PangasianodonEntity extends FishBase implements GeoEntity, Scannabl
 
     private <T extends GeoAnimatable> PlayState predicate(AnimationState<T> animationState) {
         if (!this.isInWater() && !this.isBaby()) {
-            animationState.getController().setAnimation(RawAnimation.begin().then("flop", Animation.LoopType.LOOP));
+            animationState.getController().setAnimation(RawAnimation.begin().then("beached", Animation.LoopType.LOOP));
             return PlayState.CONTINUE;
         }
 
-        if (this.isGrazing()) {
+        if (this.isGrazing() && !this.isBaby()) {
             animationState.getController().setAnimation(RawAnimation.begin().then("graze", Animation.LoopType.LOOP));
             return PlayState.CONTINUE;
         }

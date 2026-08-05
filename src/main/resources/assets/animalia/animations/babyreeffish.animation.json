@@ -1,0 +1,81 @@
+{
+	"format_version": "1.8.0",
+	"animations": {
+		"swim": {
+			"loop": true,
+			"bones": {
+				"main": {
+					"rotation": {
+						"vector": ["-0+math.sin(query.anim_time*229-100)*-0.1", "-0+math.sin(query.anim_time*229-100*1)*-0.5", "0+math.sin(query.anim_time*229)*1"]
+					},
+					"position": {
+						"vector": ["0+math.sin(query.anim_time*229)*-0.15", 0, "0+math.sin(query.anim_time*229-50)*0.1"]
+					}
+				},
+				"tail": {
+					"rotation": {
+						"vector": ["-0-math.sin(query.anim_time*350-80)*-3", "-0-math.sin(query.anim_time*350-100)*12", "0+math.sin(query.anim_time*350-20)*-8"]
+					}
+				},
+				"frontLeftFin": {
+					"rotation": {
+						"vector": ["-0-math.sin(query.anim_time*390-80)*-3", "-0+math.sin(query.anim_time*390-100)*20", "0+math.sin(query.anim_time*390-20)*18"]
+					}
+				},
+				"backLeftFin": {
+					"rotation": {
+						"vector": ["-0-math.sin(query.anim_time*150-80*6)*-1", 0, "0-math.sin(query.anim_time*150-100)*-1"]
+					}
+				},
+				"backRightFin": {
+					"rotation": {
+						"vector": ["-0-math.sin(query.anim_time*150-80*2)*-1", 0, "0+math.sin(query.anim_time*150-100)*1"]
+					}
+				},
+				"frontRightFin": {
+					"rotation": {
+						"vector": ["-0-math.sin(query.anim_time*390-80)*-3", "-0-math.sin(query.anim_time*390-100)*20", "0+math.sin(query.anim_time*390-20)*-18"]
+					}
+				}
+			}
+		},
+		"flop": {
+			"animation_length": 0.9583,
+			"bones": {
+				"main": {
+					"rotation": {
+						"vector": [0, "-0-math.sin(query.anim_time*720-100)*8", -90]
+					},
+					"position": {
+						"vector": [5, "1.575+math.sin(query.anim_time*720)", 0]
+					}
+				},
+				"tail": {
+					"rotation": {
+						"vector": [0, "2-math.sin(query.anim_time*720)*-6.5", 0]
+					}
+				},
+				"frontLeftFin": {
+					"rotation": {
+						"vector": [0, "-0-math.sin(query.anim_time*720-50)*-15", 0]
+					}
+				},
+				"backLeftFin": {
+					"rotation": {
+						"vector": [0, 0, "32.75+math.sin(query.anim_time*720-150)*-15"]
+					}
+				},
+				"backRightFin": {
+					"rotation": {
+						"vector": [0, 0, "-20.25+math.sin(query.anim_time*720-50)*15"]
+					}
+				},
+				"frontRightFin": {
+					"rotation": {
+						"vector": [0, "30.75-math.sin(query.anim_time*720-100)*-15", 0]
+					}
+				}
+			}
+		}
+	}
+}

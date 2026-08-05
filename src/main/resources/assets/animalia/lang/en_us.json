@@ -102,6 +102,7 @@
   "entity.animalia.procambarus_alleni": "Everglades Crayfish",
   "entity.animalia.procambarus_virginalis": "Marbled Crayfish",
   "entity.animalia.procambarus_lucifugus": "Light-Fleeing Crayfish",
+  "entity.animalia.pangasianodon_gigas": "Mekong Giant Catfish",
 
   "tooltip.animalia.baby": "Juvenile",
   "container.animalia.filter_trap": "Water Trap",
@@ -153,6 +154,7 @@
   "entity.animalia.procambarus_virginalis.scientific": "Procambarus virginalis",
   "entity.animalia.procambarus_alleni.scientific": "Procambarus alleni",
   "entity.animalia.procambarus_lucifugus.scientific": "Procambarus lucifugus",
+  "entity.animalia.pangasianodon_gigas.scientific": "Pangasianodon gigas",
 
   "order.animalia.perciformes": "Perciformes",
   "order.animalia.anabantiformes": "Anabantiformes",

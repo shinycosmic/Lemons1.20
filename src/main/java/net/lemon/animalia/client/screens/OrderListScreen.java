@@ -48,7 +48,7 @@ public class OrderListScreen extends Screen {
     private static final int FIELD_SCROLLBAR_COLOR = 0xFF5C3A1A; // darker orange
     private static final int SCROLLBAR_TRACK_COLOR = 0x44000000; // semi-transparent black
     private static final int FISH_BAR_COLOR = 0xFF1A8A5C;
-    private static final int FIELD_BAR_COLOR = 0xFF8A5C1A;
+    private static final int FIELD_BAR_COLOR = 0xFF1A8A5C;
     private static final int BAR_BG_COLOR = 0x44000000;
 
     private final Scannable.AppName app;
@@ -86,7 +86,7 @@ public class OrderListScreen extends Screen {
     @Override
     public void render(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
         CompendiumHomeScreen.renderHelper(graphics, app, FISH_BACKGROUND, FIELD_BACKGROUND, bgX, bgY, BG_WIDTH, BG_HEIGHT, BORDER);
-        int color = app == Scannable.AppName.FISH ? 0x00FFCC : 0xC04000;
+        int color = app == Scannable.AppName.FISH ? 0x00FFCC : 0x65e900;
         graphics.drawCenteredString(this.font, Component.translatable("gui.animalia.holonet.order_list"), bgX + BG_WIDTH / 2, bgY + 40, color);
 
         int panelX = bgX + PANEL_LEFT;
