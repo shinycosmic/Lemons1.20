@@ -38,6 +38,7 @@ public class ModItemTagGenerator extends ItemTagsProvider {
         tag(ModTags.Items.CRUSTACEAN).add(ModItems.PROCAMBARUS_LUCIFUGUS.get());
 
         tag(ModTags.Items.FISH_FOOD).add(ModItems.ARTEMIA.get());
+        tag(ModTags.Items.FISH_FOOD).add(ModItems.WORM.get());
         tag(ModTags.Items.FISH_FOOD).add(ModItems.FISH_FOOD.get());
         tag(ModTags.Items.FISH_FOOD).add(ModItems.GIGANTOCYPRIS.get());
         tag(ModTags.Items.FISH_FOOD).add(ModItems.AMPHIPOD.get());
@@ -53,6 +54,7 @@ public class ModItemTagGenerator extends ItemTagsProvider {
         tag(ModTags.Items.INVERTEBRATE).add(ModItems.GIGANTOCYPRIS.get());
         tag(ModTags.Items.INVERTEBRATE).add(ModItems.AMPHIPOD.get());
         tag(ModTags.Items.INVERTEBRATE).add(ModItems.TERMITE.get());
+        tag(ModTags.Items.INVERTEBRATE).add(ModItems.WORM.get());
         tag(ModTags.Items.INVERTEBRATE).add(ModItems.RAW_CRUSTACEAN.get());
         tag(ModTags.Items.INVERTEBRATE).add(ModItems.COOKED_CRUSTACEAN.get());
         tag(ModTags.Items.INVERTEBRATE).add(ModItems.PROCAMBARUS_CLARKII.get());

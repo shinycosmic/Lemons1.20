@@ -37,7 +37,9 @@ public class ModEntities {
     public static final RegistryObject<EntityType<ToxotesEntity>> TOXOTES_CHATAREUS = registerEntityType("toxotes_chatareus", ToxotesEntity::new, ModMobCategories.ANIMALIA_FISH, 0.6f, 0.6f, ToxotesEntity::setAttributes);
     public static final RegistryObject<EntityType<BettaEntity>> BETTA_SPLENDENS = registerEntityType("betta_splendens", BettaEntity::new, ModMobCategories.ANIMALIA_FISH, 0.3f, 0.3f, BettaEntity::setAttributes);
     public static final RegistryObject<EntityType<RegSchoolingEntity>> SCATOPHAGUS_ARGUS = registerEntityType("scatophagus_argus", RegSchoolingEntity::new, ModMobCategories.ANIMALIA_FISH, 0.5f, 0.3f, RegSchoolingEntity::setAttributes);
-    public static final RegistryObject<EntityType<PangasianodonEntity>> PANGASIANODON_GIGAS = registerEntityType("pangasianodon_gigas", PangasianodonEntity::new, ModMobCategories.ANIMALIA_FISH, 0.8f, 0.8f, PangasianodonEntity::setAttributes);
+    public static final RegistryObject<EntityType<RegSchoolingEntity>> POMACANTHUS_IMPERATOR = registerEntityType("pomacanthus_imperator", RegSchoolingEntity::new, ModMobCategories.ANIMALIA_FISH, 0.5f, 0.3f, RegSchoolingEntity::setAttributes);
+    public static final RegistryObject<EntityType<RegSchoolingEntity>> NASO_BREVIROSTRIS = registerEntityType("naso_brevirostris", RegSchoolingEntity::new, ModMobCategories.ANIMALIA_FISH, 0.5f, 0.3f, RegSchoolingEntity::setAttributes);
+    public static final RegistryObject<EntityType<PangasianodonEntity>> PANGASIANODON_GIGAS = registerEntityType("pangasianodon_gigas", PangasianodonEntity::new, ModMobCategories.ANIMALIA_FISH, 0.9f, 0.9f, PangasianodonEntity::setAttributes);
 
     //Non Fish
     public static final RegistryObject<EntityType<CrayfishEntity>> PROCAMBARUS_CLARKII = registerEntityType("procambarus_clarkii", CrayfishEntity::new, ModMobCategories.ANIMALIA_INVERTEBRATE, 0.5f, 0.3f, CrayfishEntity::setAttributes);

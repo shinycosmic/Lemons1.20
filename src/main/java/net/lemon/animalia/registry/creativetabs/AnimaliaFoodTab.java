@@ -25,6 +25,7 @@ public class AnimaliaFoodTab {
             ModItems.TADPOLE,
             ModItems.FISH_FOOD,
             ModItems.TERMITE,
+            ModItems.WORM,
             ModItems.PROCAMBARUS_CLARKII,
             ModItems.PROCAMBARUS_ALLENI,
             ModItems.PROCAMBARUS_VIRGINALIS,

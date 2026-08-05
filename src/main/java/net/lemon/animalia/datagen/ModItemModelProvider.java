@@ -39,6 +39,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItems.TADPOLE);
         simpleItem(ModItems.ARTEMIA);
         simpleItem(ModItems.TERMITE);
+        simpleItem(ModItems.WORM);
         simpleItem(ModItems.PROCAMBARUS_VIRGINALIS);
         simpleItem(ModItems.PROCAMBARUS_ALLENI);
         simpleItem(ModItems.PROCAMBARUS_CLARKII);

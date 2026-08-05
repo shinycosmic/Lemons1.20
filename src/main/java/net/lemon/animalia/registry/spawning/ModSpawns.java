@@ -63,6 +63,10 @@ public class ModSpawns {
                 BiomeSelector.in(Biomes.MANGROVE_SWAMP));
         add(ModEntities.SCATOPHAGUS_ARGUS, 6, 1, 6,
                 BiomeSelector.in(Biomes.MANGROVE_SWAMP, Biomes.RIVER));
+        add(ModEntities.NASO_BREVIROSTRIS, 2, 1, 12,
+                BiomeSelector.in(Biomes.WARM_OCEAN));
+        add(ModEntities.POMACANTHUS_IMPERATOR, 3, 1, 2,
+                BiomeSelector.in(Biomes.WARM_OCEAN));
         add(ModEntities.PANGASIANODON_GIGAS, 2, 1, 1,
                 BiomeSelector.in(Biomes.MANGROVE_SWAMP));
 

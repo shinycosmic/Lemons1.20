@@ -3,8 +3,7 @@ package net.lemon.animalia.entity.render;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.lemon.animalia.entity.custom.CrayfishEntity;
 import net.lemon.animalia.entity.custom.RegSchoolingEntity;
-import net.lemon.animalia.entity.custom.RoosterfishEntity;
-import net.lemon.animalia.entity.model.NematistiusPectoralisModel;
+import net.lemon.animalia.entity.model.PomacanthusImperatorModel;
 import net.lemon.animalia.entity.model.ScatophagusArgusModel;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
@@ -14,17 +13,22 @@ import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.cache.object.BakedGeoModel;
 import software.bernie.geckolib.renderer.GeoEntityRenderer;
 
-public class ScatophagusArgusRenderer extends GeoEntityRenderer<RegSchoolingEntity> {
-    private float babyMult = 0.2f;
+public class PomacanthusImperatorRenderer extends GeoEntityRenderer<RegSchoolingEntity> {
+    private float babyMult = 0.3f;
 
-    public ScatophagusArgusRenderer(EntityRendererProvider.Context context) {
-        super(context, new ScatophagusArgusModel());
+    public PomacanthusImperatorRenderer(EntityRendererProvider.Context context) {
+        super(context, new PomacanthusImperatorModel());
     }
 
     @Override
     public void render(RegSchoolingEntity entity, float entityYaw, float partialTick, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight) {
         if(entity.tickCount <= 1 && !entity.isRemoved()) return;
         super.render(entity, entityYaw, partialTick, poseStack, bufferSource, packedLight);
+    }
+
+    @Override
+    public RenderType getRenderType(RegSchoolingEntity animatable, ResourceLocation texture, @Nullable MultiBufferSource bufferSource, float partialTick) {
+        return RenderType.entityTranslucent(texture);
     }
 
     @Override

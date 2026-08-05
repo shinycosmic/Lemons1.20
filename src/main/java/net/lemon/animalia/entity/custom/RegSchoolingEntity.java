@@ -35,6 +35,8 @@ import software.bernie.geckolib.core.object.PlayState;
 public class RegSchoolingEntity extends FishBase implements GeoEntity, Scannable {
     private final AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
     private static final int SCATOPHAGUS_ARGUS_PIXEL = 14;
+    private static final int NASO_BREVIROSTRIS_PIXEL = 33;
+    private static final int POMACANTHUS_IMPERATOR_PIXEL = 22;
 
     public RegSchoolingEntity(EntityType<? extends FishBase> entityType, Level level) {
         super(entityType, level);
@@ -47,7 +49,12 @@ public class RegSchoolingEntity extends FishBase implements GeoEntity, Scannable
 
     @Override
     public Item getBreedingItem() {
-        return ModBlocks.ALGAE_MAT.get().asItem();
+        if (this.getType() == ModEntities.SCATOPHAGUS_ARGUS.get()) {
+            return ModBlocks.ALGAE_MAT.get().asItem();
+        } else if (this.getType() == ModEntities.POMACANTHUS_IMPERATOR.get()) {
+            return Items.SPONGE;
+        }
+        return ModItems.FISH_FOOD.get();
     }
 
     @Override
@@ -64,6 +71,10 @@ public class RegSchoolingEntity extends FishBase implements GeoEntity, Scannable
     public Component getTrivia() {
         if (this.getType() == ModEntities.SCATOPHAGUS_ARGUS.get()) {
             return Component.translatable("trivia.animalia.scatophagus_argus");
+        } else if (this.getType() == ModEntities.POMACANTHUS_IMPERATOR.get()) {
+            return Component.translatable("trivia.animalia.pomacanthus_imperator");
+        } else if (this.getType() == ModEntities.NASO_BREVIROSTRIS.get()) {
+            return Component.translatable("trivia.animalia.naso_brevirostris");
         }
         return Component.translatable("debug.animalia.trivia");
     }
@@ -72,6 +83,10 @@ public class RegSchoolingEntity extends FishBase implements GeoEntity, Scannable
     public Component getFamily() {
         if (this.getType() == ModEntities.SCATOPHAGUS_ARGUS.get()) {
             return Component.translatable("family.animalia.scatophagidae");
+        } else if (this.getType() == ModEntities.POMACANTHUS_IMPERATOR.get()) {
+            return Component.translatable("family.animalia.pomacanthidae");
+        } else if (this.getType() == ModEntities.NASO_BREVIROSTRIS.get()) {
+            return Component.translatable("family.animalia.acanthuridae");
         }
         return Component.translatable("debug.animalia.family");
     }
@@ -86,7 +101,7 @@ public class RegSchoolingEntity extends FishBase implements GeoEntity, Scannable
 
     public static AttributeSupplier setAttributes() {
         return Mob.createMobAttributes()
-                .add(Attributes.MAX_HEALTH, 2D)
+                .add(Attributes.MAX_HEALTH, 3D)
                 .add(Attributes.MOVEMENT_SPEED, 0.55f)
                 .build();
     }
@@ -95,6 +110,10 @@ public class RegSchoolingEntity extends FishBase implements GeoEntity, Scannable
     public ItemStack getBucketItemStack() {
         if (this.getType() == ModEntities.SCATOPHAGUS_ARGUS.get()) {
             return new ItemStack(ModItems.SCATOPHAGUS_ARGUS_BUCKET.get());
+        } else if (this.getType() == ModEntities.POMACANTHUS_IMPERATOR.get()) {
+            return new ItemStack(ModItems.POMACANTHUS_IMPERATOR_BUCKET.get());
+        } else if (this.getType() == ModEntities.NASO_BREVIROSTRIS.get()) {
+            return new ItemStack(ModItems.NASO_BREVIROSTRIS_BUCKET.get());
         }
         return new ItemStack(Items.SALMON_BUCKET);
     }
@@ -115,18 +134,27 @@ public class RegSchoolingEntity extends FishBase implements GeoEntity, Scannable
     public int getMaxSchoolSize() {
         if (this.getType() == ModEntities.SCATOPHAGUS_ARGUS.get()) {
             return 6;
+        } else if (this.getType() == ModEntities.NASO_BREVIROSTRIS.get()) {
+            return 12;
         }
         return super.getMaxSchoolSize();
     }
 
     @Override
     public boolean isSchoolingFish() {
+        if(this.getType() == ModEntities.POMACANTHUS_IMPERATOR.get()) {
+            return false;
+        }
         return true;
     }
 
     @Override
     public int getScaleforGUI() {
         if (this.getType() == ModEntities.SCATOPHAGUS_ARGUS.get()) {
+            return 24;
+        } else if (this.getType() == ModEntities.POMACANTHUS_IMPERATOR.get()) {
+            return 24;
+        } else if (this.getType() == ModEntities.NASO_BREVIROSTRIS.get()) {
             return 24;
         }
 
@@ -148,6 +176,10 @@ public class RegSchoolingEntity extends FishBase implements GeoEntity, Scannable
     public float genVarSizeMultiplier() {
         if (this.getType() == ModEntities.SCATOPHAGUS_ARGUS.get()) {
             return AnimaliaFunctionUtil.getScaleForSize(SCATOPHAGUS_ARGUS_PIXEL, this.genVarSize(20, 45, 40));
+        } else if (this.getType() == ModEntities.POMACANTHUS_IMPERATOR.get()) {
+            return AnimaliaFunctionUtil.getScaleForSize(POMACANTHUS_IMPERATOR_PIXEL, this.genVarSize(20, 50, 40));
+        } else if (this.getType() == ModEntities.NASO_BREVIROSTRIS.get()) {
+            return AnimaliaFunctionUtil.getScaleForSize(NASO_BREVIROSTRIS_PIXEL, this.genVarSize(40, 60, 50));
         }
         return 1;
     }
