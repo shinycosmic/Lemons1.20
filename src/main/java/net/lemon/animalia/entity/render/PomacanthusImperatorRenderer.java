@@ -14,7 +14,7 @@ import software.bernie.geckolib.cache.object.BakedGeoModel;
 import software.bernie.geckolib.renderer.GeoEntityRenderer;
 
 public class PomacanthusImperatorRenderer extends GeoEntityRenderer<RegSchoolingEntity> {
-    private float babyMult = 0.3f;
+    private float babyMult = 0.2f;
 
     public PomacanthusImperatorRenderer(EntityRendererProvider.Context context) {
         super(context, new PomacanthusImperatorModel());

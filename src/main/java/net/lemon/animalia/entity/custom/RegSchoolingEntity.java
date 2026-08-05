@@ -179,7 +179,7 @@ public class RegSchoolingEntity extends FishBase implements GeoEntity, Scannable
         } else if (this.getType() == ModEntities.POMACANTHUS_IMPERATOR.get()) {
             return AnimaliaFunctionUtil.getScaleForSize(POMACANTHUS_IMPERATOR_PIXEL, this.genVarSize(20, 50, 40));
         } else if (this.getType() == ModEntities.NASO_BREVIROSTRIS.get()) {
-            return AnimaliaFunctionUtil.getScaleForSize(NASO_BREVIROSTRIS_PIXEL, this.genVarSize(40, 60, 50));
+            return AnimaliaFunctionUtil.getScaleForSize(NASO_BREVIROSTRIS_PIXEL, this.genVarSize(40, 80, 60));
         }
         return 1;
     }

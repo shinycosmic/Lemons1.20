@@ -77,6 +77,8 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItems.PROCAMBARUS_ALLENI_BUCKET);
         simpleItem(ModItems.PROCAMBARUS_VIRGINALIS_BUCKET);
         simpleItem(ModItems.PANGASIANODON_GIGAS_BUCKET);
+        simpleItem(ModItems.POMACANTHUS_IMPERATOR_BUCKET);
+        simpleItem(ModItems.NASO_BREVIROSTRIS_BUCKET);
 
         //spawn egg generators
         withExistingParent(ModItems.CHILEANSEABASS_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
@@ -103,6 +105,8 @@ public class ModItemModelProvider extends ItemModelProvider {
         withExistingParent(ModItems.PROCAMBARUS_LUCIFUGUS_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
         withExistingParent(ModItems.PROCAMBARUS_VIRGINALIS_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
         withExistingParent(ModItems.PANGASIANODON_GIGAS_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
+        withExistingParent(ModItems.POMACANTHUS_IMPERATOR_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
+        withExistingParent(ModItems.NASO_BREVIROSTRIS_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
 
 
 

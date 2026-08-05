@@ -59,7 +59,7 @@ public class ModItems {
 //    public static final RegistryObject<Item> LEPTOBRAMA_MUELLERI_BUCKET = registerBucket("leptobrama_muelleri_bucket", ModEntities.LEPTOBRAMA_MUELLERI);
     public static final RegistryObject<Item> PANGASIANODON_GIGAS_BUCKET = registerBucket("pangasianodon_gigas_bucket", ModEntities.PANGASIANODON_GIGAS);
     public static final RegistryObject<Item> SCATOPHAGUS_ARGUS_BUCKET = registerBucket("scatophagus_argus_bucket", ModEntities.SCATOPHAGUS_ARGUS);
-    public static final RegistryObject<Item> POMACANTHUS_IMPERATOR_BUCKET = registerBucket("pomacanthus_brevirostris_bucket", ModEntities.POMACANTHUS_IMPERATOR);
+    public static final RegistryObject<Item> POMACANTHUS_IMPERATOR_BUCKET = registerBucket("pomacanthus_imperator_bucket", ModEntities.POMACANTHUS_IMPERATOR);
     public static final RegistryObject<Item> NASO_BREVIROSTRIS_BUCKET = registerBucket("naso_brevirostris_bucket", ModEntities.NASO_BREVIROSTRIS);
 
     public static final RegistryObject<Item> BETTA_SPLENDENS_BUCKET = registerBucket("betta_splendens_bucket", ModEntities.BETTA_SPLENDENS);
