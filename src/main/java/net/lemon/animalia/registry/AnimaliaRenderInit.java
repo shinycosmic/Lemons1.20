@@ -1,5 +1,6 @@
 package net.lemon.animalia.registry;
 
+import net.lemon.animalia.entity.custom.PangasianodonEntity;
 import net.lemon.animalia.entity.custom.PogonophryneEntity;
 import net.lemon.animalia.entity.custom.ToxotesEntity;
 import net.lemon.animalia.entity.render.*;
@@ -31,6 +32,11 @@ public class AnimaliaRenderInit {
         EntityRenderers.register(ModEntities.PROCAMBARUS_ALLENI.get(), ProcambarusRenderer::new);
         EntityRenderers.register(ModEntities.PROCAMBARUS_CLARKII.get(), ProcambarusRenderer::new);
         EntityRenderers.register(ModEntities.PROCAMBARUS_LUCIFUGUS.get(), ProcambarusRenderer::new);
+        EntityRenderers.register(ModEntities.PANGASIANODON_GIGAS.get(), PangasianodonGigasRenderer::new);
+        EntityRenderers.register(ModEntities.POMACANTHUS_IMPERATOR.get(), PomacanthusImperatorRenderer::new);
+        EntityRenderers.register(ModEntities.NASO_BREVIROSTRIS.get(), NasoBrevirostrisRenderer::new);
+
+
 
 
 

@@ -41,7 +41,7 @@ public class CompendiumHomeScreen extends Screen {
     private static final int BAR_HEIGHT = 8;
     private static final int BAR_BG_COLOR = 0x44000000;
     private static final int FISH_BAR_COLOR = 0xFF1A8A5C;
-    private static final int FIELD_BAR_COLOR = 0xFF8A5C1A;
+    private static final int FIELD_BAR_COLOR = 0xFF1A8A5C;
 
     private final Scannable.AppName app;
     private final Screen parent;
@@ -79,7 +79,7 @@ public class CompendiumHomeScreen extends Screen {
         }
 
         String key = app == Scannable.AppName.FISH ? "gui.animalia.holonet.fish_compendium" : "gui.animalia.holonet.field_guide";
-        int color = app == Scannable.AppName.FISH ? 0x00FFCC : 0xC04000;
+        int color = app == Scannable.AppName.FISH ? 0x00FFCC : 0x65e900;
         graphics.drawCenteredString(this.font, Component.translatable(key), bgX + BG_WIDTH / 2, bgY + 35, color);
 
         renderFeaturedEntity(graphics);

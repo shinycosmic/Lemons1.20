@@ -30,7 +30,7 @@ public interface IGrazer {
 
     /** Squared distance from the block center at which the graze animation can begin. */
     default double getGrazeReachSqr() {
-        return 4.0D;
+        return 1.0D;
     }
 
     /** Override to gate grazing, e.g. isInWater(), !isHiding(). */
