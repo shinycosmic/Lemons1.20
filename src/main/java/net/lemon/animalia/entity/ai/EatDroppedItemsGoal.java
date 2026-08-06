@@ -19,9 +19,12 @@ public class EatDroppedItemsGoal<T extends PathfinderMob & IFoodEater> extends G
 
     private static final double EAT_DISTANCE_SQR = 2.0D;
     private static final int EAT_COOLDOWN_TICKS = 40;
+    private static final int SEARCH_INTERVAL_TICKS = 20;
+    private static final int SEARCH_INTERVAL_JITTER = 10;
 
     private ItemEntity targetItem;
     private int eatCooldown;
+    private int nextSearchTime;
 
     public EatDroppedItemsGoal(T mob, double speedMultiplier, float searchRange) {
         this.mob = mob;
@@ -38,6 +41,10 @@ public class EatDroppedItemsGoal<T extends PathfinderMob & IFoodEater> extends G
         if (this.mob.isEating()) {
             return false;
         }
+        if (this.mob.tickCount < this.nextSearchTime) {
+            return false;
+        }
+        this.nextSearchTime = this.mob.tickCount + SEARCH_INTERVAL_TICKS + this.mob.getRandom().nextInt(SEARCH_INTERVAL_JITTER);
         this.targetItem = this.findNearestFoodItem();
         return this.targetItem != null;
     }

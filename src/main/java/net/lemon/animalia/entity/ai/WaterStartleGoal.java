@@ -1,30 +1,34 @@
 package net.lemon.animalia.entity.ai;
 
 import net.lemon.animalia.entity.bases.AnimaliaBreedableWater;
+import net.minecraft.world.entity.EntitySelector;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.Goal;
-import net.minecraft.world.entity.monster.Monster;
+import net.minecraft.world.entity.ai.targeting.TargetingConditions;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.level.pathfinder.Path;
 import net.minecraft.world.phys.Vec3;
 
 import java.util.EnumSet;
-import java.util.List;
+import java.util.function.Predicate;
 
 /**
  * Startle goal for any aquatic mob extending AnimaliaBreedableWater.
- * Triggers when a player (survival/adventure) or hostile mob enters within
- * triggerDistance, causing the mob to flee at high speed.
+ * Triggers when a matching threat enters within triggerDistance, causing the
+ * mob to flee at high speed. Defaults to survival/adventure players; pass a
+ * predicate to startle from predators instead. Register multiple times for
+ * multiple threat types.
  * Usage:
  *   this.goalSelector.addGoal(2, new WaterStartleGoal(this, 5.0F, 1.8D));
  *   this.goalSelector.addGoal(2, new WaterStartleGoal(this, 5.0F, 1.8D, 50));
+ *   this.goalSelector.addGoal(2, new WaterStartleGoal(this, 8.0F, 2.0D, 50, e -> e instanceof RoosterfishEntity));
  */
 public class WaterStartleGoal extends Goal {
     private final AnimaliaBreedableWater mob;
     private final float triggerDistance;
     private final double speedMultiplier;
     private final int maxFleeTicks;
+    private final Predicate<LivingEntity> threatPredicate;
+    private final TargetingConditions targetingConditions;
 
     private LivingEntity threat;
     private int fleeTicks;
@@ -34,50 +38,33 @@ public class WaterStartleGoal extends Goal {
     }
 
     public WaterStartleGoal(AnimaliaBreedableWater mob, float triggerDistance, double speedMultiplier, int maxFleeTicks) {
+        this(mob, triggerDistance, speedMultiplier, maxFleeTicks, entity -> entity instanceof Player player && !player.isCreative());
+    }
+
+    public WaterStartleGoal(AnimaliaBreedableWater mob, float triggerDistance, double speedMultiplier, int maxFleeTicks, Predicate<LivingEntity> threatPredicate) {
         this.mob = mob;
         this.triggerDistance = triggerDistance;
         this.speedMultiplier = speedMultiplier;
         this.maxFleeTicks = maxFleeTicks;
+        this.threatPredicate = threatPredicate.and(EntitySelector.NO_SPECTATORS::test);
+        this.targetingConditions = TargetingConditions.forNonCombat().range(triggerDistance)
+                .selector(entity -> this.threatPredicate.test(entity) && this.mob.hasLineOfSight(entity));
         this.setFlags(EnumSet.of(Goal.Flag.MOVE));
     }
 
     @Override
     public boolean canUse() {
-        if (!mob.isInWater()) return false;
-
-        // Check for nearby players
-        Player nearestPlayer = this.mob.level().getNearestPlayer(this.mob, this.triggerDistance);
-        if (nearestPlayer != null && !nearestPlayer.isSpectator() && !nearestPlayer.isCreative() && mob.hasLineOfSight(nearestPlayer)) {
-            Path path = mob.getNavigation().createPath(nearestPlayer, 0);
-
-            if (path != null && path.canReach()) {
-                this.threat = nearestPlayer;
-                return true;
-            }
+        if (!this.mob.isInWater()) {
+            return false;
         }
-
-        // Check for nearby hostile mobs
-        List<Monster> hostiles = this.mob.level().getEntitiesOfClass(Monster.class, this.mob.getBoundingBox().inflate(this.triggerDistance));
-        if (!hostiles.isEmpty()) {
-            this.threat = hostiles.get(0);
-            double closestDist = mob.distanceToSqr(threat);
-            for (int i = 1; i < hostiles.size(); i++) {
-                double dist = mob.distanceToSqr(hostiles.get(i));
-                if (dist < closestDist) {
-                    closestDist = dist;
-                    this.threat = hostiles.get(i);
-                }
-            }
-            return true;
-        }
-
-        return false;
+        this.threat = this.findThreat();
+        return this.threat != null;
     }
 
     @Override
     public void start() {
         this.fleeTicks = 0;
-        moveAway();
+        this.moveAway();
     }
 
     @Override
@@ -91,9 +78,8 @@ public class WaterStartleGoal extends Goal {
     public void tick() {
         this.fleeTicks++;
 
-        // Recalculate flee direction periodically so the mob adjusts if the threat chases
         if (this.fleeTicks % 10 == 0) {
-            moveAway();
+            this.moveAway();
         }
     }
 
@@ -105,6 +91,15 @@ public class WaterStartleGoal extends Goal {
 
     public boolean isActive() {
         return this.threat != null && this.fleeTicks > 0 && this.fleeTicks < this.maxFleeTicks;
+    }
+
+    private LivingEntity findThreat() {
+        return this.mob.level().getNearestEntity(
+                LivingEntity.class,
+                this.targetingConditions,
+                this.mob,
+                this.mob.getX(), this.mob.getY(), this.mob.getZ(),
+                this.mob.getBoundingBox().inflate(this.triggerDistance));
     }
 
     private void moveAway() {
