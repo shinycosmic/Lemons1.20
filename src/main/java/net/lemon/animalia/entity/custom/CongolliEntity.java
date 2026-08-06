@@ -249,7 +249,7 @@ public class CongolliEntity extends BottomWalkerSwimmerBase implements GeoEntity
     }
 
     public double getRandomUpBoost() {
-        return this.getRandom().nextDouble() * 1D;
+        return this.getRandom().nextDouble();
     }
 
     private boolean isNearGround() {
@@ -423,17 +423,22 @@ public class CongolliEntity extends BottomWalkerSwimmerBase implements GeoEntity
 
         @Override
         public boolean canUse() {
-            if (!shouldPanic()) return false;
-            if(!this.mob.isWalking()) return false;
             if (mob.panicCooldown > 0) return false;
-            return true;
+            if (!this.mob.isWalking()) return false;
+            return shouldPanic();
         }
 
         protected boolean shouldPanic() {
             if (mob.getLastHurtByMob() != null || mob.isFreezing() || mob.isOnFire()) {
                 return true;
             }
-            return !mob.level().getEntitiesOfClass(Player.class, mob.getBoundingBox().inflate(0.3)).isEmpty();
+            AABB touchBox = mob.getBoundingBox().inflate(0.3);
+            for (Player player : mob.level().players()) {
+                if (!player.isSpectator() && player.getBoundingBox().intersects(touchBox)) {
+                    return true;
+                }
+            }
+            return false;
         }
 
         @Override
