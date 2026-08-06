@@ -99,7 +99,7 @@ public class SchoolBoidGoal extends Goal {
     public void stop() {
         this.neighbors = new ArrayList<>();
         this.closestThreat = null;
-        this.scanCooldown = 0;
+        this.scanCooldown = 1 + this.fish.getRandom().nextInt(SCAN_INTERVAL);
     }
 
     @Override
