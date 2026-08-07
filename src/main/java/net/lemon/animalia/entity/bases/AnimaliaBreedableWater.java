@@ -56,6 +56,8 @@ public abstract class AnimaliaBreedableWater extends WaterAnimal implements IAct
     private static final EntityDataAccessor<Boolean> IS_GRAZING = SynchedEntityData.defineId(AnimaliaBreedableWater.class, EntityDataSerializers.BOOLEAN);
     private static final EntityDataAccessor<Boolean> IS_HIDING = SynchedEntityData.defineId(AnimaliaBreedableWater.class, EntityDataSerializers.BOOLEAN);
     private static final EntityDataAccessor<Integer> HIDE_PHASE = SynchedEntityData.defineId(AnimaliaBreedableWater.class, EntityDataSerializers.INT);
+    private static final EntityDataAccessor<Integer> BODY_IDLE = SynchedEntityData.defineId(AnimaliaBreedableWater.class, EntityDataSerializers.INT);
+    private static final EntityDataAccessor<Integer> TWITCH_IDLE = SynchedEntityData.defineId(AnimaliaBreedableWater.class, EntityDataSerializers.INT);
 
     private int eatTicks = 0;
     private int grazeTicks = 0;
@@ -69,6 +71,7 @@ public abstract class AnimaliaBreedableWater extends WaterAnimal implements IAct
     public int growthTicks = -12000;
     private int inLove;
     private int idleDisplayTicks;
+    private int twitchIdleTicks;
 
     //Constants for hiding logic
     public static final int PHASE_NONE = 0;
@@ -138,6 +141,8 @@ public abstract class AnimaliaBreedableWater extends WaterAnimal implements IAct
         this.entityData.define(IS_GRAZING, false);
         this.entityData.define(IS_HIDING, false);
         this.entityData.define(HIDE_PHASE, 0);
+        this.entityData.define(BODY_IDLE, -1);
+        this.entityData.define(TWITCH_IDLE, -1);
     }
 
     @Override
@@ -160,6 +165,41 @@ public abstract class AnimaliaBreedableWater extends WaterAnimal implements IAct
         } else {
             super.handleEntityEvent(id);
         }
+    }
+
+    @Override
+    public int getTwitchIdleTicks() {
+        return this.twitchIdleTicks;
+    }
+
+    @Override
+    public void setTwitchIdleTicks(int ticks) {
+        this.twitchIdleTicks = ticks;
+    }
+
+    @Override
+    public int getCurrentBodyIdle() {
+        return this.entityData.get(BODY_IDLE);
+    }
+
+    @Override
+    public void setCurrentBodyIdle(int displayId) {
+        this.entityData.set(BODY_IDLE, displayId);
+    }
+
+    @Override
+    public int getCurrentTwitchIdle() {
+        return this.entityData.get(TWITCH_IDLE);
+    }
+
+    @Override
+    public void setCurrentTwitchIdle(int displayId) {
+        this.entityData.set(TWITCH_IDLE, displayId);
+    }
+
+    @Override
+    public boolean canPlayIdleDisplay() {
+        return IIdles.super.canPlayIdleDisplay() && !this.isHiding() && !this.isGrazing();
     }
 
     public boolean isEating() {
@@ -248,9 +288,9 @@ public abstract class AnimaliaBreedableWater extends WaterAnimal implements IAct
     }
 
     public boolean canGraze() {
-        return this.isInWater() && !this.isHiding() && !this.isEating() && !this.isInLove();
+        return this.isInWater() && !this.isHiding() && !this.isEating() && !this.isInLove()
+                && !this.isMovementLockedByIdle();
     }
-
     public boolean wantsToGraze() {
         return this.tickCount < this.grazeUrgeUntil;
     }
@@ -460,6 +500,11 @@ public abstract class AnimaliaBreedableWater extends WaterAnimal implements IAct
                 this.surfacingTicks = 0;
                 this.wantsToHide = false;
                 this.hideCooldown = this.getHideCooldown();
+            }
+            if (!this.level().isClientSide && this.isMovementLockedByIdle()) {
+                this.setIdleDisplayTicks(0);
+                this.setCurrentBodyIdle(-1);
+                this.onMovementLockingIdleEnd();
             }
             this.inLove = 0;
             return super.hurt(source, amount);

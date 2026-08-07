@@ -207,8 +207,11 @@ public abstract class FishBase extends AnimaliaBreedableWater implements Bucketa
         if (signal == SchoolSignal.IDLE_DISPLAY && this.getIdleDisplayCount() > 0
                 && this.canPlayIdleDisplay()) {
             int display = data >= 0 && data < this.getIdleDisplayCount()
-                    ? data : this.random.nextInt(this.getIdleDisplayCount());
-            return this.startIdleDisplay(display);
+                    ? data : this.pickIdleOfType(this, IdleType.MOVEMENT_POSITIVE);
+            if (display >= 0 && this.getIdleType(display) == IdleType.MOVEMENT_POSITIVE) {
+                return this.startIdleDisplay(display);
+            }
+            return false;
         }
         return false;
     }
@@ -219,11 +222,6 @@ public abstract class FishBase extends AnimaliaBreedableWater implements Bucketa
             this.broadcastSchoolSignal(SchoolSignal.IDLE_DISPLAY, displayId);
             this.signalCooldown = 60 + this.random.nextInt(40);
         }
-    }
-
-    @Override
-    public boolean canPlayIdleDisplay() {
-        return !this.isHiding();
     }
 
     @Override
@@ -269,6 +267,19 @@ public abstract class FishBase extends AnimaliaBreedableWater implements Bucketa
 
     public boolean canSchoolWith(Mob other) {
         return other.getType() == this.getType();
+    }
+
+    @Override
+    public void onMovementLockingIdleStart() {
+        if (this.isSchoolingFish()) {
+            this.setInvisToBoid(true);
+            this.leaveSchool();
+        }
+    }
+
+    @Override
+    public void onMovementLockingIdleEnd() {
+        this.setInvisToBoid(false);
     }
 
     @Override
@@ -427,7 +438,7 @@ public abstract class FishBase extends AnimaliaBreedableWater implements Bucketa
     @Override
     public void travel(Vec3 pTravelVector) {
         if (this.isEffectiveAi() && this.isInWater()) {
-            this.moveRelative(0.01F, pTravelVector);
+            this.moveRelative(0.01F, this.isMovementLockedByIdle() ? Vec3.ZERO : pTravelVector);
             this.move(MoverType.SELF, this.getDeltaMovement().scale(this.getSwimSpeed()));
             this.setDeltaMovement(this.getDeltaMovement().scale(0.9D));
             if (this.getTarget() == null) {

@@ -36,6 +36,7 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Objects;
@@ -50,6 +51,8 @@ public abstract class AnimaliaLandBase extends Animal implements IActivityTime, 
     private static final EntityDataAccessor<Boolean> IS_HIDING = SynchedEntityData.defineId(AnimaliaLandBase.class, EntityDataSerializers.BOOLEAN);
     private static final EntityDataAccessor<Integer> HIDE_PHASE = SynchedEntityData.defineId(AnimaliaLandBase.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Boolean> IS_GRAZING = SynchedEntityData.defineId(AnimaliaLandBase.class, EntityDataSerializers.BOOLEAN);
+    private static final EntityDataAccessor<Integer> BODY_IDLE = SynchedEntityData.defineId(AnimaliaLandBase.class, EntityDataSerializers.INT);
+    private static final EntityDataAccessor<Integer> TWITCH_IDLE = SynchedEntityData.defineId(AnimaliaLandBase.class, EntityDataSerializers.INT);
 
     private int grazeTicks = 0;
     private int grazeUrgeUntil;
@@ -62,6 +65,7 @@ public abstract class AnimaliaLandBase extends Animal implements IActivityTime, 
     public int cooldown = 0;
     public int growthTicks = -12000;
     private int idleDisplayTicks;
+    private int twitchIdleTicks;
 
     protected AnimaliaLandBase(EntityType<? extends Animal> entityType, Level level) {
         super(entityType, level);
@@ -81,6 +85,8 @@ public abstract class AnimaliaLandBase extends Animal implements IActivityTime, 
         this.entityData.define(IS_GRAZING, false);
         this.entityData.define(IS_HIDING, false);
         this.entityData.define(HIDE_PHASE, 0);
+        this.entityData.define(BODY_IDLE, -1);
+        this.entityData.define(TWITCH_IDLE, -1);
     }
 
     @Override
@@ -180,7 +186,8 @@ public abstract class AnimaliaLandBase extends Animal implements IActivityTime, 
     }
 
     public boolean canGraze() {
-        return this.onGround() && !this.isInWater() && !this.isHiding() && !this.isEating() && !this.isInLove();
+        return this.onGround() && !this.isInWater() && !this.isHiding() && !this.isEating() && !this.isInLove()
+                && !this.isMovementLockedByIdle();
     }
 
     public boolean wantsToGraze() {
@@ -393,6 +400,11 @@ public abstract class AnimaliaLandBase extends Animal implements IActivityTime, 
                 this.wantsToHide = false;
                 this.hideCooldown = this.getHideCooldown();
             }
+            if (!this.level().isClientSide && this.isMovementLockedByIdle()) {
+                this.setIdleDisplayTicks(0);
+                this.setCurrentBodyIdle(-1);
+                this.onMovementLockingIdleEnd();
+            }
             return super.hurt(source, amount);
         }
     }
@@ -405,6 +417,55 @@ public abstract class AnimaliaLandBase extends Animal implements IActivityTime, 
     @Override
     public void setIdleDisplayTicks(int ticks) {
         this.idleDisplayTicks = ticks;
+    }
+
+    @Override
+    public int getTwitchIdleTicks() {
+        return this.twitchIdleTicks;
+    }
+
+    @Override
+    public void setTwitchIdleTicks(int ticks) {
+        this.twitchIdleTicks = ticks;
+    }
+
+    @Override
+    public int getCurrentBodyIdle() {
+        return this.entityData.get(BODY_IDLE);
+    }
+
+    @Override
+    public void setCurrentBodyIdle(int displayId) {
+        this.entityData.set(BODY_IDLE, displayId);
+    }
+
+    @Override
+    public int getCurrentTwitchIdle() {
+        return this.entityData.get(TWITCH_IDLE);
+    }
+
+    @Override
+    public void setCurrentTwitchIdle(int displayId) {
+        this.entityData.set(TWITCH_IDLE, displayId);
+    }
+
+    @Override
+    public boolean canPlayIdleDisplay() {
+        return IIdles.super.canPlayIdleDisplay() && !this.isHiding() && !this.isGrazing();
+    }
+
+    @Override
+    public boolean isAtRestForIdle(PathfinderMob mob) {
+        return IIdles.super.isAtRestForIdle(mob) && this.onGround();
+    }
+
+    @Override
+    public void travel(Vec3 pTravelVector) {
+        if (this.isMovementLockedByIdle()) {
+            super.travel(Vec3.ZERO);
+            return;
+        }
+        super.travel(pTravelVector);
     }
 
     @Override
