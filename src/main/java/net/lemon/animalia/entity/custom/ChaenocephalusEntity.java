@@ -327,17 +327,15 @@ public class ChaenocephalusEntity extends BottomWalkerSwimmerBase implements Geo
                 if (this.nestGuardTicks <= 0) {
                     this.setNestPhase(NEST_PHASE_HATCHING);
                 }
-                if (this.nestPos != null) {
+                if (this.nipCooldown <= 0 && this.nestPos != null) {
                     List<LivingEntity> entities = this.level().getEntitiesOfClass(LivingEntity.class,
                             new AABB(this.nestPos).inflate(0.1, 0.5, 0.1),
                             e -> e != this && e.isAlive());
                     for (LivingEntity target : entities) {
-                        if (this.nipCooldown <= 0) {
-                            target.hurt(this.damageSources().mobAttack(this), 1.0F);
-                            this.startEating();
-                            this.nipCooldown = 40;
-                            break;
-                        }
+                        target.hurt(this.damageSources().mobAttack(this), 1.0F);
+                        this.startEating();
+                        this.nipCooldown = 40;
+                        break;
                     }
                 }
                 if (this.nipCooldown > 0) {
