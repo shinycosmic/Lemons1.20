@@ -27,6 +27,9 @@ public class GrazeGoal<T extends PathfinderMob & IGrazer & IFoodEater> extends G
     private static final int SPONTANEOUS_CHANCE = 1000;
     private static final int BABY_SPONTANEOUS_CHANCE = 300;
     private static final double CLOSE_APPROACH_SQR = 6.25D;
+    private static final double APPROACH_NUDGE = 0.02D;
+    private static final int REACQUIRE_GRACE_TICKS = 100;
+
 
     private BlockPos targetPos;
     private int grazeCooldown;
@@ -34,6 +37,7 @@ public class GrazeGoal<T extends PathfinderMob & IGrazer & IFoodEater> extends G
     private int approachDeadline;
     private int nextGrazeTime;
     private int grazesRemaining;
+    private int deadline;
     private boolean inReach;
     private boolean spontaneous;
     private boolean fed;
@@ -78,7 +82,7 @@ public class GrazeGoal<T extends PathfinderMob & IGrazer & IFoodEater> extends G
         if (!this.mob.isGrazableBlock(this.mob.level().getBlockState(this.targetPos))) {
             return false;
         }
-        return this.inReach || this.mob.tickCount < this.approachDeadline;
+        return this.mob.tickCount < this.deadline;
     }
 
     @Override
@@ -86,9 +90,8 @@ public class GrazeGoal<T extends PathfinderMob & IGrazer & IFoodEater> extends G
         this.mob.clearGrazeUrge();
         this.grazesRemaining = this.mob.getGrazeCount();
         this.nextGrazeTime = 0;
-        this.inReach = false;
         this.fed = false;
-        this.approachDeadline = this.mob.tickCount + APPROACH_TIMEOUT_TICKS;
+        this.deadline = this.mob.tickCount + APPROACH_TIMEOUT_TICKS;
         Vec3 center = Vec3.atCenterOf(this.targetPos);
         this.mob.getNavigation().moveTo(center.x, center.y, center.z, this.speedMultiplier);
         if (this.spontaneous) {
@@ -105,15 +108,13 @@ public class GrazeGoal<T extends PathfinderMob & IGrazer & IFoodEater> extends G
         Vec3 mouth = this.mob.position().add(0.0D, this.mob.getBbHeight() * 0.5D, 0.0D);
         double distSqr = center.distanceToSqr(mouth);
         if (distSqr < this.mob.getGrazeReachSqr()) {
-            this.inReach = true;
             this.mob.getNavigation().stop();
             this.tryGraze();
+        } else if (distSqr < CLOSE_APPROACH_SQR) {
+            this.mob.getNavigation().stop();
+            this.mob.addDeltaMovement(center.subtract(mouth).normalize().scale(APPROACH_NUDGE));
         } else if (this.mob.getNavigation().isDone()) {
-            if (distSqr < CLOSE_APPROACH_SQR) {
-                this.mob.getMoveControl().setWantedPosition(center.x, center.y, center.z, this.speedMultiplier);
-            } else {
-                this.mob.getNavigation().moveTo(center.x, center.y, center.z, this.speedMultiplier);
-            }
+            this.mob.getNavigation().moveTo(center.x, center.y, center.z, this.speedMultiplier);
         }
     }
 
@@ -138,6 +139,7 @@ public class GrazeGoal<T extends PathfinderMob & IGrazer & IFoodEater> extends G
         }
         this.grazesRemaining--;
         this.nextGrazeTime = this.mob.tickCount + this.mob.getGrazeLength() + INTERVAL_TICKS + this.mob.getRandom().nextInt(INTERVAL_JITTER);
+        this.deadline = this.nextGrazeTime + REACQUIRE_GRACE_TICKS;
     }
 
     private BlockPos findReachableGrazeBlock() {
