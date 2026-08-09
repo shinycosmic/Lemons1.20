@@ -84,7 +84,7 @@ public abstract class AnimaliaBreedableWater extends WaterAnimal implements IAct
     protected AnimaliaBreedableWater(EntityType<? extends AnimaliaBreedableWater> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
         if(this.useSmoothControl()) {
-            this.moveControl = new SmoothSwimmingMoveControl(this, 85, 10, 0.02F, 0.1F, true);
+            this.moveControl = new SmoothSwimmingMoveControl(this, 85, 10, 0.02F, 0.1F, this.hasVerticalDrift());
             this.lookControl = new SmoothSwimmingLookControl(this, 10);
         }
     }
@@ -103,6 +103,14 @@ public abstract class AnimaliaBreedableWater extends WaterAnimal implements IAct
     }
 
     public boolean useSmoothControl() {
+        return true;
+    }
+
+    public boolean hasVerticalDrift() {
+        return true;
+    }
+
+    public boolean sinksWhenIdle() {
         return true;
     }
 

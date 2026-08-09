@@ -66,6 +66,16 @@ public abstract class FishBase extends AnimaliaBreedableWater implements Bucketa
         return !this.fromBucket() && !this.hasCustomName();
     }
 
+    @Override
+    public boolean hasVerticalDrift() {
+        return false;
+    }
+
+    @Override
+    public boolean sinksWhenIdle() {
+        return false;
+    }
+
     /**
      * Will return how many at most can spawn in a chunk at once.
      */
@@ -437,7 +447,7 @@ public abstract class FishBase extends AnimaliaBreedableWater implements Bucketa
             this.moveRelative(0.01F, this.isMovementLockedByIdle() ? Vec3.ZERO : pTravelVector);
             this.move(MoverType.SELF, this.getDeltaMovement().scale(this.getSwimSpeed()));
             this.setDeltaMovement(this.getDeltaMovement().scale(0.9D));
-            if (this.getTarget() == null) {
+            if (this.getTarget() == null && this.sinksWhenIdle()) {
                 this.setDeltaMovement(this.getDeltaMovement().add(0.0D, -0.005D, 0.0D));
             }
         } else {
