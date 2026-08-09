@@ -71,6 +71,10 @@ public class ModSpawns {
                 BiomeSelector.in(Biomes.WARM_OCEAN));
         add(ModEntities.PARACANTHURUS_HEPATUS, 3, 1, 2,
                 BiomeSelector.in(Biomes.WARM_OCEAN));
+        add(ModEntities.CHELMON_ROSTRATUS, 3, 1, 2,
+                BiomeSelector.in(Biomes.WARM_OCEAN));
+        add(ModEntities.CHAETODON_AURIGA, 3, 1, 3,
+                BiomeSelector.in(Biomes.WARM_OCEAN));
         add(ModEntities.PANGASIANODON_GIGAS, 2, 1, 1,
                 BiomeSelector.in(Biomes.MANGROVE_SWAMP));
 

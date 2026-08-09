@@ -37,6 +37,8 @@ public class AnimaliaRenderInit {
         EntityRenderers.register(ModEntities.NASO_BREVIROSTRIS.get(), NasoBrevirostrisRenderer::new);
         EntityRenderers.register(ModEntities.ZANCLUS_CORNUTUS.get(), ZanclusCornutusRenderer::new);
         EntityRenderers.register(ModEntities.PARACANTHURUS_HEPATUS.get(), ParacanthurusHepatusRenderer::new);
+        EntityRenderers.register(ModEntities.CHELMON_ROSTRATUS.get(), ChelmonRostratusRenderer::new);
+        EntityRenderers.register(ModEntities.CHAETODON_AURIGA.get(), ChaetodonAurigaRenderer::new);
 
 
 

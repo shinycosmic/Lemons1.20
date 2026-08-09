@@ -40,7 +40,7 @@ public class OrderGridScreen extends Screen {
     private static final int BG_HEIGHT = 245;
     private static final int BACK_BUTTON_SIZE = 16;
     private static final int BACK_BUTTON_BOTTOM_MARGIN = 38;
-    private static final int BACK_BUTTON_MARGIN_LEFT = 35;
+    private static final int BACK_BUTTON_MARGIN_LEFT = 38;
     private static final int BACK_BUTTON_MARGIN_TOP = 35;
     private static final int GRID_COLS = 7;
     private static final int GRID_ROWS = 3;
