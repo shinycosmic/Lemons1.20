@@ -174,7 +174,7 @@ public class GrazeSchoolingEntity extends FishBase implements GeoEntity, Scannab
         if (this.getType() == ModEntities.ZANCLUS_CORNUTUS.get()) {
             return AnimaliaFunctionUtil.getScaleForSize(ZANCLUS_CORNUTUS_PIXEL, this.genVarSize(28, 40, 33));
         } else if (this.getType() == ModEntities.PARACANTHURUS_HEPATUS.get()) {
-            return AnimaliaFunctionUtil.getScaleForSize(PARACANTHURUS_HEPATUS_PIXEL, this.genVarSize(20, 50, 40));
+            return AnimaliaFunctionUtil.getScaleForSize(PARACANTHURUS_HEPATUS_PIXEL, this.genVarSize(20, 40, 30));
         }
         return 1;
     }
