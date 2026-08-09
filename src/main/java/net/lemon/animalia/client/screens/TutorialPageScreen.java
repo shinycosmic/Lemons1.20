@@ -27,6 +27,8 @@ public class TutorialPageScreen extends Screen {
     private static final int BG_HEIGHT = 245;
     private static final int BACK_BUTTON_SIZE = 16;
     private static final int BACK_BUTTON_BOTTOM_MARGIN = 38;
+    private static final int BACK_BUTTON_MARGIN_LEFT = 35;
+    private static final int BACK_BUTTON_MARGIN_TOP = 35;
     private static final int PANEL_LEFT = 40;
     private static final int PANEL_TOP = 60;
     private static final int PANEL_WIDTH = 300;
@@ -59,8 +61,8 @@ public class TutorialPageScreen extends Screen {
         super.init();
         bgX = (this.width - BG_WIDTH) / 2;
         bgY = (this.height - BG_HEIGHT) / 2;
-        backBtnX = bgX + (BG_WIDTH - BACK_BUTTON_SIZE) / 2;
-        backBtnY = bgY + BG_HEIGHT - BACK_BUTTON_SIZE - BACK_BUTTON_BOTTOM_MARGIN;
+        backBtnX = bgX + BACK_BUTTON_MARGIN_LEFT;
+        backBtnY = bgY + BACK_BUTTON_MARGIN_TOP;
         int contentWidth = PANEL_WIDTH - SCROLLBAR_WIDTH - 8;
         this.lines = this.font.split(HolonetTutorials.getBody(tutorialId), contentWidth);
     }

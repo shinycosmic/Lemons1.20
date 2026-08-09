@@ -35,6 +35,8 @@ public class OrderListScreen extends Screen {
     private static final int BG_HEIGHT = 245;
     private static final int BACK_BUTTON_SIZE = 16;
     private static final int BACK_BUTTON_BOTTOM_MARGIN = 38;
+    private static final int BACK_BUTTON_MARGIN_LEFT = 35;
+    private static final int BACK_BUTTON_MARGIN_TOP = 35;
     private static final int PANEL_LEFT = 40;
     private static final int PANEL_TOP = 80;
     private static final int PANEL_WIDTH = 300;
@@ -76,8 +78,8 @@ public class OrderListScreen extends Screen {
         super.init();
         bgX = (this.width - BG_WIDTH) / 2;
         bgY = (this.height - BG_HEIGHT) / 2;
-        backBtnX = bgX + (BG_WIDTH - BACK_BUTTON_SIZE) / 2;
-        backBtnY = bgY + BG_HEIGHT - BACK_BUTTON_SIZE - BACK_BUTTON_BOTTOM_MARGIN;
+        backBtnX = bgX + BACK_BUTTON_MARGIN_LEFT;
+        backBtnY = bgY + BACK_BUTTON_MARGIN_TOP;
         this.addRenderableWidget(Button.builder(Component.translatable("gui.animalia.holonet.view_all"), b -> {
             Minecraft.getInstance().setScreen(new OrderGridScreen(app, null, this));
         }).pos(bgX + BG_WIDTH - 90, bgY + 35).size(55, 16).build());

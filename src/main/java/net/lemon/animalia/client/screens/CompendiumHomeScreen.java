@@ -35,6 +35,8 @@ public class CompendiumHomeScreen extends Screen {
 
     private static final int BACK_BUTTON_SIZE = 16;
     private static final int BACK_BUTTON_BOTTOM_MARGIN = 38;
+    private static final int BACK_BUTTON_MARGIN_LEFT = 35;
+    private static final int BACK_BUTTON_MARGIN_TOP = 35;
     private static final int BG_WIDTH = 390;
     private static final int BG_HEIGHT = 245;
     private static final int BAR_WIDTH = 120;
@@ -64,8 +66,8 @@ public class CompendiumHomeScreen extends Screen {
         super.init();
         bgX = (this.width - BG_WIDTH) / 2;
         bgY = (this.height - BG_HEIGHT) / 2;
-        backBtnX = bgX + (BG_WIDTH - BACK_BUTTON_SIZE) / 2;
-        backBtnY = bgY + BG_HEIGHT - BACK_BUTTON_SIZE - BACK_BUTTON_BOTTOM_MARGIN;
+        backBtnX = bgX + BACK_BUTTON_MARGIN_LEFT;
+        backBtnY = bgY + BACK_BUTTON_MARGIN_TOP;
         buildFeaturedEntity();
     }
 
@@ -161,11 +163,7 @@ public class CompendiumHomeScreen extends Screen {
             return true;
         }
         if (button == 0) {
-            if (app == Scannable.AppName.FIELD) {
-                Minecraft.getInstance().setScreen(new OrderGridScreen(app, null, this));
-            } else {
-                Minecraft.getInstance().setScreen(new OrderListScreen(app, this));
-            }
+            Minecraft.getInstance().setScreen(new OrderGridScreen(app, null, this));
             return true;
         }
 

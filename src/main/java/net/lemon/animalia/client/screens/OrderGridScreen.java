@@ -40,6 +40,8 @@ public class OrderGridScreen extends Screen {
     private static final int BG_HEIGHT = 245;
     private static final int BACK_BUTTON_SIZE = 16;
     private static final int BACK_BUTTON_BOTTOM_MARGIN = 38;
+    private static final int BACK_BUTTON_MARGIN_LEFT = 35;
+    private static final int BACK_BUTTON_MARGIN_TOP = 35;
     private static final int GRID_COLS = 7;
     private static final int GRID_ROWS = 3;
     private static final int CELLS_PER_PAGE = GRID_COLS * GRID_ROWS; // 21
@@ -81,9 +83,9 @@ public class OrderGridScreen extends Screen {
         int gridTotalWidth = GRID_COLS * CELL_SIZE + (GRID_COLS - 1) * CELL_PADDING;
         gridStartX = bgX + (BG_WIDTH - gridTotalWidth) / 2;
         gridStartY = bgY + GRID_TOP_OFFSET;
-        backBtnX = bgX + (BG_WIDTH - BACK_BUTTON_SIZE) / 2;
-        backBtnY = bgY + BG_HEIGHT - BACK_BUTTON_SIZE - BACK_BUTTON_BOTTOM_MARGIN;
-        if (app == Scannable.AppName.FIELD && order == null) {
+        backBtnX = bgX + BACK_BUTTON_MARGIN_LEFT;
+        backBtnY = bgY + BACK_BUTTON_MARGIN_TOP;
+        if (order == null) {
             this.addRenderableWidget(Button.builder(Component.translatable("gui.animalia.holonet.by_order"), b -> {
                 Minecraft.getInstance().setScreen(new OrderListScreen(app, this));
             }).pos(bgX + BG_WIDTH - 90, bgY + 35).size(55, 16).build());
