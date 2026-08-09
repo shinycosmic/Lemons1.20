@@ -1,5 +1,7 @@
 package net.lemon.animalia.entity.custom;
 
+import net.lemon.animalia.entity.ai.GrazeGoal;
+import net.lemon.animalia.entity.ai.SchoolBoidGoal;
 import net.lemon.animalia.entity.bases.ActivityTime;
 import net.lemon.animalia.entity.bases.FishBase;
 import net.lemon.animalia.registry.ModBlocks;
@@ -11,34 +13,36 @@ import net.lemon.animalia.util.HolonetEntities;
 import net.lemon.animalia.util.Scannable;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.DifficultyInstance;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.MobSpawnType;
-import net.minecraft.world.entity.SpawnGroupData;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.ai.goal.AvoidEntityGoal;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.core.animatable.GeoAnimatable;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.core.animatable.instance.SingletonAnimatableInstanceCache;
 import software.bernie.geckolib.core.animation.*;
+import software.bernie.geckolib.core.animation.AnimationState;
 import software.bernie.geckolib.core.object.PlayState;
 
-public class RegSchoolingEntity extends FishBase implements GeoEntity, Scannable {
+public class GrazeSchoolingEntity extends FishBase implements GeoEntity, Scannable {
     private final AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
-    private static final int SCATOPHAGUS_ARGUS_PIXEL = 14;
-    private static final int NASO_BREVIROSTRIS_PIXEL = 33;
-    private static final int POMACANTHUS_IMPERATOR_PIXEL = 22;
+    private static final int ZANCLUS_CORNUTUS_PIXEL = 15;
+    private static final int PARACANTHURUS_HEPATUS_PIXEL = 23;
 
-    public RegSchoolingEntity(EntityType<? extends FishBase> entityType, Level level) {
+    public GrazeSchoolingEntity(EntityType<? extends FishBase> entityType, Level level) {
         super(entityType, level);
     }
 
@@ -49,12 +53,18 @@ public class RegSchoolingEntity extends FishBase implements GeoEntity, Scannable
 
     @Override
     public Item getBreedingItem() {
-        if (this.getType() == ModEntities.SCATOPHAGUS_ARGUS.get()) {
-            return ModBlocks.ALGAE_MAT.get().asItem();
-        } else if (this.getType() == ModEntities.POMACANTHUS_IMPERATOR.get()) {
+        if (this.getType() == ModEntities.ZANCLUS_CORNUTUS.get()) {
             return Items.SPONGE;
+        } else if (this.getType() == ModEntities.PARACANTHURUS_HEPATUS.get()) {
+            return ModBlocks.ALGAE_MAT.get().asItem();
         }
         return ModItems.FISH_FOOD.get();
+    }
+
+    @Override
+    protected void registerGoals() {
+        this.goalSelector.addGoal(3, new GrazeGoal<>(this, 1.5f));
+        super.registerGoals();
     }
 
     @Override
@@ -69,23 +79,19 @@ public class RegSchoolingEntity extends FishBase implements GeoEntity, Scannable
 
     @Override
     public Component getTrivia() {
-        if (this.getType() == ModEntities.SCATOPHAGUS_ARGUS.get()) {
-            return Component.translatable("trivia.animalia.scatophagus_argus");
-        } else if (this.getType() == ModEntities.POMACANTHUS_IMPERATOR.get()) {
-            return Component.translatable("trivia.animalia.pomacanthus_imperator");
-        } else if (this.getType() == ModEntities.NASO_BREVIROSTRIS.get()) {
-            return Component.translatable("trivia.animalia.naso_brevirostris");
+        if (this.getType() == ModEntities.ZANCLUS_CORNUTUS.get()) {
+            return Component.translatable("trivia.animalia.zanclus_cornutus");
+        } else if (this.getType() == ModEntities.PARACANTHURUS_HEPATUS.get()) {
+            return Component.translatable("trivia.animalia.paracanthurus_hepatus");
         }
         return Component.translatable("debug.animalia.trivia");
     }
 
     @Override
     public Component getFamily() {
-        if (this.getType() == ModEntities.SCATOPHAGUS_ARGUS.get()) {
-            return Component.translatable("family.animalia.scatophagidae");
-        } else if (this.getType() == ModEntities.POMACANTHUS_IMPERATOR.get()) {
-            return Component.translatable("family.animalia.pomacanthidae");
-        } else if (this.getType() == ModEntities.NASO_BREVIROSTRIS.get()) {
+        if (this.getType() == ModEntities.ZANCLUS_CORNUTUS.get()) {
+            return Component.translatable("family.animalia.zanclidae");
+        } else if (this.getType() == ModEntities.PARACANTHURUS_HEPATUS.get()) {
             return Component.translatable("family.animalia.acanthuridae");
         }
         return Component.translatable("debug.animalia.family");
@@ -105,12 +111,10 @@ public class RegSchoolingEntity extends FishBase implements GeoEntity, Scannable
 
     @Override
     public ItemStack getBucketItemStack() {
-        if (this.getType() == ModEntities.SCATOPHAGUS_ARGUS.get()) {
-            return new ItemStack(ModItems.SCATOPHAGUS_ARGUS_BUCKET.get());
-        } else if (this.getType() == ModEntities.POMACANTHUS_IMPERATOR.get()) {
-            return new ItemStack(ModItems.POMACANTHUS_IMPERATOR_BUCKET.get());
-        } else if (this.getType() == ModEntities.NASO_BREVIROSTRIS.get()) {
-            return new ItemStack(ModItems.NASO_BREVIROSTRIS_BUCKET.get());
+        if (this.getType() == ModEntities.PARACANTHURUS_HEPATUS.get()) {
+            return new ItemStack(ModItems.PARACANTHURUS_HEPATUS_BUCKET.get());
+        } else if (this.getType() == ModEntities.ZANCLUS_CORNUTUS.get()) {
+            return new ItemStack(ModItems.ZANCLUS_CORNUTUS_BUCKET.get());
         }
         return new ItemStack(Items.SALMON_BUCKET);
     }
@@ -129,17 +133,15 @@ public class RegSchoolingEntity extends FishBase implements GeoEntity, Scannable
 
     @Override
     public int getMaxSchoolSize() {
-        if (this.getType() == ModEntities.SCATOPHAGUS_ARGUS.get()) {
-            return 6;
-        } else if (this.getType() == ModEntities.NASO_BREVIROSTRIS.get()) {
-            return 12;
+        if (this.getType() == ModEntities.ZANCLUS_CORNUTUS.get()) {
+            return 15;
         }
         return super.getMaxSchoolSize();
     }
 
     @Override
     public boolean isSchoolingFish() {
-        if(this.getType() == ModEntities.POMACANTHUS_IMPERATOR.get()) {
+        if(this.getType() == ModEntities.PARACANTHURUS_HEPATUS.get()) {
             return false;
         }
         return true;
@@ -147,11 +149,9 @@ public class RegSchoolingEntity extends FishBase implements GeoEntity, Scannable
 
     @Override
     public int getScaleforGUI() {
-        if (this.getType() == ModEntities.SCATOPHAGUS_ARGUS.get()) {
+        if (this.getType() == ModEntities.ZANCLUS_CORNUTUS.get()) {
             return 24;
-        } else if (this.getType() == ModEntities.POMACANTHUS_IMPERATOR.get()) {
-            return 24;
-        } else if (this.getType() == ModEntities.NASO_BREVIROSTRIS.get()) {
+        } else if (this.getType() == ModEntities.PARACANTHURUS_HEPATUS.get()) {
             return 24;
         }
 
@@ -171,20 +171,27 @@ public class RegSchoolingEntity extends FishBase implements GeoEntity, Scannable
 
     @Override
     public float genVarSizeMultiplier() {
-        if (this.getType() == ModEntities.SCATOPHAGUS_ARGUS.get()) {
-            return AnimaliaFunctionUtil.getScaleForSize(SCATOPHAGUS_ARGUS_PIXEL, this.genVarSize(20, 45, 40));
-        } else if (this.getType() == ModEntities.POMACANTHUS_IMPERATOR.get()) {
-            return AnimaliaFunctionUtil.getScaleForSize(POMACANTHUS_IMPERATOR_PIXEL, this.genVarSize(20, 50, 40));
-        } else if (this.getType() == ModEntities.NASO_BREVIROSTRIS.get()) {
-            return AnimaliaFunctionUtil.getScaleForSize(NASO_BREVIROSTRIS_PIXEL, this.genVarSize(40, 80, 60));
+        if (this.getType() == ModEntities.ZANCLUS_CORNUTUS.get()) {
+            return AnimaliaFunctionUtil.getScaleForSize(ZANCLUS_CORNUTUS_PIXEL, this.genVarSize(28, 40, 33));
+        } else if (this.getType() == ModEntities.PARACANTHURUS_HEPATUS.get()) {
+            return AnimaliaFunctionUtil.getScaleForSize(PARACANTHURUS_HEPATUS_PIXEL, this.genVarSize(20, 50, 40));
         }
         return 1;
     }
 
+    @Override
+    public boolean isGrazableBlock(BlockState state) {
+        if (this.getType() == ModEntities.ZANCLUS_CORNUTUS.get()) {
+            return state.is(BlockTags.CORAL_BLOCKS) || state.is(BlockTags.CORALS) || state.is(BlockTags.WALL_CORALS);
+        } else if (this.getType() == ModEntities.PARACANTHURUS_HEPATUS.get()) {
+            return state.is(ModBlocks.ALGAE_MAT.get());
+        }
+        return super.isGrazableBlock(state);
+    }
+
     public static void registerHolonet() {
-        HolonetEntities.register(ModEntities.SCATOPHAGUS_ARGUS, Scannable.AppName.FISH, "Acanthuriformes");
-        HolonetEntities.register(ModEntities.POMACANTHUS_IMPERATOR, Scannable.AppName.FISH, "Acanthuriformes");
-        HolonetEntities.register(ModEntities.NASO_BREVIROSTRIS, Scannable.AppName.FISH, "Acanthuriformes");
+        HolonetEntities.register(ModEntities.ZANCLUS_CORNUTUS, AppName.FISH, "Acanthuriformes");
+        HolonetEntities.register(ModEntities.PARACANTHURUS_HEPATUS, AppName.FISH, "Acanthuriformes");
 
     }
 
@@ -207,6 +214,10 @@ public class RegSchoolingEntity extends FishBase implements GeoEntity, Scannable
     private <T extends GeoAnimatable> PlayState eatPredicate(AnimationState<T> state) {
         if (this.isEating() && !this.isBaby()) {
             state.getController().setAnimation(RawAnimation.begin().then("eat", Animation.LoopType.PLAY_ONCE));
+            return PlayState.CONTINUE;
+        }
+        if (this.isGrazing() && !this.isBaby()) {
+            state.getController().setAnimation(RawAnimation.begin().then("graze", Animation.LoopType.PLAY_ONCE));
             return PlayState.CONTINUE;
         }
         return PlayState.STOP;

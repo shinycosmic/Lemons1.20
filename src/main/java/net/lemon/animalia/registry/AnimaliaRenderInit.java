@@ -35,6 +35,8 @@ public class AnimaliaRenderInit {
         EntityRenderers.register(ModEntities.PANGASIANODON_GIGAS.get(), PangasianodonGigasRenderer::new);
         EntityRenderers.register(ModEntities.POMACANTHUS_IMPERATOR.get(), PomacanthusImperatorRenderer::new);
         EntityRenderers.register(ModEntities.NASO_BREVIROSTRIS.get(), NasoBrevirostrisRenderer::new);
+        EntityRenderers.register(ModEntities.ZANCLUS_CORNUTUS.get(), ZanclusCornutusRenderer::new);
+        EntityRenderers.register(ModEntities.PARACANTHURUS_HEPATUS.get(), ParacanthurusHepatusRenderer::new);
 
 
 

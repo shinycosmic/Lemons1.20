@@ -26,7 +26,7 @@ public class ModBiomeModifiers {
 
     //Defines which biomes a block spawns in.
     public static void bootstrap(BootstapContext<BiomeModifier> context) {
-        addFeature(context, ADD_ALGAE_MAT, ModPlacedFeatures.ALGAE_MAT, GenerationStep.Decoration.VEGETAL_DECORATION, BiomeTags.IS_RIVER, Tags.Biomes.IS_SWAMP);
+        addFeature(context, ADD_ALGAE_MAT, ModPlacedFeatures.ALGAE_MAT, GenerationStep.Decoration.VEGETAL_DECORATION, BiomeTags.IS_RIVER, Tags.Biomes.IS_SWAMP, BiomeTags.IS_OCEAN);
     }
 
     @SafeVarargs

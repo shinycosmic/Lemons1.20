@@ -107,6 +107,7 @@
   "entity.animalia.pomacanthus_imperator": "Emperor Angelfish",
   "entity.animalia.naso_brevirostris": "Spotted Unicornfish",
   "entity.animalia.zanclus_cornutus": "Moorish Idol",
+  "entity.animalia.paracanthurus_hepatus": "Royal Blue Tang",
 
   "tooltip.animalia.baby": "Juvenile",
   "container.animalia.filter_trap": "Water Trap",
@@ -162,6 +163,7 @@
   "entity.animalia.pomacanthus_imperator.scientific": "Pomacanthus imperator",
   "entity.animalia.naso_brevirostris.scientific": "Naso brevirostris",
   "entity.animalia.zanclus_cornutus.scientific": "Zanclus cornutus",
+  "entity.animalia.paracanthurus_hepatus.scientific": "Paracanthurus hepatus",
 
   "order.animalia.perciformes": "Perciformes",
   "order.animalia.anabantiformes": "Anabantiformes",
@@ -222,6 +224,7 @@
   "trivia.animalia.naso_brevirostris": "These fish have a bony protrusion on their head, giving them the unicorn name. Adults generally feed on zooplankton while juveniles feed on algae.",
   "trivia.animalia.pomacanthus_imperator": "Juvenile Emperor Angelfish are strikingly different from the adults, bearing vibrant blue and white markings. The adults are striped with yellow and blue stripes and a dark mask. It typically eats sponges.",
   "trivia.animalia.zanclus_cornutus": "Moorish Idols have a high and laterally compressed body with a thin snout. They have small bristle-like teeth they use to feed on corals, tunicates, and other invertebrates. They can be found in small groups",
+  "trivia.animalia.paracanthurus_hepatus": "Royal Blue Tangs are blue and yellow surgeonfish that are generally found in the indo-pacific. They are associated with coral reefs and eat algae that may harm the corals.",
 
   "debug.animalia.trivia": "If this value displays, there is a bug [trivia]",
   "debug.animalia.family": "if this text appears, there is a bug [family]",
