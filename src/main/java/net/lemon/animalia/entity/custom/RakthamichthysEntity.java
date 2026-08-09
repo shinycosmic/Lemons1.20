@@ -146,7 +146,7 @@ public class RakthamichthysEntity extends BottomWalkerSwimmerBase implements Geo
         controllers.add(new AnimationController<>(this, "controller", 10, this::predicate));
     }
 
-    private PlayState predicate(AnimationState animationState) {
+    private <T extends GeoAnimatable> PlayState predicate(AnimationState<T> animationState) {
         if(this.isBaby()) {
             animationState.getController().setAnimation(RawAnimation.begin().then("swim", Animation.LoopType.LOOP));
             return PlayState.CONTINUE;

@@ -116,6 +116,31 @@ public class RegSchoolingEntity extends FishBase implements GeoEntity, Scannable
     }
 
     @Override
+    public int getIdleDisplayCount() {
+        if (this.getType() == ModEntities.CHELMON_ROSTRATUS.get()) {
+            return 1;
+        } else if (this.getType() == ModEntities.CHAETODON_AURIGA.get()) {
+            return 1;
+        }
+        return 0;
+    }
+
+    @Override
+    public IdleType getIdleType(int displayId) {
+//        if (this.getType() == ModEntities.CHELMON_ROSTRATUS.get()) {
+//            return switch (displayId) {
+//                default -> IdleType.MOVEMENT_POSITIVE;
+//            };
+//        }
+        return IdleType.TWITCH;
+    }
+
+    @Override
+    public int getIdleDisplayLength(int displayId) {
+        return 70;
+    }
+
+    @Override
     public ItemStack getBucketItemStack() {
         if (this.getType() == ModEntities.SCATOPHAGUS_ARGUS.get()) {
             return new ItemStack(ModItems.SCATOPHAGUS_ARGUS_BUCKET.get());
@@ -218,10 +243,11 @@ public class RegSchoolingEntity extends FishBase implements GeoEntity, Scannable
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
         controllers.add(new AnimationController<>(this, "controller", 5, this::predicate));
+        controllers.add(new AnimationController<>(this, "idles_controller", 5, this::idlesPredicate));
         controllers.add(new AnimationController<>(this, "eat_controller", 0, this::eatPredicate));
     }
 
-    private PlayState predicate(AnimationState animationState) {
+    private <T extends GeoAnimatable> PlayState predicate(AnimationState<T> animationState) {
         if (!this.isInWater() && !this.isBaby()) {
             animationState.getController().setAnimation(RawAnimation.begin().then("flop", Animation.LoopType.LOOP));
             return PlayState.CONTINUE;
@@ -229,6 +255,20 @@ public class RegSchoolingEntity extends FishBase implements GeoEntity, Scannable
 
         animationState.getController().setAnimation(RawAnimation.begin().then("swim", Animation.LoopType.LOOP));
         return PlayState.CONTINUE;
+    }
+
+    private <T extends GeoAnimatable> PlayState idlesPredicate(AnimationState<T> state) {
+        int twitch = this.getCurrentTwitchIdle();
+        if (twitch >= 0 && !this.isBaby()) {
+            state.getController().setAnimation(RawAnimation.begin().then("idle" + twitch, Animation.LoopType.PLAY_ONCE));
+            return PlayState.CONTINUE;
+        }
+//        int body = this.getCurrentBodyIdle();
+//        if (body >= 0 && this.getIdleType(body) == IdleType.MOVEMENT_POSITIVE && !this.isBaby()) {
+//            state.getController().setAnimation(RawAnimation.begin().then("idle" + body, Animation.LoopType.PLAY_ONCE));
+//            return PlayState.CONTINUE;
+//        }
+        return PlayState.STOP;
     }
 
     private <T extends GeoAnimatable> PlayState eatPredicate(AnimationState<T> state) {
