@@ -120,7 +120,7 @@ public class GrazeSchoolingEntity extends FishBase implements GeoEntity, Scannab
     }
 
     @Override
-    public int getEatLength() { return 5; }
+    public int getEatLength() { return 10; }
 
     @Override
     public double getSchoolSeparationRange() {

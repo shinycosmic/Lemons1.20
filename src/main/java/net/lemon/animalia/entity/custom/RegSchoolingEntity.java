@@ -116,7 +116,7 @@ public class RegSchoolingEntity extends FishBase implements GeoEntity, Scannable
     }
 
     @Override
-    public int getEatLength() { return 5; }
+    public int getEatLength() { return 10; }
 
     @Override
     public double getSchoolSeparationRange() {
