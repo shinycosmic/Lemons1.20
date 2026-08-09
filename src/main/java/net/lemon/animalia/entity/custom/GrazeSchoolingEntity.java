@@ -181,7 +181,7 @@ public class GrazeSchoolingEntity extends FishBase implements GeoEntity, Scannab
 
     @Override
     public double getGrazeReachSqr() {
-        return 0.2D;
+        return 1.2D;
     }
 
     @Override

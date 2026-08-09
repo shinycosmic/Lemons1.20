@@ -26,6 +26,7 @@ public class GrazeGoal<T extends PathfinderMob & IGrazer & IFoodEater> extends G
     private static final int SEARCH_INTERVAL_TICKS = 20;
     private static final int SPONTANEOUS_CHANCE = 1000;
     private static final int BABY_SPONTANEOUS_CHANCE = 300;
+    private static final double CLOSE_APPROACH_SQR = 6.25D;
 
     private BlockPos targetPos;
     private int grazeCooldown;
@@ -101,12 +102,18 @@ public class GrazeGoal<T extends PathfinderMob & IGrazer & IFoodEater> extends G
         Vec3 center = Vec3.atCenterOf(this.targetPos);
         this.mob.getLookControl().setLookAt(center.x, center.y, center.z);
 
-        if (this.mob.distanceToSqr(center) < this.mob.getGrazeReachSqr()) {
+        Vec3 mouth = this.mob.position().add(0.0D, this.mob.getBbHeight() * 0.5D, 0.0D);
+        double distSqr = center.distanceToSqr(mouth);
+        if (distSqr < this.mob.getGrazeReachSqr()) {
             this.inReach = true;
             this.mob.getNavigation().stop();
             this.tryGraze();
         } else if (this.mob.getNavigation().isDone()) {
-            this.mob.getNavigation().moveTo(center.x, center.y, center.z, this.speedMultiplier);
+            if (distSqr < CLOSE_APPROACH_SQR) {
+                this.mob.getMoveControl().setWantedPosition(center.x, center.y, center.z, this.speedMultiplier);
+            } else {
+                this.mob.getNavigation().moveTo(center.x, center.y, center.z, this.speedMultiplier);
+            }
         }
     }
 

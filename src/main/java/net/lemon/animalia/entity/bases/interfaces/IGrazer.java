@@ -28,7 +28,11 @@ public interface IGrazer {
         return 3;
     }
 
-    /** Squared distance from the block center at which the graze animation can begin. */
+    /**
+     * Squared distance from the block center to the mob's mid-body at which the graze
+     * animation can begin. For solid grazable blocks this must cover the block face
+     * plus half the mob's width.
+     */
     default double getGrazeReachSqr() {
         return 1.0D;
     }
