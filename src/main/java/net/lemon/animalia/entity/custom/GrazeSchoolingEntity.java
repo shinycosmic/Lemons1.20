@@ -180,6 +180,11 @@ public class GrazeSchoolingEntity extends FishBase implements GeoEntity, Scannab
     }
 
     @Override
+    public double getGrazeReachSqr() {
+        return 0.2D;
+    }
+
+    @Override
     public boolean isGrazableBlock(BlockState state) {
         if (this.getType() == ModEntities.ZANCLUS_CORNUTUS.get()) {
             return state.is(BlockTags.CORAL_BLOCKS) || state.is(BlockTags.CORALS) || state.is(BlockTags.WALL_CORALS);
