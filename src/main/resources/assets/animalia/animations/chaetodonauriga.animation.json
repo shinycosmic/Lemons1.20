@@ -44,7 +44,7 @@
 				}
 			}
 		},
-		"alert": {
+		"idle0": {
 			"animation_length": 3.5,
 			"bones": {
 				"dorsalSpine": {
