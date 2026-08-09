@@ -54,6 +54,11 @@ public abstract class BottomWalkerSwimmerBase extends FishBase {
     }
 
     @Override
+    public boolean sinksWhenIdle() {
+        return true;
+    }
+
+    @Override
     protected void defineSynchedData() {
         super.defineSynchedData();
         this.entityData.define(IS_WALKING, false);

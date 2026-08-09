@@ -34,11 +34,9 @@ public class GrazeGoal<T extends PathfinderMob & IGrazer & IFoodEater> extends G
     private BlockPos targetPos;
     private int grazeCooldown;
     private int nextSearchTime;
-    private int approachDeadline;
     private int nextGrazeTime;
     private int grazesRemaining;
     private int deadline;
-    private boolean inReach;
     private boolean spontaneous;
     private boolean fed;
 
