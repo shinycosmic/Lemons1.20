@@ -25,7 +25,6 @@ public class TutorialListScreen extends Screen {
     private static final int BG_WIDTH = 390;
     private static final int BG_HEIGHT = 245;
     private static final int BACK_BUTTON_SIZE = 16;
-    private static final int BACK_BUTTON_BOTTOM_MARGIN = 38;
     private static final int BACK_BUTTON_MARGIN_LEFT = 35;
     private static final int BACK_BUTTON_MARGIN_TOP = 35;
     private static final int PANEL_LEFT = 40;

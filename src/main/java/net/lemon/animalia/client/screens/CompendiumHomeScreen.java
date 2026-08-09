@@ -34,7 +34,6 @@ public class CompendiumHomeScreen extends Screen {
     public static final ResourceLocation BACK_BUTTON_TEXTURE = new ResourceLocation(Animalia.MODID, "textures/gui/back_button.png");
 
     private static final int BACK_BUTTON_SIZE = 16;
-    private static final int BACK_BUTTON_BOTTOM_MARGIN = 38;
     private static final int BACK_BUTTON_MARGIN_LEFT = 35;
     private static final int BACK_BUTTON_MARGIN_TOP = 35;
     private static final int BG_WIDTH = 390;
