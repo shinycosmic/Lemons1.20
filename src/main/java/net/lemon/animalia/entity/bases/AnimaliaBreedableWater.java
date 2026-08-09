@@ -26,6 +26,7 @@ import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.control.SmoothSwimmingLookControl;
@@ -811,6 +812,19 @@ public abstract class AnimaliaBreedableWater extends WaterAnimal implements IAct
             case NOCTURNAL -> this.level().isNight();
             default -> true;
         };
+    }
+
+    @Override
+    public boolean isInvulnerableTo(DamageSource source) {
+        return source.is(DamageTypes.HOT_FLOOR) || super.isInvulnerableTo(source);
+    }
+
+    @Override
+    public void onInsideBubbleColumn(boolean downwards) {
+    }
+
+    @Override
+    public void onAboveBubbleCol(boolean downwards) {
     }
 
     @Override
