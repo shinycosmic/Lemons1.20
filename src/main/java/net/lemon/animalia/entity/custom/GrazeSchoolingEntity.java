@@ -207,6 +207,11 @@ public class GrazeSchoolingEntity extends FishBase implements GeoEntity, Scannab
             return PlayState.CONTINUE;
         }
 
+        if (this.getType() == ModEntities.PARACANTHURUS_HEPATUS.get() && this.isFast()) {
+            animationState.getController().setAnimation(RawAnimation.begin().then("swimfast", Animation.LoopType.LOOP));
+            return PlayState.CONTINUE;
+        }
+
         animationState.getController().setAnimation(RawAnimation.begin().then("swim", Animation.LoopType.LOOP));
         return PlayState.CONTINUE;
     }

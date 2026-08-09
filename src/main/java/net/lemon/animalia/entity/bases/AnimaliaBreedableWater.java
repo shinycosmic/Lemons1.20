@@ -391,9 +391,16 @@ public abstract class AnimaliaBreedableWater extends WaterAnimal implements IAct
     };
 
     public boolean isFast() {
-        double speed = this.getDeltaMovement().horizontalDistance();
-        double baseSpeed = this.getAttributeValue(Attributes.MOVEMENT_SPEED);
-        return speed > baseSpeed * 1.5;
+        double dx = this.getX() - this.xo;
+        double dy = this.getY() - this.yo;
+        double dz = this.getZ() - this.zo;
+        double speedSqr = dx * dx + dy * dy + dz * dz;
+        double threshold = this.getAttributeValue(Attributes.MOVEMENT_SPEED) * this.getFastSwimScale();
+        return speedSqr > threshold * threshold;
+    }
+
+    public double getFastSwimScale() {
+        return 1.5D;
     }
 
     @Override
