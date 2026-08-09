@@ -37,6 +37,8 @@ public class RegSchoolingEntity extends FishBase implements GeoEntity, Scannable
     private static final int SCATOPHAGUS_ARGUS_PIXEL = 14;
     private static final int NASO_BREVIROSTRIS_PIXEL = 33;
     private static final int POMACANTHUS_IMPERATOR_PIXEL = 22;
+    private static final int CHELMON_ROSTRATUS_PIXEL = 16;
+    private static final int CHAETODON_AURIGA_PIXEL = 16;
 
     public RegSchoolingEntity(EntityType<? extends FishBase> entityType, Level level) {
         super(entityType, level);
@@ -49,10 +51,12 @@ public class RegSchoolingEntity extends FishBase implements GeoEntity, Scannable
 
     @Override
     public Item getBreedingItem() {
-        if (this.getType() == ModEntities.SCATOPHAGUS_ARGUS.get()) {
+        if (this.getType() == ModEntities.SCATOPHAGUS_ARGUS.get() || this.getType() == ModEntities.CHAETODON_AURIGA.get()) {
             return ModBlocks.ALGAE_MAT.get().asItem();
         } else if (this.getType() == ModEntities.POMACANTHUS_IMPERATOR.get()) {
             return Items.SPONGE;
+        } else if (this.getType() == ModEntities.CHELMON_ROSTRATUS.get()) {
+            return ModItems.WORM.get();
         }
         return ModItems.FISH_FOOD.get();
     }
@@ -75,6 +79,10 @@ public class RegSchoolingEntity extends FishBase implements GeoEntity, Scannable
             return Component.translatable("trivia.animalia.pomacanthus_imperator");
         } else if (this.getType() == ModEntities.NASO_BREVIROSTRIS.get()) {
             return Component.translatable("trivia.animalia.naso_brevirostris");
+        } else if (this.getType() == ModEntities.CHELMON_ROSTRATUS.get()) {
+            return Component.translatable("trivia.animalia.chelmon_rostratus");
+        } else if (this.getType() == ModEntities.CHAETODON_AURIGA.get()) {
+            return Component.translatable("trivia.animalia.chaetodon_auriga");
         }
         return Component.translatable("debug.animalia.trivia");
     }
@@ -87,6 +95,10 @@ public class RegSchoolingEntity extends FishBase implements GeoEntity, Scannable
             return Component.translatable("family.animalia.pomacanthidae");
         } else if (this.getType() == ModEntities.NASO_BREVIROSTRIS.get()) {
             return Component.translatable("family.animalia.acanthuridae");
+        } else if (this.getType() == ModEntities.CHELMON_ROSTRATUS.get()) {
+            return Component.translatable("family.animalia.chaetodontidae");
+        } else if (this.getType() == ModEntities.CHAETODON_AURIGA.get()) {
+            return Component.translatable("family.animalia.chaetodontidae");
         }
         return Component.translatable("debug.animalia.family");
     }
@@ -111,6 +123,10 @@ public class RegSchoolingEntity extends FishBase implements GeoEntity, Scannable
             return new ItemStack(ModItems.POMACANTHUS_IMPERATOR_BUCKET.get());
         } else if (this.getType() == ModEntities.NASO_BREVIROSTRIS.get()) {
             return new ItemStack(ModItems.NASO_BREVIROSTRIS_BUCKET.get());
+        } else if (this.getType() == ModEntities.CHELMON_ROSTRATUS.get()) {
+            return new ItemStack(ModItems.CHELMON_ROSTRATUS_BUCKET.get());
+        } else if (this.getType() == ModEntities.CHAETODON_AURIGA.get()) {
+            return new ItemStack(ModItems.CHAETODON_AURIGA_BUCKET.get());
         }
         return new ItemStack(Items.SALMON_BUCKET);
     }
@@ -139,10 +155,10 @@ public class RegSchoolingEntity extends FishBase implements GeoEntity, Scannable
 
     @Override
     public boolean isSchoolingFish() {
-        if(this.getType() == ModEntities.POMACANTHUS_IMPERATOR.get()) {
-            return false;
+        if(this.getType() == ModEntities.NASO_BREVIROSTRIS.get() || this.getType() == ModEntities.SCATOPHAGUS_ARGUS.get()) {
+            return true;
         }
-        return true;
+        return false;
     }
 
     @Override
@@ -152,6 +168,10 @@ public class RegSchoolingEntity extends FishBase implements GeoEntity, Scannable
         } else if (this.getType() == ModEntities.POMACANTHUS_IMPERATOR.get()) {
             return 24;
         } else if (this.getType() == ModEntities.NASO_BREVIROSTRIS.get()) {
+            return 24;
+        } else if (this.getType() == ModEntities.CHELMON_ROSTRATUS.get()) {
+            return 24;
+        } else if (this.getType() == ModEntities.CHAETODON_AURIGA.get()) {
             return 24;
         }
 
@@ -177,6 +197,10 @@ public class RegSchoolingEntity extends FishBase implements GeoEntity, Scannable
             return AnimaliaFunctionUtil.getScaleForSize(POMACANTHUS_IMPERATOR_PIXEL, this.genVarSize(20, 50, 40));
         } else if (this.getType() == ModEntities.NASO_BREVIROSTRIS.get()) {
             return AnimaliaFunctionUtil.getScaleForSize(NASO_BREVIROSTRIS_PIXEL, this.genVarSize(40, 80, 60));
+        } else if (this.getType() == ModEntities.CHELMON_ROSTRATUS.get()) {
+            return AnimaliaFunctionUtil.getScaleForSize(CHELMON_ROSTRATUS_PIXEL, 22);
+        } else if (this.getType() == ModEntities.CHAETODON_AURIGA.get()) {
+            return AnimaliaFunctionUtil.getScaleForSize(CHAETODON_AURIGA_PIXEL, 25);
         }
         return 1;
     }
@@ -185,12 +209,15 @@ public class RegSchoolingEntity extends FishBase implements GeoEntity, Scannable
         HolonetEntities.register(ModEntities.SCATOPHAGUS_ARGUS, Scannable.AppName.FISH, "Acanthuriformes");
         HolonetEntities.register(ModEntities.POMACANTHUS_IMPERATOR, Scannable.AppName.FISH, "Acanthuriformes");
         HolonetEntities.register(ModEntities.NASO_BREVIROSTRIS, Scannable.AppName.FISH, "Acanthuriformes");
+        HolonetEntities.register(ModEntities.CHELMON_ROSTRATUS, Scannable.AppName.FISH, "Acanthuriformes");
+        HolonetEntities.register(ModEntities.CHAETODON_AURIGA, Scannable.AppName.FISH, "Acanthuriformes");
+
 
     }
 
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
-        controllers.add(new AnimationController<>(this, "controller", 0, this::predicate));
+        controllers.add(new AnimationController<>(this, "controller", 5, this::predicate));
         controllers.add(new AnimationController<>(this, "eat_controller", 0, this::eatPredicate));
     }
 

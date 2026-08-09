@@ -14,7 +14,7 @@ import software.bernie.geckolib.renderer.GeoRenderer;
 import software.bernie.geckolib.renderer.layer.GeoRenderLayer;
 
 public class MastacembelusBrichardiFinLayer extends GeoRenderLayer<MastacembelusEntity> {
-    private static final ResourceLocation FIN = new ResourceLocation(Animalia.MODID, "textures/entity/mastacembelusbrichardi_fins.png");
+    private static final ResourceLocation FIN = new ResourceLocation(Animalia.MODID, "textures/entity/mastacembelus_brichardi_fins.png");
 
     public MastacembelusBrichardiFinLayer(GeoRenderer<MastacembelusEntity> renderer) {
         super(renderer);

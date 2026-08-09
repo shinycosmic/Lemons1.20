@@ -41,6 +41,9 @@ public class ModEntities {
     public static final RegistryObject<EntityType<RegSchoolingEntity>> NASO_BREVIROSTRIS = registerEntityType("naso_brevirostris", RegSchoolingEntity::new, ModMobCategories.ANIMALIA_FISH, 0.5f, 0.3f, RegSchoolingEntity::setAttributes);
     public static final RegistryObject<EntityType<GrazeSchoolingEntity>> PARACANTHURUS_HEPATUS = registerEntityType("paracanthurus_hepatus", GrazeSchoolingEntity::new, ModMobCategories.ANIMALIA_FISH, 0.5f, 0.3f, GrazeSchoolingEntity::setAttributes);
     public static final RegistryObject<EntityType<GrazeSchoolingEntity>> ZANCLUS_CORNUTUS = registerEntityType("zanclus_cornutus", GrazeSchoolingEntity::new, ModMobCategories.ANIMALIA_FISH, 0.4f, 0.4f, GrazeSchoolingEntity::setAttributes);
+    public static final RegistryObject<EntityType<RegSchoolingEntity>> CHELMON_ROSTRATUS = registerEntityType("chelmon_rostratus", RegSchoolingEntity::new, ModMobCategories.ANIMALIA_FISH, 0.4f, 0.4f, RegSchoolingEntity::setAttributes);
+    public static final RegistryObject<EntityType<RegSchoolingEntity>> CHAETODON_AURIGA = registerEntityType("chaetodon_auriga", RegSchoolingEntity::new, ModMobCategories.ANIMALIA_FISH, 0.4f, 0.4f, RegSchoolingEntity::setAttributes);
+
     public static final RegistryObject<EntityType<PangasianodonEntity>> PANGASIANODON_GIGAS = registerEntityType("pangasianodon_gigas", PangasianodonEntity::new, ModMobCategories.ANIMALIA_FISH, 0.9f, 0.9f, PangasianodonEntity::setAttributes);
 
     //Non Fish
