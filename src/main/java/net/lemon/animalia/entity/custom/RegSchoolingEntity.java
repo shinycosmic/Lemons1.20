@@ -265,11 +265,7 @@ public class RegSchoolingEntity extends FishBase implements GeoEntity, Scannable
             state.getController().setAnimation(RawAnimation.begin().then("idle" + twitch, Animation.LoopType.PLAY_ONCE));
             return PlayState.CONTINUE;
         }
-//        int body = this.getCurrentBodyIdle();
-//        if (body >= 0 && this.getIdleType(body) == IdleType.MOVEMENT_POSITIVE && !this.isBaby()) {
-//            state.getController().setAnimation(RawAnimation.begin().then("idle" + body, Animation.LoopType.PLAY_ONCE));
-//            return PlayState.CONTINUE;
-//        }
+        state.getController().forceAnimationReset();
         return PlayState.STOP;
     }
 
