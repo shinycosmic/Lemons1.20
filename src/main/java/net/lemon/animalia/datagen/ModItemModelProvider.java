@@ -1,10 +1,12 @@
 package net.lemon.animalia.datagen;
 
 import net.lemon.animalia.Animalia;
+import net.lemon.animalia.registry.ModBlocks;
 import net.lemon.animalia.registry.ModItems;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.Block;
 import net.minecraftforge.client.model.generators.ItemModelBuilder;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
@@ -51,6 +53,9 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItems.BETTA_FISH_EGG);
         simpleItem(ModItems.FISH_FOOD);
         simpleItem(ModItems.HOLONET);
+
+        //Block Items
+        blockSpriteItemBlockTexture(ModBlocks.KAEMPFERIA_PULCHRA);
 
         //Buckets
         simpleItem(ModItems.CHILEANSEABASS_BUCKET);
@@ -128,9 +133,15 @@ public class ModItemModelProvider extends ItemModelProvider {
                 new ResourceLocation(Animalia.MODID, "item/" + item.getId().getPath()));
     }
 
-    private ItemModelBuilder blockSpriteItem(RegistryObject<Item> item, String blockTextureName) {
+    private ItemModelBuilder blockSpriteItem(RegistryObject<Block> item) {
         return withExistingParent(item.getId().getPath(),
                 new ResourceLocation("item/generated")).texture("layer0",
-                new ResourceLocation(Animalia.MODID, "block/" + blockTextureName));
+                new ResourceLocation(Animalia.MODID, "item/" + item.getId().getPath()));
+    }
+
+    private ItemModelBuilder blockSpriteItemBlockTexture(RegistryObject<Block> item) {
+        return withExistingParent(item.getId().getPath(),
+                new ResourceLocation("item/generated")).texture("layer0",
+                new ResourceLocation(Animalia.MODID, "block/" + item.getId().getPath()));
     }
 }
