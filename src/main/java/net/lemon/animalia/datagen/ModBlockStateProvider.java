@@ -42,11 +42,6 @@ public class ModBlockStateProvider extends BlockStateProvider {
         simpleBlockItem(block, model);
     }
 
-    private void pottedPlantWithSpecialModel(RegistryObject<Block> blockObject) {
-        Block block = blockObject.get();
-        simpleBlock(block, cutoutWrapper(ForgeRegistries.BLOCKS.getKey(block).getPath()));
-    }
-
     private ModelFile cutoutWrapper(String name) {
         return models().withExistingParent(name + "_cutout", modLoc("block/" + name))
                 .renderType("cutout");

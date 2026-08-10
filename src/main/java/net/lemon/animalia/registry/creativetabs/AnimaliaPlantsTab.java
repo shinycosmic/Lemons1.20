@@ -12,7 +12,8 @@ import java.util.List;
 public class AnimaliaPlantsTab {
     public static final List<RegistryObject<? extends Block>> PLANTS = List.of(
             //Interactables
-            ModBlocks.ALGAE_MAT
+            ModBlocks.ALGAE_MAT,
+            ModBlocks.KAEMPFERIA_PULCHRA
 
     );
 

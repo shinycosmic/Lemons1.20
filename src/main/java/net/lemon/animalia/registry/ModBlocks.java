@@ -26,7 +26,6 @@ public class ModBlocks {
     public static final RegistryObject<Block> ALGAE_MAT = registerBlock("algae_mat", () -> new AlgaeMatBlock(BlockBehaviour.Properties.copy(Blocks.GLOW_LICHEN).noOcclusion().noCollission().sound(SoundType.VINE).lightLevel(state -> 0)));
 
     public static final RegistryObject<Block> KAEMPFERIA_PULCHRA = registerFlowerBlock("kaempferia_pulchra", MobEffects.FIRE_RESISTANCE);
-    public static final RegistryObject<Block> POTTED_KAEMPFERIA_PULCHRA = BLOCKS.register("potted_kaempferia_pulchra", () -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, ModBlocks.KAEMPFERIA_PULCHRA, BlockBehaviour.Properties.copy(Blocks.POTTED_ALLIUM).noOcclusion()));
 
 
 

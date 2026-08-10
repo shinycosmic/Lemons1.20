@@ -55,7 +55,6 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItems.HOLONET);
 
         //Block Items
-        blockSpriteItemBlockTexture(ModBlocks.KAEMPFERIA_PULCHRA);
 
         //Buckets
         simpleItem(ModItems.CHILEANSEABASS_BUCKET);
