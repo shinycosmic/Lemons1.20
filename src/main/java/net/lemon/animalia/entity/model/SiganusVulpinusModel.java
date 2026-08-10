@@ -1,4 +1,4 @@
-package net.lemon.animalia.entity.model;//package net.lemon.animalia.entity.model;
+package net.lemon.animalia.entity.model;
 
 import net.lemon.animalia.Animalia;
 import net.lemon.animalia.entity.custom.RegSchoolingEntity;
