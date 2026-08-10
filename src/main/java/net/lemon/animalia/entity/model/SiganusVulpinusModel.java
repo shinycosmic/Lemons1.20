@@ -2,6 +2,7 @@ package net.lemon.animalia.entity.model;//package net.lemon.animalia.entity.mode
 
 import net.lemon.animalia.Animalia;
 import net.lemon.animalia.entity.custom.RegSchoolingEntity;
+import net.lemon.animalia.util.NightBlend;
 import net.minecraft.resources.ResourceLocation;
 import software.bernie.geckolib.constant.DataTickets;
 import software.bernie.geckolib.core.animatable.model.CoreGeoBone;
@@ -20,6 +21,9 @@ public class SiganusVulpinusModel extends GeoModel<RegSchoolingEntity> {
     public ResourceLocation getTextureResource(RegSchoolingEntity object) {
         if(object.isBaby()) {
             return new ResourceLocation(Animalia.MODID, "textures/entity/babysiganus.png");
+        }
+        if(NightBlend.isFullNight(object)) {
+            return new ResourceLocation(Animalia.MODID, "textures/entity/siganus_vulpinus_night.png");
         }
         return new ResourceLocation(Animalia.MODID, "textures/entity/siganus_vulpinus.png");
     }
