@@ -29,7 +29,6 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         this.add(ModBlocks.ALGAE_MAT.get(), block -> createMultifaceBlockDrops(block, HAS_SHEARS));
 
         this.dropSelf(ModBlocks.KAEMPFERIA_PULCHRA.get());
-        this.add(ModBlocks.POTTED_KAEMPFERIA_PULCHRA.get(), createPotFlowerItemTable(ModBlocks.KAEMPFERIA_PULCHRA.get()));
 
     }
 

@@ -28,7 +28,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
     protected void registerStatesAndModels() {
         simpleBlockWithItem(ModBlocks.FILTER_TRAP.get(), new ModelFile.UncheckedModelFile(modLoc("block/filter_trap")));
         multifaceBlock(ModBlocks.ALGAE_MAT.get(), "algae_mat", modLoc("block/algae_mat"));
-        simpleBlockWithItem(ModBlocks.KAEMPFERIA_PULCHRA.get(), new ModelFile.UncheckedModelFile(modLoc("block/kaempferia_pulchra")));
+        plantWithSpecialModel(ModBlocks.KAEMPFERIA_PULCHRA);
 
     }
 
@@ -40,11 +40,6 @@ public class ModBlockStateProvider extends BlockStateProvider {
         Block block = blockObject.get();
         ModelFile model = cutoutWrapper(ForgeRegistries.BLOCKS.getKey(block).getPath());
         simpleBlock(block, ConfiguredModel.allYRotations(model, 0, false));
-    }
-
-    private void pottedPlantWithSpecialModel(RegistryObject<Block> blockObject) {
-        Block block = blockObject.get();
-        simpleBlock(block, cutoutWrapper(ForgeRegistries.BLOCKS.getKey(block).getPath()));
     }
 
     private ModelFile cutoutWrapper(String name) {

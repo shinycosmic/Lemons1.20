@@ -58,9 +58,6 @@ public class Animalia {
     private void commonSetup(final FMLCommonSetupEvent event) {
         ModNetwork.register();
         HolonetSetup.init();
-        event.enqueueWork(() -> {
-            ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(ModBlocks.KAEMPFERIA_PULCHRA.getId(), ModBlocks.KAEMPFERIA_PULCHRA);
-        });
     }
 
     // Add the example block item to the building blocks tab
