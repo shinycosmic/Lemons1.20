@@ -26,6 +26,8 @@ public class ModBlockStateProvider extends BlockStateProvider {
     protected void registerStatesAndModels() {
         simpleBlockWithItem(ModBlocks.FILTER_TRAP.get(), new ModelFile.UncheckedModelFile(modLoc("block/filter_trap")));
         multifaceBlock(ModBlocks.ALGAE_MAT.get(), "algae_mat", modLoc("block/algae_mat"));
+        simpleBlockWithItem(ModBlocks.KAEMPFERIA_PULCHRA.get(), new ModelFile.UncheckedModelFile(modLoc("block/kaempferia_pulchra")));
+
     }
 
     private void blockWithItem(RegistryObject<Block> blockRegistryObject) {

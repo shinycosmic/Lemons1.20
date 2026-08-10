@@ -10,6 +10,8 @@ import net.lemon.animalia.registry.AnimaliaRenderInit;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.FlowerPotBlock;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
@@ -56,6 +58,9 @@ public class Animalia {
     private void commonSetup(final FMLCommonSetupEvent event) {
         ModNetwork.register();
         HolonetSetup.init();
+        event.enqueueWork(() -> {
+            ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(ModBlocks.KAEMPFERIA_PULCHRA.getId(), ModBlocks.KAEMPFERIA_PULCHRA);
+        });
     }
 
     // Add the example block item to the building blocks tab
