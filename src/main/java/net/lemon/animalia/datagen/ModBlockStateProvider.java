@@ -11,6 +11,7 @@ import net.minecraftforge.client.model.generators.BlockStateProvider;
 import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.client.model.generators.MultiPartBlockStateBuilder;
 import net.minecraftforge.common.data.ExistingFileHelper;
+import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
 public class ModBlockStateProvider extends BlockStateProvider {
@@ -32,6 +33,23 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
     private void blockWithItem(RegistryObject<Block> blockRegistryObject) {
         simpleBlockWithItem(blockRegistryObject.get(), cubeAll(blockRegistryObject.get()));
+    }
+
+    private void plantWithSpecialModel(RegistryObject<Block> blockObject) {
+        Block block = blockObject.get();
+        ModelFile model = cutoutWrapper(ForgeRegistries.BLOCKS.getKey(block).getPath());
+        simpleBlock(block, model);
+        simpleBlockItem(block, model);
+    }
+
+    private void pottedPlantWithSpecialModel(RegistryObject<Block> blockObject) {
+        Block block = blockObject.get();
+        simpleBlock(block, cutoutWrapper(ForgeRegistries.BLOCKS.getKey(block).getPath()));
+    }
+
+    private ModelFile cutoutWrapper(String name) {
+        return models().withExistingParent(name + "_cutout", modLoc("block/" + name))
+                .renderType("cutout");
     }
 
     private void multifaceBlock(Block block, String name, ResourceLocation texture) {
