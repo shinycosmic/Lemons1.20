@@ -83,6 +83,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItems.PARACANTHURUS_HEPATUS_BUCKET);
         simpleItem(ModItems.CHELMON_ROSTRATUS_BUCKET);
         simpleItem(ModItems.CHAETODON_AURIGA_BUCKET);
+        simpleItem(ModItems.SIGANUS_VULPINUS_BUCKET);
 
         //spawn egg generators
         withExistingParent(ModItems.CHILEANSEABASS_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
@@ -115,6 +116,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         withExistingParent(ModItems.PARACANTHURUS_HEPATUS_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
         withExistingParent(ModItems.CHELMON_ROSTRATUS_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
         withExistingParent(ModItems.CHAETODON_AURIGA_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
+        withExistingParent(ModItems.SIGANUS_VULPINUS_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
 
 
 

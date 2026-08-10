@@ -65,6 +65,7 @@ public class ModItems {
     public static final RegistryObject<Item> PARACANTHURUS_HEPATUS_BUCKET = registerBucket("paracanthurus_hepatus_bucket", ModEntities.PARACANTHURUS_HEPATUS);
     public static final RegistryObject<Item> CHELMON_ROSTRATUS_BUCKET = registerBucket("chelmon_rostratus_bucket", ModEntities.CHELMON_ROSTRATUS);
     public static final RegistryObject<Item> CHAETODON_AURIGA_BUCKET = registerBucket("chaetodon_auriga_bucket", ModEntities.CHAETODON_AURIGA);
+    public static final RegistryObject<Item> SIGANUS_VULPINUS_BUCKET = registerBucket("siganus_vulpinus_bucket", ModEntities.SIGANUS_VULPINUS);
 
     public static final RegistryObject<Item> BETTA_SPLENDENS_BUCKET = registerBucket("betta_splendens_bucket", ModEntities.BETTA_SPLENDENS);
     public static final RegistryObject<Item> PROCAMBARUS_CLARKII_BUCKET = registerBucket("procambarus_clarkii_bucket", ModEntities.PROCAMBARUS_CLARKII);
@@ -121,6 +122,7 @@ public class ModItems {
     public static final RegistryObject<Item> PARACANTHURUS_HEPATUS_SPAWN_EGG = registerSpawnEgg("paracanthurus_hepatus_spawn_egg", ModEntities.PARACANTHURUS_HEPATUS, 0x3b69ff, 0x030208);
     public static final RegistryObject<Item> CHAETODON_AURIGA_SPAWN_EGG = registerSpawnEgg("chaetodon_auriga_spawn_egg", ModEntities.CHAETODON_AURIGA, 0x393424, 0xffeb64);
     public static final RegistryObject<Item> CHELMON_ROSTRATUS_SPAWN_EGG = registerSpawnEgg("chelmon_rostratus_spawn_egg", ModEntities.CHELMON_ROSTRATUS, 0xee872f, 0xd8e1e8);
+    public static final RegistryObject<Item> SIGANUS_VULPINUS_SPAWN_EGG = registerSpawnEgg("siganus_vulpinus_spawn_egg", ModEntities.SIGANUS_VULPINUS, 0xf4e609, 0x0c0805);
 
     //Non Fish Spawn Eggs
     public static final RegistryObject<Item> PROCAMBARUS_CLARKII_SPAWN_EGG = registerSpawnEgg("procambarus_clarkii_spawn_egg", ModEntities.PROCAMBARUS_CLARKII, 0x932a2a, 0x202522);
