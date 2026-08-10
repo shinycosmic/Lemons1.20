@@ -8,6 +8,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.MultifaceBlock;
 import net.minecraftforge.client.model.generators.BlockStateProvider;
+import net.minecraftforge.client.model.generators.ConfiguredModel;
 import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.client.model.generators.MultiPartBlockStateBuilder;
 import net.minecraftforge.common.data.ExistingFileHelper;
@@ -38,8 +39,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
     private void plantWithSpecialModel(RegistryObject<Block> blockObject) {
         Block block = blockObject.get();
         ModelFile model = cutoutWrapper(ForgeRegistries.BLOCKS.getKey(block).getPath());
-        simpleBlock(block, model);
-        simpleBlockItem(block, model);
+        simpleBlock(block, ConfiguredModel.allYRotations(model, 0, false));
     }
 
     private void pottedPlantWithSpecialModel(RegistryObject<Block> blockObject) {

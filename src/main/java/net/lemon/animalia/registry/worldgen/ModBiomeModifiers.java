@@ -23,10 +23,12 @@ import java.util.List;
 
 public class ModBiomeModifiers {
     public static final ResourceKey<BiomeModifier> ADD_ALGAE_MAT = createKey("add_algae_mat");
+    public static final ResourceKey<BiomeModifier> ADD_KAEMPFERIA_PULCHRA = createKey("add_kaempferia_pulchra");
 
     //Defines which biomes a block spawns in.
     public static void bootstrap(BootstapContext<BiomeModifier> context) {
         addFeature(context, ADD_ALGAE_MAT, ModPlacedFeatures.ALGAE_MAT, GenerationStep.Decoration.VEGETAL_DECORATION, BiomeTags.IS_RIVER, Tags.Biomes.IS_SWAMP, BiomeTags.IS_OCEAN);
+        addFeature(context, ADD_KAEMPFERIA_PULCHRA, ModPlacedFeatures.KAEMPFERIA_PULCHRA, GenerationStep.Decoration.VEGETAL_DECORATION, Tags.Biomes.IS_SWAMP);
     }
 
     @SafeVarargs

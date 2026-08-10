@@ -5,6 +5,8 @@ import net.lemon.animalia.registry.ModBlocks;
 import net.minecraft.core.HolderSet;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstapContext;
+import net.minecraft.data.worldgen.features.FeatureUtils;
+import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
@@ -13,6 +15,8 @@ import net.minecraft.world.level.block.MultifaceBlock;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.configurations.MultifaceGrowthConfiguration;
+import net.minecraft.world.level.levelgen.feature.configurations.SimpleBlockConfiguration;
+import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
 
 public class ModConfiguredFeatures {
     private static final Block[] FRESHWATER_BEDS = {
@@ -20,10 +24,27 @@ public class ModConfiguredFeatures {
             Blocks.CLAY, Blocks.MUD, Blocks.STONE, Blocks.DEEPSLATE};
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> ALGAE_MAT = createKey("algae_mat");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> KAEMPFERIA_PULCHRA = createKey("kaempferia_pulchra");
+
+
+
+
 
     //Define worldgen configurations here
     public static void bootstrap(BootstapContext<ConfiguredFeature<?, ?>> context) {
         registerMultiface(context, ALGAE_MAT, (MultifaceBlock) ModBlocks.ALGAE_MAT.get(), 4, 0.6F, FRESHWATER_BEDS);
+        registerFlowerPatch(context, KAEMPFERIA_PULCHRA, ModBlocks.KAEMPFERIA_PULCHRA.get(), 64);
+
+    }
+
+
+
+    private static void registerFlowerPatch(BootstapContext<ConfiguredFeature<?, ?>> context,
+                                            ResourceKey<ConfiguredFeature<?, ?>> key, Block block, int tries) {
+        context.register(key, new ConfiguredFeature<>(Feature.FLOWER,
+                FeatureUtils.simpleRandomPatchConfiguration(tries,
+                        PlacementUtils.onlyWhenEmpty(Feature.SIMPLE_BLOCK,
+                                new SimpleBlockConfiguration(BlockStateProvider.simple(block))))));
     }
 
     private static void registerMultiface(BootstapContext<ConfiguredFeature<?, ?>> context,
