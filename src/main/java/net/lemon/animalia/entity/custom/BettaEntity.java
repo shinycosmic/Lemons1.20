@@ -99,8 +99,6 @@ public class BettaEntity extends FishBase implements GeoEntity, IsGenetic, Scann
 
     public BettaEntity(EntityType<? extends FishBase> entityType, Level level) {
         super(entityType, level);
-        this.moveControl = new SmoothSwimmingMoveControl(this, 85, 10, 0.02F, 0.1F, true);
-        this.lookControl = new SmoothSwimmingLookControl(this, 10);
     }
 
     @Override

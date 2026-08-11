@@ -43,8 +43,6 @@ public class RakthamichthysEntity extends BottomWalkerSwimmerBase implements Geo
 
     public RakthamichthysEntity(EntityType<? extends FishBase> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
-        this.moveControl = new SmoothSwimmingMoveControl(this, 85, 10, 0.02F, 0.1F, true);
-        this.lookControl = new SmoothSwimmingLookControl(this, 10);
     }
 
     @Override

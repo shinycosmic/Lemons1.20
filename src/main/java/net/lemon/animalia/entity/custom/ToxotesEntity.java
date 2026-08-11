@@ -48,8 +48,6 @@ public class ToxotesEntity extends FishBase implements GeoEntity, Scannable {
 
     public ToxotesEntity(EntityType<? extends FishBase> entityType, Level level) {
         super(entityType, level);
-        this.moveControl = new SmoothSwimmingMoveControl(this, 85, 10, 0.02F, 0.1F, true);
-        this.lookControl = new SmoothSwimmingLookControl(this, 10);
     }
 
     @Override
