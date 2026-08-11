@@ -55,6 +55,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItems.HOLONET);
 
         //Block Items
+        blockSpriteItem(ModBlocks.KAEMPFERIA_PULCHRA);
 
         //Buckets
         simpleItem(ModItems.CHILEANSEABASS_BUCKET);
@@ -136,11 +137,5 @@ public class ModItemModelProvider extends ItemModelProvider {
         return withExistingParent(item.getId().getPath(),
                 new ResourceLocation("item/generated")).texture("layer0",
                 new ResourceLocation(Animalia.MODID, "item/" + item.getId().getPath()));
-    }
-
-    private ItemModelBuilder blockSpriteItemBlockTexture(RegistryObject<Block> item) {
-        return withExistingParent(item.getId().getPath(),
-                new ResourceLocation("item/generated")).texture("layer0",
-                new ResourceLocation(Animalia.MODID, "block/" + item.getId().getPath()));
     }
 }

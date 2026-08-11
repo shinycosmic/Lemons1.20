@@ -44,7 +44,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
     private ModelFile cutoutWrapper(String name) {
         return models().withExistingParent(name + "_cutout", modLoc("block/" + name))
-                .renderType("cutout");
+                .renderType("cutout").texture("particle", "#1");
     }
 
     private void multifaceBlock(Block block, String name, ResourceLocation texture) {

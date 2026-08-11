@@ -1,0 +1,74 @@
+{
+	"format_version": "1.9.0",
+	"credit": "Made with Blockbench",
+	"parent": "Sagittariamodel",
+	"texture_size": [32, 32],
+	"textures": {
+		"0": "animalia:block/sagittaria_leaf",
+		"1": "animalia:block/sagittaria_flower",
+		"particle": "animalia:block/sagittaria_leaf"
+	},
+	"elements": [
+		{
+			"from": [0, 0, 8],
+			"to": [16, 32, 8],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 0, 8]},
+			"faces": {
+				"north": {"uv": [16, 0, 8, 16], "texture": "#0"},
+				"east": {"uv": [0, 0, 0, 16], "texture": "#0"},
+				"south": {"uv": [16, 0, 8, 16], "texture": "#0"},
+				"west": {"uv": [0, 0, 0, 16], "texture": "#0"},
+				"up": {"uv": [0, 0, 8, 0], "texture": "#0"},
+				"down": {"uv": [0, 0, 8, 0], "texture": "#0"}
+			}
+		},
+		{
+			"from": [8, 0, 0],
+			"to": [8, 32, 16],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 0, 8]},
+			"faces": {
+				"north": {"uv": [0, 0, 0, 16], "texture": "#0"},
+				"east": {"uv": [8, 0, 0, 16], "texture": "#0"},
+				"south": {"uv": [0, 0, 0, 16], "texture": "#0"},
+				"west": {"uv": [8, 0, 0, 16], "texture": "#0"},
+				"up": {"uv": [8, 0, 0, 0], "rotation": 270, "texture": "#0"},
+				"down": {"uv": [8, 0, 0, 0], "rotation": 90, "texture": "#0"}
+			}
+		},
+		{
+			"from": [5.5, 2, 8],
+			"to": [10.5, 31, 8],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 2, 8]},
+			"faces": {
+				"north": {"uv": [2.5, 0, 0, 14.5], "texture": "#1"},
+				"east": {"uv": [0, 0, 0, 14.5], "texture": "#1"},
+				"south": {"uv": [2.5, 0, 0, 14.5], "texture": "#1"},
+				"west": {"uv": [0, 0, 0, 14.5], "texture": "#1"},
+				"up": {"uv": [0, 0, 2.5, 0], "texture": "#1"},
+				"down": {"uv": [0, 0, 2.5, 0], "texture": "#1"}
+			}
+		},
+		{
+			"from": [8, 2, 5.5],
+			"to": [8, 31, 10.5],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 2, 8]},
+			"faces": {
+				"north": {"uv": [0, 0, 0, 14.5], "texture": "#1"},
+				"east": {"uv": [2.5, 0, 0, 14.5], "texture": "#1"},
+				"south": {"uv": [0, 0, 0, 14.5], "texture": "#1"},
+				"west": {"uv": [2.5, 0, 0, 14.5], "texture": "#1"},
+				"up": {"uv": [0, 0, 2.5, 0], "rotation": 270, "texture": "#1"},
+				"down": {"uv": [0, 0, 2.5, 0], "rotation": 90, "texture": "#1"}
+			}
+		}
+	],
+	"groups": [
+		{
+			"name": "group",
+			"origin": [8, 0, 8],
+			"scope": 0,
+			"color": 0,
+			"children": [0, 1, 2, 3]
+		}
+	]
+}
