@@ -1,7 +1,8 @@
 {
 	"format_version": "1.9.0",
 	"credit": "Made with Blockbench",
-	"parent": "Sagittariamodel",
+	"parent": "minecraft:block/block",
+	"ambientocclusion": false,
 	"texture_size": [32, 32],
 	"textures": {
 		"0": "animalia:block/sagittaria_leaf",
