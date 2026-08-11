@@ -6,7 +6,9 @@ import net.minecraft.core.Direction;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.DoublePlantBlock;
 import net.minecraft.world.level.block.MultifaceBlock;
+import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraftforge.client.model.generators.BlockStateProvider;
 import net.minecraftforge.client.model.generators.ConfiguredModel;
 import net.minecraftforge.client.model.generators.ModelFile;
@@ -29,6 +31,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
         simpleBlockWithItem(ModBlocks.FILTER_TRAP.get(), new ModelFile.UncheckedModelFile(modLoc("block/filter_trap")));
         multifaceBlock(ModBlocks.ALGAE_MAT.get(), "algae_mat", modLoc("block/algae_mat"));
         plantWithSpecialModel(ModBlocks.KAEMPFERIA_PULCHRA);
+        semiaquaticDoubleBlockPlant(ModBlocks.SAGITTARIA);
 
     }
 
@@ -40,6 +43,20 @@ public class ModBlockStateProvider extends BlockStateProvider {
         Block block = blockObject.get();
         ModelFile model = cutoutWrapper(ForgeRegistries.BLOCKS.getKey(block).getPath());
         simpleBlock(block, ConfiguredModel.allYRotations(model, 0, false));
+    }
+
+    private void semiaquaticDoubleBlockPlant(RegistryObject<Block> blockObject) {
+        Block block = blockObject.get();
+        String name = ForgeRegistries.BLOCKS.getKey(block).getPath();
+        ModelFile lower = cutoutWrapper(name);
+        ModelFile upper = models().getBuilder(name + "_top")
+                .texture("particle", modLoc("block/" + name + "_leaf"))
+                .renderType("cutout");
+        getVariantBuilder(block)
+                .partialState().with(DoublePlantBlock.HALF, DoubleBlockHalf.LOWER)
+                .setModels(ConfiguredModel.allYRotations(lower, 0, false))
+                .partialState().with(DoublePlantBlock.HALF, DoubleBlockHalf.UPPER)
+                .setModels(new ConfiguredModel(upper));
     }
 
     private ModelFile cutoutWrapper(String name) {

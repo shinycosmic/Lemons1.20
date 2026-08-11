@@ -56,6 +56,7 @@ public class ModItemModelProvider extends ItemModelProvider {
 
         //Block Items
         blockSpriteItem(ModBlocks.KAEMPFERIA_PULCHRA);
+        blockSpriteItem(ModBlocks.SAGITTARIA);
 
         //Buckets
         simpleItem(ModItems.CHILEANSEABASS_BUCKET);

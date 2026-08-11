@@ -4,6 +4,8 @@ import net.lemon.animalia.registry.ModBlocks;
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.DoublePlantBlock;
+import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraftforge.registries.RegistryObject;
 
 import java.util.Set;
@@ -29,6 +31,7 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         this.add(ModBlocks.ALGAE_MAT.get(), block -> createMultifaceBlockDrops(block, HAS_SHEARS));
 
         this.dropSelf(ModBlocks.KAEMPFERIA_PULCHRA.get());
+        this.add(ModBlocks.SAGITTARIA.get(), block -> this.createSinglePropConditionTable(block, DoublePlantBlock.HALF, DoubleBlockHalf.LOWER));
 
     }
 

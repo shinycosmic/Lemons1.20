@@ -4,6 +4,7 @@ import net.lemon.animalia.Animalia;
 import net.lemon.animalia.block.AlgaeMatBlock;
 import net.lemon.animalia.block.FilterTrapBlock;
 import net.lemon.animalia.block.MoundNestBlock;
+import net.lemon.animalia.block.SemiaquaticPlantBlock;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.item.BlockItem;
@@ -26,6 +27,7 @@ public class ModBlocks {
     public static final RegistryObject<Block> ALGAE_MAT = registerBlock("algae_mat", () -> new AlgaeMatBlock(BlockBehaviour.Properties.copy(Blocks.GLOW_LICHEN).noOcclusion().noCollission().sound(SoundType.VINE).lightLevel(state -> 0)));
 
     public static final RegistryObject<Block> KAEMPFERIA_PULCHRA = registerFlowerBlock("kaempferia_pulchra", MobEffects.FIRE_RESISTANCE);
+    public static final RegistryObject<Block> SAGITTARIA = registerBlock("sagittaria", () -> new SemiaquaticPlantBlock(BlockBehaviour.Properties.copy(Blocks.TALL_GRASS).noOcclusion().noCollission()));
 
 
 

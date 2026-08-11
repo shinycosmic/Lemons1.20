@@ -12,11 +12,14 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.MultifaceBlock;
+import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.configurations.MultifaceGrowthConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.SimpleBlockConfiguration;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
+import net.minecraft.world.level.levelgen.placement.BlockPredicateFilter;
+import net.minecraft.world.level.material.Fluids;
 
 public class ModConfiguredFeatures {
     private static final Block[] FRESHWATER_BEDS = {
@@ -25,7 +28,7 @@ public class ModConfiguredFeatures {
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> ALGAE_MAT = createKey("algae_mat");
     public static final ResourceKey<ConfiguredFeature<?, ?>> KAEMPFERIA_PULCHRA = createKey("kaempferia_pulchra");
-
+    public static final ResourceKey<ConfiguredFeature<?, ?>> SAGITTARIA = createKey("sagittaria");
 
 
 
@@ -34,10 +37,17 @@ public class ModConfiguredFeatures {
     public static void bootstrap(BootstapContext<ConfiguredFeature<?, ?>> context) {
         registerMultiface(context, ALGAE_MAT, (MultifaceBlock) ModBlocks.ALGAE_MAT.get(), 4, 0.6F, FRESHWATER_BEDS);
         registerFlowerPatch(context, KAEMPFERIA_PULCHRA, ModBlocks.KAEMPFERIA_PULCHRA.get(), 64);
-
+        registerSemiaquaticPatch(context, SAGITTARIA, ModBlocks.SAGITTARIA.get(), 64);
     }
 
-
+    private static void registerSemiaquaticPatch(BootstapContext<ConfiguredFeature<?, ?>> context,
+                                              ResourceKey<ConfiguredFeature<?, ?>> key, Block block, int tries) {
+        context.register(key, new ConfiguredFeature<>(Feature.RANDOM_PATCH,
+                FeatureUtils.simpleRandomPatchConfiguration(tries,
+                        PlacementUtils.inlinePlaced(Feature.SIMPLE_BLOCK,
+                                new SimpleBlockConfiguration(BlockStateProvider.simple(block)),
+                                BlockPredicateFilter.forPredicate(BlockPredicate.matchesFluids(Fluids.WATER))))));
+    }
 
     private static void registerFlowerPatch(BootstapContext<ConfiguredFeature<?, ?>> context,
                                             ResourceKey<ConfiguredFeature<?, ?>> key, Block block, int tries) {
