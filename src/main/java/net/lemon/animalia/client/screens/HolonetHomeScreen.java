@@ -10,19 +10,15 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
+import static net.lemon.animalia.util.AnimaliaConstants.*;
+
 @OnlyIn(Dist.CLIENT)
 public class HolonetHomeScreen extends Screen {
 
-    private static final ResourceLocation BACKGROUND = new ResourceLocation(Animalia.MODID, "textures/gui/holonet_transparent.png");
-    private static final ResourceLocation BORDER = new ResourceLocation(Animalia.MODID, "textures/gui/holonet.png");
     private static final ResourceLocation FISH_ICON = new ResourceLocation(Animalia.MODID, "textures/gui/fish_compendium_icon.png");
     private static final ResourceLocation FIELD_ICON = new ResourceLocation(Animalia.MODID, "textures/gui/field_guide_icon.png");
     private static final ResourceLocation TUTORIAL_ICON = new ResourceLocation(Animalia.MODID, "textures/gui/tutorial_icon.png");
 
-    private static final int BG_WIDTH = 390;
-    private static final int BG_HEIGHT = 245;
-
-    // Icon display size (scaled up from 16x16 source)
     private static final int ICON_SIZE = 32;
     private static final int ICON_SPACING = 64;
 
@@ -41,29 +37,24 @@ public class HolonetHomeScreen extends Screen {
         int bgX = (this.width - BG_WIDTH) / 2;
         int bgY = (this.height - BG_HEIGHT) / 2;
 
-        // Draw phone background
         graphics.blit(BACKGROUND, bgX, bgY, 0, 0, BG_WIDTH, BG_HEIGHT, BG_WIDTH, (int) (BG_HEIGHT*1.6));
         graphics.blit(BORDER, bgX, bgY, 0, 0, BG_WIDTH, BG_HEIGHT, BG_WIDTH, (int) (BG_HEIGHT*1.6));
 
-        // Calculate icon positions (centered within background)
         int totalWidth = (ICON_SIZE * 3) + (ICON_SPACING * 2);
         int startX = bgX + (BG_WIDTH - totalWidth) / 2;
         int iconY = bgY + (BG_HEIGHT - ICON_SIZE) / 2;
 
-        // Fish Compendium icon
         graphics.blit(FISH_ICON, startX, iconY, 0, 0, ICON_SIZE, ICON_SIZE, ICON_SIZE, ICON_SIZE);
         graphics.drawCenteredString(this.font,
                 Component.translatable("gui.animalia.holonet.fish_compendium"),
                 startX + ICON_SIZE / 2, iconY + ICON_SIZE + 4, 0xFFFFFF);
 
-        // Field Guide icon
         int fieldX = startX + ICON_SIZE + ICON_SPACING;
         graphics.blit(FIELD_ICON, fieldX, iconY, 0, 0, ICON_SIZE, ICON_SIZE, ICON_SIZE, ICON_SIZE);
         graphics.drawCenteredString(this.font,
                 Component.translatable("gui.animalia.holonet.field_guide"),
                 fieldX + ICON_SIZE / 2, iconY + ICON_SIZE + 4, 0xFFFFFF);
 
-        // Tutorials icon
         int tutorialsX = fieldX + ICON_SIZE + ICON_SPACING;
         graphics.blit(TUTORIAL_ICON, tutorialsX, iconY, 0, 0, ICON_SIZE, ICON_SIZE, ICON_SIZE, ICON_SIZE);
         graphics.drawCenteredString(this.font,
@@ -74,7 +65,6 @@ public class HolonetHomeScreen extends Screen {
             graphics.fill(tutorialsX - 2, iconY - 2, tutorialsX + ICON_SIZE + 2, iconY + ICON_SIZE + 2, 0x44FFFFFF);
         }
 
-        // Hover highlight
         if (isOver(mouseX, mouseY, startX, iconY)) {
             graphics.fill(startX - 2, iconY - 2, startX + ICON_SIZE + 2, iconY + ICON_SIZE + 2, 0x44FFFFFF);
         }

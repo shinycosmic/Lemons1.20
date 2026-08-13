@@ -10,7 +10,6 @@ import net.minecraft.world.level.pathfinder.*;
 
 public class BottomWalkerNodeEvaluator extends WalkNodeEvaluator {
 
-    //getStart
     @Override
     public Node getStart() {
         BlockPos.MutableBlockPos pos = new BlockPos.MutableBlockPos();

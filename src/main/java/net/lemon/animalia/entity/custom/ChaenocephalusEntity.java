@@ -65,8 +65,6 @@ public class ChaenocephalusEntity extends BottomWalkerSwimmerBase implements Geo
 
     private static final int NEST_MAKING_TICKS = 42;
     private static final int ROTATION_TICKS = 30;
-    private static final int GUARD_DURATION = 6000;
-    private static final int NEST_COOLDOWN = 12000;
 
     private final AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
     private static final int CHAENOCEPHALUS_ACERATUS_PIXEL = 37;
@@ -79,7 +77,7 @@ public class ChaenocephalusEntity extends BottomWalkerSwimmerBase implements Geo
     private int guardDirectionTicks;
     private boolean wantsToNest;
     private int wantsToNestTimeout;
-    private int nipCooldown;
+    private int attackCooldown;
     @Nullable
     private BlockPos nestPos;
 
@@ -327,19 +325,19 @@ public class ChaenocephalusEntity extends BottomWalkerSwimmerBase implements Geo
                 if (this.nestGuardTicks <= 0) {
                     this.setNestPhase(NEST_PHASE_HATCHING);
                 }
-                if (this.nipCooldown <= 0 && this.nestPos != null) {
+                if (this.attackCooldown <= 0 && this.nestPos != null) {
                     List<LivingEntity> entities = this.level().getEntitiesOfClass(LivingEntity.class,
                             new AABB(this.nestPos).inflate(0.1, 0.5, 0.1),
                             e -> e != this && e.isAlive());
                     for (LivingEntity target : entities) {
                         target.hurt(this.damageSources().mobAttack(this), 1.0F);
                         this.startEating();
-                        this.nipCooldown = 40;
+                        this.attackCooldown = 40;
                         break;
                     }
                 }
-                if (this.nipCooldown > 0) {
-                    this.nipCooldown--;
+                if (this.attackCooldown > 0) {
+                    this.attackCooldown--;
                 }
                 break;
 
@@ -368,7 +366,7 @@ public class ChaenocephalusEntity extends BottomWalkerSwimmerBase implements Geo
 
         this.nestPos = pos;
         this.setNestPhase(NEST_PHASE_GUARDING);
-        this.nestGuardTicks = GUARD_DURATION;
+        this.nestGuardTicks = 6000;
         this.setGuardDirection(GUARD_DIR_CENTER);
         this.guardDirectionTicks = 200 + rand.nextInt(400);
     }
@@ -443,7 +441,7 @@ public class ChaenocephalusEntity extends BottomWalkerSwimmerBase implements Geo
         }
 
         this.setNestPhase(NEST_PHASE_COOLDOWN);
-        this.nestCooldown = NEST_COOLDOWN;
+        this.nestCooldown = 12000;
         this.setGuardDirection(GUARD_DIR_CENTER);
     }
 

@@ -12,9 +12,9 @@ import org.lwjgl.glfw.GLFW;
 public class ModKeyBindings {
 
     public static final KeyMapping OPEN_HOLONET = new KeyMapping(
-            "key.animalia.open_holonet",       // translation key (shown in controls menu)
-            GLFW.GLFW_KEY_G,                   // default key
-            "key.categories.animalia"          // category heading in controls menu
+            "key.animalia.open_holonet",
+            GLFW.GLFW_KEY_G,
+            "key.categories.animalia"
     );
 
     @SubscribeEvent

@@ -75,7 +75,6 @@ public class MoundNestBakedModel extends BakedModelWrapper<BakedModel> {
             float u = Float.intBitsToFloat(vertexData[offset + 4]);
             float v = Float.intBitsToFloat(vertexData[offset + 5]);
 
-            // Convert from old sprite UV space back to 0-1, then to new sprite UV space
             float normalizedU = (u - oldSprite.getU0()) / (oldSprite.getU1() - oldSprite.getU0());
             float normalizedV = (v - oldSprite.getV0()) / (oldSprite.getV1() - oldSprite.getV0());
 

@@ -1,14 +1,10 @@
 package net.lemon.animalia.entity.custom;
 
 import com.google.common.collect.ImmutableMap;
-import net.lemon.animalia.entity.ai.BottomDwellingGoal;
-import net.lemon.animalia.entity.ai.FishFrySwimmingGoal;
-import net.lemon.animalia.entity.ai.PelagicRandomSwimGoal;
 import net.lemon.animalia.entity.bases.AnimaliaBreedableWater;
 import net.lemon.animalia.item.BettaFishEggItem;
-import net.lemon.animalia.item.FishEggItem;
 import net.lemon.animalia.util.HolonetEntities;
-import net.lemon.animalia.util.IsGenetic;
+import net.lemon.animalia.entity.bases.interfaces.IsGenetic;
 import net.lemon.animalia.util.Scannable;
 import net.minecraft.network.chat.Component;
 import net.lemon.animalia.entity.bases.ActivityTime;
@@ -25,22 +21,15 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.ai.control.SmoothSwimmingLookControl;
-import net.minecraft.world.entity.ai.control.SmoothSwimmingMoveControl;
-import net.minecraft.world.entity.ai.goal.AvoidEntityGoal;
-import net.minecraft.world.entity.ai.goal.RandomSwimmingGoal;
-import net.minecraft.world.entity.animal.AbstractFish;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.item.SpawnEggItem;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
@@ -55,7 +44,6 @@ import software.bernie.geckolib.core.animation.AnimationState;
 import software.bernie.geckolib.core.object.PlayState;
 
 import java.util.*;
-import java.util.Arrays;
 import java.util.Map;
 
 public class BettaEntity extends FishBase implements GeoEntity, IsGenetic, Scannable {
@@ -99,11 +87,6 @@ public class BettaEntity extends FishBase implements GeoEntity, IsGenetic, Scann
 
     public BettaEntity(EntityType<? extends FishBase> entityType, Level level) {
         super(entityType, level);
-    }
-
-    @Override
-    public boolean useSmoothControl() {
-        return true;
     }
 
     public static void registerHolonet(){

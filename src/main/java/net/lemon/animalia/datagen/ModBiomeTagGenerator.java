@@ -22,6 +22,7 @@ public class ModBiomeTagGenerator extends BiomeTagsProvider {
 
     @Override
     protected void addTags(HolderLookup.Provider provider) {
+        //Polar Oceans biome tag generator
         tag(ModTags.Biomes.POLAR_OCEAN)
                 .add(Biomes.FROZEN_OCEAN)
                 .add(Biomes.DEEP_FROZEN_OCEAN)

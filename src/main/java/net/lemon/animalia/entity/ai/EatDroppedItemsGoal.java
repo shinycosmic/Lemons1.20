@@ -17,11 +17,6 @@ public class EatDroppedItemsGoal<T extends PathfinderMob & IFoodEater> extends G
     private final double speedMultiplier;
     private final float searchRange;
 
-    private static final double EAT_DISTANCE_SQR = 2.0D;
-    private static final int EAT_COOLDOWN_TICKS = 40;
-    private static final int SEARCH_INTERVAL_TICKS = 20;
-    private static final int SEARCH_INTERVAL_JITTER = 10;
-
     private ItemEntity targetItem;
     private int eatCooldown;
     private int nextSearchTime;
@@ -44,7 +39,7 @@ public class EatDroppedItemsGoal<T extends PathfinderMob & IFoodEater> extends G
         if (this.mob.tickCount < this.nextSearchTime) {
             return false;
         }
-        this.nextSearchTime = this.mob.tickCount + SEARCH_INTERVAL_TICKS + this.mob.getRandom().nextInt(SEARCH_INTERVAL_JITTER);
+        this.nextSearchTime = this.mob.tickCount + 20 + this.mob.getRandom().nextInt(10);
         this.targetItem = this.findNearestFoodItem();
         return this.targetItem != null;
     }
@@ -64,7 +59,7 @@ public class EatDroppedItemsGoal<T extends PathfinderMob & IFoodEater> extends G
     public void tick() {
         this.mob.getLookControl().setLookAt(this.targetItem, 10.0F, 10.0F);
 
-        if (this.mob.distanceToSqr(this.targetItem) < EAT_DISTANCE_SQR) {
+        if (this.mob.distanceToSqr(this.targetItem) < 2.0D) {
             this.eatItem();
         } else {
             this.mob.getNavigation().moveTo(this.targetItem, this.speedMultiplier);
@@ -80,7 +75,6 @@ public class EatDroppedItemsGoal<T extends PathfinderMob & IFoodEater> extends G
     private void eatItem() {
         ItemStack stack = this.targetItem.getItem();
         float healAmount = stack.getFoodProperties(this.mob) != null ? Objects.requireNonNull(stack.getFoodProperties(this.mob)).getNutrition() : 2;
-
         this.mob.heal(healAmount);
         this.mob.ageUpFromFood();
         this.mob.startEating();
@@ -91,14 +85,13 @@ public class EatDroppedItemsGoal<T extends PathfinderMob & IFoodEater> extends G
             this.targetItem.discard();
         }
 
-        this.eatCooldown = this.mob.tickCount + EAT_COOLDOWN_TICKS;
+        this.eatCooldown = this.mob.tickCount + 40;
         this.targetItem = null;
     }
 
     private ItemEntity findNearestFoodItem() {
         List<ItemEntity> items = this.mob.level().getEntitiesOfClass(ItemEntity.class,
-                this.mob.getBoundingBox().inflate(this.searchRange),
-                item -> (item.isInWater() || item.onGround()) && this.mob.isFood(item.getItem()));
+                this.mob.getBoundingBox().inflate(this.searchRange), item -> (item.isInWater() || item.onGround()) && this.mob.isFood(item.getItem()));
 
         ItemEntity nearest = null;
         double nearestDist = Double.MAX_VALUE;

@@ -74,8 +74,8 @@ public class ToothfishEntity extends FishBase implements GeoEntity, Scannable {
 
     @Override
     public ItemStack getBucketItemStack() {
-        if(this.getType() == ModEntities.CHILEANSEABASS.get()) {
-            return new ItemStack(ModItems.CHILEANSEABASS_BUCKET.get());
+        if(this.getType() == ModEntities.DISSOSTICHUS_ELEGINOIDES.get()) {
+            return new ItemStack(ModItems.DISSOSTICHUS_ELEGINOIDES_BUCKET.get());
         } else if(this.getType() == ModEntities.ELEGINOPS_MACLOVINUS.get()) {
             return new ItemStack(ModItems.ELEGINOPS_MACLOVINUS_BUCKET.get());
         } else if(this.getType() == ModEntities.PERCOPHIS_BRASILIENSIS.get()) {
@@ -184,7 +184,7 @@ public class ToothfishEntity extends FishBase implements GeoEntity, Scannable {
 
     @Override
     public Component getTrivia() {
-        if (this.getType() == ModEntities.CHILEANSEABASS.get()) {
+        if (this.getType() == ModEntities.DISSOSTICHUS_ELEGINOIDES.get()) {
             return Component.translatable("trivia.animalia.dissostichus_eleginoides");
         } else if (this.getType() == ModEntities.ELEGINOPS_MACLOVINUS.get()) {
             return Component.translatable("trivia.animalia.eleginops_maclovinus");
@@ -197,7 +197,7 @@ public class ToothfishEntity extends FishBase implements GeoEntity, Scannable {
 
     @Override
     public Component getFamily() {
-        if (this.getType() == ModEntities.CHILEANSEABASS.get()) {
+        if (this.getType() == ModEntities.DISSOSTICHUS_ELEGINOIDES.get()) {
             return Component.translatable("family.animalia.nototheniidae");
         } else if (this.getType() == ModEntities.ELEGINOPS_MACLOVINUS.get()) {
             return Component.translatable("family.animalia.eleginopidae");
@@ -215,7 +215,7 @@ public class ToothfishEntity extends FishBase implements GeoEntity, Scannable {
 
     @Override
     public int getScaleforGUI() {
-        if (this.getType() == ModEntities.CHILEANSEABASS.get()) {
+        if (this.getType() == ModEntities.DISSOSTICHUS_ELEGINOIDES.get()) {
             return 22;
         } else if (this.getType() == ModEntities.ELEGINOPS_MACLOVINUS.get()) {
             return 42;
@@ -239,7 +239,7 @@ public class ToothfishEntity extends FishBase implements GeoEntity, Scannable {
     }
 
     public static void registerHolonet(){
-        HolonetEntities.register(ModEntities.CHILEANSEABASS, Scannable.AppName.FISH, "Perciformes");
+        HolonetEntities.register(ModEntities.DISSOSTICHUS_ELEGINOIDES, Scannable.AppName.FISH, "Perciformes");
         HolonetEntities.register(ModEntities.ELEGINOPS_MACLOVINUS, Scannable.AppName.FISH, "Perciformes");
         HolonetEntities.register(ModEntities.PERCOPHIS_BRASILIENSIS, Scannable.AppName.FISH, "Perciformes");
     }

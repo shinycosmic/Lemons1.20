@@ -1,19 +1,13 @@
 package net.lemon.animalia.registry;
 
-import com.google.errorprone.annotations.Var;
 import net.lemon.animalia.Animalia;
 import net.lemon.animalia.item.*;
-import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.MobBucketItem;
-import net.minecraft.world.item.SpawnEggItem;
-import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
-import net.minecraftforge.common.ForgeSpawnEggItem;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -38,7 +32,7 @@ public class ModItems {
 
 
     //Buckets
-    public static final RegistryObject<Item> CHILEANSEABASS_BUCKET = registerBucket("dissostichus_eleginoides_bucket", ModEntities.CHILEANSEABASS);
+    public static final RegistryObject<Item> DISSOSTICHUS_ELEGINOIDES_BUCKET = registerBucket("dissostichus_eleginoides_bucket", ModEntities.DISSOSTICHUS_ELEGINOIDES);
     public static final RegistryObject<Item> ELEGINOPS_MACLOVINUS_BUCKET = registerBucket("eleginops_maclovinus_bucket", ModEntities.ELEGINOPS_MACLOVINUS);
     public static final RegistryObject<Item> PSEUDAPHRITIS_URVILLII_BUCKET = registerBucket("pseudaphritis_urvillii_bucket", ModEntities.PSEUDAPHRITIS_URVILLII);
     public static final RegistryObject<Item> PERCOPHIS_BRASILIENSIS_BUCKET = registerBucket("percophis_brasiliensis_bucket", ModEntities.PERCOPHIS_BRASILIENSIS);
@@ -95,7 +89,7 @@ public class ModItems {
     public static final RegistryObject<Item> PROCAMBARUS_LUCIFUGUS = ITEMS.register("procambarus_lucifugus", () -> new Item(new Item.Properties()));
 
     //Spawn Eggs
-    public static final RegistryObject<Item> CHILEANSEABASS_SPAWN_EGG = registerSpawnEgg("dissostichus_eleginoides_spawn_egg", ModEntities.CHILEANSEABASS, 0x4D5267, 0xA5A8B0);
+    public static final RegistryObject<Item> DISSOSTICHUS_ELEGINOIDES_SPAWN_EGG = registerSpawnEgg("dissostichus_eleginoides_spawn_egg", ModEntities.DISSOSTICHUS_ELEGINOIDES, 0x4D5267, 0xA5A8B0);
     public static final RegistryObject<Item> ELEGINOPS_MACLOVINUS_SPAWN_EGG = registerSpawnEgg("eleginops_maclovinus_spawn_egg", ModEntities.ELEGINOPS_MACLOVINUS, 0x927A60, 0xFDEDD4);
     public static final RegistryObject<Item> PSEUDAPHRITIS_URVILLII_SPAWN_EGG = registerSpawnEgg("pseudaphritis_urvillii_spawn_egg", ModEntities.PSEUDAPHRITIS_URVILLII, 0xceaf63, 0x384436);
     public static final RegistryObject<Item> PERCOPHIS_BRASILIENSIS_SPAWN_EGG = registerSpawnEgg("percophis_brasiliensis_spawn_egg", ModEntities.PERCOPHIS_BRASILIENSIS, 0x6e5540, 0xfff0cd);

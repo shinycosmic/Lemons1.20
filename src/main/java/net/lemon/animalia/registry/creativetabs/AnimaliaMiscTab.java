@@ -11,12 +11,10 @@ import java.util.List;
 
 public class AnimaliaMiscTab {
     public static final List<RegistryObject<? extends Block>> MISC_BLOCKS = List.of(
-            //Interactables
             ModBlocks.FILTER_TRAP
     );
 
     public static final List<RegistryObject<? extends Item>> MISC_ITEMS = List.of(
-            //Interactables
             ModItems.HOLONET
 
     );

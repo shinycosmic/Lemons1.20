@@ -41,9 +41,6 @@ public class ModNetwork {
                 .add();
     }
 
-    /**
-     * Sends a packet to a specific player's client.
-     */
     public static void sendToPlayer(ServerPlayer player, Object packet) {
         CHANNEL.send(PacketDistributor.PLAYER.with(() -> player), packet);
     }

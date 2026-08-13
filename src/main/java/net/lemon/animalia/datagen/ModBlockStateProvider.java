@@ -29,7 +29,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
      */
     protected void registerStatesAndModels() {
         simpleBlockWithItem(ModBlocks.FILTER_TRAP.get(), new ModelFile.UncheckedModelFile(modLoc("block/filter_trap")));
-        multifaceBlock(ModBlocks.ALGAE_MAT.get(), "algae_mat", modLoc("block/algae_mat"));
+        glowLichenBaseBlock(ModBlocks.ALGAE_MAT.get(), "algae_mat", modLoc("block/algae_mat"));
         plantWithSpecialModel(ModBlocks.KAEMPFERIA_PULCHRA);
         semiaquaticDoubleBlockPlant(ModBlocks.SAGITTARIA);
 
@@ -64,7 +64,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
                 .renderType("cutout").texture("particle", "#1");
     }
 
-    private void multifaceBlock(Block block, String name, ResourceLocation texture) {
+    private void glowLichenBaseBlock(Block block, String name, ResourceLocation texture) {
         ModelFile model = models().withExistingParent(name, mcLoc("block/glow_lichen"))
                 .texture("glow_lichen", texture)
                 .texture("particle", texture)

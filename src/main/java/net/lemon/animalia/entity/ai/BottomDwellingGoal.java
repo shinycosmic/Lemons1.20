@@ -30,7 +30,7 @@ public class BottomDwellingGoal extends RandomSwimmingGoal {
     }
 
     /***
-     * Logic: check blocks directly below to find floor. If floor not found, allow continuous swimming, but tend to choose lower value targets
+     * check blocks directly below to find floor. If floor not found, allow continuous swimming, but tend to choose lower value targets
      * @return
      */
     @Override

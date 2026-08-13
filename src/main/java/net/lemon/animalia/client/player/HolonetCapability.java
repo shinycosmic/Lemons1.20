@@ -11,34 +11,25 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
- * Stores per-player Holonet discovery data.
+ * Stores Holonet data. unique for each player
  * Key format:
  *   Non-dimorphic: "animalia:dissostichus_eleginoides"
- *   Dimorphic:     "animalia:betta_splendens_1" (appended gender int)
+ *   Dimorphic:     "animalia:betta_splendens_1"
  */
 public class HolonetCapability {
 
     private final Set<String> discovered = new HashSet<>();
     private boolean loadedFirstTime = false;
 
-    /**
-     * Discovers a species+gender combo. Returns true if this is a NEW discovery.
-     */
     public boolean discover(ResourceLocation entityType, int gender) {
         return this.discovered.add(entityType.toString() + "_" + gender);
     }
 
-    /**
-     * Has this species been discovered in ANY gender?
-     */
     public boolean isDiscovered(ResourceLocation entityType) {
         String prefix = entityType.toString();
         return this.discovered.stream().anyMatch(key -> key.startsWith(prefix));
     }
 
-    /**
-     * Which genders have been discovered for this species?
-     */
     public Set<Integer> getDiscoveredGenders(ResourceLocation entityType) {
         String prefix = entityType.toString() + "_";
         return this.discovered.stream()

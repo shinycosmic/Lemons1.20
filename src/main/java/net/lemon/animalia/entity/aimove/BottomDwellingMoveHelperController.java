@@ -42,33 +42,24 @@ public class BottomDwellingMoveHelperController extends SmoothSwimmingMoveContro
                 desiredZ = normZ * fish.getSpeed() * 0.1;
             }
 
-            // Lerp horizontal velocity for smooth acceleration
             double lerpFactor = 0.1; // smaller = smoother
             double finalX = Mth.lerp(lerpFactor, currentVelocity.x, desiredX);
             double finalZ = Mth.lerp(lerpFactor, currentVelocity.z, desiredZ);
             double finalY = currentVelocity.y;
 
             if ( totalDist > 0.0) {
-                double swimSpeed = fish.getSpeed() * 0.06; // scale factor similar to horizontal
+                double swimSpeed = fish.getSpeed() * 0.06;
                 finalY = Mth.clamp(dy, -swimSpeed, swimSpeed);
             }
 
             fish.setDeltaMovement(new Vec3(finalX, finalY, finalZ));
 
-
-
-            /***
-             * Handle Rotation speed
-             * Lower Maximum change to make rotation speed slower
-             */
             if (dx != 0.0D || dz != 0.0D) {
-                // Smooth horizontal yaw
                 float targetYaw = (float)(Math.atan2(dz, dx) * (180.0 / Math.PI)) - 90.0F;
                 this.fish.setYRot(rotlerp(this.fish.getYRot(), targetYaw, 15.0F));
                 this.fish.yBodyRot = this.fish.getYRot();
                 this.fish.yHeadRot = this.fish.getYRot();
 
-                // Smooth pitch toward target
                 float targetPitch = -(float)(Math.atan2(dy, horizontalDist) * (180.0 / Math.PI));
                 targetPitch = Mth.clamp(Mth.wrapDegrees(targetPitch), -85.0F, 85.0F); // max pitch
                 this.fish.setXRot(rotlerp(this.fish.getXRot(), targetPitch, 5.0F));

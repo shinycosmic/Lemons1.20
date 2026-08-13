@@ -17,8 +17,8 @@ import java.util.function.Supplier;
 public class ModEntities {
     public static final DeferredRegister<EntityType<?>> ENTITY_TYPES = DeferredRegister.create(ForgeRegistries.ENTITY_TYPES, Animalia.MODID);
     public static final Map<RegistryObject<? extends EntityType<? extends LivingEntity>>, Supplier<AttributeSupplier>> ATTRIBUTE_SUPPLIERS = new HashMap<>();
-    /// REGISTER ENTITIES BELOW
-    public static final RegistryObject<EntityType<ToothfishEntity>> CHILEANSEABASS = registerEntityType("dissostichus_eleginoides", ToothfishEntity::new, ModMobCategories.ANIMALIA_FISH, 0.9f, 0.9f, ToothfishEntity::setAttributes);
+
+    public static final RegistryObject<EntityType<ToothfishEntity>> DISSOSTICHUS_ELEGINOIDES = registerEntityType("dissostichus_eleginoides", ToothfishEntity::new, ModMobCategories.ANIMALIA_FISH, 0.9f, 0.9f, ToothfishEntity::setAttributes);
     public static final RegistryObject<EntityType<ToothfishEntity>> ELEGINOPS_MACLOVINUS = registerEntityType("eleginops_maclovinus", ToothfishEntity::new, ModMobCategories.ANIMALIA_FISH, 0.6f, 0.9f, ToothfishEntity::setAttributes);
     public static final RegistryObject<EntityType<CongolliEntity>> PSEUDAPHRITIS_URVILLII = registerEntityType("pseudaphritis_urvillii", CongolliEntity::new, ModMobCategories.ANIMALIA_FISH, 0.5f, 0.3f, CongolliEntity::setAttributes);
     public static final RegistryObject<EntityType<ToothfishEntity>> PERCOPHIS_BRASILIENSIS = registerEntityType("percophis_brasiliensis", ToothfishEntity::new, ModMobCategories.ANIMALIA_FISH, 0.5f, 0.5f, ToothfishEntity::setAttributes);
@@ -56,7 +56,7 @@ public class ModEntities {
     public static final RegistryObject<EntityType<CrayfishEntity>> PROCAMBARUS_LUCIFUGUS = registerEntityType("procambarus_lucifugus", CrayfishEntity::new, ModMobCategories.ANIMALIA_INVERTEBRATE, 0.5f, 0.3f, CrayfishEntity::setAttributes);
 
 
-    /// REGISTER OTHER ENTITIES BELOW
+
     public static final RegistryObject<EntityType<WaterSpitProjectile>> WATER_SPIT = ENTITY_TYPES.register("water_spit",
             () -> EntityType.Builder.<WaterSpitProjectile>of(WaterSpitProjectile::new, MobCategory.MISC).sized(0.25F, 0.25F).clientTrackingRange(4).updateInterval(10).build("water_spit"));
 

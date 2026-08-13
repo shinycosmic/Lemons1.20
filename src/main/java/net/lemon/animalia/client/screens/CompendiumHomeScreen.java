@@ -2,11 +2,10 @@ package net.lemon.animalia.client.screens;
 
 import com.mojang.blaze3d.platform.Lighting;
 import com.mojang.blaze3d.systems.RenderSystem;
-import net.lemon.animalia.Animalia;
 import net.lemon.animalia.entity.bases.FishBase;
 import net.lemon.animalia.client.player.network.ClientDiscoveryCache;
 import net.lemon.animalia.util.HolonetEntities;
-import net.lemon.animalia.util.IsGenetic;
+import net.lemon.animalia.entity.bases.interfaces.IsGenetic;
 import net.lemon.animalia.util.Scannable;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -16,6 +15,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Mob;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -25,19 +25,10 @@ import software.bernie.geckolib.core.animation.AnimationController;
 
 import java.util.Random;
 
+import static net.lemon.animalia.util.AnimaliaConstants.*;
+
 @OnlyIn(Dist.CLIENT)
 public class CompendiumHomeScreen extends Screen {
-
-    private static final ResourceLocation FISH_BACKGROUND = new ResourceLocation(Animalia.MODID, "textures/gui/holonet_fish_transparent.png");
-    private static final ResourceLocation FIELD_BACKGROUND = new ResourceLocation(Animalia.MODID, "textures/gui/holonet_field_transparent.png");
-    private static final ResourceLocation BORDER = new ResourceLocation(Animalia.MODID, "textures/gui/holonet.png");
-    public static final ResourceLocation BACK_BUTTON_TEXTURE = new ResourceLocation(Animalia.MODID, "textures/gui/back_button.png");
-
-    private static final int BACK_BUTTON_SIZE = 16;
-    private static final int BACK_BUTTON_MARGIN_LEFT = 38;
-    private static final int BACK_BUTTON_MARGIN_TOP = 35;
-    private static final int BG_WIDTH = 390;
-    private static final int BG_HEIGHT = 245;
     private static final int BAR_WIDTH = 120;
     private static final int BAR_HEIGHT = 8;
     private static final int BAR_BG_COLOR = 0x44000000;
@@ -51,8 +42,8 @@ public class CompendiumHomeScreen extends Screen {
     private int bgY;
     private int backBtnX;
     private int backBtnY;
-    private LivingEntity featuredEntity;
-    private EntityType<?> featuredType;
+    private LivingEntity displayEntity;
+    private EntityType<?> displayType;
 
     public CompendiumHomeScreen(Scannable.AppName app, Screen parent) {
         super(Component.translatable("gui.animalia.holonet.splash"));
@@ -72,9 +63,8 @@ public class CompendiumHomeScreen extends Screen {
 
     @Override
     public void render(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
-        renderHelper(graphics, app, FISH_BACKGROUND, FIELD_BACKGROUND, bgX, bgY, BG_WIDTH, BG_HEIGHT, BORDER);
-        graphics.blit(BACK_BUTTON_TEXTURE, backBtnX, backBtnY, 0, 0, BACK_BUTTON_SIZE, BACK_BUTTON_SIZE, BACK_BUTTON_SIZE, BACK_BUTTON_SIZE);
-        // Hover highlight on back button
+        renderHelper(graphics, app, FISH_BG, FIELD_BG, bgX, bgY, BG_WIDTH, BG_HEIGHT, BORDER);
+        graphics.blit(BACK_BUTTON, backBtnX, backBtnY, 0, 0, BACK_BUTTON_SIZE, BACK_BUTTON_SIZE, BACK_BUTTON_SIZE, BACK_BUTTON_SIZE);
         if (isOverBackButton(mouseX, mouseY)) {
             graphics.fill(backBtnX - 1, backBtnY - 1, backBtnX + BACK_BUTTON_SIZE + 1, backBtnY + BACK_BUTTON_SIZE + 1, 0x44FFFFFF);
         }
@@ -106,7 +96,6 @@ public class CompendiumHomeScreen extends Screen {
 
         String progress = discovered + " / " + totalSpecies;
         graphics.drawCenteredString(this.font, progress, bgX + BG_WIDTH / 2, barY - 12, 0xFFFFFF);
-        //graphics.drawCenteredString(this.font, Component.translatable("gui.animalia.tap"), bgX + BG_WIDTH / 2, barY + BAR_HEIGHT + 8, 0xAAAAAA);
         super.render(graphics, mouseX, mouseY, partialTick);
     }
 
@@ -116,14 +105,10 @@ public class CompendiumHomeScreen extends Screen {
         graphics.blit(border, bgX, bgY, 0, 0, bgWidth, bgHeight, bgWidth, (int) (bgHeight *1.6));
     }
 
-    /**
-     * Renders the featured entity, blacked out as a silhouette if not yet discovered.
-     */
     private void renderFeaturedEntity(GuiGraphics graphics) {
-        if (featuredEntity == null) return;
-
-        if (featuredEntity instanceof GeoEntity geo) {
-            geo.getAnimatableInstanceCache().getManagerForId(featuredEntity.getId())
+        if (displayEntity == null) return;
+        if (displayEntity instanceof GeoEntity geo) {
+            geo.getAnimatableInstanceCache().getManagerForId(displayEntity.getId())
                     .getAnimationControllers().values()
                     .forEach(AnimationController::forceAnimationReset);
         }
@@ -132,18 +117,18 @@ public class CompendiumHomeScreen extends Screen {
         int entityY = bgY + BG_HEIGHT / 2 + 5;
         int scale = 40;
         int entityX = bgX + BG_WIDTH / 2;
-        if (featuredEntity instanceof Scannable scannable) {
+        if (displayEntity instanceof Scannable scannable) {
             scale = Math.min(scannable.getScaleforGUI() * 3, 60);
             entityX -= scannable.getXOffsetForGUI();
         }
 
-        boolean discovered = ClientDiscoveryCache.isDiscovered(ForgeRegistries.ENTITY_TYPES.getKey(featuredType));
+        boolean discovered = ClientDiscoveryCache.isDiscovered(ForgeRegistries.ENTITY_TYPES.getKey(displayType));
         if (!discovered) {
             RenderSystem.setShaderColor(0.0F, 0.0F, 0.0F, 1.0F);
         }
 
         Lighting.setupForEntityInInventory();
-        InventoryScreen.renderEntityInInventory(graphics, entityX, entityY, scale, rotation, null, featuredEntity);
+        InventoryScreen.renderEntityInInventory(graphics, entityX, entityY, scale, rotation, null, displayEntity);
 
         if (!discovered) {
             RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
@@ -152,7 +137,6 @@ public class CompendiumHomeScreen extends Screen {
 
     @Override
     public boolean mouseClicked(double mouseX, double mouseY, int button) {
-        // Right-click anywhere → go back to parent screen
         if (button == 1) {
             goBack();
             return true;
@@ -169,17 +153,11 @@ public class CompendiumHomeScreen extends Screen {
         return super.mouseClicked(mouseX, mouseY, button);
     }
 
-    /**
-     * Esc key closes the entire Holonet GUI, not just this screen.
-     */
     @Override
     public void onClose() {
         Minecraft.getInstance().setScreen(null);
     }
 
-    /**
-     * Goes back to the parent screen (HolonetHomeScreen).
-     */
     private void goBack() {
         Minecraft.getInstance().setScreen(parent);
     }
@@ -198,25 +176,25 @@ public class CompendiumHomeScreen extends Screen {
         Minecraft mc = Minecraft.getInstance();
         if (mc.level == null) return;
 
-        featuredType = HolonetEntities.getRandom(app, new Random());
-        if (featuredType == null) return;
+        displayType = HolonetEntities.getRandom(app, new Random());
+        if (displayType == null) return;
 
-        featuredEntity = (LivingEntity) featuredType.create(mc.level);
-        if (featuredEntity == null) return;
+        displayEntity = (LivingEntity) displayType.create(mc.level);
+        if (displayEntity == null) return;
 
-        if (featuredEntity instanceof net.minecraft.world.entity.Mob mob) {
+        if (displayEntity instanceof Mob mob) {
             mob.setNoAi(true);
         }
 
-        if (featuredEntity instanceof FishBase fish) {
+        if (displayEntity instanceof FishBase fish) {
             fish.setForcedInWater(true);
         }
-        featuredEntity.setOnGround(true);
+        displayEntity.setOnGround(true);
 
-        if (featuredEntity instanceof IsGenetic genetic) {
+        if (displayEntity instanceof IsGenetic genetic) {
             genetic.buildTraitsRandom();
         }
 
-        featuredEntity.discard();
+        displayEntity.discard();
     }
 }

@@ -32,9 +32,7 @@ public class BettaFishEggItem extends FishEggItem {
     }
 
     public static void setEntity(ItemStack stack, EntityType<?> type) {
-        if(type == null) return;
-        stack.getOrCreateTag().putString("Species",
-                ForgeRegistries.ENTITY_TYPES.getKey(type).toString());
+        FishEggItem.setEntity(stack, type);
     }
 
     @Nullable

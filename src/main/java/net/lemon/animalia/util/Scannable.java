@@ -23,26 +23,13 @@ public interface Scannable {
         FISH,
         FIELD,
     }
-
-    /**
-     * Returns the App this animal will be sorted into
-     * @return
-     */
+    //Might use this in the future but doesn't do anything right now
     AppName getApp();
 
-    /***
-     *  getTrivia, return a translatable component
-     */
     Component getTrivia();
 
-    /***
-     * getFamily, return a translatable component
-     */
     Component getFamily();
 
-    /***
-     * getOrder, return a translatable component
-     */
     Component getOrder();
 
     /***
@@ -60,10 +47,6 @@ public interface Scannable {
         return 50;
     }
 
-    /***
-     * Override to add multipliers
-     * @return
-     */
     default int getScaleforDetailGUI() {
         if(this instanceof LivingEntity living) {
             float maxDim = Math.max(living.getBbHeight(), living.getBbWidth());

@@ -6,6 +6,7 @@ import java.util.List;
 
 public class HolonetTutorials {
 
+    //register new tutorial pages below
     private static final List<String> TUTORIALS = List.of(
             "scanning",
             "gene_inheritance",

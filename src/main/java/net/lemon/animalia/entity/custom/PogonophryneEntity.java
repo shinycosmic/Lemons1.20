@@ -42,7 +42,7 @@ public class PogonophryneEntity extends BottomWalkerSwimmerBase implements GeoEn
     private static final EntityDataAccessor<Boolean> IDLE_REST = SynchedEntityData.defineId(PogonophryneEntity.class, EntityDataSerializers.BOOLEAN);
     private final AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
 
-    private int restTicks; // How long is this animal resting
+    private int restTicks;
     private int cooldown;
     private static final int POGONOPHRYNE_MARMORATA_PIXEL = 19;
 

@@ -10,8 +10,8 @@ public class FishHideGoal extends Goal {
     private final AnimaliaBreedableWater mob;
     private final ActivityTime activeTime;
 
-    private static final float INACTIVE_PERIOD_CHANCE = 0.8F;
-    private static final float ACTIVE_PERIOD_CHANCE = 0.05F;
+    private static final float INACTIVE_CHANCE = 0.8F;
+    private static final float ACTIVE_CHANCE = 0.05F;
 
     public FishHideGoal(AnimaliaBreedableWater mob) {
         this(mob, ActivityTime.NONE);
@@ -50,7 +50,7 @@ public class FishHideGoal extends Goal {
                 return true;
         }
 
-        float chance = isInactivePeriod ? INACTIVE_PERIOD_CHANCE : ACTIVE_PERIOD_CHANCE;
+        float chance = isInactivePeriod ? INACTIVE_CHANCE : ACTIVE_CHANCE;
         return mob.getRandom().nextFloat() < chance;
     }
 
@@ -83,7 +83,4 @@ public class FishHideGoal extends Goal {
         }
     }
 
-    @Override
-    public void stop() {
-    }
 }

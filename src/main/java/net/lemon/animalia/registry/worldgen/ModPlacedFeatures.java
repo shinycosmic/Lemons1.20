@@ -26,12 +26,17 @@ public class ModPlacedFeatures {
     public static final ResourceKey<PlacedFeature> KAEMPFERIA_PULCHRA = createKey("kaempferia_pulchra");
     public static final ResourceKey<PlacedFeature> SAGITTARIA = createKey("sagittaria");
 
+
     //define worldgen here for blocks
     public static void bootstrap(BootstapContext<PlacedFeature> context) {
         registerBedCluster(context, ALGAE_MAT, ModConfiguredFeatures.ALGAE_MAT, 3, 3, 5);
         registerFlowerPatch(context, KAEMPFERIA_PULCHRA, ModConfiguredFeatures.KAEMPFERIA_PULCHRA, 32);
         registerFlowerPatch(context, SAGITTARIA, ModConfiguredFeatures.SAGITTARIA, 32);
     }
+
+
+
+
 
     private static void registerBedCluster(BootstapContext<PlacedFeature> context, ResourceKey<PlacedFeature> key,
                                            ResourceKey<ConfiguredFeature<?, ?>> feature,

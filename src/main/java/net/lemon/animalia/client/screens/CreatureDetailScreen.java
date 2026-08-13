@@ -5,7 +5,7 @@ import net.lemon.animalia.Animalia;
 import net.lemon.animalia.entity.bases.AnimaliaBreedableWater;
 import net.lemon.animalia.entity.bases.FishBase;
 import net.lemon.animalia.client.player.network.ClientDiscoveryCache;
-import net.lemon.animalia.util.IsGenetic;
+import net.lemon.animalia.entity.bases.interfaces.IsGenetic;
 import net.lemon.animalia.util.Scannable;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
@@ -29,34 +29,25 @@ import software.bernie.geckolib.core.animation.AnimationController;
 import java.util.List;
 import java.util.Set;
 
+import static net.lemon.animalia.util.AnimaliaConstants.*;
+
 @OnlyIn(Dist.CLIENT)
 public class CreatureDetailScreen extends Screen {
+    private static final ResourceLocation MALE_BUTTON = new ResourceLocation(Animalia.MODID, "textures/gui/male_button.png");
+    private static final ResourceLocation FEMALE_BUTTON = new ResourceLocation(Animalia.MODID, "textures/gui/female_button.png");
+    private static final ResourceLocation MALE_PRESSED = new ResourceLocation(Animalia.MODID, "textures/gui/male_button_pressed.png");
+    private static final ResourceLocation FEMALE_PRESSED = new ResourceLocation(Animalia.MODID, "textures/gui/female_button_pressed.png");
+    private static final ResourceLocation LOCKED = new ResourceLocation(Animalia.MODID, "textures/gui/generic_locked.png");
 
-    private static final ResourceLocation FISH_BACKGROUND = new ResourceLocation(Animalia.MODID, "textures/gui/holonet_fish_transparent.png");
-    private static final ResourceLocation FIELD_BACKGROUND = new ResourceLocation(Animalia.MODID, "textures/gui/holonet_field_transparent.png");
-    private static final ResourceLocation BORDER = new ResourceLocation(Animalia.MODID, "textures/gui/holonet.png");
-    private static final ResourceLocation BACK_BUTTON_TEXTURE = new ResourceLocation(Animalia.MODID, "textures/gui/back_button.png");
-
-    private static final ResourceLocation MALE_BUTTON_TEXTURE = new ResourceLocation(Animalia.MODID, "textures/gui/male_button.png");
-    private static final ResourceLocation FEMALE_BUTTON_TEXTURE = new ResourceLocation(Animalia.MODID, "textures/gui/female_button.png");
-    private static final ResourceLocation MALE_PRESSED_TEXTURE = new ResourceLocation(Animalia.MODID, "textures/gui/male_button_pressed.png");
-    private static final ResourceLocation FEMALE_PRESSED_TEXTURE = new ResourceLocation(Animalia.MODID, "textures/gui/female_button_pressed.png");
-    private static final ResourceLocation GENERIC_LOCKED_TEXTURE = new ResourceLocation(Animalia.MODID, "textures/gui/generic_locked.png");
-
-    private static final int BG_WIDTH = 390;
-    private static final int BG_HEIGHT = 245;
-    private static final int BACK_BUTTON_SIZE = 16;
-    private static final int BACK_BUTTON_MARGIN_LEFT = 38;
-    private static final int BACK_BUTTON_MARGIN_TOP = 35;
     private static final int MODEL_AREA_WIDTH = 160;
     private static final int INFO_LEFT_OFFSET = 175;
     private static final int INFO_TOP_OFFSET = 40;
     private static final int INFO_WIDTH = 180;
     private static final int LINE_SPACING = 12;
-    private static final int GENDER_BTN_SIZE = 16;
-    private static final int GENDER_BTN_SPACING = 4;
-    private static final int GENDER_BTN_TOP = 35;
-    private static final int GENDER_BTN_LEFT = 15;
+    private static final int GENDER_BUTTON_SIZE = 16;
+    private static final int GENDER_BUTTON_SPACING = 4;
+    private static final int GENDER_BUTTON_TOP = 35;
+    private static final int GENDER_BUTTON_LEFT = 15;
 
     private final Scannable.AppName app;
     private final EntityType<?> entityType;
@@ -67,9 +58,7 @@ public class CreatureDetailScreen extends Screen {
     private int backBtnX;
     private int backBtnY;
     private float baseRotation = 0;
-    private float baseRotationZ = 0;
     private boolean isDragging = false;
-    private double lastDragX = 0;
 
     private LivingEntity displayEntity;
     private int currentGender = 0;
@@ -133,14 +122,11 @@ public class CreatureDetailScreen extends Screen {
 
     @Override
     public void render(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
-        CompendiumHomeScreen.renderHelper(graphics, app, FISH_BACKGROUND, FIELD_BACKGROUND, bgX, bgY, BG_WIDTH, BG_HEIGHT, BORDER);
-
-        // 3D model
+        CompendiumHomeScreen.renderHelper(graphics, app, FISH_BG, FIELD_BG, bgX, bgY, BG_WIDTH, BG_HEIGHT, BORDER);
+        
         if (displayEntity != null) {
             if (displayEntity instanceof GeoEntity geo) {
-                geo.getAnimatableInstanceCache().getManagerForId(displayEntity.getId())
-                        .getAnimationControllers().values()
-                        .forEach(AnimationController::forceAnimationReset);
+                geo.getAnimatableInstanceCache().getManagerForId(displayEntity.getId()).getAnimationControllers().values().forEach(AnimationController::forceAnimationReset);
             }
 
             int entityX = bgX + MODEL_AREA_WIDTH / 2 + 40;
@@ -155,38 +141,38 @@ public class CreatureDetailScreen extends Screen {
             InventoryScreen.renderEntityInInventory(graphics, entityX, entityY, scale, rotation, null, displayEntity);
         }
         if (hasDimorphism) {
-            int btnX = bgX + GENDER_BTN_LEFT;
-            int maleBtnY = bgY + GENDER_BTN_TOP;
-            int femaleBtnY = maleBtnY + GENDER_BTN_SIZE + GENDER_BTN_SPACING;
+            int btnX = bgX + GENDER_BUTTON_LEFT;
+            int maleBtnY = bgY + GENDER_BUTTON_TOP;
+            int femaleBtnY = maleBtnY + GENDER_BUTTON_SIZE + GENDER_BUTTON_SPACING;
 
             boolean maleDiscovered = discoveredGenders.contains(1);
             boolean femaleDiscovered = discoveredGenders.contains(0);
 
-            ResourceLocation maleTexture = !maleDiscovered ? GENERIC_LOCKED_TEXTURE
-                    : currentGender == 1 ? MALE_PRESSED_TEXTURE : MALE_BUTTON_TEXTURE;
-            graphics.blit(maleTexture, btnX, maleBtnY, 0, 0, GENDER_BTN_SIZE, GENDER_BTN_SIZE, GENDER_BTN_SIZE, GENDER_BTN_SIZE);
+            ResourceLocation maleTexture = !maleDiscovered ? LOCKED
+                    : currentGender == 1 ? MALE_PRESSED : MALE_BUTTON;
+            graphics.blit(maleTexture, btnX, maleBtnY, 0, 0, GENDER_BUTTON_SIZE, GENDER_BUTTON_SIZE, GENDER_BUTTON_SIZE, GENDER_BUTTON_SIZE);
             if (maleDiscovered && isOverGenderButton(mouseX, mouseY, btnX, maleBtnY)) {
-                graphics.fill(btnX, maleBtnY, btnX + GENDER_BTN_SIZE, maleBtnY + GENDER_BTN_SIZE, 0x44FFFFFF);
+                graphics.fill(btnX, maleBtnY, btnX + GENDER_BUTTON_SIZE, maleBtnY + GENDER_BUTTON_SIZE, 0x44FFFFFF);
             }
 
-            ResourceLocation femaleTexture = !femaleDiscovered ? GENERIC_LOCKED_TEXTURE
-                    : currentGender == 0 ? FEMALE_PRESSED_TEXTURE : FEMALE_BUTTON_TEXTURE;
-            graphics.blit(femaleTexture, btnX, femaleBtnY, 0, 0, GENDER_BTN_SIZE, GENDER_BTN_SIZE, GENDER_BTN_SIZE, GENDER_BTN_SIZE);
+            ResourceLocation femaleTexture = !femaleDiscovered ? LOCKED
+                    : currentGender == 0 ? FEMALE_PRESSED : FEMALE_BUTTON;
+            graphics.blit(femaleTexture, btnX, femaleBtnY, 0, 0, GENDER_BUTTON_SIZE, GENDER_BUTTON_SIZE, GENDER_BUTTON_SIZE, GENDER_BUTTON_SIZE);
             if (femaleDiscovered && isOverGenderButton(mouseX, mouseY, btnX, femaleBtnY)) {
-                graphics.fill(btnX, femaleBtnY, btnX + GENDER_BTN_SIZE, femaleBtnY + GENDER_BTN_SIZE, 0x44FFFFFF);
+                graphics.fill(btnX, femaleBtnY, btnX + GENDER_BUTTON_SIZE, femaleBtnY + GENDER_BUTTON_SIZE, 0x44FFFFFF);
             }
         }
 
-        // Common name (top center)
+        //Draws the common name
         if (displayEntity != null) {
             graphics.drawCenteredString(this.font, entityType.getDescription().copy().withStyle(ChatFormatting.BOLD),
                     bgX + BG_WIDTH / 2, bgY + 35, 0xFFFFFF);
         }
 
-        // Info panel (right side)
         int infoX = bgX + INFO_LEFT_OFFSET;
         int infoY = bgY + INFO_TOP_OFFSET + 10;
 
+        //Draws the right side info
         if (displayEntity instanceof AnimaliaBreedableWater abw && displayEntity instanceof Scannable scannable) {
             graphics.drawString(this.font, Component.literal("> ").append(scannable.getOrder()), infoX, infoY, 0xFFFFFF, true);
             infoY += LINE_SPACING;
@@ -197,7 +183,7 @@ public class CreatureDetailScreen extends Screen {
                     infoX, infoY, 0xFFFFFF, true);
             infoY += LINE_SPACING + 8;
 
-            // Breeding item
+            //Currently only the breeding item. Leaning against including whole diet as diet is made up of itemTags
             ItemStack foodItem = new ItemStack(abw.getBreedingItem());
             if (!foodItem.isEmpty()) {
                 graphics.renderItem(foodItem, infoX, infoY - 2);
@@ -205,7 +191,6 @@ public class CreatureDetailScreen extends Screen {
                 infoY += LINE_SPACING + 10;
             }
 
-            // Description
             List<FormattedCharSequence> wrappedLines = this.font.split(scannable.getTrivia(), INFO_WIDTH);
             for (FormattedCharSequence line : wrappedLines) {
                 graphics.drawString(this.font, line, infoX, infoY, 0xFFFFFF, true);
@@ -213,7 +198,7 @@ public class CreatureDetailScreen extends Screen {
             }
         }
 
-        graphics.blit(BACK_BUTTON_TEXTURE, backBtnX, backBtnY, 0, 0, BACK_BUTTON_SIZE, BACK_BUTTON_SIZE, BACK_BUTTON_SIZE, BACK_BUTTON_SIZE);
+        graphics.blit(BACK_BUTTON, backBtnX, backBtnY, 0, 0, BACK_BUTTON_SIZE, BACK_BUTTON_SIZE, BACK_BUTTON_SIZE, BACK_BUTTON_SIZE);
         if (isOverBackButton(mouseX, mouseY)) {
             graphics.fill(backBtnX - 1, backBtnY - 1, backBtnX + BACK_BUTTON_SIZE + 1, backBtnY + BACK_BUTTON_SIZE + 1, 0x44FFFFFF);
         }
@@ -235,9 +220,9 @@ public class CreatureDetailScreen extends Screen {
             }
 
             if (hasDimorphism) {
-                int btnX = bgX + GENDER_BTN_LEFT;
-                int maleBtnY = bgY + GENDER_BTN_TOP;
-                int femaleBtnY = maleBtnY + GENDER_BTN_SIZE + GENDER_BTN_SPACING;
+                int btnX = bgX + GENDER_BUTTON_LEFT;
+                int maleBtnY = bgY + GENDER_BUTTON_TOP;
+                int femaleBtnY = maleBtnY + GENDER_BUTTON_SIZE + GENDER_BUTTON_SPACING;
 
                 if (discoveredGenders.contains(1) && isOverGenderButton((int) mouseX, (int) mouseY, btnX, maleBtnY)) {
                     if (currentGender != 1) {
@@ -284,8 +269,8 @@ public class CreatureDetailScreen extends Screen {
     }
 
     private boolean isOverGenderButton(int mouseX, int mouseY, int btnX, int btnY) {
-        return mouseX >= btnX && mouseX <= btnX + GENDER_BTN_SIZE
-                && mouseY >= btnY && mouseY <= btnY + GENDER_BTN_SIZE;
+        return mouseX >= btnX && mouseX <= btnX + GENDER_BUTTON_SIZE
+                && mouseY >= btnY && mouseY <= btnY + GENDER_BUTTON_SIZE;
     }
 
     private void goBack() {

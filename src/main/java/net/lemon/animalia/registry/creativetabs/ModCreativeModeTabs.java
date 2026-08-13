@@ -17,7 +17,7 @@ public class ModCreativeModeTabs {
             DeferredRegister.create(Registries.CREATIVE_MODE_TAB, Animalia.MODID);
 
     public static final RegistryObject<CreativeModeTab> ANIMALIA_FOODS = CREATIVE_MODE_TABS.register("animalia_food",
-            () -> CreativeModeTab.builder().icon(() -> new ItemStack(ModItems.RAW_ICEFISH.get()))
+            () -> CreativeModeTab.builder().icon(() -> new ItemStack(ModItems.RAW_FISH.get()))
                     .title(Component.translatable("creativetab.animalia_food"))
                     .displayItems((param, output) -> {
                         AnimaliaFoodTab.displayItems(output);
@@ -39,7 +39,7 @@ public class ModCreativeModeTabs {
                     })
                     .build());
     public static final RegistryObject<CreativeModeTab> ANIMALIA_PLANTS = CREATIVE_MODE_TABS.register("animalia_plants",
-            () -> CreativeModeTab.builder().icon(() -> new ItemStack(ModBlocks.ALGAE_MAT.get()))
+            () -> CreativeModeTab.builder().icon(() -> new ItemStack(ModBlocks.SAGITTARIA.get()))
                     .title(Component.translatable("creativetab.animalia_plants"))
                     .displayItems((param, output) -> {
                         AnimaliaPlantsTab.displayItems(output);

@@ -11,17 +11,6 @@ import net.minecraft.world.phys.Vec3;
 import java.util.EnumSet;
 import java.util.function.Predicate;
 
-/**
- * Startle goal for any aquatic mob extending AnimaliaBreedableWater.
- * Triggers when a matching threat enters within triggerDistance, causing the
- * mob to flee at high speed. Defaults to survival/adventure players; pass a
- * predicate to startle from predators instead. Register multiple times for
- * multiple threat types.
- * Usage:
- *   this.goalSelector.addGoal(2, new WaterStartleGoal(this, 5.0F, 1.8D));
- *   this.goalSelector.addGoal(2, new WaterStartleGoal(this, 5.0F, 1.8D, 50));
- *   this.goalSelector.addGoal(2, new WaterStartleGoal(this, 8.0F, 2.0D, 50, e -> e instanceof RoosterfishEntity));
- */
 public class WaterStartleGoal extends Goal {
     private final AnimaliaBreedableWater mob;
     private final float triggerDistance;

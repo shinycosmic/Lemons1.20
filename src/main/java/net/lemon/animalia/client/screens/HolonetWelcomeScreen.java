@@ -12,21 +12,15 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
+import static net.lemon.animalia.util.AnimaliaConstants.*;
+
 @OnlyIn(Dist.CLIENT)
 public class HolonetWelcomeScreen extends Screen {
-
-    private static final ResourceLocation BACKGROUND = new ResourceLocation(Animalia.MODID, "textures/gui/holonet_transparent.png");
-    private static final ResourceLocation BORDER = new ResourceLocation(Animalia.MODID, "textures/gui/holonet.png");
-
-    private static final int BG_WIDTH = 390;
-    private static final int BG_HEIGHT = 245;
     private static final int BAR_WIDTH = 140;
     private static final int BAR_HEIGHT = 14;
     private static final int BAR_BG_COLOR = 0x44000000;
     private static final int BAR_FILL_COLOR = 0xFF00FFCC;
     private static final int BUTTON_HOVER_COLOR = 0x44FFFFFF;
-
-    /** Time in ticks for the loading bar to fill (7 seconds = 140 ticks). */
     private static final int LOAD_TICKS = 60;
 
     private int bgX;
@@ -58,16 +52,13 @@ public class HolonetWelcomeScreen extends Screen {
 
     @Override
     public void render(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
-        // Background
         graphics.blit(BACKGROUND, bgX, bgY, 0, 0, BG_WIDTH, BG_HEIGHT, BG_WIDTH, (int) (BG_HEIGHT * 1.6));
         graphics.blit(BORDER, bgX, bgY, 0, 0, BG_WIDTH, BG_HEIGHT, BG_WIDTH, (int) (BG_HEIGHT * 1.6));
 
-        // Title
         graphics.drawCenteredString(this.font,
                 Component.translatable("gui.animalia.holonet.welcome.title"),
                 bgX + BG_WIDTH / 2, bgY + 40, 0xFFFFFF);
 
-        // Instructional text lines
         int textX = bgX + BG_WIDTH / 2;
         int textY = bgY + 55;
         int lineSpacing = 14;
@@ -90,23 +81,15 @@ public class HolonetWelcomeScreen extends Screen {
         int barY = bgY + BG_HEIGHT - 60;
 
         if (!loadComplete) {
-            // Draw loading bar background
             graphics.fill(barX, barY, barX + BAR_WIDTH, barY + BAR_HEIGHT, BAR_BG_COLOR);
-
-            // Draw fill
             float progress = (float) ticksOpen / LOAD_TICKS;
             int fillWidth = (int) (progress * BAR_WIDTH);
             graphics.fill(barX, barY, barX + fillWidth, barY + BAR_HEIGHT, BAR_FILL_COLOR);
-
-            // "Setting Up" text above the bar
             graphics.drawCenteredString(this.font,
                     Component.translatable("gui.animalia.holonet.welcome.setting_up"),
                     bgX + BG_WIDTH / 2, barY - 14, 0xFFFFFF);
         } else {
-            // Draw "Start" button
             graphics.fill(barX, barY, barX + BAR_WIDTH, barY + BAR_HEIGHT, BAR_FILL_COLOR);
-
-            // Hover highlight
             if (isOverButton(mouseX, mouseY, barX, barY)) {
                 graphics.fill(barX, barY, barX + BAR_WIDTH, barY + BAR_HEIGHT, BUTTON_HOVER_COLOR);
             }
@@ -131,13 +114,9 @@ public class HolonetWelcomeScreen extends Screen {
                 return true;
             }
         }
-        // During loading, only Esc closes - block all clicks
         return true;
     }
 
-    /**
-     * Esc closes the Holonet entirely (even during loading).
-     */
     @Override
     public void onClose() {
         Minecraft.getInstance().setScreen(null);

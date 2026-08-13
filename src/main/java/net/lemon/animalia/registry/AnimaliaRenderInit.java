@@ -1,15 +1,12 @@
 package net.lemon.animalia.registry;
 
-import net.lemon.animalia.entity.custom.PangasianodonEntity;
-import net.lemon.animalia.entity.custom.PogonophryneEntity;
-import net.lemon.animalia.entity.custom.ToxotesEntity;
 import net.lemon.animalia.entity.render.*;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 
 public class AnimaliaRenderInit {
     public static void init() {
         //put render initializers here
-        EntityRenderers.register(ModEntities.CHILEANSEABASS.get(), ChileanSeaBassRenderer::new);
+        EntityRenderers.register(ModEntities.DISSOSTICHUS_ELEGINOIDES.get(), ChileanSeaBassRenderer::new);
         EntityRenderers.register(ModEntities.ELEGINOPS_MACLOVINUS.get(), EleginopsMaclovinusRenderer::new);
         EntityRenderers.register(ModEntities.PSEUDAPHRITIS_URVILLII.get(), PseudaphritisUrvilliiRenderer::new);
         EntityRenderers.register(ModEntities.BETTA_SPLENDENS.get(), BettaSplendensRenderer::new);
@@ -46,7 +43,6 @@ public class AnimaliaRenderInit {
 
 
 
-        ///  OTHER RENDERS
         EntityRenderers.register(ModEntities.WATER_SPIT.get(), WaterSpitRenderer::new);
 
     }

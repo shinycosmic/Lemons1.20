@@ -9,10 +9,6 @@ import net.minecraftforge.registries.RegistryObject;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * The natural spawn table. One line per species (or more, for per-region weights).
- * Consumed by datagen only - the game ships the generated biome modifier JSONs.
- */
 public class ModSpawns {
     public static final List<SpawnEntry> ENTRIES = new ArrayList<>();
 
@@ -25,7 +21,7 @@ public class ModSpawns {
      * The Y level and time based spawns are defined in the entity classes themselves by ActivityTime and SpawnBand
      */
     static {
-        add(ModEntities.CHILEANSEABASS, 5, 1, 2,
+        add(ModEntities.DISSOSTICHUS_ELEGINOIDES, 5, 1, 2,
                 BiomeSelector.in(ModTags.Biomes.POLAR_OCEAN));
         add(ModEntities.ELEGINOPS_MACLOVINUS, 8, 1, 3,
                 BiomeSelector.in(Biomes.FROZEN_RIVER, Biomes.SNOWY_BEACH));

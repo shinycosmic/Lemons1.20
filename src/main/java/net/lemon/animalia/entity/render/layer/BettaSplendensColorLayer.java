@@ -24,7 +24,6 @@ public class BettaSplendensColorLayer extends GeoRenderLayer<BettaEntity> {
     @Override
     public void render(PoseStack poseStack, BettaEntity animatable, BakedGeoModel bakedModel, RenderType renderType,
                        MultiBufferSource bufferSource, VertexConsumer buffer, float partialTick, int packedLight, int packedOverlay) {
-        //Entity will auto-assign to true if trait combination found in dict
         if(animatable.isSpecialVariant()) {
             String fullPath = "textures/entity/betta/betta_"+animatable.getTraitsClient().specialTexture;
             renderMask(fullPath, bakedModel, animatable, bufferSource, partialTick, packedLight, ColorUtil.WHITE, packedOverlay, poseStack);

@@ -27,7 +27,6 @@ import java.util.stream.Stream;
 
 public class ModCommands {
 
-    /** Suggests only entity IDs that are registered in HolonetEntities. */
     private static final SuggestionProvider<CommandSourceStack> HOLONET_ENTITY_SUGGESTIONS = (context, builder) -> {
         Stream<ResourceLocation> ids = getRegisteredHolonetIds();
         return SharedSuggestionProvider.suggestResource(ids, builder);
@@ -107,7 +106,6 @@ public class ModCommands {
         return 1;
     }
 
-    /** Get all ResourceLocations of entities registered in HolonetEntities. */
     private static Stream<ResourceLocation> getRegisteredHolonetIds() {
         List<EntityType<?>> all = new java.util.ArrayList<>();
         for (Scannable.AppName app : Scannable.AppName.values()) {
@@ -118,7 +116,6 @@ public class ModCommands {
                 .filter(java.util.Objects::nonNull);
     }
 
-    /** Check if a ResourceLocation is a valid Holonet-registered entity. */
     private static boolean isRegisteredHolonetEntity(ResourceLocation id) {
         return getRegisteredHolonetIds().anyMatch(registered -> registered.equals(id));
     }

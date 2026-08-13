@@ -31,14 +31,16 @@ public class ModConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> SAGITTARIA = createKey("sagittaria");
 
 
-
-
     //Define worldgen configurations here
     public static void bootstrap(BootstapContext<ConfiguredFeature<?, ?>> context) {
         registerMultiface(context, ALGAE_MAT, (MultifaceBlock) ModBlocks.ALGAE_MAT.get(), 4, 0.6F, FRESHWATER_BEDS);
         registerFlowerPatch(context, KAEMPFERIA_PULCHRA, ModBlocks.KAEMPFERIA_PULCHRA.get(), 64);
         registerSemiaquaticPatch(context, SAGITTARIA, ModBlocks.SAGITTARIA.get(), 64);
     }
+
+
+
+
 
     private static void registerSemiaquaticPatch(BootstapContext<ConfiguredFeature<?, ?>> context,
                                               ResourceKey<ConfiguredFeature<?, ?>> key, Block block, int tries) {

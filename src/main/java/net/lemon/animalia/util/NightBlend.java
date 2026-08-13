@@ -12,7 +12,6 @@ public final class NightBlend {
     private NightBlend() {
     }
 
-    /** Night-texture blend for this entity: 0 = day, 1 = night, between = fading. */
     public static float blend(Entity entity) {
         long offset = (entity.getId() * 1664525L & 0x7FFFFFFFL) % STAGGER_TICKS;
         long time = (entity.level().getDayTime() + offset) % 24000L;

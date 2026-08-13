@@ -27,10 +27,6 @@ import net.minecraftforge.registries.ForgeRegistries;
 @Mod.EventBusSubscriber(modid = Animalia.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ModEventBusEvents {
 
-    /***
-     * register Attributes here. You set them in the entity and here is where you build them.
-     * @param event
-     */
     @SubscribeEvent
     public static void registerAttributes(EntityAttributeCreationEvent event) {
         ModEntities.ATTRIBUTE_SUPPLIERS.forEach((type, attributes) -> event.put(type.get(), attributes.get()));

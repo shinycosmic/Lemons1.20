@@ -27,8 +27,8 @@ public class ArcherfishShootGoal extends Goal {
 
     private static final int SURFACE_TIMEOUT = 60;
     private static final int SCAN_TIMEOUT = 40;
-    private static final int AIM_DURATION = 20;
-    private static final int SHOOT_DELAY = 5;
+    private static final int AIM_TICKS = 20;
+    private static final int SHOOT_OFFSET = 5;
     private static final int SCAN_RANGE = 3;
 
     private enum State {
@@ -90,7 +90,6 @@ public class ArcherfishShootGoal extends Goal {
                 break;
             case SHOOTING:
                 tickShooting();
-                System.out.println("[DEBUG] JUST SHOT WATER");
                 break;
         }
     }
@@ -101,7 +100,6 @@ public class ArcherfishShootGoal extends Goal {
             return;
         }
 
-        // Check if already near the surface
         BlockPos above = this.mob.blockPosition().above();
         if (!this.mob.level().getFluidState(above).is(FluidTags.WATER)) {
             this.state = State.SCANNING;
@@ -136,7 +134,7 @@ public class ArcherfishShootGoal extends Goal {
         Vec3 targetCenter = Vec3.atCenterOf(this.targetBlock);
         this.mob.getLookControl().setLookAt(targetCenter.x, targetCenter.y, targetCenter.z);
 
-        if (this.stateTicks >= AIM_DURATION) {
+        if (this.stateTicks >= AIM_TICKS) {
             this.state = State.SHOOTING;
             this.stateTicks = 0;
         }
@@ -145,7 +143,7 @@ public class ArcherfishShootGoal extends Goal {
     private void tickShooting() {
         this.mob.getNavigation().stop();
 
-        if (this.stateTicks >= SHOOT_DELAY) {
+        if (this.stateTicks >= SHOOT_OFFSET) {
             shoot();
             this.mob.setShooting(false);
             this.stop();
@@ -168,10 +166,6 @@ public class ArcherfishShootGoal extends Goal {
         this.mob.playSound(net.minecraft.sounds.SoundEvents.FISHING_BOBBER_SPLASH, 0.5F, 1.2F + this.mob.getRandom().nextFloat() * 0.3F);
     }
 
-    /***
-     * Finds a random valid foliage target block within range that is above the water surface.
-     * @return A valid target BlockPos, or null if none found
-     */
     private BlockPos findTarget() {
         Level level = this.mob.level();
         BlockPos fishPos = this.mob.blockPosition();
@@ -198,10 +192,6 @@ public class ArcherfishShootGoal extends Goal {
         return candidates.get(this.mob.getRandom().nextInt(candidates.size()));
     }
 
-    /***
-     * Finds the Y level of the water surface above the fish.
-     * @return The Y coordinate of the first non-water block above the fish
-     */
     private int findSurfaceY() {
         BlockPos pos = this.mob.blockPosition();
         Level level = this.mob.level();

@@ -55,7 +55,6 @@ public class WaterSpitProjectile extends Projectile {
         Vec3 velocity = this.getDeltaMovement();
         this.setPos(this.getX() + velocity.x, this.getY() + velocity.y, this.getZ() + velocity.z);
 
-        // Gravity only applies in air
         if (!this.isInWater()) {
             if (!this.isNoGravity()) {
                 this.setDeltaMovement(velocity.x, velocity.y - 0.06, velocity.z);

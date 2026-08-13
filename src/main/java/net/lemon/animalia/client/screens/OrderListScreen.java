@@ -19,23 +19,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import static net.lemon.animalia.util.AnimaliaConstants.*;
+
 @OnlyIn(Dist.CLIENT)
 public class OrderListScreen extends Screen {
 
-    private static final ResourceLocation FISH_BACKGROUND =
-            new ResourceLocation(Animalia.MODID, "textures/gui/holonet_fish_transparent.png");
-    private static final ResourceLocation FIELD_BACKGROUND =
-            new ResourceLocation(Animalia.MODID, "textures/gui/holonet_field_transparent.png");
-    private static final ResourceLocation BORDER =
-            new ResourceLocation(Animalia.MODID, "textures/gui/holonet.png");
-    public static final ResourceLocation BACK_BUTTON_TEXTURE =
-            new ResourceLocation(Animalia.MODID, "textures/gui/back_button.png");
-
-    private static final int BG_WIDTH = 390;
-    private static final int BG_HEIGHT = 245;
-    private static final int BACK_BUTTON_SIZE = 16;
-    private static final int BACK_BUTTON_MARGIN_LEFT = 38;
-    private static final int BACK_BUTTON_MARGIN_TOP = 35;
     private static final int PANEL_LEFT = 40;
     private static final int PANEL_TOP = 80;
     private static final int PANEL_WIDTH = 300;
@@ -86,7 +74,7 @@ public class OrderListScreen extends Screen {
 
     @Override
     public void render(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
-        CompendiumHomeScreen.renderHelper(graphics, app, FISH_BACKGROUND, FIELD_BACKGROUND, bgX, bgY, BG_WIDTH, BG_HEIGHT, BORDER);
+        CompendiumHomeScreen.renderHelper(graphics, app, FISH_BG, FIELD_BG, bgX, bgY, BG_WIDTH, BG_HEIGHT, BORDER);
         int color = app == Scannable.AppName.FISH ? 0x00FFCC : 0x65e900;
         graphics.drawCenteredString(this.font, Component.translatable("gui.animalia.holonet.order_list"), bgX + BG_WIDTH / 2, bgY + 40, color);
 
@@ -100,7 +88,6 @@ public class OrderListScreen extends Screen {
         scrollOffset = Math.max(0, Math.min(scrollOffset, maxScroll));
         graphics.enableScissor(panelX, panelY, panelRight - SCROLLBAR_WIDTH - 4, panelBottom);
 
-        // Render each row
         for (int i = 0; i < orders.size(); i++) {
             int rowY = panelY + i * (ROW_HEIGHT + ROW_PADDING) - (int) scrollOffset;
             if (rowY + ROW_HEIGHT < panelY || rowY > panelBottom) continue;
@@ -130,7 +117,6 @@ public class OrderListScreen extends Screen {
 
         graphics.disableScissor();
 
-        // Render scrollbar (if content overflows)
         if (totalContentHeight > PANEL_HEIGHT) {
             int scrollbarX = panelRight - SCROLLBAR_WIDTH;
             graphics.fill(scrollbarX, panelY, scrollbarX + SCROLLBAR_WIDTH, panelBottom, SCROLLBAR_TRACK_COLOR);
@@ -142,7 +128,7 @@ public class OrderListScreen extends Screen {
             graphics.fill(scrollbarX, thumbY, scrollbarX + SCROLLBAR_WIDTH, thumbY + thumbHeight, thumbColor);
         }
 
-        graphics.blit(BACK_BUTTON_TEXTURE, backBtnX, backBtnY, 0, 0,
+        graphics.blit(BACK_BUTTON, backBtnX, backBtnY, 0, 0,
                 BACK_BUTTON_SIZE, BACK_BUTTON_SIZE, BACK_BUTTON_SIZE, BACK_BUTTON_SIZE);
         if (isOverBackButton(mouseX, mouseY)) {
             graphics.fill(backBtnX - 1, backBtnY - 1, backBtnX + BACK_BUTTON_SIZE + 1,
@@ -176,7 +162,6 @@ public class OrderListScreen extends Screen {
                 return true;
             }
 
-            // Check order click
             int contentWidth = PANEL_WIDTH - SCROLLBAR_WIDTH - 4;
             for (int i = 0; i < orders.size(); i++) {
                 int rowY = panelY + i * (ROW_HEIGHT + ROW_PADDING) - (int) scrollOffset;

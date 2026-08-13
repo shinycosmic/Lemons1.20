@@ -18,17 +18,6 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
         super(output, lookupProvider, Animalia.MODID, existingFileHelper);
     }
 
-    /***
-     * Add tags to specific custom tags in this format (Use BlockTags instead of ModTags if it is a vanilla tag)
-     * ex: this.tag(ModTags.Blocks.TAG_NAME)
-     *          .add(ModBlocks.ITEM_NAME.get()).addTag(Tags.Blocks.NAME_OF_VANILLA_TAG) <- this is to add other ores in the vanilla tag to this custom tag
-     *
-     *          Can also use
-     *          .add(ModBlocks.ITEM1.get(), ModBlocks.ITEM2.get()....etc) <- this should become a list we pass in
-     *
-     *          WILL EVENTUALLY REFRACTOR THIS SO THAT WE JUST UPDATE A LIST FROM SOMEWHERE ELSE
-     * @param pProvider
-     */
     @Override
     protected void addTags(HolderLookup.Provider pProvider) {
         tag(ModTags.Blocks.FOLIAGE).add(Blocks.ACACIA_LEAVES);

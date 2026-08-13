@@ -8,7 +8,6 @@ import net.lemon.animalia.entity.bases.FishBase;
 import net.lemon.animalia.registry.ModEntities;
 import net.lemon.animalia.registry.ModItems;
 import net.lemon.animalia.util.AnimaliaFunctionUtil;
-import net.lemon.animalia.util.ChainBuffer;
 import net.lemon.animalia.util.HolonetEntities;
 import net.lemon.animalia.util.Scannable;
 import net.minecraft.nbt.CompoundTag;
@@ -22,8 +21,6 @@ import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.SpawnGroupData;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.ai.control.SmoothSwimmingLookControl;
-import net.minecraft.world.entity.ai.control.SmoothSwimmingMoveControl;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -216,19 +213,16 @@ public class SynbranchusEntity extends BottomWalkerSwimmerBase implements GeoEnt
 
         int phase = this.getHidePhase();
 
-        // BURROWING
         if(phase == AnimaliaBreedableWater.PHASE_BURROWING) {
             animationState.getController().setAnimationSpeed(1.0);
             animationState.getController().setAnimation(RawAnimation.begin().then("burrowing", Animation.LoopType.HOLD_ON_LAST_FRAME));
             return PlayState.CONTINUE;
         }
-        // BURROWED
         if(phase == AnimaliaBreedableWater.PHASE_BURROWED) {
             animationState.getController().setAnimationSpeed(1.0);
             animationState.getController().setAnimation(RawAnimation.begin().then("burrowed", Animation.LoopType.LOOP));
             return PlayState.CONTINUE;
         }
-        // SURFACING
         if(phase == AnimaliaBreedableWater.PHASE_SURFACING) {
             animationState.getController().setAnimationSpeed(1.0);
             animationState.getController().setAnimation(RawAnimation.begin().then("surfacing", Animation.LoopType.HOLD_ON_LAST_FRAME));

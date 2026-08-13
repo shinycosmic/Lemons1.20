@@ -12,21 +12,11 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.util.List;
 
+import static net.lemon.animalia.util.AnimaliaConstants.*;
+
 @OnlyIn(Dist.CLIENT)
 public class TutorialListScreen extends Screen {
 
-    private static final ResourceLocation BACKGROUND =
-            new ResourceLocation(Animalia.MODID, "textures/gui/holonet_transparent.png");
-    private static final ResourceLocation BORDER =
-            new ResourceLocation(Animalia.MODID, "textures/gui/holonet.png");
-    public static final ResourceLocation BACK_BUTTON_TEXTURE =
-            new ResourceLocation(Animalia.MODID, "textures/gui/back_button.png");
-
-    private static final int BG_WIDTH = 390;
-    private static final int BG_HEIGHT = 245;
-    private static final int BACK_BUTTON_SIZE = 16;
-    private static final int BACK_BUTTON_MARGIN_LEFT = 38;
-    private static final int BACK_BUTTON_MARGIN_TOP = 35;
     private static final int PANEL_LEFT = 40;
     private static final int PANEL_TOP = 80;
     private static final int PANEL_WIDTH = 300;
@@ -105,7 +95,7 @@ public class TutorialListScreen extends Screen {
             graphics.fill(scrollbarX, thumbY, scrollbarX + SCROLLBAR_WIDTH, thumbY + thumbHeight, SCROLLBAR_COLOR);
         }
 
-        graphics.blit(BACK_BUTTON_TEXTURE, backBtnX, backBtnY, 0, 0,
+        graphics.blit(BACK_BUTTON, backBtnX, backBtnY, 0, 0,
                 BACK_BUTTON_SIZE, BACK_BUTTON_SIZE, BACK_BUTTON_SIZE, BACK_BUTTON_SIZE);
         if (isOverBackButton(mouseX, mouseY)) {
             graphics.fill(backBtnX - 1, backBtnY - 1, backBtnX + BACK_BUTTON_SIZE + 1,

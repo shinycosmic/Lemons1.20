@@ -17,7 +17,6 @@ public class SyncAllDiscoveriesPacket {
         this.hasSeenWelcome = hasSeenWelcome;
     }
 
-    /** Decoder constructor - reads from network buffer. */
     public SyncAllDiscoveriesPacket(FriendlyByteBuf buf) {
         int size = buf.readVarInt();
         this.discoveries = new HashSet<>(size);
@@ -27,7 +26,6 @@ public class SyncAllDiscoveriesPacket {
         this.hasSeenWelcome = buf.readBoolean();
     }
 
-    /** Encodes this packet into the network buffer. */
     public void encode(FriendlyByteBuf buf) {
         buf.writeVarInt(discoveries.size());
         for (String key : discoveries) {
@@ -36,7 +34,6 @@ public class SyncAllDiscoveriesPacket {
         buf.writeBoolean(hasSeenWelcome);
     }
 
-    /** Handles the packet on the client thread. */
     public void handle(Supplier<NetworkEvent.Context> ctx) {
         ctx.get().enqueueWork(() -> {
             ClientDiscoveryCache.replaceAll(discoveries);

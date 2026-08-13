@@ -34,7 +34,7 @@ public class ModBlocks {
 
 
 
-    //HELPER METHODS BELOW
+
     private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block) {
         RegistryObject<T> toReturn = BLOCKS.register(name, block);
         registerBlockItem(name, toReturn);

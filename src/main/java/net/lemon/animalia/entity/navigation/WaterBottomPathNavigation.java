@@ -17,13 +17,11 @@ public class WaterBottomPathNavigation extends PathNavigation {
         return new PathFinder(this.nodeEvaluator, pMaxVisitedNodes);
     }
 
-    //getEntityPosition
     @Override
     protected Vec3 getTempMobPos() {
         return new Vec3(this.mob.getX(), this.mob.getY(1D), this.mob.getZ());
     }
 
-    //canNavigate
     @Override
     protected boolean canUpdatePath() {
         return this.mob.onGround() || this.canFloat() && this.isInLiquid();

@@ -22,7 +22,6 @@ import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.ai.goal.AvoidEntityGoal;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -40,8 +39,8 @@ public class CrayfishEntity extends BottomWalkerSwimmerBase implements GeoEntity
     private final AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
     private static final EntityDataAccessor<Integer> THREAT_PHASE = SynchedEntityData.defineId(CrayfishEntity.class, EntityDataSerializers.INT);
     private static final int PROCAMBARUS_PIXEL = 16;
-    private static final int EXIT_ANIM_TICKS = 20;
-    private static final int ATTACK_ANIM_TICKS = 10;
+    private static final int EXIT_ANIM_LENGTH = 20;
+    private static final int ATTACK_ANIM_LENGTH = 10;
     private int attackCooldown;
 
     public CrayfishEntity(EntityType<? extends FishBase> pEntityType, Level pLevel) {
@@ -51,7 +50,7 @@ public class CrayfishEntity extends BottomWalkerSwimmerBase implements GeoEntity
     @Override
     protected void registerGoals() {
         super.registerGoals();
-        this.goalSelector.addGoal(2, new ThreatGoal(this, 5.0D, 200, EXIT_ANIM_TICKS, ThreatGoal.ThreatOutcome.FLEE));
+        this.goalSelector.addGoal(2, new ThreatGoal(this, 5.0D, 200, EXIT_ANIM_LENGTH, ThreatGoal.ThreatOutcome.FLEE));
     }
 
     @Override
@@ -125,8 +124,7 @@ public class CrayfishEntity extends BottomWalkerSwimmerBase implements GeoEntity
 
     @Override
     public int getScaleforDetailGUI() {
-        int currScale = Scannable.super.getScaleforDetailGUI();
-        return currScale;
+        return Scannable.super.getScaleforDetailGUI();
     }
 
     @Override
@@ -152,11 +150,6 @@ public class CrayfishEntity extends BottomWalkerSwimmerBase implements GeoEntity
     @Override
     public int getWalkTime() {
         return 400 + random.nextInt(500);
-    }
-
-    @Override
-    public int getSwimTime() {
-        return 100 + random.nextInt(100);
     }
 
     @Override
@@ -285,7 +278,7 @@ public class CrayfishEntity extends BottomWalkerSwimmerBase implements GeoEntity
         if (this.getBoundingBox().inflate(0.3D).intersects(threat.getBoundingBox())) {
             this.doHurtTarget(threat);
             this.triggerAnim("attack_controller", "defensiveAttack");
-            this.attackCooldown = ATTACK_ANIM_TICKS;
+            this.attackCooldown = ATTACK_ANIM_LENGTH;
         }
     }
 

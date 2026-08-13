@@ -1,12 +1,11 @@
 package net.lemon.animalia.client.screens;
 
 import com.mojang.blaze3d.platform.Lighting;
-import net.lemon.animalia.Animalia;
 import net.lemon.animalia.entity.bases.AnimaliaBreedableWater;
 import net.lemon.animalia.entity.bases.FishBase;
 import net.lemon.animalia.client.player.network.ClientDiscoveryCache;
 import net.lemon.animalia.util.HolonetEntities;
-import net.lemon.animalia.util.IsGenetic;
+import net.lemon.animalia.entity.bases.interfaces.IsGenetic;
 import net.lemon.animalia.util.Scannable;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
@@ -29,19 +28,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static net.lemon.animalia.util.AnimaliaConstants.*;
+
 @OnlyIn(Dist.CLIENT)
 public class OrderGridScreen extends Screen {
 
-    private static final ResourceLocation FISH_BACKGROUND = new ResourceLocation(Animalia.MODID, "textures/gui/holonet_fish_transparent.png");
-    private static final ResourceLocation FIELD_BACKGROUND = new ResourceLocation(Animalia.MODID, "textures/gui/holonet_field_transparent.png");
-    private static final ResourceLocation BORDER = new ResourceLocation(Animalia.MODID, "textures/gui/holonet.png");
-    private static final ResourceLocation BACK_BUTTON_TEXTURE = new ResourceLocation(Animalia.MODID, "textures/gui/back_button.png");
-    private static final int BG_WIDTH = 390;
-    private static final int BG_HEIGHT = 245;
-    private static final int BACK_BUTTON_SIZE = 16;
     private static final int BACK_BUTTON_BOTTOM_MARGIN = 38;
-    private static final int BACK_BUTTON_MARGIN_LEFT = 38;
-    private static final int BACK_BUTTON_MARGIN_TOP = 35;
     private static final int GRID_COLS = 7;
     private static final int GRID_ROWS = 3;
     private static final int CELLS_PER_PAGE = GRID_COLS * GRID_ROWS; // 21
@@ -95,7 +87,7 @@ public class OrderGridScreen extends Screen {
 
     @Override
     public void render(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
-        CompendiumHomeScreen.renderHelper(graphics, app, FISH_BACKGROUND, FIELD_BACKGROUND, bgX, bgY, BG_WIDTH, BG_HEIGHT, BORDER);
+        CompendiumHomeScreen.renderHelper(graphics, app, FISH_BG, FIELD_BG, bgX, bgY, BG_WIDTH, BG_HEIGHT, BORDER);
         int color = app == Scannable.AppName.FISH ? 0x00FFCC : 0x65e900;
         String title = order != null ? order : "All Species";
         graphics.drawCenteredString(this.font, title, bgX + BG_WIDTH / 2, bgY + 35, color);
@@ -122,7 +114,6 @@ public class OrderGridScreen extends Screen {
                 if (isMouseOverCell(mouseX, mouseY, cellX, cellY)) {
                     graphics.fill(cellX, cellY, cellX + CELL_SIZE, cellY + CELL_SIZE, HOVER_HIGHLIGHT);
 
-                    // Tooltip: common name
                     LivingEntity dummy = cachedDummies.get(entityType);
                     if(dummy instanceof AnimaliaBreedableWater water) {
                         hoveredTooltip = List.of(entityType.getDescription(), Component.literal(water.getScientificName()).withStyle(ChatFormatting.ITALIC, ChatFormatting.GRAY));
@@ -183,7 +174,7 @@ public class OrderGridScreen extends Screen {
             graphics.drawCenteredString(this.font, pageText, bgX + BG_WIDTH / 2, arrowY, PAGE_TEXT_COLOR);
         }
 
-        graphics.blit(BACK_BUTTON_TEXTURE, backBtnX, backBtnY, 0, 0, BACK_BUTTON_SIZE, BACK_BUTTON_SIZE, BACK_BUTTON_SIZE, BACK_BUTTON_SIZE);
+        graphics.blit(BACK_BUTTON, backBtnX, backBtnY, 0, 0, BACK_BUTTON_SIZE, BACK_BUTTON_SIZE, BACK_BUTTON_SIZE, BACK_BUTTON_SIZE);
         if (isOverBackButton(mouseX, mouseY)) {
             graphics.fill(backBtnX - 1, backBtnY - 1, backBtnX + BACK_BUTTON_SIZE + 1, backBtnY + BACK_BUTTON_SIZE + 1, HOVER_HIGHLIGHT);
         }
@@ -199,7 +190,6 @@ public class OrderGridScreen extends Screen {
         LivingEntity dummy = cachedDummies.get(entityType);
         if (dummy == null) return;
 
-        //fully freeze entity because we cache them
         if(dummy instanceof GeoEntity geo) {
             geo.getAnimatableInstanceCache().getManagerForId(dummy.getId())
                     .getAnimationControllers().values().forEach(AnimationController::forceAnimationReset);

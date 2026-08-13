@@ -22,7 +22,6 @@ public class ModBlockLootTables extends BlockLootSubProvider {
      *
      *  Ore blocks use something different since they already have a loot table.
      *  CreateCopperLikeOreDrops is a placeholder, but basically look at vanilla and find one you want to reuse or edit.
-     *  Chain these to add more.
      *  this.add(ModBlocks.ORE.get(), block -> createCopperLikeOreDrops(ModBlocks.ORE.get(), ModItems.WHAT_DOES_THIS_ORE_DROP.get()));
      */
     @Override

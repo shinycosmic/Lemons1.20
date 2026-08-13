@@ -19,8 +19,6 @@ public class ThreatGoal extends Goal {
         ATTACK
     }
 
-    private static final int DEFAULT_COOLDOWN = 200;
-
     private final PathfinderMob mob;
     private final ICanThreat threatener;
     private final double threatRange;
@@ -123,7 +121,7 @@ public class ThreatGoal extends Goal {
     public void stop() {
         this.threatener.setThreatPhase(ICanThreat.THREAT_PHASE_NONE);
         this.threatTarget = null;
-        this.cooldown = DEFAULT_COOLDOWN;
+        this.cooldown = 200;
     }
 
     @Override

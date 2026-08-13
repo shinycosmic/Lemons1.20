@@ -3,9 +3,7 @@ package net.lemon.animalia.entity.bases;
 import net.lemon.animalia.entity.ai.SchoolBoidGoal;
 import net.lemon.animalia.entity.ai.utils.SchoolDepthBias;
 import net.lemon.animalia.entity.ai.utils.SchoolSignal;
-import net.lemon.animalia.entity.bases.interfaces.IGrazer;
 import net.lemon.animalia.registry.ModItems;
-import net.lemon.animalia.registry.spawning.SpawnBand;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -14,7 +12,6 @@ import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.FluidTags;
-import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.*;
@@ -28,7 +25,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
 import net.minecraft.world.phys.Vec3;
@@ -180,7 +176,7 @@ public abstract class FishBase extends AnimaliaBreedableWater implements Bucketa
         }
         this.pendingSignal = signal;
         this.signalData = data;
-        this.signalDelay = signal.getBaseDelay() + this.random.nextInt(signal.getDelayJitter());
+        this.signalDelay = signal.getBaseDelay() + this.random.nextInt(signal.getDelay());
     }
 
     protected void tickSchoolSignals() {

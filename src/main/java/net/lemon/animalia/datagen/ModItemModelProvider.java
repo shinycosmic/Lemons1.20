@@ -17,13 +17,6 @@ public class ModItemModelProvider extends ItemModelProvider {
         super(output, Animalia.MODID, existingFileHelper);
     }
 
-    /***
-     * Usage Case:
-     *  simpleItem(ModItems.ITEM_NAME);
-     *
-     *  spawn Eggs:
-     *  withExistingParent(ModItems.NAME_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
-     */
     @Override
     protected void registerModels() {
         //Food generators
@@ -59,7 +52,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         blockSpriteItem(ModBlocks.SAGITTARIA);
 
         //Buckets
-        simpleItem(ModItems.CHILEANSEABASS_BUCKET);
+        simpleItem(ModItems.DISSOSTICHUS_ELEGINOIDES_BUCKET);
         simpleItem(ModItems.ELEGINOPS_MACLOVINUS_BUCKET);
         simpleItem(ModItems.PSEUDAPHRITIS_URVILLII_BUCKET);
         simpleItem(ModItems.BETTA_SPLENDENS_BUCKET);
@@ -92,7 +85,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItems.SIGANUS_VULPINUS_BUCKET);
 
         //spawn egg generators
-        withExistingParent(ModItems.CHILEANSEABASS_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
+        withExistingParent(ModItems.DISSOSTICHUS_ELEGINOIDES_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
         withExistingParent(ModItems.ELEGINOPS_MACLOVINUS_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
         withExistingParent(ModItems.PSEUDAPHRITIS_URVILLII_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
         withExistingParent(ModItems.BETTA_SPLENDENS_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));

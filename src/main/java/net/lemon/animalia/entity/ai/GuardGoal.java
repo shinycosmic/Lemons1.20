@@ -13,8 +13,6 @@ import java.util.function.Predicate;
 
 public class GuardGoal extends Goal {
 
-    private static final int DEFAULT_COOLDOWN = 100;
-
     private final PathfinderMob mob;
     private final ICanGuard guarder;
     private final double guardRange;
@@ -102,7 +100,7 @@ public class GuardGoal extends Goal {
         this.guarder.setGuardPhase(ICanGuard.GUARD_PHASE_NONE);
         this.guarder.clearGuardUrge();
         this.threatTarget = null;
-        this.cooldown = DEFAULT_COOLDOWN;
+        this.cooldown = 100;
     }
 
     @Override
@@ -144,10 +142,6 @@ public class GuardGoal extends Goal {
         }
     }
 
-    /**
-     * calm = no qualifying damage within the cooldown window,
-     * clear = no matching threat within guardRange.
-     */
     private boolean shouldExit() {
         boolean calm = !this.guarder.wantsToGuard();
         switch (this.guarder.getGuardActivation()) {
