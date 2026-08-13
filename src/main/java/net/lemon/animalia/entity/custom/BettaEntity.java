@@ -435,9 +435,6 @@ public class BettaEntity extends FishBase implements GeoEntity, IsGenetic, Scann
         return this.traits;
     }
 
-    /**
-     * For spawn egg spawns
-     */
     public void buildTraitsRandom(){
         this.entityData.set(PATTERN_PRESET, BettaTraits.PatternPreset.values()[(int)(Math.random() * BettaTraits.PatternPreset.values().length)].getId());
         this.entityData.set(BODY_PRESET, BettaTraits.BodyPreset.values()[(int)(Math.random() * BettaTraits.BodyPreset.values().length)].getId());
@@ -453,9 +450,6 @@ public class BettaEntity extends FishBase implements GeoEntity, IsGenetic, Scann
         buildTraits();
     }
 
-    /**
-     * for natural spawning
-     */
     public void buildTraitsWild(){
         ColorUtil[] allowed = {ColorUtil.RED, ColorUtil.BLUE, ColorUtil.GREEN};
         this.entityData.set(PATTERN_PRESET, BettaTraits.PatternPreset.BUTTERFLY.getId());
@@ -472,9 +466,7 @@ public class BettaEntity extends FishBase implements GeoEntity, IsGenetic, Scann
 
         buildTraits();
     }
-    /**
-     * for Testing special variants
-     */
+
     public void buildTraitsSpecial(){
         ColorUtil[] allowed = {ColorUtil.ORANGE, ColorUtil.BLACK, ColorUtil.YELLOW};
         this.entityData.set(PATTERN_PRESET, BettaTraits.PatternPreset.MARBLE.getId());
@@ -704,32 +696,32 @@ public class BettaEntity extends FishBase implements GeoEntity, IsGenetic, Scann
             candidates.add(BettaTraits.CaudalPreset.SPADE);
         }
 
-        if (has(p1Caudal, p2Caudal, BettaTraits.CaudalPreset.PLAKAT) ||
-                has(p1Caudal, p2Caudal, BettaTraits.CaudalPreset.ROSE) ||
-                has(p1Caudal, p2Caudal, BettaTraits.CaudalPreset.DOUBLE) ||
-                has(p1Caudal, p2Caudal, BettaTraits.CaudalPreset.HM)) {
+        if (hasCaudal(p1Caudal, p2Caudal, BettaTraits.CaudalPreset.PLAKAT) ||
+                hasCaudal(p1Caudal, p2Caudal, BettaTraits.CaudalPreset.ROSE) ||
+                hasCaudal(p1Caudal, p2Caudal, BettaTraits.CaudalPreset.DOUBLE) ||
+                hasCaudal(p1Caudal, p2Caudal, BettaTraits.CaudalPreset.HM)) {
             candidates.add(BettaTraits.CaudalPreset.VEIL);
         }
 
-        if (has(p1Caudal, p2Caudal, BettaTraits.CaudalPreset.HM) ||
-                has(p1Caudal, p2Caudal, BettaTraits.CaudalPreset.COMB)) {
+        if (hasCaudal(p1Caudal, p2Caudal, BettaTraits.CaudalPreset.HM) ||
+                hasCaudal(p1Caudal, p2Caudal, BettaTraits.CaudalPreset.COMB)) {
             candidates.add(BettaTraits.CaudalPreset.CROWN);
         }
 
-        if (has(p1Caudal, p2Caudal, BettaTraits.CaudalPreset.HM) ||
-                has(p1Caudal, p2Caudal, BettaTraits.CaudalPreset.CROWN)) {
+        if (hasCaudal(p1Caudal, p2Caudal, BettaTraits.CaudalPreset.HM) ||
+                hasCaudal(p1Caudal, p2Caudal, BettaTraits.CaudalPreset.CROWN)) {
             candidates.add(BettaTraits.CaudalPreset.COMB);
         }
 
-        if (has(p1Caudal, p2Caudal, BettaTraits.CaudalPreset.VEIL) ||
-                has(p1Caudal, p2Caudal, BettaTraits.CaudalPreset.CROWN) ||
-                has(p1Caudal, p2Caudal, BettaTraits.CaudalPreset.COMB) ||
-                has(p1Caudal, p2Caudal, BettaTraits.CaudalPreset.ROSE)) {
+        if (hasCaudal(p1Caudal, p2Caudal, BettaTraits.CaudalPreset.VEIL) ||
+                hasCaudal(p1Caudal, p2Caudal, BettaTraits.CaudalPreset.CROWN) ||
+                hasCaudal(p1Caudal, p2Caudal, BettaTraits.CaudalPreset.COMB) ||
+                hasCaudal(p1Caudal, p2Caudal, BettaTraits.CaudalPreset.ROSE)) {
             candidates.add(BettaTraits.CaudalPreset.HM);
         }
 
-        if (has(p1Caudal, p2Caudal, BettaTraits.CaudalPreset.HM) ||
-                has(p1Caudal, p2Caudal, BettaTraits.CaudalPreset.VEIL)) {
+        if (hasCaudal(p1Caudal, p2Caudal, BettaTraits.CaudalPreset.HM) ||
+                hasCaudal(p1Caudal, p2Caudal, BettaTraits.CaudalPreset.VEIL)) {
             candidates.add(BettaTraits.CaudalPreset.PLAKAT);
         }
 
@@ -892,19 +884,19 @@ public class BettaEntity extends FishBase implements GeoEntity, IsGenetic, Scann
         if(Math.random() < 0.15) return passedotherColor;
 
         //Yellow
-        if(isPair(p1Color, p2Color, ColorUtil.RED, ColorUtil.ORANGE)) return ColorUtil.YELLOW;
+        if(isColorPair(p1Color, p2Color, ColorUtil.RED, ColorUtil.ORANGE)) return ColorUtil.YELLOW;
 
         //Turquoise
-        if(isPair(p1Color, p2Color, ColorUtil.GREEN, ColorUtil.BLUE)) return ColorUtil.TURQUOISE;
+        if(isColorPair(p1Color, p2Color, ColorUtil.GREEN, ColorUtil.BLUE)) return ColorUtil.TURQUOISE;
 
         //Lavender
-        if(isPair(p1Color, p2Color, ColorUtil.RED, ColorUtil.BLUE)) return ColorUtil.LAVENDER;
+        if(isColorPair(p1Color, p2Color, ColorUtil.RED, ColorUtil.BLUE)) return ColorUtil.LAVENDER;
 
         //Purple
-        if(isPair(p1Color, p2Color, ColorUtil.LAVENDER, ColorUtil.BLUE)) return ColorUtil.PURPLE;
+        if(isColorPair(p1Color, p2Color, ColorUtil.LAVENDER, ColorUtil.BLUE)) return ColorUtil.PURPLE;
 
         //Pink
-        if(isPair(p1Color, p2Color, ColorUtil.RED, ColorUtil.WHITE) || isPair(p1Color, p2Color, ColorUtil.RED, ColorUtil.YELLOW)) {
+        if(isColorPair(p1Color, p2Color, ColorUtil.RED, ColorUtil.WHITE) || isColorPair(p1Color, p2Color, ColorUtil.RED, ColorUtil.YELLOW)) {
             return ColorUtil.PINK;
         }
 
@@ -1065,17 +1057,11 @@ public class BettaEntity extends FishBase implements GeoEntity, IsGenetic, Scann
         this.buildTraits();
     }
 
-    //Helper Methods
-    private boolean isPair(ColorUtil a, ColorUtil b, ColorUtil x, ColorUtil y) {
+    private boolean isColorPair(ColorUtil a, ColorUtil b, ColorUtil x, ColorUtil y) {
         return (a == x && b == y) || (a == y && b == x);
     }
 
-
-    private boolean has(BettaTraits.CaudalPreset a, BettaTraits.CaudalPreset b, BettaTraits.CaudalPreset target) {
+    private boolean hasCaudal(BettaTraits.CaudalPreset a, BettaTraits.CaudalPreset b, BettaTraits.CaudalPreset target) {
         return a == target || b == target;
-    }
-
-    private boolean both(BettaTraits.CaudalPreset a, BettaTraits.CaudalPreset b) {
-        return a == b;
     }
 }

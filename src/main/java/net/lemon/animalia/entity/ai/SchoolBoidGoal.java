@@ -28,11 +28,7 @@ public class SchoolBoidGoal extends Goal {
     private static final double COHESION = 0.05;
     private static final double ALIGNMENT = 0.4;
     private static final double SEPARATION = 0.25;
-    private static final double DEPTH = 0.1;
     private static final int SCAN_TICKS = 10;
-    private static final int SCAN_OFFSET = 5;
-    private static final int REJOIN_COOLDOWN = 600;
-    private static final int REJOIN_OFFSET = 600;
 
     private final FishBase fish;
     private final int maxNeighbors;
@@ -48,7 +44,7 @@ public class SchoolBoidGoal extends Goal {
     public SchoolBoidGoal(FishBase fish, int maxNeighbors) {
         this.fish = fish;
         this.maxNeighbors = maxNeighbors;
-        this.space = this.rollPersonalSpace();
+        this.space = this.rollSpace();
         this.scanCooldown = 1 + fish.getRandom().nextInt(SCAN_TICKS);
     }
 
@@ -61,7 +57,7 @@ public class SchoolBoidGoal extends Goal {
             return false;
         }
         if (--this.scanCooldown <= 0) {
-            this.scanCooldown = SCAN_TICKS + this.fish.getRandom().nextInt(SCAN_OFFSET);
+            this.scanCooldown = SCAN_TICKS + this.fish.getRandom().nextInt(5);
             this.scan();
         } else {
             this.neighbors.removeIf(m -> !m.isAlive());
@@ -105,7 +101,7 @@ public class SchoolBoidGoal extends Goal {
             push = this.computeCohesion().scale(COHESION)
                     .add(this.computeAlignment().scale(ALIGNMENT))
                     .add(this.computeSeparation().scale(SEPARATION))
-                    .add(this.depthBias.scale(DEPTH));
+                    .add(this.depthBias.scale(0.1));
         }
 
         if (push.length() > maxDelta) {
@@ -162,7 +158,7 @@ public class SchoolBoidGoal extends Goal {
         return push;
     }
 
-    private double rollPersonalSpace() {
+    private double rollSpace() {
         return 0.7 + this.fish.getRandom().nextDouble() * 0.6;
     }
 
@@ -196,7 +192,7 @@ public class SchoolBoidGoal extends Goal {
 
     private void scan() {
         if (this.fish.getRandom().nextInt(20) == 0) {
-            this.space = this.rollPersonalSpace();
+            this.space = this.rollSpace();
         }
 
         List<LivingEntity> nearby = this.fish.level().getEntitiesOfClass(
@@ -254,7 +250,7 @@ public class SchoolBoidGoal extends Goal {
         if (this.fish.hasSchool() && !this.fish.isSchoolLeader()
                 && this.fish.getRandom().nextFloat() < this.fish.getSchoolDefectionChance()) {
             this.fish.leaveSchool();
-            this.fish.setSchoolJoinCooldown(REJOIN_COOLDOWN + this.fish.getRandom().nextInt(REJOIN_OFFSET));
+            this.fish.setSchoolJoinCooldown(600 + this.fish.getRandom().nextInt(600));
             return;
         }
 
