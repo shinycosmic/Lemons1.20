@@ -41,6 +41,8 @@ public class GrazeSchoolingEntity extends FishBase implements GeoEntity, Scannab
     private final AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
     private static final int ZANCLUS_CORNUTUS_PIXEL = 15;
     private static final int PARACANTHURUS_HEPATUS_PIXEL = 23;
+    private static final int ZEBRASOMA_VELIFER_PIXEL = 23;
+    private static final int ZEBRASOMA_FLAVESCENS_PIXEL = 18;
 
     public GrazeSchoolingEntity(EntityType<? extends FishBase> entityType, Level level) {
         super(entityType, level);
@@ -48,6 +50,9 @@ public class GrazeSchoolingEntity extends FishBase implements GeoEntity, Scannab
 
     @Override
     public TagKey<Item> getFoodTag() {
+        if (this.getType() == ModEntities.ZEBRASOMA_FLAVESCENS.get() || this.getType() == ModEntities.ZEBRASOMA_VELIFER.get()) {
+            return ModTags.Items.MARINE_PLANT;
+        }
         return ModTags.Items.FISH_FOOD;
     }
 
@@ -55,10 +60,10 @@ public class GrazeSchoolingEntity extends FishBase implements GeoEntity, Scannab
     public Item getBreedingItem() {
         if (this.getType() == ModEntities.ZANCLUS_CORNUTUS.get()) {
             return Items.SPONGE;
-        } else if (this.getType() == ModEntities.PARACANTHURUS_HEPATUS.get()) {
-            return ModBlocks.ALGAE_MAT.get().asItem();
-        }
-        return ModItems.FISH_FOOD.get();
+        } //else if (this.getType() == ModEntities.PARACANTHURUS_HEPATUS.get()) {
+//            return ModItems.FISH_FOOD.get();
+//        }
+        return ModBlocks.ALGAE_MAT.get().asItem();
     }
 
     @Override
@@ -83,6 +88,10 @@ public class GrazeSchoolingEntity extends FishBase implements GeoEntity, Scannab
             return Component.translatable("trivia.animalia.zanclus_cornutus");
         } else if (this.getType() == ModEntities.PARACANTHURUS_HEPATUS.get()) {
             return Component.translatable("trivia.animalia.paracanthurus_hepatus");
+        } else if (this.getType() == ModEntities.ZEBRASOMA_VELIFER.get()) {
+            return Component.translatable("trivia.animalia.zebrasoma_velifer");
+        } else if (this.getType() == ModEntities.ZEBRASOMA_FLAVESCENS.get()) {
+            return Component.translatable("trivia.animalia.zebrasoma_flavescens");
         }
         return Component.translatable("debug.animalia.trivia");
     }
@@ -91,7 +100,7 @@ public class GrazeSchoolingEntity extends FishBase implements GeoEntity, Scannab
     public Component getFamily() {
         if (this.getType() == ModEntities.ZANCLUS_CORNUTUS.get()) {
             return Component.translatable("family.animalia.zanclidae");
-        } else if (this.getType() == ModEntities.PARACANTHURUS_HEPATUS.get()) {
+        } else if (this.getType() == ModEntities.PARACANTHURUS_HEPATUS.get() || this.getType() == ModEntities.ZEBRASOMA_VELIFER.get() || this.getType() == ModEntities.ZEBRASOMA_FLAVESCENS.get()) {
             return Component.translatable("family.animalia.acanthuridae");
         }
         return Component.translatable("debug.animalia.family");
@@ -111,7 +120,15 @@ public class GrazeSchoolingEntity extends FishBase implements GeoEntity, Scannab
 
     @Override
     public int getIdleDisplayCount() {
+        if(this.getType() == ModEntities.ZEBRASOMA_VELIFER.get() || this.getType() == ModEntities.ZEBRASOMA_FLAVESCENS.get()) {
+            return 1;
+        }
         return 0;
+    }
+
+    @Override
+    public int twitchChance() {
+        return 160;
     }
 
     @Override
@@ -126,7 +143,7 @@ public class GrazeSchoolingEntity extends FishBase implements GeoEntity, Scannab
 
     @Override
     public int getIdleDisplayLength(int displayId) {
-        return 70;
+        return 80;
     }
 
     @Override
@@ -135,6 +152,10 @@ public class GrazeSchoolingEntity extends FishBase implements GeoEntity, Scannab
             return new ItemStack(ModItems.PARACANTHURUS_HEPATUS_BUCKET.get());
         } else if (this.getType() == ModEntities.ZANCLUS_CORNUTUS.get()) {
             return new ItemStack(ModItems.ZANCLUS_CORNUTUS_BUCKET.get());
+        } else if (this.getType() == ModEntities.ZEBRASOMA_FLAVESCENS.get()) {
+            return new ItemStack(ModItems.ZEBRASOMA_FLAVESCENS_BUCKET.get());
+        } else if (this.getType() == ModEntities.ZEBRASOMA_VELIFER.get()) {
+            return new ItemStack(ModItems.ZEBRASOMA_VELIFER_BUCKET.get());
         }
         return new ItemStack(Items.SALMON_BUCKET);
     }
@@ -155,13 +176,15 @@ public class GrazeSchoolingEntity extends FishBase implements GeoEntity, Scannab
     public int getMaxSchoolSize() {
         if (this.getType() == ModEntities.ZANCLUS_CORNUTUS.get()) {
             return 15;
+        } else if (this.getType() == ModEntities.ZEBRASOMA_FLAVESCENS.get()) {
+            return 8;
         }
         return super.getMaxSchoolSize();
     }
 
     @Override
     public boolean isSchoolingFish() {
-        if(this.getType() == ModEntities.PARACANTHURUS_HEPATUS.get()) {
+        if(this.getType() == ModEntities.PARACANTHURUS_HEPATUS.get() || this.getType() == ModEntities.ZEBRASOMA_VELIFER.get()) {
             return false;
         }
         return true;
@@ -169,14 +192,7 @@ public class GrazeSchoolingEntity extends FishBase implements GeoEntity, Scannab
 
     @Override
     public int getScaleforGUI() {
-        if (this.getType() == ModEntities.ZANCLUS_CORNUTUS.get()) {
-            return 24;
-        } else if (this.getType() == ModEntities.PARACANTHURUS_HEPATUS.get()) {
-            return 24;
-        }
-
-        return Scannable.super.getScaleforGUI();
-
+        return 24;
     }
 
     @Override
@@ -195,6 +211,10 @@ public class GrazeSchoolingEntity extends FishBase implements GeoEntity, Scannab
             return AnimaliaFunctionUtil.getScaleForSize(ZANCLUS_CORNUTUS_PIXEL, this.genVarSize(28, 40, 33));
         } else if (this.getType() == ModEntities.PARACANTHURUS_HEPATUS.get()) {
             return AnimaliaFunctionUtil.getScaleForSize(PARACANTHURUS_HEPATUS_PIXEL, this.genVarSize(20, 40, 30));
+        } else if (this.getType() == ModEntities.ZEBRASOMA_FLAVESCENS.get()) {
+            return AnimaliaFunctionUtil.getScaleForSize(ZEBRASOMA_FLAVESCENS_PIXEL, 20);
+        } else if (this.getType() == ModEntities.ZEBRASOMA_VELIFER.get()) {
+            return AnimaliaFunctionUtil.getScaleForSize(ZEBRASOMA_VELIFER_PIXEL, this.genVarSize(30, 50, 40));
         }
         return 1;
     }
@@ -208,7 +228,7 @@ public class GrazeSchoolingEntity extends FishBase implements GeoEntity, Scannab
     public boolean isGrazableBlock(BlockState state) {
         if (this.getType() == ModEntities.ZANCLUS_CORNUTUS.get()) {
             return state.is(BlockTags.CORAL_BLOCKS) || state.is(BlockTags.CORALS) || state.is(BlockTags.WALL_CORALS);
-        } else if (this.getType() == ModEntities.PARACANTHURUS_HEPATUS.get()) {
+        } else if (this.getType() == ModEntities.PARACANTHURUS_HEPATUS.get() || this.getType() == ModEntities.ZEBRASOMA_VELIFER.get() || this.getType() == ModEntities.ZEBRASOMA_FLAVESCENS.get()) {
             return state.is(ModBlocks.ALGAE_MAT.get());
         }
         return super.isGrazableBlock(state);
@@ -217,7 +237,8 @@ public class GrazeSchoolingEntity extends FishBase implements GeoEntity, Scannab
     public static void registerHolonet() {
         HolonetEntities.register(ModEntities.ZANCLUS_CORNUTUS, AppName.FISH, "Acanthuriformes");
         HolonetEntities.register(ModEntities.PARACANTHURUS_HEPATUS, AppName.FISH, "Acanthuriformes");
-
+        HolonetEntities.register(ModEntities.ZEBRASOMA_VELIFER, AppName.FISH, "Acanthuriformes");
+        HolonetEntities.register(ModEntities.ZEBRASOMA_FLAVESCENS, AppName.FISH, "Acanthuriformes");
     }
 
     @Override

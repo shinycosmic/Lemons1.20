@@ -28,9 +28,6 @@ import net.minecraft.world.entity.PathfinderMob;
  */
 public interface IIdles {
 
-    int TWITCH_CHANCE = 200;
-    int BODY_CHANCE = 600;
-
     enum IdleType {
         TWITCH,
         MOVEMENT_POSITIVE,
@@ -86,6 +83,14 @@ public interface IIdles {
     default boolean isMovementLockedByIdle() {
         return this.getCurrentBodyIdle() >= 0
                 && this.getIdleType(this.getCurrentBodyIdle()) == IdleType.MOVEMENT_NEGATIVE;
+    }
+
+    default int twitchChance() {
+        return 200;
+    }
+
+    default int bodyChance() {
+        return 600;
     }
 
     /**
@@ -189,7 +194,7 @@ public interface IIdles {
         }
 
         if (this.getCurrentTwitchIdle() < 0 && !this.isPlayingPositiveIdle()
-                && mob.getRandom().nextInt(TWITCH_CHANCE) == 0) {
+                && mob.getRandom().nextInt(twitchChance()) == 0) {
             int display = this.pickIdleOfType(mob, IdleType.TWITCH);
             if (display >= 0) {
                 this.startIdleDisplay(display);
@@ -199,13 +204,13 @@ public interface IIdles {
         if (this.getCurrentBodyIdle() >= 0) {
             return;
         }
-        if (this.isAtRestForIdle(mob) && mob.getRandom().nextInt(BODY_CHANCE) == 0) {
+        if (this.isAtRestForIdle(mob) && mob.getRandom().nextInt(bodyChance()) == 0) {
             int display = this.pickIdleOfType(mob, IdleType.MOVEMENT_NEGATIVE);
             if (display >= 0 && this.startIdleDisplay(display)) {
                 return;
             }
         }
-        if (this.getCurrentTwitchIdle() < 0 && mob.getRandom().nextInt(BODY_CHANCE) == 0) {
+        if (this.getCurrentTwitchIdle() < 0 && mob.getRandom().nextInt(bodyChance()) == 0) {
             int display = this.pickIdleOfType(mob, IdleType.MOVEMENT_POSITIVE);
             if (display >= 0 && this.startIdleDisplay(display)) {
                 this.onSpontaneousIdleDisplay(display);

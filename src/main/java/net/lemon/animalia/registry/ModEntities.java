@@ -44,8 +44,8 @@ public class ModEntities {
     public static final RegistryObject<EntityType<RegSchoolingEntity>> CHELMON_ROSTRATUS = registerEntityType("chelmon_rostratus", RegSchoolingEntity::new, ModMobCategories.ANIMALIA_FISH, 0.4f, 0.4f, RegSchoolingEntity::setAttributes);
     public static final RegistryObject<EntityType<RegSchoolingEntity>> CHAETODON_AURIGA = registerEntityType("chaetodon_auriga", RegSchoolingEntity::new, ModMobCategories.ANIMALIA_FISH, 0.4f, 0.4f, RegSchoolingEntity::setAttributes);
     public static final RegistryObject<EntityType<RegSchoolingEntity>> SIGANUS_VULPINUS = registerEntityType("siganus_vulpinus", RegSchoolingEntity::new, ModMobCategories.ANIMALIA_FISH, 0.4f, 0.4f, RegSchoolingEntity::setAttributes);
-//    public static final RegistryObject<EntityType<GrazeSchoolingEntity>> ZEBRASOMA_VELIFER = registerEntityType("zebrasoma_velifer", GrazeSchoolingEntity::new, ModMobCategories.ANIMALIA_FISH, 0.4f, 0.6f, GrazeSchoolingEntity::setAttributes);
-//    public static final RegistryObject<EntityType<GrazeSchoolingEntity>> ZEBRASOMA_FLAVESCENS = registerEntityType("zebrasoma_flavescens", GrazeSchoolingEntity::new, ModMobCategories.ANIMALIA_FISH, 0.4f, 0.4f, GrazeSchoolingEntity::setAttributes);
+    public static final RegistryObject<EntityType<GrazeSchoolingEntity>> ZEBRASOMA_VELIFER = registerEntityType("zebrasoma_velifer", GrazeSchoolingEntity::new, ModMobCategories.ANIMALIA_FISH, 0.4f, 0.6f, GrazeSchoolingEntity::setAttributes);
+    public static final RegistryObject<EntityType<GrazeSchoolingEntity>> ZEBRASOMA_FLAVESCENS = registerEntityType("zebrasoma_flavescens", GrazeSchoolingEntity::new, ModMobCategories.ANIMALIA_FISH, 0.4f, 0.4f, GrazeSchoolingEntity::setAttributes);
 
     public static final RegistryObject<EntityType<PangasianodonEntity>> PANGASIANODON_GIGAS = registerEntityType("pangasianodon_gigas", PangasianodonEntity::new, ModMobCategories.ANIMALIA_FISH, 0.9f, 0.9f, PangasianodonEntity::setAttributes);
 

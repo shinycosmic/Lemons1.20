@@ -69,7 +69,10 @@ public class ToothfishEntity extends FishBase implements GeoEntity, Scannable {
 
     @Override
     public SpawnBand spawnBand() {
-        return SpawnBand.DEEP;
+        if(this.getType() == ModEntities.DISSOSTICHUS_ELEGINOIDES.get()) {
+            return SpawnBand.DEEP;
+        }
+        return SpawnBand.SHALLOW;
     }
 
     @Override

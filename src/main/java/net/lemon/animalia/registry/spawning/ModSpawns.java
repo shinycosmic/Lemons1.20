@@ -63,7 +63,7 @@ public class ModSpawns {
                 BiomeSelector.in(Biomes.WARM_OCEAN));
         add(ModEntities.POMACANTHUS_IMPERATOR, 3, 1, 2,
                 BiomeSelector.in(Biomes.WARM_OCEAN));
-        add(ModEntities.ZANCLUS_CORNUTUS, 3, 2, 6,
+        add(ModEntities.ZANCLUS_CORNUTUS, 4, 2, 6,
                 BiomeSelector.in(Biomes.WARM_OCEAN));
         add(ModEntities.PARACANTHURUS_HEPATUS, 3, 1, 2,
                 BiomeSelector.in(Biomes.WARM_OCEAN));
@@ -72,6 +72,10 @@ public class ModSpawns {
         add(ModEntities.CHAETODON_AURIGA, 3, 1, 3,
                 BiomeSelector.in(Biomes.WARM_OCEAN));
         add(ModEntities.SIGANUS_VULPINUS, 3, 1, 4,
+                BiomeSelector.in(Biomes.WARM_OCEAN));
+        add(ModEntities.ZEBRASOMA_FLAVESCENS, 3, 2, 4,
+                BiomeSelector.in(Biomes.WARM_OCEAN));
+        add(ModEntities.ZEBRASOMA_VELIFER, 2, 1, 3,
                 BiomeSelector.in(Biomes.WARM_OCEAN));
         add(ModEntities.PANGASIANODON_GIGAS, 2, 1, 1,
                 BiomeSelector.in(Biomes.MANGROVE_SWAMP));
