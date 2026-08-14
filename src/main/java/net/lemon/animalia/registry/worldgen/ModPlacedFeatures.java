@@ -30,8 +30,8 @@ public class ModPlacedFeatures {
     //define worldgen here for blocks
     public static void bootstrap(BootstapContext<PlacedFeature> context) {
         registerBedCluster(context, ALGAE_MAT, ModConfiguredFeatures.ALGAE_MAT, 3, 3, 5);
-        registerFlowerPatch(context, KAEMPFERIA_PULCHRA, ModConfiguredFeatures.KAEMPFERIA_PULCHRA, 32);
-        registerFlowerPatch(context, SAGITTARIA, ModConfiguredFeatures.SAGITTARIA, 32);
+        registerFlowerPatch(context, KAEMPFERIA_PULCHRA, ModConfiguredFeatures.KAEMPFERIA_PULCHRA, 8);
+        registerFlowerPatch(context, SAGITTARIA, ModConfiguredFeatures.SAGITTARIA, 16);
     }
 
 
