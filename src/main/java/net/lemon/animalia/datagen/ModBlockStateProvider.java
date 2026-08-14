@@ -8,6 +8,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.DoublePlantBlock;
 import net.minecraft.world.level.block.MultifaceBlock;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraftforge.client.model.generators.BlockStateProvider;
 import net.minecraftforge.client.model.generators.ConfiguredModel;
@@ -16,6 +17,10 @@ import net.minecraftforge.client.model.generators.MultiPartBlockStateBuilder;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
+
+import java.util.function.Function;
+
+import static net.minecraft.core.Direction.*;
 
 public class ModBlockStateProvider extends BlockStateProvider {
     public ModBlockStateProvider(PackOutput output, ExistingFileHelper existingFileHelper) {
@@ -64,6 +69,25 @@ public class ModBlockStateProvider extends BlockStateProvider {
                 .renderType("cutout").texture("particle", "#1");
     }
 
+    private ModelFile crossWrapper(String name) {
+        return models().cross(name, modLoc("block/" + name)).renderType("cutout");
+    }
+
+    private void anyAttachBlock(RegistryObject<Block> blockObject, Function<String, ModelFile> modelFactory) {
+        Block block = blockObject.get();
+        String name = ForgeRegistries.BLOCKS.getKey(block).getPath();
+        ModelFile model = modelFactory.apply(name);
+        getVariantBuilder(block).forAllStatesExcept(state -> switch (state.getValue(BlockStateProperties.FACING)) {
+            case UP -> ConfiguredModel.allYRotations(model, 0, false);
+            case DOWN -> ConfiguredModel.allYRotations(model, 180, false);
+            case NORTH -> ConfiguredModel.builder().modelFile(model).rotationX(90).build();
+            case SOUTH -> ConfiguredModel.builder().modelFile(model).rotationX(90).rotationY(180).build();
+            case EAST -> ConfiguredModel.builder().modelFile(model).rotationX(90).rotationY(90).build();
+            case WEST -> ConfiguredModel.builder().modelFile(model).rotationX(90).rotationY(270).build();
+        }, BlockStateProperties.WATERLOGGED);
+        itemModels().getBuilder(name).parent(model);
+    }
+
     private void glowLichenBaseBlock(Block block, String name, ResourceLocation texture) {
         ModelFile model = models().withExistingParent(name, mcLoc("block/glow_lichen"))
                 .texture("glow_lichen", texture)
@@ -73,17 +97,17 @@ public class ModBlockStateProvider extends BlockStateProvider {
         MultiPartBlockStateBuilder builder = getMultipartBuilder(block);
 
         builder.part().modelFile(model).rotationX(270).uvLock(true).addModel()
-                .condition(MultifaceBlock.getFaceProperty(Direction.UP), true).end();
+                .condition(MultifaceBlock.getFaceProperty(UP), true).end();
         builder.part().modelFile(model).rotationX(90).uvLock(true).addModel()
-                .condition(MultifaceBlock.getFaceProperty(Direction.DOWN), true).end();
+                .condition(MultifaceBlock.getFaceProperty(DOWN), true).end();
         builder.part().modelFile(model).addModel()
-                .condition(MultifaceBlock.getFaceProperty(Direction.NORTH), true).end();
+                .condition(MultifaceBlock.getFaceProperty(NORTH), true).end();
         builder.part().modelFile(model).rotationY(180).uvLock(true).addModel()
-                .condition(MultifaceBlock.getFaceProperty(Direction.SOUTH), true).end();
+                .condition(MultifaceBlock.getFaceProperty(SOUTH), true).end();
         builder.part().modelFile(model).rotationY(270).uvLock(true).addModel()
-                .condition(MultifaceBlock.getFaceProperty(Direction.WEST), true).end();
+                .condition(MultifaceBlock.getFaceProperty(WEST), true).end();
         builder.part().modelFile(model).rotationY(90).uvLock(true).addModel()
-                .condition(MultifaceBlock.getFaceProperty(Direction.EAST), true).end();
+                .condition(MultifaceBlock.getFaceProperty(EAST), true).end();
 
         itemModels().withExistingParent(name, new ResourceLocation("item/generated")).texture("layer0", texture);
     }

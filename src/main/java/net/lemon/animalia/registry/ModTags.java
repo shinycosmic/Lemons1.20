@@ -14,6 +14,7 @@ public class ModTags {
     public static class Blocks {
 
         public static final TagKey<Block> FOLIAGE = tag("foliage");
+        public static final TagKey<Block> SHELLS = tag("shells");
 
         private static TagKey<Block> tag(String name) {
             return BlockTags.create(new ResourceLocation(Animalia.MODID, name));
@@ -27,6 +28,7 @@ public class ModTags {
         public static final TagKey<Item> MARINE_PLANT = tag("marine_plant");
         public static final TagKey<Item> DUROPHAGOUS = tag("durophagous");
         public static final TagKey<Item> TO_COOKED_FISH = tag("to_cooked_fish");
+        public static final TagKey<Item> BIVALVES = tag("bivalves");
 
         private static TagKey<Item> tag(String name) {
             return ItemTags.create(new ResourceLocation(Animalia.MODID, name));

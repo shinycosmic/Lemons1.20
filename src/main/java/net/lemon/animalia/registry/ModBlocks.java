@@ -29,6 +29,8 @@ public class ModBlocks {
     public static final RegistryObject<Block> KAEMPFERIA_PULCHRA = registerFlowerBlock("kaempferia_pulchra", MobEffects.FIRE_RESISTANCE);
     public static final RegistryObject<Block> SAGITTARIA = registerBlock("sagittaria", () -> new SemiaquaticPlantBlock(BlockBehaviour.Properties.copy(Blocks.TALL_GRASS).noOcclusion().noCollission()));
 
+    public static final RegistryObject<Block> WHITE_MUSSEL = registerBlock("filter_trap", () -> new FilterTrapBlock(BlockBehaviour.Properties.copy(Blocks.STONE).noOcclusion()));
+
 
 
 
