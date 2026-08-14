@@ -29,16 +29,16 @@ public class ModPlacedFeatures {
 
     //define worldgen here for blocks
     public static void bootstrap(BootstapContext<PlacedFeature> context) {
-        registerBedCluster(context, ALGAE_MAT, ModConfiguredFeatures.ALGAE_MAT, 3, 3, 5);
-        registerFlowerPatch(context, KAEMPFERIA_PULCHRA, ModConfiguredFeatures.KAEMPFERIA_PULCHRA, 8);
-        registerFlowerPatch(context, SAGITTARIA, ModConfiguredFeatures.SAGITTARIA, 16);
+        registerSeaCluster(context, ALGAE_MAT, ModConfiguredFeatures.ALGAE_MAT, 3, 3, 5);
+        registerPatch(context, KAEMPFERIA_PULCHRA, ModConfiguredFeatures.KAEMPFERIA_PULCHRA, 8, Heightmap.Types.MOTION_BLOCKING);
+        registerPatch(context, SAGITTARIA, ModConfiguredFeatures.SAGITTARIA, 16, Heightmap.Types.OCEAN_FLOOR_WG);
     }
 
 
 
 
 
-    private static void registerBedCluster(BootstapContext<PlacedFeature> context, ResourceKey<PlacedFeature> key,
+    private static void registerSeaCluster(BootstapContext<PlacedFeature> context, ResourceKey<PlacedFeature> key,
                                            ResourceKey<ConfiguredFeature<?, ?>> feature,
                                            int rarity, int minCount, int maxCount) {
         HolderGetter<ConfiguredFeature<?, ?>> features = context.lookup(Registries.CONFIGURED_FEATURE);
@@ -51,13 +51,13 @@ public class ModPlacedFeatures {
                 BiomeFilter.biome())));
     }
 
-    private static void registerFlowerPatch(BootstapContext<PlacedFeature> context, ResourceKey<PlacedFeature> key,
-                                            ResourceKey<ConfiguredFeature<?, ?>> feature, int rarity) {
+    private static void registerPatch(BootstapContext<PlacedFeature> context, ResourceKey<PlacedFeature> key,
+                                      ResourceKey<ConfiguredFeature<?, ?>> feature, int rarity, Heightmap.Types heightmap) {
         HolderGetter<ConfiguredFeature<?, ?>> features = context.lookup(Registries.CONFIGURED_FEATURE);
         context.register(key, new PlacedFeature(features.getOrThrow(feature), List.of(
                 RarityFilter.onAverageOnceEvery(rarity),
                 InSquarePlacement.spread(),
-                HeightmapPlacement.onHeightmap(Heightmap.Types.MOTION_BLOCKING),
+                HeightmapPlacement.onHeightmap(heightmap),
                 BiomeFilter.biome())));
     }
 
