@@ -769,7 +769,7 @@
 							"vector": [3.281, -10.2863, -3.0509]
 						},
 						"0.6667": {
-							"vector": [10.0021, -21.8358, "-9.1198"]
+							"vector": [10.0021, -21.8358, "--9.1198"]
 						},
 						"1.0": {
 							"vector": [16.9009, -7.7841, 27.6487]
@@ -860,6 +860,120 @@
 							"-0-math.sin(query.anim_time*288/0.5-150*2)*3",
 							"0+math.sin(query.anim_time*288/0.5-150*3)*3"
 						]
+					}
+				}
+			}
+		},
+		"idle": {
+			"loop": true,
+			"bones": {
+				"tail": {
+					"rotation": {
+						"vector": [15, 0, 0]
+					}
+				},
+				"leftArm": {
+					"rotation": {
+						"vector": [22.5, 0, 0]
+					}
+				},
+				"body": {
+					"rotation": {
+						"vector": [-12.5, 0, 0]
+					},
+					"position": {
+						"vector": [0, -0.25, 0]
+					}
+				},
+				"leftantennule": {
+					"rotation": {
+						"vector": [
+							"-0-math.sin(query.anim_time*100/0.5-190)*-1.5",
+							"-0-math.sin(query.anim_time*100/0.5-150*2)*-1",
+							"0+math.sin(query.anim_time*100/0.5-150*3)*-1.5"
+						]
+					}
+				},
+				"head": {
+					"rotation": {
+						"vector": [2.5, 0, 0]
+					}
+				},
+				"tail3": {
+					"rotation": {
+						"vector": [7.5, 0, 0]
+					}
+				},
+				"leftAntenna": {
+					"rotation": {
+						"vector": [
+							"-0-math.sin(query.anim_time*100/0.5-150*1)*1.5",
+							"-0-math.sin(query.anim_time*100/0.5-150*2)*-1",
+							"0+math.sin(query.anim_time*100/0.5-150*3)*-1.5"
+						]
+					}
+				},
+				"rightArm": {
+					"rotation": {
+						"vector": [20, 0, 0]
+					}
+				},
+				"rightAntenna": {
+					"rotation": {
+						"vector": [
+							"-0-math.sin(query.anim_time*100/0.5-150)*-1.5",
+							"-0-math.sin(query.anim_time*100/0.5-150*2)*-1",
+							"0+math.sin(query.anim_time*100/0.5-150*3)*-1.5"
+						]
+					}
+				},
+				"rightantennule": {
+					"rotation": {
+						"vector": [
+							"-0-math.sin(query.anim_time*100/0.5-50*1)*1.5",
+							"-0-math.sin(query.anim_time*100/0.5-150*2)*-1",
+							"0+math.sin(query.anim_time*100/0.5-150*3)*-1.5"
+						]
+					}
+				},
+				"rightleg1": {
+					"rotation": {
+						"vector": [0, 0, -15]
+					}
+				},
+				"rightleg": {
+					"rotation": {
+						"vector": [0, 0, -5]
+					}
+				},
+				"rightleg3": {
+					"rotation": {
+						"vector": [0, 0, 5]
+					}
+				},
+				"rightleg4": {
+					"rotation": {
+						"vector": [0, 0, 15]
+					}
+				},
+				"leftleg1": {
+					"rotation": {
+						"vector": [0, 0, 12.5]
+					}
+				},
+				"leftleg": {
+					"rotation": {
+						"vector": [0, 0, 2.5]
+					}
+				},
+				"leftleg3": {
+					"rotation": {
+						"vector": [0, 0, -5]
+					}
+				},
+				"leftleg4": {
+					"rotation": {
+						"vector": [0, 0, -15]
 					}
 				}
 			}
@@ -2011,84 +2125,6 @@
 				"leftleg4": {
 					"rotation": {
 						"vector": [0, 0, -22.5]
-					}
-				}
-			}
-		},
-		"idle": {
-			"loop": true,
-			"bones": {
-				"tail": {
-					"rotation": {
-						"vector": [15, 0, 0]
-					}
-				},
-				"leftArm": {
-					"rotation": {
-						"vector": [22.5, 0, 0]
-					}
-				},
-				"body": {
-					"rotation": {
-						"vector": [-12.5, 0, 0]
-					},
-					"position": {
-						"vector": [0, -0.25, 0]
-					}
-				},
-				"head": {
-					"rotation": {
-						"vector": [2.5, 0, 0]
-					}
-				},
-				"tail3": {
-					"rotation": {
-						"vector": [7.5, 0, 0]
-					}
-				},
-				"rightArm": {
-					"rotation": {
-						"vector": [20, 0, 0]
-					}
-				},
-				"rightleg1": {
-					"rotation": {
-						"vector": [0, 0, -15]
-					}
-				},
-				"rightleg": {
-					"rotation": {
-						"vector": [0, 0, -5]
-					}
-				},
-				"rightleg3": {
-					"rotation": {
-						"vector": [0, 0, 5]
-					}
-				},
-				"rightleg4": {
-					"rotation": {
-						"vector": [0, 0, 15]
-					}
-				},
-				"leftleg1": {
-					"rotation": {
-						"vector": [0, 0, 12.5]
-					}
-				},
-				"leftleg": {
-					"rotation": {
-						"vector": [0, 0, 2.5]
-					}
-				},
-				"leftleg3": {
-					"rotation": {
-						"vector": [0, 0, -5]
-					}
-				},
-				"leftleg4": {
-					"rotation": {
-						"vector": [0, 0, -15]
 					}
 				}
 			}
