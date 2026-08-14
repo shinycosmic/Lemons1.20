@@ -1,6 +1,6 @@
 package net.lemon.animalia.entity.ai;
 
-import net.lemon.animalia.entity.bases.interfaces.ICanThreat;
+import net.lemon.animalia.entity.bases.helpers.ICanThreat;
 import net.minecraft.world.entity.EntitySelector;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.PathfinderMob;

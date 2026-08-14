@@ -1,4 +1,4 @@
-package net.lemon.animalia.entity.bases.interfaces;
+package net.lemon.animalia.entity.bases.helpers;
 
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.tags.DamageTypeTags;
@@ -26,15 +26,10 @@ public interface ICanGuard {
         return this.getGuardPhase() != GUARD_PHASE_NONE;
     }
 
-    /**.
-     * ATTACK/BOTH species back this with a tick deadline field; PROXIMITY-only
-     * species can keep the defaults.
-     */
     default boolean wantsToGuard() {
         return false;
     }
 
-    /** Start or refresh the re-attack window deadline. */
     default void urgeGuard(int ticks) {
     }
 

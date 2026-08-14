@@ -5,7 +5,7 @@ import net.lemon.animalia.entity.bases.AnimaliaBreedableWater;
 import net.lemon.animalia.entity.bases.FishBase;
 import net.lemon.animalia.client.player.network.ClientDiscoveryCache;
 import net.lemon.animalia.util.HolonetEntities;
-import net.lemon.animalia.entity.bases.interfaces.IsGenetic;
+import net.lemon.animalia.entity.bases.helpers.IsGenetic;
 import net.lemon.animalia.util.Scannable;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;

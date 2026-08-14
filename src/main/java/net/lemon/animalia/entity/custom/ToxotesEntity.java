@@ -1,8 +1,7 @@
 package net.lemon.animalia.entity.custom;
 
 import net.lemon.animalia.entity.ai.ArcherfishShootGoal;
-import net.lemon.animalia.entity.ai.WaterStartleGoal;
-import net.lemon.animalia.entity.bases.ActivityTime;
+import net.lemon.animalia.entity.bases.helpers.ActivityTime;
 import net.lemon.animalia.entity.bases.FishBase;
 import net.lemon.animalia.registry.ModEntities;
 import net.lemon.animalia.registry.ModItems;
@@ -24,9 +23,6 @@ import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.SpawnGroupData;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.ai.control.SmoothSwimmingLookControl;
-import net.minecraft.world.entity.ai.control.SmoothSwimmingMoveControl;
-import net.minecraft.world.entity.ai.goal.AvoidEntityGoal;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;

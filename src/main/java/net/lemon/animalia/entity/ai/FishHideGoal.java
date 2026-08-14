@@ -1,6 +1,6 @@
 package net.lemon.animalia.entity.ai;
 
-import net.lemon.animalia.entity.bases.ActivityTime;
+import net.lemon.animalia.entity.bases.helpers.ActivityTime;
 import net.lemon.animalia.entity.bases.AnimaliaBreedableWater;
 import net.minecraft.world.entity.ai.goal.Goal;
 

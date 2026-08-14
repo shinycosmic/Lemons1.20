@@ -1,4 +1,4 @@
-package net.lemon.animalia.entity.bases;
+package net.lemon.animalia.entity.bases.helpers;
 
 public enum AnimaliaEggTypes {
     ITEM_EGG,

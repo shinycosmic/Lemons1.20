@@ -1,6 +1,6 @@
 package net.lemon.animalia.entity.custom;
 
-import net.lemon.animalia.entity.bases.ActivityTime;
+import net.lemon.animalia.entity.bases.helpers.ActivityTime;
 import net.lemon.animalia.entity.bases.FishBase;
 import net.lemon.animalia.registry.ModBlocks;
 import net.lemon.animalia.registry.ModEntities;

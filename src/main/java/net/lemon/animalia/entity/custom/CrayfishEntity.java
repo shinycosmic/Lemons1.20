@@ -1,10 +1,10 @@
 package net.lemon.animalia.entity.custom;
 
 import net.lemon.animalia.entity.ai.ThreatGoal;
-import net.lemon.animalia.entity.bases.ActivityTime;
+import net.lemon.animalia.entity.bases.helpers.ActivityTime;
 import net.lemon.animalia.entity.bases.BottomWalkerSwimmerBase;
 import net.lemon.animalia.entity.bases.FishBase;
-import net.lemon.animalia.entity.bases.interfaces.ICanThreat;
+import net.lemon.animalia.entity.bases.helpers.ICanThreat;
 import net.lemon.animalia.registry.ModEntities;
 import net.lemon.animalia.registry.ModItems;
 import net.lemon.animalia.registry.ModTags;

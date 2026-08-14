@@ -1,11 +1,10 @@
 package net.lemon.animalia.entity.ai;
 
-import net.lemon.animalia.entity.bases.AnimaliaEggTypes;
+import net.lemon.animalia.entity.bases.helpers.AnimaliaEggTypes;
 import net.lemon.animalia.entity.bases.AnimaliaBreedableWater;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.ai.targeting.TargetingConditions;
-import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.level.Level;
 
 import javax.annotation.Nullable;

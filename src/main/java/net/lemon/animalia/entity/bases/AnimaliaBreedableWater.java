@@ -2,10 +2,7 @@ package net.lemon.animalia.entity.bases;
 
 import net.lemon.animalia.entity.ai.EatDroppedItemsGoal;
 import net.lemon.animalia.entity.ai.FishBreedGoal;
-import net.lemon.animalia.entity.bases.interfaces.IActivityTime;
-import net.lemon.animalia.entity.bases.interfaces.IFoodEater;
-import net.lemon.animalia.entity.bases.interfaces.IGrazer;
-import net.lemon.animalia.entity.bases.interfaces.IIdles;
+import net.lemon.animalia.entity.bases.helpers.*;
 import net.lemon.animalia.item.FishEggItem;
 import net.lemon.animalia.registry.ModItems;
 import net.lemon.animalia.registry.spawning.SpawnBand;
@@ -315,7 +312,7 @@ public abstract class AnimaliaBreedableWater extends WaterAnimal implements IAct
     public void onGrazeStart() {
     }
 
-    public void onSpontaneousGraze() {
+    public void onRandomGraze() {
     }
 
     public void onGrazeStop() {
@@ -333,27 +330,14 @@ public abstract class AnimaliaBreedableWater extends WaterAnimal implements IAct
         return false;
     }
 
-    /***
-     * Length of hide animation/how long hide lasts for
-     * @return
-     */
     public int getHideLength() {
         return 100;
     }
 
-    /***
-     * When can it start hiding again?
-     * @return
-     */
     public int getHideCooldown() {
         return 600 + random.nextInt(2000);
     }
 
-    /***
-     * ticker that tracks length in hiding
-     * for the first X ticks of hiding, we play the transition toHide animation, and we will play the leaveHide animation as soon as hideticks is up
-     * @return
-     */
     public int getHideTicks() {
         return this.hideTicks;
     }
@@ -655,18 +639,10 @@ public abstract class AnimaliaBreedableWater extends WaterAnimal implements IAct
         return Ingredient.of(getFoodTag());
     }
 
-    /***
-     * Used to check breeding item
-     * @return
-     */
     public boolean isBreedingItem(ItemStack stack) {
         return stack.is(getBreedingItem());
     }
 
-    /***
-     * Used to set breedingItem
-     * @return
-     */
     public abstract Item getBreedingItem();
 
     public boolean isFood(ItemStack stack) {

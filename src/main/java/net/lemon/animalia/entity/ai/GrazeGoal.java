@@ -1,7 +1,7 @@
 package net.lemon.animalia.entity.ai;
 
-import net.lemon.animalia.entity.bases.interfaces.IFoodEater;
-import net.lemon.animalia.entity.bases.interfaces.IGrazer;
+import net.lemon.animalia.entity.bases.helpers.IFoodEater;
+import net.lemon.animalia.entity.bases.helpers.IGrazer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.PathfinderMob;
@@ -84,7 +84,7 @@ public class GrazeGoal<T extends PathfinderMob & IGrazer & IFoodEater> extends G
         Vec3 center = Vec3.atCenterOf(this.targetPos);
         this.mob.getNavigation().moveTo(center.x, center.y, center.z, this.speedMultiplier);
         if (this.randomChance) {
-            this.mob.onSpontaneousGraze();
+            this.mob.onRandomGraze();
         }
         this.mob.onGrazeStart();
     }

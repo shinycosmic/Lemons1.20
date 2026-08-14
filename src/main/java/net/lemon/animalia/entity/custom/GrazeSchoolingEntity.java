@@ -1,8 +1,7 @@
 package net.lemon.animalia.entity.custom;
 
 import net.lemon.animalia.entity.ai.GrazeGoal;
-import net.lemon.animalia.entity.ai.SchoolBoidGoal;
-import net.lemon.animalia.entity.bases.ActivityTime;
+import net.lemon.animalia.entity.bases.helpers.ActivityTime;
 import net.lemon.animalia.entity.bases.FishBase;
 import net.lemon.animalia.registry.ModBlocks;
 import net.lemon.animalia.registry.ModEntities;
@@ -19,14 +18,11 @@ import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.ai.goal.AvoidEntityGoal;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.GeoEntity;

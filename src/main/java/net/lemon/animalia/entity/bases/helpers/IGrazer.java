@@ -1,4 +1,4 @@
-package net.lemon.animalia.entity.bases.interfaces;
+package net.lemon.animalia.entity.bases.helpers;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.PathfinderMob;
@@ -9,13 +9,10 @@ public interface IGrazer {
 
     boolean isGrazableBlock(BlockState state);
 
-    /** Whether the graze animation is currently playing. */
     boolean isGrazing();
 
-    /** Trigger one playthrough of the graze animation. */
     void startGrazing();
 
-    /** Ticks one graze animation playthrough lasts - override to match the clip. */
     default int getGrazeLength() {
         return 20;
     }
@@ -28,21 +25,15 @@ public interface IGrazer {
         return 3;
     }
 
-    /**
-     * Squared distance from the block center to the mob's mid-body at which the graze
-     * animation can begin. For solid grazable blocks this must cover the block face
-     * plus half the mob's width.
-     */
     default double getGrazeReachSqr() {
         return 1.0D;
     }
 
-    /** Override to gate grazing, e.g. isInWater(), !isHiding(). */
+    //override this to set graze conditions
     default boolean canGraze() {
         return true;
     }
 
-    /** Whether an external trigger (e.g. a school signal) is urging this entity to graze. */
     default boolean wantsToGraze() {
         return false;
     }
@@ -50,15 +41,12 @@ public interface IGrazer {
     default void clearGrazeUrge() {
     }
 
-    /** Called when a graze session begins, spontaneous or signaled. */
     default void onGrazeStart() {
     }
 
-    /** Called only when a graze session begins spontaneously. */
-    default void onSpontaneousGraze() {
+    default void onRandomGraze() {
     }
 
-    /** Called when a graze session ends for any reason. */
     default void onGrazeStop() {
     }
 

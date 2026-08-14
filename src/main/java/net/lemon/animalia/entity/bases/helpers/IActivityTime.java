@@ -1,12 +1,11 @@
-package net.lemon.animalia.entity.bases.interfaces;
+package net.lemon.animalia.entity.bases.helpers;
 
-import net.lemon.animalia.entity.bases.ActivityTime;
 import net.minecraft.world.entity.PathfinderMob;
 
 public interface IActivityTime {
     /***
      * Returns the ActivityTime.
-     * This is used in goal and move helpers as well as TODO: Sleep AI
+     * This is used in goal and move helpers as well as Sleep AI and spawning
      * @return
      */
     public ActivityTime activityTime();

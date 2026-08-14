@@ -5,7 +5,7 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import net.lemon.animalia.entity.bases.FishBase;
 import net.lemon.animalia.client.player.network.ClientDiscoveryCache;
 import net.lemon.animalia.util.HolonetEntities;
-import net.lemon.animalia.entity.bases.interfaces.IsGenetic;
+import net.lemon.animalia.entity.bases.helpers.IsGenetic;
 import net.lemon.animalia.util.Scannable;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;

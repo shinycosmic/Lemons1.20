@@ -1,7 +1,7 @@
 package net.lemon.animalia.entity.custom;
 
 import net.lemon.animalia.entity.ai.FishHideGoal;
-import net.lemon.animalia.entity.bases.ActivityTime;
+import net.lemon.animalia.entity.bases.helpers.ActivityTime;
 import net.lemon.animalia.entity.bases.AnimaliaBreedableWater;
 import net.lemon.animalia.entity.bases.BottomWalkerSwimmerBase;
 import net.lemon.animalia.entity.bases.FishBase;

@@ -1,6 +1,6 @@
 package net.lemon.animalia.entity.ai;
 
-import net.lemon.animalia.entity.bases.interfaces.IFoodEater;
+import net.lemon.animalia.entity.bases.helpers.IFoodEater;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.ai.goal.Goal;

@@ -3,6 +3,8 @@ package net.lemon.animalia.entity.custom;
 import net.lemon.animalia.block.MoundNestBlock;
 import net.lemon.animalia.block.entities.MoundNestBlockEntity;
 import net.lemon.animalia.entity.bases.*;
+import net.lemon.animalia.entity.bases.helpers.ActivityTime;
+import net.lemon.animalia.entity.bases.helpers.AnimaliaEggTypes;
 import net.lemon.animalia.registry.ModEntities;
 import net.lemon.animalia.registry.ModItems;
 import net.lemon.animalia.util.AnimaliaFunctionUtil;

@@ -1,11 +1,7 @@
 package net.lemon.animalia.entity.bases;
 
 import net.lemon.animalia.entity.ai.EatDroppedItemsGoal;
-import net.lemon.animalia.entity.ai.FishBreedGoal;
-import net.lemon.animalia.entity.bases.interfaces.IActivityTime;
-import net.lemon.animalia.entity.bases.interfaces.IFoodEater;
-import net.lemon.animalia.entity.bases.interfaces.IGrazer;
-import net.lemon.animalia.entity.bases.interfaces.IIdles;
+import net.lemon.animalia.entity.bases.helpers.*;
 import net.lemon.animalia.item.FishEggItem;
 import net.lemon.animalia.registry.ModItems;
 import net.minecraft.core.BlockPos;
@@ -120,16 +116,10 @@ public abstract class AnimaliaLandBase extends Animal implements IActivityTime, 
         return Ingredient.of(getFoodTag());
     }
 
-    /***
-     * Used to check breeding item
-     */
     public boolean isBreedingItem(ItemStack stack) {
         return stack.is(getBreedingItem());
     }
 
-    /***
-     * Used to set breedingItem
-     */
     public abstract Item getBreedingItem();
 
     @Override
@@ -137,9 +127,6 @@ public abstract class AnimaliaLandBase extends Animal implements IActivityTime, 
         return stack.is(getFoodTag());
     }
 
-    /***
-     * cannibalized from Animal class. Used to set Food Item (to heal/grow)
-     */
     public abstract TagKey<Item> getFoodTag();
 
     protected SoundEvent getAmbientSound() {
@@ -240,24 +227,14 @@ public abstract class AnimaliaLandBase extends Animal implements IActivityTime, 
         return false;
     }
 
-    /***
-     * Length of hide animation/how long hide lasts for
-     */
     public int getHideLength() {
         return 100;
     }
 
-    /***
-     * When can it start hiding again?
-     */
     public int getHideCooldown() {
         return 600 + random.nextInt(2000);
     }
 
-    /***
-     * ticker that tracks length in hiding
-     * for the first X ticks of hiding, we play the transition toHide animation, and we will play the leaveHide animation as soon as hideticks is up
-     */
     public int getHideTicks() {
         return this.hideTicks;
     }

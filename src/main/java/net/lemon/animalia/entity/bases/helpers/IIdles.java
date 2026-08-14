@@ -1,31 +1,7 @@
-package net.lemon.animalia.entity.bases.interfaces;
+package net.lemon.animalia.entity.bases.helpers;
 
 import net.minecraft.world.entity.PathfinderMob;
 
-/**
- * Capability for entities with cosmetic idle displays, split into three types (see
- * {@link IdleType}): twitches (blinks, tongue flicks) layer over everything on their own
- * bones, movement-positive idles (scratches, yawns, fin flares) play safely during
- * movement, and movement-negative idles (digging, meerkat look-arounds) lock movement for
- * their duration via a travel() gate in the bases plus a per-tick navigation stop.
- *
- * <p>Delivery is state-based: the playing ids are synced entity data
- * ({@link #getCurrentBodyIdle()} / {@link #getCurrentTwitchIdle()}, -1 = none) and client
- * predicates branch on them, playing animations named {@code idle0..idleN}. Cancellation
- * is resetting the synced id - there are no GeckoLib triggers.</p>
- *
- * <p>Two channels run concurrently: twitch (TWITCH ids) and body (MOVEMENT_POSITIVE and
- * MOVEMENT_NEGATIVE ids). Each channel plays one idle at a time, tracked server-side by
- * tick countdowns fed by {@link #getIdleDisplayLength(int)}. Twitch and movement-positive
- * idles share one animation controller, so they are mutually exclusive at play time. All
- * starts must go through {@link #startIdleDisplay(int)}, which enforces both rules.</p>
-
- * <p>Spontaneous rolls happen in {@link #tickIdleDisplay(PathfinderMob)}, gated by
- * {@link #canPlayIdleDisplay()} (no hide, threat, or guard phase active). Social
- * propagation (schoolmates mimicking a display) is layered on separately by the school
- * signal system via {@link #onSpontaneousIdleDisplay(int)} and applies to
- * movement-positive idles only.</p>
- */
 public interface IIdles {
 
     enum IdleType {
@@ -38,35 +14,27 @@ public interface IIdles {
         return 0;
     }
 
-    /** Classification of display #displayId (0-based). Species map each id to a type. */
     default IdleType getIdleType(int displayId) {
         return IdleType.MOVEMENT_POSITIVE;
     }
 
-    /**
-     * Length in ticks of display #displayId. Lengths are arbitrary per id and must match
-     * the actual animation length by hand.
-     */
+    //override this with a switch to control idle lengths per idle
     default int getIdleDisplayLength(int displayId) {
         return 40;
     }
 
-    /** Remaining ticks of the currently playing body idle. */
     int getIdleDisplayTicks();
 
     void setIdleDisplayTicks(int ticks);
 
-    /** Remaining ticks of the currently playing twitch idle. */
     int getTwitchIdleTicks();
 
     void setTwitchIdleTicks(int ticks);
 
-    /** Synced id of the playing body idle (POSITIVE or NEGATIVE), -1 = none. */
     int getCurrentBodyIdle();
 
     void setCurrentBodyIdle(int displayId);
 
-    /** Synced id of the playing twitch idle, -1 = none. */
     int getCurrentTwitchIdle();
 
     void setCurrentTwitchIdle(int displayId);
@@ -93,11 +61,6 @@ public interface IIdles {
         return 600;
     }
 
-    /**
-     * Whether the entity is currently calm enough to play an idle display. Aggregates the
-     * phased modes: threat and guard here, hiding added by the base overrides. Species
-     * without a system pass vacuously.
-     */
     default boolean canPlayIdleDisplay() {
         if (this instanceof ICanThreat threat && threat.isThreatening()) {
             return false;
@@ -108,16 +71,13 @@ public interface IIdles {
         return true;
     }
 
-    /** At-rest gate for movement-negative idles. Land bases add an onGround check. */
     default boolean isAtRestForIdle(PathfinderMob mob) {
         return mob.getNavigation().isDone();
     }
 
-    /** Called when a movement-negative idle starts. Fish leave their school here. */
     default void onMovementLockingIdleStart() {
     }
 
-    /** Called when a movement-negative idle ends or is cancelled by hurt. */
     default void onMovementLockingIdleEnd() {
     }
 

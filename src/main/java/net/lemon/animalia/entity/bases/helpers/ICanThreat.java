@@ -1,4 +1,4 @@
-package net.lemon.animalia.entity.bases.interfaces;
+package net.lemon.animalia.entity.bases.helpers;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.PathfinderMob;
@@ -17,30 +17,19 @@ public interface ICanThreat {
         return this.getThreatPhase() != THREAT_PHASE_NONE;
     }
 
-    /** Override to play a sound when the display starts. Null is silent. */
     @Nullable
     default SoundEvent getThreatSound() {
         return null;
     }
 
-    /** Override to gate the display, e.g. !isHiding(), onGround(), isWalking(). */
     default boolean canStartThreatening() {
         return true;
     }
 
-    /**
-     * Called every tick during the DISPLAY phase with the current threat.
-     * Default does nothing. Override for contact reactions, e.g. a crayfish
-     * pinching a threat that walks into its hitbox mid-display.
-     */
+    //use this to add mid threat actions like attacking.
     default void onThreatTick(LivingEntity threat) {
     }
 
-    /**
-     * Called when the FLEE outcome fires. Default marks the threat as the last
-     * attacker so an existing PanicGoal picks it up. Override for mobs with
-     * retaliation goals (HurtByTargetGoal) or custom flee behavior.
-     */
     default void onThreatFlee(LivingEntity threat) {
         ((PathfinderMob) this).setLastHurtByMob(threat);
     }

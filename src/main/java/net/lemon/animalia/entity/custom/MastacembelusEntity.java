@@ -4,7 +4,7 @@ import net.lemon.animalia.entity.ai.BottomDwellingGoal;
 import net.lemon.animalia.entity.ai.FishFrySwimmingGoal;
 import net.lemon.animalia.entity.ai.FishHideGoal;
 import net.lemon.animalia.entity.aimove.BottomDwellingMoveHelperController;
-import net.lemon.animalia.entity.bases.ActivityTime;
+import net.lemon.animalia.entity.bases.helpers.ActivityTime;
 import net.lemon.animalia.entity.bases.AnimaliaBreedableWater;
 import net.lemon.animalia.entity.bases.FishBase;
 import net.lemon.animalia.registry.ModEntities;

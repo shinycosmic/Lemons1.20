@@ -1,7 +1,7 @@
 package net.lemon.animalia.entity.custom;
 
 import net.lemon.animalia.entity.ai.GrazeGoal;
-import net.lemon.animalia.entity.bases.ActivityTime;
+import net.lemon.animalia.entity.bases.helpers.ActivityTime;
 import net.lemon.animalia.entity.bases.FishBase;
 import net.lemon.animalia.registry.ModBlocks;
 import net.lemon.animalia.registry.ModEntities;
@@ -12,7 +12,6 @@ import net.lemon.animalia.util.HolonetEntities;
 import net.lemon.animalia.util.Scannable;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.entity.EntityType;

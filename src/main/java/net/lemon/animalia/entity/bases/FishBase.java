@@ -293,7 +293,7 @@ public abstract class FishBase extends AnimaliaBreedableWater implements Bucketa
     }
 
     @Override
-    public void onSpontaneousGraze() {
+    public void onRandomGraze() {
         if (this.isSchoolingFish()) {
             this.broadcastSchoolSignal(SchoolSignal.GRAZE);
             this.signalCooldown = 60 + this.random.nextInt(40);
@@ -341,7 +341,6 @@ public abstract class FishBase extends AnimaliaBreedableWater implements Bucketa
         return this.schoolLeader != null;
     }
 
-    /** Size of this fish's school, leader included. 0 if lone. */
     public int getSchoolSize() {
         return this.schoolLeader == null ? 0 : this.schoolLeader.schoolSize;
     }
@@ -385,7 +384,6 @@ public abstract class FishBase extends AnimaliaBreedableWater implements Bucketa
         this.schoolJoinCooldownEnd = this.level().getGameTime() + ticks;
     }
 
-    /** Chance for a non-leader member to wander off from its school. */
     public float getSchoolDefectionChance() {
         return 0.0002f;
     }
@@ -476,10 +474,6 @@ public abstract class FishBase extends AnimaliaBreedableWater implements Bucketa
             this.fish = pFish;
         }
 
-        /**
-         * Returns whether execution should begin. You can also read and cache any state necessary for execution in this
-         * method as well.
-         */
         public boolean canUse() {
             return this.fish.canRandomSwim() && super.canUse();
         }
