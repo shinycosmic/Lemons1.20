@@ -297,13 +297,13 @@ public abstract class WaterDartBase extends FishBase{
         }
     }
 
-    public class DartBreedGoal extends FishBreedGoal {
+    public static class DartBreedGoal extends FishBreedGoal {
         private int loveTime;
         private int dartCooldown;
         private final WaterDartBase mob;
 
         public DartBreedGoal(WaterDartBase mob) {
-            super(WaterDartBase.this, 1.0D);
+            super(mob, 1.0D);
             this.mob = mob;
         }
 
