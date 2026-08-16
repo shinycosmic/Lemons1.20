@@ -10,15 +10,12 @@ import net.minecraft.util.valueproviders.ClampedNormalInt;
 import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.level.levelgen.Heightmap;
+import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
-import net.minecraft.world.level.levelgen.placement.BiomeFilter;
-import net.minecraft.world.level.levelgen.placement.CountPlacement;
-import net.minecraft.world.level.levelgen.placement.HeightmapPlacement;
-import net.minecraft.world.level.levelgen.placement.InSquarePlacement;
-import net.minecraft.world.level.levelgen.placement.PlacedFeature;
-import net.minecraft.world.level.levelgen.placement.RandomOffsetPlacement;
-import net.minecraft.world.level.levelgen.placement.RarityFilter;
+import net.minecraft.world.level.levelgen.placement.*;
+import net.minecraft.world.level.material.Fluids;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ModPlacedFeatures {
@@ -29,36 +26,46 @@ public class ModPlacedFeatures {
 
     //define worldgen here for blocks
     public static void bootstrap(BootstapContext<PlacedFeature> context) {
-        registerSeaCluster(context, ALGAE_MAT, ModConfiguredFeatures.ALGAE_MAT, 3, 3, 5);
-        registerPatch(context, KAEMPFERIA_PULCHRA, ModConfiguredFeatures.KAEMPFERIA_PULCHRA, 8, Heightmap.Types.MOTION_BLOCKING);
-        registerPatch(context, SAGITTARIA, ModConfiguredFeatures.SAGITTARIA, 16, Heightmap.Types.OCEAN_FLOOR_WG);
+        register(context, ALGAE_MAT, ModConfiguredFeatures.ALGAE_MAT, seaCluster(3, 3, 5));
+        register(context, KAEMPFERIA_PULCHRA, ModConfiguredFeatures.KAEMPFERIA_PULCHRA, patch(8, Heightmap.Types.MOTION_BLOCKING));
+        register(context, SAGITTARIA, ModConfiguredFeatures.SAGITTARIA, patch(16, Heightmap.Types.OCEAN_FLOOR_WG));
     }
 
 
 
 
 
-    private static void registerSeaCluster(BootstapContext<PlacedFeature> context, ResourceKey<PlacedFeature> key,
-                                           ResourceKey<ConfiguredFeature<?, ?>> feature,
-                                           int rarity, int minCount, int maxCount) {
+    private static void register(BootstapContext<PlacedFeature> context, ResourceKey<PlacedFeature> key,
+                                 ResourceKey<ConfiguredFeature<?, ?>> feature, List<PlacementModifier> placements) {
         HolderGetter<ConfiguredFeature<?, ?>> features = context.lookup(Registries.CONFIGURED_FEATURE);
-        context.register(key, new PlacedFeature(features.getOrThrow(feature), List.of(
+        context.register(key, new PlacedFeature(features.getOrThrow(feature), placements));
+    }
+
+    private static List<PlacementModifier> seaCluster(int rarity, int minCount, int maxCount, PlacementModifier... extras) {
+        return buildPlacements(List.of(
                 RarityFilter.onAverageOnceEvery(rarity),
                 InSquarePlacement.spread(),
                 HeightmapPlacement.onHeightmap(Heightmap.Types.OCEAN_FLOOR),
                 CountPlacement.of(UniformInt.of(minCount, maxCount)),
-                RandomOffsetPlacement.of(ClampedNormalInt.of(0.0F, 1.5F, -3, 3), ConstantInt.of(0)),
-                BiomeFilter.biome())));
+                RandomOffsetPlacement.of(ClampedNormalInt.of(0.0F, 1.5F, -3, 3), ConstantInt.of(0))), extras);
     }
 
-    private static void registerPatch(BootstapContext<PlacedFeature> context, ResourceKey<PlacedFeature> key,
-                                      ResourceKey<ConfiguredFeature<?, ?>> feature, int rarity, Heightmap.Types heightmap) {
-        HolderGetter<ConfiguredFeature<?, ?>> features = context.lookup(Registries.CONFIGURED_FEATURE);
-        context.register(key, new PlacedFeature(features.getOrThrow(feature), List.of(
+    private static List<PlacementModifier> patch(int rarity, Heightmap.Types heightmap, PlacementModifier... extras) {
+        return buildPlacements(List.of(
                 RarityFilter.onAverageOnceEvery(rarity),
                 InSquarePlacement.spread(),
-                HeightmapPlacement.onHeightmap(heightmap),
-                BiomeFilter.biome())));
+                HeightmapPlacement.onHeightmap(heightmap)), extras);
+    }
+
+    private static List<PlacementModifier> buildPlacements(List<PlacementModifier> base, PlacementModifier... extras) {
+        List<PlacementModifier> placements = new ArrayList<>(base);
+        placements.addAll(List.of(extras));
+        placements.add(BiomeFilter.biome());
+        return placements;
+    }
+
+    private static PlacementModifier inWater() {
+        return BlockPredicateFilter.forPredicate(BlockPredicate.matchesFluids(Fluids.WATER));
     }
 
     private static ResourceKey<PlacedFeature> createKey(String name) {
