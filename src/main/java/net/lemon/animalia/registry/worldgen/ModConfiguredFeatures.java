@@ -12,6 +12,8 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.MultifaceBlock;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
@@ -57,6 +59,16 @@ public class ModConfiguredFeatures {
                 FeatureUtils.simpleRandomPatchConfiguration(tries,
                         PlacementUtils.onlyWhenEmpty(Feature.SIMPLE_BLOCK,
                                 new SimpleBlockConfiguration(BlockStateProvider.simple(block))))));
+    }
+
+    private static void registerWaterFloorBlock(BootstapContext<ConfiguredFeature<?, ?>> context,
+                                                ResourceKey<ConfiguredFeature<?, ?>> key, Block block) {
+        BlockState state = block.defaultBlockState();
+        if (state.hasProperty(BlockStateProperties.WATERLOGGED)) {
+            state = state.setValue(BlockStateProperties.WATERLOGGED, true);
+        }
+        context.register(key, new ConfiguredFeature<>(Feature.SIMPLE_BLOCK,
+                new SimpleBlockConfiguration(BlockStateProvider.simple(state))));
     }
 
     private static void registerMultiface(BootstapContext<ConfiguredFeature<?, ?>> context,
