@@ -9,6 +9,7 @@ import net.minecraft.data.worldgen.features.FeatureUtils;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.random.SimpleWeightedRandomList;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.MultifaceBlock;
@@ -20,6 +21,7 @@ import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.configurations.MultifaceGrowthConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.SimpleBlockConfiguration;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
+import net.minecraft.world.level.levelgen.feature.stateproviders.WeightedStateProvider;
 import net.minecraft.world.level.levelgen.placement.BlockPredicateFilter;
 import net.minecraft.world.level.material.Fluids;
 
@@ -61,14 +63,18 @@ public class ModConfiguredFeatures {
                                 new SimpleBlockConfiguration(BlockStateProvider.simple(block))))));
     }
 
-    private static void registerWaterFloorBlock(BootstapContext<ConfiguredFeature<?, ?>> context,
-                                                ResourceKey<ConfiguredFeature<?, ?>> key, Block block) {
-        BlockState state = block.defaultBlockState();
-        if (state.hasProperty(BlockStateProperties.WATERLOGGED)) {
-            state = state.setValue(BlockStateProperties.WATERLOGGED, true);
+    private static void registerWaterFloorBlocks(BootstapContext<ConfiguredFeature<?, ?>> context,
+                                                 ResourceKey<ConfiguredFeature<?, ?>> key, Block... blocks) {
+        SimpleWeightedRandomList.Builder<BlockState> states = SimpleWeightedRandomList.builder();
+        for (Block block : blocks) {
+            BlockState state = block.defaultBlockState();
+            if (state.hasProperty(BlockStateProperties.WATERLOGGED)) {
+                state = state.setValue(BlockStateProperties.WATERLOGGED, true);
+            }
+            states.add(state, 1);
         }
         context.register(key, new ConfiguredFeature<>(Feature.SIMPLE_BLOCK,
-                new SimpleBlockConfiguration(BlockStateProvider.simple(state))));
+                new SimpleBlockConfiguration(new WeightedStateProvider(states.build()))));
     }
 
     private static void registerMultiface(BootstapContext<ConfiguredFeature<?, ?>> context,
