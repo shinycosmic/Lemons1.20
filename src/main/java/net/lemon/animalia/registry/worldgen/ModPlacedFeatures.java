@@ -22,13 +22,17 @@ public class ModPlacedFeatures {
     public static final ResourceKey<PlacedFeature> ALGAE_MAT = createKey("algae_mat");
     public static final ResourceKey<PlacedFeature> KAEMPFERIA_PULCHRA = createKey("kaempferia_pulchra");
     public static final ResourceKey<PlacedFeature> SAGITTARIA = createKey("sagittaria");
+    public static final ResourceKey<PlacedFeature> MARINE_MUSSELS = createKey("marine_mussels");
+    public static final ResourceKey<PlacedFeature> FRESHWATER_MUSSELS = createKey("freshwater_mussels");
 
 
     //define worldgen here for blocks
     public static void bootstrap(BootstapContext<PlacedFeature> context) {
-        register(context, ALGAE_MAT, ModConfiguredFeatures.ALGAE_MAT, seaCluster(3, 3, 5));
+        register(context, ALGAE_MAT, ModConfiguredFeatures.ALGAE_MAT, waterCluster(3, 3, 5));
         register(context, KAEMPFERIA_PULCHRA, ModConfiguredFeatures.KAEMPFERIA_PULCHRA, patch(8, Heightmap.Types.MOTION_BLOCKING));
         register(context, SAGITTARIA, ModConfiguredFeatures.SAGITTARIA, patch(16, Heightmap.Types.OCEAN_FLOOR_WG));
+        register(context, MARINE_MUSSELS, ModConfiguredFeatures.MARINE_MUSSELS, waterCluster(3, 3, 5, inWater()));
+        register(context, FRESHWATER_MUSSELS, ModConfiguredFeatures.FRESHWATER_MUSSELS, waterCluster(3, 3, 5, inWater()));
     }
 
 
@@ -41,7 +45,7 @@ public class ModPlacedFeatures {
         context.register(key, new PlacedFeature(features.getOrThrow(feature), placements));
     }
 
-    private static List<PlacementModifier> seaCluster(int rarity, int minCount, int maxCount, PlacementModifier... extras) {
+    private static List<PlacementModifier> waterCluster(int rarity, int minCount, int maxCount, PlacementModifier... extras) {
         return buildPlacements(List.of(
                 RarityFilter.onAverageOnceEvery(rarity),
                 InSquarePlacement.spread(),

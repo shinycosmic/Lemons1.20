@@ -25,7 +25,8 @@ public class ModBiomeModifiers {
     public static final ResourceKey<BiomeModifier> ADD_ALGAE_MAT = createKey("add_algae_mat");
     public static final ResourceKey<BiomeModifier> ADD_KAEMPFERIA_PULCHRA = createKey("add_kaempferia_pulchra");
     public static final ResourceKey<BiomeModifier> ADD_SAGITTARIA = createKey("add_sagittaria");
-    public static final ResourceKey<BiomeModifier> ADD_BLUE_MUSSEL = createKey("add_blue_mussel");
+    public static final ResourceKey<BiomeModifier> ADD_MARINE_MUSSEL = createKey("add_marine_mussel");
+    public static final ResourceKey<BiomeModifier> ADD_FRESHWATER_MUSSEL = createKey("add_freshwater_mussel");
 
 
     //Defines which biomes a block spawns in.
@@ -33,6 +34,8 @@ public class ModBiomeModifiers {
         addFeature(context, ADD_ALGAE_MAT, ModPlacedFeatures.ALGAE_MAT, GenerationStep.Decoration.VEGETAL_DECORATION, BiomeTags.IS_RIVER, Tags.Biomes.IS_SWAMP, BiomeTags.IS_OCEAN);
         addFeature(context, ADD_KAEMPFERIA_PULCHRA, ModPlacedFeatures.KAEMPFERIA_PULCHRA, GenerationStep.Decoration.VEGETAL_DECORATION, Tags.Biomes.IS_SWAMP);
         addFeature(context, ADD_SAGITTARIA, ModPlacedFeatures.SAGITTARIA, GenerationStep.Decoration.VEGETAL_DECORATION, Tags.Biomes.IS_SWAMP);
+        addFeature(context, ADD_MARINE_MUSSEL, ModPlacedFeatures.MARINE_MUSSELS, GenerationStep.Decoration.VEGETAL_DECORATION, BiomeTags.IS_OCEAN);
+        addFeature(context, ADD_FRESHWATER_MUSSEL, ModPlacedFeatures.FRESHWATER_MUSSELS, GenerationStep.Decoration.VEGETAL_DECORATION, Tags.Biomes.IS_SWAMP, BiomeTags.IS_RIVER);
     }
 
 

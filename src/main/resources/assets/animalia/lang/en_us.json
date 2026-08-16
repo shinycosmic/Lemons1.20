@@ -10,11 +10,11 @@
   "block.animalia.kaempferia_pulchra": "Peacock Ginger",
   "block.animalia.sagittaria": "Arrowhead Plant",
   "block.animalia.blue_mussel": "Blue Mussel",
-  "block.animalia.algae_crusted_mussel": "Blue Mussel",
-  "block.animalia.swan_mussel": "Blue Mussel",
-  "block.animalia.blue_mussel": "Blue Mussel",
-  "block.animalia.cream_mussel": "Blue Mussel",
-  "block.animalia.yellow_mussel": "Blue Mussel",
+  "block.animalia.algae_crusted_mussel": "Algae Crusted Mussel",
+  "block.animalia.swan_mussel": "Swan Mussel",
+  "block.animalia.black_mussel": "Black Mussel",
+  "block.animalia.cream_mussel": "Cream Mussel",
+  "block.animalia.yellow_mussel": "Yellow Mussel",
 
 
   "entity.animalia.betta_splendens.twoComp": "%s %s Betta",

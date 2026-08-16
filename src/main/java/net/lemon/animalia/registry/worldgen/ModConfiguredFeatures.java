@@ -33,6 +33,8 @@ public class ModConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> ALGAE_MAT = createKey("algae_mat");
     public static final ResourceKey<ConfiguredFeature<?, ?>> KAEMPFERIA_PULCHRA = createKey("kaempferia_pulchra");
     public static final ResourceKey<ConfiguredFeature<?, ?>> SAGITTARIA = createKey("sagittaria");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> MARINE_MUSSELS = createKey("marine_mussels");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> FRESHWATER_MUSSELS = createKey("freshwater_mussels");
 
 
     //Define worldgen configurations here
@@ -40,6 +42,9 @@ public class ModConfiguredFeatures {
         registerMultiface(context, ALGAE_MAT, (MultifaceBlock) ModBlocks.ALGAE_MAT.get(), 4, 0.6F, FRESHWATER_BEDS);
         registerFlowerPatch(context, KAEMPFERIA_PULCHRA, ModBlocks.KAEMPFERIA_PULCHRA.get(), 64);
         registerSemiaquaticPatch(context, SAGITTARIA, ModBlocks.SAGITTARIA.get(), 64);
+        registerWaterFloorBlocks(context, MARINE_MUSSELS, ModBlocks.BLUE_MUSSEL.get(), ModBlocks.ALGAE_CRUSTED_MUSSEL.get(), ModBlocks.BLACK_MUSSEL.get());
+        registerWaterFloorBlocks(context, FRESHWATER_MUSSELS, ModBlocks.YELLOW_MUSSEL.get(), ModBlocks.ALGAE_CRUSTED_MUSSEL.get(), ModBlocks.BLACK_MUSSEL.get(), ModBlocks.CREAM_MUSSEL.get(),ModBlocks.SWAN_MUSSEL.get());
+
     }
 
 
