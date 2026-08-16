@@ -1,5 +1,6 @@
 package net.lemon.animalia.registry.creativetabs;
 
+import net.lemon.animalia.item.AnimaliaBucketItem;
 import net.lemon.animalia.registry.ModItems;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
@@ -10,6 +11,9 @@ public class AnimaliaMobsTab {
 
     public static void displayItems(CreativeModeTab.Output output) {
         for (RegistryObject<Item> entry : ModItems.ITEMS.getEntries()) {
+            if (entry.get() instanceof AnimaliaBucketItem bucket) {
+                output.accept(bucket);
+            }
             if (entry.get() instanceof SpawnEggItem egg) {
                 output.accept(egg);
             }

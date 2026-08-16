@@ -37,6 +37,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
         glowLichenBaseBlock(ModBlocks.ALGAE_MAT.get(), "algae_mat", modLoc("block/algae_mat"));
         plantWithSpecialModel(ModBlocks.KAEMPFERIA_PULCHRA);
         semiaquaticDoubleBlockPlant(ModBlocks.SAGITTARIA);
+        anyAttachBlock(ModBlocks.BLACK_MUSSEL, "mussel2", "solid");
 
     }
 
@@ -73,10 +74,12 @@ public class ModBlockStateProvider extends BlockStateProvider {
         return models().cross(name, modLoc("block/" + name)).renderType("cutout");
     }
 
-    private void anyAttachBlock(RegistryObject<Block> blockObject, Function<String, ModelFile> modelFactory) {
+    private void anyAttachBlock(RegistryObject<Block> blockObject, String parentModel, String renderType) {
         Block block = blockObject.get();
         String name = ForgeRegistries.BLOCKS.getKey(block).getPath();
-        ModelFile model = modelFactory.apply(name);
+        ModelFile model = models().withExistingParent(name, modLoc("block/"+parentModel))
+                        .texture("0", modLoc("block/"+name)).texture("particle", modLoc("block/"+name))
+                        .renderType(renderType);
         getVariantBuilder(block).forAllStatesExcept(state -> switch (state.getValue(BlockStateProperties.FACING)) {
             case UP -> ConfiguredModel.allYRotations(model, 0, false);
             case DOWN -> ConfiguredModel.allYRotations(model, 180, false);

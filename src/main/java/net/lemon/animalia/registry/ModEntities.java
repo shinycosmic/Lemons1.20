@@ -48,6 +48,7 @@ public class ModEntities {
     public static final RegistryObject<EntityType<GrazeSchoolingEntity>> ZEBRASOMA_FLAVESCENS = registerEntityType("zebrasoma_flavescens", GrazeSchoolingEntity::new, ModMobCategories.ANIMALIA_FISH, 0.4f, 0.4f, GrazeSchoolingEntity::setAttributes);
 
     public static final RegistryObject<EntityType<PangasianodonEntity>> PANGASIANODON_GIGAS = registerEntityType("pangasianodon_gigas", PangasianodonEntity::new, ModMobCategories.ANIMALIA_FISH, 0.9f, 0.9f, PangasianodonEntity::setAttributes);
+    public static final RegistryObject<EntityType<HydrocynusEntity>> HYDROCYNUS_GOLIATH = registerEntityType("hydrocynus_goliath", HydrocynusEntity::new, ModMobCategories.ANIMALIA_FISH, 0.9f, 0.9f, HydrocynusEntity::setAttributes);
 
     //Non Fish
     public static final RegistryObject<EntityType<CrayfishEntity>> PROCAMBARUS_CLARKII = registerEntityType("procambarus_clarkii", CrayfishEntity::new, ModMobCategories.ANIMALIA_INVERTEBRATE, 0.5f, 0.3f, CrayfishEntity::setAttributes);

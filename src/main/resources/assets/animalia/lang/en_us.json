@@ -2,13 +2,19 @@
   "creativetab.animalia_food": "Wildlife Explorers Foods",
   "creativetab.animalia_mobs": "Wildlife Explorers Mobs",
   "creativetab.animalia_misc": "Wildlife Explorers Misc",
-  "creativetab.animalia_plants": "Wildlife Explorers Plants",
+  "creativetab.animalia_plants": "Wildlife Explorers Statics",
 
   "block.animalia.filter_trap": "Water Trap",
   "block.animalia.mound_nest": "Mound Nest",
   "block.animalia.algae_mat": "Algal Mat",
   "block.animalia.kaempferia_pulchra": "Peacock Ginger",
   "block.animalia.sagittaria": "Arrowhead Plant",
+  "block.animalia.blue_mussel": "Blue Mussel",
+  "block.animalia.algae_crusted_mussel": "Blue Mussel",
+  "block.animalia.swan_mussel": "Blue Mussel",
+  "block.animalia.black_mussel": "Blue Mussel",
+  "block.animalia.cream_mussel": "Blue Mussel",
+  "block.animalia.yellow_mussel": "Blue Mussel",
 
 
   "entity.animalia.betta_splendens.twoComp": "%s %s Betta",
@@ -67,6 +73,7 @@
   "item.animalia.cooked_fish": "Cooked Fish",
   "item.animalia.raw_crustacean": "Raw Crustacean",
   "item.animalia.cooked_crustacean": "Cooked Crustacean",
+  "item.animalia.bivalve_meat": "Bivalve Meat",
 
   "item.animalia.amphipod": "Amphipod",
   "item.animalia.gigantocypris": "Giant Ostracod",
@@ -119,6 +126,7 @@
   "entity.animalia.heteroconger_hassi": "Spotted Garden Eel",
   "entity.animalia.gorgasia_preclara": "Splendid Garden Eel",
   "entity.animalia.hippocampus_ingens": "Pacific Seahorse",
+  "entity.animalia.hydrocynus_goliath": "Goliath Tigerfish",
 
   "tooltip.animalia.baby": "Juvenile",
   "container.animalia.filter_trap": "Water Trap",
@@ -182,6 +190,7 @@
   "entity.animalia.paracanthurus_hepatus.scientific": "Paracanthurus hepatus",
   "entity.animalia.heteroconger_hassi.scientific": "Heteroconger hassi",
   "entity.animalia.gorgasia_preclara.scientific": "Gorgasia preclara",
+  "entity.animalia.hydrocynus_goliath.scientific": "Hydrocynus goliath",
 
   "order.animalia.perciformes": "Perciformes",
   "order.animalia.anabantiformes": "Anabantiformes",
@@ -190,6 +199,7 @@
   "order.animalia.siluriformes": "Siluriformes",
   "order.animalia.acanthuriformes": "Acanthuriformes",
   "order.animalia.decapoda": "Decapoda",
+  "order.animalia.characiformes": "Characiformes",
 
   "family.animalia.percophidae": "Percophidae",
   "family.animalia.eleginopidae": "Eleginopidae",
@@ -214,6 +224,7 @@
   "family.animalia.chaetodontidae": "Chaetodontidae",
   "family.animalia.siganidae": "Siganidae",
   "family.animalia.congridae": "Congridae",
+  "family.animalia.alestidae": "Alestidae",
 
   "trivia.animalia.dissostichus_eleginoides": "The Chilean Sea Bass, also known as the Patagonian Toothfish is an icefish that lives in the southern cold oceans at depths of 45 to over 3000 meters deep.",
   "trivia.animalia.percophis_brasiliensis": "The Brazilian Flathead is considered to be the most basal member of Notothenioidei. It lives off the coast of Brazil and Argentina.",
@@ -248,6 +259,7 @@
   "trivia.animalia.siganus_vulpinus": "The foxface rabbitfish is a reef fish found in the Indo-Pacific region. They are omnivorous and are usually found alone or in pairs. At night, the rabbitfish's colors become duller and mottled.",
   "trivia.animalia.zebrasoma_flavescens": "The Yellow Tang is a bright yellow surgeonfish that is commonly found in coral reefs. They generally eat algae and at night, a pale white band develops in the middle of their body.",
   "trivia.animalia.zebrasoma_velifer": "The Sailfin Tang is a brown and yellow colored surgeonfish known for its sail-like dorsal and anal fins which it can extend outwards. They generally graze on leafy algae.",
+  "trivia.animalia.hydrocynus_goliath": "The Sailfin Tang is a brown and yellow colored surgeonfish known for its sail-like dorsal and anal fins which it can extend outwards. They generally graze on leafy algae.",
 
   "debug.animalia.trivia": "If this value displays, there is a bug [trivia]",
   "debug.animalia.family": "if this text appears, there is a bug [family]",

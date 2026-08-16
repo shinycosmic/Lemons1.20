@@ -28,6 +28,7 @@ public class ModItems {
     public static final RegistryObject<Item> COOKED_FISH = ITEMS.register("cooked_fish", () -> new Item(new Item.Properties().food(ModFoods.COOKED_FISH)));
     public static final RegistryObject<Item> RAW_CRUSTACEAN = ITEMS.register("raw_crustacean", () -> new Item(new Item.Properties().food(ModFoods.FISH_FOOD)));
     public static final RegistryObject<Item> COOKED_CRUSTACEAN = ITEMS.register("cooked_crustacean", () -> new Item(new Item.Properties().food(ModFoods.COOKED_FISH)));
+    public static final RegistryObject<Item> BIVALVE_MEAT = ITEMS.register("bivalve_meat", () -> new Item(new Item.Properties().food(ModFoods.RAW_FISH)));
 
 
 
@@ -62,6 +63,7 @@ public class ModItems {
     public static final RegistryObject<Item> SIGANUS_VULPINUS_BUCKET = registerBucket("siganus_vulpinus_bucket", ModEntities.SIGANUS_VULPINUS);
     public static final RegistryObject<Item> ZEBRASOMA_FLAVESCENS_BUCKET = registerBucket("zebrasoma_flavescens_bucket", ModEntities.ZEBRASOMA_FLAVESCENS);
     public static final RegistryObject<Item> ZEBRASOMA_VELIFER_BUCKET = registerBucket("zebrasoma_velifer_bucket", ModEntities.ZEBRASOMA_VELIFER);
+    public static final RegistryObject<Item> HYDROCYNUS_GOLIATH_BUCKET = registerBucket("hydrocynus_goliath_bucket", ModEntities.HYDROCYNUS_GOLIATH);
 
     public static final RegistryObject<Item> BETTA_SPLENDENS_BUCKET = registerBucket("betta_splendens_bucket", ModEntities.BETTA_SPLENDENS);
     public static final RegistryObject<Item> PROCAMBARUS_CLARKII_BUCKET = registerBucket("procambarus_clarkii_bucket", ModEntities.PROCAMBARUS_CLARKII);
@@ -121,6 +123,7 @@ public class ModItems {
     public static final RegistryObject<Item> SIGANUS_VULPINUS_SPAWN_EGG = registerSpawnEgg("siganus_vulpinus_spawn_egg", ModEntities.SIGANUS_VULPINUS, 0xf4e609, 0x0c0805);
     public static final RegistryObject<Item> ZEBRASOMA_FLAVESCENS_SPAWN_EGG = registerSpawnEgg("zebrasoma_flavescens_spawn_egg", ModEntities.ZEBRASOMA_FLAVESCENS, 0xdabd04, 0xfffbb4);
     public static final RegistryObject<Item> ZEBRASOMA_VELIFER_SPAWN_EGG = registerSpawnEgg("zebrasoma_velifer_spawn_egg", ModEntities.ZEBRASOMA_VELIFER, 0x4d3d25, 0xb68e0b);
+    public static final RegistryObject<Item> HYDROCYNUS_GOLIATH_SPAWN_EGG = registerSpawnEgg("hydrocynus_goliath_spawn_egg", ModEntities.HYDROCYNUS_GOLIATH, 0xb7b075, 0xc83226);
 
     //Non Fish Spawn Eggs
     public static final RegistryObject<Item> PROCAMBARUS_CLARKII_SPAWN_EGG = registerSpawnEgg("procambarus_clarkii_spawn_egg", ModEntities.PROCAMBARUS_CLARKII, 0x932a2a, 0x202522);

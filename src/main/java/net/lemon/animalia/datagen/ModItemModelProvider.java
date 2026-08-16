@@ -27,6 +27,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItems.COOKED_FISH);
         simpleItem(ModItems.COOKED_VENISON);
         simpleItem(ModItems.COOKED_CRUSTACEAN);
+        simpleItem(ModItems.BIVALVE_MEAT);
 
         //Animal Items
         simpleItem(ModItems.AMPHIPOD);
@@ -85,6 +86,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItems.SIGANUS_VULPINUS_BUCKET);
         simpleItem(ModItems.ZEBRASOMA_FLAVESCENS_BUCKET);
         simpleItem(ModItems.ZEBRASOMA_VELIFER_BUCKET);
+        simpleItem(ModItems.HYDROCYNUS_GOLIATH_BUCKET);
 
         //spawn egg generators
         withExistingParent(ModItems.DISSOSTICHUS_ELEGINOIDES_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
@@ -120,6 +122,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         withExistingParent(ModItems.SIGANUS_VULPINUS_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
         withExistingParent(ModItems.ZEBRASOMA_FLAVESCENS_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
         withExistingParent(ModItems.ZEBRASOMA_VELIFER_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
+        withExistingParent(ModItems.HYDROCYNUS_GOLIATH_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
 
 
 

@@ -17,6 +17,7 @@ public class AnimaliaFoodTab {
             ModItems.COOKED_VENISON,
             ModItems.RAW_CRUSTACEAN,
             ModItems.COOKED_CRUSTACEAN,
+            ModItems.BIVALVE_MEAT,
 
             //Other|Breeding
             ModItems.AMPHIPOD,
