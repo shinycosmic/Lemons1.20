@@ -32,7 +32,12 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         this.dropSelf(ModBlocks.KAEMPFERIA_PULCHRA.get());
         this.add(ModBlocks.SAGITTARIA.get(), block -> this.createSinglePropConditionTable(block, DoublePlantBlock.HALF, DoubleBlockHalf.LOWER));
 
+        this.dropSelf(ModBlocks.BLUE_MUSSEL.get());
         this.dropSelf(ModBlocks.BLACK_MUSSEL.get());
+        this.dropSelf(ModBlocks.SWAN_MUSSEL.get());
+        this.dropSelf(ModBlocks.ALGAE_CRUSTED_MUSSEL.get());
+        this.dropSelf(ModBlocks.YELLOW_MUSSEL.get());
+        this.dropSelf(ModBlocks.CREAM_MUSSEL.get());
 
     }
 

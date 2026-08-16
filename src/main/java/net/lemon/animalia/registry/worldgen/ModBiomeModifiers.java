@@ -25,6 +25,7 @@ public class ModBiomeModifiers {
     public static final ResourceKey<BiomeModifier> ADD_ALGAE_MAT = createKey("add_algae_mat");
     public static final ResourceKey<BiomeModifier> ADD_KAEMPFERIA_PULCHRA = createKey("add_kaempferia_pulchra");
     public static final ResourceKey<BiomeModifier> ADD_SAGITTARIA = createKey("add_sagittaria");
+    public static final ResourceKey<BiomeModifier> ADD_BLUE_MUSSEL = createKey("add_blue_mussel");
 
 
     //Defines which biomes a block spawns in.

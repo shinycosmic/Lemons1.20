@@ -12,7 +12,7 @@
   "block.animalia.blue_mussel": "Blue Mussel",
   "block.animalia.algae_crusted_mussel": "Blue Mussel",
   "block.animalia.swan_mussel": "Blue Mussel",
-  "block.animalia.black_mussel": "Blue Mussel",
+  "block.animalia.blue_mussel": "Blue Mussel",
   "block.animalia.cream_mussel": "Blue Mussel",
   "block.animalia.yellow_mussel": "Blue Mussel",
 
@@ -259,7 +259,7 @@
   "trivia.animalia.siganus_vulpinus": "The foxface rabbitfish is a reef fish found in the Indo-Pacific region. They are omnivorous and are usually found alone or in pairs. At night, the rabbitfish's colors become duller and mottled.",
   "trivia.animalia.zebrasoma_flavescens": "The Yellow Tang is a bright yellow surgeonfish that is commonly found in coral reefs. They generally eat algae and at night, a pale white band develops in the middle of their body.",
   "trivia.animalia.zebrasoma_velifer": "The Sailfin Tang is a brown and yellow colored surgeonfish known for its sail-like dorsal and anal fins which it can extend outwards. They generally graze on leafy algae.",
-  "trivia.animalia.hydrocynus_goliath": "The Sailfin Tang is a brown and yellow colored surgeonfish known for its sail-like dorsal and anal fins which it can extend outwards. They generally graze on leafy algae.",
+  "trivia.animalia.hydrocynus_goliath": "Goliath Tigerfish is a large fish native to African freshwater environments such as the Congo and Lake Tanganyika. It is a general piscivore but are also known to attack larger animals when food is scarce.",
 
   "debug.animalia.trivia": "If this value displays, there is a bug [trivia]",
   "debug.animalia.family": "if this text appears, there is a bug [family]",

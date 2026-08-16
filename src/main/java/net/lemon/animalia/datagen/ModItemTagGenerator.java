@@ -62,9 +62,9 @@ public class ModItemTagGenerator extends ItemTagsProvider {
         tag(ModTags.Items.INVERTEBRATE).add(ModItems.PROCAMBARUS_VIRGINALIS.get());
         tag(ModTags.Items.INVERTEBRATE).add(ModItems.PROCAMBARUS_LUCIFUGUS.get());
 
-        tag(ModTags.Items.MARINE_PLANT).add(Items.KELP);
-        tag(ModTags.Items.MARINE_PLANT).add(Items.SEAGRASS);
-        tag(ModTags.Items.MARINE_PLANT).add(ModBlocks.ALGAE_MAT.get().asItem());
+        tag(ModTags.Items.AQUATIC_PLANT).add(Items.KELP);
+        tag(ModTags.Items.AQUATIC_PLANT).add(Items.SEAGRASS);
+        tag(ModTags.Items.AQUATIC_PLANT).add(ModBlocks.ALGAE_MAT.get().asItem());
 
 
         tag(ModTags.Items.DUROPHAGOUS).add(Items.HORN_CORAL);
@@ -99,8 +99,25 @@ public class ModItemTagGenerator extends ItemTagsProvider {
         tag(ModTags.Items.DUROPHAGOUS).add(Items.DEAD_FIRE_CORAL_FAN);
         tag(ModTags.Items.DUROPHAGOUS).add(Items.NAUTILUS_SHELL);
         tag(ModTags.Items.DUROPHAGOUS).add(Items.SPONGE);
-        tag(ModTags.Items.DUROPHAGOUS).add(Items.SEA_PICKLE);
+        tag(ModTags.Items.DUROPHAGOUS).add(ModItems.BIVALVE_MEAT.get());
+        tag(ModTags.Items.DUROPHAGOUS).add(ModBlocks.CREAM_MUSSEL.get().asItem());
+        tag(ModTags.Items.DUROPHAGOUS).add(ModBlocks.YELLOW_MUSSEL.get().asItem());
+        tag(ModTags.Items.DUROPHAGOUS).add(ModBlocks.BLUE_MUSSEL.get().asItem());
+        tag(ModTags.Items.DUROPHAGOUS).add(ModBlocks.BLACK_MUSSEL.get().asItem());
+        tag(ModTags.Items.DUROPHAGOUS).add(ModBlocks.ALGAE_CRUSTED_MUSSEL.get().asItem());
+        tag(ModTags.Items.DUROPHAGOUS).add(ModBlocks.SWAN_MUSSEL.get().asItem());
 
+        tag(ModTags.Items.BIVALVES).add(ModBlocks.CREAM_MUSSEL.get().asItem());
+        tag(ModTags.Items.BIVALVES).add(ModBlocks.YELLOW_MUSSEL.get().asItem());
+        tag(ModTags.Items.BIVALVES).add(ModBlocks.BLUE_MUSSEL.get().asItem());
+        tag(ModTags.Items.BIVALVES).add(ModBlocks.BLACK_MUSSEL.get().asItem());
+        tag(ModTags.Items.BIVALVES).add(ModBlocks.ALGAE_CRUSTED_MUSSEL.get().asItem());
+        tag(ModTags.Items.BIVALVES).add(ModBlocks.SWAN_MUSSEL.get().asItem());
+
+        tag(ModTags.Items.RAW_CRUSTACEAN).add(ModItems.PROCAMBARUS_CLARKII.get());
+        tag(ModTags.Items.RAW_CRUSTACEAN).add(ModItems.PROCAMBARUS_ALLENI.get());
+        tag(ModTags.Items.RAW_CRUSTACEAN).add(ModItems.PROCAMBARUS_VIRGINALIS.get());
+        tag(ModTags.Items.RAW_CRUSTACEAN).add(ModItems.PROCAMBARUS_LUCIFUGUS.get());
 
     }
 }

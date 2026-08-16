@@ -65,7 +65,7 @@ public class PangasianodonEntity extends FishBase implements GeoEntity, Scannabl
 
     @Override
     public TagKey<Item> getFoodTag() {
-        return ModTags.Items.MARINE_PLANT;
+        return ModTags.Items.AQUATIC_PLANT;
     }
 
     @Override

@@ -3,11 +3,11 @@
   "category": "misc",
   "ingredients": [
     {
-      "tag": "animalia:raw_crustacean"
+      "tag": "animalia:bivalves"
     }
   ],
   "result": {
-    "count": 1,
-    "item": "animalia:raw_crustacean"
+    "count": 2,
+    "item": "animalia:bivalve_meat"
   }
 }

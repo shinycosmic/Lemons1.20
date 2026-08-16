@@ -1,6 +1,7 @@
 package net.lemon.animalia.datagen;
 
 import net.lemon.animalia.Animalia;
+import net.lemon.animalia.registry.ModBlocks;
 import net.lemon.animalia.registry.ModTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
@@ -32,6 +33,13 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
         tag(ModTags.Blocks.FOLIAGE).add(Blocks.FLOWERING_AZALEA_LEAVES);
         tag(ModTags.Blocks.FOLIAGE).add(Blocks.VINE);
         tag(ModTags.Blocks.FOLIAGE).add(Blocks.LILY_PAD);
+
+        tag(ModTags.Blocks.SHELLS).add(ModBlocks.CREAM_MUSSEL.get());
+        tag(ModTags.Blocks.SHELLS).add(ModBlocks.BLACK_MUSSEL.get());
+        tag(ModTags.Blocks.SHELLS).add(ModBlocks.BLUE_MUSSEL.get());
+        tag(ModTags.Blocks.SHELLS).add(ModBlocks.SWAN_MUSSEL.get());
+        tag(ModTags.Blocks.SHELLS).add(ModBlocks.ALGAE_CRUSTED_MUSSEL.get());
+        tag(ModTags.Blocks.SHELLS).add(ModBlocks.YELLOW_MUSSEL.get());
 
     }
 }

@@ -26,6 +26,11 @@ public class ModBlocks {
     public static final RegistryObject<Block> KAEMPFERIA_PULCHRA = registerFlowerBlock("kaempferia_pulchra", MobEffects.FIRE_RESISTANCE);
     public static final RegistryObject<Block> SAGITTARIA = registerBlock("sagittaria", () -> new SemiaquaticPlantBlock(BlockBehaviour.Properties.copy(Blocks.TALL_GRASS).noOcclusion().noCollission()));
 
+    public static final RegistryObject<Block> BLUE_MUSSEL = registerBlock("blue_mussel", () -> new AnyAttachWaterStaticBlock(BlockBehaviour.Properties.copy(Blocks.TUBE_CORAL).noOcclusion().noCollission()));
+    public static final RegistryObject<Block> SWAN_MUSSEL = registerBlock("swan_mussel", () -> new AnyAttachWaterStaticBlock(BlockBehaviour.Properties.copy(Blocks.TUBE_CORAL).noOcclusion().noCollission()));
+    public static final RegistryObject<Block> ALGAE_CRUSTED_MUSSEL = registerBlock("algae_crusted_mussel", () -> new AnyAttachWaterStaticBlock(BlockBehaviour.Properties.copy(Blocks.TUBE_CORAL).noOcclusion().noCollission()));
+    public static final RegistryObject<Block> CREAM_MUSSEL = registerBlock("cream_mussel", () -> new AnyAttachWaterStaticBlock(BlockBehaviour.Properties.copy(Blocks.TUBE_CORAL).noOcclusion().noCollission()));
+    public static final RegistryObject<Block> YELLOW_MUSSEL = registerBlock("yellow_mussel", () -> new AnyAttachWaterStaticBlock(BlockBehaviour.Properties.copy(Blocks.TUBE_CORAL).noOcclusion().noCollission()));
     public static final RegistryObject<Block> BLACK_MUSSEL = registerBlock("black_mussel", () -> new AnyAttachWaterStaticBlock(BlockBehaviour.Properties.copy(Blocks.TUBE_CORAL).noOcclusion().noCollission()));
 
 

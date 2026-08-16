@@ -14,7 +14,12 @@ public class AnimaliaPlantsTab {
             ModBlocks.ALGAE_MAT,
             ModBlocks.KAEMPFERIA_PULCHRA,
             ModBlocks.SAGITTARIA,
-            ModBlocks.BLACK_MUSSEL
+            ModBlocks.BLUE_MUSSEL,
+            ModBlocks.SWAN_MUSSEL,
+            ModBlocks.ALGAE_CRUSTED_MUSSEL,
+            ModBlocks.CREAM_MUSSEL,
+            ModBlocks.BLACK_MUSSEL,
+            ModBlocks.YELLOW_MUSSEL
 
     );
 

@@ -51,6 +51,12 @@ public class ModItemModelProvider extends ItemModelProvider {
         //Block Items
         blockSpriteItem(ModBlocks.KAEMPFERIA_PULCHRA);
         blockSpriteItem(ModBlocks.SAGITTARIA);
+        blockSpriteItem(ModBlocks.BLUE_MUSSEL);
+        blockSpriteItem(ModBlocks.SWAN_MUSSEL);
+        blockSpriteItem(ModBlocks.ALGAE_CRUSTED_MUSSEL);
+        blockSpriteItem(ModBlocks.YELLOW_MUSSEL);
+        blockSpriteItem(ModBlocks.CREAM_MUSSEL);
+        blockSpriteItem(ModBlocks.BLACK_MUSSEL);
 
         //Buckets
         simpleItem(ModItems.DISSOSTICHUS_ELEGINOIDES_BUCKET);

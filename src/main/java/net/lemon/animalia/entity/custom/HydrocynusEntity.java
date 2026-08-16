@@ -24,6 +24,7 @@ import net.minecraft.world.entity.ai.goal.AvoidEntityGoal;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
+import net.minecraft.world.entity.animal.AbstractFish;
 import net.minecraft.world.entity.animal.Cod;
 import net.minecraft.world.entity.animal.Salmon;
 import net.minecraft.world.entity.animal.Squid;
@@ -52,7 +53,7 @@ public class HydrocynusEntity extends FishBase implements GeoEntity, Scannable {
     protected void registerGoals() {
         super.registerGoals();
         this.goalSelector.getAvailableGoals().removeIf(g -> g.getGoal() instanceof AvoidEntityGoal);
-        this.goalSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, LivingEntity.class, 10, true, false, e -> e instanceof Salmon || e instanceof Squid || e instanceof Cod));
+        this.goalSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, AbstractFish.class, 10, false, false, e -> e instanceof Salmon));
         this.goalSelector.addGoal(2, new MeleeAttackGoal(this, 5.0F, true));
     }
 

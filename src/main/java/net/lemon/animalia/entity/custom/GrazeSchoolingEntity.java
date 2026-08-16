@@ -47,7 +47,7 @@ public class GrazeSchoolingEntity extends FishBase implements GeoEntity, Scannab
     @Override
     public TagKey<Item> getFoodTag() {
         if (this.getType() == ModEntities.ZEBRASOMA_FLAVESCENS.get() || this.getType() == ModEntities.ZEBRASOMA_VELIFER.get()) {
-            return ModTags.Items.MARINE_PLANT;
+            return ModTags.Items.AQUATIC_PLANT;
         }
         return ModTags.Items.FISH_FOOD;
     }

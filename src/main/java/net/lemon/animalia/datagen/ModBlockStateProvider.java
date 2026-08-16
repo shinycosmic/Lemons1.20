@@ -37,7 +37,12 @@ public class ModBlockStateProvider extends BlockStateProvider {
         glowLichenBaseBlock(ModBlocks.ALGAE_MAT.get(), "algae_mat", modLoc("block/algae_mat"));
         plantWithSpecialModel(ModBlocks.KAEMPFERIA_PULCHRA);
         semiaquaticDoubleBlockPlant(ModBlocks.SAGITTARIA);
+        anyAttachBlock(ModBlocks.BLUE_MUSSEL, "mussel1", "solid");
+        anyAttachBlock(ModBlocks.SWAN_MUSSEL, "mussel1", "solid");
+        anyAttachBlock(ModBlocks.ALGAE_CRUSTED_MUSSEL, "mussel1", "solid");
         anyAttachBlock(ModBlocks.BLACK_MUSSEL, "mussel2", "solid");
+        anyAttachBlock(ModBlocks.YELLOW_MUSSEL, "mussel2", "solid");
+        anyAttachBlock(ModBlocks.CREAM_MUSSEL, "mussel2", "solid");
 
     }
 
@@ -88,7 +93,6 @@ public class ModBlockStateProvider extends BlockStateProvider {
             case EAST -> ConfiguredModel.builder().modelFile(model).rotationX(90).rotationY(90).build();
             case WEST -> ConfiguredModel.builder().modelFile(model).rotationX(90).rotationY(270).build();
         }, BlockStateProperties.WATERLOGGED);
-        itemModels().getBuilder(name).parent(model);
     }
 
     private void glowLichenBaseBlock(Block block, String name, ResourceLocation texture) {

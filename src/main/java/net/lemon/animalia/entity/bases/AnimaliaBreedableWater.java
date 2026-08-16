@@ -128,7 +128,7 @@ public abstract class AnimaliaBreedableWater extends WaterAnimal implements IAct
         this.goalSelector.addGoal(1, new PanicGoal(this, 1.5D));
         this.goalSelector.addGoal(2, new FishBreedGoal(this, 1.0D));
         this.goalSelector.addGoal(3, new TemptGoal(this, 1.0D, this.foodIngredients(), false));
-        this.goalSelector.addGoal(4, new EatDroppedItemsGoal<>(this, 1.2D, 10.0F));
+        //this.goalSelector.addGoal(4, new EatDroppedItemsGoal<>(this, 1.2D, 10.0F));
         super.registerGoals();
     }
 
