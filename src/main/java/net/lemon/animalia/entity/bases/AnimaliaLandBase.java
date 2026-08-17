@@ -181,7 +181,7 @@ public abstract class AnimaliaLandBase extends Animal implements IActivityTime, 
         return this.tickCount < this.wantsToGrazeUntil;
     }
 
-    public void wantsToGrazeFor(int ticks) {
+    public void grazeWindow(int ticks) {
         this.wantsToGrazeUntil = this.tickCount + ticks;
     }
 
