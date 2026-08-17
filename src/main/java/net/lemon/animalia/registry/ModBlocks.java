@@ -21,11 +21,16 @@ public class ModBlocks {
 
     public static final RegistryObject<Block> FILTER_TRAP = registerBlock("filter_trap", () -> new FilterTrapBlock(BlockBehaviour.Properties.copy(Blocks.STONE).noOcclusion()));
     public static final RegistryObject<Block> MOUND_NEST = registerBlock("mound_nest", () -> new MoundNestBlock(BlockBehaviour.Properties.copy(Blocks.SAND).noOcclusion().noLootTable()));
-    public static final RegistryObject<Block> ALGAE_MAT = registerBlock("algae_mat", () -> new AlgaeMatBlock(BlockBehaviour.Properties.copy(Blocks.GLOW_LICHEN).noOcclusion().noCollission().sound(SoundType.VINE).lightLevel(state -> 0)));
+    public static final RegistryObject<Block> TERMITE_MOUND = registerBlock("termite_mound", () -> new MoundNestBlock(BlockBehaviour.Properties.copy(Blocks.SAND)));
+    public static final RegistryObject<Block> RED_TERMITE_MOUND = registerBlock("red_termite_mound", () -> new MoundNestBlock(BlockBehaviour.Properties.copy(Blocks.RED_SAND)));
 
+
+    //Plants
+    public static final RegistryObject<Block> ALGAE_MAT = registerBlock("algae_mat", () -> new AlgaeMatBlock(BlockBehaviour.Properties.copy(Blocks.GLOW_LICHEN).noOcclusion().noCollission().sound(SoundType.VINE).lightLevel(state -> 0)));
     public static final RegistryObject<Block> KAEMPFERIA_PULCHRA = registerFlowerBlock("kaempferia_pulchra", MobEffects.FIRE_RESISTANCE);
     public static final RegistryObject<Block> SAGITTARIA = registerBlock("sagittaria", () -> new SemiaquaticPlantBlock(BlockBehaviour.Properties.copy(Blocks.TALL_GRASS).noOcclusion().noCollission()));
 
+    //Statics
     public static final RegistryObject<Block> BLUE_MUSSEL = registerBlock("blue_mussel", () -> new AnyAttachWaterStaticBlock(BlockBehaviour.Properties.copy(Blocks.TUBE_CORAL).noOcclusion().noCollission()));
     public static final RegistryObject<Block> SWAN_MUSSEL = registerBlock("swan_mussel", () -> new AnyAttachWaterStaticBlock(BlockBehaviour.Properties.copy(Blocks.TUBE_CORAL).noOcclusion().noCollission()));
     public static final RegistryObject<Block> ALGAE_CRUSTED_MUSSEL = registerBlock("algae_crusted_mussel", () -> new AnyAttachWaterStaticBlock(BlockBehaviour.Properties.copy(Blocks.TUBE_CORAL).noOcclusion().noCollission()));

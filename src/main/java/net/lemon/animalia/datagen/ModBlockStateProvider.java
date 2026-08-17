@@ -43,6 +43,8 @@ public class ModBlockStateProvider extends BlockStateProvider {
         anyAttachBlock(ModBlocks.BLACK_MUSSEL, "mussel2", "solid");
         anyAttachBlock(ModBlocks.YELLOW_MUSSEL, "mussel2", "solid");
         anyAttachBlock(ModBlocks.CREAM_MUSSEL, "mussel2", "solid");
+        overlayBlock(ModBlocks.TERMITE_MOUND, mcLoc("block/sand"), modLoc("block/termite_mound"), "cutout_mipped");
+        overlayBlock(ModBlocks.RED_TERMITE_MOUND, mcLoc("block/red_sand"), modLoc("block/termite_mound"), "cutout_mipped");
 
     }
 
@@ -93,6 +95,22 @@ public class ModBlockStateProvider extends BlockStateProvider {
             case EAST -> ConfiguredModel.builder().modelFile(model).rotationX(90).rotationY(90).build();
             case WEST -> ConfiguredModel.builder().modelFile(model).rotationX(90).rotationY(270).build();
         }, BlockStateProperties.WATERLOGGED);
+    }
+
+    private void overlayBlock(RegistryObject<Block> blockObject, ResourceLocation base, ResourceLocation overlay, String renderType) {
+        Block block = blockObject.get();
+        String name = ForgeRegistries.BLOCKS.getKey(block).getPath();
+        ModelFile model = models().withExistingParent(name, mcLoc("block/block"))
+                .texture("base", base)
+                .texture("overlay", overlay)
+                .texture("particle", base)
+                .renderType(renderType)
+                .element().from(0, 0, 0).to(16, 16, 16)
+                .allFaces((direction, face) -> face.texture("#base").cullface(direction)).end()
+                .element().from(0, 0, 0).to(16, 16, 16)
+                .allFaces((direction, face) -> face.texture("#overlay").cullface(direction)).end();
+        simpleBlock(block, ConfiguredModel.allYRotations(model, 0, false));
+        simpleBlockItem(block, model);
     }
 
     private void glowLichenBaseBlock(Block block, String name, ResourceLocation texture) {
