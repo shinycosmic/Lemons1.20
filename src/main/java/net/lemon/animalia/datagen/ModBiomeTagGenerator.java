@@ -27,5 +27,11 @@ public class ModBiomeTagGenerator extends BiomeTagsProvider {
                 .add(Biomes.FROZEN_OCEAN)
                 .add(Biomes.DEEP_FROZEN_OCEAN)
                 .add(Biomes.DEEP_COLD_OCEAN);
+
+        tag(ModTags.Biomes.FRESHWATER)
+                .add(Biomes.RIVER)
+                .add(Biomes.FROZEN_RIVER)
+                .add(Biomes.MANGROVE_SWAMP)
+                .add(Biomes.SWAMP);
     }
 }

@@ -34,10 +34,14 @@ public class ModTags {
         private static TagKey<Item> tag(String name) {
             return ItemTags.create(new ResourceLocation(Animalia.MODID, name));
         }
+        private static TagKey<Item> forgeTag(String name) {
+            return ItemTags.create(new ResourceLocation("forge", name));
+        }
     }
 
     public static class Biomes {
         public static final TagKey<Biome> POLAR_OCEAN = tag("spawns/polar_ocean");
+        public static final TagKey<Biome> FRESHWATER = tag("spawns/freshwater");
 
         private static TagKey<Biome> tag(String name) {
             return TagKey.create(Registries.BIOME, new ResourceLocation(Animalia.MODID, name));

@@ -34,26 +34,19 @@ public class HydrocynusGoliathModel extends GeoModel<HydrocynusEntity> {
     @Override
     public void setCustomAnimations(HydrocynusEntity animatable, long instanceId, AnimationState<HydrocynusEntity> animationState) {
         super.setCustomAnimations(animatable, instanceId, animationState);
-        if(animatable.isBaby() || !animatable.isInWater()) {
-            return;
-        }
-
-        CoreGeoBone whole = this.getAnimationProcessor().getBone("main");
-        CoreGeoBone dorsal = this.getAnimationProcessor().getBone("dorsalFin");
-        CoreGeoBone pelvicLeft = this.getAnimationProcessor().getBone("backLeftFin");
-        CoreGeoBone pelvicRight = this.getAnimationProcessor().getBone("backRightFin");
-        CoreGeoBone tail = this.getAnimationProcessor().getBone("tail");
-        CoreGeoBone tail2 = this.getAnimationProcessor().getBone("tail2");
-        CoreGeoBone tail3 = this.getAnimationProcessor().getBone("tail3");
-        CoreGeoBone tail4 = this.getAnimationProcessor().getBone("tail4");
-
-
-        EntityModelData entityData = animationState.getData(DataTickets.ENTITY_MODEL_DATA);
-        float yaw = entityData.netHeadYaw() * ((float) Math.PI / 180F);
-        float pitch = entityData.headPitch() * ((float) Math.PI / 180F);
-
-        whole.setRotX(pitch);
-        whole.setRotZ(-yaw/2);
+//        if(animatable.isBaby() || !animatable.isInWater()) {
+//            return;
+//        }
+//
+//        CoreGeoBone whole = this.getAnimationProcessor().getBone("swim");
+//
+//
+//        EntityModelData entityData = animationState.getData(DataTickets.ENTITY_MODEL_DATA);
+//        float yaw = entityData.netHeadYaw() * ((float) Math.PI / 180F);
+//        float pitch = entityData.headPitch() * ((float) Math.PI / 180F);
+//
+//        whole.setRotX(pitch);
+//        whole.setRotZ(-yaw/2);
 
     }
 }
