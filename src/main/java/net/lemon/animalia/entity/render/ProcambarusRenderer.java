@@ -2,7 +2,7 @@ package net.lemon.animalia.entity.render;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.lemon.animalia.entity.custom.CrayfishEntity;
-import net.lemon.animalia.entity.model.ProcambarusModel;
+import net.lemon.animalia.entity.model.field.ProcambarusModel;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;

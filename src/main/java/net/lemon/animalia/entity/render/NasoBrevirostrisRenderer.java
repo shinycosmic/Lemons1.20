@@ -2,7 +2,7 @@ package net.lemon.animalia.entity.render;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.lemon.animalia.entity.custom.RegSchoolingEntity;
-import net.lemon.animalia.entity.model.NasoBrevirostrisModel;
+import net.lemon.animalia.entity.model.fish.NasoBrevirostrisModel;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;

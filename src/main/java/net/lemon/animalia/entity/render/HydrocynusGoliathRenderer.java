@@ -1,11 +1,8 @@
 package net.lemon.animalia.entity.render;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import net.lemon.animalia.entity.custom.CrayfishEntity;
 import net.lemon.animalia.entity.custom.HydrocynusEntity;
-import net.lemon.animalia.entity.custom.PangasianodonEntity;
-import net.lemon.animalia.entity.model.HydrocynusGoliathModel;
-import net.lemon.animalia.entity.model.PangasianodonGigasModel;
+import net.lemon.animalia.entity.model.fish.HydrocynusGoliathModel;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;

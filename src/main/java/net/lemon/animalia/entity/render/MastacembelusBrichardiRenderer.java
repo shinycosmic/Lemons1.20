@@ -1,10 +1,8 @@
 package net.lemon.animalia.entity.render;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.math.Axis;
 import net.lemon.animalia.entity.custom.MastacembelusEntity;
-import net.lemon.animalia.entity.model.MastacembelusArmatusModel;
-import net.lemon.animalia.entity.model.MastacembelusBrichardiModel;
+import net.lemon.animalia.entity.model.fish.MastacembelusBrichardiModel;
 import net.lemon.animalia.entity.render.layer.MastacembelusBrichardiFinLayer;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;

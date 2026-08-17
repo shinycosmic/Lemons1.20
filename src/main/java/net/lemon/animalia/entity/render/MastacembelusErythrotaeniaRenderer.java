@@ -1,9 +1,8 @@
 package net.lemon.animalia.entity.render;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.math.Axis;
 import net.lemon.animalia.entity.custom.MastacembelusEntity;
-import net.lemon.animalia.entity.model.MastacembelusErythrotaeniaModel;
+import net.lemon.animalia.entity.model.fish.MastacembelusErythrotaeniaModel;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import software.bernie.geckolib.cache.object.BakedGeoModel;

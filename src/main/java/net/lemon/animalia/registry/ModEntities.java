@@ -56,6 +56,8 @@ public class ModEntities {
     public static final RegistryObject<EntityType<CrayfishEntity>> PROCAMBARUS_VIRGINALIS = registerEntityType("procambarus_virginalis", CrayfishEntity::new, ModMobCategories.ANIMALIA_INVERTEBRATE, 0.5f, 0.3f, CrayfishEntity::setAttributes);
     public static final RegistryObject<EntityType<CrayfishEntity>> PROCAMBARUS_LUCIFUGUS = registerEntityType("procambarus_lucifugus", CrayfishEntity::new, ModMobCategories.ANIMALIA_INVERTEBRATE, 0.5f, 0.3f, CrayfishEntity::setAttributes);
 
+    //Actual Land animals
+    public static final RegistryObject<EntityType<PangolinEntity>> SMUTSIA_GIGANTEA = registerEntityType("smutsia_gigantea", PangolinEntity::new, ModMobCategories.ANIMALIA_LAND, 0.9f, 0.9f, PangolinEntity::setAttributes);
 
 
     public static final RegistryObject<EntityType<WaterSpitProjectile>> WATER_SPIT = ENTITY_TYPES.register("water_spit",

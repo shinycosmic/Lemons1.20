@@ -2,8 +2,7 @@ package net.lemon.animalia.entity.render;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.lemon.animalia.entity.custom.GrazeSchoolingEntity;
-import net.lemon.animalia.entity.model.ParacanthurusHepatusModel;
-import net.lemon.animalia.entity.model.ZanclusCornutusModel;
+import net.lemon.animalia.entity.model.fish.ParacanthurusHepatusModel;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;

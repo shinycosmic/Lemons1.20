@@ -2,8 +2,7 @@ package net.lemon.animalia.entity.render;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.lemon.animalia.entity.custom.ChaenocephalusEntity;
-import net.lemon.animalia.entity.model.ChaenocephalusAceratusModel;
-import net.lemon.animalia.entity.model.CygnodracoMawsoniModel;
+import net.lemon.animalia.entity.model.fish.CygnodracoMawsoniModel;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import software.bernie.geckolib.cache.object.BakedGeoModel;

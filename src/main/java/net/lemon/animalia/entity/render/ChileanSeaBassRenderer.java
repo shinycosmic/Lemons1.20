@@ -1,14 +1,10 @@
 package net.lemon.animalia.entity.render;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.math.Axis;
-import net.lemon.animalia.Animalia;
-import net.lemon.animalia.entity.custom.SynbranchusEntity;
 import net.lemon.animalia.entity.custom.ToothfishEntity;
-import net.lemon.animalia.entity.model.ChileanSeaBassModel;
+import net.lemon.animalia.entity.model.fish.ChileanSeaBassModel;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
-import net.minecraft.resources.ResourceLocation;
 import software.bernie.geckolib.cache.object.BakedGeoModel;
 import software.bernie.geckolib.renderer.GeoEntityRenderer;
 

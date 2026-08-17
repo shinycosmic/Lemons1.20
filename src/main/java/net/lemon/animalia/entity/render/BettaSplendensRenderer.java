@@ -1,11 +1,9 @@
 package net.lemon.animalia.entity.render;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.math.Axis;
 import net.lemon.animalia.Animalia;
 import net.lemon.animalia.entity.custom.BettaEntity;
-import net.lemon.animalia.entity.custom.ToothfishEntity;
-import net.lemon.animalia.entity.model.BettaSplendensModel;
+import net.lemon.animalia.entity.model.fish.BettaSplendensModel;
 import net.lemon.animalia.entity.render.layer.BettaSplendensColorLayer;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;

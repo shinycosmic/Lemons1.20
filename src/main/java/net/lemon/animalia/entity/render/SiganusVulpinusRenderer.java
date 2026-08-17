@@ -3,7 +3,7 @@ package net.lemon.animalia.entity.render;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.lemon.animalia.Animalia;
 import net.lemon.animalia.entity.custom.RegSchoolingEntity;
-import net.lemon.animalia.entity.model.SiganusVulpinusModel;
+import net.lemon.animalia.entity.model.fish.SiganusVulpinusModel;
 import net.lemon.animalia.entity.render.layer.NightFadeLayer;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;

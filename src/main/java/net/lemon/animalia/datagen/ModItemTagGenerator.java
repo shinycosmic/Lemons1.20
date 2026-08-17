@@ -9,6 +9,7 @@ import net.minecraft.data.tags.ItemTagsProvider;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
+import net.minecraftforge.common.Tags;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -20,10 +21,14 @@ public class ModItemTagGenerator extends ItemTagsProvider {
 
     @Override
     protected void addTags(HolderLookup.Provider pProvider) {
+        //forge tags
         tag(ItemTags.FISHES).add(ModItems.RAW_FISH.get());
         tag(ItemTags.FISHES).add(ModItems.RAW_ICEFISH.get());
         tag(ItemTags.FISHES).add(ModItems.FISH_FOOD.get());
         tag(ItemTags.FISHES).add(ModItems.COOKED_FISH.get());
+
+        tag(Tags.Items.EGGS).add(ModItems.FISH_EGG.get());
+        tag(Tags.Items.EGGS).add(ModItems.MOUND_FISH_EGG.get());
 
         tag(ModTags.Items.TO_COOKED_FISH).add(ModItems.RAW_FISH.get());
         tag(ModTags.Items.TO_COOKED_FISH).add(ModItems.RAW_ICEFISH.get());
