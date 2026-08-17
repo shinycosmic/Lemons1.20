@@ -213,7 +213,7 @@ public class PangolinEntity extends AnimaliaLandBase implements GeoEntity, Scann
     public GuardActivation getGuardActivation() {return GuardActivation.ATTACK;}
 
     @Override
-    public boolean isGrazableBlock(BlockState state) {return state.is(ModBlocks.TERMITE_MOUND.get());}
+    public boolean isGrazableBlock(BlockState state) {return state.is(ModTags.Blocks.TERMITE_MOUNDS);}
 
     @Override
     public int getGrazeCount() { return 1; }
@@ -222,7 +222,7 @@ public class PangolinEntity extends AnimaliaLandBase implements GeoEntity, Scann
     public int getGrazeLength() {return 190;}
 
     @Override
-    public double getGrazeReachSqr() {return 1.2D;}
+    public double getGrazeReachSqr() {return 3.5D;}
 
     @Override
     public boolean canGraze() {return super.canGraze() && this.getGuardPhase() == GUARD_PHASE_NONE;}

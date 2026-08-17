@@ -5,6 +5,7 @@ import net.lemon.animalia.registry.ModBlocks;
 import net.lemon.animalia.registry.ModTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.data.BlockTagsProvider;
@@ -40,6 +41,11 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
         tag(ModTags.Blocks.SHELLS).add(ModBlocks.SWAN_MUSSEL.get());
         tag(ModTags.Blocks.SHELLS).add(ModBlocks.ALGAE_CRUSTED_MUSSEL.get());
         tag(ModTags.Blocks.SHELLS).add(ModBlocks.YELLOW_MUSSEL.get());
+
+        tag(ModTags.Blocks.TERMITE_MOUNDS).add(ModBlocks.TERMITE_MOUND.get());
+        tag(ModTags.Blocks.TERMITE_MOUNDS).add(ModBlocks.RED_TERMITE_MOUND.get());
+
+        tag(BlockTags.MINEABLE_WITH_SHOVEL).addTag(ModTags.Blocks.TERMITE_MOUNDS);
 
     }
 }
