@@ -2,6 +2,7 @@ package net.lemon.animalia.registry.events;
 
 import net.lemon.animalia.Animalia;
 import net.lemon.animalia.entity.bases.AnimaliaBreedableWater;
+import net.lemon.animalia.entity.bases.helpers.IDimorphism;
 import net.lemon.animalia.entity.custom.*;
 import net.lemon.animalia.client.player.HolonetCapability;
 import net.lemon.animalia.client.player.HolonetCapabilityProvider;
@@ -68,7 +69,7 @@ public class ModEventBusEvents {
                 Player player = event.getEntity();
                 player.getCapability(HolonetCapabilityProvider.HOLONET_CAPABILITY).ifPresent(cap -> {
                     ResourceLocation id = ForgeRegistries.ENTITY_TYPES.getKey(event.getTarget().getType());
-                    int gender = scannable.hasDimorphism() ? ((AnimaliaBreedableWater) event.getTarget()).getGender() : -1;
+                    int gender = scannedGender(event.getTarget(), scannable);
                     if (cap.discover(id, gender)) {
                         ModNetwork.sendToPlayer((ServerPlayer) player, new DiscoverSpeciesPacket(id, gender));
                     }
@@ -83,12 +84,19 @@ public class ModEventBusEvents {
                 Player player = event.getEntity();
                 player.getCapability(HolonetCapabilityProvider.HOLONET_CAPABILITY).ifPresent(cap -> {
                     ResourceLocation id = ForgeRegistries.ENTITY_TYPES.getKey(event.getTarget().getType());
-                    int gender = scannable.hasDimorphism() ? ((AnimaliaBreedableWater) event.getTarget()).getGender() : -1;
+                    int gender = scannedGender(event.getTarget(), scannable);
                     if (cap.discover(id, gender)) {
                         ModNetwork.sendToPlayer((ServerPlayer) player, new DiscoverSpeciesPacket(id, gender));
                     }
                 });
             }
+        }
+
+        private static int scannedGender(Entity target, Scannable scannable) {
+            if (!scannable.hasDimorphism() || !(target instanceof IDimorphism gendered)) {
+                return IDimorphism.UNGENDERED;
+            }
+            return gendered.getGender();
         }
 
         @SubscribeEvent

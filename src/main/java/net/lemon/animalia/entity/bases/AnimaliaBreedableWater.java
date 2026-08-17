@@ -45,7 +45,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Objects;
 import java.util.UUID;
 
-public abstract class AnimaliaBreedableWater extends WaterAnimal implements IActivityTime, IFoodEater, IIdles, IGrazer {
+public abstract class AnimaliaBreedableWater extends WaterAnimal implements IActivityTime, IFoodEater, IIdles, IGrazer, IDimorphism {
     private static final EntityDataAccessor<Integer> AGE = SynchedEntityData.defineId(AnimaliaBreedableWater.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Integer> GENDER = SynchedEntityData.defineId(AnimaliaBreedableWater.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Integer> VAR_COLOR = SynchedEntityData.defineId(AnimaliaBreedableWater.class, EntityDataSerializers.INT);
@@ -265,13 +265,11 @@ public abstract class AnimaliaBreedableWater extends WaterAnimal implements IAct
         this.entityData.set(VAR_COLOR, i);
     }
 
-    public int getGender() {
-        return Mth.clamp(this.entityData.get(GENDER), 0, 2);
-    }
+    @Override
+    public int getGender() {return Mth.clamp(this.entityData.get(GENDER), 0, 2);}
 
-    public void setGender(int i) {
-        this.entityData.set(GENDER, i);
-    }
+    @Override
+    public void setGender(int i) {this.entityData.set(GENDER, i);}
 
     public int getEatLength() { return 20; }
 

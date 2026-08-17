@@ -38,7 +38,7 @@ import software.bernie.geckolib.core.object.PlayState;
 
 public class PangolinEntity extends AnimaliaLandBase implements GeoEntity, Scannable, ICanGuard {
     private final AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
-    private static final EntityDataAccessor<Integer> GUARD_PHASE = SynchedEntityData.defineId(AnimaliaLandBase.class, EntityDataSerializers.INT);
+    private static final EntityDataAccessor<Integer> GUARD_PHASE = SynchedEntityData.defineId(PangolinEntity.class, EntityDataSerializers.INT);
     private final int SMUTSIA_GIGANTEA_PIXEL = 39;
 
     public PangolinEntity(EntityType<? extends Animal> entityType, Level level) {
@@ -205,7 +205,7 @@ public class PangolinEntity extends AnimaliaLandBase implements GeoEntity, Scann
 
     @Override
     public void addAdditionalSaveData(CompoundTag pCompound) {
-        pCompound.putFloat("GuardPhase", this.getGuardPhase());
+        pCompound.putInt("GuardPhase", this.getGuardPhase());
         super.addAdditionalSaveData(pCompound);
     }
 

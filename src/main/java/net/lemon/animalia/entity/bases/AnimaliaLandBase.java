@@ -39,7 +39,7 @@ import java.util.Objects;
 
 import static net.lemon.animalia.entity.bases.AnimaliaBreedableWater.*;
 
-public abstract class AnimaliaLandBase extends Animal implements IActivityTime, IFoodEater, IIdles, IGrazer {
+public abstract class AnimaliaLandBase extends Animal implements IActivityTime, IFoodEater, IIdles, IGrazer, IDimorphism {
     private static final EntityDataAccessor<Integer> GENDER = SynchedEntityData.defineId(AnimaliaLandBase.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Integer> VAR_COLOR = SynchedEntityData.defineId(AnimaliaLandBase.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Float> VAR_SIZE_MULTIPLIER = SynchedEntityData.defineId(AnimaliaLandBase.class, EntityDataSerializers.FLOAT);
@@ -207,13 +207,11 @@ public abstract class AnimaliaLandBase extends Animal implements IActivityTime, 
         this.entityData.set(VAR_COLOR, i);
     }
 
-    public int getGender() {
-        return Mth.clamp(this.entityData.get(GENDER), 0, 2);
-    }
+    @Override
+    public int getGender() {return Mth.clamp(this.entityData.get(GENDER), 0, 2);}
 
-    public void setGender(int i) {
-        this.entityData.set(GENDER, i);
-    }
+    @Override
+    public void setGender(int i) {this.entityData.set(GENDER, i);}
 
     public int getEatLength() { return 20; }
 

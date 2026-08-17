@@ -5,6 +5,7 @@ import net.lemon.animalia.Animalia;
 import net.lemon.animalia.entity.bases.AnimaliaBreedableWater;
 import net.lemon.animalia.entity.bases.FishBase;
 import net.lemon.animalia.client.player.network.ClientDiscoveryCache;
+import net.lemon.animalia.entity.bases.helpers.IDimorphism;
 import net.lemon.animalia.entity.bases.helpers.IsGenetic;
 import net.lemon.animalia.util.Scannable;
 import net.minecraft.ChatFormatting;
@@ -107,8 +108,8 @@ public class CreatureDetailScreen extends Screen {
         }
         displayEntity.setOnGround(true);
 
-        if (displayEntity instanceof AnimaliaBreedableWater abw) {
-            abw.setGender(currentGender);
+        if (displayEntity instanceof IDimorphism gendered) {
+            gendered.setGender(currentGender);
         }
         if (displayEntity instanceof Scannable scannable) {
             hasDimorphism = scannable.hasDimorphism();
