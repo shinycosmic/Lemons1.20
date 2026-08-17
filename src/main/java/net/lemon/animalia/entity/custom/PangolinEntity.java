@@ -17,6 +17,7 @@ import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.DifficultyInstance;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.MobSpawnType;
@@ -41,13 +42,15 @@ public class PangolinEntity extends AnimaliaLandBase implements GeoEntity, Scann
     private static final EntityDataAccessor<Integer> GUARD_PHASE = SynchedEntityData.defineId(PangolinEntity.class, EntityDataSerializers.INT);
     private final int SMUTSIA_GIGANTEA_PIXEL = 39;
 
+    private int wantsToGuardUntil;
+
     public PangolinEntity(EntityType<? extends Animal> entityType, Level level) {
         super(entityType, level);
     }
 
     @Override
     protected void registerGoals() {
-        this.goalSelector.addGoal(1, new GuardGoal(this, 1.15D));
+        this.goalSelector.addGoal(1, new GuardGoal(this, 6D));
         super.registerGoals();
     }
 
@@ -180,15 +183,6 @@ public class PangolinEntity extends AnimaliaLandBase implements GeoEntity, Scann
     }
 
     @Override
-    public @Nullable SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, MobSpawnType reason, @Nullable SpawnGroupData spawnData, @Nullable CompoundTag dataTag) {
-        if (dataTag == null) {
-            this.setVarColor(1);
-            this.setVarSizeMultiplier(this.genVarSizeMultiplier());
-        }
-        return super.finalizeSpawn(level, difficulty, reason, spawnData, dataTag);
-    }
-
-    @Override
     public int getGuardPhase() {
         return this.entityData.get(GUARD_PHASE);
     }
@@ -199,19 +193,42 @@ public class PangolinEntity extends AnimaliaLandBase implements GeoEntity, Scann
     }
 
     @Override
+    public boolean wantsToGuard() {return this.tickCount < this.wantsToGuardUntil;}
+
+    @Override
+    public void guardWindow(int ticks) {this.wantsToGuardUntil = this.tickCount + ticks;}
+
+    @Override
+    public void clearWantsToGuard() {this.wantsToGuardUntil = 0;}
+
+    @Override
+    public int getToGuardLength() {return 14;}
+
+    @Override
+    public int getUnGuardLength() {return 80;}
+
+    @Override
     public GuardActivation getGuardActivation() {
         return GuardActivation.ATTACK;
     }
 
     @Override
-    public void addAdditionalSaveData(CompoundTag pCompound) {
-        pCompound.putInt("GuardPhase", this.getGuardPhase());
-        super.addAdditionalSaveData(pCompound);
+    public boolean hurt(DamageSource source, float amount) {
+        if (this.isInvulnerableTo(source)) {
+            return false;
+        }
+        if (!this.level().isClientSide && this.guardTriggersFrom(source)) {
+            this.guardWindow(this.getGuardReAttackWindow());
+        }
+        return super.hurt(source, amount * this.getGuardDamageMultiplier(source));
     }
 
     @Override
-    public void readAdditionalSaveData(CompoundTag pCompound) {
-        this.setGuardPhase(pCompound.getInt("GuardPhase"));
-        super.readAdditionalSaveData(pCompound);
+    public @Nullable SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, MobSpawnType reason, @Nullable SpawnGroupData spawnData, @Nullable CompoundTag dataTag) {
+        if (dataTag == null) {
+            this.setVarColor(1);
+            this.setVarSizeMultiplier(this.genVarSizeMultiplier());
+        }
+        return super.finalizeSpawn(level, difficulty, reason, spawnData, dataTag);
     }
 }

@@ -19,6 +19,7 @@ public class ThreatGoal extends Goal {
         ATTACK
     }
 
+    private static final int SCAN_INTERVAL = 5;
     private final PathfinderMob mob;
     private final ICanThreat threatener;
     private final double threatRange;
@@ -32,6 +33,7 @@ public class ThreatGoal extends Goal {
     private int displayTicks;
     private int leavingTicks;
     private int cooldown;
+    private int nextThreatScan;
 
     public ThreatGoal(PathfinderMob mob, double threatRange, int maxThreatTicks, int exitTicks, ThreatOutcome outcome) {
         this(mob, threatRange, maxThreatTicks, exitTicks, outcome, entity -> entity instanceof Player player && !player.isCreative());
@@ -58,6 +60,10 @@ public class ThreatGoal extends Goal {
         if (!this.threatener.canStartThreatening() || this.mob.isBaby()) {
             return false;
         }
+        if (this.mob.tickCount < this.nextThreatScan) {
+            return false;
+        }
+        this.nextThreatScan = this.mob.tickCount + SCAN_INTERVAL + this.mob.getRandom().nextInt(10);
         this.threatTarget = this.findThreat();
         return this.threatTarget != null;
     }

@@ -18,7 +18,8 @@ public class GuardGoal extends Goal {
     private final double guardRange;
     private final Predicate<LivingEntity> threatPredicate;
     private final TargetingConditions targetingConditions;
-
+    private static final int SCAN_INTERVAL = 5;
+    private int nextThreatScan;
     private LivingEntity threatTarget;
     private int enteringTicks;
     private int exitingTicks;
@@ -62,7 +63,7 @@ public class GuardGoal extends Goal {
     @Override
     public void start() {
         this.exitingTicks = 0;
-        this.enteringTicks = this.guarder.getGuardInLength();
+        this.enteringTicks = this.guarder.getToGuardLength();
         if (this.enteringTicks > 0) {
             this.guarder.setGuardPhase(ICanGuard.GUARD_PHASE_ENTERING);
         } else {
@@ -109,7 +110,7 @@ public class GuardGoal extends Goal {
     }
 
     private void tickGuarding() {
-        this.threatTarget = this.findThreat();
+        this.threatTarget = this.currentThreat();
         if (this.threatTarget != null) {
             this.guarder.onGuardTick(this.threatTarget);
         }
@@ -133,12 +134,12 @@ public class GuardGoal extends Goal {
     private boolean activationSatisfied() {
         switch (this.guarder.getGuardActivation()) {
             case PROXIMITY:
-                return this.findThreat() != null;
+                return this.currentThreat() != null;
             case ATTACK:
                 return this.guarder.wantsToGuard();
             case BOTH:
             default:
-                return this.guarder.wantsToGuard() || this.findThreat() != null;
+                return this.guarder.wantsToGuard() || this.currentThreat() != null;
         }
     }
 
@@ -165,7 +166,7 @@ public class GuardGoal extends Goal {
 
     private void beginExiting() {
         this.guarder.clearWantsToGuard();
-        this.exitingTicks = this.guarder.getGuardOutLength();
+        this.exitingTicks = this.guarder.getUnGuardLength();
         if (this.exitingTicks > 0) {
             this.guarder.setGuardPhase(ICanGuard.GUARD_PHASE_EXITING);
         } else {
@@ -180,5 +181,22 @@ public class GuardGoal extends Goal {
                 this.mob,
                 this.mob.getX(), this.mob.getY(), this.mob.getZ(),
                 this.mob.getBoundingBox().inflate(this.guardRange));
+    }
+
+    private LivingEntity currentThreat() {
+        if (this.threatTarget != null && !this.stillThreatening(this.threatTarget)) {
+            this.threatTarget = null;
+        }
+        if (this.mob.tickCount < this.nextThreatScan) {
+            return this.threatTarget;
+        }
+        this.nextThreatScan = this.mob.tickCount + SCAN_INTERVAL + this.mob.getRandom().nextInt(10);
+        this.threatTarget = this.findThreat();
+        return this.threatTarget;
+    }
+
+    private boolean stillThreatening(LivingEntity threat) {
+        return threat.isAlive() && this.threatPredicate.test(threat)
+                && this.mob.distanceTo(threat) <= this.guardRange;
     }
 }

@@ -40,11 +40,11 @@ public interface ICanGuard {
         return 100;
     }
 
-    default int getGuardInLength() {
+    default int getToGuardLength() {
         return 0;
     }
 
-    default int getGuardOutLength() {
+    default int getUnGuardLength() {
         return 0;
     }
 
