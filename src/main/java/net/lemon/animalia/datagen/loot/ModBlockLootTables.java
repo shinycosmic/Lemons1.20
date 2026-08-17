@@ -1,11 +1,15 @@
 package net.lemon.animalia.datagen.loot;
 
 import net.lemon.animalia.registry.ModBlocks;
+import net.lemon.animalia.registry.ModItems;
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.DoublePlantBlock;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
+import net.minecraft.world.level.storage.loot.entries.LootItem;
+import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
+import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 import net.minecraftforge.registries.RegistryObject;
 
 import java.util.Set;
@@ -38,6 +42,11 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         this.dropSelf(ModBlocks.ALGAE_CRUSTED_MUSSEL.get());
         this.dropSelf(ModBlocks.YELLOW_MUSSEL.get());
         this.dropSelf(ModBlocks.CREAM_MUSSEL.get());
+
+        this.add(ModBlocks.TERMITE_MOUND.get(), block -> createSilkTouchDispatchTable(block, this.applyExplosionDecay(block, LootItem.lootTableItem(ModItems.TERMITE.get())
+                        .apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 3.0F))))));
+        this.add(ModBlocks.RED_TERMITE_MOUND.get(), block -> createSilkTouchDispatchTable(block, this.applyExplosionDecay(block, LootItem.lootTableItem(ModItems.TERMITE.get())
+                        .apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 3.0F))))));
 
     }
 

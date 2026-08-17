@@ -11,7 +11,9 @@ import java.util.List;
 
 public class AnimaliaMiscTab {
     public static final List<RegistryObject<? extends Block>> MISC_BLOCKS = List.of(
-            ModBlocks.FILTER_TRAP
+            ModBlocks.FILTER_TRAP,
+            ModBlocks.TERMITE_MOUND,
+            ModBlocks.RED_TERMITE_MOUND
     );
 
     public static final List<RegistryObject<? extends Item>> MISC_ITEMS = List.of(

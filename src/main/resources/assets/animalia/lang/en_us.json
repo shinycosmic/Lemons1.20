@@ -15,7 +15,8 @@
   "block.animalia.black_mussel": "Black Mussel",
   "block.animalia.cream_mussel": "Cream Mussel",
   "block.animalia.yellow_mussel": "Yellow Mussel",
-
+  "block.animalia.termite_mound": "Termite Mound",
+  "block.animalia.red_termite_mound": "Termite Mound",
 
   "entity.animalia.betta_splendens.twoComp": "%s %s Betta",
   "entity.animalia.betta_splendens.threeComp": "%s %s %s Betta",
