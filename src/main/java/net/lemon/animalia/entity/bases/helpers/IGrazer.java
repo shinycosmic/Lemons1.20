@@ -38,7 +38,7 @@ public interface IGrazer {
         return false;
     }
 
-    default void clearGrazeUrge() {
+    default void clearWantsToGraze() {
     }
 
     default void onGrazeStart() {

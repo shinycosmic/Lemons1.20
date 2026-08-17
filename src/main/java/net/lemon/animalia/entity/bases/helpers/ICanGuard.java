@@ -30,10 +30,10 @@ public interface ICanGuard {
         return false;
     }
 
-    default void urgeGuard(int ticks) {
+    default void guardWindow(int ticks) {
     }
 
-    default void clearGuardUrge() {
+    default void clearWantsToGuard() {
     }
 
     default int getGuardReAttackWindow() {

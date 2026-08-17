@@ -1,6 +1,5 @@
 package net.lemon.animalia.entity.bases;
 
-import net.lemon.animalia.entity.ai.EatDroppedItemsGoal;
 import net.lemon.animalia.entity.ai.FishBreedGoal;
 import net.lemon.animalia.entity.bases.helpers.*;
 import net.lemon.animalia.item.FishEggItem;
@@ -59,7 +58,7 @@ public abstract class AnimaliaBreedableWater extends WaterAnimal implements IAct
 
     private int eatTicks = 0;
     private int grazeTicks = 0;
-    private int grazeUrgeUntil;
+    private int wantsToGrazeUntil;
     private int hideTicks = 0;
     private int hideCooldown = 0;
     private int burrowingTicks = 0;
@@ -296,15 +295,15 @@ public abstract class AnimaliaBreedableWater extends WaterAnimal implements IAct
                 && !this.isMovementLockedByIdle();
     }
     public boolean wantsToGraze() {
-        return this.tickCount < this.grazeUrgeUntil;
+        return this.tickCount < this.wantsToGrazeUntil;
     }
 
-    public void urgeGraze(int ticks) {
-        this.grazeUrgeUntil = this.tickCount + ticks;
+    public void grazeWindow(int ticks) {
+        this.wantsToGrazeUntil = this.tickCount + ticks;
     }
 
-    public void clearGrazeUrge() {
-        this.grazeUrgeUntil = 0;
+    public void clearWantsToGraze() {
+        this.wantsToGrazeUntil = 0;
     }
 
     public void onGrazeStart() {

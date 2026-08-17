@@ -32,7 +32,7 @@ import org.jetbrains.annotations.Nullable;
 
 public abstract class FishBase extends AnimaliaBreedableWater implements Bucketable {
     private static final EntityDataAccessor<Boolean> FROM_BUCKET = SynchedEntityData.defineId(FishBase.class, EntityDataSerializers.BOOLEAN);
-    private static final int GRAZE_URGE_TICKS = 200;
+    private static final int GRAZE_WINDOW = 200;
 
     private boolean invisToBoid;
     @Nullable
@@ -202,7 +202,7 @@ public abstract class FishBase extends AnimaliaBreedableWater implements Bucketa
     public boolean onSchoolSignalReceived(SchoolSignal signal, int data) {
         if (signal == SchoolSignal.GRAZE
                 && this.canGraze() && this.findGrazeBlock() != null) {
-            this.urgeGraze(GRAZE_URGE_TICKS);
+            this.grazeWindow(GRAZE_WINDOW);
             return true;
         }
 

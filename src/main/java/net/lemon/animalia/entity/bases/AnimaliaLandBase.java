@@ -51,7 +51,7 @@ public abstract class AnimaliaLandBase extends Animal implements IActivityTime, 
     private static final EntityDataAccessor<Integer> TWITCH_IDLE = SynchedEntityData.defineId(AnimaliaLandBase.class, EntityDataSerializers.INT);
 
     private int grazeTicks = 0;
-    private int grazeUrgeUntil;
+    private int wantsToGrazeUntil;
     private int eatTicks = 0;
     private int hideTicks = 0;
     private int hideCooldown = 0;
@@ -178,15 +178,15 @@ public abstract class AnimaliaLandBase extends Animal implements IActivityTime, 
     }
 
     public boolean wantsToGraze() {
-        return this.tickCount < this.grazeUrgeUntil;
+        return this.tickCount < this.wantsToGrazeUntil;
     }
 
-    public void urgeGraze(int ticks) {
-        this.grazeUrgeUntil = this.tickCount + ticks;
+    public void wantsToGrazeFor(int ticks) {
+        this.wantsToGrazeUntil = this.tickCount + ticks;
     }
 
-    public void clearGrazeUrge() {
-        this.grazeUrgeUntil = 0;
+    public void clearWantsToGraze() {
+        this.wantsToGrazeUntil = 0;
     }
 
     public float getVarSizeMultiplier() {

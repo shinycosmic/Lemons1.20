@@ -98,7 +98,7 @@ public class GuardGoal extends Goal {
     @Override
     public void stop() {
         this.guarder.setGuardPhase(ICanGuard.GUARD_PHASE_NONE);
-        this.guarder.clearGuardUrge();
+        this.guarder.clearWantsToGuard();
         this.threatTarget = null;
         this.cooldown = 100;
     }
@@ -164,7 +164,7 @@ public class GuardGoal extends Goal {
     }
 
     private void beginExiting() {
-        this.guarder.clearGuardUrge();
+        this.guarder.clearWantsToGuard();
         this.exitingTicks = this.guarder.getGuardOutLength();
         if (this.exitingTicks > 0) {
             this.guarder.setGuardPhase(ICanGuard.GUARD_PHASE_EXITING);

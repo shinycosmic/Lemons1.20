@@ -76,7 +76,7 @@ public class GrazeGoal<T extends PathfinderMob & IGrazer & IFoodEater> extends G
 
     @Override
     public void start() {
-        this.mob.clearGrazeUrge();
+        this.mob.clearWantsToGraze();
         this.grazesRemaining = this.mob.getGrazeCount();
         this.nextGrazeTime = 0;
         this.fed = false;
