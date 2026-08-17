@@ -4,6 +4,7 @@ import net.lemon.animalia.entity.ai.GuardGoal;
 import net.lemon.animalia.entity.bases.AnimaliaLandBase;
 import net.lemon.animalia.entity.bases.helpers.ActivityTime;
 import net.lemon.animalia.entity.bases.helpers.ICanGuard;
+import net.lemon.animalia.registry.ModBlocks;
 import net.lemon.animalia.registry.ModEntities;
 import net.lemon.animalia.registry.ModItems;
 import net.lemon.animalia.registry.ModTags;
@@ -29,6 +30,7 @@ import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
+import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.core.animatable.GeoAnimatable;
@@ -208,9 +210,22 @@ public class PangolinEntity extends AnimaliaLandBase implements GeoEntity, Scann
     public int getUnGuardLength() {return 80;}
 
     @Override
-    public GuardActivation getGuardActivation() {
-        return GuardActivation.ATTACK;
-    }
+    public GuardActivation getGuardActivation() {return GuardActivation.ATTACK;}
+
+    @Override
+    public boolean isGrazableBlock(BlockState state) {return state.is(ModBlocks.TERMITE_MOUND.get());}
+
+    @Override
+    public int getGrazeCount() { return 1; }
+
+    @Override
+    public int getGrazeLength() {return 190;}
+
+    @Override
+    public double getGrazeReachSqr() {return 1.2D;}
+
+    @Override
+    public boolean canGraze() {return super.canGraze() && this.getGuardPhase() == GUARD_PHASE_NONE;}
 
     @Override
     public boolean hurt(DamageSource source, float amount) {
