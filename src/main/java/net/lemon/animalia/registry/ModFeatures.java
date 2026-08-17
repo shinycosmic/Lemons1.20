@@ -1,6 +1,8 @@
 package net.lemon.animalia.registry;
 
 import net.lemon.animalia.Animalia;
+import net.lemon.animalia.worldgen.feature.TermiteMoundConfiguration;
+import net.lemon.animalia.worldgen.feature.TermiteMoundFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
