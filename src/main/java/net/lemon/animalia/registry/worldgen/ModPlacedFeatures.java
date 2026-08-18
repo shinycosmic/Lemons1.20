@@ -34,8 +34,8 @@ public class ModPlacedFeatures {
         register(context, SAGITTARIA, ModConfiguredFeatures.SAGITTARIA, patch(16, Heightmap.Types.OCEAN_FLOOR_WG));
         register(context, MARINE_MUSSELS, ModConfiguredFeatures.MARINE_MUSSELS, waterCluster(3, 3, 5, inWater()));
         register(context, FRESHWATER_MUSSELS, ModConfiguredFeatures.FRESHWATER_MUSSELS, waterCluster(3, 3, 5, inWater()));
-        register(context, TERMITE_MOUND, ModConfiguredFeatures.TERMITE_MOUND, patch(14, Heightmap.Types.WORLD_SURFACE_WG));
-        register(context, RED_TERMITE_MOUND, ModConfiguredFeatures.RED_TERMITE_MOUND, patch(14, Heightmap.Types.WORLD_SURFACE_WG));
+        register(context, TERMITE_MOUND, ModConfiguredFeatures.TERMITE_MOUND, patch(24, Heightmap.Types.WORLD_SURFACE_WG));
+        register(context, RED_TERMITE_MOUND, ModConfiguredFeatures.RED_TERMITE_MOUND, patch(24, Heightmap.Types.WORLD_SURFACE_WG));
     }
 
 
