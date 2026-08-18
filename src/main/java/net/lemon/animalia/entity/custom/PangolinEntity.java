@@ -65,7 +65,7 @@ public class PangolinEntity extends AnimaliaLandBase implements GeoEntity, Scann
     public static AttributeSupplier setAttributes() {
         return Mob.createMobAttributes()
                 .add(Attributes.MAX_HEALTH, 12D)
-                .add(Attributes.MOVEMENT_SPEED, 0.4f)
+                .add(Attributes.MOVEMENT_SPEED, 0.05f)
                 .add(Attributes.ATTACK_DAMAGE, 3)
                 .build();
     }
@@ -172,8 +172,10 @@ public class PangolinEntity extends AnimaliaLandBase implements GeoEntity, Scann
 
         if (this.isActuallyMoving()) {
             animationState.getController().setAnimation(RawAnimation.begin().then("walk", Animation.LoopType.LOOP));
+            return PlayState.CONTINUE;
+        } else {
+            return PlayState.STOP;
         }
-        return PlayState.CONTINUE;
     }
 
     private <T extends GeoAnimatable> PlayState eatPredicate(AnimationState<T> state) {
