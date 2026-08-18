@@ -129,6 +129,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         withExistingParent(ModItems.ZEBRASOMA_FLAVESCENS_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
         withExistingParent(ModItems.ZEBRASOMA_VELIFER_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
         withExistingParent(ModItems.HYDROCYNUS_GOLIATH_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
+        withExistingParent(ModItems.SMUTSIA_GIGANTEA_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
 
 
 

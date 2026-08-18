@@ -131,6 +131,9 @@ public class ModItems {
     public static final RegistryObject<Item> PROCAMBARUS_VIRGINALIS_SPAWN_EGG = registerSpawnEgg("procambarus_virginalis_spawn_egg", ModEntities.PROCAMBARUS_VIRGINALIS, 0x332b20, 0x8a7346);
     public static final RegistryObject<Item> PROCAMBARUS_LUCIFUGUS_SPAWN_EGG = registerSpawnEgg("procambarus_lucifugus_spawn_egg", ModEntities.PROCAMBARUS_LUCIFUGUS, 0xab9782, 0xbbb8c9);
 
+    //Land
+    public static final RegistryObject<Item> SMUTSIA_GIGANTEA_SPAWN_EGG = registerSpawnEgg("smutsia_gigantea_spawn_egg", ModEntities.SMUTSIA_GIGANTEA, 0x8e6b3c, 0xffc06a);
+
 
 
     public static final RegistryObject<Item> BETTA_SPLENDENS_SPAWN_EGG = registerSpecialSpawnEgg("betta_splendens_spawn_egg", ModEntities.BETTA_SPLENDENS, 0xF12D03, 0x608EE9);
