@@ -188,9 +188,9 @@ public class PangolinEntity extends AnimaliaLandBase implements GeoEntity, Scann
         if (this.isActuallyMoving()) {
             animationState.getController().setAnimation(RawAnimation.begin().then("walk", Animation.LoopType.LOOP));
             return PlayState.CONTINUE;
-        } else {
-            return PlayState.STOP;
         }
+        animationState.getController().setAnimation(RawAnimation.begin().then("idle", Animation.LoopType.LOOP));
+        return PlayState.CONTINUE;
     }
 
     private <T extends GeoAnimatable> PlayState eatPredicate(AnimationState<T> state) {
