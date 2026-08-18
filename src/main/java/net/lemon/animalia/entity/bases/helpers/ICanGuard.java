@@ -89,7 +89,7 @@ public interface ICanGuard {
 
     default boolean canStartGuarding() {
         PathfinderMob mob = (PathfinderMob) this;
-        return !this.isHiding() && mob.onGround() && !mob.isInWater();
+        return !this.isHiding() && !mob.isInWater();
     }
 
     default void onGuardTick(LivingEntity threat) {

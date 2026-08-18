@@ -101,7 +101,7 @@ public class GuardGoal extends Goal {
         this.guarder.setGuardPhase(ICanGuard.GUARD_PHASE_NONE);
         this.guarder.clearWantsToGuard();
         this.threatTarget = null;
-        this.cooldown = 100;
+        this.cooldown = 20;
     }
 
     @Override
