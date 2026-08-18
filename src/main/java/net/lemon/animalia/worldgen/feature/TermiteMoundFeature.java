@@ -29,10 +29,10 @@ public class TermiteMoundFeature extends Feature<TermiteMoundConfiguration> {
             return false;
         }
 
-        BlockState sand = config.sand();
+        BlockState sandstone = config.sandstone();
         BlockState mound = config.mound();
-        if (level.getBlockState(origin.below()).is(config.borderSand().getBlock())) {
-            sand = config.borderSand();
+        if (level.getBlockState(origin.below()).is(config.borderGround().getBlock())) {
+            sandstone = config.borderSandstone();
             mound = config.borderMound();
         }
 
@@ -58,7 +58,7 @@ public class TermiteMoundFeature extends Feature<TermiteMoundConfiguration> {
                     continue;
                 }
                 boolean isMound = random.nextInt(4) == 0;
-                this.setBlock(level, pos, isMound ? mound : sand);
+                this.setBlock(level, pos, isMound ? mound : sandstone);
                 placedMound |= isMound;
                 if (anyPlaced == null) {
                     anyPlaced = pos;

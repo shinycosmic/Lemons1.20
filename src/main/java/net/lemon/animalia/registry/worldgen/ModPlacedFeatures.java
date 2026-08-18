@@ -24,7 +24,8 @@ public class ModPlacedFeatures {
     public static final ResourceKey<PlacedFeature> SAGITTARIA = createKey("sagittaria");
     public static final ResourceKey<PlacedFeature> MARINE_MUSSELS = createKey("marine_mussels");
     public static final ResourceKey<PlacedFeature> FRESHWATER_MUSSELS = createKey("freshwater_mussels");
-
+    public static final ResourceKey<PlacedFeature> TERMITE_MOUND = createKey("termite_mound");
+    public static final ResourceKey<PlacedFeature> RED_TERMITE_MOUND = createKey("red_termite_mound");
 
     //define worldgen here for blocks
     public static void bootstrap(BootstapContext<PlacedFeature> context) {
@@ -33,6 +34,8 @@ public class ModPlacedFeatures {
         register(context, SAGITTARIA, ModConfiguredFeatures.SAGITTARIA, patch(16, Heightmap.Types.OCEAN_FLOOR_WG));
         register(context, MARINE_MUSSELS, ModConfiguredFeatures.MARINE_MUSSELS, waterCluster(3, 3, 5, inWater()));
         register(context, FRESHWATER_MUSSELS, ModConfiguredFeatures.FRESHWATER_MUSSELS, waterCluster(3, 3, 5, inWater()));
+        register(context, TERMITE_MOUND, ModConfiguredFeatures.TERMITE_MOUND, patch(14, Heightmap.Types.WORLD_SURFACE_WG));
+        register(context, RED_TERMITE_MOUND, ModConfiguredFeatures.RED_TERMITE_MOUND, patch(14, Heightmap.Types.WORLD_SURFACE_WG));
     }
 
 

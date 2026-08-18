@@ -2,6 +2,8 @@ package net.lemon.animalia.registry.worldgen;
 
 import net.lemon.animalia.Animalia;
 import net.lemon.animalia.registry.ModBlocks;
+import net.lemon.animalia.registry.ModFeatures;
+import net.lemon.animalia.worldgen.feature.TermiteMoundConfiguration;
 import net.minecraft.core.HolderSet;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstapContext;
@@ -19,6 +21,7 @@ import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.configurations.MultifaceGrowthConfiguration;
+import net.minecraft.world.level.levelgen.feature.configurations.RandomPatchConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.SimpleBlockConfiguration;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
 import net.minecraft.world.level.levelgen.feature.stateproviders.WeightedStateProvider;
@@ -35,41 +38,45 @@ public class ModConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> SAGITTARIA = createKey("sagittaria");
     public static final ResourceKey<ConfiguredFeature<?, ?>> MARINE_MUSSELS = createKey("marine_mussels");
     public static final ResourceKey<ConfiguredFeature<?, ?>> FRESHWATER_MUSSELS = createKey("freshwater_mussels");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> TERMITE_MOUND = createKey("termite_mound");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> RED_TERMITE_MOUND = createKey("red_termite_mound");
 
 
     //Define worldgen configurations here
     public static void bootstrap(BootstapContext<ConfiguredFeature<?, ?>> context) {
-        registerMultiface(context, ALGAE_MAT, (MultifaceBlock) ModBlocks.ALGAE_MAT.get(), 4, 0.6F, FRESHWATER_BEDS);
-        registerFlowerPatch(context, KAEMPFERIA_PULCHRA, ModBlocks.KAEMPFERIA_PULCHRA.get(), 64);
-        registerSemiaquaticPatch(context, SAGITTARIA, ModBlocks.SAGITTARIA.get(), 64);
-        registerWaterFloorBlocks(context, MARINE_MUSSELS, ModBlocks.BLUE_MUSSEL.get(), ModBlocks.ALGAE_CRUSTED_MUSSEL.get(), ModBlocks.BLACK_MUSSEL.get());
-        registerWaterFloorBlocks(context, FRESHWATER_MUSSELS, ModBlocks.YELLOW_MUSSEL.get(), ModBlocks.ALGAE_CRUSTED_MUSSEL.get(), ModBlocks.BLACK_MUSSEL.get(), ModBlocks.CREAM_MUSSEL.get(),ModBlocks.SWAN_MUSSEL.get());
-
+        FeatureUtils.register(context, ALGAE_MAT, Feature.MULTIFACE_GROWTH, multiface((MultifaceBlock) ModBlocks.ALGAE_MAT.get(), 4, 0.6F, FRESHWATER_BEDS));
+        FeatureUtils.register(context, KAEMPFERIA_PULCHRA, Feature.FLOWER, flowerPatch(ModBlocks.KAEMPFERIA_PULCHRA.get(), 64));
+        FeatureUtils.register(context, SAGITTARIA, Feature.RANDOM_PATCH, semiaquaticPatch(ModBlocks.SAGITTARIA.get(), 64));
+        FeatureUtils.register(context, MARINE_MUSSELS, Feature.SIMPLE_BLOCK, waterFloorBlocks(ModBlocks.BLUE_MUSSEL.get(), ModBlocks.ALGAE_CRUSTED_MUSSEL.get(), ModBlocks.BLACK_MUSSEL.get()));
+        FeatureUtils.register(context, FRESHWATER_MUSSELS, Feature.SIMPLE_BLOCK, waterFloorBlocks(ModBlocks.YELLOW_MUSSEL.get(), ModBlocks.ALGAE_CRUSTED_MUSSEL.get(), ModBlocks.BLACK_MUSSEL.get(), ModBlocks.CREAM_MUSSEL.get(), ModBlocks.SWAN_MUSSEL.get()));
+        FeatureUtils.register(context, TERMITE_MOUND, ModFeatures.TERMITE_MOUND.get(), new TermiteMoundConfiguration(Blocks.SMOOTH_SANDSTONE, ModBlocks.TERMITE_MOUND.get(), Blocks.RED_SAND, Blocks.SMOOTH_RED_SANDSTONE, ModBlocks.RED_TERMITE_MOUND.get()));
+        FeatureUtils.register(context, RED_TERMITE_MOUND, ModFeatures.TERMITE_MOUND.get(), new TermiteMoundConfiguration(Blocks.SMOOTH_RED_SANDSTONE, ModBlocks.RED_TERMITE_MOUND.get(), Blocks.SAND, Blocks.SMOOTH_SANDSTONE, ModBlocks.TERMITE_MOUND.get()));
     }
 
 
 
 
 
-    private static void registerSemiaquaticPatch(BootstapContext<ConfiguredFeature<?, ?>> context,
-                                              ResourceKey<ConfiguredFeature<?, ?>> key, Block block, int tries) {
-        context.register(key, new ConfiguredFeature<>(Feature.RANDOM_PATCH,
-                FeatureUtils.simpleRandomPatchConfiguration(tries,
-                        PlacementUtils.inlinePlaced(Feature.SIMPLE_BLOCK,
-                                new SimpleBlockConfiguration(BlockStateProvider.simple(block)),
-                                BlockPredicateFilter.forPredicate(BlockPredicate.matchesFluids(Fluids.WATER))))));
+    private static MultifaceGrowthConfiguration multiface(MultifaceBlock block, int searchRange,
+                                                          float chanceOfSpreading, Block... substrate) {
+        return new MultifaceGrowthConfiguration(block, searchRange, true, false, true, chanceOfSpreading,
+                HolderSet.direct(Block::builtInRegistryHolder, substrate));
     }
 
-    private static void registerFlowerPatch(BootstapContext<ConfiguredFeature<?, ?>> context,
-                                            ResourceKey<ConfiguredFeature<?, ?>> key, Block block, int tries) {
-        context.register(key, new ConfiguredFeature<>(Feature.FLOWER,
-                FeatureUtils.simpleRandomPatchConfiguration(tries,
-                        PlacementUtils.onlyWhenEmpty(Feature.SIMPLE_BLOCK,
-                                new SimpleBlockConfiguration(BlockStateProvider.simple(block))))));
+    private static RandomPatchConfiguration flowerPatch(Block block, int tries) {
+        return FeatureUtils.simpleRandomPatchConfiguration(tries,
+                PlacementUtils.onlyWhenEmpty(Feature.SIMPLE_BLOCK,
+                        new SimpleBlockConfiguration(BlockStateProvider.simple(block))));
     }
 
-    private static void registerWaterFloorBlocks(BootstapContext<ConfiguredFeature<?, ?>> context,
-                                                 ResourceKey<ConfiguredFeature<?, ?>> key, Block... blocks) {
+    private static RandomPatchConfiguration semiaquaticPatch(Block block, int tries) {
+        return FeatureUtils.simpleRandomPatchConfiguration(tries,
+                PlacementUtils.inlinePlaced(Feature.SIMPLE_BLOCK,
+                        new SimpleBlockConfiguration(BlockStateProvider.simple(block)),
+                        BlockPredicateFilter.forPredicate(BlockPredicate.matchesFluids(Fluids.WATER))));
+    }
+
+    private static SimpleBlockConfiguration waterFloorBlocks(Block... blocks) {
         SimpleWeightedRandomList.Builder<BlockState> states = SimpleWeightedRandomList.builder();
         for (Block block : blocks) {
             BlockState state = block.defaultBlockState();
@@ -78,16 +85,7 @@ public class ModConfiguredFeatures {
             }
             states.add(state, 1);
         }
-        context.register(key, new ConfiguredFeature<>(Feature.SIMPLE_BLOCK,
-                new SimpleBlockConfiguration(new WeightedStateProvider(states.build()))));
-    }
-
-    private static void registerMultiface(BootstapContext<ConfiguredFeature<?, ?>> context,
-                                          ResourceKey<ConfiguredFeature<?, ?>> key, MultifaceBlock block,
-                                          int searchRange, float chanceOfSpreading, Block... substrate) {
-        context.register(key, new ConfiguredFeature<>(Feature.MULTIFACE_GROWTH,
-                new MultifaceGrowthConfiguration(block, searchRange, true, false, true, chanceOfSpreading,
-                        HolderSet.direct(Block::builtInRegistryHolder, substrate))));
+        return new SimpleBlockConfiguration(new WeightedStateProvider(states.build()));
     }
 
     private static ResourceKey<ConfiguredFeature<?, ?>> createKey(String name) {
