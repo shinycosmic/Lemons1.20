@@ -1,5 +1,6 @@
 package net.lemon.animalia.entity.custom;
 
+import net.lemon.animalia.entity.ai.GrazeGoal;
 import net.lemon.animalia.entity.ai.GuardGoal;
 import net.lemon.animalia.entity.ai.SleepGoal;
 import net.lemon.animalia.entity.bases.AnimaliaLandBase;
@@ -59,6 +60,7 @@ public class PangolinEntity extends AnimaliaLandBase implements GeoEntity, Scann
     protected void registerGoals() {
         this.goalSelector.addGoal(1, new GuardGoal(this, 6D, entity -> !(entity instanceof PangolinEntity) && !(entity instanceof Player player && player.isCreative())));
         this.goalSelector.addGoal(1, new SleepGoal(this));
+        this.goalSelector.addGoal(6, new GrazeGoal<>(this, 1.0D));
         super.registerGoals();
     }
 
