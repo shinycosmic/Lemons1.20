@@ -128,6 +128,7 @@
   "entity.animalia.gorgasia_preclara": "Splendid Garden Eel",
   "entity.animalia.hippocampus_ingens": "Pacific Seahorse",
   "entity.animalia.hydrocynus_goliath": "Goliath Tigerfish",
+  "entity.animalia.smutsia_gigantea": "Giant Pangolin",
 
   "tooltip.animalia.baby": "Juvenile",
   "container.animalia.filter_trap": "Water Trap",
@@ -192,6 +193,7 @@
   "entity.animalia.heteroconger_hassi.scientific": "Heteroconger hassi",
   "entity.animalia.gorgasia_preclara.scientific": "Gorgasia preclara",
   "entity.animalia.hydrocynus_goliath.scientific": "Hydrocynus goliath",
+  "entity.animalia.smutsia_gigantea.scientific": "Smutsia gigantea",
 
   "order.animalia.perciformes": "Perciformes",
   "order.animalia.anabantiformes": "Anabantiformes",
@@ -201,6 +203,7 @@
   "order.animalia.acanthuriformes": "Acanthuriformes",
   "order.animalia.decapoda": "Decapoda",
   "order.animalia.characiformes": "Characiformes",
+  "order.animalia.pholidota": "Pholidota",
 
   "family.animalia.percophidae": "Percophidae",
   "family.animalia.eleginopidae": "Eleginopidae",
@@ -226,6 +229,7 @@
   "family.animalia.siganidae": "Siganidae",
   "family.animalia.congridae": "Congridae",
   "family.animalia.alestidae": "Alestidae",
+  "family.animalia.manidae": "Manidae",
 
   "trivia.animalia.dissostichus_eleginoides": "The Chilean Sea Bass, also known as the Patagonian Toothfish is an icefish that lives in the southern cold oceans at depths of 45 to over 3000 meters deep.",
   "trivia.animalia.percophis_brasiliensis": "The Brazilian Flathead is considered to be the most basal member of Notothenioidei. It lives off the coast of Brazil and Argentina.",
@@ -261,6 +265,7 @@
   "trivia.animalia.zebrasoma_flavescens": "The Yellow Tang is a bright yellow surgeonfish that is commonly found in coral reefs. They generally eat algae and at night, a pale white band develops in the middle of their body.",
   "trivia.animalia.zebrasoma_velifer": "The Sailfin Tang is a brown and yellow colored surgeonfish known for its sail-like dorsal and anal fins which it can extend outwards. They generally graze on leafy algae.",
   "trivia.animalia.hydrocynus_goliath": "Goliath Tigerfish is a large fish native to African freshwater environments such as the Congo and Lake Tanganyika. It is a general piscivore but are also known to attack larger animals when food is scarce.",
+  "trivia.animalia.smutsia_gigantea": "",
 
   "debug.animalia.trivia": "If this value displays, there is a bug [trivia]",
   "debug.animalia.family": "if this text appears, there is a bug [family]",
