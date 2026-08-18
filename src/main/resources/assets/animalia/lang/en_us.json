@@ -129,6 +129,7 @@
   "entity.animalia.hippocampus_ingens": "Pacific Seahorse",
   "entity.animalia.hydrocynus_goliath": "Goliath Tigerfish",
   "entity.animalia.smutsia_gigantea": "Giant Pangolin",
+  "entity.animalia.indostomus_paradoxus": "Toothpick Fish",
 
   "tooltip.animalia.baby": "Juvenile",
   "container.animalia.filter_trap": "Water Trap",
@@ -194,6 +195,7 @@
   "entity.animalia.gorgasia_preclara.scientific": "Gorgasia preclara",
   "entity.animalia.hydrocynus_goliath.scientific": "Hydrocynus goliath",
   "entity.animalia.smutsia_gigantea.scientific": "Smutsia gigantea",
+  "entity.animalia.indostomus_paradoxus.scientific": "Indostomus paradoxus",
 
   "order.animalia.perciformes": "Perciformes",
   "order.animalia.anabantiformes": "Anabantiformes",
@@ -266,6 +268,7 @@
   "trivia.animalia.zebrasoma_velifer": "The Sailfin Tang is a brown and yellow colored surgeonfish known for its sail-like dorsal and anal fins which it can extend outwards. They generally graze on leafy algae.",
   "trivia.animalia.hydrocynus_goliath": "Goliath Tigerfish is a large fish native to African freshwater environments such as the Congo and Lake Tanganyika. It is a general piscivore but are also known to attack larger animals when food is scarce.",
   "trivia.animalia.smutsia_gigantea": "",
+  "trivia.animalia.indostomus_paradoxus": "",
 
   "debug.animalia.trivia": "If this value displays, there is a bug [trivia]",
   "debug.animalia.family": "if this text appears, there is a bug [family]",

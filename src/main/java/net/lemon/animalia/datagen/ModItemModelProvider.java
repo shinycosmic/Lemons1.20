@@ -93,6 +93,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItems.ZEBRASOMA_FLAVESCENS_BUCKET);
         simpleItem(ModItems.ZEBRASOMA_VELIFER_BUCKET);
         simpleItem(ModItems.HYDROCYNUS_GOLIATH_BUCKET);
+        simpleItem(ModItems.INDOSTOMUS_PARADOXUS_BUCKET);
 
         //spawn egg generators
         withExistingParent(ModItems.DISSOSTICHUS_ELEGINOIDES_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
@@ -130,6 +131,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         withExistingParent(ModItems.ZEBRASOMA_VELIFER_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
         withExistingParent(ModItems.HYDROCYNUS_GOLIATH_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
         withExistingParent(ModItems.SMUTSIA_GIGANTEA_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
+        withExistingParent(ModItems.INDOSTOMUS_PARADOXUS_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
 
 
 
