@@ -152,19 +152,22 @@ public class PangolinEntity extends AnimaliaLandBase implements GeoEntity, Scann
             animationState.getController().setAnimation(RawAnimation.begin().then("graze", Animation.LoopType.LOOP));
             return PlayState.CONTINUE;
         }
+        //Sleep is allowed on babies, and so is idle0, only graze and guard are not
 
-        int phase = this.getGuardPhase();
-        //TODO need to add handling for attack during guard, and 1 random idle, sleeping(looped without special enter and exit anims) and dream (idle during sleep only)
-        switch(phase){
-            case GUARD_PHASE_ENTERING:
-                animationState.getController().setAnimation(RawAnimation.begin().then("toGuard", Animation.LoopType.HOLD_ON_LAST_FRAME));
-                return PlayState.CONTINUE;
-            case GUARD_PHASE_GUARDING:
-                animationState.getController().setAnimation(RawAnimation.begin().then("guard", Animation.LoopType.LOOP));
-                return PlayState.CONTINUE;
-            case GUARD_PHASE_EXITING:
-                animationState.getController().setAnimation(RawAnimation.begin().then("unGuard", Animation.LoopType.HOLD_ON_LAST_FRAME));
-                return PlayState.CONTINUE;
+        if(!isBaby()) {
+            int phase = this.getGuardPhase();
+            //TODO need to add handling for attack during guard, and 1 random idle, sleeping(looped without special enter and exit anims) and dream (idle during sleep only)
+            switch (phase) {
+                case GUARD_PHASE_ENTERING:
+                    animationState.getController().setAnimation(RawAnimation.begin().then("toGuard", Animation.LoopType.HOLD_ON_LAST_FRAME));
+                    return PlayState.CONTINUE;
+                case GUARD_PHASE_GUARDING:
+                    animationState.getController().setAnimation(RawAnimation.begin().then("guard", Animation.LoopType.LOOP));
+                    return PlayState.CONTINUE;
+                case GUARD_PHASE_EXITING:
+                    animationState.getController().setAnimation(RawAnimation.begin().then("unGuard", Animation.LoopType.HOLD_ON_LAST_FRAME));
+                    return PlayState.CONTINUE;
+            }
         }
 
         animationState.getController().setAnimation(RawAnimation.begin().then("walk", Animation.LoopType.LOOP));

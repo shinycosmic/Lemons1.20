@@ -43,7 +43,8 @@ public class AnimaliaRenderInit {
 
 
 
-
+        //Land
+        EntityRenderers.register(ModEntities.SMUTSIA_GIGANTEA.get(), SmutsiaGiganteaRenderer::new);
 
 
         EntityRenderers.register(ModEntities.WATER_SPIT.get(), WaterSpitRenderer::new);
