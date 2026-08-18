@@ -154,7 +154,7 @@ public class PangolinEntity extends AnimaliaLandBase implements GeoEntity, Scann
         }
         //Sleep is allowed on babies, and so is idle0, only graze and guard are not
 
-        if(!isBaby()) {
+        if (!isBaby()) {
             int phase = this.getGuardPhase();
             //TODO need to add handling for attack during guard, and 1 random idle, sleeping(looped without special enter and exit anims) and dream (idle during sleep only)
             switch (phase) {
@@ -170,7 +170,9 @@ public class PangolinEntity extends AnimaliaLandBase implements GeoEntity, Scann
             }
         }
 
-        animationState.getController().setAnimation(RawAnimation.begin().then("walk", Animation.LoopType.LOOP));
+        if (this.isActuallyMoving()) {
+            animationState.getController().setAnimation(RawAnimation.begin().then("walk", Animation.LoopType.LOOP));
+        }
         return PlayState.CONTINUE;
     }
 

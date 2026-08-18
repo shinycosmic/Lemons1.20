@@ -362,6 +362,10 @@ public abstract class AnimaliaLandBase extends Animal implements IActivityTime, 
         super.readAdditionalSaveData(pCompound);
     }
 
+    public boolean isActuallyMoving() {
+        return this.walkAnimation.isMoving();
+    }
+
     public boolean hurt(DamageSource source, float amount) {
         if (this.isInvulnerableTo(source)) {
             return false;
