@@ -316,7 +316,7 @@ public class PangolinEntity extends AnimaliaLandBase implements GeoEntity, Scann
     @Override
     public boolean canStartSleeping() {
         return ICanSleep.super.canStartSleeping() && this.getGuardPhase() == GUARD_PHASE_NONE
-                && !this.isGrazing() && !this.isEating() && !this.isInLove();
+                && !this.isGrazing() && !this.isEating() && !this.isInLove() && !this.isMovementLockedByIdle();
     }
 
     @Override
