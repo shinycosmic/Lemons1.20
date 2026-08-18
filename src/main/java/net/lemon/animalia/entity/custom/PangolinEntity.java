@@ -73,7 +73,7 @@ public class PangolinEntity extends AnimaliaLandBase implements GeoEntity, Scann
     public static AttributeSupplier setAttributes() {
         return Mob.createMobAttributes()
                 .add(Attributes.MAX_HEALTH, 12D)
-                .add(Attributes.MOVEMENT_SPEED, 0.05f)
+                .add(Attributes.MOVEMENT_SPEED, 0.1f)
                 .add(Attributes.ATTACK_DAMAGE, 3)
                 .build();
     }
@@ -168,6 +168,11 @@ public class PangolinEntity extends AnimaliaLandBase implements GeoEntity, Scann
                 return PlayState.CONTINUE;
             }
             animationState.getController().setAnimation(RawAnimation.begin().then("sleeping", Animation.LoopType.LOOP));
+            return PlayState.CONTINUE;
+        }
+        int bodyIdle = this.getCurrentBodyIdle();
+        if (bodyIdle >= 0) {
+            animationState.getController().setAnimation(RawAnimation.begin().then("idle" + bodyIdle, Animation.LoopType.PLAY_ONCE));
             return PlayState.CONTINUE;
         }
         if (!isBaby()) {
@@ -313,4 +318,13 @@ public class PangolinEntity extends AnimaliaLandBase implements GeoEntity, Scann
         return ICanSleep.super.canStartSleeping() && this.getGuardPhase() == GUARD_PHASE_NONE
                 && !this.isGrazing() && !this.isEating() && !this.isInLove();
     }
+
+    @Override
+    public int getIdleDisplayCount() {return 1;}
+
+    @Override
+    public IdleType getIdleType(int displayId) {return IdleType.MOVEMENT_NEGATIVE;}
+
+    @Override
+    public int getIdleDisplayLength(int displayId) {return 130;}
 }
