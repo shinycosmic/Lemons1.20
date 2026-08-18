@@ -2,6 +2,7 @@ package net.lemon.animalia.registry.spawning;
 
 import net.lemon.animalia.registry.ModEntities;
 import net.lemon.animalia.registry.ModTags;
+import net.minecraft.tags.BiomeTags;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.biome.Biomes;
 import net.minecraftforge.registries.RegistryObject;
@@ -90,6 +91,10 @@ public class ModSpawns {
                 BiomeSelector.in(Biomes.RIVER));
         add(ModEntities.PROCAMBARUS_LUCIFUGUS, 3, 1, 1,
                 BiomeSelector.in(Biomes.DRIPSTONE_CAVES, Biomes.LUSH_CAVES));
+
+        //land
+        add(ModEntities.SMUTSIA_GIGANTEA, 1, 1, 1,
+                BiomeSelector.in(BiomeTags.IS_SAVANNA));
     }
 
     private static void add(RegistryObject<? extends EntityType<?>> type, int weight, int minGroup, int maxGroup, BiomeSelector selector) {
