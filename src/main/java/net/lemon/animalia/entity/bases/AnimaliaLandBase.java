@@ -174,7 +174,7 @@ public abstract class AnimaliaLandBase extends Animal implements IActivityTime, 
 
     public boolean canGraze() {
         return this.onGround() && !this.isInWater() && !this.isHiding() && !this.isEating() && !this.isInLove()
-                && !this.isMovementLockedByIdle();
+                && !this.isMovementLockedByIdle() && !(this instanceof ICanSleep sleeper && sleeper.isAsleep());
     }
 
     public boolean wantsToGraze() {

@@ -68,6 +68,9 @@ public interface IIdles {
         if (this instanceof ICanGuard guard && guard.isGuarding()) {
             return false;
         }
+        if (this instanceof ICanSleep sleeper && sleeper.isAsleep()) {
+            return false;
+        }
         return true;
     }
 

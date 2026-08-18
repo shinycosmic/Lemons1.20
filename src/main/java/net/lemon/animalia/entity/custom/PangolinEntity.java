@@ -1,9 +1,11 @@
 package net.lemon.animalia.entity.custom;
 
 import net.lemon.animalia.entity.ai.GuardGoal;
+import net.lemon.animalia.entity.ai.SleepGoal;
 import net.lemon.animalia.entity.bases.AnimaliaLandBase;
 import net.lemon.animalia.entity.bases.helpers.ActivityTime;
 import net.lemon.animalia.entity.bases.helpers.ICanGuard;
+import net.lemon.animalia.entity.bases.helpers.ICanSleep;
 import net.lemon.animalia.registry.ModBlocks;
 import net.lemon.animalia.registry.ModEntities;
 import net.lemon.animalia.registry.ModItems;
@@ -38,9 +40,11 @@ import software.bernie.geckolib.core.animation.*;
 import software.bernie.geckolib.core.animation.AnimationState;
 import software.bernie.geckolib.core.object.PlayState;
 
-public class PangolinEntity extends AnimaliaLandBase implements GeoEntity, Scannable, ICanGuard {
+public class PangolinEntity extends AnimaliaLandBase implements GeoEntity, Scannable, ICanGuard, ICanSleep {
     private final AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
     private static final EntityDataAccessor<Integer> GUARD_PHASE = SynchedEntityData.defineId(PangolinEntity.class, EntityDataSerializers.INT);
+    private static final EntityDataAccessor<Integer> SLEEP_PHASE = SynchedEntityData.defineId(PangolinEntity.class, EntityDataSerializers.INT);
+    private static final EntityDataAccessor<Integer> SLEEP_IDLE = SynchedEntityData.defineId(PangolinEntity.class, EntityDataSerializers.INT);
     private final int SMUTSIA_GIGANTEA_PIXEL = 39;
 
     private int wantsToGuardUntil;
@@ -54,6 +58,7 @@ public class PangolinEntity extends AnimaliaLandBase implements GeoEntity, Scann
     @Override
     protected void registerGoals() {
         this.goalSelector.addGoal(1, new GuardGoal(this, 6D, entity -> !(entity instanceof PangolinEntity) && !(entity instanceof Player player && player.isCreative())));
+        this.goalSelector.addGoal(1, new SleepGoal(this));
         super.registerGoals();
     }
 
@@ -61,6 +66,8 @@ public class PangolinEntity extends AnimaliaLandBase implements GeoEntity, Scann
     protected void defineSynchedData() {
         super.defineSynchedData();
         this.entityData.define(GUARD_PHASE, 0);
+        this.entityData.define(SLEEP_PHASE, 0);
+        this.entityData.define(SLEEP_IDLE, -1);
     }
 
     public static AttributeSupplier setAttributes() {
@@ -93,7 +100,7 @@ public class PangolinEntity extends AnimaliaLandBase implements GeoEntity, Scann
 
     @Override
     public Component getTrivia() {
-        return Component.translatable("family.animalia.smutsia_gigantea");
+        return Component.translatable("trivia.animalia.smutsia_gigantea");
     }
 
     @Override
@@ -103,7 +110,7 @@ public class PangolinEntity extends AnimaliaLandBase implements GeoEntity, Scann
 
     @Override
     public Component getOrder() {
-        return Component.translatable("family.animalia.pholidota");
+        return Component.translatable("order.animalia.pholidota");
     }
 
     @Override
@@ -154,10 +161,17 @@ public class PangolinEntity extends AnimaliaLandBase implements GeoEntity, Scann
             return PlayState.CONTINUE;
         }
         //Sleep is allowed on babies, and so is idle0, only graze and guard are not
-
+        if (this.isAsleep()) {
+            int sleepIdle = this.getCurrentSleepIdle();
+            if (sleepIdle >= 0) {
+                animationState.getController().setAnimation(RawAnimation.begin().then("sleepIdle" + sleepIdle, Animation.LoopType.PLAY_ONCE));
+                return PlayState.CONTINUE;
+            }
+            animationState.getController().setAnimation(RawAnimation.begin().then("sleeping", Animation.LoopType.LOOP));
+            return PlayState.CONTINUE;
+        }
         if (!isBaby()) {
             int phase = this.getGuardPhase();
-            //TODO need to add 1 random idle, sleeping(looped without special enter and exit anims) and dream (idle during sleep only)
             switch (phase) {
                 case GUARD_PHASE_ENTERING:
                     animationState.getController().setAnimation(RawAnimation.begin().then("toGuard", Animation.LoopType.HOLD_ON_LAST_FRAME));
@@ -240,6 +254,10 @@ public class PangolinEntity extends AnimaliaLandBase implements GeoEntity, Scann
         if (this.isInvulnerableTo(source)) {
             return false;
         }
+        if (!this.level().isClientSide && this.isAsleep()) {
+            this.setSleepPhase(SLEEP_PHASE_NONE);
+            this.setCurrentSleepIdle(-1);
+        }
         if (!this.level().isClientSide && this.guardTriggersFrom(source)) {
             this.guardWindow(this.getGuardReAttackWindow());
         }
@@ -273,5 +291,26 @@ public class PangolinEntity extends AnimaliaLandBase implements GeoEntity, Scann
             this.setVarSizeMultiplier(this.genVarSizeMultiplier());
         }
         return super.finalizeSpawn(level, difficulty, reason, spawnData, dataTag);
+    }
+
+    @Override
+    public int getSleepPhase() {return this.entityData.get(SLEEP_PHASE);}
+
+    @Override
+    public void setSleepPhase(int phase) {this.entityData.set(SLEEP_PHASE, phase);}
+
+    @Override
+    public int getCurrentSleepIdle() {return this.entityData.get(SLEEP_IDLE);}
+
+    @Override
+    public void setCurrentSleepIdle(int sleepIdleId) {this.entityData.set(SLEEP_IDLE, sleepIdleId);}
+
+    @Override
+    public int getSleepIdleCount() {return 1;}
+
+    @Override
+    public boolean canStartSleeping() {
+        return ICanSleep.super.canStartSleeping() && this.getGuardPhase() == GUARD_PHASE_NONE
+                && !this.isGrazing() && !this.isEating() && !this.isInLove();
     }
 }
