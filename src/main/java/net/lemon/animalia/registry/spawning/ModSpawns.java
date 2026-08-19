@@ -82,6 +82,8 @@ public class ModSpawns {
                 BiomeSelector.in(Biomes.MANGROVE_SWAMP));
         add(ModEntities.HYDROCYNUS_GOLIATH, 2, 1, 1,
                 BiomeSelector.in(Biomes.RIVER));
+        add(ModEntities.INDOSTOMUS_PARADOXUS, 3, 1, 3,
+                BiomeSelector.in(Biomes.MANGROVE_SWAMP));
 
         add(ModEntities.PROCAMBARUS_CLARKII, 6, 1, 2,
                 BiomeSelector.in(Biomes.SWAMP, Biomes.RIVER));

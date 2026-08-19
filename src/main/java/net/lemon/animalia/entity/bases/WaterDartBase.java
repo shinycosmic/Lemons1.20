@@ -90,7 +90,7 @@ public abstract class WaterDartBase extends FishBase{
     }
 
     public double getBurstPower() {
-        return 0.25D;
+        return 0.15D;
     }
 
     public double getBabyBurstScale() {
@@ -122,7 +122,7 @@ public abstract class WaterDartBase extends FishBase{
     public void dart(@Nullable Vec3 focusPos, boolean towardFocus) {
         float baseYaw = this.getYRot();
         float pitchRange = this.isSurfaceDarter() ? 0F : this.getDartPitch();
-        boolean pitched = pitchRange > 0 && this.getRandom().nextFloat() < 0.4F;
+        boolean pitched = pitchRange > 0 && this.getRandom().nextFloat() < 0.65F;
         float pitchMag = pitched ? pitchRange * (0.3F + 0.7F * this.getRandom().nextFloat()) : 0F;
         float[] pitchOffsets = pitched ? new float[]{0F, pitchMag, -pitchMag, pitchMag * 0.5F, -pitchMag * 0.5F} : new float[]{0F};
         float bestYaw = baseYaw;
