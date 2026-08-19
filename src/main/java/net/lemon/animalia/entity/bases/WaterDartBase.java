@@ -124,8 +124,7 @@ public abstract class WaterDartBase extends FishBase{
         float pitchRange = this.isSurfaceDarter() ? 0F : this.getDartPitch();
         boolean pitched = pitchRange > 0 && this.getRandom().nextFloat() < 0.4F;
         float pitchMag = pitched ? pitchRange * (0.3F + 0.7F * this.getRandom().nextFloat()) : 0F;
-        float[] pitchOffsets = pitched ? new float[]{0F, pitchMag, -pitchMag} : new float[]{0F};
-
+        float[] pitchOffsets = pitched ? new float[]{0F, pitchMag, -pitchMag, pitchMag * 0.5F, -pitchMag * 0.5F} : new float[]{0F};
         float bestYaw = baseYaw;
         float bestPitch = 0F;
         double bestScore = Double.NEGATIVE_INFINITY;
