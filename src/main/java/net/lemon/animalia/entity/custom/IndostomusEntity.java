@@ -120,7 +120,18 @@ public class IndostomusEntity extends WaterDartBase implements GeoEntity, Scanna
 
     @Override
     public int getIdleLength(int displayId) {
-        return super.getIdleLength(displayId);
+        return switch (displayId) {
+            case 0 -> 70;
+            default -> 13;
+        };
+    }
+
+    @Override
+    public IdleType getIdleType(int displayId) {
+        return switch (displayId) {
+            case 0 -> IdleType.TWITCH;
+            default -> IdleType.MOVEMENT_NEGATIVE;
+        };
     }
 
     @Override
@@ -131,7 +142,7 @@ public class IndostomusEntity extends WaterDartBase implements GeoEntity, Scanna
 
     private <T extends GeoAnimatable> PlayState predicate(AnimationState<T> animationState) {
         if (this.isMovementLockedByIdle() && !this.isBaby()) {
-            animationState.getController().setAnimation(RawAnimation.begin().then("idle" + this.getCurrentBodyIdle(), Animation.LoopType.PLAY_ONCE));
+            animationState.getController().setAnimation(RawAnimation.begin().then("idle" + this.getCurrRegIdle(), Animation.LoopType.PLAY_ONCE));
             return PlayState.CONTINUE;
         }
         animationState.getController().setAnimation(RawAnimation.begin().then("swim", Animation.LoopType.LOOP));
@@ -139,7 +150,7 @@ public class IndostomusEntity extends WaterDartBase implements GeoEntity, Scanna
     }
 
     private <T extends GeoAnimatable> PlayState idlesPredicate(AnimationState<T> state) {
-        int twitch = this.getCurrentTwitchIdle();
+        int twitch = this.getCurrTwitchIdle();
         if (twitch >= 0 && !this.isBaby()) {
             state.getController().setAnimation(RawAnimation.begin().then("idle" + twitch, Animation.LoopType.LOOP));
             return PlayState.CONTINUE;
