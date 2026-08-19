@@ -33,7 +33,7 @@ public class ModBiomeModifiers {
     //Defines which biomes a block spawns in.
     public static void bootstrap(BootstapContext<BiomeModifier> context) {
         addFeature(context, ADD_ALGAE_MAT, ModPlacedFeatures.ALGAE_MAT, GenerationStep.Decoration.VEGETAL_DECORATION, BiomeTags.IS_RIVER, Tags.Biomes.IS_SWAMP, BiomeTags.IS_OCEAN);
-        addFeature(context, ADD_KAEMPFERIA_PULCHRA, ModPlacedFeatures.KAEMPFERIA_PULCHRA, GenerationStep.Decoration.VEGETAL_DECORATION, Tags.Biomes.IS_SWAMP);
+        addFeature(context, ADD_KAEMPFERIA_PULCHRA, ModPlacedFeatures.KAEMPFERIA_PULCHRA, GenerationStep.Decoration.VEGETAL_DECORATION, BiomeTags.IS_JUNGLE);
         addFeature(context, ADD_SAGITTARIA, ModPlacedFeatures.SAGITTARIA, GenerationStep.Decoration.VEGETAL_DECORATION, Tags.Biomes.IS_SWAMP);
         addFeature(context, ADD_MARINE_MUSSEL, ModPlacedFeatures.MARINE_MUSSELS, GenerationStep.Decoration.VEGETAL_DECORATION, BiomeTags.IS_OCEAN);
         addFeature(context, ADD_FRESHWATER_MUSSEL, ModPlacedFeatures.FRESHWATER_MUSSELS, GenerationStep.Decoration.VEGETAL_DECORATION, Tags.Biomes.IS_SWAMP, BiomeTags.IS_RIVER);
