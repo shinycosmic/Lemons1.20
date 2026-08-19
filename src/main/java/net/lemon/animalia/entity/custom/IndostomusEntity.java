@@ -20,9 +20,11 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import software.bernie.geckolib.animatable.GeoEntity;
+import software.bernie.geckolib.core.animatable.GeoAnimatable;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.core.animatable.instance.SingletonAnimatableInstanceCache;
-import software.bernie.geckolib.core.animation.AnimatableManager;
+import software.bernie.geckolib.core.animation.*;
+import software.bernie.geckolib.core.object.PlayState;
 
 public class IndostomusEntity extends WaterDartBase implements GeoEntity, Scannable {
     private final AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
@@ -113,7 +115,27 @@ public class IndostomusEntity extends WaterDartBase implements GeoEntity, Scanna
 
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
+        controllers.add(new AnimationController<>(this, "controller", 5, this::predicate));
+        controllers.add(new AnimationController<>(this, "idles_controller", 5, this::idlesPredicate));
+    }
 
+    private <T extends GeoAnimatable> PlayState predicate(AnimationState<T> animationState) {
+        if (this.isMovementLockedByIdle() && !this.isBaby()) {
+            animationState.getController().setAnimation(RawAnimation.begin().then("idle" + this.getCurrentBodyIdle(), Animation.LoopType.PLAY_ONCE));
+            return PlayState.CONTINUE;
+        }
+        animationState.getController().setAnimation(RawAnimation.begin().then("swim", Animation.LoopType.LOOP));
+        return PlayState.CONTINUE;
+    }
+
+    private <T extends GeoAnimatable> PlayState idlesPredicate(AnimationState<T> state) {
+        int twitch = this.getCurrentTwitchIdle();
+        if (twitch >= 0 && !this.isBaby()) {
+            state.getController().setAnimation(RawAnimation.begin().then("idle" + twitch, Animation.LoopType.LOOP));
+            return PlayState.CONTINUE;
+        }
+        state.getController().forceAnimationReset();
+        return PlayState.STOP;
     }
 
     @Override
