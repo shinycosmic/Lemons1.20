@@ -1,7 +1,6 @@
 package net.lemon.animalia.client.screens;
 
 import com.mojang.blaze3d.platform.Lighting;
-import net.lemon.animalia.entity.bases.AnimaliaBreedableWater;
 import net.lemon.animalia.entity.bases.FishBase;
 import net.lemon.animalia.client.player.network.ClientDiscoveryCache;
 import net.lemon.animalia.util.HolonetEntities;

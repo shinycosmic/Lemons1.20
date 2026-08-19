@@ -50,6 +50,8 @@ public class PangolinEntity extends AnimaliaLandBase implements GeoEntity, Scann
 
     private int wantsToGuardUntil;
     private int attackCooldown;
+    private int attackTicks;
+    private LivingEntity attackTarget;
 
 
     public PangolinEntity(EntityType<? extends Animal> entityType, Level level) {
@@ -277,8 +279,9 @@ public class PangolinEntity extends AnimaliaLandBase implements GeoEntity, Scann
             return;
         }
         if (this.getBoundingBox().inflate(0.3D).intersects(threat.getBoundingBox())) {
-            this.doHurtTarget(threat);
             this.triggerAnim("controller", "attack");
+            this.attackTarget = threat;
+            this.attackTicks = 12;
             this.attackCooldown = 15;
         }
     }
@@ -288,6 +291,15 @@ public class PangolinEntity extends AnimaliaLandBase implements GeoEntity, Scann
         super.aiStep();
         if (!this.level().isClientSide && this.attackCooldown > 0) {
             this.attackCooldown--;
+        }
+        if (!this.level().isClientSide && this.attackTicks > 0) {
+            this.attackTicks--;
+            if (this.attackTicks <= 0 && this.attackTarget != null) {
+                if (this.attackTarget.isAlive() && this.getBoundingBox().inflate(0.3D).intersects(this.attackTarget.getBoundingBox())) {
+                    this.doHurtTarget(this.attackTarget);
+                }
+                this.attackTarget = null;
+            }
         }
     }
 

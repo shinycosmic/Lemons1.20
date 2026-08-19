@@ -529,6 +529,12 @@ public abstract class AnimaliaBreedableWater extends WaterAnimal implements IAct
             this.tickIdleDisplay(this);
         }
 
+        if (!this.level().isClientSide && (this.isMovementLockedByIdle() || this.isGrazing())) {
+            this.setYRot(this.yRotO);
+            this.yBodyRot = this.yBodyRotO;
+            this.yHeadRot = this.yHeadRotO;
+        }
+
         if (!this.level().isClientSide && this.eatTicks > 0) {
             --this.eatTicks;
             if (this.eatTicks <= 0) {
