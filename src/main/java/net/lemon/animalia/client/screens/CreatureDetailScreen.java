@@ -19,6 +19,7 @@ import net.minecraft.util.FormattedCharSequence;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Mob;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -100,7 +101,7 @@ public class CreatureDetailScreen extends Screen {
         displayEntity = (LivingEntity) entityType.create(mc.level);
         if (displayEntity == null) return;
 
-        if (displayEntity instanceof net.minecraft.world.entity.Mob mob) {
+        if (displayEntity instanceof Mob mob) {
             mob.setNoAi(true);
         }
         if (displayEntity instanceof FishBase fish) {

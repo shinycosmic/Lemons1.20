@@ -58,7 +58,7 @@ public interface IIdles {
     }
 
     default int bodyChance() {
-        return 600;
+        return 300;
     }
 
     default boolean canPlayIdleDisplay() {

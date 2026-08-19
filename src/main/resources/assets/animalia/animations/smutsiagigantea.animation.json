@@ -3445,6 +3445,96 @@
 				}
 			}
 		},
+		"idle": {
+			"loop": true,
+			"bones": {
+				"main": {
+					"rotation": {
+						"vector": ["-0-math.sin(query.anim_time*50)*0.5", 0, 0]
+					}
+				},
+				"body": {
+					"rotation": {
+						"vector": ["-0-math.sin(query.anim_time*50-100)*0.5", 0, 0]
+					}
+				},
+				"body2": {
+					"rotation": {
+						"vector": ["-0-math.sin(query.anim_time*50-150)*0.5", 0, 0]
+					}
+				},
+				"body3": {
+					"rotation": {
+						"vector": ["-0-math.sin(query.anim_time*50-250)*0.5", 0, 0]
+					}
+				},
+				"neck": {
+					"rotation": {
+						"vector": ["-0-math.sin(query.anim_time*50-300)*1", 0, 0]
+					}
+				},
+				"head": {
+					"rotation": {
+						"vector": ["-0-math.sin(query.anim_time*50-350)*-2", 0, 0]
+					}
+				},
+				"tail": {
+					"rotation": {
+						"vector": [0, "-0-math.sin(query.anim_time*120)", 0]
+					}
+				},
+				"tail2": {
+					"rotation": {
+						"vector": [0, "-0-math.sin(query.anim_time*120)*2", 0]
+					}
+				},
+				"tail3": {
+					"rotation": {
+						"vector": [0, "-0-math.sin(query.anim_time*120)*2", 0]
+					}
+				},
+				"leftLeg": {
+					"rotation": {
+						"vector": ["-0-math.sin(query.anim_time*50)*-0.5", 0, 0]
+					}
+				},
+				"leftArm": {
+					"rotation": {
+						"vector": ["-0-math.sin(query.anim_time*50+50)*1", 0, 0]
+					}
+				},
+				"leftArm2": {
+					"rotation": {
+						"vector": ["-0-math.sin(query.anim_time*50+150)*2", 0, 0]
+					}
+				},
+				"leftArm3": {
+					"rotation": {
+						"vector": [0, 0, 0]
+					}
+				},
+				"rightArm": {
+					"rotation": {
+						"vector": ["-0-math.sin(query.anim_time*50-100)*1", 0, 0]
+					}
+				},
+				"rightArm2": {
+					"rotation": {
+						"vector": ["-0-math.sin(query.anim_time*50-250)*2", 0, 0]
+					}
+				},
+				"rightArm3": {
+					"rotation": {
+						"vector": [0, 0, 0]
+					}
+				},
+				"rightLeg": {
+					"rotation": {
+						"vector": ["-0-math.sin(query.anim_time*50)*-0.5", 0, 0]
+					}
+				}
+			}
+		},
 		"sleeping": {
 			"loop": true,
 			"bones": {
