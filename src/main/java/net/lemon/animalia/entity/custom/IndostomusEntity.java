@@ -112,6 +112,16 @@ public class IndostomusEntity extends WaterDartBase implements GeoEntity, Scanna
     }
 
     @Override
+    public int getIdleCount() {
+        return 2;
+    }
+
+    @Override
+    public int getIdleLength(int displayId) {
+        return super.getIdleLength(displayId);
+    }
+
+    @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
 
     }

@@ -10,7 +10,7 @@ public interface IIdles {
         MOVEMENT_NEGATIVE
     }
 
-    default int getIdleDisplayCount() {
+    default int getIdleCount() {
         return 0;
     }
 
@@ -19,49 +19,49 @@ public interface IIdles {
     }
 
     //override this with a switch to control idle lengths per idle
-    default int getIdleDisplayLength(int displayId) {
+    default int getIdleLength(int displayId) {
         return 40;
     }
 
-    int getIdleDisplayTicks();
+    int getIdleTicks();
 
-    void setIdleDisplayTicks(int ticks);
+    void setIdleTicks(int ticks);
 
-    int getTwitchIdleTicks();
+    int getTwitchTicks();
 
-    void setTwitchIdleTicks(int ticks);
+    void setTwitchTicks(int ticks);
 
-    int getCurrentBodyIdle();
+    int getCurrRegIdle();
 
-    void setCurrentBodyIdle(int displayId);
+    void setCurrRegIdle(int displayId);
 
-    int getCurrentTwitchIdle();
+    int getCurrTwitchIdle();
 
-    void setCurrentTwitchIdle(int displayId);
+    void setCurrTwitchIdle(int displayId);
 
-    default boolean isPlayingIdleDisplay() {
-        return this.getIdleDisplayTicks() > 0;
+    default boolean isPlayingIdle() {
+        return this.getIdleTicks() > 0;
     }
 
     default boolean isPlayingPositiveIdle() {
-        int body = this.getCurrentBodyIdle();
+        int body = this.getCurrRegIdle();
         return body >= 0 && this.getIdleType(body) == IdleType.MOVEMENT_POSITIVE;
     }
 
     default boolean isMovementLockedByIdle() {
-        return this.getCurrentBodyIdle() >= 0
-                && this.getIdleType(this.getCurrentBodyIdle()) == IdleType.MOVEMENT_NEGATIVE;
+        return this.getCurrRegIdle() >= 0
+                && this.getIdleType(this.getCurrRegIdle()) == IdleType.MOVEMENT_NEGATIVE;
     }
 
     default int twitchChance() {
         return 200;
     }
 
-    default int bodyChance() {
+    default int regChance() {
         return 300;
     }
 
-    default boolean canPlayIdleDisplay() {
+    default boolean canPlayIdle() {
         if (this instanceof ICanThreat threat && threat.isThreatening()) {
             return false;
         }
@@ -74,7 +74,7 @@ public interface IIdles {
         return true;
     }
 
-    default boolean isAtRestForIdle(PathfinderMob mob) {
+    default boolean isAtRest(PathfinderMob mob) {
         return mob.getNavigation().isDone();
     }
 
@@ -84,12 +84,12 @@ public interface IIdles {
     default void onMovementLockingIdleEnd() {
     }
 
-    default void onSpontaneousIdleDisplay(int displayId) {
+    default void onRandomIdle(int displayId) {
     }
 
     default int pickIdleOfType(PathfinderMob mob, IdleType type) {
         int matches = 0;
-        for (int id = 0; id < this.getIdleDisplayCount(); id++) {
+        for (int id = 0; id < this.getIdleCount(); id++) {
             if (this.getIdleType(id) == type) {
                 matches++;
             }
@@ -98,7 +98,7 @@ public interface IIdles {
             return -1;
         }
         int pick = mob.getRandom().nextInt(matches);
-        for (int id = 0; id < this.getIdleDisplayCount(); id++) {
+        for (int id = 0; id < this.getIdleCount(); id++) {
             if (this.getIdleType(id) == type && pick-- == 0) {
                 return id;
             }
@@ -106,24 +106,24 @@ public interface IIdles {
         return -1;
     }
 
-    default boolean startIdleDisplay(int displayId) {
+    default boolean startIdle(int displayId) {
         IdleType type = this.getIdleType(displayId);
         if (type == IdleType.TWITCH) {
-            if (this.getCurrentTwitchIdle() >= 0 || this.isPlayingPositiveIdle()) {
+            if (this.getCurrTwitchIdle() >= 0 || this.isPlayingPositiveIdle()) {
                 return false;
             }
-            this.setCurrentTwitchIdle(displayId);
-            this.setTwitchIdleTicks(this.getIdleDisplayLength(displayId));
+            this.setCurrTwitchIdle(displayId);
+            this.setTwitchTicks(this.getIdleLength(displayId));
             return true;
         }
-        if (this.getCurrentBodyIdle() >= 0) {
+        if (this.getCurrRegIdle() >= 0) {
             return false;
         }
-        if (type == IdleType.MOVEMENT_POSITIVE && this.getCurrentTwitchIdle() >= 0) {
+        if (type == IdleType.MOVEMENT_POSITIVE && this.getCurrTwitchIdle() >= 0) {
             return false;
         }
-        this.setCurrentBodyIdle(displayId);
-        this.setIdleDisplayTicks(this.getIdleDisplayLength(displayId));
+        this.setCurrRegIdle(displayId);
+        this.setIdleTicks(this.getIdleLength(displayId));
         if (type == IdleType.MOVEMENT_NEGATIVE) {
             ((PathfinderMob) this).getNavigation().stop();
             this.onMovementLockingIdleStart();
@@ -131,52 +131,52 @@ public interface IIdles {
         return true;
     }
 
-    default void tickIdleDisplay(PathfinderMob mob) {
-        if (this.getIdleDisplayTicks() > 0) {
+    default void tickIdle(PathfinderMob mob) {
+        if (this.getIdleTicks() > 0) {
             boolean locked = this.isMovementLockedByIdle();
             if (locked) {
                 mob.getNavigation().stop();
             }
-            this.setIdleDisplayTicks(this.getIdleDisplayTicks() - 1);
-            if (this.getIdleDisplayTicks() <= 0) {
-                this.setCurrentBodyIdle(-1);
+            this.setIdleTicks(this.getIdleTicks() - 1);
+            if (this.getIdleTicks() <= 0) {
+                this.setCurrRegIdle(-1);
                 if (locked) {
                     this.onMovementLockingIdleEnd();
                 }
             }
         }
-        if (this.getTwitchIdleTicks() > 0) {
-            this.setTwitchIdleTicks(this.getTwitchIdleTicks() - 1);
-            if (this.getTwitchIdleTicks() <= 0) {
-                this.setCurrentTwitchIdle(-1);
+        if (this.getTwitchTicks() > 0) {
+            this.setTwitchTicks(this.getTwitchTicks() - 1);
+            if (this.getTwitchTicks() <= 0) {
+                this.setCurrTwitchIdle(-1);
             }
         }
 
-        if (this.getIdleDisplayCount() <= 0 || !this.canPlayIdleDisplay()) {
+        if (this.getIdleCount() <= 0 || !this.canPlayIdle()) {
             return;
         }
 
-        if (this.getCurrentTwitchIdle() < 0 && !this.isPlayingPositiveIdle()
+        if (this.getCurrTwitchIdle() < 0 && !this.isPlayingPositiveIdle()
                 && mob.getRandom().nextInt(twitchChance()) == 0) {
             int display = this.pickIdleOfType(mob, IdleType.TWITCH);
             if (display >= 0) {
-                this.startIdleDisplay(display);
+                this.startIdle(display);
             }
         }
 
-        if (this.getCurrentBodyIdle() >= 0) {
+        if (this.getCurrRegIdle() >= 0) {
             return;
         }
-        if (this.isAtRestForIdle(mob) && mob.getRandom().nextInt(bodyChance()) == 0) {
+        if (this.isAtRest(mob) && mob.getRandom().nextInt(regChance()) == 0) {
             int display = this.pickIdleOfType(mob, IdleType.MOVEMENT_NEGATIVE);
-            if (display >= 0 && this.startIdleDisplay(display)) {
+            if (display >= 0 && this.startIdle(display)) {
                 return;
             }
         }
-        if (this.getCurrentTwitchIdle() < 0 && mob.getRandom().nextInt(bodyChance()) == 0) {
+        if (this.getCurrTwitchIdle() < 0 && mob.getRandom().nextInt(regChance()) == 0) {
             int display = this.pickIdleOfType(mob, IdleType.MOVEMENT_POSITIVE);
-            if (display >= 0 && this.startIdleDisplay(display)) {
-                this.onSpontaneousIdleDisplay(display);
+            if (display >= 0 && this.startIdle(display)) {
+                this.onRandomIdle(display);
             }
         }
     }

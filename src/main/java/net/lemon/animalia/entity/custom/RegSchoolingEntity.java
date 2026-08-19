@@ -123,7 +123,7 @@ public class RegSchoolingEntity extends FishBase implements GeoEntity, Scannable
     }
 
     @Override
-    public int getIdleDisplayCount() {
+    public int getIdleCount() {
         if (this.getType() == ModEntities.CHELMON_ROSTRATUS.get()) {
             return 1;
         } else if (this.getType() == ModEntities.CHAETODON_AURIGA.get()) {
@@ -145,7 +145,7 @@ public class RegSchoolingEntity extends FishBase implements GeoEntity, Scannable
     }
 
     @Override
-    public int getIdleDisplayLength(int displayId) {
+    public int getIdleLength(int displayId) {
         return 70;
     }
 
@@ -260,7 +260,7 @@ public class RegSchoolingEntity extends FishBase implements GeoEntity, Scannable
     }
 
     private <T extends GeoAnimatable> PlayState idlesPredicate(AnimationState<T> state) {
-        int twitch = this.getCurrentTwitchIdle();
+        int twitch = this.getCurrTwitchIdle();
         if (twitch >= 0 && !this.isBaby()) {
             state.getController().setAnimation(RawAnimation.begin().then("idle" + twitch, Animation.LoopType.PLAY_ONCE));
             return PlayState.CONTINUE;

@@ -112,12 +112,12 @@ public abstract class AnimaliaBreedableWater extends WaterAnimal implements IAct
     }
 
     @Override
-    public int getIdleDisplayTicks() {
+    public int getIdleTicks() {
         return this.idleDisplayTicks;
     }
 
     @Override
-    public void setIdleDisplayTicks(int ticks) {
+    public void setIdleTicks(int ticks) {
         this.idleDisplayTicks = ticks;
     }
 
@@ -173,38 +173,38 @@ public abstract class AnimaliaBreedableWater extends WaterAnimal implements IAct
     }
 
     @Override
-    public int getTwitchIdleTicks() {
+    public int getTwitchTicks() {
         return this.twitchIdleTicks;
     }
 
     @Override
-    public void setTwitchIdleTicks(int ticks) {
+    public void setTwitchTicks(int ticks) {
         this.twitchIdleTicks = ticks;
     }
 
     @Override
-    public int getCurrentBodyIdle() {
+    public int getCurrRegIdle() {
         return this.entityData.get(BODY_IDLE);
     }
 
     @Override
-    public void setCurrentBodyIdle(int displayId) {
+    public void setCurrRegIdle(int displayId) {
         this.entityData.set(BODY_IDLE, displayId);
     }
 
     @Override
-    public int getCurrentTwitchIdle() {
+    public int getCurrTwitchIdle() {
         return this.entityData.get(TWITCH_IDLE);
     }
 
     @Override
-    public void setCurrentTwitchIdle(int displayId) {
+    public void setCurrTwitchIdle(int displayId) {
         this.entityData.set(TWITCH_IDLE, displayId);
     }
 
     @Override
-    public boolean canPlayIdleDisplay() {
-        return IIdles.super.canPlayIdleDisplay() && !this.isHiding() && !this.isGrazing();
+    public boolean canPlayIdle() {
+        return IIdles.super.canPlayIdle() && !this.isHiding() && !this.isGrazing();
     }
 
     public boolean isEating() {
@@ -506,8 +506,8 @@ public abstract class AnimaliaBreedableWater extends WaterAnimal implements IAct
                 this.hideCooldown = this.getHideCooldown();
             }
             if (!this.level().isClientSide && this.isMovementLockedByIdle()) {
-                this.setIdleDisplayTicks(0);
-                this.setCurrentBodyIdle(-1);
+                this.setIdleTicks(0);
+                this.setCurrRegIdle(-1);
                 this.onMovementLockingIdleEnd();
             }
             this.inLove = 0;
@@ -526,7 +526,7 @@ public abstract class AnimaliaBreedableWater extends WaterAnimal implements IAct
         }
 
         if (!this.level().isClientSide) {
-            this.tickIdleDisplay(this);
+            this.tickIdle(this);
         }
 
         if (!this.level().isClientSide && (this.isMovementLockedByIdle() || this.isGrazing())) {

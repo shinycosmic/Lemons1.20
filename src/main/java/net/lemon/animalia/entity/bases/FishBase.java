@@ -206,12 +206,12 @@ public abstract class FishBase extends AnimaliaBreedableWater implements Bucketa
             return true;
         }
 
-        if (signal == SchoolSignal.IDLE_DISPLAY && this.getIdleDisplayCount() > 0
-                && this.canPlayIdleDisplay()) {
-            int display = data >= 0 && data < this.getIdleDisplayCount()
+        if (signal == SchoolSignal.IDLE_DISPLAY && this.getIdleCount() > 0
+                && this.canPlayIdle()) {
+            int display = data >= 0 && data < this.getIdleCount()
                     ? data : this.pickIdleOfType(this, IdleType.MOVEMENT_POSITIVE);
             if (display >= 0 && this.getIdleType(display) == IdleType.MOVEMENT_POSITIVE) {
-                return this.startIdleDisplay(display);
+                return this.startIdle(display);
             }
             return false;
         }
@@ -219,7 +219,7 @@ public abstract class FishBase extends AnimaliaBreedableWater implements Bucketa
     }
 
     @Override
-    public void onSpontaneousIdleDisplay(int displayId) {
+    public void onRandomIdle(int displayId) {
         if (this.isSchoolingFish()) {
             this.broadcastSchoolSignal(SchoolSignal.IDLE_DISPLAY, displayId);
             this.signalCooldown = 60 + this.random.nextInt(40);

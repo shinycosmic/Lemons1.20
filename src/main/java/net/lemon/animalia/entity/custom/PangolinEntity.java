@@ -7,7 +7,6 @@ import net.lemon.animalia.entity.bases.AnimaliaLandBase;
 import net.lemon.animalia.entity.bases.helpers.ActivityTime;
 import net.lemon.animalia.entity.bases.helpers.ICanGuard;
 import net.lemon.animalia.entity.bases.helpers.ICanSleep;
-import net.lemon.animalia.registry.ModBlocks;
 import net.lemon.animalia.registry.ModEntities;
 import net.lemon.animalia.registry.ModItems;
 import net.lemon.animalia.registry.ModTags;
@@ -25,7 +24,6 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.ai.goal.BreedGoal;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
@@ -174,7 +172,7 @@ public class PangolinEntity extends AnimaliaLandBase implements GeoEntity, Scann
             animationState.getController().setAnimation(RawAnimation.begin().then("sleeping", Animation.LoopType.LOOP));
             return PlayState.CONTINUE;
         }
-        int bodyIdle = this.getCurrentBodyIdle();
+        int bodyIdle = this.getCurrRegIdle();
         if (bodyIdle >= 0) {
             animationState.getController().setAnimation(RawAnimation.begin().then("idle" + bodyIdle, Animation.LoopType.PLAY_ONCE));
             return PlayState.CONTINUE;
@@ -334,11 +332,11 @@ public class PangolinEntity extends AnimaliaLandBase implements GeoEntity, Scann
     }
 
     @Override
-    public int getIdleDisplayCount() {return 1;}
+    public int getIdleCount() {return 1;}
 
     @Override
     public IdleType getIdleType(int displayId) {return IdleType.MOVEMENT_NEGATIVE;}
 
     @Override
-    public int getIdleDisplayLength(int displayId) {return 130;}
+    public int getIdleLength(int displayId) {return 130;}
 }
