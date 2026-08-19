@@ -20,6 +20,7 @@ public class HolonetSetup {
         GrazeSchoolingEntity.registerHolonet();
         PangasianodonEntity.registerHolonet();
         HydrocynusEntity.registerHolonet();
+        IndostomusEntity.registerHolonet();
 
         //Field
         CrayfishEntity.registerHolonet();

@@ -131,7 +131,7 @@ public abstract class WaterDartBase extends FishBase{
                 if (pitch == 0F) {
                     score += 0.5;
                 }
-                if (focusPos == null && Math.abs(yawOffset) <= 45F) {
+                if (focusPos == null && Math.abs(yawOffset) <= 75F) {
                     score += 0.05;
                 }
                 score += (this.getRandom().nextFloat() - 0.5) * 0.2;

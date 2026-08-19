@@ -10,15 +10,21 @@ import net.lemon.animalia.registry.spawning.SpawnBand;
 import net.lemon.animalia.util.AnimaliaFunctionUtil;
 import net.lemon.animalia.util.HolonetEntities;
 import net.lemon.animalia.util.Scannable;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.SpawnGroupData;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.ServerLevelAccessor;
+import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.core.animatable.GeoAnimatable;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
@@ -69,7 +75,7 @@ public class IndostomusEntity extends WaterDartBase implements GeoEntity, Scanna
 
     @Override
     public int getScaleforGUI() {
-        if (this.getType() == ModEntities.HYDROCYNUS_GOLIATH.get()) {
+        if (this.getType() == ModEntities.INDOSTOMUS_PARADOXUS.get()) {
             return 18;
         }
         return Scannable.super.getScaleforGUI();
@@ -121,7 +127,7 @@ public class IndostomusEntity extends WaterDartBase implements GeoEntity, Scanna
     @Override
     public int getIdleLength(int displayId) {
         return switch (displayId) {
-            case 0 -> 70;
+            case 0 -> 40;
             default -> 13;
         };
     }
@@ -162,5 +168,14 @@ public class IndostomusEntity extends WaterDartBase implements GeoEntity, Scanna
     @Override
     public AnimatableInstanceCache getAnimatableInstanceCache() {
         return cache;
+    }
+
+    @Override
+    public @Nullable SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, MobSpawnType reason, @Nullable SpawnGroupData spawnData, @Nullable CompoundTag dataTag) {
+        if (reason != MobSpawnType.BUCKET || dataTag == null || !dataTag.contains("BucketVarSize")) {
+            this.setVarColor(1);
+            this.setVarSizeMultiplier(this.genVarSizeMultiplier());
+        }
+        return super.finalizeSpawn(level, difficulty, reason, spawnData, dataTag);
     }
 }

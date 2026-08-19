@@ -118,25 +118,10 @@ public class PangolinEntity extends AnimaliaLandBase implements GeoEntity, Scann
     @Override
     public int getScaleforGUI() {
         if (this.getType() == ModEntities.SMUTSIA_GIGANTEA.get()) {
-            return 18;
+            return 22;
         } else {
             return Scannable.super.getScaleforGUI();
         }
-    }
-
-    @Override
-    public int getScaleforDetailGUI() {
-        int currScale = Scannable.super.getScaleforDetailGUI();
-        return (int) (currScale * 0.65f);
-    }
-
-    @Override
-    public int getXOffsetForGUI() {
-        int offset = 0;
-        if(this.getType() == ModEntities.SMUTSIA_GIGANTEA.get()) {
-            offset = -5;
-        }
-        return offset;
     }
 
     public static void registerHolonet(){
@@ -251,7 +236,7 @@ public class PangolinEntity extends AnimaliaLandBase implements GeoEntity, Scann
     public int getGrazeLength() {return 190;}
 
     @Override
-    public double getGrazeReachSqr() {return 3.5D;}
+    public double getGrazeReachSqr() {return 1.5D;}
 
     @Override
     public boolean canGraze() {return super.canGraze() && this.getGuardPhase() == GUARD_PHASE_NONE;}

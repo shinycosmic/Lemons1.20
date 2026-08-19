@@ -40,6 +40,7 @@ public class AnimaliaRenderInit {
         EntityRenderers.register(ModEntities.ZEBRASOMA_VELIFER.get(), ZebrasomaVeliferRenderer::new);
         EntityRenderers.register(ModEntities.ZEBRASOMA_FLAVESCENS.get(), ZebrasomaFlavescensRenderer::new);
         EntityRenderers.register(ModEntities.HYDROCYNUS_GOLIATH.get(), HydrocynusGoliathRenderer::new);
+        EntityRenderers.register(ModEntities.INDOSTOMUS_PARADOXUS.get(), IndostomusParadoxusRenderer::new);
 
 
 
