@@ -1,6 +1,5 @@
 package net.lemon.animalia.entity.bases;
 
-import net.lemon.animalia.entity.ai.EatDroppedItemsGoal;
 import net.lemon.animalia.entity.bases.helpers.*;
 import net.lemon.animalia.item.FishEggItem;
 import net.lemon.animalia.registry.ModItems;
@@ -104,7 +103,6 @@ public abstract class AnimaliaLandBase extends Animal implements IActivityTime, 
 
         this.goalSelector.addGoal(2, new BreedGoal(this, 1.15D));
         this.goalSelector.addGoal(3, new TemptGoal(this, 1.0D, this.foodIngredients(), false));
-        //this.goalSelector.addGoal(4, new EatDroppedItemsGoal<>(this, 1.2D, 10.0F));
         this.goalSelector.addGoal(5, new FollowParentGoal(this, 1.25D));
         this.goalSelector.addGoal(5, new WaterAvoidingRandomStrollGoal(this, 1.0D));
         this.goalSelector.addGoal(6, new LookAtPlayerGoal(this, Player.class, 6.0F));

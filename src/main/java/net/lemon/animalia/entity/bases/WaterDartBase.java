@@ -1,6 +1,5 @@
 package net.lemon.animalia.entity.bases;
 
-import net.lemon.animalia.entity.ai.EatDroppedItemsGoal;
 import net.lemon.animalia.entity.ai.FishBreedGoal;
 import net.minecraft.core.BlockPos;
 import net.minecraft.tags.FluidTags;
@@ -43,11 +42,8 @@ public abstract class WaterDartBase extends FishBase{
     @Override
     protected void registerGoals() {
         super.registerGoals();
-        this.goalSelector.getAvailableGoals().removeIf(g ->
-                g.getGoal() instanceof PanicGoal
-                        || g.getGoal() instanceof AvoidEntityGoal || g.getGoal() instanceof TemptGoal || g.getGoal() instanceof FishBreedGoal
-//                        || g.getGoal() instanceof EatDroppedItemsGoal
-        );
+        this.goalSelector.getAvailableGoals().removeIf(g -> g.getGoal() instanceof PanicGoal
+                || g.getGoal() instanceof AvoidEntityGoal || g.getGoal() instanceof TemptGoal || g.getGoal() instanceof FishBreedGoal);
         this.goalSelector.addGoal(1, new DartPanicGoal(this));
         this.goalSelector.addGoal(2, new DartBreedGoal(this));
         this.goalSelector.addGoal(7, new DartWanderGoal(this));
