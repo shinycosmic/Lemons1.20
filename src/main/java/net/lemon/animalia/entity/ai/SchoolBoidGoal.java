@@ -15,11 +15,6 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-/**
- * <p>Boid forces only act between fish sharing the same school leader. This allows two schools of differing sizes
- * to pass through each other.
- * Membership (join, promote, defect, lost-contact) is maintained during the periodic scan. //TODO Probably can optimize this more</p>
- */
 public class SchoolBoidGoal extends Goal {
 
     private static final double VIEW_RADIUS = 8.0;
