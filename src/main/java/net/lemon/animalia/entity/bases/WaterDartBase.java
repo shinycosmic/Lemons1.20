@@ -3,6 +3,7 @@ package net.lemon.animalia.entity.bases;
 import net.lemon.animalia.entity.ai.FishBreedGoal;
 import net.minecraft.core.BlockPos;
 import net.minecraft.tags.FluidTags;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.goal.AvoidEntityGoal;
@@ -29,6 +30,10 @@ public abstract class WaterDartBase extends FishBase{
     };
 
     public int panicCooldown = 0;
+    private int aimTicks;
+    private float dartYaw;
+    private float dartPitch;
+
     public WaterDartBase(EntityType<? extends FishBase> entityType, Level level) {
         super(entityType, level);
     }
@@ -55,6 +60,23 @@ public abstract class WaterDartBase extends FishBase{
         if (!this.level().isClientSide) {
             if (this.panicCooldown > 0) {
                 this.panicCooldown--;
+            }
+            if (this.aimTicks > 0) {
+                if (this.isMovementLockedByIdle()) {
+                    this.aimTicks = 0;
+                } else {
+                    this.aimTicks--;
+                    float yaw = Mth.approachDegrees(this.getYRot(), this.dartYaw, 25.0F);
+                    this.setYRot(yaw);
+                    this.yBodyRot = yaw;
+                    this.setYHeadRot(yaw);
+                    this.setXRot(Mth.approachDegrees(this.getXRot(), -this.dartPitch, 10.0F));
+                    if (this.aimTicks <= 0 || (Mth.degreesDifferenceAbs(yaw, this.dartYaw) < 1.0F && Mth.degreesDifferenceAbs(this.getXRot(), -this.dartPitch)
+                            < 1.0F)) {
+                        this.aimTicks = 0;
+                        this.burst();
+                    }
+                }
             }
             if (this.isSurfaceDarter() && this.isInWater()) {
                 if (this.isUnderWater()) {
@@ -100,7 +122,9 @@ public abstract class WaterDartBase extends FishBase{
     public void dart(@Nullable Vec3 focusPos, boolean towardFocus) {
         float baseYaw = this.getYRot();
         float pitchRange = this.isSurfaceDarter() ? 0F : this.getDartPitch();
-        float[] pitchOffsets = pitchRange > 0 ? new float[]{0F, pitchRange, -pitchRange} : new float[]{0F};
+        boolean pitched = pitchRange > 0 && this.getRandom().nextFloat() < 0.4F;
+        float pitchMag = pitched ? pitchRange * (0.3F + 0.7F * this.getRandom().nextFloat()) : 0F;
+        float[] pitchOffsets = pitched ? new float[]{0F, pitchMag, -pitchMag} : new float[]{0F};
 
         float bestYaw = baseYaw;
         float bestPitch = 0F;
@@ -128,10 +152,10 @@ public abstract class WaterDartBase extends FishBase{
                     score += 2.0;
                 }
                 score -= this.waterPenalty(dir);
-                if (pitch == 0F) {
+                if (pitched ? pitch != 0F : pitch == 0F) {
                     score += 0.5;
                 }
-                if (focusPos == null && Math.abs(yawOffset) <= 75F) {
+                if (focusPos == null && Math.abs(yawOffset) <= 90F) {
                     score += 0.05;
                 }
                 score += (this.getRandom().nextFloat() - 0.5) * 0.2;
@@ -144,8 +168,14 @@ public abstract class WaterDartBase extends FishBase{
             }
         }
 
-        double yawRad = Math.toRadians(bestYaw);
-        double pitchRad = Math.toRadians(bestPitch);
+        this.dartYaw = bestYaw;
+        this.dartPitch = bestPitch;
+        this.aimTicks = 15;
+    }
+
+    private void burst() {
+        double yawRad = Math.toRadians(this.dartYaw);
+        double pitchRad = Math.toRadians(this.dartPitch);
         double strength = this.getBurstPower() * (this.isBaby() ? this.getBabyBurstScale() : 1.0);
         double xzScale = Math.cos(pitchRad);
 
@@ -155,13 +185,6 @@ public abstract class WaterDartBase extends FishBase{
                 Math.cos(yawRad) * xzScale * strength
         );
         this.hasImpulse = true;
-
-        this.setYRot(bestYaw);
-        this.setYHeadRot(bestYaw);
-        this.yRotO = bestYaw;
-        this.yHeadRotO = bestYaw;
-        this.setXRot(-bestPitch);
-        this.xRotO = -bestPitch;
     }
 
     private boolean isDirectionBlocked(Vec3 offset) {

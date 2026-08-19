@@ -142,7 +142,7 @@ public class IndostomusEntity extends WaterDartBase implements GeoEntity, Scanna
 
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
-        controllers.add(new AnimationController<>(this, "controller", 5, this::predicate));
+        controllers.add(new AnimationController<>(this, "controller", 0, this::predicate));
         controllers.add(new AnimationController<>(this, "idles_controller", 5, this::idlesPredicate));
     }
 
