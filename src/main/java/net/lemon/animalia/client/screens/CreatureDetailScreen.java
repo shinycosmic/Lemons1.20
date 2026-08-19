@@ -3,6 +3,7 @@ package net.lemon.animalia.client.screens;
 import com.mojang.blaze3d.platform.Lighting;
 import net.lemon.animalia.Animalia;
 import net.lemon.animalia.entity.bases.AnimaliaBreedableWater;
+import net.lemon.animalia.entity.bases.AnimaliaLandBase;
 import net.lemon.animalia.entity.bases.FishBase;
 import net.lemon.animalia.client.player.network.ClientDiscoveryCache;
 import net.lemon.animalia.entity.bases.helpers.IDimorphism;
@@ -175,18 +176,20 @@ public class CreatureDetailScreen extends Screen {
         int infoY = bgY + INFO_TOP_OFFSET + 10;
 
         //Draws the right side info
-        if (displayEntity instanceof AnimaliaBreedableWater abw && displayEntity instanceof Scannable scannable) {
+        if (displayEntity instanceof Scannable scannable) {
             graphics.drawString(this.font, Component.literal("> ").append(scannable.getOrder()), infoX, infoY, 0xFFFFFF, true);
             infoY += LINE_SPACING;
             graphics.drawString(this.font, Component.literal("> ").append(scannable.getFamily()), infoX, infoY, 0xFFFFFF, true);
             infoY += LINE_SPACING;
             graphics.drawString(this.font, Component.literal("> ").append(
-                            Component.literal(abw.getScientificName()).withStyle(ChatFormatting.ITALIC)),
+                            Component.literal(scannable.getScientificName()).withStyle(ChatFormatting.ITALIC)),
                     infoX, infoY, 0xFFFFFF, true);
             infoY += LINE_SPACING + 8;
 
             //Currently only the breeding item. Leaning against including whole diet as diet is made up of itemTags
-            ItemStack foodItem = new ItemStack(abw.getBreedingItem());
+            ItemStack foodItem = displayEntity instanceof AnimaliaBreedableWater abw ? new ItemStack(abw.getBreedingItem())
+                    : displayEntity instanceof AnimaliaLandBase land ? new ItemStack(land.getBreedingItem())
+                    : ItemStack.EMPTY;
             if (!foodItem.isEmpty()) {
                 graphics.renderItem(foodItem, infoX, infoY - 2);
                 graphics.drawString(this.font, foodItem.getHoverName(), infoX + 18, infoY + 2, 0xFFFFFF, true);

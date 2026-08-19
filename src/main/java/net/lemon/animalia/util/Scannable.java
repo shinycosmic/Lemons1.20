@@ -32,6 +32,8 @@ public interface Scannable {
 
     Component getOrder();
 
+    String getScientificName();
+
     /***
      * the registry method, this is called to make sure Holonet recognizes this creature
      * Every Scannable creature must also have this method

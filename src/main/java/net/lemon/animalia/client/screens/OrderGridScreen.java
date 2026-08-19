@@ -115,8 +115,8 @@ public class OrderGridScreen extends Screen {
                     graphics.fill(cellX, cellY, cellX + CELL_SIZE, cellY + CELL_SIZE, HOVER_HIGHLIGHT);
 
                     LivingEntity dummy = cachedDummies.get(entityType);
-                    if(dummy instanceof AnimaliaBreedableWater water) {
-                        hoveredTooltip = List.of(entityType.getDescription(), Component.literal(water.getScientificName()).withStyle(ChatFormatting.ITALIC, ChatFormatting.GRAY));
+                    if(dummy instanceof Scannable scannable) {
+                        hoveredTooltip = List.of(entityType.getDescription(), Component.literal(scannable.getScientificName()).withStyle(ChatFormatting.ITALIC, ChatFormatting.GRAY));
                     } else {
                         hoveredTooltip = List.of(entityType.getDescription());
                     }
