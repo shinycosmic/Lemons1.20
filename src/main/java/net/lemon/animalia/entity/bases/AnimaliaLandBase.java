@@ -1,6 +1,5 @@
 package net.lemon.animalia.entity.bases;
 
-import net.lemon.animalia.entity.ai.EatDroppedItemsGoal;
 import net.lemon.animalia.entity.bases.helpers.*;
 import net.lemon.animalia.item.FishEggItem;
 import net.lemon.animalia.registry.ModItems;
@@ -104,7 +103,6 @@ public abstract class AnimaliaLandBase extends Animal implements IActivityTime, 
 
         this.goalSelector.addGoal(2, new BreedGoal(this, 1.15D));
         this.goalSelector.addGoal(3, new TemptGoal(this, 1.0D, this.foodIngredients(), false));
-        //this.goalSelector.addGoal(4, new EatDroppedItemsGoal<>(this, 1.2D, 10.0F));
         this.goalSelector.addGoal(5, new FollowParentGoal(this, 1.25D));
         this.goalSelector.addGoal(5, new WaterAvoidingRandomStrollGoal(this, 1.0D));
         this.goalSelector.addGoal(6, new LookAtPlayerGoal(this, Player.class, 6.0F));
@@ -380,8 +378,8 @@ public abstract class AnimaliaLandBase extends Animal implements IActivityTime, 
                 this.hideCooldown = this.getHideCooldown();
             }
             if (!this.level().isClientSide && this.isMovementLockedByIdle()) {
-                this.setIdleDisplayTicks(0);
-                this.setCurrentBodyIdle(-1);
+                this.setIdleTicks(0);
+                this.setCurrRegIdle(-1);
                 this.onMovementLockingIdleEnd();
             }
             return super.hurt(source, amount);
@@ -389,53 +387,53 @@ public abstract class AnimaliaLandBase extends Animal implements IActivityTime, 
     }
 
     @Override
-    public int getIdleDisplayTicks() {
+    public int getIdleTicks() {
         return this.idleDisplayTicks;
     }
 
     @Override
-    public void setIdleDisplayTicks(int ticks) {
+    public void setIdleTicks(int ticks) {
         this.idleDisplayTicks = ticks;
     }
 
     @Override
-    public int getTwitchIdleTicks() {
+    public int getTwitchTicks() {
         return this.twitchIdleTicks;
     }
 
     @Override
-    public void setTwitchIdleTicks(int ticks) {
+    public void setTwitchTicks(int ticks) {
         this.twitchIdleTicks = ticks;
     }
 
     @Override
-    public int getCurrentBodyIdle() {
+    public int getCurrRegIdle() {
         return this.entityData.get(BODY_IDLE);
     }
 
     @Override
-    public void setCurrentBodyIdle(int displayId) {
+    public void setCurrRegIdle(int displayId) {
         this.entityData.set(BODY_IDLE, displayId);
     }
 
     @Override
-    public int getCurrentTwitchIdle() {
+    public int getCurrTwitchIdle() {
         return this.entityData.get(TWITCH_IDLE);
     }
 
     @Override
-    public void setCurrentTwitchIdle(int displayId) {
+    public void setCurrTwitchIdle(int displayId) {
         this.entityData.set(TWITCH_IDLE, displayId);
     }
 
     @Override
-    public boolean canPlayIdleDisplay() {
-        return IIdles.super.canPlayIdleDisplay() && !this.isHiding() && !this.isGrazing();
+    public boolean canPlayIdle() {
+        return IIdles.super.canPlayIdle() && !this.isHiding() && !this.isGrazing();
     }
 
     @Override
-    public boolean isAtRestForIdle(PathfinderMob mob) {
-        return IIdles.super.isAtRestForIdle(mob) && this.onGround();
+    public boolean isAtRest(PathfinderMob mob) {
+        return IIdles.super.isAtRest(mob) && this.onGround();
     }
 
     @Override
@@ -456,7 +454,7 @@ public abstract class AnimaliaLandBase extends Animal implements IActivityTime, 
         }
 
         if (!this.level().isClientSide) {
-            this.tickIdleDisplay(this);
+            this.tickIdle(this);
         }
 
         if (!this.level().isClientSide && (this.isMovementLockedByIdle() || this.isGrazing())) {

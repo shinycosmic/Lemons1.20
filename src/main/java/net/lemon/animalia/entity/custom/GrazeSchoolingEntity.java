@@ -115,7 +115,7 @@ public class GrazeSchoolingEntity extends FishBase implements GeoEntity, Scannab
     }
 
     @Override
-    public int getIdleDisplayCount() {
+    public int getIdleCount() {
         if(this.getType() == ModEntities.ZEBRASOMA_VELIFER.get() || this.getType() == ModEntities.ZEBRASOMA_FLAVESCENS.get()) {
             return 1;
         }
@@ -138,7 +138,7 @@ public class GrazeSchoolingEntity extends FishBase implements GeoEntity, Scannab
     }
 
     @Override
-    public int getIdleDisplayLength(int displayId) {
+    public int getIdleLength(int displayId) {
         return 80;
     }
 
@@ -265,7 +265,7 @@ public class GrazeSchoolingEntity extends FishBase implements GeoEntity, Scannab
     }
 
     private <T extends GeoAnimatable> PlayState idlesPredicate(AnimationState<T> state) {
-        int twitch = this.getCurrentTwitchIdle();
+        int twitch = this.getCurrTwitchIdle();
         if (twitch >= 0 && !this.isBaby()) {
             state.getController().setAnimation(RawAnimation.begin().then("idle" + twitch, Animation.LoopType.PLAY_ONCE));
             return PlayState.CONTINUE;
