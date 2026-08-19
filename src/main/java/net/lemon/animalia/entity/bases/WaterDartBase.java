@@ -101,7 +101,6 @@ public abstract class WaterDartBase extends FishBase{
         float baseYaw = this.getYRot();
         float pitchRange = this.isSurfaceDarter() ? 0F : this.getDartPitch();
         float[] pitchOffsets = pitchRange > 0 ? new float[]{0F, pitchRange, -pitchRange} : new float[]{0F};
-        Vec3 forward = new Vec3(-Math.sin(Math.toRadians(baseYaw)), 0, Math.cos(Math.toRadians(baseYaw)));
 
         float bestYaw = baseYaw;
         float bestPitch = 0F;
@@ -132,13 +131,8 @@ public abstract class WaterDartBase extends FishBase{
                 if (pitch == 0F) {
                     score += 0.5;
                 }
-                if (focusPos == null) {
-                    double forwardDot = dir.dot(forward);
-                    if (forwardDot > 0) {
-                        score += forwardDot * 2.0;
-                    } else {
-                        score -= 1.0;
-                    }
+                if (focusPos == null && Math.abs(yawOffset) <= 45F) {
+                    score += 0.05;
                 }
                 score += (this.getRandom().nextFloat() - 0.5) * 0.2;
 
