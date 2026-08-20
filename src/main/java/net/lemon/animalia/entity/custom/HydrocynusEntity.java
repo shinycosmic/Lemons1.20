@@ -107,11 +107,6 @@ public class HydrocynusEntity extends FishBase implements GeoEntity, Scannable {
     }
 
     @Override
-    public ItemStack getBucketItemStack() {
-        return new ItemStack(ModItems.HYDROCYNUS_GOLIATH_BUCKET.get());
-    }
-
-    @Override
     public int getScaleforGUI() {
         if (this.getType() == ModEntities.HYDROCYNUS_GOLIATH.get()) {
             return 18;

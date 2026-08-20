@@ -162,16 +162,6 @@ public class SynbranchusEntity extends BottomWalkerSwimmerBase implements GeoEnt
     }
 
     @Override
-    public ItemStack getBucketItemStack() {
-        if (this.getType() == ModEntities.SYNBRANCHUS_MARMORATUS.get()) {
-            return new ItemStack(ModItems.SYNBRANCHUS_MARMORATUS_BUCKET.get());
-        } else if (this.getType() == ModEntities.CHAUDHURIA_CAUDATA.get()) {
-            return new ItemStack(ModItems.CHAUDHURIA_CAUDATA_BUCKET.get());
-        }
-        return new ItemStack(Items.SALMON_BUCKET);
-    }
-
-    @Override
     public boolean shouldJumpOnFlop() {
         return false;
     }

@@ -119,11 +119,6 @@ public class ToxotesEntity extends FishBase implements GeoEntity, Scannable {
     }
 
     @Override
-    public ItemStack getBucketItemStack() {
-        return new ItemStack(ModItems.TOXOTES_CHATAREUS_BUCKET.get());
-    }
-
-    @Override
     public int getScaleforGUI() {
         if (this.getType() == ModEntities.TOXOTES_CHATAREUS.get()) {
             return 30;

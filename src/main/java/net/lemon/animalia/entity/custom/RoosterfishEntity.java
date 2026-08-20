@@ -139,11 +139,6 @@ public class RoosterfishEntity extends FishBase implements GeoEntity, Scannable 
     }
 
     @Override
-    public ItemStack getBucketItemStack() {
-        return new ItemStack(ModItems.NEMATISTIUS_PECTORALIS_BUCKET.get());
-    }
-
-    @Override
     public int getScaleforGUI() {
         if (this.getType() == ModEntities.NEMATISTIUS_PECTORALIS.get()) {
             return 18;

@@ -220,22 +220,6 @@ public class MastacembelusEntity extends FishBase implements GeoEntity, Scannabl
     }
 
     @Override
-    public ItemStack getBucketItemStack() {
-        if (this.getType() == ModEntities.MASTACEMBELUS_ARMATUS.get()) {
-            return new ItemStack(ModItems.MASTACEMBELUS_ARMATUS_BUCKET.get());
-        } else if (this.getType() == ModEntities.MASTACEMBELUS_ERYTHROTAENIA.get()) {
-            return new ItemStack(ModItems.MASTACEMBELUS_ERYTHROTAENIA_BUCKET.get());
-        } else if (this.getType() == ModEntities.MACROGNATHUS_SIAMENSIS.get()) {
-            return new ItemStack(ModItems.MACROGNATHUS_SIAMENSIS_BUCKET.get());
-        } else if (this.getType() == ModEntities.MASTACEMBELUS_BRICHARDI.get()) {
-            return new ItemStack(ModItems.MASTACEMBELUS_BRICHARDI_BUCKET.get());
-        } else if (this.getType() == ModEntities.SINOBDELLA_SINENSIS.get()) {
-            return new ItemStack(ModItems.SINOBDELLA_SINENSIS_BUCKET.get());
-        }
-        return new ItemStack(Items.SALMON_BUCKET);
-    }
-
-    @Override
     public boolean shouldJumpOnFlop() {
         return false;
     }

@@ -104,11 +104,6 @@ public class RakthamichthysEntity extends BottomWalkerSwimmerBase implements Geo
     }
 
     @Override
-    public ItemStack getBucketItemStack() {
-        return new ItemStack(ModItems.RAKTHAMICHTHYS_INDICUS_BUCKET.get());
-    }
-
-    @Override
     public int getScaleforGUI() {
         if (this.getType() == ModEntities.RAKTHAMICHTHYS_INDICUS.get()) {
             return 500;

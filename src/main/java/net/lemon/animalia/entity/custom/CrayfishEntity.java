@@ -102,18 +102,6 @@ public class CrayfishEntity extends BottomWalkerSwimmerBase implements GeoEntity
     }
 
     @Override
-    public ItemStack getBucketItemStack() {
-        if (this.getType() == ModEntities.PROCAMBARUS_CLARKII.get()) {
-            return new ItemStack(ModItems.PROCAMBARUS_CLARKII_BUCKET.get());
-        } else if (this.getType() == ModEntities.PROCAMBARUS_LUCIFUGUS.get()) {
-            return new ItemStack(ModItems.PROCAMBARUS_LUCIFUGUS_BUCKET.get());
-        } else if (this.getType() == ModEntities.PROCAMBARUS_VIRGINALIS.get()) {
-            return new ItemStack(ModItems.PROCAMBARUS_VIRGINALIS_BUCKET.get());
-        }
-        return new ItemStack(ModItems.PROCAMBARUS_ALLENI_BUCKET.get());
-    }
-
-    @Override
     public int getScaleforGUI() {
         if (this.getType() == ModEntities.PROCAMBARUS_LUCIFUGUS.get()) {
             return 40;

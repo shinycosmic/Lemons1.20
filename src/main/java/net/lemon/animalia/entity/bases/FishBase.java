@@ -3,6 +3,7 @@ package net.lemon.animalia.entity.bases;
 import net.lemon.animalia.entity.ai.SchoolBoidGoal;
 import net.lemon.animalia.entity.ai.utils.SchoolDepthBias;
 import net.lemon.animalia.entity.ai.utils.SchoolSignal;
+import net.lemon.animalia.registry.ModEntities;
 import net.lemon.animalia.registry.ModItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -29,6 +30,8 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.Objects;
 
 public abstract class FishBase extends AnimaliaBreedableWater implements Bucketable {
     private static final EntityDataAccessor<Boolean> FROM_BUCKET = SynchedEntityData.defineId(FishBase.class, EntityDataSerializers.BOOLEAN);
@@ -106,6 +109,13 @@ public abstract class FishBase extends AnimaliaBreedableWater implements Bucketa
 
     public int maxNeighbors() {
         return 6;
+    }
+
+    //now we should finally have signal if there is no bucket instead of just defaulting to salmon buckets
+    @Override
+    public ItemStack getBucketItemStack() {
+        String name = EntityType.getKey(this.getType()).getPath();
+        return new ItemStack(Objects.requireNonNull(ModEntities.BUCKET_MAP.get(name), () -> "No bucket registered for " + name).get());
     }
 
     @Override
@@ -454,8 +464,15 @@ public abstract class FishBase extends AnimaliaBreedableWater implements Bucketa
         this.wasTouchingWater = inWater;
     }
 
+    public boolean bucketable() {
+        return true;
+    }
+
     public InteractionResult mobInteract(Player player, InteractionHand hand) {
-        return Bucketable.bucketMobPickup(player, hand, this).orElse(super.mobInteract(player, hand));
+        if (this.bucketable()) {
+            return Bucketable.bucketMobPickup(player, hand, this).orElse(super.mobInteract(player, hand));
+        }
+        return super.mobInteract(player, hand);
     }
 
     @Override

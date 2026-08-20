@@ -147,11 +147,6 @@ public class BettaEntity extends FishBase implements GeoEntity, IsGenetic, Scann
     }
 
     @Override
-    public ItemStack getBucketItemStack() {
-        return new ItemStack(ModItems.BETTA_SPLENDENS_BUCKET.get());
-    }
-
-    @Override
     protected ResourceLocation getDefaultLootTable() {
         return super.getDefaultLootTable();
     }

@@ -139,20 +139,6 @@ public class GrazeSchoolingEntity extends FishBase implements GeoEntity, Scannab
     }
 
     @Override
-    public ItemStack getBucketItemStack() {
-        if (this.getType() == ModEntities.PARACANTHURUS_HEPATUS.get()) {
-            return new ItemStack(ModItems.PARACANTHURUS_HEPATUS_BUCKET.get());
-        } else if (this.getType() == ModEntities.ZANCLUS_CORNUTUS.get()) {
-            return new ItemStack(ModItems.ZANCLUS_CORNUTUS_BUCKET.get());
-        } else if (this.getType() == ModEntities.ZEBRASOMA_FLAVESCENS.get()) {
-            return new ItemStack(ModItems.ZEBRASOMA_FLAVESCENS_BUCKET.get());
-        } else if (this.getType() == ModEntities.ZEBRASOMA_VELIFER.get()) {
-            return new ItemStack(ModItems.ZEBRASOMA_VELIFER_BUCKET.get());
-        }
-        return new ItemStack(Items.SALMON_BUCKET);
-    }
-
-    @Override
     public int getEatLength() { return 10; }
 
     @Override

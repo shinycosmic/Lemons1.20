@@ -133,11 +133,6 @@ public class PangasianodonEntity extends FishBase implements GeoEntity, Scannabl
     }
 
     @Override
-    public ItemStack getBucketItemStack() {
-        return new ItemStack(ModItems.PANGASIANODON_GIGAS_BUCKET.get());
-    }
-
-    @Override
     public double getGrazeReachSqr() {
         return 0.4d;
     }

@@ -221,26 +221,6 @@ public class CavefishEntity extends FishBase implements GeoEntity, Scannable {
     }
 
     @Override
-    public ItemStack getBucketItemStack() {
-        if (this.getType() == ModEntities.AMBLYOPSIS_HOOSIERI.get()) {
-            return new ItemStack(ModItems.AMBLYOPSIS_HOOSIERI_BUCKET.get());
-        } else if (this.getType() == ModEntities.CYPRINODON_DIABOLIS.get()) {
-            return new ItemStack(ModItems.CYPRINODON_DIABOLIS_BUCKET.get());
-        } else if (this.getType() == ModEntities.GITCHAK_NAKANA.get()) {
-            return new ItemStack(ModItems.GITCHAK_NAKANA_BUCKET.get());
-        } else if (this.getType() == ModEntities.KRYPTOGLANIS_SHAJII.get()) {
-            return new ItemStack(ModItems.KRYPTOGLANIS_SHAJII_BUCKET.get());
-        } else if (this.getType() == ModEntities.SINOCYCLOCHEILUS_ANATIROSTRIS.get()) {
-            return new ItemStack(ModItems.SINOCYCLOCHEILUS_ANATIROSTRIS_BUCKET.get());
-        } else if (this.getType() == ModEntities.SINOCYCLOCHEILUS_HYALINUS.get()) {
-            return new ItemStack(ModItems.SINOCYCLOCHEILUS_HYALINUS_BUCKET.get());
-        } else if (this.getType() == ModEntities.SINOCYCLOCHEILUS_LONGICORNUS.get()) {
-            return new ItemStack(ModItems.SINOCYCLOCHEILUS_LONGICORNUS_BUCKET.get());
-        }
-        return new ItemStack(Items.SALMON_BUCKET);
-    }
-
-    @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
         controllers.add(new AnimationController<>(this, "controller", 5, this::predicate));
         controllers.add(new AnimationController<>(this, "eat_controller", 0, this::eatPredicate));

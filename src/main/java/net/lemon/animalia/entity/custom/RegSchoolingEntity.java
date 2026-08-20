@@ -144,24 +144,6 @@ public class RegSchoolingEntity extends FishBase implements GeoEntity, Scannable
     }
 
     @Override
-    public ItemStack getBucketItemStack() {
-        if (this.getType() == ModEntities.SCATOPHAGUS_ARGUS.get()) {
-            return new ItemStack(ModItems.SCATOPHAGUS_ARGUS_BUCKET.get());
-        } else if (this.getType() == ModEntities.POMACANTHUS_IMPERATOR.get()) {
-            return new ItemStack(ModItems.POMACANTHUS_IMPERATOR_BUCKET.get());
-        } else if (this.getType() == ModEntities.NASO_BREVIROSTRIS.get()) {
-            return new ItemStack(ModItems.NASO_BREVIROSTRIS_BUCKET.get());
-        } else if (this.getType() == ModEntities.CHELMON_ROSTRATUS.get()) {
-            return new ItemStack(ModItems.CHELMON_ROSTRATUS_BUCKET.get());
-        } else if (this.getType() == ModEntities.CHAETODON_AURIGA.get()) {
-            return new ItemStack(ModItems.CHAETODON_AURIGA_BUCKET.get());
-        } else if (this.getType() == ModEntities.SIGANUS_VULPINUS.get()) {
-            return new ItemStack(ModItems.SIGANUS_VULPINUS_BUCKET.get());
-        }
-        return new ItemStack(Items.SALMON_BUCKET);
-    }
-
-    @Override
     public int getEatLength() { return 10; }
 
     @Override

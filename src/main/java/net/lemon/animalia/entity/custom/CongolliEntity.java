@@ -86,11 +86,6 @@ public class CongolliEntity extends BottomWalkerSwimmerBase implements GeoEntity
         return ActivityTime.NONE;
     }
 
-    @Override
-    public ItemStack getBucketItemStack() {
-        return new ItemStack(ModItems.PSEUDAPHRITIS_URVILLII_BUCKET.get());
-    }
-
     public static AttributeSupplier setAttributes() {
         return Mob.createMobAttributes()
                 .add(Attributes.MAX_HEALTH, 4D)

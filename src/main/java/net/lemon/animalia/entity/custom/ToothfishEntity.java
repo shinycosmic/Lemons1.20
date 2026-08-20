@@ -75,18 +75,6 @@ public class ToothfishEntity extends FishBase implements GeoEntity, Scannable {
     }
 
     @Override
-    public ItemStack getBucketItemStack() {
-        if(this.getType() == ModEntities.DISSOSTICHUS_ELEGINOIDES.get()) {
-            return new ItemStack(ModItems.DISSOSTICHUS_ELEGINOIDES_BUCKET.get());
-        } else if(this.getType() == ModEntities.ELEGINOPS_MACLOVINUS.get()) {
-            return new ItemStack(ModItems.ELEGINOPS_MACLOVINUS_BUCKET.get());
-        } else if(this.getType() == ModEntities.PERCOPHIS_BRASILIENSIS.get()) {
-            return new ItemStack(ModItems.PERCOPHIS_BRASILIENSIS_BUCKET.get());
-        }
-        return new ItemStack(Items.SALMON_BUCKET);
-    }
-
-    @Override
     protected void registerGoals() {
         this.goalSelector.addGoal(5, new FishFrySwimmingGoal(this, 1.0D, 40));
         this.goalSelector.addGoal(7, new BottomDwellingGoal(this, 1.0D, 160, 8, 4));

@@ -154,14 +154,6 @@ public class ChaenocephalusEntity extends BottomWalkerSwimmerBase implements Geo
     }
 
     @Override
-    public ItemStack getBucketItemStack() {
-        if (this.getType() == ModEntities.CYGNODRACO_MAWSONI.get()) {
-            return new ItemStack(ModItems.CYGNODRACO_MAWSONI_BUCKET.get());
-        }
-        return new ItemStack(ModItems.CHAENOCEPHALUS_ACERATUS_BUCKET.get());
-    }
-
-    @Override
     public int getScaleforGUI() {
         if (this.getType() == ModEntities.CHAENOCEPHALUS_ACERATUS.get()) {
             return 24;

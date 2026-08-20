@@ -113,11 +113,6 @@ public class IndostomusEntity extends WaterDartBase implements GeoEntity, Scanna
     }
 
     @Override
-    public ItemStack getBucketItemStack() {
-        return new ItemStack(ModItems.INDOSTOMUS_PARADOXUS_BUCKET.get());
-    }
-
-    @Override
     public int getIdleCount() {
         return 2;
     }

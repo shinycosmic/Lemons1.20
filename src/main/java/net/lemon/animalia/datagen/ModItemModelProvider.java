@@ -59,49 +59,9 @@ public class ModItemModelProvider extends ItemModelProvider {
         blockSpriteItem(ModBlocks.CREAM_MUSSEL);
         blockSpriteItem(ModBlocks.BLACK_MUSSEL);
 
-        //Buckets
-        simpleItem(ModItems.DISSOSTICHUS_ELEGINOIDES_BUCKET);
-        simpleItem(ModItems.ELEGINOPS_MACLOVINUS_BUCKET);
-        simpleItem(ModItems.PSEUDAPHRITIS_URVILLII_BUCKET);
-        simpleItem(ModItems.BETTA_SPLENDENS_BUCKET);
-        simpleItem(ModItems.PERCOPHIS_BRASILIENSIS_BUCKET);
-        simpleItem(ModItems.SYNBRANCHUS_MARMORATUS_BUCKET);
-        simpleItem(ModItems.CHAUDHURIA_CAUDATA_BUCKET);
-        simpleItem(ModItems.MACROGNATHUS_SIAMENSIS_BUCKET);
-        simpleItem(ModItems.MASTACEMBELUS_ARMATUS_BUCKET);
-        simpleItem(ModItems.MASTACEMBELUS_ERYTHROTAENIA_BUCKET);
-        simpleItem(ModItems.MASTACEMBELUS_BRICHARDI_BUCKET);
-        simpleItem(ModItems.SINOBDELLA_SINENSIS_BUCKET);
-        simpleItem(ModItems.RAKTHAMICHTHYS_INDICUS_BUCKET);
-        simpleItem(ModItems.NEMATISTIUS_PECTORALIS_BUCKET);
-        simpleItem(ModItems.TOXOTES_CHATAREUS_BUCKET);
-        simpleItem(ModItems.POGONOPHRYNE_MARMORATA_BUCKET);
-        simpleItem(ModItems.CHAENOCEPHALUS_ACERATUS_BUCKET);
-        simpleItem(ModItems.CYGNODRACO_MAWSONI_BUCKET);
-        simpleItem(ModItems.SCATOPHAGUS_ARGUS_BUCKET);
-        simpleItem(ModItems.PROCAMBARUS_CLARKII_BUCKET);
-        simpleItem(ModItems.PROCAMBARUS_LUCIFUGUS_BUCKET);
-        simpleItem(ModItems.PROCAMBARUS_ALLENI_BUCKET);
-        simpleItem(ModItems.PROCAMBARUS_VIRGINALIS_BUCKET);
-        simpleItem(ModItems.PANGASIANODON_GIGAS_BUCKET);
-        simpleItem(ModItems.POMACANTHUS_IMPERATOR_BUCKET);
-        simpleItem(ModItems.NASO_BREVIROSTRIS_BUCKET);
-        simpleItem(ModItems.ZANCLUS_CORNUTUS_BUCKET);
-        simpleItem(ModItems.PARACANTHURUS_HEPATUS_BUCKET);
-        simpleItem(ModItems.CHELMON_ROSTRATUS_BUCKET);
-        simpleItem(ModItems.CHAETODON_AURIGA_BUCKET);
-        simpleItem(ModItems.SIGANUS_VULPINUS_BUCKET);
-        simpleItem(ModItems.ZEBRASOMA_FLAVESCENS_BUCKET);
-        simpleItem(ModItems.ZEBRASOMA_VELIFER_BUCKET);
-        simpleItem(ModItems.HYDROCYNUS_GOLIATH_BUCKET);
-        simpleItem(ModItems.INDOSTOMUS_PARADOXUS_BUCKET);
-        simpleItem(ModItems.KRYPTOGLANIS_SHAJII_BUCKET);
-        simpleItem(ModItems.GITCHAK_NAKANA_BUCKET);
-        simpleItem(ModItems.AMBLYOPSIS_HOOSIERI_BUCKET);
-        simpleItem(ModItems.CYPRINODON_DIABOLIS_BUCKET);
-        simpleItem(ModItems.SINOCYCLOCHEILUS_ANATIROSTRIS_BUCKET);
-        simpleItem(ModItems.SINOCYCLOCHEILUS_HYALINUS_BUCKET);
-        simpleItem(ModItems.SINOCYCLOCHEILUS_LONGICORNUS_BUCKET);
+        for (RegistryObject<Item> bucket : ModEntities.BUCKETS.getEntries()) {
+            simpleItem(bucket);
+        }
 
         for (RegistryObject<Item> egg : ModEntities.SPAWN_EGGS.getEntries()) {
             withExistingParent(egg.getId().getPath(), mcLoc("item/template_spawn_egg"));

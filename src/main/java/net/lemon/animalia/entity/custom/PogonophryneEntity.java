@@ -136,11 +136,6 @@ public class PogonophryneEntity extends BottomWalkerSwimmerBase implements GeoEn
     }
 
     @Override
-    public ItemStack getBucketItemStack() {
-        return new ItemStack(ModItems.POGONOPHRYNE_MARMORATA_BUCKET.get());
-    }
-
-    @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
         controllers.add(new AnimationController<>(this, "controller", 10, this::predicate));
         controllers.add(new AnimationController<>(this, "eat_controller", 0, this::eatPredicate));
