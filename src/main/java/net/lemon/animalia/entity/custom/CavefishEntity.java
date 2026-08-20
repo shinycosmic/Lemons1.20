@@ -155,19 +155,19 @@ public class CavefishEntity extends FishBase implements GeoEntity, Scannable {
     @Override
     public int getScaleforGUI() {
         if (this.getType() == ModEntities.AMBLYOPSIS_HOOSIERI.get()) {
-            return 22;
+            return 35;
         } else if (this.getType() == ModEntities.SINOCYCLOCHEILUS_ANATIROSTRIS.get()) {
-            return 22;
+            return 35;
         } else if (this.getType() == ModEntities.SINOCYCLOCHEILUS_HYALINUS.get()){
-            return 22;
+            return 35;
         } else if (this.getType() == ModEntities.SINOCYCLOCHEILUS_LONGICORNUS.get()){
-            return 22;
+            return 35;
         } else if (this.getType() == ModEntities.CYPRINODON_DIABOLIS.get()){
-            return 22;
+            return 35;
         } else if (this.getType() == ModEntities.KRYPTOGLANIS_SHAJII.get()){
-            return 22;
+            return 35;
         } else if (this.getType() == ModEntities.GITCHAK_NAKANA.get()){
-            return 22;
+            return 35;
         }
         return Scannable.super.getScaleforGUI();
     }
@@ -176,19 +176,19 @@ public class CavefishEntity extends FishBase implements GeoEntity, Scannable {
     public int getScaleforDetailGUI() {
         int currScale = Scannable.super.getScaleforDetailGUI();
         if(this.getType() == ModEntities.AMBLYOPSIS_HOOSIERI.get()) {
-            currScale *= 1.6f;
+            currScale *= 0.8f;
         } else if(this.getType() == ModEntities.SINOCYCLOCHEILUS_ANATIROSTRIS.get()) {
-            currScale *= 1.6f;
+            currScale *= 0.85f;
         } else if(this.getType() == ModEntities.SINOCYCLOCHEILUS_HYALINUS.get()) {
-            currScale *= 1.75f;
+            currScale *= 0.84f;
         } else if(this.getType() == ModEntities.SINOCYCLOCHEILUS_LONGICORNUS.get()) {
-            currScale *= 1.75f;
+            currScale *= 0.83f;
         } else if(this.getType() == ModEntities.CYPRINODON_DIABOLIS.get()) {
-            currScale *= 1.7f;
+            currScale *= 0.9;
         } else if(this.getType() == ModEntities.GITCHAK_NAKANA.get()) {
-            currScale *= 1.7f;
+            currScale *= 1.2;
         } else if(this.getType() == ModEntities.KRYPTOGLANIS_SHAJII.get()) {
-            currScale *= 1.7f;
+            currScale *= 0.81f;
         }
 
         return currScale;
