@@ -14,7 +14,7 @@ import java.util.function.Predicate;
 public class WaterStartleGoal extends Goal {
     private final AnimaliaBreedableWater mob;
     private final float triggerDistance;
-    private final double speedMultiplier;
+    private final double speedMult;
     private final int maxFleeTicks;
     private final Predicate<LivingEntity> threatPredicate;
     private final TargetingConditions targetingConditions;
@@ -22,18 +22,18 @@ public class WaterStartleGoal extends Goal {
     private LivingEntity threat;
     private int fleeTicks;
 
-    public WaterStartleGoal(AnimaliaBreedableWater mob, float triggerDistance, double speedMultiplier) {
-        this(mob, triggerDistance, speedMultiplier, 40);
+    public WaterStartleGoal(AnimaliaBreedableWater mob, float triggerDistance, double speedMult) {
+        this(mob, triggerDistance, speedMult, 40);
     }
 
-    public WaterStartleGoal(AnimaliaBreedableWater mob, float triggerDistance, double speedMultiplier, int maxFleeTicks) {
-        this(mob, triggerDistance, speedMultiplier, maxFleeTicks, entity -> entity instanceof Player player && !player.isCreative());
+    public WaterStartleGoal(AnimaliaBreedableWater mob, float triggerDistance, double speedMult, int maxFleeTicks) {
+        this(mob, triggerDistance, speedMult, maxFleeTicks, entity -> entity instanceof Player player && !player.isCreative());
     }
 
-    public WaterStartleGoal(AnimaliaBreedableWater mob, float triggerDistance, double speedMultiplier, int maxFleeTicks, Predicate<LivingEntity> threatPredicate) {
+    public WaterStartleGoal(AnimaliaBreedableWater mob, float triggerDistance, double speedMult, int maxFleeTicks, Predicate<LivingEntity> threatPredicate) {
         this.mob = mob;
         this.triggerDistance = triggerDistance;
-        this.speedMultiplier = speedMultiplier;
+        this.speedMult = speedMult;
         this.maxFleeTicks = maxFleeTicks;
         this.threatPredicate = threatPredicate.and(EntitySelector.NO_SPECTATORS::test);
         this.targetingConditions = TargetingConditions.forNonCombat().range(triggerDistance)
@@ -105,6 +105,6 @@ public class WaterStartleGoal extends Goal {
         double distance = 8.0 + this.mob.getRandom().nextDouble() * 4.0;
         Vec3 target = mobPos.add(fleeDir.scale(distance));
 
-        this.mob.getNavigation().moveTo(target.x, target.y, target.z, this.speedMultiplier);
+        this.mob.getNavigation().moveTo(target.x, target.y, target.z, this.speedMult);
     }
 }

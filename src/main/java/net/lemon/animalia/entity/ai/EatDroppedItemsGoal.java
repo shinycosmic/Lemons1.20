@@ -14,16 +14,16 @@ import java.util.Objects;
 
 public class EatDroppedItemsGoal<T extends PathfinderMob & IFoodEater> extends Goal {
     private final T mob;
-    private final double speedMultiplier;
+    private final double speedMult;
     private final float searchRange;
 
     private ItemEntity targetItem;
     private int eatCooldown;
     private int nextSearchTime;
 
-    public EatDroppedItemsGoal(T mob, double speedMultiplier, float searchRange) {
+    public EatDroppedItemsGoal(T mob, double speedMult, float searchRange) {
         this.mob = mob;
-        this.speedMultiplier = speedMultiplier;
+        this.speedMult = speedMult;
         this.searchRange = searchRange;
         this.setFlags(EnumSet.of(Goal.Flag.MOVE, Goal.Flag.LOOK));
     }
@@ -52,7 +52,7 @@ public class EatDroppedItemsGoal<T extends PathfinderMob & IFoodEater> extends G
 
     @Override
     public void start() {
-        this.mob.getNavigation().moveTo(this.targetItem, this.speedMultiplier);
+        this.mob.getNavigation().moveTo(this.targetItem, this.speedMult);
     }
 
     @Override
@@ -62,7 +62,7 @@ public class EatDroppedItemsGoal<T extends PathfinderMob & IFoodEater> extends G
         if (this.mob.distanceToSqr(this.targetItem) < 2.0D) {
             this.eatItem();
         } else {
-            this.mob.getNavigation().moveTo(this.targetItem, this.speedMultiplier);
+            this.mob.getNavigation().moveTo(this.targetItem, this.speedMult);
         }
     }
 

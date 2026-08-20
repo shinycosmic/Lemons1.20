@@ -16,7 +16,7 @@ import java.util.EnumSet;
  */
 public class GrazeGoal<T extends PathfinderMob & IGrazer & IFoodEater> extends Goal {
     private final T mob;
-    private final double speedMultiplier;
+    private final double speedMult;
 
     private static final int INTERVAL_TICKS = 20;
     private static final int INTERVAL_OFFSET = 15;
@@ -32,9 +32,9 @@ public class GrazeGoal<T extends PathfinderMob & IGrazer & IFoodEater> extends G
     private boolean randomChance;
     private boolean fed;
 
-    public GrazeGoal(T mob, double speedMultiplier) {
+    public GrazeGoal(T mob, double speedMult) {
         this.mob = mob;
-        this.speedMultiplier = speedMultiplier;
+        this.speedMult = speedMult;
         this.setFlags(EnumSet.of(Goal.Flag.MOVE, Goal.Flag.LOOK));
     }
 
@@ -82,7 +82,7 @@ public class GrazeGoal<T extends PathfinderMob & IGrazer & IFoodEater> extends G
         this.fed = false;
         this.deadline = this.mob.tickCount + 200;
         Vec3 center = Vec3.atCenterOf(this.targetPos);
-        this.mob.getNavigation().moveTo(center.x, center.y, center.z, this.speedMultiplier);
+        this.mob.getNavigation().moveTo(center.x, center.y, center.z, this.speedMult);
         if (this.randomChance) {
             this.mob.onRandomGraze();
         }
@@ -103,7 +103,7 @@ public class GrazeGoal<T extends PathfinderMob & IGrazer & IFoodEater> extends G
             this.mob.getNavigation().stop();
             this.mob.addDeltaMovement(center.subtract(mouth).normalize().scale(0.02D));
         } else if (this.mob.getNavigation().isDone()) {
-            this.mob.getNavigation().moveTo(center.x, center.y, center.z, this.speedMultiplier);
+            this.mob.getNavigation().moveTo(center.x, center.y, center.z, this.speedMult);
         }
     }
 
