@@ -38,7 +38,6 @@ import software.bernie.geckolib.core.object.PlayState;
 public class ToxotesEntity extends FishBase implements GeoEntity, Scannable {
 
     private final AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
-    private static final int TOXOTES_CHATAREUS_PIXEL = 19;
     private static final EntityDataAccessor<Boolean> IS_SHOOTING = SynchedEntityData.defineId(ToxotesEntity.class, EntityDataSerializers.BOOLEAN);
 
 
@@ -145,7 +144,7 @@ public class ToxotesEntity extends FishBase implements GeoEntity, Scannable {
     @Override
     public float genVarSizeMultiplier() {
         if (this.getType() == ModEntities.TOXOTES_CHATAREUS.get()) {
-            return AnimaliaFunctionUtil.getScaleForSize(TOXOTES_CHATAREUS_PIXEL, 40);
+            return AnimaliaFunctionUtil.getScaleForSize(19, 40);
         }
         return 1;
     }

@@ -37,9 +37,6 @@ import software.bernie.geckolib.core.object.PlayState;
 public class SynbranchusEntity extends BottomWalkerSwimmerBase implements GeoEntity, Scannable {
 
     private final AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
-    private static final float SYNBRANCHUS_MARMORATUS_PIXEL = 48;
-    private static final float CHAUDHURIA_CAUDATA_PIXEL = 30;
-
     private int stillTicks = 0;
     private static final int FREEZE_DELAY = 10;
 
@@ -254,9 +251,9 @@ public class SynbranchusEntity extends BottomWalkerSwimmerBase implements GeoEnt
     @Override
     public float genVarSizeMultiplier() {
         if (this.getType() == ModEntities.CHAUDHURIA_CAUDATA.get()) {
-            return AnimaliaFunctionUtil.getScaleForSize(CHAUDHURIA_CAUDATA_PIXEL, 25);
+            return AnimaliaFunctionUtil.getScaleForSize(48, 25);
         }
-        return AnimaliaFunctionUtil.getScaleForSize(SYNBRANCHUS_MARMORATUS_PIXEL, this.genVarSize(50, 150, 80));
+        return AnimaliaFunctionUtil.getScaleForSize(30, this.genVarSize(50, 150, 80));
     }
 
     @Override

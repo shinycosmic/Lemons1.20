@@ -35,12 +35,6 @@ import software.bernie.geckolib.core.object.PlayState;
 
 public class CavefishEntity extends FishBase implements GeoEntity, Scannable {
     private final AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
-    private final int AMBLYOPSIS_HOOSIERI_PIXEL = 15;
-    private final int CYPRINODON_DIABOLIS_PIXEL = 12;
-    private final int KRYPTOGLANIS_SHAJII_PIXEL = 24;
-    private final int SINOCYCLOCHEILUS_PIXEL = 22;
-    private final int GITCHAK_NAKANA_PIXEL = 13;
-
 
     public CavefishEntity(EntityType<? extends FishBase> entityType, Level level) {
         super(entityType, level);
@@ -198,19 +192,19 @@ public class CavefishEntity extends FishBase implements GeoEntity, Scannable {
     @Override
     public float genVarSizeMultiplier() {
         if (this.getType() == ModEntities.AMBLYOPSIS_HOOSIERI.get()) {
-            return AnimaliaFunctionUtil.getScaleForSize(AMBLYOPSIS_HOOSIERI_PIXEL, 22);
+            return AnimaliaFunctionUtil.getScaleForSize(15, 22);
         } else if (this.getType() == ModEntities.CYPRINODON_DIABOLIS.get()) {
-            return AnimaliaFunctionUtil.getScaleForSize(CYPRINODON_DIABOLIS_PIXEL, 18);
+            return AnimaliaFunctionUtil.getScaleForSize(12, 18);
         } else if (this.getType() == ModEntities.GITCHAK_NAKANA.get()) {
-            return AnimaliaFunctionUtil.getScaleForSize(GITCHAK_NAKANA_PIXEL, 20);
+            return AnimaliaFunctionUtil.getScaleForSize(13, 20);
         } else if (this.getType() == ModEntities.KRYPTOGLANIS_SHAJII.get()) {
-            return AnimaliaFunctionUtil.getScaleForSize(KRYPTOGLANIS_SHAJII_PIXEL, 25);
+            return AnimaliaFunctionUtil.getScaleForSize(24, 25);
         } else if (this.getType() == ModEntities.SINOCYCLOCHEILUS_ANATIROSTRIS.get()) {
-            return AnimaliaFunctionUtil.getScaleForSize(SINOCYCLOCHEILUS_PIXEL, 30);
+            return AnimaliaFunctionUtil.getScaleForSize(22, 30);
         } else if (this.getType() == ModEntities.SINOCYCLOCHEILUS_HYALINUS.get()) {
-            return AnimaliaFunctionUtil.getScaleForSize(SINOCYCLOCHEILUS_PIXEL, 37);
+            return AnimaliaFunctionUtil.getScaleForSize(22, 37);
         } else if (this.getType() == ModEntities.SINOCYCLOCHEILUS_LONGICORNUS.get()) {
-            return AnimaliaFunctionUtil.getScaleForSize(SINOCYCLOCHEILUS_PIXEL, 27);
+            return AnimaliaFunctionUtil.getScaleForSize(22, 27);
         }
         return 1;
     }

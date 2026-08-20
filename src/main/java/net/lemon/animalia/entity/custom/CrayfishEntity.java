@@ -38,7 +38,6 @@ import software.bernie.geckolib.core.object.PlayState;
 public class CrayfishEntity extends BottomWalkerSwimmerBase implements GeoEntity, Scannable, ICanThreat {
     private final AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
     private static final EntityDataAccessor<Integer> THREAT_PHASE = SynchedEntityData.defineId(CrayfishEntity.class, EntityDataSerializers.INT);
-    private static final int PROCAMBARUS_PIXEL = 16;
     private static final int EXIT_ANIM_LENGTH = 20;
     private static final int ATTACK_ANIM_LENGTH = 10;
     private int attackCooldown;
@@ -129,7 +128,7 @@ public class CrayfishEntity extends BottomWalkerSwimmerBase implements GeoEntity
 
     @Override
     public float genVarSizeMultiplier() {
-        return AnimaliaFunctionUtil.getScaleForSize(PROCAMBARUS_PIXEL, 20);
+        return AnimaliaFunctionUtil.getScaleForSize(16, 20);
     }
 
     public static void registerHolonet(){

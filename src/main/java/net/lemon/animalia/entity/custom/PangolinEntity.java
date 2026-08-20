@@ -44,7 +44,6 @@ public class PangolinEntity extends AnimaliaLandBase implements GeoEntity, Scann
     private static final EntityDataAccessor<Integer> GUARD_PHASE = SynchedEntityData.defineId(PangolinEntity.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Integer> SLEEP_PHASE = SynchedEntityData.defineId(PangolinEntity.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Integer> SLEEP_IDLE = SynchedEntityData.defineId(PangolinEntity.class, EntityDataSerializers.INT);
-    private final int SMUTSIA_GIGANTEA_PIXEL = 39;
 
     private int wantsToGuardUntil;
     private int attackCooldown;
@@ -131,7 +130,7 @@ public class PangolinEntity extends AnimaliaLandBase implements GeoEntity, Scann
     @Override
     public float genVarSizeMultiplier() {
         if (this.getType() == ModEntities.SMUTSIA_GIGANTEA.get()) {
-            return AnimaliaFunctionUtil.getScaleForSize(SMUTSIA_GIGANTEA_PIXEL, 137);
+            return AnimaliaFunctionUtil.getScaleForSize(39, 137);
         }
         return 1;
     }

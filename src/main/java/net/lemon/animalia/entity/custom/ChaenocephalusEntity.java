@@ -69,8 +69,6 @@ public class ChaenocephalusEntity extends BottomWalkerSwimmerBase implements Geo
     private static final int ROTATION_TICKS = 30;
 
     private final AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
-    private static final int CHAENOCEPHALUS_ACERATUS_PIXEL = 37;
-    private static final int CYGNODRACO_MAWSONI_PIXEL = 31;
     private final Random rand = new Random();
 
     private int nestMakingTicks;
@@ -190,9 +188,9 @@ public class ChaenocephalusEntity extends BottomWalkerSwimmerBase implements Geo
     @Override
     public float genVarSizeMultiplier() {
         if (this.getType() == ModEntities.CHAENOCEPHALUS_ACERATUS.get()) {
-            return AnimaliaFunctionUtil.getScaleForSize(CHAENOCEPHALUS_ACERATUS_PIXEL, this.genVarSize(45, 65, 60));
+            return AnimaliaFunctionUtil.getScaleForSize(37, this.genVarSize(45, 65, 60));
         } else if (this.getType() == ModEntities.CYGNODRACO_MAWSONI.get()) {
-            return AnimaliaFunctionUtil.getScaleForSize(CYGNODRACO_MAWSONI_PIXEL, this.genVarSize(41, 55, 45));
+            return AnimaliaFunctionUtil.getScaleForSize(31, this.genVarSize(41, 55, 45));
         }
         return 1;
     }

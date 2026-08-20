@@ -40,7 +40,6 @@ import software.bernie.geckolib.core.object.PlayState;
 public class RoosterfishEntity extends FishBase implements GeoEntity, Scannable {
 
     private static final EntityDataAccessor<Boolean> IS_STARTLED = SynchedEntityData.defineId(RoosterfishEntity.class, EntityDataSerializers.BOOLEAN);
-    private static final int NEMATISTIUS_PECTORALIS_PIXEL = 41;
 
     private final AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
     private int startleCooldown = 0;
@@ -165,7 +164,7 @@ public class RoosterfishEntity extends FishBase implements GeoEntity, Scannable 
     @Override
     public float genVarSizeMultiplier() {
         if (this.getType() == ModEntities.NEMATISTIUS_PECTORALIS.get()) {
-            return AnimaliaFunctionUtil.getScaleForSize(NEMATISTIUS_PECTORALIS_PIXEL, this.genVarSize(160, 200, 180));
+            return AnimaliaFunctionUtil.getScaleForSize(41, this.genVarSize(160, 200, 180));
         }
         return 1;
     }

@@ -34,8 +34,6 @@ import software.bernie.geckolib.core.object.PlayState;
 
 public class IndostomusEntity extends WaterDartBase implements GeoEntity, Scannable {
     private final AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
-    private static final int INDOSTOMUS_PARADOXUS_PIXEL = 16;
-
 
     public IndostomusEntity(EntityType<? extends FishBase> entityType, Level level) {
         super(entityType, level);
@@ -94,7 +92,7 @@ public class IndostomusEntity extends WaterDartBase implements GeoEntity, Scanna
     @Override
     public float genVarSizeMultiplier() {
         if (this.getType() == ModEntities.INDOSTOMUS_PARADOXUS.get()) {
-            return AnimaliaFunctionUtil.getScaleForSize(INDOSTOMUS_PARADOXUS_PIXEL, 20);
+            return AnimaliaFunctionUtil.getScaleForSize(16, 20);
         }
         return 1;
     }

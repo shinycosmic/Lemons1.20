@@ -36,8 +36,6 @@ import software.bernie.geckolib.core.object.PlayState;
 public class PangasianodonEntity extends FishBase implements GeoEntity, Scannable {
     private final AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
 
-    private static final int PANGASIANODON_GIGAS_PIXEL = 49;
-
     public PangasianodonEntity(EntityType<? extends FishBase> entityType, Level level) {
         super(entityType, level);
     }
@@ -129,7 +127,7 @@ public class PangasianodonEntity extends FishBase implements GeoEntity, Scannabl
     @Override
     public float genVarSizeMultiplier() {
         if (this.getType() == ModEntities.PANGASIANODON_GIGAS.get()) {
-            return AnimaliaFunctionUtil.getScaleForSize(PANGASIANODON_GIGAS_PIXEL, this.genVarSize(230, 300, 280));
+            return AnimaliaFunctionUtil.getScaleForSize(49, this.genVarSize(230, 300, 280));
         }
         return 1;
     }

@@ -43,7 +43,6 @@ import software.bernie.geckolib.core.object.PlayState;
 public class ToothfishEntity extends FishBase implements GeoEntity, Scannable {
 
     private final AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
-    private static final float DISSOSTUCHUS_ELEGINOIDES_PIXEL = 37;
 
     public ToothfishEntity(EntityType<? extends FishBase> entityType, Level level) {
         super(entityType, level);
@@ -145,7 +144,7 @@ public class ToothfishEntity extends FishBase implements GeoEntity, Scannable {
 
     @Override
     public float genVarSizeMultiplier() {
-        return AnimaliaFunctionUtil.getScaleForSize(DISSOSTUCHUS_ELEGINOIDES_PIXEL, this.genVarSize(70, 230, 80));
+        return AnimaliaFunctionUtil.getScaleForSize(37, this.genVarSize(70, 230, 80));
     }
 
     @Override

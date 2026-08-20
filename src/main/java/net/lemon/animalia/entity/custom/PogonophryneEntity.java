@@ -41,10 +41,8 @@ import java.util.Random;
 public class PogonophryneEntity extends BottomWalkerSwimmerBase implements GeoEntity, Scannable {
     private static final EntityDataAccessor<Boolean> IDLE_REST = SynchedEntityData.defineId(PogonophryneEntity.class, EntityDataSerializers.BOOLEAN);
     private final AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
-
     private int restTicks;
     private int cooldown;
-    private static final int POGONOPHRYNE_MARMORATA_PIXEL = 19;
 
     private final Random rand = new Random();
 
@@ -132,7 +130,7 @@ public class PogonophryneEntity extends BottomWalkerSwimmerBase implements GeoEn
     @Override
     public float genVarSizeMultiplier() {
         if (this.getType() == ModEntities.POGONOPHRYNE_MARMORATA.get()) {
-            return AnimaliaFunctionUtil.getScaleForSize(POGONOPHRYNE_MARMORATA_PIXEL, 29);
+            return AnimaliaFunctionUtil.getScaleForSize(19, 29);
         }
         return 1;
     }

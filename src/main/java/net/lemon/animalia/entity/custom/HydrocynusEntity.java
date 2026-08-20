@@ -42,7 +42,6 @@ import software.bernie.geckolib.core.animation.AnimationState;
 import software.bernie.geckolib.core.object.PlayState;
 
 public class HydrocynusEntity extends FishBase implements GeoEntity, Scannable {
-    private static final int HYDROCYNUS_GOLIATH_PIXEL = 44;
 
     private final AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
 
@@ -133,7 +132,7 @@ public class HydrocynusEntity extends FishBase implements GeoEntity, Scannable {
     @Override
     public float genVarSizeMultiplier() {
         if (this.getType() == ModEntities.NEMATISTIUS_PECTORALIS.get()) {
-            return AnimaliaFunctionUtil.getScaleForSize(HYDROCYNUS_GOLIATH_PIXEL, this.genVarSize(133, 200, 180));
+            return AnimaliaFunctionUtil.getScaleForSize(44, this.genVarSize(133, 200, 180));
         }
         return 1;
     }

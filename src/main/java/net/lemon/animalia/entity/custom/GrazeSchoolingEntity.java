@@ -35,10 +35,6 @@ import software.bernie.geckolib.core.object.PlayState;
 
 public class GrazeSchoolingEntity extends FishBase implements GeoEntity, Scannable {
     private final AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
-    private static final int ZANCLUS_CORNUTUS_PIXEL = 15;
-    private static final int PARACANTHURUS_HEPATUS_PIXEL = 23;
-    private static final int ZEBRASOMA_VELIFER_PIXEL = 23;
-    private static final int ZEBRASOMA_FLAVESCENS_PIXEL = 18;
 
     public GrazeSchoolingEntity(EntityType<? extends FishBase> entityType, Level level) {
         super(entityType, level);
@@ -204,13 +200,13 @@ public class GrazeSchoolingEntity extends FishBase implements GeoEntity, Scannab
     @Override
     public float genVarSizeMultiplier() {
         if (this.getType() == ModEntities.ZANCLUS_CORNUTUS.get()) {
-            return AnimaliaFunctionUtil.getScaleForSize(ZANCLUS_CORNUTUS_PIXEL, this.genVarSize(28, 40, 33));
+            return AnimaliaFunctionUtil.getScaleForSize(15, this.genVarSize(28, 40, 33));
         } else if (this.getType() == ModEntities.PARACANTHURUS_HEPATUS.get()) {
-            return AnimaliaFunctionUtil.getScaleForSize(PARACANTHURUS_HEPATUS_PIXEL, this.genVarSize(20, 40, 30));
+            return AnimaliaFunctionUtil.getScaleForSize(23, this.genVarSize(20, 40, 30));
         } else if (this.getType() == ModEntities.ZEBRASOMA_FLAVESCENS.get()) {
-            return AnimaliaFunctionUtil.getScaleForSize(ZEBRASOMA_FLAVESCENS_PIXEL, 20);
+            return AnimaliaFunctionUtil.getScaleForSize(23, 20);
         } else if (this.getType() == ModEntities.ZEBRASOMA_VELIFER.get()) {
-            return AnimaliaFunctionUtil.getScaleForSize(ZEBRASOMA_VELIFER_PIXEL, this.genVarSize(30, 50, 40));
+            return AnimaliaFunctionUtil.getScaleForSize(18, this.genVarSize(30, 50, 40));
         }
         return 1;
     }

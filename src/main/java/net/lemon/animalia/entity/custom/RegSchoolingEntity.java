@@ -34,12 +34,6 @@ import software.bernie.geckolib.core.object.PlayState;
 
 public class RegSchoolingEntity extends FishBase implements GeoEntity, Scannable {
     private final AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
-    private static final int SCATOPHAGUS_ARGUS_PIXEL = 14;
-    private static final int NASO_BREVIROSTRIS_PIXEL = 33;
-    private static final int POMACANTHUS_IMPERATOR_PIXEL = 22;
-    private static final int CHELMON_ROSTRATUS_PIXEL = 16;
-    private static final int CHAETODON_AURIGA_PIXEL = 16;
-    private static final int SIGANUS_VULPINUS_PIXEL = 19;
 
     public RegSchoolingEntity(EntityType<? extends FishBase> entityType, Level level) {
         super(entityType, level);
@@ -216,17 +210,17 @@ public class RegSchoolingEntity extends FishBase implements GeoEntity, Scannable
     @Override
     public float genVarSizeMultiplier() {
         if (this.getType() == ModEntities.SCATOPHAGUS_ARGUS.get()) {
-            return AnimaliaFunctionUtil.getScaleForSize(SCATOPHAGUS_ARGUS_PIXEL, this.genVarSize(20, 45, 40));
+            return AnimaliaFunctionUtil.getScaleForSize(14, this.genVarSize(20, 45, 40));
         } else if (this.getType() == ModEntities.POMACANTHUS_IMPERATOR.get()) {
-            return AnimaliaFunctionUtil.getScaleForSize(POMACANTHUS_IMPERATOR_PIXEL, this.genVarSize(20, 50, 40));
+            return AnimaliaFunctionUtil.getScaleForSize(22, this.genVarSize(20, 50, 40));
         } else if (this.getType() == ModEntities.NASO_BREVIROSTRIS.get()) {
-            return AnimaliaFunctionUtil.getScaleForSize(NASO_BREVIROSTRIS_PIXEL, this.genVarSize(40, 80, 60));
+            return AnimaliaFunctionUtil.getScaleForSize(33, this.genVarSize(40, 80, 60));
         } else if (this.getType() == ModEntities.CHELMON_ROSTRATUS.get()) {
-            return AnimaliaFunctionUtil.getScaleForSize(CHELMON_ROSTRATUS_PIXEL, 22);
+            return AnimaliaFunctionUtil.getScaleForSize(16, 22);
         } else if (this.getType() == ModEntities.CHAETODON_AURIGA.get()) {
-            return AnimaliaFunctionUtil.getScaleForSize(CHAETODON_AURIGA_PIXEL, 25);
+            return AnimaliaFunctionUtil.getScaleForSize(16, 25);
         } else if (this.getType() == ModEntities.SIGANUS_VULPINUS.get()) {
-            return AnimaliaFunctionUtil.getScaleForSize(SIGANUS_VULPINUS_PIXEL, 25);
+            return AnimaliaFunctionUtil.getScaleForSize(19, 25);
         }
         return 1;
     }
