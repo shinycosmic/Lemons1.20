@@ -166,6 +166,7 @@ public class HydrocynusEntity extends FishBase implements GeoEntity, Scannable {
 
         if (this.isFast()) {
             animationState.getController().setAnimation(RawAnimation.begin().then("swimfast", Animation.LoopType.LOOP));
+            return PlayState.CONTINUE;
         }
 
         if(isActuallyMoving()) {

@@ -41,6 +41,13 @@ public class AnimaliaRenderInit {
         EntityRenderers.register(ModEntities.ZEBRASOMA_FLAVESCENS.get(), ZebrasomaFlavescensRenderer::new);
         EntityRenderers.register(ModEntities.HYDROCYNUS_GOLIATH.get(), HydrocynusGoliathRenderer::new);
         EntityRenderers.register(ModEntities.INDOSTOMUS_PARADOXUS.get(), IndostomusParadoxusRenderer::new);
+        EntityRenderers.register(ModEntities.AMBLYOPSIS_HOOSIERI.get(), CavefishRenderer::new);
+        EntityRenderers.register(ModEntities.GITCHAK_NAKANA.get(), CavefishRenderer::new);
+        EntityRenderers.register(ModEntities.KRYPTOGLANIS_SHAJII.get(), CavefishRenderer::new);
+        EntityRenderers.register(ModEntities.SINOCYCLOCHEILUS_ANATIROSTRIS.get(), CavefishRenderer::new);
+        EntityRenderers.register(ModEntities.SINOCYCLOCHEILUS_HYALINUS.get(), CavefishRenderer::new);
+        EntityRenderers.register(ModEntities.SINOCYCLOCHEILUS_LONGICORNUS.get(), CavefishRenderer::new);
+        EntityRenderers.register(ModEntities.CYPRINODON_DIABOLIS.get(), CavefishRenderer::new);
 
 
 

@@ -19,14 +19,20 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import software.bernie.geckolib.animatable.GeoEntity;
+import software.bernie.geckolib.core.animatable.GeoAnimatable;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.core.animatable.instance.SingletonAnimatableInstanceCache;
-import software.bernie.geckolib.core.animation.AnimatableManager;
+import software.bernie.geckolib.core.animation.*;
+import software.bernie.geckolib.core.object.PlayState;
 
 public class CavefishEntity extends FishBase implements GeoEntity, Scannable {
     private final AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
-    private final int AMBLYOPSIS_HOOSIERI_PIXEL = 16;
-    private final int CYPRINODON_DIABOLIS_PIXEL = 14;
+    private final int AMBLYOPSIS_HOOSIERI_PIXEL = 15;
+    private final int CYPRINODON_DIABOLIS_PIXEL = 12;
+    private final int KRYPTOGLANIS_SHAJII_PIXEL = 24;
+    private final int SINOCYCLOCHEILUS_PIXEL = 22;
+    private final int GITCHAK_NAKANA_PIXEL = 13;
+
 
     public CavefishEntity(EntityType<? extends FishBase> entityType, Level level) {
         super(entityType, level);
@@ -43,6 +49,10 @@ public class CavefishEntity extends FishBase implements GeoEntity, Scannable {
     public TagKey<Item> getFoodTag() {
         if(this.getType() == ModEntities.AMBLYOPSIS_HOOSIERI.get()) {
             return ModTags.Items.CRUSTACEAN;
+        } else if(this.getType() == ModEntities.GITCHAK_NAKANA.get()) {
+            return ModTags.Items.FISH_FOOD;
+        } else if(this.getType() == ModEntities.KRYPTOGLANIS_SHAJII.get()) {
+            return ModTags.Items.INVERTEBRATE;
         }
         return ModTags.Items.AQUATIC_PLANT;
     }
@@ -51,6 +61,10 @@ public class CavefishEntity extends FishBase implements GeoEntity, Scannable {
     public Item getBreedingItem() {
         if(this.getType() == ModEntities.AMBLYOPSIS_HOOSIERI.get()) {
             return ModItems.AMPHIPOD.get();
+        } else if(this.getType() == ModEntities.GITCHAK_NAKANA.get()) {
+            return ModItems.FISH_FOOD.get();
+        } else if(this.getType() == ModEntities.KRYPTOGLANIS_SHAJII.get()) {
+            return ModItems.WORM.get();
         }
         return ModBlocks.ALGAE_MAT.get().asItem();
     }
@@ -77,6 +91,10 @@ public class CavefishEntity extends FishBase implements GeoEntity, Scannable {
             return Component.translatable("trivia.animalia.sinocyclocheilus_longicornus");
         } else if(this.getType() == ModEntities.CYPRINODON_DIABOLIS.get()) {
             return Component.translatable("trivia.animalia.cyprinodon_diabolis");
+        } else if(this.getType() == ModEntities.GITCHAK_NAKANA.get()) {
+            return Component.translatable("trivia.animalia.gitchak_nakana");
+        } else if(this.getType() == ModEntities.KRYPTOGLANIS_SHAJII.get()) {
+            return Component.translatable("trivia.animalia.kryptoglanis_shajii");
         }
         return Component.translatable("debug.animalia.trivia");
     }
@@ -85,15 +103,19 @@ public class CavefishEntity extends FishBase implements GeoEntity, Scannable {
     @Override
     public Component getFamily() {
         if(this.getType() == ModEntities.AMBLYOPSIS_HOOSIERI.get()) {
-            return Component.translatable("family.animalia.amblyopsis_hoosieri");
+            return Component.translatable("family.animalia.amblyopsidae");
         } else if(this.getType() == ModEntities.SINOCYCLOCHEILUS_ANATIROSTRIS.get()) {
-            return Component.translatable("family.animalia.sinocyclocheilus_anatirostris");
+            return Component.translatable("family.animalia.cyprinidae");
         } else if(this.getType() == ModEntities.SINOCYCLOCHEILUS_HYALINUS.get()) {
-            return Component.translatable("family.animalia.sinocyclocheilus_hyalinus");
+            return Component.translatable("family.animalia.cyprinidae");
         } else if(this.getType() == ModEntities.SINOCYCLOCHEILUS_LONGICORNUS.get()) {
-            return Component.translatable("family.animalia.sinocyclocheilus_longicornus");
+            return Component.translatable("family.animalia.cyprinidae");
         } else if(this.getType() == ModEntities.CYPRINODON_DIABOLIS.get()) {
-            return Component.translatable("family.animalia.cyprinodon_diabolis");
+            return Component.translatable("family.animalia.cyprinodontidae");
+        } else if(this.getType() == ModEntities.GITCHAK_NAKANA.get()) {
+            return Component.translatable("family.animalia.cobitidae");
+        } else if(this.getType() == ModEntities.KRYPTOGLANIS_SHAJII.get()) {
+            return Component.translatable("family.animalia.kryptoglanidae");
         }
         return Component.translatable("debug.animalia.family");
     }
@@ -101,15 +123,19 @@ public class CavefishEntity extends FishBase implements GeoEntity, Scannable {
     @Override
     public Component getOrder() {
         if(this.getType() == ModEntities.AMBLYOPSIS_HOOSIERI.get()) {
-            return Component.translatable("order.animalia.amblyopsis_hoosieri");
+            return Component.translatable("order.animalia.percopsiformes");
         } else if(this.getType() == ModEntities.SINOCYCLOCHEILUS_ANATIROSTRIS.get()) {
-            return Component.translatable("order.animalia.sinocyclocheilus_anatirostris");
+            return Component.translatable("order.animalia.cypriniformes");
         } else if(this.getType() == ModEntities.SINOCYCLOCHEILUS_HYALINUS.get()) {
-            return Component.translatable("order.animalia.sinocyclocheilus_hyalinus");
+            return Component.translatable("order.animalia.cypriniformes");
         } else if(this.getType() == ModEntities.SINOCYCLOCHEILUS_LONGICORNUS.get()) {
-            return Component.translatable("order.animalia.sinocyclocheilus_longicornus");
+            return Component.translatable("order.animalia.cypriniformes");
         } else if(this.getType() == ModEntities.CYPRINODON_DIABOLIS.get()) {
-            return Component.translatable("order.animalia.cyprinodon_diabolis");
+            return Component.translatable("order.animalia.cyprinodontiformes");
+        } else if(this.getType() == ModEntities.GITCHAK_NAKANA.get()) {
+            return Component.translatable("order.animalia.cypriniformes");
+        } else if(this.getType() == ModEntities.KRYPTOGLANIS_SHAJII.get()) {
+            return Component.translatable("order.animalia.siluriformes");
         }
         return Component.translatable("debug.animalia.order");
     }
@@ -117,14 +143,18 @@ public class CavefishEntity extends FishBase implements GeoEntity, Scannable {
     @Override
     public int getScaleforGUI() {
         if (this.getType() == ModEntities.AMBLYOPSIS_HOOSIERI.get()) {
-            return 54;
+            return 90;
         } else if (this.getType() == ModEntities.SINOCYCLOCHEILUS_ANATIROSTRIS.get()) {
-            return 50;
+            return 90;
         } else if (this.getType() == ModEntities.SINOCYCLOCHEILUS_HYALINUS.get()){
             return 90;
         } else if (this.getType() == ModEntities.SINOCYCLOCHEILUS_LONGICORNUS.get()){
             return 88;
         } else if (this.getType() == ModEntities.CYPRINODON_DIABOLIS.get()){
+            return 88;
+        } else if (this.getType() == ModEntities.KRYPTOGLANIS_SHAJII.get()){
+            return 88;
+        } else if (this.getType() == ModEntities.GITCHAK_NAKANA.get()){
             return 88;
         }
         return Scannable.super.getScaleforGUI();
@@ -143,6 +173,10 @@ public class CavefishEntity extends FishBase implements GeoEntity, Scannable {
             currScale *= 1.75f;
         } else if(this.getType() == ModEntities.CYPRINODON_DIABOLIS.get()) {
             currScale *= 1.7f;
+        } else if(this.getType() == ModEntities.GITCHAK_NAKANA.get()) {
+            currScale *= 1.7f;
+        } else if(this.getType() == ModEntities.KRYPTOGLANIS_SHAJII.get()) {
+            currScale *= 1.7f;
         }
 
         return currScale;
@@ -151,19 +185,31 @@ public class CavefishEntity extends FishBase implements GeoEntity, Scannable {
     @Override
     public float genVarSizeMultiplier() {
         if (this.getType() == ModEntities.AMBLYOPSIS_HOOSIERI.get()) {
-            return AnimaliaFunctionUtil.getScaleForSize(AMBLYOPSIS_HOOSIERI_PIXEL, 15);
+            return AnimaliaFunctionUtil.getScaleForSize(AMBLYOPSIS_HOOSIERI_PIXEL, 20);
         } else if (this.getType() == ModEntities.CYPRINODON_DIABOLIS.get()) {
             return AnimaliaFunctionUtil.getScaleForSize(CYPRINODON_DIABOLIS_PIXEL, 13);
+        } else if (this.getType() == ModEntities.GITCHAK_NAKANA.get()) {
+            return AnimaliaFunctionUtil.getScaleForSize(GITCHAK_NAKANA_PIXEL, 15);
+        } else if (this.getType() == ModEntities.KRYPTOGLANIS_SHAJII.get()) {
+            return AnimaliaFunctionUtil.getScaleForSize(KRYPTOGLANIS_SHAJII_PIXEL, 20);
+        } else if (this.getType() == ModEntities.SINOCYCLOCHEILUS_ANATIROSTRIS.get()) {
+            return AnimaliaFunctionUtil.getScaleForSize(SINOCYCLOCHEILUS_PIXEL, 25);
+        } else if (this.getType() == ModEntities.SINOCYCLOCHEILUS_HYALINUS.get()) {
+            return AnimaliaFunctionUtil.getScaleForSize(SINOCYCLOCHEILUS_PIXEL, 22);
+        } else if (this.getType() == ModEntities.SINOCYCLOCHEILUS_LONGICORNUS.get()) {
+            return AnimaliaFunctionUtil.getScaleForSize(SINOCYCLOCHEILUS_PIXEL, 22);
         }
         return 1;
     }
 
     public static void registerHolonet(){
-        HolonetEntities.register(ModEntities.AMBLYOPSIS_HOOSIERI, Scannable.AppName.FISH, "Synbranchiformes");
-        HolonetEntities.register(ModEntities.CYPRINODON_DIABOLIS, Scannable.AppName.FISH, "Synbranchiformes");
-        HolonetEntities.register(ModEntities.SINOCYCLOCHEILUS_ANATIROSTRIS, Scannable.AppName.FISH, "Synbranchiformes");
-        HolonetEntities.register(ModEntities.SINOCYCLOCHEILUS_HYALINUS, Scannable.AppName.FISH, "Synbranchiformes");
-        HolonetEntities.register(ModEntities.SINOCYCLOCHEILUS_LONGICORNUS, Scannable.AppName.FISH, "Synbranchiformes");
+        HolonetEntities.register(ModEntities.AMBLYOPSIS_HOOSIERI, Scannable.AppName.FISH, "Percopsiformes");
+        HolonetEntities.register(ModEntities.CYPRINODON_DIABOLIS, Scannable.AppName.FISH, "Cyprinodontiformes");
+        HolonetEntities.register(ModEntities.SINOCYCLOCHEILUS_ANATIROSTRIS, Scannable.AppName.FISH, "Cypriniformes");
+        HolonetEntities.register(ModEntities.SINOCYCLOCHEILUS_HYALINUS, Scannable.AppName.FISH, "Cypriniformes");
+        HolonetEntities.register(ModEntities.SINOCYCLOCHEILUS_LONGICORNUS, Scannable.AppName.FISH, "Cypriniformes");
+        HolonetEntities.register(ModEntities.GITCHAK_NAKANA, Scannable.AppName.FISH, "Cypriniformes");
+        HolonetEntities.register(ModEntities.KRYPTOGLANIS_SHAJII, Scannable.AppName.FISH, "Siluriformes");
 
     }
 
@@ -174,7 +220,25 @@ public class CavefishEntity extends FishBase implements GeoEntity, Scannable {
 
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
+        controllers.add(new AnimationController<>(this, "controller", 5, this::predicate));
+        controllers.add(new AnimationController<>(this, "eat_controller", 0, this::eatPredicate));
+    }
 
+    private <T extends GeoAnimatable> PlayState predicate(AnimationState<T> animationState) {
+        if (this.isFast()) {
+            animationState.getController().setAnimation(RawAnimation.begin().then("swimFast", Animation.LoopType.LOOP));
+            return PlayState.CONTINUE;
+        }
+        animationState.getController().setAnimation(RawAnimation.begin().then("swim", Animation.LoopType.LOOP));
+        return PlayState.CONTINUE;
+    }
+
+    private <T extends GeoAnimatable> PlayState eatPredicate(AnimationState<T> state) {
+        if (this.isEating() && !this.isBaby()) {
+            state.getController().setAnimation(RawAnimation.begin().then("eat", Animation.LoopType.PLAY_ONCE));
+            return PlayState.CONTINUE;
+        }
+        return PlayState.STOP;
     }
 
     @Override

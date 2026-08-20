@@ -94,6 +94,13 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItems.ZEBRASOMA_VELIFER_BUCKET);
         simpleItem(ModItems.HYDROCYNUS_GOLIATH_BUCKET);
         simpleItem(ModItems.INDOSTOMUS_PARADOXUS_BUCKET);
+        simpleItem(ModItems.KRYPTOGLANIS_SHAJII_BUCKET);
+        simpleItem(ModItems.GITCHAK_NAKANA_BUCKET);
+        simpleItem(ModItems.AMBLYOPSIS_HOOSIERI_BUCKET);
+        simpleItem(ModItems.CYPRINODON_DIABOLIS_BUCKET);
+        simpleItem(ModItems.SINOCYCLOCHEILUS_ANATIROSTRIS_BUCKET);
+        simpleItem(ModItems.SINOCYCLOCHEILUS_HYALINUS_BUCKET);
+        simpleItem(ModItems.SINOCYCLOCHEILUS_LONGICORNUS_BUCKET);
 
         //spawn egg generators
         withExistingParent(ModItems.DISSOSTICHUS_ELEGINOIDES_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
@@ -132,6 +139,14 @@ public class ModItemModelProvider extends ItemModelProvider {
         withExistingParent(ModItems.HYDROCYNUS_GOLIATH_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
         withExistingParent(ModItems.SMUTSIA_GIGANTEA_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
         withExistingParent(ModItems.INDOSTOMUS_PARADOXUS_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
+        withExistingParent(ModItems.GITCHAK_NAKANA_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
+        withExistingParent(ModItems.KRYPTOGLANIS_SHAJII_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
+        withExistingParent(ModItems.AMBLYOPSIS_HOOSIERI_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
+        withExistingParent(ModItems.CYPRINODON_DIABOLIS_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
+        withExistingParent(ModItems.SINOCYCLOCHEILUS_ANATIROSTRIS_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
+        withExistingParent(ModItems.SINOCYCLOCHEILUS_HYALINUS_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
+        withExistingParent(ModItems.SINOCYCLOCHEILUS_LONGICORNUS_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
+
 
 
 

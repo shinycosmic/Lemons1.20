@@ -65,6 +65,13 @@ public class ModItems {
     public static final RegistryObject<Item> ZEBRASOMA_FLAVESCENS_BUCKET = registerBucket("zebrasoma_flavescens_bucket", ModEntities.ZEBRASOMA_FLAVESCENS);
     public static final RegistryObject<Item> ZEBRASOMA_VELIFER_BUCKET = registerBucket("zebrasoma_velifer_bucket", ModEntities.ZEBRASOMA_VELIFER);
     public static final RegistryObject<Item> HYDROCYNUS_GOLIATH_BUCKET = registerBucket("hydrocynus_goliath_bucket", ModEntities.HYDROCYNUS_GOLIATH);
+    public static final RegistryObject<Item> SINOCYCLOCHEILUS_ANATIROSTRIS_BUCKET = registerBucket("sinocyclocheilus_anatirostris_bucket", ModEntities.SINOCYCLOCHEILUS_ANATIROSTRIS);
+    public static final RegistryObject<Item> SINOCYCLOCHEILUS_HYALINUS_BUCKET = registerBucket("sinocyclocheilus_hyalinus_bucket", ModEntities.SINOCYCLOCHEILUS_HYALINUS);
+    public static final RegistryObject<Item> SINOCYCLOCHEILUS_LONGICORNUS_BUCKET = registerBucket("sinocyclocheilus_longicornus_bucket", ModEntities.SINOCYCLOCHEILUS_LONGICORNUS);
+    public static final RegistryObject<Item> GITCHAK_NAKANA_BUCKET = registerBucket("gitchak_nakana_bucket", ModEntities.GITCHAK_NAKANA);
+    public static final RegistryObject<Item> KRYPTOGLANIS_SHAJII_BUCKET = registerBucket("kryptoglanis_shajii_bucket", ModEntities.KRYPTOGLANIS_SHAJII);
+    public static final RegistryObject<Item> AMBLYOPSIS_HOOSIERI_BUCKET = registerBucket("amblyopsis_hoosieri_bucket", ModEntities.AMBLYOPSIS_HOOSIERI);
+    public static final RegistryObject<Item> CYPRINODON_DIABOLIS_BUCKET = registerBucket("cyprinodon_diabolis_bucket", ModEntities.CYPRINODON_DIABOLIS);
 
     public static final RegistryObject<Item> BETTA_SPLENDENS_BUCKET = registerBucket("betta_splendens_bucket", ModEntities.BETTA_SPLENDENS);
     public static final RegistryObject<Item> PROCAMBARUS_CLARKII_BUCKET = registerBucket("procambarus_clarkii_bucket", ModEntities.PROCAMBARUS_CLARKII);
@@ -126,6 +133,13 @@ public class ModItems {
     public static final RegistryObject<Item> ZEBRASOMA_FLAVESCENS_SPAWN_EGG = registerSpawnEgg("zebrasoma_flavescens_spawn_egg", ModEntities.ZEBRASOMA_FLAVESCENS, 0xdabd04, 0xfffbb4);
     public static final RegistryObject<Item> ZEBRASOMA_VELIFER_SPAWN_EGG = registerSpawnEgg("zebrasoma_velifer_spawn_egg", ModEntities.ZEBRASOMA_VELIFER, 0x4d3d25, 0xb68e0b);
     public static final RegistryObject<Item> HYDROCYNUS_GOLIATH_SPAWN_EGG = registerSpawnEgg("hydrocynus_goliath_spawn_egg", ModEntities.HYDROCYNUS_GOLIATH, 0xb7b075, 0xc83226);
+    public static final RegistryObject<Item> SINOCYCLOCHEILUS_ANATIROSTRIS_SPAWN_EGG = registerSpawnEgg("sinocyclocheilus_anatirostris_spawn_egg", ModEntities.SINOCYCLOCHEILUS_ANATIROSTRIS, 0xecbca4, 0xa25547);
+    public static final RegistryObject<Item> SINOCYCLOCHEILUS_HYALINUS_SPAWN_EGG = registerSpawnEgg("sinocyclocheilus_hyalinus_spawn_egg", ModEntities.SINOCYCLOCHEILUS_HYALINUS, 0xf6edd3, 0xd4c599);
+    public static final RegistryObject<Item> SINOCYCLOCHEILUS_LONGICORNUS_SPAWN_EGG = registerSpawnEgg("sinocyclocheilus_longicornus_spawn_egg", ModEntities.SINOCYCLOCHEILUS_LONGICORNUS, 0xe4c08c, 0xc16b54);
+    public static final RegistryObject<Item> GITCHAK_NAKANA_SPAWN_EGG = registerSpawnEgg("gitchak_nakana_spawn_egg", ModEntities.GITCHAK_NAKANA, 0xc55522, 0xe71f11);
+    public static final RegistryObject<Item> KRYPTOGLANIS_SHAJII_SPAWN_EGG = registerSpawnEgg("kryptoglanis_shajii_spawn_egg", ModEntities.KRYPTOGLANIS_SHAJII, 0xdb729d, 0xfcedf1);
+    public static final RegistryObject<Item> AMBLYOPSIS_HOOSIERI_SPAWN_EGG = registerSpawnEgg("amblyopsis_hoosieri_spawn_egg", ModEntities.AMBLYOPSIS_HOOSIERI, 0xedcebc, 0xe6977a);
+    public static final RegistryObject<Item> CYPRINODON_DIABOLIS_SPAWN_EGG = registerSpawnEgg("cyprinodon_diabolis_spawn_egg", ModEntities.CYPRINODON_DIABOLIS, 0x322f6d, 0x8599cd);
 
     //Non Fish Spawn Eggs
     public static final RegistryObject<Item> PROCAMBARUS_CLARKII_SPAWN_EGG = registerSpawnEgg("procambarus_clarkii_spawn_egg", ModEntities.PROCAMBARUS_CLARKII, 0x932a2a, 0x202522);
