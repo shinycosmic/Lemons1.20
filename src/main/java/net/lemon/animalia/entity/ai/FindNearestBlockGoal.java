@@ -41,13 +41,13 @@ public class FindNearestBlockGoal extends Goal {
         this(mob, speedMult, searchRange, state -> state.is(block), 0, true);
     }
 
-    private FindNearestBlockGoal(PathfinderMob mob, double speedMult, int searchRange, Predicate<BlockState> target, int chance, boolean restPeriodOnly) {
+    private FindNearestBlockGoal(PathfinderMob mob, double speedMult, int searchRange, Predicate<BlockState> target, int chance, boolean timegate) {
         this.mob = mob;
         this.speedMult = speedMult;
         this.searchRange = searchRange;
         this.target = target;
         this.chance = chance;
-        this.activityTime = restPeriodOnly ? (IActivityTime) mob : null;
+        this.activityTime = timegate ? (IActivityTime) mob : null;
         this.setFlags(EnumSet.of(Goal.Flag.MOVE));
     }
 
@@ -56,13 +56,13 @@ public class FindNearestBlockGoal extends Goal {
         if (this.cooldown > this.mob.tickCount) {
             return false;
         }
-        if (!this.passesTrigger()) {
+        if (!this.isValidTime()) {
             return false;
         }
         if (this.mob.tickCount < this.nextSearchTime) {
             return false;
         }
-        this.nextSearchTime = this.mob.tickCount + 20;
+        this.nextSearchTime = this.mob.tickCount + this.mob.getRandom().nextInt(20);
         this.targetPos = this.findNearestBlock();
         return this.targetPos != null;
     }
@@ -106,7 +106,7 @@ public class FindNearestBlockGoal extends Goal {
         this.cooldown = this.mob.tickCount + 400;
     }
 
-    private boolean passesTrigger() {
+    private boolean isValidTime() {
         if (this.activityTime != null) {
             return !this.activityTime.isActiveTime(this.mob);
         }
