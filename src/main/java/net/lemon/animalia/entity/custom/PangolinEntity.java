@@ -92,7 +92,7 @@ public class PangolinEntity extends AnimaliaLandBase implements GeoEntity, Scann
 
     @Override
     public ActivityTime activityTime() {
-        return ActivityTime.DIURNAL;
+        return ActivityTime.NOCTURNAL;
     }
 
     @Override
@@ -254,6 +254,11 @@ public class PangolinEntity extends AnimaliaLandBase implements GeoEntity, Scann
             this.guardWindow(this.getGuardReAttackWindow());
         }
         return super.hurt(source, amount * this.getGuardDamageMultiplier(source));
+    }
+
+    @Override
+    public int getGuardReAttackWindow() {
+        return 400;
     }
 
     @Override
