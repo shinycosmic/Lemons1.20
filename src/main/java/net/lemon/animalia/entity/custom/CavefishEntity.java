@@ -6,18 +6,25 @@ import net.lemon.animalia.registry.ModBlocks;
 import net.lemon.animalia.registry.ModEntities;
 import net.lemon.animalia.registry.ModItems;
 import net.lemon.animalia.registry.ModTags;
+import net.lemon.animalia.registry.spawning.SpawnBand;
 import net.lemon.animalia.util.AnimaliaFunctionUtil;
 import net.lemon.animalia.util.HolonetEntities;
 import net.lemon.animalia.util.Scannable;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.SpawnGroupData;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.ServerLevelAccessor;
+import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.core.animatable.GeoAnimatable;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
@@ -41,8 +48,13 @@ public class CavefishEntity extends FishBase implements GeoEntity, Scannable {
     public static AttributeSupplier setAttributes() {
         return Mob.createMobAttributes()
                 .add(Attributes.MAX_HEALTH, 3D)
-                .add(Attributes.MOVEMENT_SPEED, 0.4f)
+                .add(Attributes.MOVEMENT_SPEED, 0.5f)
                 .build();
+    }
+
+    @Override
+    public SpawnBand spawnBand() {
+        return SpawnBand.CAVE_WATER;
     }
 
     @Override
@@ -143,19 +155,19 @@ public class CavefishEntity extends FishBase implements GeoEntity, Scannable {
     @Override
     public int getScaleforGUI() {
         if (this.getType() == ModEntities.AMBLYOPSIS_HOOSIERI.get()) {
-            return 90;
+            return 22;
         } else if (this.getType() == ModEntities.SINOCYCLOCHEILUS_ANATIROSTRIS.get()) {
-            return 90;
+            return 22;
         } else if (this.getType() == ModEntities.SINOCYCLOCHEILUS_HYALINUS.get()){
-            return 90;
+            return 22;
         } else if (this.getType() == ModEntities.SINOCYCLOCHEILUS_LONGICORNUS.get()){
-            return 88;
+            return 22;
         } else if (this.getType() == ModEntities.CYPRINODON_DIABOLIS.get()){
-            return 88;
+            return 22;
         } else if (this.getType() == ModEntities.KRYPTOGLANIS_SHAJII.get()){
-            return 88;
+            return 22;
         } else if (this.getType() == ModEntities.GITCHAK_NAKANA.get()){
-            return 88;
+            return 22;
         }
         return Scannable.super.getScaleforGUI();
     }
@@ -244,5 +256,14 @@ public class CavefishEntity extends FishBase implements GeoEntity, Scannable {
     @Override
     public AnimatableInstanceCache getAnimatableInstanceCache() {
         return cache;
+    }
+
+    @Override
+    public @Nullable SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, MobSpawnType reason, @Nullable SpawnGroupData spawnData, @Nullable CompoundTag dataTag) {
+        if (reason != MobSpawnType.BUCKET || dataTag == null || !dataTag.contains("BucketVarSize")) {
+            this.setVarColor(1);
+            this.setVarSizeMultiplier(this.genVarSizeMultiplier());
+        }
+        return super.finalizeSpawn(level, difficulty, reason, spawnData, dataTag);
     }
 }

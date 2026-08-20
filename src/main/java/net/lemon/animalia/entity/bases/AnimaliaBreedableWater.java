@@ -700,7 +700,7 @@ public abstract class AnimaliaBreedableWater extends WaterAnimal implements IAct
     public boolean canMate(AnimaliaBreedableWater otherMob) {
         if (otherMob == this) {
             return false;
-        } else if (otherMob.getClass() != this.getClass()) {
+        } else if (otherMob.getType() != this.getType()) {
             return false;
         } else {
             return this.isInLove() && otherMob.isInLove();
