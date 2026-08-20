@@ -254,7 +254,7 @@ public class SynbranchusEntity extends BottomWalkerSwimmerBase implements GeoEnt
     @Override
     public float genVarSizeMultiplier() {
         if (this.getType() == ModEntities.CHAUDHURIA_CAUDATA.get()) {
-            return AnimaliaFunctionUtil.getScaleForSize(CHAUDHURIA_CAUDATA_PIXEL, this.genVarSize(15, 18, 25));
+            return AnimaliaFunctionUtil.getScaleForSize(CHAUDHURIA_CAUDATA_PIXEL, 25);
         }
         return AnimaliaFunctionUtil.getScaleForSize(SYNBRANCHUS_MARMORATUS_PIXEL, this.genVarSize(50, 150, 80));
     }

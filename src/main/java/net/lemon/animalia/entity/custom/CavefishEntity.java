@@ -197,19 +197,19 @@ public class CavefishEntity extends FishBase implements GeoEntity, Scannable {
     @Override
     public float genVarSizeMultiplier() {
         if (this.getType() == ModEntities.AMBLYOPSIS_HOOSIERI.get()) {
-            return AnimaliaFunctionUtil.getScaleForSize(AMBLYOPSIS_HOOSIERI_PIXEL, 20);
+            return AnimaliaFunctionUtil.getScaleForSize(AMBLYOPSIS_HOOSIERI_PIXEL, 22);
         } else if (this.getType() == ModEntities.CYPRINODON_DIABOLIS.get()) {
-            return AnimaliaFunctionUtil.getScaleForSize(CYPRINODON_DIABOLIS_PIXEL, 13);
+            return AnimaliaFunctionUtil.getScaleForSize(CYPRINODON_DIABOLIS_PIXEL, 18);
         } else if (this.getType() == ModEntities.GITCHAK_NAKANA.get()) {
-            return AnimaliaFunctionUtil.getScaleForSize(GITCHAK_NAKANA_PIXEL, 15);
+            return AnimaliaFunctionUtil.getScaleForSize(GITCHAK_NAKANA_PIXEL, 20);
         } else if (this.getType() == ModEntities.KRYPTOGLANIS_SHAJII.get()) {
-            return AnimaliaFunctionUtil.getScaleForSize(KRYPTOGLANIS_SHAJII_PIXEL, 20);
+            return AnimaliaFunctionUtil.getScaleForSize(KRYPTOGLANIS_SHAJII_PIXEL, 25);
         } else if (this.getType() == ModEntities.SINOCYCLOCHEILUS_ANATIROSTRIS.get()) {
-            return AnimaliaFunctionUtil.getScaleForSize(SINOCYCLOCHEILUS_PIXEL, 25);
+            return AnimaliaFunctionUtil.getScaleForSize(SINOCYCLOCHEILUS_PIXEL, 30);
         } else if (this.getType() == ModEntities.SINOCYCLOCHEILUS_HYALINUS.get()) {
-            return AnimaliaFunctionUtil.getScaleForSize(SINOCYCLOCHEILUS_PIXEL, 22);
+            return AnimaliaFunctionUtil.getScaleForSize(SINOCYCLOCHEILUS_PIXEL, 37);
         } else if (this.getType() == ModEntities.SINOCYCLOCHEILUS_LONGICORNUS.get()) {
-            return AnimaliaFunctionUtil.getScaleForSize(SINOCYCLOCHEILUS_PIXEL, 22);
+            return AnimaliaFunctionUtil.getScaleForSize(SINOCYCLOCHEILUS_PIXEL, 27);
         }
         return 1;
     }
