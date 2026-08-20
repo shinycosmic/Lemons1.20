@@ -2,6 +2,7 @@ package net.lemon.animalia.datagen;
 
 import net.lemon.animalia.Animalia;
 import net.lemon.animalia.registry.ModBlocks;
+import net.lemon.animalia.registry.ModEntities;
 import net.lemon.animalia.registry.ModItems;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
@@ -102,54 +103,9 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItems.SINOCYCLOCHEILUS_HYALINUS_BUCKET);
         simpleItem(ModItems.SINOCYCLOCHEILUS_LONGICORNUS_BUCKET);
 
-        //spawn egg generators
-        withExistingParent(ModItems.DISSOSTICHUS_ELEGINOIDES_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
-        withExistingParent(ModItems.ELEGINOPS_MACLOVINUS_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
-        withExistingParent(ModItems.PSEUDAPHRITIS_URVILLII_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
-        withExistingParent(ModItems.BETTA_SPLENDENS_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
-        withExistingParent(ModItems.PERCOPHIS_BRASILIENSIS_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
-        withExistingParent(ModItems.SYNBRANCHUS_MARMORATUS_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
-        withExistingParent(ModItems.CHAUDHURIA_CAUDATA_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
-        withExistingParent(ModItems.MASTACEMBELUS_ERYTHROTAENIA_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
-        withExistingParent(ModItems.MASTACEMBELUS_ARMATUS_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
-        withExistingParent(ModItems.MASTACEMBELUS_BRICHARDI_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
-        withExistingParent(ModItems.MACROGNATHUS_SIAMENSIS_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
-        withExistingParent(ModItems.SINOBDELLA_SINENSIS_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
-        withExistingParent(ModItems.RAKTHAMICHTHYS_INDICUS_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
-        withExistingParent(ModItems.NEMATISTIUS_PECTORALIS_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
-        withExistingParent(ModItems.TOXOTES_CHATAREUS_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
-        withExistingParent(ModItems.POGONOPHRYNE_MARMORATA_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
-        withExistingParent(ModItems.CHAENOCEPHALUS_ACERATUS_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
-        withExistingParent(ModItems.CYGNODRACO_MAWSONI_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
-        withExistingParent(ModItems.SCATOPHAGUS_ARGUS_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
-        withExistingParent(ModItems.PROCAMBARUS_ALLENI_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
-        withExistingParent(ModItems.PROCAMBARUS_CLARKII_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
-        withExistingParent(ModItems.PROCAMBARUS_LUCIFUGUS_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
-        withExistingParent(ModItems.PROCAMBARUS_VIRGINALIS_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
-        withExistingParent(ModItems.PANGASIANODON_GIGAS_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
-        withExistingParent(ModItems.POMACANTHUS_IMPERATOR_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
-        withExistingParent(ModItems.NASO_BREVIROSTRIS_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
-        withExistingParent(ModItems.ZANCLUS_CORNUTUS_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
-        withExistingParent(ModItems.PARACANTHURUS_HEPATUS_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
-        withExistingParent(ModItems.CHELMON_ROSTRATUS_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
-        withExistingParent(ModItems.CHAETODON_AURIGA_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
-        withExistingParent(ModItems.SIGANUS_VULPINUS_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
-        withExistingParent(ModItems.ZEBRASOMA_FLAVESCENS_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
-        withExistingParent(ModItems.ZEBRASOMA_VELIFER_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
-        withExistingParent(ModItems.HYDROCYNUS_GOLIATH_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
-        withExistingParent(ModItems.SMUTSIA_GIGANTEA_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
-        withExistingParent(ModItems.INDOSTOMUS_PARADOXUS_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
-        withExistingParent(ModItems.GITCHAK_NAKANA_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
-        withExistingParent(ModItems.KRYPTOGLANIS_SHAJII_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
-        withExistingParent(ModItems.AMBLYOPSIS_HOOSIERI_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
-        withExistingParent(ModItems.CYPRINODON_DIABOLIS_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
-        withExistingParent(ModItems.SINOCYCLOCHEILUS_ANATIROSTRIS_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
-        withExistingParent(ModItems.SINOCYCLOCHEILUS_HYALINUS_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
-        withExistingParent(ModItems.SINOCYCLOCHEILUS_LONGICORNUS_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
-
-
-
-
+        for (RegistryObject<Item> egg : ModEntities.SPAWN_EGGS.getEntries()) {
+            withExistingParent(egg.getId().getPath(), mcLoc("item/template_spawn_egg"));
+        }
     }
 
     private ItemModelBuilder simpleItem(RegistryObject<Item> item) {

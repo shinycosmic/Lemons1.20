@@ -2,15 +2,18 @@ package net.lemon.animalia.registry.creativetabs;
 
 import net.lemon.animalia.Animalia;
 import net.lemon.animalia.registry.ModBlocks;
+import net.lemon.animalia.registry.ModEntities;
 import net.lemon.animalia.registry.ModItems;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
+import net.minecraftforge.common.ForgeSpawnEggItem;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
+
+import java.util.Objects;
 
 public class ModCreativeModeTabs {
     public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS =
@@ -25,7 +28,7 @@ public class ModCreativeModeTabs {
                     .build());
 
     public static final RegistryObject<CreativeModeTab> ANIMALIA_MOBS = CREATIVE_MODE_TABS.register("animalia_mobs",
-            () -> CreativeModeTab.builder().icon(() -> new ItemStack(ModItems.CHAENOCEPHALUS_ACERATUS_SPAWN_EGG.get()))
+            () -> CreativeModeTab.builder().icon(() -> new ItemStack(Objects.requireNonNull(ForgeSpawnEggItem.fromEntityType(ModEntities.CHAENOCEPHALUS_ACERATUS.get()))))
                     .title(Component.translatable("creativetab.animalia_mobs"))
                     .displayItems((param, output) -> {
                         AnimaliaMobsTab.displayItems(output);
