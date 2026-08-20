@@ -56,13 +56,13 @@ public class FindNearestBlockGoal extends Goal {
         if (this.cooldown > this.mob.tickCount) {
             return false;
         }
-        if (!this.isValidTime()) {
+        if (!this.passCheck()) {
             return false;
         }
         if (this.mob.tickCount < this.nextSearchTime) {
             return false;
         }
-        this.nextSearchTime = this.mob.tickCount + this.mob.getRandom().nextInt(20);
+        this.nextSearchTime = this.mob.tickCount + 20 + this.mob.getRandom().nextInt(20);
         this.targetPos = this.findNearestBlock();
         return this.targetPos != null;
     }
@@ -106,7 +106,7 @@ public class FindNearestBlockGoal extends Goal {
         this.cooldown = this.mob.tickCount + 400;
     }
 
-    private boolean isValidTime() {
+    private boolean passCheck() {
         if (this.activityTime != null) {
             return !this.activityTime.isActiveTime(this.mob);
         }
