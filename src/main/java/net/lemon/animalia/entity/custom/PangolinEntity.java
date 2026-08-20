@@ -1,5 +1,6 @@
 package net.lemon.animalia.entity.custom;
 
+import net.lemon.animalia.entity.ai.FindNearestBlockGoal;
 import net.lemon.animalia.entity.ai.GrazeGoal;
 import net.lemon.animalia.entity.ai.GuardGoal;
 import net.lemon.animalia.entity.ai.SleepGoal;
@@ -18,6 +19,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.damagesource.DamageSource;
@@ -30,6 +32,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraftforge.common.Tags;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.core.animatable.GeoAnimatable;
@@ -59,6 +62,7 @@ public class PangolinEntity extends AnimaliaLandBase implements GeoEntity, Scann
     protected void registerGoals() {
         this.goalSelector.addGoal(1, new GuardGoal(this, 6D, entity -> !(entity instanceof PangolinEntity) && !(entity instanceof Player player && player.isCreative())));
         this.goalSelector.addGoal(1, new SleepGoal(this));
+        this.goalSelector.addGoal(4, new FindNearestBlockGoal(this, 1.0D, 8, ModTags.Blocks.CROSS_PLANTS));
         this.goalSelector.addGoal(6, new GrazeGoal<>(this, 1.0D));
         super.registerGoals();
     }

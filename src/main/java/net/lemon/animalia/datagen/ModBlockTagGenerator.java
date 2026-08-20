@@ -45,6 +45,19 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
         tag(ModTags.Blocks.TERMITE_MOUNDS).add(ModBlocks.TERMITE_MOUND.get());
         tag(ModTags.Blocks.TERMITE_MOUNDS).add(ModBlocks.RED_TERMITE_MOUND.get());
 
+        tag(ModTags.Blocks.CROSS_PLANTS).add(ModBlocks.SAGITTARIA.get());
+        tag(ModTags.Blocks.CROSS_PLANTS).add(ModBlocks.KAEMPFERIA_PULCHRA.get());
+        tag(ModTags.Blocks.CROSS_PLANTS).add(Blocks.GRASS);
+        tag(ModTags.Blocks.CROSS_PLANTS).add(Blocks.TALL_GRASS);
+        tag(ModTags.Blocks.CROSS_PLANTS).add(Blocks.FERN);
+        tag(ModTags.Blocks.CROSS_PLANTS).add(Blocks.LARGE_FERN);
+        tag(ModTags.Blocks.CROSS_PLANTS).add(Blocks.DEAD_BUSH);
+        tag(ModTags.Blocks.CROSS_PLANTS).add(Blocks.ROSE_BUSH);
+        tag(ModTags.Blocks.CROSS_PLANTS).add(Blocks.PITCHER_PLANT);
+        tag(ModTags.Blocks.CROSS_PLANTS).add(Blocks.SUNFLOWER);
+        tag(ModTags.Blocks.CROSS_PLANTS).add(Blocks.LILAC);
+        tag(ModTags.Blocks.CROSS_PLANTS).add(Blocks.PEONY);
+
         tag(BlockTags.MINEABLE_WITH_SHOVEL).addTag(ModTags.Blocks.TERMITE_MOUNDS);
 
     }
