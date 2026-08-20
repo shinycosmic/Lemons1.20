@@ -22,6 +22,7 @@ import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import org.jetbrains.annotations.Nullable;
@@ -227,7 +228,22 @@ public class CavefishEntity extends FishBase implements GeoEntity, Scannable {
 
     @Override
     public ItemStack getBucketItemStack() {
-        return null;
+        if (this.getType() == ModEntities.AMBLYOPSIS_HOOSIERI.get()) {
+            return new ItemStack(ModItems.AMBLYOPSIS_HOOSIERI_BUCKET.get());
+        } else if (this.getType() == ModEntities.CYPRINODON_DIABOLIS.get()) {
+            return new ItemStack(ModItems.CYPRINODON_DIABOLIS_BUCKET.get());
+        } else if (this.getType() == ModEntities.GITCHAK_NAKANA.get()) {
+            return new ItemStack(ModItems.GITCHAK_NAKANA_BUCKET.get());
+        } else if (this.getType() == ModEntities.KRYPTOGLANIS_SHAJII.get()) {
+            return new ItemStack(ModItems.KRYPTOGLANIS_SHAJII_BUCKET.get());
+        } else if (this.getType() == ModEntities.SINOCYCLOCHEILUS_ANATIROSTRIS.get()) {
+            return new ItemStack(ModItems.SINOCYCLOCHEILUS_ANATIROSTRIS_BUCKET.get());
+        } else if (this.getType() == ModEntities.SINOCYCLOCHEILUS_HYALINUS.get()) {
+            return new ItemStack(ModItems.SINOCYCLOCHEILUS_HYALINUS_BUCKET.get());
+        } else if (this.getType() == ModEntities.SINOCYCLOCHEILUS_LONGICORNUS.get()) {
+            return new ItemStack(ModItems.SINOCYCLOCHEILUS_LONGICORNUS_BUCKET.get());
+        }
+        return new ItemStack(Items.SALMON_BUCKET);
     }
 
     @Override
