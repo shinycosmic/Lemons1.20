@@ -76,8 +76,10 @@ public class ModEntities {
             width, float height, Supplier<AttributeSupplier> attributes) {
         RegistryObject<EntityType<T>> type = ENTITY_TYPES.register(name, () -> EntityType.Builder.of(factory, category).sized(width, height).build(name));
         ATTRIBUTE_SUPPLIERS.put(type, attributes);
+        //todo add spawn eggs to this deferred register
         return type;
     }
+    //todo overload the above method to optionally ship a bucket.
 
     public static void register(IEventBus eventBus) {
         ENTITY_TYPES.register(eventBus);
