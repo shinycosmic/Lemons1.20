@@ -33,7 +33,6 @@ import software.bernie.geckolib.core.object.PlayState;
 
 public class AenigmachannaEntity extends BottomWalkerSwimmerBase implements GeoEntity, Scannable {
     private final AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
-    private int idleSwitch = 0;
 
     public AenigmachannaEntity(EntityType<? extends FishBase> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
@@ -110,16 +109,6 @@ public class AenigmachannaEntity extends BottomWalkerSwimmerBase implements GeoE
     public static void registerHolonet(){
         HolonetEntities.register(ModEntities.AENIGMACHANNA_GOLLUM, Scannable.AppName.FISH, "Anabantiformes");
 
-    }
-
-    @Override
-    public void aiStep() {
-        if (this.isInWater() && !this.level().isClientSide) {
-            if(this.wantsToWalk && this.idleSwitch == 0) {
-
-            }
-        }
-        super.aiStep();
     }
 
     @Override
