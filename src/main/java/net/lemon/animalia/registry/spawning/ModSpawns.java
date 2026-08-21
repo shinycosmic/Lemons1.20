@@ -102,6 +102,8 @@ public class ModSpawns {
                 BiomeSelector.in(Biomes.LUSH_CAVES, Biomes.DRIPSTONE_CAVES));
         add(ModEntities.LEPTOBRAMA_MUELLERI, 4, 4, 8,
                 BiomeSelector.in(Biomes.LUKEWARM_OCEAN));
+        add(ModEntities.HIPPOCAMPUS_INGENS, 2, 1, 3,
+                BiomeSelector.in(Biomes.LUKEWARM_OCEAN));
 
         add(ModEntities.PROCAMBARUS_CLARKII, 6, 1, 2,
                 BiomeSelector.in(Biomes.SWAMP, Biomes.RIVER));

@@ -4,9 +4,9 @@ import net.lemon.animalia.Animalia;
 import net.minecraft.world.entity.MobCategory;
 
 public class ModMobCategories {
-    public static final int FISH_CAP = 20;
-    public static final int INVERTEBRATE_CAP = 8;
-    public static final int LAND_CAP = 5;
+    public static final int FISH_CAP = 28;
+    public static final int INVERTEBRATE_CAP = 12;
+    public static final int LAND_CAP = 12;
     public static final int FLIER_CAP = 8;
 
     public static final MobCategory ANIMALIA_FISH = MobCategory.create(
