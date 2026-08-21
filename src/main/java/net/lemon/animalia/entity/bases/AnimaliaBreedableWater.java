@@ -5,6 +5,7 @@ import net.lemon.animalia.entity.bases.helpers.*;
 import net.lemon.animalia.item.FishEggItem;
 import net.lemon.animalia.registry.ModItems;
 import net.lemon.animalia.registry.spawning.SpawnBand;
+import net.lemon.animalia.util.Scannable;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.locale.Language;
@@ -95,8 +96,7 @@ public abstract class AnimaliaBreedableWater extends WaterAnimal implements IAct
     }
 
     public String getScientificName() {
-        String key = this.getType().getDescriptionId() + ".scientific";
-        return Language.getInstance().has(key) ? Component.translatable(key).getString() : "";
+        return Scannable.getScientificName(this.getType());
     }
 
     public boolean useSmoothControl() {

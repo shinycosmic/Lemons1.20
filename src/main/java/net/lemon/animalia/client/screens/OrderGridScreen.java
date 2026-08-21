@@ -23,9 +23,7 @@ import org.joml.Quaternionf;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.core.animation.AnimationController;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static net.lemon.animalia.util.AnimaliaConstants.*;
 
@@ -63,7 +61,26 @@ public class OrderGridScreen extends Screen {
         this.app = app;
         this.order = order;
         this.parent = parent;
-        this.species = order != null ? HolonetEntities.getForOrder(app, order) : HolonetEntities.getAllForApp(app);
+        this.species = buildSpeciesList(app, order);
+    }
+
+    private static List<EntityType<?>> buildSpeciesList(Scannable.AppName app, String order) {
+        if(order != null) {
+            return sortedByName(HolonetEntities.getForOrder(app, order));
+        }
+        List<String> orders = new ArrayList<>(HolonetEntities.getForApp(app).keySet());
+        Collections.sort(orders);
+        List<EntityType<?>> all = new ArrayList<>();
+        for(String key : orders) {
+            all.addAll(sortedByName(HolonetEntities.getForOrder(app, key)));
+        }
+        return all;
+    }
+
+    private static List<EntityType<?>> sortedByName(List<EntityType<?>> types) {
+        List<EntityType<?>> sorted = new ArrayList<>(types);
+        sorted.sort(Comparator.comparing(Scannable::getScientificName));
+        return sorted;
     }
 
     @Override

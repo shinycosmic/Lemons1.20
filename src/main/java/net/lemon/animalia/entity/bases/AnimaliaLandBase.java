@@ -3,6 +3,7 @@ package net.lemon.animalia.entity.bases;
 import net.lemon.animalia.entity.bases.helpers.*;
 import net.lemon.animalia.item.FishEggItem;
 import net.lemon.animalia.registry.ModItems;
+import net.lemon.animalia.util.Scannable;
 import net.minecraft.core.BlockPos;
 import net.minecraft.locale.Language;
 import net.minecraft.nbt.CompoundTag;
@@ -93,8 +94,7 @@ public abstract class AnimaliaLandBase extends Animal implements IActivityTime, 
     }
 
     public String getScientificName() {
-        String key = this.getType().getDescriptionId() + ".scientific";
-        return Language.getInstance().has(key) ? Component.translatable(key).getString() : "";
+        return Scannable.getScientificName(this.getType());
     }
 
     @Override

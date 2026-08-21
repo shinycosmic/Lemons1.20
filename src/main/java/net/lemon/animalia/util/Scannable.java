@@ -1,5 +1,7 @@
 package net.lemon.animalia.util;
+import net.minecraft.locale.Language;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import org.joml.Quaternionf;
 
@@ -33,6 +35,11 @@ public interface Scannable {
     Component getOrder();
 
     String getScientificName();
+
+    static String getScientificName(EntityType<?> type) {
+        String key = type.getDescriptionId() + ".scientific";
+        return Language.getInstance().has(key) ? Component.translatable(key).getString() : "";
+    }
 
     /***
      * the registry method, this is called to make sure Holonet recognizes this creature
