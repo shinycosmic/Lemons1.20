@@ -8,7 +8,6 @@ import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.pathfinder.Path;
-import net.minecraft.world.phys.Vec3;
 
 import java.util.EnumSet;
 import java.util.function.Predicate;
@@ -114,8 +113,7 @@ public class FindNearestBlockGoal extends Goal {
     }
 
     private void moveToTarget() {
-        Vec3 center = Vec3.atCenterOf(this.targetPos);
-        this.mob.getNavigation().moveTo(center.x, center.y, center.z, this.speedMult);
+        this.mob.getNavigation().moveTo(this.mob.getNavigation().createPath(this.targetPos, 0), this.speedMult);
     }
 
     private BlockPos findNearestBlock() {
