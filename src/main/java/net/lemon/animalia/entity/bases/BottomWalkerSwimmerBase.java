@@ -33,6 +33,7 @@ import org.jetbrains.annotations.Nullable;
 public abstract class BottomWalkerSwimmerBase extends FishBase {
 
     private static final EntityDataAccessor<Boolean> IS_WALKING = SynchedEntityData.defineId(BottomWalkerSwimmerBase.class, EntityDataSerializers.BOOLEAN);
+    private static final EntityDataAccessor<Integer> GROUNDIDLESWITCH = SynchedEntityData.defineId(BottomWalkerSwimmerBase.class, EntityDataSerializers.INT);
 
     private int stateTime;
     public float currentRoll = 0.0F;
@@ -62,6 +63,7 @@ public abstract class BottomWalkerSwimmerBase extends FishBase {
     protected void defineSynchedData() {
         super.defineSynchedData();
         this.entityData.define(IS_WALKING, false);
+        this.entityData.define(GROUNDIDLESWITCH, 0);
     }
 
     public boolean hasSwimToWalkTransition() {
@@ -155,6 +157,8 @@ public abstract class BottomWalkerSwimmerBase extends FishBase {
                     this.setWalking(true);
                     this.wantsToWalk = false;
                     this.stateTime = getWalkTime();
+                    int groundIdle = this.getGroundIdleSwitch() == 0 ? 1 : 0;
+                    this.setGroundIdleSwitch(groundIdle);
                 } else {
                     this.setDeltaMovement(this.getDeltaMovement().add(0, getSinkSpeed(), 0));
                 }
@@ -180,6 +184,14 @@ public abstract class BottomWalkerSwimmerBase extends FishBase {
         float targetRoll = Math.max(-0.45F, Math.min(0.45F, (this.getYRot() - this.yRotO) * 0.1F));
         targetRoll = -targetRoll;
         this.currentRoll = this.currentRoll + (targetRoll - this.currentRoll) * 0.05F;
+    }
+
+    public int getGroundIdleSwitch() {
+        return this.entityData.get(GROUNDIDLESWITCH);
+    }
+
+    public void setGroundIdleSwitch(int num) {
+        this.entityData.set(GROUNDIDLESWITCH, num);
     }
 
     public int getStrollInterval() {

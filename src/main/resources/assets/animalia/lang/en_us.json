@@ -142,6 +142,7 @@
   "entity.animalia.neolissochilus_pnar": "Pnar Cave Mahseer",
   "entity.animalia.munidopsis_polymorpha": "Jameos Blind Crab",
   "entity.animalia.xibalbanus_tulumensis": "Tulum Cave Remipede",
+  "entity.animalia.leptobrama_muelleri": "Spot-fin Beachsalmon",
 
   "tooltip.animalia.baby": "Juvenile",
   "container.animalia.filter_trap": "Water Trap",
@@ -220,6 +221,7 @@
   "entity.animalia.neolissochilus_pnar.scientific": "Neolissochilus pnar",
   "entity.animalia.munidopsis_polymorpha.scientific": "Munidopsis polymorpha",
   "entity.animalia.xibalbanus_tulumensis.scientific": "Xibalbanus tulumensis",
+  "entity.animalia.leptobrama_muelleri.scientific": "Leptobrama muelleri",
 
   "order.animalia.perciformes": "Perciformes",
   "order.animalia.anabantiformes": "Anabantiformes",
@@ -264,6 +266,8 @@
   "family.animalia.cyprinodontidae": "Cyprinodontidae",
   "family.animalia.cobitidae": "Cobitidae",
   "family.animalia.kryptoglanidae": "Kryptoglanidae",
+  "family.animalia.aenigmachannidae": "Aenigmachannidae",
+  "family.animalia.leptobramidae": "Leptobramidae",
 
   "trivia.animalia.dissostichus_eleginoides": "The Chilean Sea Bass, also known as the Patagonian Toothfish is an icefish that lives in the southern cold oceans at depths of 45 to over 3000 meters deep.",
   "trivia.animalia.percophis_brasiliensis": "The Brazilian Flathead is considered to be the most basal member of Notothenioidei. It lives off the coast of Brazil and Argentina.",
@@ -313,6 +317,7 @@
   "trivia.animalia.kryptoglanis_shajii": "This cave catfish is endemic to Kerala, India and has a very long and thin body with a long anal fin. It laks dorsal fins and has an upward pointed mouth.",
   "trivia.animalia.munidopsis_polymorpha": "The Jameos blind crab is a blind and pale squat lobster found in the caves of Jameos del Agua in the Canary Islands. They are small, only around 3cm long.",
   "trivia.animalia.xibalbanus_tulumensis": "Xibalbanus is a venomous remipede known only from caves on the Yucatán Peninsula. It is relatively large for a remipede, being 3cm in length.",
+  "trivia.animalia.leptobrama_muelleri": "",
 
   "debug.animalia.trivia": "If this value displays, there is a bug [trivia]",
   "debug.animalia.family": "if this text appears, there is a bug [family]",

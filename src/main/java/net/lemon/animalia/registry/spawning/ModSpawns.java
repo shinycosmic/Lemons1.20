@@ -98,6 +98,10 @@ public class ModSpawns {
                 BiomeSelector.in(Biomes.LUSH_CAVES));
         add(ModEntities.CYPRINODON_DIABOLIS, 1, 2, 4,
                 BiomeSelector.in(Biomes.DRIPSTONE_CAVES));
+        add(ModEntities.AENIGMACHANNA_GOLLUM, 2, 1, 1,
+                BiomeSelector.in(Biomes.LUSH_CAVES, Biomes.DRIPSTONE_CAVES));
+        add(ModEntities.LEPTOBRAMA_MUELLERI, 4, 4, 8,
+                BiomeSelector.in(Biomes.LUKEWARM_OCEAN));
 
         add(ModEntities.PROCAMBARUS_CLARKII, 6, 1, 2,
                 BiomeSelector.in(Biomes.SWAMP, Biomes.RIVER));

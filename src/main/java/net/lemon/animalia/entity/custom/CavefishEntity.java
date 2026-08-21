@@ -42,7 +42,7 @@ public class CavefishEntity extends FishBase implements GeoEntity, Scannable {
 
     public static AttributeSupplier setAttributes() {
         return Mob.createMobAttributes()
-                .add(Attributes.MAX_HEALTH, 3D)
+                .add(Attributes.MAX_HEALTH, 2D)
                 .add(Attributes.MOVEMENT_SPEED, 0.5f)
                 .build();
     }

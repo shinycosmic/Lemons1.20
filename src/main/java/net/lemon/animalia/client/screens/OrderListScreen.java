@@ -25,9 +25,9 @@ import static net.lemon.animalia.util.AnimaliaConstants.*;
 public class OrderListScreen extends Screen {
 
     private static final int PANEL_LEFT = 40;
-    private static final int PANEL_TOP = 80;
+    private static final int PANEL_TOP = 75;
     private static final int PANEL_WIDTH = 300;
-    private static final int PANEL_HEIGHT = 140;
+    private static final int PANEL_HEIGHT = 125;
     private static final int BAR_WIDTH = 60;
     private static final int BAR_HEIGHT = 6;
     private static final int ROW_HEIGHT = 14;

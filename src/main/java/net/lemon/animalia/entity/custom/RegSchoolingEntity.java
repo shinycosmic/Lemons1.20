@@ -54,6 +54,8 @@ public class RegSchoolingEntity extends FishBase implements GeoEntity, Scannable
             return ModItems.WORM.get();
         } else if (this.getType() == ModEntities.SIGANUS_VULPINUS.get()) {
             return Items.SEAGRASS;
+        } else if (this.getType() == ModEntities.LEPTOBRAMA_MUELLERI.get()) {
+            return ModItems.RAW_CRUSTACEAN.get();
         }
         return ModItems.FISH_FOOD.get();
     }
@@ -82,6 +84,8 @@ public class RegSchoolingEntity extends FishBase implements GeoEntity, Scannable
             return Component.translatable("trivia.animalia.chaetodon_auriga");
         } else if (this.getType() == ModEntities.SIGANUS_VULPINUS.get()) {
             return Component.translatable("trivia.animalia.siganus_vulpinus");
+        } else if (this.getType() == ModEntities.LEPTOBRAMA_MUELLERI.get()) {
+            return Component.translatable("trivia.animalia.leptobrama_muelleri");
         }
         return Component.translatable("debug.animalia.trivia");
     }
@@ -100,12 +104,17 @@ public class RegSchoolingEntity extends FishBase implements GeoEntity, Scannable
             return Component.translatable("family.animalia.chaetodontidae");
         } else if (this.getType() == ModEntities.SIGANUS_VULPINUS.get()) {
             return Component.translatable("family.animalia.siganidae");
+        } else if (this.getType() == ModEntities.LEPTOBRAMA_MUELLERI.get()) {
+            return Component.translatable("family.animalia.leptobramidae");
         }
         return Component.translatable("debug.animalia.family");
     }
 
     @Override
     public Component getOrder() {
+        if(this.getType() == ModEntities.LEPTOBRAMA_MUELLERI.get()) {
+            return Component.translatable("order.animalia.carangiformes");
+        }
         return Component.translatable("order.animalia.acanthuriformes");
     }
 
@@ -161,13 +170,17 @@ public class RegSchoolingEntity extends FishBase implements GeoEntity, Scannable
             return 6;
         } else if (this.getType() == ModEntities.NASO_BREVIROSTRIS.get()) {
             return 12;
+        } else if (this.getType() == ModEntities.LEPTOBRAMA_MUELLERI.get()) {
+            return 20;
         }
         return super.getMaxSchoolSize();
     }
 
     @Override
     public boolean isSchoolingFish() {
-        if(this.getType() == ModEntities.NASO_BREVIROSTRIS.get() || this.getType() == ModEntities.SCATOPHAGUS_ARGUS.get()) {
+        if(this.getType() == ModEntities.NASO_BREVIROSTRIS.get()
+                || this.getType() == ModEntities.SCATOPHAGUS_ARGUS.get()
+                || this.getType() == ModEntities.LEPTOBRAMA_MUELLERI.get()) {
             return true;
         }
         return false;
@@ -203,6 +216,8 @@ public class RegSchoolingEntity extends FishBase implements GeoEntity, Scannable
             return AnimaliaFunctionUtil.getScaleForSize(16, 25);
         } else if (this.getType() == ModEntities.SIGANUS_VULPINUS.get()) {
             return AnimaliaFunctionUtil.getScaleForSize(19, 25);
+        } else if (this.getType() == ModEntities.LEPTOBRAMA_MUELLERI.get()) {
+            return AnimaliaFunctionUtil.getScaleForSize(19, 38);
         }
         return 1;
     }
@@ -214,7 +229,7 @@ public class RegSchoolingEntity extends FishBase implements GeoEntity, Scannable
         HolonetEntities.register(ModEntities.CHELMON_ROSTRATUS, Scannable.AppName.FISH, "Acanthuriformes");
         HolonetEntities.register(ModEntities.CHAETODON_AURIGA, Scannable.AppName.FISH, "Acanthuriformes");
         HolonetEntities.register(ModEntities.SIGANUS_VULPINUS, Scannable.AppName.FISH, "Acanthuriformes");
-
+        HolonetEntities.register(ModEntities.LEPTOBRAMA_MUELLERI, Scannable.AppName.FISH, "Carangiformes");
 
     }
 
