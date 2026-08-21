@@ -50,6 +50,7 @@ public class AnimaliaRenderInit {
         EntityRenderers.register(ModEntities.CYPRINODON_DIABOLIS.get(), CavefishRenderer::new);
         EntityRenderers.register(ModEntities.AENIGMACHANNA_GOLLUM.get(), AenigmachannaRenderer::new);
         EntityRenderers.register(ModEntities.LEPTOBRAMA_MUELLERI.get(), LeptobramaMuelleriRenderer::new);
+        EntityRenderers.register(ModEntities.HIPPOCAMPUS_INGENS.get(), HippocampusIngensRenderer::new);
 
 
 

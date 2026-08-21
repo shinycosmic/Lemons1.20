@@ -222,6 +222,7 @@
   "entity.animalia.munidopsis_polymorpha.scientific": "Munidopsis polymorpha",
   "entity.animalia.xibalbanus_tulumensis.scientific": "Xibalbanus tulumensis",
   "entity.animalia.leptobrama_muelleri.scientific": "Leptobrama muelleri",
+  "entity.animalia.hippocampus_ingens.scientific": "Hippocampus ingens",
 
   "order.animalia.perciformes": "Perciformes",
   "order.animalia.anabantiformes": "Anabantiformes",
@@ -235,6 +236,7 @@
   "order.animalia.cyprinodontiformes": "Cyprinodontiformes",
   "order.animalia.cypriniformes": "Cypriniformes",
   "order.animalia.percopsiformes": "Percopsiformes",
+  "order.animalia.syngnathiformes": "Syngnathiformes",
 
   "family.animalia.percophidae": "Percophidae",
   "family.animalia.eleginopidae": "Eleginopidae",
@@ -268,6 +270,7 @@
   "family.animalia.kryptoglanidae": "Kryptoglanidae",
   "family.animalia.aenigmachannidae": "Aenigmachannidae",
   "family.animalia.leptobramidae": "Leptobramidae",
+  "family.animalia.syngnathidae": "Syngnathidae",
 
   "trivia.animalia.dissostichus_eleginoides": "The Chilean Sea Bass, also known as the Patagonian Toothfish is an icefish that lives in the southern cold oceans at depths of 45 to over 3000 meters deep.",
   "trivia.animalia.percophis_brasiliensis": "The Brazilian Flathead is considered to be the most basal member of Notothenioidei. It lives off the coast of Brazil and Argentina.",
@@ -318,6 +321,7 @@
   "trivia.animalia.munidopsis_polymorpha": "The Jameos blind crab is a blind and pale squat lobster found in the caves of Jameos del Agua in the Canary Islands. They are small, only around 3cm long.",
   "trivia.animalia.xibalbanus_tulumensis": "Xibalbanus is a venomous remipede known only from caves on the Yucatán Peninsula. It is relatively large for a remipede, being 3cm in length.",
   "trivia.animalia.leptobrama_muelleri": "",
+  "trivia.animalia.hippocampus_ingens": "",
 
   "debug.animalia.trivia": "If this value displays, there is a bug [trivia]",
   "debug.animalia.family": "if this text appears, there is a bug [family]",
