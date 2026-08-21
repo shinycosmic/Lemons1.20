@@ -233,9 +233,6 @@ public class PangolinEntity extends AnimaliaLandBase implements GeoEntity, Scann
     public boolean isGrazableBlock(BlockState state) {return state.is(ModTags.Blocks.TERMITE_MOUNDS);}
 
     @Override
-    public int getGrazeCount() { return 1; }
-
-    @Override
     public int getGrazeLength() {return 190;}
 
     @Override

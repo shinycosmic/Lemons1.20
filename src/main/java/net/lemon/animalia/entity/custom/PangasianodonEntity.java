@@ -138,9 +138,6 @@ public class PangasianodonEntity extends FishBase implements GeoEntity, Scannabl
     }
 
     @Override
-    public int getGrazeCount() { return 1; }
-
-    @Override
     public int getGrazeLength() {
         return 100 + this.random.nextInt(200);
     }

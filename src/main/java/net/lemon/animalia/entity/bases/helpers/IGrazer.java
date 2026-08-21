@@ -22,7 +22,7 @@ public interface IGrazer {
     }
 
     default int getGrazeCount() {
-        return 3;
+        return 1;
     }
 
     default double getGrazeReachSqr() {

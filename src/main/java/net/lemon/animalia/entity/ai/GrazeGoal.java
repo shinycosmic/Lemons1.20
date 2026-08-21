@@ -17,12 +17,6 @@ import java.util.EnumSet;
 public class GrazeGoal<T extends PathfinderMob & IGrazer & IFoodEater> extends Goal {
     private final T mob;
     private final double speedMult;
-
-    private static final int INTERVAL_TICKS = 20;
-    private static final int INTERVAL_OFFSET = 15;
-    private static final int GRAZE_COOLDOWN = 400;
-    private static final double CLOSE_SQR = 6.25D;
-
     private BlockPos targetPos;
     private int grazeCooldown;
     private int nextSearchTime;
@@ -99,7 +93,7 @@ public class GrazeGoal<T extends PathfinderMob & IGrazer & IFoodEater> extends G
         if (distSqr < this.mob.getGrazeReachSqr()) {
             this.mob.getNavigation().stop();
             this.tryGraze();
-        } else if (distSqr < CLOSE_SQR) {
+        } else if (distSqr < 6.25) {
             this.mob.getNavigation().stop();
             this.mob.addDeltaMovement(center.subtract(mouth).normalize().scale(0.02D));
         } else if (this.mob.getNavigation().isDone()) {
@@ -111,7 +105,7 @@ public class GrazeGoal<T extends PathfinderMob & IGrazer & IFoodEater> extends G
     public void stop() {
         this.targetPos = null;
         this.mob.getNavigation().stop();
-        this.grazeCooldown = this.mob.tickCount + GRAZE_COOLDOWN;
+        this.grazeCooldown = this.mob.tickCount + 400;
         this.mob.onGrazeStop();
     }
 
@@ -127,7 +121,7 @@ public class GrazeGoal<T extends PathfinderMob & IGrazer & IFoodEater> extends G
             this.fed = true;
         }
         this.grazesRemaining--;
-        this.nextGrazeTime = this.mob.tickCount + this.mob.getGrazeLength() + INTERVAL_TICKS + this.mob.getRandom().nextInt(INTERVAL_OFFSET);
+        this.nextGrazeTime = this.mob.tickCount + this.mob.getGrazeLength() + 20 + this.mob.getRandom().nextInt(15);
         this.deadline = this.nextGrazeTime + 100;
     }
 
