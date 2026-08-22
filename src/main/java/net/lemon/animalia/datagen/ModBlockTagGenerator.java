@@ -58,6 +58,26 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
         tag(ModTags.Blocks.CROSS_PLANTS).add(Blocks.LILAC);
         tag(ModTags.Blocks.CROSS_PLANTS).add(Blocks.PEONY);
 
+        tag(ModTags.Blocks.AQUATIC_PLANTS).add(Blocks.SEAGRASS);
+        tag(ModTags.Blocks.AQUATIC_PLANTS).add(Blocks.TALL_SEAGRASS);
+        tag(ModTags.Blocks.AQUATIC_PLANTS).add(Blocks.HORN_CORAL);
+        tag(ModTags.Blocks.AQUATIC_PLANTS).add(Blocks.BRAIN_CORAL);
+        tag(ModTags.Blocks.AQUATIC_PLANTS).add(Blocks.TUBE_CORAL);
+        tag(ModTags.Blocks.AQUATIC_PLANTS).add(Blocks.FIRE_CORAL);
+        tag(ModTags.Blocks.AQUATIC_PLANTS).add(Blocks.BUBBLE_CORAL);
+        tag(ModTags.Blocks.AQUATIC_PLANTS).add(Blocks.HORN_CORAL_FAN);
+        tag(ModTags.Blocks.AQUATIC_PLANTS).add(Blocks.BRAIN_CORAL_FAN);
+        tag(ModTags.Blocks.AQUATIC_PLANTS).add(Blocks.TUBE_CORAL_FAN);
+        tag(ModTags.Blocks.AQUATIC_PLANTS).add(Blocks.FIRE_CORAL_FAN);
+        tag(ModTags.Blocks.AQUATIC_PLANTS).add(Blocks.BUBBLE_CORAL_FAN);
+        tag(ModTags.Blocks.AQUATIC_PLANTS).add(Blocks.HORN_CORAL_WALL_FAN);
+        tag(ModTags.Blocks.AQUATIC_PLANTS).add(Blocks.BRAIN_CORAL_WALL_FAN);
+        tag(ModTags.Blocks.AQUATIC_PLANTS).add(Blocks.TUBE_CORAL_WALL_FAN);
+        tag(ModTags.Blocks.AQUATIC_PLANTS).add(Blocks.FIRE_CORAL_WALL_FAN);
+        tag(ModTags.Blocks.AQUATIC_PLANTS).add(Blocks.BUBBLE_CORAL_WALL_FAN);
+        tag(ModTags.Blocks.AQUATIC_PLANTS).add(Blocks.KELP);
+        tag(ModTags.Blocks.AQUATIC_PLANTS).add(Blocks.KELP_PLANT);
+
         tag(BlockTags.MINEABLE_WITH_SHOVEL).addTag(ModTags.Blocks.TERMITE_MOUNDS);
 
     }

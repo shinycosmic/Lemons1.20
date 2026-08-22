@@ -17,6 +17,8 @@ public class ModTags {
         public static final TagKey<Block> SHELLS = tag("shells");
         public static final TagKey<Block> TERMITE_MOUNDS = tag("termite_mounds");
         public static final TagKey<Block> CROSS_PLANTS = tag("cross_plants");
+        public static final TagKey<Block> AQUATIC_PLANTS = tag("aquatic_plants");
+
 
         private static TagKey<Block> tag(String name) {
             return BlockTags.create(new ResourceLocation(Animalia.MODID, name));

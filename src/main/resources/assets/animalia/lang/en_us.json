@@ -143,6 +143,8 @@
   "entity.animalia.munidopsis_polymorpha": "Jameos Blind Crab",
   "entity.animalia.xibalbanus_tulumensis": "Tulum Cave Remipede",
   "entity.animalia.leptobrama_muelleri": "Spot-fin Beachsalmon",
+  "entity.animalia.hippocampus_reidi": "Slender Seahorse",
+  "entity.animalia.bovichtus_variegatus": "Thornfish",
 
   "tooltip.animalia.baby": "Juvenile",
   "container.animalia.filter_trap": "Water Trap",
@@ -223,6 +225,8 @@
   "entity.animalia.xibalbanus_tulumensis.scientific": "Xibalbanus tulumensis",
   "entity.animalia.leptobrama_muelleri.scientific": "Leptobrama muelleri",
   "entity.animalia.hippocampus_ingens.scientific": "Hippocampus ingens",
+  "entity.animalia.hippocampus_reidi.scientific": "Hippocampus reidi",
+  "entity.animalia.bovichtus_variegatus.scientific": "Bovichtus variegatus",
 
   "order.animalia.perciformes": "Perciformes",
   "order.animalia.anabantiformes": "Anabantiformes",
@@ -271,6 +275,7 @@
   "family.animalia.aenigmachannidae": "Aenigmachannidae",
   "family.animalia.leptobramidae": "Leptobramidae",
   "family.animalia.syngnathidae": "Syngnathidae",
+  "family.animalia.bovichtidae": "Bovichtidae",
 
   "trivia.animalia.dissostichus_eleginoides": "The Chilean Sea Bass, also known as the Patagonian Toothfish is an icefish that lives in the southern cold oceans at depths of 45 to over 3000 meters deep.",
   "trivia.animalia.percophis_brasiliensis": "The Brazilian Flathead is considered to be the most basal member of Notothenioidei. It lives off the coast of Brazil and Argentina.",
@@ -320,8 +325,10 @@
   "trivia.animalia.kryptoglanis_shajii": "This cave catfish is endemic to Kerala, India and has a very long and thin body with a long anal fin. It laks dorsal fins and has an upward pointed mouth.",
   "trivia.animalia.munidopsis_polymorpha": "The Jameos blind crab is a blind and pale squat lobster found in the caves of Jameos del Agua in the Canary Islands. They are small, only around 3cm long.",
   "trivia.animalia.xibalbanus_tulumensis": "Xibalbanus is a venomous remipede known only from caves on the Yucatán Peninsula. It is relatively large for a remipede, being 3cm in length.",
-  "trivia.animalia.leptobrama_muelleri": "",
-  "trivia.animalia.hippocampus_ingens": "",
+  "trivia.animalia.leptobrama_muelleri": "A coastal marine and brackish carangiforme fish, the Beachsalmon is a popular sport fish in Australia and grows to around 38cm in length.",
+  "trivia.animalia.hippocampus_ingens": "The pacific seahorse is the largest seahorse, able to grow up to 30cm in height. It is nocturnal and is often found inhabiting seagrass meadows and coral reefs.",
+  "trivia.animalia.hippocampus_reidi": "The slender seahorse is small, growing to 17.5cm in height. These seahorses have brown to light spots around their body and typically live near sargassum, seagrass, or corals.",
+  "trivia.animalia.bovichtus_variegatus": "The thornfish is a small notothenioid fish endemic to New Zealand. It has a brownish, grayish, olive coloration and typically grows to around 25cm in length. They prey on crustaceans and worms.",
 
   "debug.animalia.trivia": "If this value displays, there is a bug [trivia]",
   "debug.animalia.family": "if this text appears, there is a bug [family]",

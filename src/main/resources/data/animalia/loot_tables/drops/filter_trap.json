@@ -40,6 +40,19 @@
         },
         {
           "type": "minecraft:item",
+          "name": "animalia:worm",
+          "weight": 20,
+          "conditions": [
+            {
+              "condition": "minecraft:location_check",
+              "predicate": {
+                "dimension": "minecraft:overworld"
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
           "name": "animalia:tadpole",
           "weight": 20,
           "conditions": [
@@ -49,6 +62,65 @@
                 { "condition": "minecraft:location_check", "predicate": { "biome": "minecraft:river" } },
                 { "condition": "minecraft:location_check", "predicate": { "biome": "minecraft:swamp" } },
                 { "condition": "minecraft:location_check", "predicate": { "biome": "minecraft:mangrove_swamp" } }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "animalia:procambarus_clarkii",
+          "weight": 20,
+          "conditions": [
+            {
+              "condition": "minecraft:alternative",
+              "terms": [
+                { "condition": "minecraft:location_check", "predicate": { "biome": "minecraft:river" } },
+                { "condition": "minecraft:location_check", "predicate": { "biome": "minecraft:swamp" } },
+                { "condition": "minecraft:location_check", "predicate": { "biome": "minecraft:mangrove_swamp" } }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "animalia:procambarus_alleni",
+          "weight": 20,
+          "conditions": [
+            {
+              "condition": "minecraft:alternative",
+              "terms": [
+                { "condition": "minecraft:location_check", "predicate": { "biome": "minecraft:river" } },
+                { "condition": "minecraft:location_check", "predicate": { "biome": "minecraft:swamp" } },
+                { "condition": "minecraft:location_check", "predicate": { "biome": "minecraft:mangrove_swamp" } }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "animalia:procambarus_virginalis",
+          "weight": 20,
+          "conditions": [
+            {
+              "condition": "minecraft:alternative",
+              "terms": [
+                { "condition": "minecraft:location_check", "predicate": { "biome": "minecraft:river" } },
+                { "condition": "minecraft:location_check", "predicate": { "biome": "minecraft:swamp" } },
+                { "condition": "minecraft:location_check", "predicate": { "biome": "minecraft:mangrove_swamp" } }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "animalia:procambarus_lucifugus",
+          "weight": 20,
+          "conditions": [
+            {
+              "condition": "minecraft:alternative",
+              "terms": [
+                { "condition": "minecraft:location_check", "predicate": { "biome": "minecraft:lush_caves" } },
+                { "condition": "minecraft:location_check", "predicate": { "biome": "minecraft:dripstone_caves" } }
               ]
             }
           ]

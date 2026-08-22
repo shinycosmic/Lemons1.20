@@ -1,0 +1,23 @@
+{
+	"format_version": "1.8.0",
+	"animations": {
+		"swim": {
+			"loop": true,
+			"bones": {
+				"main": {
+					"rotation": {
+						"vector": ["-0-math.sin(query.anim_time*150-80)*-0.5", 0, 0]
+					},
+					"position": {
+						"vector": [0, 0, "0+math.sin(query.anim_time*150)*-0.1"]
+					}
+				},
+				"tail": {
+					"rotation": {
+						"vector": ["34.5-math.sin(query.anim_time*150-100)*-1", 0, 0]
+					}
+				}
+			}
+		}
+	}
+}

@@ -65,7 +65,9 @@ public class ModEntities {
     public static final RegistryObject<EntityType<CavefishEntity>> SINOCYCLOCHEILUS_ANATIROSTRIS = registerEntityType("sinocyclocheilus_anatirostris", CavefishEntity::new, ModMobCategories.ANIMALIA_FISH, 0.5f, 0.5f, CavefishEntity::setAttributes, 0xecbca4, 0xa25547, true);
     public static final RegistryObject<EntityType<CavefishEntity>> SINOCYCLOCHEILUS_HYALINUS = registerEntityType("sinocyclocheilus_hyalinus", CavefishEntity::new, ModMobCategories.ANIMALIA_FISH, 0.5f, 0.5f, CavefishEntity::setAttributes, 0xf6edd3, 0xd4c599, true);
     public static final RegistryObject<EntityType<AenigmachannaEntity>> AENIGMACHANNA_GOLLUM = registerEntityType("aenigmachanna_gollum", AenigmachannaEntity::new, ModMobCategories.ANIMALIA_FISH, 0.4f, 0.9f, AenigmachannaEntity::setAttributes, 0xbe6435, 0x512500, true);
-    public static final RegistryObject<EntityType<SeahorseEntity>> HIPPOCAMPUS_INGENS = registerEntityType("hippocampus_ingens", SeahorseEntity::new, ModMobCategories.ANIMALIA_FISH, 0.4f, 0.9f, SeahorseEntity::setAttributes, 0xbe6435, 0x512500, true);
+    public static final RegistryObject<EntityType<SeahorseEntity>> HIPPOCAMPUS_INGENS = registerEntityType("hippocampus_ingens", SeahorseEntity::new, ModMobCategories.ANIMALIA_FISH, 0.4f, 0.9f, SeahorseEntity::setAttributes, 0xf8b239, 0xa9761c, true);
+    public static final RegistryObject<EntityType<SeahorseEntity>> HIPPOCAMPUS_REIDI = registerEntityType("hippocampus_reidi", SeahorseEntity::new, ModMobCategories.ANIMALIA_FISH, 0.4f, 0.9f, SeahorseEntity::setAttributes, 0xffcc66, 0x1c130f, true);
+    public static final RegistryObject<EntityType<BovichtusEntity>> BOVICHTUS_VARIEGATUS = registerEntityType("bovichtus_variegatus", BovichtusEntity::new, ModMobCategories.ANIMALIA_FISH, 0.4f, 0.4f, BovichtusEntity::setAttributes, 0xb49689, 0x4d403e, true);
 
     public static final RegistryObject<EntityType<PangasianodonEntity>> PANGASIANODON_GIGAS = registerEntityType("pangasianodon_gigas", PangasianodonEntity::new, ModMobCategories.ANIMALIA_FISH, 0.9f, 0.9f, PangasianodonEntity::setAttributes, 0x384643, 0xb4ccc0, true);
     public static final RegistryObject<EntityType<HydrocynusEntity>> HYDROCYNUS_GOLIATH = registerEntityType("hydrocynus_goliath", HydrocynusEntity::new, ModMobCategories.ANIMALIA_FISH, 0.9f, 0.9f, HydrocynusEntity::setAttributes, 0xb7b075, 0xc83226, true);
@@ -78,8 +80,14 @@ public class ModEntities {
     //Actual Land animals
     public static final RegistryObject<EntityType<PangolinEntity>> SMUTSIA_GIGANTEA = registerEntityType("smutsia_gigantea", PangolinEntity::new, ModMobCategories.ANIMALIA_LAND, 0.9f, 0.9f, PangolinEntity::setAttributes, 0x8e6b3c, 0xffc06a);
 
+
+
+
     public static final RegistryObject<EntityType<WaterSpitProjectile>> WATER_SPIT = ENTITY_TYPES.register("water_spit",
             () -> EntityType.Builder.<WaterSpitProjectile>of(WaterSpitProjectile::new, MobCategory.MISC).sized(0.25F, 0.25F).clientTrackingRange(4).updateInterval(10).build("water_spit"));
+
+
+
 
     //Supplier Helper Methods
     public static <T extends Mob> RegistryObject<EntityType<T>> registerEntityType

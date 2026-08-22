@@ -104,6 +104,10 @@ public class ModSpawns {
                 BiomeSelector.in(Biomes.LUKEWARM_OCEAN));
         add(ModEntities.HIPPOCAMPUS_INGENS, 2, 1, 3,
                 BiomeSelector.in(Biomes.LUKEWARM_OCEAN));
+        add(ModEntities.HIPPOCAMPUS_REIDI, 2, 1, 3,
+                BiomeSelector.in(Biomes.WARM_OCEAN));
+        add(ModEntities.BOVICHTUS_VARIEGATUS, 4, 1, 2,
+                BiomeSelector.in(Biomes.SNOWY_BEACH));
 
         add(ModEntities.PROCAMBARUS_CLARKII, 6, 1, 2,
                 BiomeSelector.in(Biomes.SWAMP, Biomes.RIVER));

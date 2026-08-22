@@ -4,6 +4,7 @@ import net.lemon.animalia.Animalia;
 import net.lemon.animalia.entity.custom.RegSchoolingEntity;
 import net.lemon.animalia.entity.custom.SeahorseEntity;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraftforge.registries.ForgeRegistries;
 import software.bernie.geckolib.constant.DataTickets;
 import software.bernie.geckolib.core.animatable.model.CoreGeoBone;
 import software.bernie.geckolib.core.animation.AnimationState;
@@ -22,7 +23,7 @@ public class HippocampusIngensModel extends GeoModel<SeahorseEntity> {
         if(object.isBaby()) {
             return new ResourceLocation(Animalia.MODID, "textures/entity/babyseahorse.png");
         }
-        return new ResourceLocation(Animalia.MODID, "textures/entity/hippocampus_ingens.png");
+        return new ResourceLocation(Animalia.MODID, "textures/entity/" + ForgeRegistries.ENTITY_TYPES.getKey(object.getType()).getPath() + ".png");
     }
 
     public ResourceLocation getAnimationResource(SeahorseEntity animatable) {
@@ -35,7 +36,7 @@ public class HippocampusIngensModel extends GeoModel<SeahorseEntity> {
     @Override
     public void setCustomAnimations(SeahorseEntity animatable, long instanceId, AnimationState<SeahorseEntity> animationState) {
         super.setCustomAnimations(animatable, instanceId, animationState);
-        if(!animatable.isInWater()) return;
+        if(!animatable.isInWater() || animatable.isBaby()) return;
 
         CoreGeoBone whole = this.getAnimationProcessor().getBone("swim");
 

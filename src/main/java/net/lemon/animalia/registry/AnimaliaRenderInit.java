@@ -51,6 +51,8 @@ public class AnimaliaRenderInit {
         EntityRenderers.register(ModEntities.AENIGMACHANNA_GOLLUM.get(), AenigmachannaRenderer::new);
         EntityRenderers.register(ModEntities.LEPTOBRAMA_MUELLERI.get(), LeptobramaMuelleriRenderer::new);
         EntityRenderers.register(ModEntities.HIPPOCAMPUS_INGENS.get(), HippocampusIngensRenderer::new);
+        EntityRenderers.register(ModEntities.HIPPOCAMPUS_REIDI.get(), HippocampusIngensRenderer::new);
+        EntityRenderers.register(ModEntities.BOVICHTUS_VARIEGATUS.get(), BovichtusVariegatusRenderer::new);
 
 
 
