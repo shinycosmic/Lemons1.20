@@ -231,10 +231,10 @@ public class SeahorseEntity extends FishBase implements GeoEntity, Scannable {
             return PlayState.CONTINUE;
         }
 
-        if(!this.isActuallyMoving()) {
-            animationState.getController().setAnimation(RawAnimation.begin().then("idle", Animation.LoopType.LOOP));
-            return PlayState.CONTINUE;
-        }
+//        if(!this.isActuallyMoving()) {
+//            animationState.getController().setAnimation(RawAnimation.begin().then("idle", Animation.LoopType.LOOP));
+//            return PlayState.CONTINUE;
+//        }
         animationState.getController().setAnimation(RawAnimation.begin().then("swim", Animation.LoopType.LOOP));
         return PlayState.CONTINUE;
     }

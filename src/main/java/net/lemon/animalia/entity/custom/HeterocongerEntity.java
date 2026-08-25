@@ -219,8 +219,8 @@ public class HeterocongerEntity extends FishBase implements GeoEntity, Scannable
     @Override
     public int getIdleLength(int displayId) {
         return switch (displayId) {
-            case 0, 1 -> 25;
-            default -> 15;
+            case 0, 1 -> 30;
+            default -> 20;
         };
     }
 
@@ -245,7 +245,7 @@ public class HeterocongerEntity extends FishBase implements GeoEntity, Scannable
             }
 
             if (this.isBurrowedPhase(phase) && this.tickCount % 10 == 0
-                    && (!this.onGround() || !this.onHideableBlock(this))) {
+                    && (!this.onHideableBlock(this))) {
                 this.leaveBurrow();
             }
 
@@ -336,7 +336,7 @@ public class HeterocongerEntity extends FishBase implements GeoEntity, Scannable
         boolean result = super.hurt(source, amount);
         if (!this.level().isClientSide && result && this.isAlive()
                 && this.isBurrowedPhase(phase)
-                && this.onGround() && this.onHideableBlock(this)) {
+                && this.onHideableBlock(this)) {
             this.setHiding(true);
             if (phase == PHASE_HIDDEN) {
                 this.setHidePhase(PHASE_HIDDEN);
@@ -382,8 +382,8 @@ public class HeterocongerEntity extends FishBase implements GeoEntity, Scannable
 
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
-        controllers.add(new AnimationController<>(this, "controller", 5, this::predicate));
-        controllers.add(new AnimationController<>(this, "idles_controller", 5, this::idlesPredicate));
+        controllers.add(new AnimationController<>(this, "controller", 20, this::predicate));
+        controllers.add(new AnimationController<>(this, "idles_controller", 10, this::idlesPredicate));
         controllers.add(new AnimationController<>(this, "eat_controller", 0, this::eatPredicate));
     }
 
@@ -391,20 +391,20 @@ public class HeterocongerEntity extends FishBase implements GeoEntity, Scannable
         int suffix = this.getStateSwitch() == 0 ? 1 : 2;
         switch (this.getHidePhase()) {
             case PHASE_BURROWING:
-                animationState.getController().setAnimation(RawAnimation.begin().then("burrowing", Animation.LoopType.PLAY_ONCE));
+                animationState.getController().setAnimation(RawAnimation.begin().then("burrowing", Animation.LoopType.HOLD_ON_LAST_FRAME));
                 return PlayState.CONTINUE;
             case PHASE_BURROWED:
                 animationState.getController().setAnimation(RawAnimation.begin().then("burrowed" + suffix, Animation.LoopType.LOOP));
                 return PlayState.CONTINUE;
             case PHASE_RETREAT:
-                animationState.getController().setAnimation(RawAnimation.begin().then("toHide" + suffix, Animation.LoopType.PLAY_ONCE));
+                animationState.getController().setAnimation(RawAnimation.begin().then("toHide" + suffix, Animation.LoopType.HOLD_ON_LAST_FRAME));
                 return PlayState.CONTINUE;
             case PHASE_HIDDEN:
                 animationState.getController().setAnimation(RawAnimation.begin().then("hiding", Animation.LoopType.LOOP));
                 return PlayState.CONTINUE;
-            case PHASE_RETURN:
-                animationState.getController().setAnimation(RawAnimation.begin().then("unHide", Animation.LoopType.PLAY_ONCE));
-                return PlayState.CONTINUE;
+//            case PHASE_RETURN:
+//                animationState.getController().setAnimation(RawAnimation.begin().then("unHide", Animation.LoopType.HOLD_ON_LAST_FRAME));
+//                return PlayState.CONTINUE;
         }
         animationState.getController().setAnimation(RawAnimation.begin().then("swim", Animation.LoopType.LOOP));
         return PlayState.CONTINUE;
