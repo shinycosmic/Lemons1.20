@@ -108,7 +108,7 @@ public abstract class FishBase extends AnimaliaBreedableWater implements Bucketa
     }
 
     public int maxNeighbors() {
-        return 4;
+        return 6;
     }
 
     //now we should finally have signal if there is no bucket instead of just defaulting to salmon buckets

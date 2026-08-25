@@ -1,36 +1,33 @@
 package net.lemon.animalia.entity.bases;
 
-import net.lemon.animalia.entity.ai.SchoolBoidGoal;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.stats.Stats;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.AgeableMob;
-import net.minecraft.world.entity.EntitySelector;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.ExperienceOrb;
-import net.minecraft.world.entity.ai.goal.AvoidEntityGoal;
 import net.minecraft.world.entity.ai.goal.BreedGoal;
 import net.minecraft.world.entity.ai.goal.FloatGoal;
 import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
 import net.minecraft.world.entity.animal.Animal;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
 
 public abstract class SemiaquaticBase extends AnimaliaLandBase{
+
+
     protected SemiaquaticBase(EntityType<? extends Animal> entityType, Level level) {
         super(entityType, level);
     }
 
     @Override
     protected void registerGoals() {
-        this.goalSelector.addGoal(3, new AvoidEntityGoal<>(this, Player.class, 8.0F, 1.6D, 1.4D, EntitySelector.NO_SPECTATORS::test));
+        super.registerGoals();
         this.goalSelector.getAvailableGoals().removeIf(
                 g -> g.getGoal() instanceof FloatGoal
                         || g.getGoal() instanceof WaterAvoidingRandomStrollGoal
         );
-        super.registerGoals();
     }
 
 
