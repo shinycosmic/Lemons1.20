@@ -366,6 +366,13 @@ public class HeterocongerEntity extends FishBase implements GeoEntity, Scannable
         return super.mobInteract(player, hand);
     }
 
+    @Override
+    public void knockback(double strength, double x, double z) {
+        if (!this.isHiding()) {
+            super.knockback(strength, x, z);
+        }
+    }
+
     private HeterocongerEntity findBreedPartner() {
         List<HeterocongerEntity> neighbors = this.level().getEntitiesOfClass(HeterocongerEntity.class,
                 this.getBoundingBox().inflate(5.0D),
