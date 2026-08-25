@@ -176,6 +176,11 @@ public class HeterocongerEntity extends FishBase implements GeoEntity, Scannable
     }
 
     @Override
+    public boolean canHide() {
+        return !this.isBaby();
+    }
+
+    @Override
     public boolean canStartHiding() {
         return this.canHide() && !this.isHiding() && this.isInWater() && this.onGround() && this.onHideableBlock(this);
     }
@@ -237,7 +242,7 @@ public class HeterocongerEntity extends FishBase implements GeoEntity, Scannable
 
             if (this.isBurrowedPhase(phase) && this.tickCount % 10 == 0
                     && (!this.onGround() || !this.onHideableBlock(this))) {
-                this.evict();
+                this.leaveBurrow();
             }
 
             switch (phase) {
@@ -286,6 +291,11 @@ public class HeterocongerEntity extends FishBase implements GeoEntity, Scannable
         }
     }
 
+    @Override
+    public boolean sinksWhenIdle() {
+        return true;
+    }
+
     private LivingEntity findThreat(TargetingConditions conditions, double range) {
         return this.level().getNearestEntity(LivingEntity.class, conditions, this,
                 this.getX(), this.getY(), this.getZ(),
@@ -297,7 +307,7 @@ public class HeterocongerEntity extends FishBase implements GeoEntity, Scannable
                 || phase == PHASE_HIDDEN || phase == PHASE_RETURN;
     }
 
-    private void evict() {
+    private void leaveBurrow() {
         this.setHidePhase(PHASE_NONE);
         this.setHiding(false);
         this.wantsToHide = false;
@@ -391,7 +401,7 @@ public class HeterocongerEntity extends FishBase implements GeoEntity, Scannable
 
     private <T extends GeoAnimatable> PlayState idlesPredicate(AnimationState<T> state) {
         int twitch = this.getCurrTwitchIdle();
-        if (twitch >= 0) {
+        if (twitch >= 0 && !this.isBaby()) {
             state.getController().setAnimation(RawAnimation.begin().then("idle" + twitch, Animation.LoopType.PLAY_ONCE));
             return PlayState.CONTINUE;
         }
