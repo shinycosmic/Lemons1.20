@@ -25,6 +25,7 @@ import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.animal.Animal;
+import net.minecraft.world.entity.animal.Turtle;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -49,6 +50,7 @@ public abstract class AnimaliaLandBase extends Animal implements IActivityTime, 
     private static final EntityDataAccessor<Boolean> IS_GRAZING = SynchedEntityData.defineId(AnimaliaLandBase.class, EntityDataSerializers.BOOLEAN);
     private static final EntityDataAccessor<Integer> BODY_IDLE = SynchedEntityData.defineId(AnimaliaLandBase.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Integer> TWITCH_IDLE = SynchedEntityData.defineId(AnimaliaLandBase.class, EntityDataSerializers.INT);
+    private static final EntityDataAccessor<Boolean> IS_PREGNANT = SynchedEntityData.defineId(AnimaliaLandBase.class, EntityDataSerializers.BOOLEAN);
 
     private int grazeTicks = 0;
     private int wantsToGrazeUntil;
@@ -83,6 +85,7 @@ public abstract class AnimaliaLandBase extends Animal implements IActivityTime, 
         this.entityData.define(HIDE_PHASE, 0);
         this.entityData.define(BODY_IDLE, -1);
         this.entityData.define(TWITCH_IDLE, -1);
+        this.entityData.define(IS_PREGNANT, false);
     }
 
     @Override
@@ -322,6 +325,7 @@ public abstract class AnimaliaLandBase extends Animal implements IActivityTime, 
         pCompound.putFloat("VarSize", this.getVarSizeMultiplier());
         pCompound.putInt("Gender", this.getGender());
         pCompound.putInt("VarColor", this.getVarColor());
+        pCompound.putBoolean("IsPregnant", this.isPregnant());
         if(this.canHide()) {
             pCompound.putInt("HidePhase", this.getHidePhase());
             pCompound.putInt("HideTicks", this.hideTicks);
@@ -338,7 +342,7 @@ public abstract class AnimaliaLandBase extends Animal implements IActivityTime, 
     public void readAdditionalSaveData(CompoundTag pCompound) {
         this.setGender(pCompound.getInt("Gender"));
         this.setVarColor(pCompound.getInt("VarColor"));
-
+        this.setPregnant(pCompound.getBoolean("IsPregnant"));
         if(this.canHide()) {
             this.setHiding(pCompound.getBoolean("IsHiding"));
             this.setHidePhase(PHASE_NONE);
@@ -581,6 +585,14 @@ public abstract class AnimaliaLandBase extends Animal implements IActivityTime, 
         }
     }
 
+    public boolean isPregnant() {
+        return this.entityData.get(IS_PREGNANT);
+    }
+
+    void setPregnant(boolean isPregnant) {
+        this.entityData.set(IS_PREGNANT, isPregnant);
+    }
+
     /**
      * TODO Edit this method so it drops LandEggItem. These item eggs are used for insects and such.
      * Birds and lizards lay eggs in mounds/nests
@@ -596,6 +608,11 @@ public abstract class AnimaliaLandBase extends Animal implements IActivityTime, 
         ItemStack egg = new ItemStack(getEggItem());
         FishEggItem.setEntity(egg, this.getType());
         this.spawnAtLocation(egg);
+    }
+
+    @Override
+    public boolean canFallInLove() {
+        return super.canFallInLove() && !this.isPregnant();
     }
 
     @Override

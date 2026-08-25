@@ -87,7 +87,7 @@ public class FindNearestBlockGoal extends Goal {
 
     @Override
     public void start() {
-        this.deadline = this.mob.tickCount + 200;
+        this.deadline = this.mob.tickCount + this.searchRange * 25;
         this.moveToTarget();
     }
 
