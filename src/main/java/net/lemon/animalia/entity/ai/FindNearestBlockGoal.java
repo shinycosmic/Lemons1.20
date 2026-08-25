@@ -13,7 +13,7 @@ import java.util.EnumSet;
 import java.util.function.Predicate;
 
 public class FindNearestBlockGoal extends Goal {
-    private final PathfinderMob mob;
+    protected final PathfinderMob mob;
     private final IActivityTime activityTime;
     private final Predicate<BlockState> target;
     private final double speedMult;
@@ -40,7 +40,7 @@ public class FindNearestBlockGoal extends Goal {
         this(mob, speedMult, searchRange, state -> state.is(block), 0, true);
     }
 
-    private FindNearestBlockGoal(PathfinderMob mob, double speedMult, int searchRange, Predicate<BlockState> target, int chance, boolean timegate) {
+    protected FindNearestBlockGoal(PathfinderMob mob, double speedMult, int searchRange, Predicate<BlockState> target, int chance, boolean timegate) {
         this.mob = mob;
         this.speedMult = speedMult;
         this.searchRange = searchRange;
@@ -72,6 +72,7 @@ public class FindNearestBlockGoal extends Goal {
             return false;
         }
         if (this.mob.blockPosition().equals(this.targetPos)) {
+            this.onArrival();
             return false;
         }
         if (!this.isTarget(this.targetPos)) {
@@ -125,8 +126,11 @@ public class FindNearestBlockGoal extends Goal {
         return path != null && path.canReach() ? pos.immutable() : null;
     }
 
-    private boolean isTarget(BlockPos pos) {
+    protected boolean isTarget(BlockPos pos) {
         BlockState state = this.mob.level().getBlockState(pos);
         return this.target.test(state) && state.getCollisionShape(this.mob.level(), pos).isEmpty();
+    }
+
+    protected void onArrival() {
     }
 }
