@@ -558,7 +558,6 @@ public abstract class AnimaliaBreedableWater extends WaterAnimal implements IAct
 
             switch (phase) {
                 case PHASE_NONE:
-                    // Entry: triggered by FishHideGoal or legacy aiStep trigger
                     if (this.wantsToHide) {
                         if (this.onGround() && this.onHideableBlock(this)) {
                             this.setHidePhase(PHASE_BURROWING);
@@ -567,7 +566,6 @@ public abstract class AnimaliaBreedableWater extends WaterAnimal implements IAct
                             this.getNavigation().stop();
                             this.wantsToHide = false;
                         } else if (this.onGround()) {
-                            // On ground but wrong block - abort
                             this.wantsToHide = false;
                             this.hideCooldown = (int) (this.getHideCooldown() * 0.25f);
                         }

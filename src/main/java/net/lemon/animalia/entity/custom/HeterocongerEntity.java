@@ -1,12 +1,15 @@
 package net.lemon.animalia.entity.custom;
 
+import net.lemon.animalia.entity.ai.FishHideGoal;
 import net.lemon.animalia.entity.bases.FishBase;
 import net.lemon.animalia.entity.bases.helpers.ActivityTime;
+import net.lemon.animalia.registry.ModEntities;
 import net.lemon.animalia.registry.ModItems;
 import net.lemon.animalia.registry.ModTags;
 import net.lemon.animalia.registry.spawning.SpawnBand;
+import net.lemon.animalia.util.AnimaliaFunctionUtil;
+import net.lemon.animalia.util.HolonetEntities;
 import net.lemon.animalia.util.Scannable;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -15,25 +18,24 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.PathfinderMob;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.ai.targeting.TargetingConditions;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.fluids.FluidType;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.core.animatable.GeoAnimatable;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.core.animatable.instance.SingletonAnimatableInstanceCache;
 import software.bernie.geckolib.core.animation.*;
+import software.bernie.geckolib.core.animation.AnimationState;
 import software.bernie.geckolib.core.object.PlayState;
 
 import java.util.List;
+import java.util.function.Predicate;
 
 public class HeterocongerEntity extends FishBase implements GeoEntity, Scannable {
     private final AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
@@ -44,6 +46,13 @@ public class HeterocongerEntity extends FishBase implements GeoEntity, Scannable
     private int retreatTicks;
     private int hiddenTicks;
     private int returnTicks;
+    private int nextCheck;
+    private final TargetingConditions retreatCon = TargetingConditions.forNonCombat().range(3.0D).selector(THREAT);
+    private final TargetingConditions clearCon = TargetingConditions.forNonCombat().range(4.0D).selector(THREAT);
+    private static final Predicate<LivingEntity> THREAT = ((Predicate<LivingEntity>) entity ->
+            (entity.getBbWidth() >= 0.5F || entity.getBbHeight() >= 0.9F)
+                    && !(entity instanceof HeterocongerEntity)
+                    && !(entity instanceof Player player && player.isCreative())).and(EntitySelector.NO_SPECTATORS);
 
     public HeterocongerEntity(EntityType<? extends FishBase> entityType, Level level) {
         super(entityType, level);
@@ -59,6 +68,7 @@ public class HeterocongerEntity extends FishBase implements GeoEntity, Scannable
     @Override
     protected void registerGoals() {
         super.registerGoals();
+        this.goalSelector.addGoal(5, new FishHideGoal(this));
     }
 
     @Override
@@ -107,7 +117,7 @@ public class HeterocongerEntity extends FishBase implements GeoEntity, Scannable
 
     @Override
     public Component getTrivia() {
-        return null;
+        return Component.translatable("trivia.animalia.heteroconger_hassi");
     }
 
     @Override
@@ -118,6 +128,36 @@ public class HeterocongerEntity extends FishBase implements GeoEntity, Scannable
     @Override
     public Component getOrder() {
         return Component.translatable("order.animalia.anguilliformes");
+    }
+
+    @Override
+    public int getScaleforGUI() {
+        if (this.getType() == ModEntities.HETEROCONGER_HASSI.get()) {
+            return 30;
+        }
+        return Scannable.super.getScaleforGUI();
+    }
+
+    @Override
+    public int getScaleforDetailGUI() {
+        int currScale = Scannable.super.getScaleforDetailGUI();
+        if(this.getType() == ModEntities.HETEROCONGER_HASSI.get()) {
+            currScale *= 0.8f;
+        }
+        return currScale;
+    }
+
+    @Override
+    public float genVarSizeMultiplier() {
+        if (this.getType() == ModEntities.HETEROCONGER_HASSI.get()) {
+            return AnimaliaFunctionUtil.getScaleForSize(34, 32);
+        }
+        return 1;
+    }
+
+    public static void registerHolonet(){
+        HolonetEntities.register(ModEntities.HETEROCONGER_HASSI, Scannable.AppName.FISH, "Anguilliformes");
+
     }
 
     @Override
@@ -199,7 +239,57 @@ public class HeterocongerEntity extends FishBase implements GeoEntity, Scannable
                     && (!this.onGround() || !this.onHideableBlock(this))) {
                 this.evict();
             }
+
+            switch (phase) {
+                case PHASE_BURROWED:
+                    if (this.tickCount >= this.nextCheck) {
+                        this.nextCheck = this.tickCount + 5 + this.random.nextInt(10);
+                        if (this.findThreat(this.retreatCon, 3.0D) != null) {
+                            this.startRetreat();
+                        }
+                    }
+                    break;
+                case PHASE_RETREAT:
+                    --this.retreatTicks;
+                    if (this.retreatTicks <= 0) {
+                        this.setHidePhase(PHASE_HIDDEN);
+                        this.hiddenTicks = 0;
+                    }
+                    break;
+                case PHASE_HIDDEN:
+                    if (this.tickCount >= this.nextCheck) {
+                        this.nextCheck = this.tickCount + 5 + this.random.nextInt(10);
+                        if (this.findThreat(this.clearCon, 4.0D) != null) {
+                            this.hiddenTicks = 0;
+                        }
+                    }
+                    ++this.hiddenTicks;
+                    if (this.hiddenTicks >= 100) {
+                        this.setHidePhase(PHASE_RETURN);
+                        this.returnTicks = 10;
+                    }
+                    break;
+                case PHASE_RETURN:
+                    if (this.tickCount >= this.nextCheck) {
+                        this.nextCheck = this.tickCount + 5 + this.random.nextInt(10);
+                        if (this.findThreat(this.retreatCon, 3.0D) != null) {
+                            this.startRetreat();
+                            break;
+                        }
+                    }
+                    --this.returnTicks;
+                    if (this.returnTicks <= 0) {
+                        this.setHidePhase(PHASE_BURROWING);
+                    }
+                    break;
+            }
         }
+    }
+
+    private LivingEntity findThreat(TargetingConditions conditions, double range) {
+        return this.level().getNearestEntity(LivingEntity.class, conditions, this,
+                this.getX(), this.getY(), this.getZ(),
+                this.getBoundingBox().inflate(range));
     }
 
     private boolean isBurrowedPhase(int phase) {
@@ -234,19 +324,16 @@ public class HeterocongerEntity extends FishBase implements GeoEntity, Scannable
                 && this.isBurrowedPhase(phase)
                 && this.onGround() && this.onHideableBlock(this)) {
             this.setHiding(true);
-            this.startRetreat();
+            if (phase == PHASE_HIDDEN) {
+                this.setHidePhase(PHASE_HIDDEN);
+                this.hiddenTicks = 0;
+            } else if (phase == PHASE_RETREAT) {
+                this.setHidePhase(PHASE_RETREAT);
+            } else {
+                this.startRetreat();
+            }
         }
         return result;
-    }
-
-    @Override
-    public void readAdditionalSaveData(CompoundTag pCompound) {
-        super.readAdditionalSaveData(pCompound);
-        int phase = pCompound.getInt("HidePhase");
-        if (this.isBurrowedPhase(phase) || phase == PHASE_BURROWING) {
-            this.setHidePhase(PHASE_BURROWED);
-            this.setHiding(true);
-        }
     }
 
     @Override
