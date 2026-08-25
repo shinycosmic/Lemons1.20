@@ -10,11 +10,13 @@ import net.lemon.animalia.registry.spawning.SpawnBand;
 import net.lemon.animalia.util.AnimaliaFunctionUtil;
 import net.lemon.animalia.util.HolonetEntities;
 import net.lemon.animalia.util.Scannable;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
@@ -26,6 +28,8 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.ServerLevelAccessor;
+import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.core.animatable.GeoAnimatable;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
@@ -422,5 +426,13 @@ public class HeterocongerEntity extends FishBase implements GeoEntity, Scannable
         return cache;
     }
 
-    //todo Finalize Spawn and holonet stuff
+    @Override
+    public @Nullable SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, MobSpawnType reason, @Nullable SpawnGroupData spawnData, @Nullable CompoundTag dataTag) {
+        if (reason != MobSpawnType.BUCKET || dataTag == null || !dataTag.contains("BucketVarSize")) {
+            this.setVarColor(1);
+            this.setVarSizeMultiplier(this.genVarSizeMultiplier());
+        }
+        this.setStateSwitch(this.random.nextInt(2));
+        return super.finalizeSpawn(level, difficulty, reason, spawnData, dataTag);
+    }
 }
