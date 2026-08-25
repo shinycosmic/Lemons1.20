@@ -1,11 +1,13 @@
 package net.lemon.animalia.entity.bases;
 
+import net.lemon.animalia.entity.ai.FindNearestBlockGoal;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.control.SmoothSwimmingMoveControl;
+import net.minecraft.world.entity.ai.goal.BreathAirGoal;
 import net.minecraft.world.entity.ai.goal.FloatGoal;
 import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
 import net.minecraft.world.entity.ai.navigation.AmphibiousPathNavigation;
@@ -17,14 +19,14 @@ import net.minecraft.world.level.PathNavigationRegion;
 import net.minecraft.world.level.pathfinder.AmphibiousNodeEvaluator;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
 import net.minecraft.world.level.pathfinder.PathFinder;
-import net.minecraftforge.fluids.FluidType;
+import net.minecraftforge.common.ForgeMod;
 
 public abstract class SemiaquaticBase extends AnimaliaLandBase{
 
+    private int dryTicks;
 
     protected SemiaquaticBase(EntityType<? extends Animal> entityType, Level level) {
         super(entityType, level);
-        this.setPathfindingMalus(BlockPathTypes.WATER, this.waterMalus());
         this.moveControl = new SmoothSwimmingMoveControl(this, 85, 10, 0.02F, 0.1F, true);
         this.setMaxUpStep(1.0F);
     }
@@ -36,14 +38,33 @@ public abstract class SemiaquaticBase extends AnimaliaLandBase{
                 g -> g.getGoal() instanceof FloatGoal
                         || g.getGoal() instanceof WaterAvoidingRandomStrollGoal
         );
+        if (this.wetPreference() > 0) {
+            this.goalSelector.addGoal(4, new GoToWaterGoal(this, 1.3D, 12));
+        }
+        if (this.canDrownInFluidType(ForgeMod.WATER_TYPE.get())) {
+            this.goalSelector.addGoal(0, new BreathAirGoal(this));
+        }
     }
 
     public float waterPreference() {
         return 0.5f;
     }
 
-    private float waterMalus() {
-        return this.waterPreference() <= 0.0F ? -1.0F : Math.max(0.0F, (0.5F - this.waterPreference()) * 16.0F);
+    public int wetPreference() {
+        return 0;
+    }
+
+    @Override
+    public void aiStep() {
+        super.aiStep();
+
+        if (!this.level().isClientSide && this.wetPreference() > 0) {
+            if (this.isInWater()) {
+                this.dryTicks = 0;
+            } else {
+                ++this.dryTicks;
+            }
+        }
     }
 
     @Override
@@ -109,11 +130,33 @@ public abstract class SemiaquaticBase extends AnimaliaLandBase{
             super.prepare(region, mob);
             if(mob instanceof SemiaquaticBase semiaquatic) {
                 float pref = semiaquatic.waterPreference();
-                mob.setPathfindingMalus(BlockPathTypes.WATER,
-                        pref <= 0.0F ? -1.0F : Math.max(0.0F, (0.5F - pref) * 12.0F));
-                mob.setPathfindingMalus(BlockPathTypes.WALKABLE,
-                        Math.max(0.0F, (pref - 0.5F) * 12.0F));
+                mob.setPathfindingMalus(BlockPathTypes.WATER, pref <= 0.0F ? -1.0F : Math.max(0.0F, (0.5F - pref) * 12.0F));
+                mob.setPathfindingMalus(BlockPathTypes.WALKABLE, Math.max(0.0F, (pref - 0.5F) * 12.0F));
             }
+        }
+    }
+
+    static class GoToWaterGoal extends FindNearestBlockGoal {
+        private final SemiaquaticBase semiaquatic;
+
+        GoToWaterGoal(SemiaquaticBase mob, double speedMult, int searchRange) {
+            super(mob, speedMult, searchRange, state -> state.getFluidState().is(FluidTags.WATER), 1, false);
+            this.semiaquatic = mob;
+        }
+
+        @Override
+        protected boolean passCheck() {
+            return this.semiaquatic.dryTicks > this.semiaquatic.wetPreference();
+        }
+
+        @Override
+        public boolean canContinueToUse() {
+            return !this.semiaquatic.isInWater() && super.canContinueToUse();
+        }
+
+        @Override
+        public boolean isInterruptable() {
+            return true;
         }
     }
 

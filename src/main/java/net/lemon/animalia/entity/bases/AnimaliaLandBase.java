@@ -673,6 +673,11 @@ public abstract class AnimaliaLandBase extends Animal implements IActivityTime, 
         }
 
         @Override
+        public boolean isInterruptable() {
+            return true;
+        }
+
+        @Override
         protected boolean passCheck() {
             return this.parent.isPregnant();
         }

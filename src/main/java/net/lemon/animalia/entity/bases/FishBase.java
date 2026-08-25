@@ -236,11 +236,6 @@ public abstract class FishBase extends AnimaliaBreedableWater implements Bucketa
         }
     }
 
-    @Override
-    public boolean canBreatheUnderwater() {
-        return true;
-    }
-
     protected PathNavigation createNavigation(Level pLevel) {
         return new WaterBoundPathNavigation(this, pLevel);
     }
