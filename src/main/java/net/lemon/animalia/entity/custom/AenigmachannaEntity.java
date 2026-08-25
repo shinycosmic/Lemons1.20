@@ -84,7 +84,7 @@ public class AenigmachannaEntity extends BottomWalkerSwimmerBase implements GeoE
     @Override
     public int getScaleforGUI() {
         if (this.getType() == ModEntities.AENIGMACHANNA_GOLLUM.get()) {
-            return 30;
+            return 24;
         }
         return Scannable.super.getScaleforGUI();
     }

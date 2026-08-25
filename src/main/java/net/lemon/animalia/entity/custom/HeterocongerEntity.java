@@ -136,27 +136,19 @@ public class HeterocongerEntity extends FishBase implements GeoEntity, Scannable
 
     @Override
     public int getScaleforGUI() {
-        if (this.getType() == ModEntities.HETEROCONGER_HASSI.get()) {
-            return 20;
-        }
-        return Scannable.super.getScaleforGUI();
+        return 14;
     }
 
     @Override
     public int getScaleforDetailGUI() {
         int currScale = Scannable.super.getScaleforDetailGUI();
-        if(this.getType() == ModEntities.HETEROCONGER_HASSI.get()) {
-            currScale *= 0.8f;
-        }
+        currScale *= 0.2f;
         return currScale;
     }
 
     @Override
     public float genVarSizeMultiplier() {
-        if (this.getType() == ModEntities.HETEROCONGER_HASSI.get()) {
-            return AnimaliaFunctionUtil.getScaleForSize(34, 32);
-        }
-        return 1;
+        return AnimaliaFunctionUtil.getScaleForSize(50, 50);
     }
 
     public static void registerHolonet(){
