@@ -1,5 +1,6 @@
 package net.lemon.animalia.entity.bases;
 
+import net.lemon.animalia.entity.ai.FindNearestBlockGoal;
 import net.lemon.animalia.entity.bases.helpers.*;
 import net.lemon.animalia.item.FishEggItem;
 import net.lemon.animalia.registry.ModItems;
@@ -13,6 +14,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.FluidTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.Mth;
 import net.minecraft.world.DifficultyInstance;
@@ -27,6 +29,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
@@ -546,20 +549,24 @@ public abstract class AnimaliaLandBase extends Animal implements IActivityTime, 
 
     @Override
     public void spawnChildFromBreeding(ServerLevel level, Animal mate) {
-        switch (this.getEggType()) {
+        this.birthSelector(this.getEggType(), level);
+        this.setAge(6000);
+        this.resetLove();
+        mate.setAge(6000);
+        mate.resetLove();
+    }
+
+    public void birthSelector(AnimaliaEggTypes type, ServerLevel level) {
+        switch (type) {
             case ITEM_EGG:
                 this.dropEggItem();
                 break;
             case LIVE_BIRTH:
-                this.giveBirth(level, mate);
+                this.giveBirth(level);
                 break;
             case BLOCK_EGG:
                 this.dropEggItem(); //TODO implement layEggInNest()
         }
-        this.setAge(6000);
-        mate.setAge(6000);
-        this.resetLove();
-        mate.resetLove();
     }
 
     @Override
@@ -567,7 +574,7 @@ public abstract class AnimaliaLandBase extends Animal implements IActivityTime, 
         return null;
     }
 
-    public void giveBirth(ServerLevel level, Animal mate) {
+    public void giveBirth(ServerLevel level) {
         if(!level.isClientSide) {
             EntityType<?> type = this.getType();
             Entity entity = type.create(level);
@@ -577,8 +584,10 @@ public abstract class AnimaliaLandBase extends Animal implements IActivityTime, 
             baby.moveTo(this.getX(), this.getY(), this.getZ(), 0.0F, 0.0F);
             baby.setVarSizeMultiplier(this.genVarSizeMultiplier());
             baby.setGender(this.random.nextInt(2));
-            this.finalizeSpawnChildFromBreeding(level, mate, baby);
             level.addFreshEntityWithPassengers(baby);
+            if (level.getGameRules().getBoolean(GameRules.RULE_DOMOBLOOT)) {
+                level.addFreshEntity(new ExperienceOrb(level, this.getX(), this.getY(), this.getZ(), this.random.nextInt(7) + 1));
+            }
         }
     }
 
@@ -636,12 +645,60 @@ public abstract class AnimaliaLandBase extends Animal implements IActivityTime, 
         return super.mobInteract(player, hand);
     }
 
+    public BirthLocation getBirthLocation() {
+        return BirthLocation.ANY;
+    }
+
     @Override
     public @Nullable SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, MobSpawnType reason, @Nullable SpawnGroupData spawnData, @Nullable CompoundTag dataTag) {
         this.setVarColor(1);
         this.setGender(this.random.nextInt(2));
         this.setVarSizeMultiplier(this.genVarSizeMultiplier());
         return super.finalizeSpawn(level, difficulty, reason, spawnData, dataTag);
+    }
+
+    //Subclasses for some goals
+    public enum BirthLocation {
+        ANY,
+        LAND,
+        WATER
+    }
+
+    static class SpawnChildGoal extends FindNearestBlockGoal {
+        private final AnimaliaLandBase parent;
+
+        public SpawnChildGoal(AnimaliaLandBase mob, double speedMult, int searchRange) {
+            super(mob, speedMult, searchRange, state -> true, 1, false);
+            this.parent = mob;
+        }
+
+        @Override
+        protected boolean passCheck() {
+            return this.parent.isPregnant();
+        }
+
+        @Override
+        protected boolean isTarget(BlockPos pos) {
+            if (!super.isTarget(pos)) {
+                return false;
+            }
+            Level level = this.parent.level();
+            return switch (this.parent.getBirthLocation()) {
+                case WATER -> level.getFluidState(pos).is(FluidTags.WATER);
+                case LAND -> level.getFluidState(pos).isEmpty()
+                        && !level.getBlockState(pos.below()).getCollisionShape(level, pos.below()).isEmpty();
+                default -> false;
+            };
+        }
+
+        @Override
+        protected void onArrival() {
+            if (this.parent.level() instanceof ServerLevel level) {
+                this.parent.birthSelector(this.parent.getEggType(),  level);
+                this.parent.setPregnant(false);
+            }
+        }
+
     }
 
 }

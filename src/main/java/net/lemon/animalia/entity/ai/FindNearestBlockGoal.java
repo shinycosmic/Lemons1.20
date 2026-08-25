@@ -106,7 +106,7 @@ public class FindNearestBlockGoal extends Goal {
         this.cooldown = this.mob.tickCount + 400;
     }
 
-    private boolean passCheck() {
+    protected boolean passCheck() {
         if (this.activityTime != null) {
             return !this.activityTime.isActiveTime(this.mob);
         }
