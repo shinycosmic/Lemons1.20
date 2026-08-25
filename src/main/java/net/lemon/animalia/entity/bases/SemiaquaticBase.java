@@ -38,7 +38,7 @@ public abstract class SemiaquaticBase extends AnimaliaLandBase{
                 g -> g.getGoal() instanceof FloatGoal
                         || g.getGoal() instanceof WaterAvoidingRandomStrollGoal
         );
-        if (this.wetPreference() > 0) {
+        if (this.dryTolerance() > 0) {
             this.goalSelector.addGoal(4, new GoToWaterGoal(this, 1.3D, 12));
         }
         if (this.canDrownInFluidType(ForgeMod.WATER_TYPE.get())) {
@@ -50,7 +50,7 @@ public abstract class SemiaquaticBase extends AnimaliaLandBase{
         return 0.5f;
     }
 
-    public int wetPreference() {
+    public int dryTolerance() {
         return 0;
     }
 
@@ -58,7 +58,7 @@ public abstract class SemiaquaticBase extends AnimaliaLandBase{
     public void aiStep() {
         super.aiStep();
 
-        if (!this.level().isClientSide && this.wetPreference() > 0) {
+        if (!this.level().isClientSide && this.dryTolerance() > 0) {
             if (this.isInWater()) {
                 this.dryTicks = 0;
             } else {
@@ -146,7 +146,7 @@ public abstract class SemiaquaticBase extends AnimaliaLandBase{
 
         @Override
         protected boolean passCheck() {
-            return this.semiaquatic.dryTicks > this.semiaquatic.wetPreference();
+            return this.semiaquatic.dryTicks > this.semiaquatic.dryTolerance();
         }
 
         @Override
