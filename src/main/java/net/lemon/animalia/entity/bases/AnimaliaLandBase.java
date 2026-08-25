@@ -664,7 +664,7 @@ public abstract class AnimaliaLandBase extends Animal implements IActivityTime, 
         WATER
     }
 
-    static class SpawnChildGoal extends FindNearestBlockGoal {
+    public static class SpawnChildGoal extends FindNearestBlockGoal {
         private final AnimaliaLandBase parent;
 
         public SpawnChildGoal(AnimaliaLandBase mob, double speedMult, int searchRange) {
