@@ -25,6 +25,7 @@ public class HolonetSetup {
         AenigmachannaEntity.registerHolonet();
         SeahorseEntity.registerHolonet();
         BovichtusEntity.registerHolonet();
+        HeterocongerEntity.registerHolonet();
 
         //Field
         CrayfishEntity.registerHolonet();

@@ -53,10 +53,7 @@ public class HeterocongerEntity extends FishBase implements GeoEntity, Scannable
     private int nextCheck;
     private final TargetingConditions retreatCon = TargetingConditions.forNonCombat().range(3.0D).selector(THREAT);
     private final TargetingConditions clearCon = TargetingConditions.forNonCombat().range(4.0D).selector(THREAT);
-    private static final Predicate<LivingEntity> THREAT = ((Predicate<LivingEntity>) entity ->
-            (entity.getBbWidth() >= 0.5F || entity.getBbHeight() >= 0.9F)
-                    && !(entity instanceof HeterocongerEntity)
-                    && !(entity instanceof Player player && player.isCreative())).and(EntitySelector.NO_SPECTATORS);
+    private static final Predicate<LivingEntity> THREAT = ((Predicate<LivingEntity>) entity -> (entity.getBbWidth() >= 0.5F || entity.getBbHeight() >= 0.9F) && !(entity instanceof HeterocongerEntity) && !(entity instanceof Player player && player.isCreative())).and(EntitySelector.NO_SPECTATORS);
 
     public HeterocongerEntity(EntityType<? extends FishBase> entityType, Level level) {
         super(entityType, level);
@@ -121,7 +118,10 @@ public class HeterocongerEntity extends FishBase implements GeoEntity, Scannable
 
     @Override
     public Component getTrivia() {
-        return Component.translatable("trivia.animalia.heteroconger_hassi");
+        if(this.getType() == ModEntities.HETEROCONGER_HASSI.get()) {
+            return Component.translatable("trivia.animalia.heteroconger_hassi");
+        }
+        return Component.translatable("trivia.animalia.gorgasia_preclara");
     }
 
     @Override
@@ -137,7 +137,7 @@ public class HeterocongerEntity extends FishBase implements GeoEntity, Scannable
     @Override
     public int getScaleforGUI() {
         if (this.getType() == ModEntities.HETEROCONGER_HASSI.get()) {
-            return 30;
+            return 20;
         }
         return Scannable.super.getScaleforGUI();
     }
@@ -161,6 +161,7 @@ public class HeterocongerEntity extends FishBase implements GeoEntity, Scannable
 
     public static void registerHolonet(){
         HolonetEntities.register(ModEntities.HETEROCONGER_HASSI, Scannable.AppName.FISH, "Anguilliformes");
+        HolonetEntities.register(ModEntities.GORGASIA_PRECLARA, Scannable.AppName.FISH, "Anguilliformes");
 
     }
 
@@ -382,8 +383,8 @@ public class HeterocongerEntity extends FishBase implements GeoEntity, Scannable
 
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
-        controllers.add(new AnimationController<>(this, "controller", 20, this::predicate));
-        controllers.add(new AnimationController<>(this, "idles_controller", 10, this::idlesPredicate));
+        controllers.add(new AnimationController<>(this, "controller", 10, this::predicate));
+        controllers.add(new AnimationController<>(this, "idles_controller", 0, this::idlesPredicate));
         controllers.add(new AnimationController<>(this, "eat_controller", 0, this::eatPredicate));
     }
 

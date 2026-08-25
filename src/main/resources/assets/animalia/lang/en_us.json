@@ -330,6 +330,8 @@
   "trivia.animalia.hippocampus_ingens": "The pacific seahorse is the largest seahorse, able to grow up to 30cm in height. It is nocturnal and is often found inhabiting seagrass meadows and coral reefs.",
   "trivia.animalia.hippocampus_reidi": "The slender seahorse is small, growing to 17.5cm in height. These seahorses have brown to light spots around their body and typically live near sargassum, seagrass, or corals.",
   "trivia.animalia.bovichtus_variegatus": "The thornfish is a small notothenioid fish endemic to New Zealand. It has a brownish, grayish, olive coloration and typically grows to around 25cm in length. They prey on crustaceans and worms.",
+  "trivia.animalia.heteroconger_hassi": "The spotted garden eel is a widespread tropical and subtropical fish known to live in variously sized colonies in sandy bottoms. Individuals rarely leave their burrow once they've settled down.",
+  "trivia.animalia.gorgasia_preclara": "The splendid garden eel is a medium sized garden eel that mainly lives buried in the sand, with its head and upper body sticking out. They generally live in groups.",
 
   "debug.animalia.trivia": "If this value displays, there is a bug [trivia]",
   "debug.animalia.family": "if this text appears, there is a bug [family]",
