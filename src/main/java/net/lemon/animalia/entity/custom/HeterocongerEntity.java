@@ -440,6 +440,7 @@ public class HeterocongerEntity extends FishBase implements GeoEntity, Scannable
             this.setVarSizeMultiplier(this.genVarSizeMultiplier());
         }
         this.setStateSwitch(this.random.nextInt(2));
+        this.setPos(this.getX() + (this.random.nextDouble() - 0.5D) * 0.7D, this.getY(), this.getZ() + (this.random.nextDouble() - 0.5D) * 0.7D);
         return super.finalizeSpawn(level, difficulty, reason, spawnData, dataTag);
     }
 }
