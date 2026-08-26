@@ -1,6 +1,7 @@
 package net.lemon.animalia.entity.bases.helpers;
 
 import net.minecraft.world.entity.PathfinderMob;
+import net.minecraftforge.common.ForgeMod;
 
 public interface IIdles {
 
@@ -21,6 +22,18 @@ public interface IIdles {
     //override this with a switch to control idle lengths per idle
     default int getIdleLength(int displayId) {
         return 40;
+    }
+
+    //override this with a switch to allow specific idles while submerged
+    default boolean canIdleInWater(int displayId) {
+        return false;
+    }
+
+    default boolean waterBlocksIdle(int displayId) {
+        PathfinderMob mob = (PathfinderMob) this;
+        return mob.isUnderWater()
+                && mob.canDrownInFluidType(ForgeMod.WATER_TYPE.get())
+                && !this.canIdleInWater(displayId);
     }
 
     int getIdleTicks();
@@ -116,6 +129,9 @@ public interface IIdles {
             this.setTwitchTicks(this.getIdleLength(displayId));
             return true;
         }
+        if (this.waterBlocksIdle(displayId)) {
+            return false;
+        }
         if (this.getCurrRegIdle() >= 0) {
             return false;
         }
@@ -134,10 +150,11 @@ public interface IIdles {
     default void tickIdle(PathfinderMob mob) {
         if (this.getIdleTicks() > 0) {
             boolean locked = this.isMovementLockedByIdle();
-            if (locked) {
+            boolean cancel = this.waterBlocksIdle(this.getCurrRegIdle());
+            if (locked && !cancel) {
                 mob.getNavigation().stop();
             }
-            this.setIdleTicks(this.getIdleTicks() - 1);
+            this.setIdleTicks(cancel ? 0 : this.getIdleTicks() - 1);
             if (this.getIdleTicks() <= 0) {
                 this.setCurrRegIdle(-1);
                 if (locked) {

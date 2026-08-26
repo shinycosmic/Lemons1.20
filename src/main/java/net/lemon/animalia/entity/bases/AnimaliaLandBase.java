@@ -34,6 +34,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.common.ForgeMod;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Objects;
@@ -220,9 +221,16 @@ public abstract class AnimaliaLandBase extends Animal implements IActivityTime, 
     public int getEatLength() { return 20; }
 
     public boolean onHideableBlock(AnimaliaLandBase mob) {
+        if (mob.waterBlocksHide()) {
+            return false;
+        }
         BlockPos pos = mob.blockPosition().below();
         BlockState blockState = mob.level().getBlockState(pos);
         return blockState.is(BlockTags.DIRT) || blockState.is(BlockTags.SAND) || blockState.is(BlockTags.LUSH_GROUND_REPLACEABLE);
+    }
+
+    public boolean waterBlocksHide() {
+        return this.isUnderWater() && this.canDrownInFluidType(ForgeMod.WATER_TYPE.get());
     }
 
     public boolean canHide() {
@@ -270,9 +278,7 @@ public abstract class AnimaliaLandBase extends Animal implements IActivityTime, 
     /***
      * Override this method to add special conditions such as hiding in plants.
      */
-    public boolean canStartHiding() {
-        return this.canHide() && !this.isHiding() && this.hideCooldown <= 0;
-    }
+    public boolean canStartHiding() {return this.canHide() && !this.isHiding() && !this.waterBlocksHide() && this.hideCooldown <= 0;}
 
     public boolean isFast() {
         double speed = this.getDeltaMovement().horizontalDistance();

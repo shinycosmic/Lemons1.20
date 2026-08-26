@@ -81,7 +81,7 @@ public abstract class SemiaquaticBase extends AnimaliaLandBase{
 
     @Override
     public void travel(Vec3 pTravelVector) {
-        if (this.isEffectiveAi() && this.isInWater()) {
+        if (this.isEffectiveAi() && (this.isUnderWater() || (this.isInWater() && !this.onGround()))) {
             this.moveRelative(0.01F, this.isMovementLockedByIdle() || this.isGrazing() ? Vec3.ZERO : pTravelVector);
             this.move(MoverType.SELF, this.getDeltaMovement().scale(this.getSwimSpeed()));
             this.setDeltaMovement(this.getDeltaMovement().scale(0.9D));
