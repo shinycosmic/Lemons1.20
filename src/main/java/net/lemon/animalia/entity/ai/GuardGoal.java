@@ -19,8 +19,10 @@ public class GuardGoal extends Goal {
     private final Predicate<LivingEntity> threatPredicate;
     private final TargetingConditions targetingConditions;
     private static final int SCAN_INTERVAL = 5;
+    private final TargetingConditions proximityConditions;
     private int nextThreatScan;
-    private LivingEntity threatTarget;
+    private int nextProximityScan;
+    private LivingEntity proximityTarget;    private LivingEntity threatTarget;
     private int enteringTicks;
     private int exitingTicks;
     private int cooldown;
@@ -33,8 +35,10 @@ public class GuardGoal extends Goal {
         this.mob = mob;
         this.guarder = (ICanGuard) mob;
         this.guardRange = guardRange;
-        this.threatPredicate = threatPredicate.and(EntitySelector.NO_SPECTATORS::test);
-        this.targetingConditions = TargetingConditions.forNonCombat().range(guardRange).selector(this.threatPredicate::test);
+        this.threatPredicate = threatPredicate.and(EntitySelector.NO_SPECTATORS);
+        this.targetingConditions = TargetingConditions.forNonCombat().range(guardRange).selector(this.threatPredicate);
+        this.proximityConditions = TargetingConditions.forNonCombat().range(guardRange)
+                .selector(entity -> this.threatPredicate.test(entity) && !(entity instanceof Player));
         this.setFlags(EnumSet.of(Goal.Flag.MOVE, Goal.Flag.LOOK));
     }
 
@@ -132,28 +136,20 @@ public class GuardGoal extends Goal {
     }
 
     private boolean activationSatisfied() {
-        switch (this.guarder.getGuardActivation()) {
-            case PROXIMITY:
-                return this.currentThreat() != null;
-            case ATTACK:
-                return this.guarder.wantsToGuard();
-            case BOTH:
-            default:
-                return this.guarder.wantsToGuard() || this.currentThreat() != null;
-        }
+        return switch (this.guarder.getGuardActivation()) {
+            case PROXIMITY -> this.proximityThreat() != null;
+            case ATTACK -> this.guarder.wantsToGuard();
+            default -> this.guarder.wantsToGuard() || this.proximityThreat() != null;
+        };
     }
 
     private boolean shouldExit() {
         boolean calm = !this.guarder.wantsToGuard();
-        switch (this.guarder.getGuardActivation()) {
-            case PROXIMITY:
-                return this.threatTarget == null;
-            case ATTACK:
-                return calm || this.attackerGone();
-            case BOTH:
-            default:
-                return calm && this.threatTarget == null;
-        }
+        return switch (this.guarder.getGuardActivation()) {
+            case PROXIMITY -> this.proximityThreat() == null;
+            case ATTACK -> calm || this.attackerGone();
+            default -> calm && this.proximityThreat() == null;
+        };
     }
 
     private boolean attackerGone() {
@@ -193,6 +189,23 @@ public class GuardGoal extends Goal {
         this.nextThreatScan = this.mob.tickCount + SCAN_INTERVAL + this.mob.getRandom().nextInt(10);
         this.threatTarget = this.findThreat();
         return this.threatTarget;
+    }
+
+    private LivingEntity proximityThreat() {
+        if (this.proximityTarget != null && !this.stillThreatening(this.proximityTarget)) {
+            this.proximityTarget = null;
+        }
+        if (this.mob.tickCount < this.nextProximityScan) {
+            return this.proximityTarget;
+        }
+        this.nextProximityScan = this.mob.tickCount + SCAN_INTERVAL + this.mob.getRandom().nextInt(10);
+        this.proximityTarget = this.mob.level().getNearestEntity(
+                LivingEntity.class,
+                this.proximityConditions,
+                this.mob,
+                this.mob.getX(), this.mob.getY(), this.mob.getZ(),
+                this.mob.getBoundingBox().inflate(this.guardRange));
+        return this.proximityTarget;
     }
 
     private boolean stillThreatening(LivingEntity threat) {

@@ -35,7 +35,7 @@ public class WaterStartleGoal extends Goal {
         this.triggerDistance = triggerDistance;
         this.speedMult = speedMult;
         this.maxFleeTicks = maxFleeTicks;
-        this.threatPredicate = threatPredicate.and(EntitySelector.NO_SPECTATORS::test);
+        this.threatPredicate = threatPredicate.and(EntitySelector.NO_SPECTATORS);
         this.targetingConditions = TargetingConditions.forNonCombat().range(triggerDistance)
                 .selector(entity -> this.threatPredicate.test(entity) && this.mob.hasLineOfSight(entity));
         this.setFlags(EnumSet.of(Goal.Flag.MOVE));
