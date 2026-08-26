@@ -221,7 +221,7 @@ public abstract class AnimaliaLandBase extends Animal implements IActivityTime, 
     public int getEatLength() { return 20; }
 
     public boolean onHideableBlock(AnimaliaLandBase mob) {
-        if (mob.waterBlocksHide()) {
+        if (mob.waterBlocking()) {
             return false;
         }
         BlockPos pos = mob.blockPosition().below();
@@ -229,7 +229,7 @@ public abstract class AnimaliaLandBase extends Animal implements IActivityTime, 
         return blockState.is(BlockTags.DIRT) || blockState.is(BlockTags.SAND) || blockState.is(BlockTags.LUSH_GROUND_REPLACEABLE);
     }
 
-    public boolean waterBlocksHide() {
+    public boolean waterBlocking() {
         return this.isUnderWater() && this.canDrownInFluidType(ForgeMod.WATER_TYPE.get());
     }
 
@@ -278,7 +278,7 @@ public abstract class AnimaliaLandBase extends Animal implements IActivityTime, 
     /***
      * Override this method to add special conditions such as hiding in plants.
      */
-    public boolean canStartHiding() {return this.canHide() && !this.isHiding() && !this.waterBlocksHide() && this.hideCooldown <= 0;}
+    public boolean canStartHiding() {return this.canHide() && !this.isHiding() && !this.waterBlocking() && this.hideCooldown <= 0;}
 
     public boolean isFast() {
         double speed = this.getDeltaMovement().horizontalDistance();
@@ -484,7 +484,7 @@ public abstract class AnimaliaLandBase extends Animal implements IActivityTime, 
         }
 
         if (!this.level().isClientSide && this.grazeTicks > 0) {
-            --this.grazeTicks;
+            this.grazeTicks = this.waterBlocking() ? 0 : this.grazeTicks - 1;
             if (this.grazeTicks <= 0) {
                 this.setGrazing(false);
             }
@@ -493,6 +493,16 @@ public abstract class AnimaliaLandBase extends Animal implements IActivityTime, 
         if (!this.level().isClientSide && this.canHide()) {
             if (this.hideCooldown > 0) {
                 --this.hideCooldown;
+            }
+
+            if (this.waterBlocking() && this.getHidePhase() != PHASE_NONE) {
+                this.setHidePhase(PHASE_NONE);
+                this.setHiding(false);
+                this.hideTicks = 0;
+                this.hideTransitionInTicks = 0;
+                this.hideTransitionOutTicks = 0;
+                this.wantsToHide = false;
+                this.hideCooldown = this.getHideCooldown();
             }
 
             int phase = this.getHidePhase();
