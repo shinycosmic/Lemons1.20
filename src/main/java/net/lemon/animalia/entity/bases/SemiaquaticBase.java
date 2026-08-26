@@ -5,26 +5,29 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.FluidTags;
+import net.minecraft.tags.TagKey;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.MoverType;
 import net.minecraft.world.entity.ai.control.SmoothSwimmingMoveControl;
-import net.minecraft.world.entity.ai.goal.BreathAirGoal;
-import net.minecraft.world.entity.ai.goal.FloatGoal;
-import net.minecraft.world.entity.ai.goal.RandomStrollGoal;
-import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
+import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.navigation.AmphibiousPathNavigation;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.PathNavigationRegion;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.pathfinder.AmphibiousNodeEvaluator;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
+import net.minecraft.world.level.pathfinder.Path;
 import net.minecraft.world.level.pathfinder.PathFinder;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.ForgeMod;
+
+import java.util.function.Predicate;
 
 public abstract class SemiaquaticBase extends AnimaliaLandBase{
 
@@ -39,25 +42,16 @@ public abstract class SemiaquaticBase extends AnimaliaLandBase{
     @Override
     protected void registerGoals() {
         super.registerGoals();
-        this.goalSelector.getAvailableGoals().removeIf(
-                g -> g.getGoal() instanceof FloatGoal
-                        || g.getGoal() instanceof WaterAvoidingRandomStrollGoal
-        );
-        if (this.dryTolerance() > 0) {
-            this.goalSelector.addGoal(4, new GoToWaterGoal(this, 1.3D, 12));
-        }
+        this.goalSelector.getAvailableGoals().removeIf(g -> g.getGoal() instanceof FloatGoal || g.getGoal() instanceof WaterAvoidingRandomStrollGoal);
+        if (this.dryTolerance() > 0) this.goalSelector.addGoal(4, new GoToWaterGoal(this, 1.3D, 12));
         if (this.depthTolerance() > 0) {
             this.goalSelector.addGoal(4, new GoToShallowGoal(this, 1.3D, 12));
         } else {
             this.goalSelector.addGoal(4, new GoToLandGoal(this, 1.3D, 16));
         }
         this.goalSelector.addGoal(5, new LandStrollGoal(this, 1.0D));
-        if (this.waterPreference() > 0.0F) {
-            this.goalSelector.addGoal(5, new WaterStrollGoal(this, 1.0D, (int) (120 / this.waterPreference())));
-        }
-        if (this.canDrownInFluidType(ForgeMod.WATER_TYPE.get())) {
-            this.goalSelector.addGoal(0, new BreathAirGoal(this));
-        }
+        if (this.waterPreference() > 0.0F) this.goalSelector.addGoal(5, new WaterStrollGoal(this, 1.0D, (int) (120 / this.waterPreference())));
+        if (this.canDrownInFluidType(ForgeMod.WATER_TYPE.get())) this.goalSelector.addGoal(0, new BreathAirGoal(this));
     }
 
     public float waterPreference() {
@@ -316,5 +310,60 @@ public abstract class SemiaquaticBase extends AnimaliaLandBase{
             return null;
         }
     }
+
+    //This goal should be registered in child entities with priority same or higher than guard or panic.
+    //if no water is found, itll run guard or panic instead. child entities cannot have both guard and panic alts
+    public static class SemiaquaticPanicGoal extends PanicGoal {
+        private final Predicate<BlockState> refuge;
+        private final int range;
+
+        public SemiaquaticPanicGoal(SemiaquaticBase mob, double speedMult, int range) {
+            this(mob, speedMult, range, state -> state.getFluidState().is(FluidTags.WATER));
+        }
+
+        public SemiaquaticPanicGoal(SemiaquaticBase mob, double speedMult, int range, TagKey<Block> tag) {
+            this(mob, speedMult, range, state -> state.is(tag));
+        }
+
+        public SemiaquaticPanicGoal(SemiaquaticBase mob, double speedMult, int range, Block block) {
+            this(mob, speedMult, range, state -> state.is(block));
+        }
+
+        private SemiaquaticPanicGoal(SemiaquaticBase mob, double speedMult, int range, Predicate<BlockState> refuge) {
+            super(mob, speedMult);
+            this.range = range;
+            this.refuge = refuge;
+        }
+
+        @Override
+        public boolean canUse() {
+            if (!this.shouldPanic()) {
+                return false;
+            }
+            BlockPos pos = this.findTarget();
+            if (pos == null) {
+                return false;
+            }
+            this.posX = pos.getX();
+            this.posY = pos.getY();
+            this.posZ = pos.getZ();
+            return true;
+        }
+
+        private BlockPos findTarget() {
+            Level level = this.mob.level();
+            BlockPos pos = this.mob.blockPosition();
+            if (!level.getBlockState(pos).getCollisionShape(level, pos).isEmpty()) {
+                return null;
+            }
+            BlockPos found = BlockPos.findClosestMatch(pos, this.range, 1, p -> this.refuge.test(level.getBlockState(p))).orElse(null);
+            if (found == null) {
+                return null;
+            }
+            Path path = this.mob.getNavigation().createPath(found, 1);
+            return path != null && path.canReach() ? found.immutable() : null;
+        }
+    }
+
 
 }
