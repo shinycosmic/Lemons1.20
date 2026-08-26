@@ -233,6 +233,12 @@ public abstract class AnimaliaLandBase extends Animal implements IActivityTime, 
         return this.isUnderWater() && this.canDrownInFluidType(ForgeMod.WATER_TYPE.get());
     }
 
+    public static boolean isLand(Level level, BlockPos pos) {
+        return level.getBlockState(pos).getCollisionShape(level, pos).isEmpty()
+                && level.getFluidState(pos).isEmpty()
+                && !level.getBlockState(pos.below()).getCollisionShape(level, pos.below()).isEmpty();
+    }
+
     public boolean canHide() {
         return false;
     }
@@ -709,8 +715,7 @@ public abstract class AnimaliaLandBase extends Animal implements IActivityTime, 
             Level level = this.parent.level();
             return switch (this.parent.getBirthLocation()) {
                 case WATER -> level.getFluidState(pos).is(FluidTags.WATER);
-                case LAND -> level.getFluidState(pos).isEmpty()
-                        && !level.getBlockState(pos.below()).getCollisionShape(level, pos.below()).isEmpty();
+                case LAND -> isLand(level, pos);
                 default -> false;
             };
         }

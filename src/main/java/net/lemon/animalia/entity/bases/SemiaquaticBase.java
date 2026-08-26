@@ -46,7 +46,11 @@ public abstract class SemiaquaticBase extends AnimaliaLandBase{
         if (this.dryTolerance() > 0) {
             this.goalSelector.addGoal(4, new GoToWaterGoal(this, 1.3D, 12));
         }
-        this.goalSelector.addGoal(4, new GoToShallowGoal(this, 1.3D, 12));
+        if (this.depthTolerance() > 0) {
+            this.goalSelector.addGoal(4, new GoToShallowGoal(this, 1.3D, 12));
+        } else {
+            this.goalSelector.addGoal(4, new GoToLandGoal(this, 1.3D, 16));
+        }
         this.goalSelector.addGoal(5, new LandStrollGoal(this, 1.0D));
         if (this.waterPreference() > 0.0F) {
             this.goalSelector.addGoal(5, new WaterStrollGoal(this, 1.0D, (int) (120 / this.waterPreference())));
@@ -243,6 +247,35 @@ public abstract class SemiaquaticBase extends AnimaliaLandBase{
         }
     }
 
+    static class GoToLandGoal extends FindNearestBlockGoal {
+        private final SemiaquaticBase semiaquatic;
+
+        GoToLandGoal(SemiaquaticBase mob, double speedMult, int searchRange) {
+            super(mob, speedMult, searchRange, state -> true, 1, false);
+            this.semiaquatic = mob;
+        }
+
+        @Override
+        protected boolean passCheck() {
+            return this.semiaquatic.isInWater();
+        }
+
+        @Override
+        protected boolean isTarget(BlockPos pos) {
+            return super.isTarget(pos) && isLand(this.semiaquatic.level(), pos);
+        }
+
+        @Override
+        public boolean canContinueToUse() {
+            return this.semiaquatic.isInWater() && super.canContinueToUse();
+        }
+
+        @Override
+        public boolean isInterruptable() {
+            return true;
+        }
+    }
+
     static class LandStrollGoal extends RandomStrollGoal {
         LandStrollGoal(SemiaquaticBase mob, double speedMult) {
             super(mob, speedMult);
@@ -254,9 +287,7 @@ public abstract class SemiaquaticBase extends AnimaliaLandBase{
             RandomSource random = this.mob.getRandom();
             for (int i = 0; i < 10; ++i) {
                 BlockPos pos = this.mob.blockPosition().offset(random.nextInt(21) - 10, random.nextInt(15) - 7, random.nextInt(21) - 10);
-                if (level.getBlockState(pos).getCollisionShape(level, pos).isEmpty()
-                        && level.getFluidState(pos).isEmpty()
-                        && !level.getBlockState(pos.below()).getCollisionShape(level, pos.below()).isEmpty()) {
+                if (isLand(level, pos)) {
                     return Vec3.atBottomCenterOf(pos);
                 }
             }
