@@ -4,11 +4,14 @@ import net.lemon.animalia.entity.ai.FindNearestBlockGoal;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.FluidTags;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.MoverType;
 import net.minecraft.world.entity.ai.control.SmoothSwimmingMoveControl;
 import net.minecraft.world.entity.ai.goal.BreathAirGoal;
 import net.minecraft.world.entity.ai.goal.FloatGoal;
+import net.minecraft.world.entity.ai.goal.RandomStrollGoal;
 import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
 import net.minecraft.world.entity.ai.navigation.AmphibiousPathNavigation;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
@@ -19,6 +22,7 @@ import net.minecraft.world.level.PathNavigationRegion;
 import net.minecraft.world.level.pathfinder.AmphibiousNodeEvaluator;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
 import net.minecraft.world.level.pathfinder.PathFinder;
+import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.ForgeMod;
 
 public abstract class SemiaquaticBase extends AnimaliaLandBase{
@@ -40,6 +44,10 @@ public abstract class SemiaquaticBase extends AnimaliaLandBase{
         );
         if (this.dryTolerance() > 0) {
             this.goalSelector.addGoal(4, new GoToWaterGoal(this, 1.3D, 12));
+        }
+        this.goalSelector.addGoal(5, new LandStrollGoal(this, 1.0D));
+        if (this.waterPreference() > 0.0F) {
+            this.goalSelector.addGoal(5, new WaterStrollGoal(this, 1.0D, (int) (120 / this.waterPreference())));
         }
         if (this.canDrownInFluidType(ForgeMod.WATER_TYPE.get())) {
             this.goalSelector.addGoal(0, new BreathAirGoal(this));
@@ -64,6 +72,21 @@ public abstract class SemiaquaticBase extends AnimaliaLandBase{
             } else {
                 ++this.dryTicks;
             }
+        }
+    }
+
+    public float getSwimSpeed() {
+        return 1.0f;
+    }
+
+    @Override
+    public void travel(Vec3 pTravelVector) {
+        if (this.isEffectiveAi() && this.isInWater()) {
+            this.moveRelative(0.01F, this.isMovementLockedByIdle() || this.isGrazing() ? Vec3.ZERO : pTravelVector);
+            this.move(MoverType.SELF, this.getDeltaMovement().scale(this.getSwimSpeed()));
+            this.setDeltaMovement(this.getDeltaMovement().scale(0.9D));
+        } else {
+            super.travel(pTravelVector);
         }
     }
 
@@ -130,7 +153,7 @@ public abstract class SemiaquaticBase extends AnimaliaLandBase{
             super.prepare(region, mob);
             if(mob instanceof SemiaquaticBase semiaquatic) {
                 float pref = semiaquatic.waterPreference();
-                mob.setPathfindingMalus(BlockPathTypes.WATER, pref <= 0.0F ? -1.0F : Math.max(0.0F, (0.5F - pref) * 12.0F));
+                mob.setPathfindingMalus(BlockPathTypes.WATER, pref <= 0.0F ? (mob.isInWater() ? 8.0F : -1.0F) : Math.max(0.0F, (0.5F - pref) * 12.0F));
                 mob.setPathfindingMalus(BlockPathTypes.WALKABLE, Math.max(0.0F, (pref - 0.5F) * 12.0F));
             }
         }
@@ -157,6 +180,45 @@ public abstract class SemiaquaticBase extends AnimaliaLandBase{
         @Override
         public boolean isInterruptable() {
             return true;
+        }
+    }
+
+    static class LandStrollGoal extends RandomStrollGoal {
+        LandStrollGoal(SemiaquaticBase mob, double speedMult) {
+            super(mob, speedMult);
+        }
+
+        @Override
+        protected Vec3 getPosition() {
+            Level level = this.mob.level();
+            RandomSource random = this.mob.getRandom();
+            for (int i = 0; i < 10; ++i) {
+                BlockPos pos = this.mob.blockPosition().offset(random.nextInt(21) - 10, random.nextInt(15) - 7, random.nextInt(21) - 10);
+                if (level.getBlockState(pos).getCollisionShape(level, pos).isEmpty()
+                        && level.getFluidState(pos).isEmpty()
+                        && !level.getBlockState(pos.below()).getCollisionShape(level, pos.below()).isEmpty()) {
+                    return Vec3.atBottomCenterOf(pos);
+                }
+            }
+            return null;
+        }
+    }
+
+    static class WaterStrollGoal extends RandomStrollGoal {
+        WaterStrollGoal(SemiaquaticBase mob, double speedMult, int interval) {
+            super(mob, speedMult, interval);
+        }
+
+        @Override
+        protected Vec3 getPosition() {
+            RandomSource random = this.mob.getRandom();
+            for (int i = 0; i < 10; ++i) {
+                BlockPos pos = this.mob.blockPosition().offset(random.nextInt(21) - 10, random.nextInt(15) - 7, random.nextInt(21) - 10);
+                if (this.mob.level().getFluidState(pos).is(FluidTags.WATER)) {
+                    return Vec3.atBottomCenterOf(pos);
+                }
+            }
+            return null;
         }
     }
 
