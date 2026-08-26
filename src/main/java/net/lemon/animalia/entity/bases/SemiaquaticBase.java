@@ -2,6 +2,7 @@ package net.lemon.animalia.entity.bases;
 
 import net.lemon.animalia.entity.ai.FindNearestBlockGoal;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.RandomSource;
@@ -45,6 +46,7 @@ public abstract class SemiaquaticBase extends AnimaliaLandBase{
         if (this.dryTolerance() > 0) {
             this.goalSelector.addGoal(4, new GoToWaterGoal(this, 1.3D, 12));
         }
+        this.goalSelector.addGoal(4, new GoToShallowGoal(this, 1.3D, 12));
         this.goalSelector.addGoal(5, new LandStrollGoal(this, 1.0D));
         if (this.waterPreference() > 0.0F) {
             this.goalSelector.addGoal(5, new WaterStrollGoal(this, 1.0D, (int) (120 / this.waterPreference())));
@@ -60,6 +62,30 @@ public abstract class SemiaquaticBase extends AnimaliaLandBase{
 
     public int dryTolerance() {
         return 0;
+    }
+
+    public int depthTolerance() {
+        return 64;
+    }
+
+    public int surfaceY(BlockPos pos) {
+        BlockPos.MutableBlockPos cursor = pos.mutable();
+        while (cursor.getY() < this.level().getMaxBuildHeight() && this.level().isWaterAt(cursor)) {
+            cursor.move(Direction.UP);
+        }
+        return cursor.getY();
+    }
+
+    public int shallowY(BlockPos pos) {
+        return this.surfaceY(pos) - this.depthTolerance();
+    }
+
+    public boolean tooDeep(BlockPos pos, int shallowY) {
+        return this.level().isWaterAt(new BlockPos(pos.getX(), shallowY - 1, pos.getZ()));
+    }
+
+    public boolean tooDeep(BlockPos pos) {
+        return this.tooDeep(pos, this.shallowY(pos));
     }
 
     @Override
@@ -183,6 +209,40 @@ public abstract class SemiaquaticBase extends AnimaliaLandBase{
         }
     }
 
+    static class GoToShallowGoal extends FindNearestBlockGoal {
+        private final SemiaquaticBase semiaquatic;
+        private int shallowY;
+
+        GoToShallowGoal(SemiaquaticBase mob, double speedMult, int searchRange) {
+            super(mob, speedMult, searchRange, state -> state.getFluidState().is(FluidTags.WATER), 1, false);
+            this.semiaquatic = mob;
+        }
+
+        @Override
+        protected boolean passCheck() {
+            if (!this.semiaquatic.isInWater()) {
+                return false;
+            }
+            this.shallowY = this.semiaquatic.shallowY(this.semiaquatic.blockPosition());
+            return this.semiaquatic.tooDeep(this.semiaquatic.blockPosition(), this.shallowY);
+        }
+
+        @Override
+        protected boolean isTarget(BlockPos pos) {
+            return super.isTarget(pos) && !this.semiaquatic.tooDeep(pos, this.shallowY);
+        }
+
+        @Override
+        public boolean canContinueToUse() {
+            return this.semiaquatic.isInWater() && super.canContinueToUse();
+        }
+
+        @Override
+        public boolean isInterruptable() {
+            return true;
+        }
+    }
+
     static class LandStrollGoal extends RandomStrollGoal {
         LandStrollGoal(SemiaquaticBase mob, double speedMult) {
             super(mob, speedMult);
@@ -205,16 +265,20 @@ public abstract class SemiaquaticBase extends AnimaliaLandBase{
     }
 
     static class WaterStrollGoal extends RandomStrollGoal {
+        private final SemiaquaticBase semiaquatic;
+
         WaterStrollGoal(SemiaquaticBase mob, double speedMult, int interval) {
             super(mob, speedMult, interval);
+            this.semiaquatic = mob;
         }
 
         @Override
         protected Vec3 getPosition() {
             RandomSource random = this.mob.getRandom();
+            boolean deep = this.semiaquatic.tooDeep(this.semiaquatic.blockPosition());
             for (int i = 0; i < 10; ++i) {
                 BlockPos pos = this.mob.blockPosition().offset(random.nextInt(21) - 10, random.nextInt(15) - 7, random.nextInt(21) - 10);
-                if (this.mob.level().getFluidState(pos).is(FluidTags.WATER)) {
+                if (this.mob.level().getFluidState(pos).is(FluidTags.WATER) && (deep || !this.semiaquatic.tooDeep(pos))) {
                     return Vec3.atBottomCenterOf(pos);
                 }
             }

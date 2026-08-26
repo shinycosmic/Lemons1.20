@@ -58,10 +58,10 @@ public class FindNearestBlockGoal extends Goal {
         if (this.mob.tickCount < this.nextSearchTime) {
             return false;
         }
+        this.nextSearchTime = this.mob.tickCount + 20 + this.mob.getRandom().nextInt(20);
         if (!this.passCheck()) {
             return false;
         }
-        this.nextSearchTime = this.mob.tickCount + 20 + this.mob.getRandom().nextInt(20);
         this.targetPos = this.findNearestBlock();
         return this.targetPos != null;
     }
