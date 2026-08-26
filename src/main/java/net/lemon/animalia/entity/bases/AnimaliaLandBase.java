@@ -105,6 +105,9 @@ public abstract class AnimaliaLandBase extends Animal implements IActivityTime, 
         this.goalSelector.addGoal(0, new FloatGoal(this));
 
         this.goalSelector.addGoal(2, new BreedGoal(this, 1.15D));
+        if (this.getBirthLocation() != BirthLocation.ANY) {
+            this.goalSelector.addGoal(2, new SpawnChildGoal(this, 1.0D, 12));
+        }
         this.goalSelector.addGoal(3, new TemptGoal(this, 1.0D, this.foodIngredients(), false));
         this.goalSelector.addGoal(5, new FollowParentGoal(this, 1.25D));
         this.goalSelector.addGoal(5, new WaterAvoidingRandomStrollGoal(this, 1.0D));
