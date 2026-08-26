@@ -60,11 +60,11 @@ public class PangolinEntity extends AnimaliaLandBase implements GeoEntity, Scann
 
     @Override
     protected void registerGoals() {
-        super.registerGoals();
         this.goalSelector.addGoal(2, new GuardGoal(this, 6D, entity -> !(entity instanceof PangolinEntity) && !(entity instanceof Player player && player.isCreative())));
         this.goalSelector.addGoal(2, new SleepGoal(this));
         this.goalSelector.addGoal(4, new FindNearestBlockGoal(this, 1.0D, 8, ModTags.Blocks.CROSS_PLANTS));
         this.goalSelector.addGoal(6, new GrazeGoal<>(this, 1.0D));
+        super.registerGoals();
     }
 
     @Override
