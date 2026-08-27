@@ -137,7 +137,7 @@ public class RegSchoolingEntity extends FishBase implements GeoEntity, Scannable
     public static AttributeSupplier setAttributes() {
         return Mob.createMobAttributes()
                 .add(Attributes.MAX_HEALTH, 3D)
-                .add(Attributes.MOVEMENT_SPEED, 0.4f)
+                .add(Attributes.MOVEMENT_SPEED, 0.55f)
                 .build();
     }
 
@@ -248,7 +248,7 @@ public class RegSchoolingEntity extends FishBase implements GeoEntity, Scannable
         } else if (this.getType() == ModEntities.ACANTHURUS_LINEATUS.get()) {
             return AnimaliaFunctionUtil.getScaleForSize(24, 38);
         } else if (this.getType() == ModEntities.ACANTHURUS_SOHAL.get() || this.getType() == ModEntities.ACANTHURUS_COERULEUS.get()) {
-            return AnimaliaFunctionUtil.getScaleForSize(24, 40);
+            return AnimaliaFunctionUtil.getScaleForSize(24, 50);
         } else if (this.getType() == ModEntities.ACANTHURUS_LEUCOSTERNON.get() || this.getType() == ModEntities.ACANTHURUS_JAPONICUS.get() || this.getType() == ModEntities.ACANTHURUS_ACHILLES.get()) {
             return AnimaliaFunctionUtil.getScaleForSize(24, 25);
         }
