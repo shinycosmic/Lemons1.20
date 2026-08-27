@@ -27,7 +27,6 @@ public class SleepGoal extends Goal {
 
     @Override
     public boolean canUse() {
-        if(this.mob.isInWater()) { return false; }
         if (this.cooldown > 0) {
             this.cooldown--;
             return false;
