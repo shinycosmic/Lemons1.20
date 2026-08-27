@@ -100,7 +100,7 @@ public class ModSpawns {
                 BiomeSelector.in(Biomes.DRIPSTONE_CAVES));
         add(ModEntities.AENIGMACHANNA_GOLLUM, 2, 1, 1,
                 BiomeSelector.in(Biomes.LUSH_CAVES, Biomes.DRIPSTONE_CAVES));
-        add(ModEntities.LEPTOBRAMA_MUELLERI, 4, 6, 8,
+        add(ModEntities.LEPTOBRAMA_MUELLERI, 4, 8, 16,
                 BiomeSelector.in(Biomes.LUKEWARM_OCEAN));
         add(ModEntities.HIPPOCAMPUS_INGENS, 2, 1, 3,
                 BiomeSelector.in(Biomes.LUKEWARM_OCEAN));
@@ -112,6 +112,18 @@ public class ModSpawns {
                 BiomeSelector.in(Biomes.LUKEWARM_OCEAN));
         add(ModEntities.GORGASIA_PRECLARA, 5, 1, 5,
                 BiomeSelector.in(Biomes.LUKEWARM_OCEAN));
+        add(ModEntities.ACANTHURUS_LEUCOSTERNON, 3, 1, 2,
+                BiomeSelector.in(Biomes.WARM_OCEAN));
+        add(ModEntities.ACANTHURUS_JAPONICUS, 3, 1, 2,
+                BiomeSelector.in(Biomes.WARM_OCEAN));
+        add(ModEntities.ACANTHURUS_SOHAL, 3, 1, 1,
+                BiomeSelector.in(Biomes.WARM_OCEAN));
+        add(ModEntities.ACANTHURUS_COERULEUS, 5, 2, 4,
+                BiomeSelector.in(Biomes.WARM_OCEAN));
+        add(ModEntities.ACANTHURUS_LINEATUS, 3, 1, 2,
+                BiomeSelector.in(Biomes.WARM_OCEAN));
+        add(ModEntities.ACANTHURUS_ACHILLES, 3, 1, 2,
+                BiomeSelector.in(Biomes.WARM_OCEAN));
 
         add(ModEntities.PROCAMBARUS_CLARKII, 6, 1, 2,
                 BiomeSelector.in(Biomes.SWAMP, Biomes.RIVER));
