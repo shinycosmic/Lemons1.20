@@ -43,12 +43,9 @@ public abstract class SemiaquaticBase extends AnimaliaLandBase{
     protected void registerGoals() {
         super.registerGoals();
         this.goalSelector.getAvailableGoals().removeIf(g -> g.getGoal() instanceof FloatGoal || g.getGoal() instanceof WaterAvoidingRandomStrollGoal);
-        if (this.dryTolerance() > 0) this.goalSelector.addGoal(4, new GoToWaterGoal(this, 1.3D, 12));
-        if (this.depthTolerance() > 0) {
-            this.goalSelector.addGoal(4, new GoToShallowGoal(this, 1.3D, 12));
-        } else {
-            this.goalSelector.addGoal(4, new GoToLandGoal(this, 1.3D, 16));
-        }
+        this.goalSelector.addGoal(3, new GoToShallowGoal(this, 1.3D, 12));
+        this.goalSelector.addGoal(4, new GoToWaterGoal(this, 1.3D, 12));
+        this.goalSelector.addGoal(4, new GoToLandGoal(this, 1.3D, 16));
         this.goalSelector.addGoal(5, new LandStrollGoal(this, 1.0D));
         if (this.waterPreference() > 0.0F) this.goalSelector.addGoal(5, new WaterStrollGoal(this, 1.0D, (int) (120 / this.waterPreference())));
         if (this.canDrownInFluidType(ForgeMod.WATER_TYPE.get())) this.goalSelector.addGoal(0, new BreathAirGoal(this));
@@ -218,7 +215,7 @@ public abstract class SemiaquaticBase extends AnimaliaLandBase{
 
         @Override
         protected boolean passCheck() {
-            if (!this.semiaquatic.isInWater()) {
+            if (!this.semiaquatic.isInWater() || this.semiaquatic.depthTolerance() <= 0) {
                 return false;
             }
             this.shallowY = this.semiaquatic.shallowY(this.semiaquatic.blockPosition());
@@ -251,7 +248,9 @@ public abstract class SemiaquaticBase extends AnimaliaLandBase{
 
         @Override
         protected boolean passCheck() {
-            return this.semiaquatic.isInWater();
+            return this.semiaquatic.isInWater()
+                    && (this.semiaquatic.depthTolerance() <= 0
+                    || !this.semiaquatic.isActiveTime(this.semiaquatic));
         }
 
         @Override
