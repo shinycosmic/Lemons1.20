@@ -111,6 +111,9 @@ public class SchoolBoidGoal extends Goal {
     }
 
     private void faceMovement() {
+        if (!this.fish.getNavigation().isDone()) {
+            return;
+        }
         Vec3 velocity = this.fish.getDeltaMovement();
         if (velocity.lengthSqr() < 1.0E-4) {
             return;
@@ -236,7 +239,7 @@ public class SchoolBoidGoal extends Goal {
 
         this.updateDepthBias();
         this.maxDelta = Math.max(0.1, this.fish.getAttributeValue(Attributes.MOVEMENT_SPEED))
-                * this.fish.getSwimSpeed() * 0.0075f;
+                * this.fish.getSwimSpeed() * 0.02f;
     }
 
     private void updateMembership(List<Mob> visible) {
