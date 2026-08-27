@@ -55,6 +55,12 @@ public class AnimaliaRenderInit {
         EntityRenderers.register(ModEntities.BOVICHTUS_VARIEGATUS.get(), BovichtusVariegatusRenderer::new);
         EntityRenderers.register(ModEntities.HETEROCONGER_HASSI.get(), HeterocongerRenderer::new);
         EntityRenderers.register(ModEntities.GORGASIA_PRECLARA.get(), HeterocongerRenderer::new);
+        EntityRenderers.register(ModEntities.ACANTHURUS_LEUCOSTERNON.get(), AcanthurusRenderer::new);
+        EntityRenderers.register(ModEntities.ACANTHURUS_ACHILLES.get(), AcanthurusRenderer::new);
+        EntityRenderers.register(ModEntities.ACANTHURUS_COERULEUS.get(), AcanthurusRenderer::new);
+        EntityRenderers.register(ModEntities.ACANTHURUS_SOHAL.get(), AcanthurusSlenderRenderer::new);
+        EntityRenderers.register(ModEntities.ACANTHURUS_JAPONICUS.get(), AcanthurusRenderer::new);
+        EntityRenderers.register(ModEntities.ACANTHURUS_LINEATUS.get(), AcanthurusSlenderRenderer::new);
 
 
 

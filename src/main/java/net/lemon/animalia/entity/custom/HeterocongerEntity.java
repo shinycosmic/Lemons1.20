@@ -148,7 +148,7 @@ public class HeterocongerEntity extends FishBase implements GeoEntity, Scannable
 
     @Override
     public float genVarSizeMultiplier() {
-        return AnimaliaFunctionUtil.getScaleForSize(50, 50);
+        return AnimaliaFunctionUtil.getScaleForSize(50, 70);
     }
 
     public static void registerHolonet(){
