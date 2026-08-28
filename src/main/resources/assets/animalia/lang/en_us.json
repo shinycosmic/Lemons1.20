@@ -151,6 +151,8 @@
   "entity.animalia.acanthurus_sohal": "Sohal Tang",
   "entity.animalia.acanthurus_coeruleus": "Atlantic Blue Tang",
   "entity.animalia.acanthurus_achilles": "Achilles Tang",
+  "entity.animalia.forcipiger_flavissimus": "Forceps Butterflyfish",
+  "entity.animalia.forcipiger_longirostris": "Longnose Butterflyfish",
 
   "tooltip.animalia.baby": "Juvenile",
   "container.animalia.filter_trap": "Water Trap",
@@ -239,6 +241,8 @@
   "entity.animalia.acanthurus_achilles.scientific": "Acanthurus achilles",
   "entity.animalia.acanthurus_coeruleus.scientific": "Acanthurus coeruleus",
   "entity.animalia.acanthurus_japonicus.scientific": "Acanthurus japonicus",
+  "entity.animalia.forcipiger_flavissimus.scientific": "Forcipiger flavissimus",
+  "entity.animalia.forcipiger_longirostris.scientific": "Forcipiger longirostris",
 
   "order.animalia.perciformes": "Perciformes",
   "order.animalia.anabantiformes": "Anabantiformes",
@@ -289,6 +293,7 @@
   "family.animalia.leptobramidae": "Leptobramidae",
   "family.animalia.syngnathidae": "Syngnathidae",
   "family.animalia.bovichtidae": "Bovichtidae",
+  "family.animalia.ictaluridae": "Ictaluridae",
 
   "trivia.animalia.dissostichus_eleginoides": "The Chilean Sea Bass, also known as the Patagonian Toothfish is an icefish that lives in the southern cold oceans at depths of 45 to over 3000 meters deep.",
   "trivia.animalia.percophis_brasiliensis": "The Brazilian Flathead is considered to be the most basal member of Notothenioidei. It lives off the coast of Brazil and Argentina.",
@@ -350,6 +355,8 @@
   "trivia.animalia.acanthurus_sohal": "The Sohal tang is a striped surgeonfish  found in the Indian Ocean. Sohal comes from the Arabic name for this fish. It grows to around 40cm in length and is usually found alone.",
   "trivia.animalia.acanthurus_coeruleus": "The Atlantic blue tang is a medium sized surgeonfish found off the coasts of the eastern Americas. They are known to engage in cleaning behavior with other fish and they grow up to 40cm in length.",
   "trivia.animalia.acanthurus_achilles": "The Achilles tang is tropical fish characterized by a large circular orange splotch around its tail spine. It is commonly found in reefs around Hawaii and the Pitcairn Islands.",
+  "trivia.animalia.forcipiger_flavissimus": "This butterflyfish is characterized by its yellow, black and white body colors and long snout. It looks similar to other members of the genus except that its snout is not as long. This animal can reach 22cm in length.",
+  "trivia.animalia.forcipiger_longirostris": "This butterflyfish sports a long slender snout and can be found in the Indo-Pacific region. Its snout is much longer than its cousin, F. flavissimus, which is generally more common and the same size.",
 
   "debug.animalia.trivia": "If this value displays, there is a bug [trivia]",
   "debug.animalia.family": "if this text appears, there is a bug [family]",

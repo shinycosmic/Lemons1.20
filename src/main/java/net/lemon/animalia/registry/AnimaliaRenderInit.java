@@ -61,6 +61,10 @@ public class AnimaliaRenderInit {
         EntityRenderers.register(ModEntities.ACANTHURUS_SOHAL.get(), AcanthurusSlenderRenderer::new);
         EntityRenderers.register(ModEntities.ACANTHURUS_JAPONICUS.get(), AcanthurusRenderer::new);
         EntityRenderers.register(ModEntities.ACANTHURUS_LINEATUS.get(), AcanthurusSlenderRenderer::new);
+        EntityRenderers.register(ModEntities.FORCIPIGER_LONGIROSTRIS.get(), ForcipigerRenderer::new);
+        EntityRenderers.register(ModEntities.FORCIPIGER_FLAVISSIMUS.get(), ForcipigerRenderer::new);
+        EntityRenderers.register(ModEntities.NEOLISSOCHILUS_PNAR.get(), CavefishRenderer::new);
+        EntityRenderers.register(ModEntities.SATAN_EURYSTOMUS.get(), CavefishRenderer::new);
 
 
 

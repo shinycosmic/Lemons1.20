@@ -50,7 +50,9 @@ public class RegSchoolingEntity extends FishBase implements GeoEntity, Scannable
             return ModItems.FISH_FOOD.get();
         } else if (this.getType() == ModEntities.POMACANTHUS_IMPERATOR.get()) {
             return Items.SPONGE;
-        } else if (this.getType() == ModEntities.CHELMON_ROSTRATUS.get()) {
+        } else if (this.getType() == ModEntities.CHELMON_ROSTRATUS.get()
+                    || this.getType() == ModEntities.FORCIPIGER_LONGIROSTRIS.get()
+                    || this.getType() == ModEntities.FORCIPIGER_FLAVISSIMUS.get()) {
             return ModItems.WORM.get();
         } else if (this.getType() == ModEntities.SIGANUS_VULPINUS.get()) {
             return Items.SEAGRASS;
@@ -98,6 +100,10 @@ public class RegSchoolingEntity extends FishBase implements GeoEntity, Scannable
             return Component.translatable("trivia.animalia.acanthurus_lineatus");
         } else if (this.getType() == ModEntities.LEPTOBRAMA_MUELLERI.get()) {
             return Component.translatable("trivia.animalia.leptobrama_muelleri");
+        } else if (this.getType() == ModEntities.FORCIPIGER_LONGIROSTRIS.get()) {
+            return Component.translatable("trivia.animalia.forcipiger_longirostris");
+        } else if (this.getType() == ModEntities.FORCIPIGER_FLAVISSIMUS.get()) {
+            return Component.translatable("trivia.animalia.forcipiger_flavissimus");
         }
         return Component.translatable("debug.animalia.trivia");
     }
@@ -116,7 +122,10 @@ public class RegSchoolingEntity extends FishBase implements GeoEntity, Scannable
                 || this.getType() == ModEntities.ACANTHURUS_ACHILLES.get()
                 || this.getType() == ModEntities.ACANTHURUS_LEUCOSTERNON.get()) {
             return Component.translatable("family.animalia.acanthuridae");
-        } else if (this.getType() == ModEntities.CHELMON_ROSTRATUS.get() || this.getType() == ModEntities.CHAETODON_AURIGA.get()) {
+        } else if (this.getType() == ModEntities.CHELMON_ROSTRATUS.get()
+                || this.getType() == ModEntities.CHAETODON_AURIGA.get()
+                || this.getType() == ModEntities.FORCIPIGER_FLAVISSIMUS.get()
+                || this.getType() == ModEntities.FORCIPIGER_LONGIROSTRIS.get()) {
             return Component.translatable("family.animalia.chaetodontidae");
         }else if (this.getType() == ModEntities.SIGANUS_VULPINUS.get()) {
             return Component.translatable("family.animalia.siganidae");
@@ -143,11 +152,10 @@ public class RegSchoolingEntity extends FishBase implements GeoEntity, Scannable
 
     @Override
     public int getIdleCount() {
-        if (this.getType() == ModEntities.CHELMON_ROSTRATUS.get()) {
-            return 1;
-        } else if (this.getType() == ModEntities.CHAETODON_AURIGA.get()) {
-            return 1;
-        } else if (this.getType() == ModEntities.SIGANUS_VULPINUS.get()) {
+        if (this.getType() == ModEntities.CHELMON_ROSTRATUS.get()
+                || this.getType() == ModEntities.CHAETODON_AURIGA.get()
+                || this.getType() == ModEntities.FORCIPIGER_LONGIROSTRIS.get()
+                || this.getType() == ModEntities.FORCIPIGER_FLAVISSIMUS.get()) {
             return 1;
         }
         return 0;
@@ -226,7 +234,7 @@ public class RegSchoolingEntity extends FishBase implements GeoEntity, Scannable
     }
 
     public float getSwimSpeed() {
-        return  1.2f;
+        return  1.05f;
     }
 
     @Override
@@ -237,7 +245,7 @@ public class RegSchoolingEntity extends FishBase implements GeoEntity, Scannable
             return AnimaliaFunctionUtil.getScaleForSize(22, this.genVarSize(20, 50, 40));
         } else if (this.getType() == ModEntities.NASO_BREVIROSTRIS.get()) {
             return AnimaliaFunctionUtil.getScaleForSize(33, this.genVarSize(40, 80, 60));
-        } else if (this.getType() == ModEntities.CHELMON_ROSTRATUS.get()) {
+        } else if (this.getType() == ModEntities.CHELMON_ROSTRATUS.get() || this.getType() == ModEntities.FORCIPIGER_FLAVISSIMUS.get() || this.getType() == ModEntities.FORCIPIGER_LONGIROSTRIS.get()) {
             return AnimaliaFunctionUtil.getScaleForSize(16, 22);
         } else if (this.getType() == ModEntities.CHAETODON_AURIGA.get()) {
             return AnimaliaFunctionUtil.getScaleForSize(16, 25);
@@ -269,13 +277,15 @@ public class RegSchoolingEntity extends FishBase implements GeoEntity, Scannable
         HolonetEntities.register(ModEntities.ACANTHURUS_COERULEUS, Scannable.AppName.FISH, "Acanthuriformes");
         HolonetEntities.register(ModEntities.ACANTHURUS_SOHAL, Scannable.AppName.FISH, "Acanthuriformes");
         HolonetEntities.register(ModEntities.ACANTHURUS_LINEATUS, Scannable.AppName.FISH, "Acanthuriformes");
+        HolonetEntities.register(ModEntities.FORCIPIGER_LONGIROSTRIS, Scannable.AppName.FISH, "Acanthuriformes");
+        HolonetEntities.register(ModEntities.FORCIPIGER_FLAVISSIMUS, Scannable.AppName.FISH, "Acanthuriformes");
 
     }
 
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
         controllers.add(new AnimationController<>(this, "controller", 5, this::predicate));
-        controllers.add(new AnimationController<>(this, "idles_controller", 5, this::idlesPredicate));
+        controllers.add(new AnimationController<>(this, "idles_controller", 0, this::idlesPredicate));
         controllers.add(new AnimationController<>(this, "eat_controller", 0, this::eatPredicate));
     }
 

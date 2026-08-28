@@ -86,6 +86,10 @@ public class ModSpawns {
                 BiomeSelector.in(Biomes.MANGROVE_SWAMP));
         add(ModEntities.AMBLYOPSIS_HOOSIERI, 6, 1, 1,
                 BiomeSelector.in(Biomes.DRIPSTONE_CAVES));
+        add(ModEntities.SATAN_EURYSTOMUS, 3, 1, 1,
+                BiomeSelector.in(Biomes.DRIPSTONE_CAVES));
+        add(ModEntities.NEOLISSOCHILUS_PNAR, 3, 1, 1,
+                BiomeSelector.in(Biomes.LUSH_CAVES));
         add(ModEntities.SINOCYCLOCHEILUS_LONGICORNUS, 3, 1, 1,
                 BiomeSelector.in(Biomes.LUSH_CAVES));
         add(ModEntities.SINOCYCLOCHEILUS_HYALINUS, 3, 1, 1,
@@ -123,6 +127,10 @@ public class ModSpawns {
         add(ModEntities.ACANTHURUS_LINEATUS, 3, 1, 2,
                 BiomeSelector.in(Biomes.WARM_OCEAN));
         add(ModEntities.ACANTHURUS_ACHILLES, 3, 1, 2,
+                BiomeSelector.in(Biomes.WARM_OCEAN));
+        add(ModEntities.FORCIPIGER_FLAVISSIMUS, 4, 1, 2,
+                BiomeSelector.in(Biomes.WARM_OCEAN));
+        add(ModEntities.FORCIPIGER_LONGIROSTRIS, 2, 1, 2,
                 BiomeSelector.in(Biomes.WARM_OCEAN));
 
         add(ModEntities.PROCAMBARUS_CLARKII, 6, 1, 2,

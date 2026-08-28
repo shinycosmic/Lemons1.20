@@ -111,9 +111,6 @@ public class SchoolBoidGoal extends Goal {
     }
 
     private void faceMovement() {
-        if (!this.fish.getNavigation().isDone()) {
-            return;
-        }
         Vec3 velocity = this.fish.getDeltaMovement();
         if (velocity.lengthSqr() < 1.0E-4) {
             return;
