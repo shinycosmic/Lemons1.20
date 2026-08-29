@@ -1,9 +1,11 @@
 package net.lemon.animalia.entity.render;
 
 import com.mojang.blaze3d.vertex.PoseStack;
+import net.lemon.animalia.Animalia;
 import net.lemon.animalia.entity.custom.RegSchoolingEntity;
 import net.lemon.animalia.entity.model.fish.AcanthurusModel;
 import net.lemon.animalia.entity.model.fish.ForcipigerModel;
+import net.lemon.animalia.entity.render.layer.NightFadeLayer;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
@@ -17,6 +19,7 @@ public class ForcipigerRenderer extends GeoEntityRenderer<RegSchoolingEntity> {
 
     public ForcipigerRenderer(EntityRendererProvider.Context context) {
         super(context, new ForcipigerModel());
+        this.addRenderLayer(new NightFadeLayer<>(this, new ResourceLocation(Animalia.MODID, "textures/entity/forcipiger_flavissimus_night.png")));
     }
 
     @Override

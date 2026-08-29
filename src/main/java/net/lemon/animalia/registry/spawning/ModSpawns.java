@@ -112,10 +112,18 @@ public class ModSpawns {
                 BiomeSelector.in(Biomes.WARM_OCEAN));
         add(ModEntities.BOVICHTUS_VARIEGATUS, 4, 1, 2,
                 BiomeSelector.in(Biomes.SNOWY_BEACH));
-        add(ModEntities.HETEROCONGER_HASSI, 8, 4, 7,
+        add(ModEntities.HETEROCONGER_HASSI, 6, 4, 7,
                 BiomeSelector.in(Biomes.LUKEWARM_OCEAN));
-        add(ModEntities.GORGASIA_PRECLARA, 5, 1, 5,
+        add(ModEntities.HETEROCONGER_POLYZONA, 6, 4, 7,
+                BiomeSelector.in(Biomes.WARM_OCEAN));
+        add(ModEntities.HETEROCONGER_LUTEOLUS, 6, 4, 7,
+                BiomeSelector.in(Biomes.WARM_OCEAN));
+        add(ModEntities.GORGASIA_PRECLARA, 3, 1, 5,
                 BiomeSelector.in(Biomes.LUKEWARM_OCEAN));
+        add(ModEntities.GORGASIA_BARNESI, 3, 1, 5,
+                BiomeSelector.in(Biomes.WARM_OCEAN));
+        add(ModEntities.GORGASIA_JAPONICA, 3, 3, 5,
+                BiomeSelector.in(Biomes.OCEAN));
         add(ModEntities.ACANTHURUS_LEUCOSTERNON, 3, 1, 2,
                 BiomeSelector.in(Biomes.WARM_OCEAN));
         add(ModEntities.ACANTHURUS_JAPONICUS, 3, 1, 2,

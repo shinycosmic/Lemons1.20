@@ -40,6 +40,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraftforge.common.Tags;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Objects;
@@ -320,7 +321,7 @@ public abstract class AnimaliaBreedableWater extends WaterAnimal implements IAct
     public boolean onHideableBlock(AnimaliaBreedableWater mob) {
         BlockPos pos = mob.blockPosition().below();
         BlockState blockState = mob.level().getBlockState(pos);
-        return blockState.is(BlockTags.DIRT) || blockState.is(BlockTags.SAND);
+        return blockState.is(BlockTags.DIRT) || blockState.is(BlockTags.SAND) || blockState.is(Tags.Blocks.GRAVEL) || blockState.is(BlockTags.CONVERTABLE_TO_MUD);
     }
 
     public boolean canHide() {

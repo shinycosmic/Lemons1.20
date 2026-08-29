@@ -120,6 +120,14 @@ public class HeterocongerEntity extends FishBase implements GeoEntity, Scannable
     public Component getTrivia() {
         if(this.getType() == ModEntities.HETEROCONGER_HASSI.get()) {
             return Component.translatable("trivia.animalia.heteroconger_hassi");
+        } else if(this.getType() == ModEntities.HETEROCONGER_POLYZONA.get()) {
+            return Component.translatable("trivia.animalia.heteroconger_polyzona");
+        } else if(this.getType() == ModEntities.HETEROCONGER_LUTEOLUS.get()) {
+            return Component.translatable("trivia.animalia.heteroconger_luteolus");
+        } else if(this.getType() == ModEntities.GORGASIA_JAPONICA.get()) {
+            return Component.translatable("trivia.animalia.gorgasia_japonica");
+        } else if(this.getType() == ModEntities.GORGASIA_BARNESI.get()) {
+            return Component.translatable("trivia.animalia.gorgasia_barnesi");
         }
         return Component.translatable("trivia.animalia.gorgasia_preclara");
     }
@@ -148,12 +156,21 @@ public class HeterocongerEntity extends FishBase implements GeoEntity, Scannable
 
     @Override
     public float genVarSizeMultiplier() {
+        if (this.getType() == ModEntities.GORGASIA_BARNESI.get()) {
+            return AnimaliaFunctionUtil.getScaleForSize(50, this.genVarSize(135, 160, 145));
+        } else if (this.getType() == ModEntities.GORGASIA_JAPONICA.get()) {
+            return AnimaliaFunctionUtil.getScaleForSize(50, this.genVarSize(80, 120, 100));
+        }
         return AnimaliaFunctionUtil.getScaleForSize(50, 70);
     }
 
     public static void registerHolonet(){
         HolonetEntities.register(ModEntities.HETEROCONGER_HASSI, Scannable.AppName.FISH, "Anguilliformes");
         HolonetEntities.register(ModEntities.GORGASIA_PRECLARA, Scannable.AppName.FISH, "Anguilliformes");
+        HolonetEntities.register(ModEntities.GORGASIA_JAPONICA, Scannable.AppName.FISH, "Anguilliformes");
+        HolonetEntities.register(ModEntities.GORGASIA_BARNESI, Scannable.AppName.FISH, "Anguilliformes");
+        HolonetEntities.register(ModEntities.HETEROCONGER_POLYZONA, Scannable.AppName.FISH, "Anguilliformes");
+        HolonetEntities.register(ModEntities.HETEROCONGER_LUTEOLUS, Scannable.AppName.FISH, "Anguilliformes");
 
     }
 

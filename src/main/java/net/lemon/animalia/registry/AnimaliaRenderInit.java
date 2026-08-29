@@ -54,6 +54,10 @@ public class AnimaliaRenderInit {
         EntityRenderers.register(ModEntities.HIPPOCAMPUS_REIDI.get(), HippocampusIngensRenderer::new);
         EntityRenderers.register(ModEntities.BOVICHTUS_VARIEGATUS.get(), BovichtusVariegatusRenderer::new);
         EntityRenderers.register(ModEntities.HETEROCONGER_HASSI.get(), HeterocongerRenderer::new);
+        EntityRenderers.register(ModEntities.HETEROCONGER_POLYZONA.get(), HeterocongerRenderer::new);
+        EntityRenderers.register(ModEntities.HETEROCONGER_LUTEOLUS.get(), HeterocongerRenderer::new);
+        EntityRenderers.register(ModEntities.GORGASIA_JAPONICA.get(), HeterocongerRenderer::new);
+        EntityRenderers.register(ModEntities.GORGASIA_BARNESI.get(), HeterocongerRenderer::new);
         EntityRenderers.register(ModEntities.GORGASIA_PRECLARA.get(), HeterocongerRenderer::new);
         EntityRenderers.register(ModEntities.ACANTHURUS_LEUCOSTERNON.get(), AcanthurusRenderer::new);
         EntityRenderers.register(ModEntities.ACANTHURUS_ACHILLES.get(), AcanthurusRenderer::new);
