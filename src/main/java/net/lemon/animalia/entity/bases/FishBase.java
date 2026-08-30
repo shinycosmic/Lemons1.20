@@ -446,7 +446,7 @@ public abstract class FishBase extends AnimaliaBreedableWater implements Bucketa
             this.moveRelative(0.01F, this.isMovementLockedByIdle() ? Vec3.ZERO : pTravelVector);
             this.move(MoverType.SELF, this.getDeltaMovement().scale(this.getSwimSpeed()));
             this.setDeltaMovement(this.getDeltaMovement().scale(0.9D));
-            if (this.getTarget() == null && this.sinksWhenIdle()) {
+            if (this.getTarget() == null && this.getNavigation().isDone() && this.sinksWhenIdle()) {
                 this.setDeltaMovement(this.getDeltaMovement().add(0.0D, -0.005D, 0.0D));
             }
         } else {
