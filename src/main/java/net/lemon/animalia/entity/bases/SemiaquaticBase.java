@@ -47,8 +47,12 @@ public abstract class SemiaquaticBase extends AnimaliaLandBase{
         this.goalSelector.addGoal(4, new GoToWaterGoal(this, 1.3D, 12));
         this.goalSelector.addGoal(4, new GoToLandGoal(this, 1.3D, 16));
         this.goalSelector.addGoal(5, new LandStrollGoal(this, 1.0D));
-        if (this.waterPreference() > 0.0F) this.goalSelector.addGoal(5, new WaterStrollGoal(this, 1.0D, (int) (120 / this.waterPreference())));
+        if (this.waterPreference() > 0.0F && !this.isBottomWalker()) this.goalSelector.addGoal(5, new WaterStrollGoal(this, 1.0D, (int) (120 / this.waterPreference())));
         if (this.canDrownInFluidType(ForgeMod.WATER_TYPE.get())) this.goalSelector.addGoal(0, new BreathAirGoal(this));
+    }
+
+    public boolean isBottomWalker() {
+        return false;
     }
 
     public float waterPreference() {
@@ -102,10 +106,14 @@ public abstract class SemiaquaticBase extends AnimaliaLandBase{
 
     @Override
     public void travel(Vec3 pTravelVector) {
-        if (this.isEffectiveAi() && (this.isUnderWater() || (this.isInWater() && !this.onGround()))) {
+        if (this.isEffectiveAi() && (this.isUnderWater() || (this.isInWater() && !this.onGround()))
+                && !(this.isBottomWalker() && this.onGround())) {
             this.moveRelative(0.01F, this.isMovementLockedByIdle() || this.isGrazing() ? Vec3.ZERO : pTravelVector);
             this.move(MoverType.SELF, this.getDeltaMovement().scale(this.getSwimSpeed()));
             this.setDeltaMovement(this.getDeltaMovement().scale(0.9D));
+            if (this.isBottomWalker() && this.getNavigation().isDone()) {
+                this.setDeltaMovement(this.getDeltaMovement().add(0.0D, -0.005D, 0.0D));
+            }
         } else {
             super.travel(pTravelVector);
         }
@@ -270,8 +278,11 @@ public abstract class SemiaquaticBase extends AnimaliaLandBase{
     }
 
     static class LandStrollGoal extends RandomStrollGoal {
+        private final SemiaquaticBase semiaquatic;
+
         LandStrollGoal(SemiaquaticBase mob, double speedMult) {
             super(mob, speedMult);
+            this.semiaquatic = mob;
         }
 
         @Override
@@ -280,7 +291,7 @@ public abstract class SemiaquaticBase extends AnimaliaLandBase{
             RandomSource random = this.mob.getRandom();
             for (int i = 0; i < 10; ++i) {
                 BlockPos pos = this.mob.blockPosition().offset(random.nextInt(21) - 10, random.nextInt(15) - 7, random.nextInt(21) - 10);
-                if (isLand(level, pos)) {
+                if (this.semiaquatic.isBottomWalker() ? isFloor(level, pos) && !this.semiaquatic.tooDeep(pos) : isLand(level, pos)) {
                     return Vec3.atBottomCenterOf(pos);
                 }
             }
