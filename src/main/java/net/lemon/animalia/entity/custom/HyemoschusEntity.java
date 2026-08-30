@@ -12,6 +12,7 @@ import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.SpawnGroupData;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import org.jetbrains.annotations.Nullable;
@@ -22,13 +23,14 @@ import software.bernie.geckolib.core.animation.AnimatableManager;
 
 public class HyemoschusEntity extends SemiaquaticBase implements GeoEntity, Scannable {
     private final AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
-    protected HyemoschusEntity(EntityType<? extends Animal> entityType, Level level) {
+
+    public HyemoschusEntity(EntityType<? extends Animal> entityType, Level level) {
         super(entityType, level);
     }
 
     @Override
     public Item getBreedingItem() {
-        return null;
+        return Items.APPLE;
     }
 
     @Override
@@ -38,27 +40,27 @@ public class HyemoschusEntity extends SemiaquaticBase implements GeoEntity, Scan
 
     @Override
     public ActivityTime activityTime() {
-        return null;
+        return ActivityTime.NOCTURNAL;
     }
 
     @Override
     public AppName getApp() {
-        return null;
+        return AppName.FIELD;
     }
 
     @Override
     public Component getTrivia() {
-        return null;
+        return Component.translatable("trivia.animalia.hyemoschus_aquaticus");
     }
 
     @Override
     public Component getFamily() {
-        return null;
+        return Component.translatable("family.animalia.tragulidae");
     }
 
     @Override
     public Component getOrder() {
-        return null;
+        return Component.translatable("order.animalia.artiodactyla");
     }
 
     @Override
