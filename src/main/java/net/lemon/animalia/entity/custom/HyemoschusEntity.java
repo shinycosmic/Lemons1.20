@@ -114,4 +114,6 @@ public class HyemoschusEntity extends SemiaquaticBase implements GeoEntity, Scan
         }
         return super.finalizeSpawn(level, difficulty, reason, spawnData, dataTag);
     }
+
+
 }

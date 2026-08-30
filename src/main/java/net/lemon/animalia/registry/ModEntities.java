@@ -100,6 +100,7 @@ public class ModEntities {
     public static final RegistryObject<EntityType<CrayfishEntity>> PROCAMBARUS_LUCIFUGUS = registerEntityType("procambarus_lucifugus", CrayfishEntity::new, ModMobCategories.ANIMALIA_INVERTEBRATE, 0.5f, 0.3f, CrayfishEntity::setAttributes, 0xab9782, 0xbbb8c9, true);
     //Actual Land animals
     public static final RegistryObject<EntityType<PangolinEntity>> SMUTSIA_GIGANTEA = registerEntityType("smutsia_gigantea", PangolinEntity::new, ModMobCategories.ANIMALIA_LAND, 0.9f, 0.9f, PangolinEntity::setAttributes, 0x8e6b3c, 0xffc06a);
+    public static final RegistryObject<EntityType<HyemoschusEntity>> HYEMOSCHUS_AQUATICUS = registerEntityType("hyemoschus_aquaticus", HyemoschusEntity::new, ModMobCategories.ANIMALIA_LAND, 0.9f, 0.9f, HyemoschusEntity::setAttributes, 0x553933, 0xe0dbd9);
 
 
 

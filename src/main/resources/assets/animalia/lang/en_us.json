@@ -160,6 +160,7 @@
   "entity.animalia.centropyge_boylei": "Peppermint Angelfish",
   "entity.animalia.centropyge_venusta": "Purple-masked Angelfish",
   "entity.animalia.centropyge_loricula": "Flame Angelfish",
+  "entity.animalia.hyemoschus_aquaticus": "Water Chevrotain",
 
 
   "tooltip.animalia.baby": "Juvenile",
@@ -258,6 +259,7 @@
   "entity.animalia.centropyge_loricula.scientific": "Centropyge loricula",
   "entity.animalia.centropyge_venusta.scientific": "Centropyge venusta",
   "entity.animalia.centropyge_boylei.scientific": "Centropyge boylei",
+  "entity.animalia.hyemoschus_aquaticus.scientific": "Hyemoschus aquaticus",
 
   "order.animalia.perciformes": "Perciformes",
   "order.animalia.anabantiformes": "Anabantiformes",
@@ -273,6 +275,7 @@
   "order.animalia.percopsiformes": "Percopsiformes",
   "order.animalia.syngnathiformes": "Syngnathiformes",
   "order.animalia.anguilliformes": "Anguilliformes",
+  "order.animalia.artiodactyla": "Artiodactyla",
 
   "family.animalia.percophidae": "Percophidae",
   "family.animalia.eleginopidae": "Eleginopidae",
@@ -309,6 +312,7 @@
   "family.animalia.syngnathidae": "Syngnathidae",
   "family.animalia.bovichtidae": "Bovichtidae",
   "family.animalia.ictaluridae": "Ictaluridae",
+  "family.animalia.tragulidae": "Tragulidae",
 
   "trivia.animalia.dissostichus_eleginoides": "The Chilean Sea Bass, also known as the Patagonian Toothfish is an icefish that lives in the southern cold oceans at depths of 45 to over 3000 meters deep.",
   "trivia.animalia.percophis_brasiliensis": "The Brazilian Flathead is considered to be the most basal member of Notothenioidei. It lives off the coast of Brazil and Argentina.",
@@ -379,6 +383,7 @@
   "trivia.animalia.centropyge_loricula": "",
   "trivia.animalia.centropyge_venusta": "",
   "trivia.animalia.centropyge_boylei": "",
+  "trivia.animalia.hyemoschus_aquaticus": "The water chevrotain is a small deer-like animal that lives in tropical Africa. It is the largest of the chevrotains, at 85cm in length and it typically stays around water, foraging for food. It is also exclusively nocturnal.",
 
   "debug.animalia.trivia": "If this value displays, there is a bug [trivia]",
   "debug.animalia.family": "if this text appears, there is a bug [family]",
