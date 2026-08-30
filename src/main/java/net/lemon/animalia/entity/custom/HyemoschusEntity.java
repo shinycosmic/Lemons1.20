@@ -2,6 +2,7 @@ package net.lemon.animalia.entity.custom;
 
 import net.lemon.animalia.entity.bases.SemiaquaticBase;
 import net.lemon.animalia.entity.bases.helpers.ActivityTime;
+import net.lemon.animalia.registry.ModTags;
 import net.lemon.animalia.util.Scannable;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -36,7 +37,7 @@ public class HyemoschusEntity extends SemiaquaticBase implements GeoEntity, Scan
 
     @Override
     public TagKey<Item> getFoodTag() {
-        return Tags.Items.CROPS;
+        return ModTags.Items.FRUITS_SEEDS;
     }
 
     @Override
