@@ -8,7 +8,10 @@ import net.lemon.animalia.entity.bases.helpers.ActivityTime;
 import net.lemon.animalia.entity.bases.helpers.ICanSleep;
 import net.lemon.animalia.entity.bases.helpers.ICanThreat;
 import net.lemon.animalia.entity.bases.helpers.IGrazer;
+import net.lemon.animalia.registry.ModEntities;
 import net.lemon.animalia.registry.ModTags;
+import net.lemon.animalia.util.AnimaliaFunctionUtil;
+import net.lemon.animalia.util.HolonetEntities;
 import net.lemon.animalia.util.Scannable;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -134,15 +137,20 @@ public class HyemoschusEntity extends SemiaquaticBase implements GeoEntity, Scan
     }
 
     public static void registerHolonet(){
-//        HolonetEntities.register(ModEntities.HYEMOSCHUS_AQUATICUS, AppName.FIELD, "Artiodactyla");
+        HolonetEntities.register(ModEntities.HYEMOSCHUS_AQUATICUS, AppName.FIELD, "Artiodactyla");
     }
 
     @Override
     public float genVarSizeMultiplier() {
-//        if (this.getType() == ModEntities.HYEMOSCHUS_AQUATICUS.get()) {
-//            return AnimaliaFunctionUtil.getScaleForSize(21, 85);
-//        }
+        if (this.getType() == ModEntities.HYEMOSCHUS_AQUATICUS.get()) {
+            return AnimaliaFunctionUtil.getScaleForSize(21, 85);
+        }
         return 1;
+    }
+
+    @Override
+    public boolean hasDimorphism() {
+        return true;
     }
 
     @Override

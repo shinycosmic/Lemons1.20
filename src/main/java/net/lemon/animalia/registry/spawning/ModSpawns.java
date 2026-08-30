@@ -159,6 +159,8 @@ public class ModSpawns {
         //land
         add(ModEntities.SMUTSIA_GIGANTEA, 1, 1, 1,
                 BiomeSelector.in(BiomeTags.IS_SAVANNA));
+        add(ModEntities.HYEMOSCHUS_AQUATICUS, 2, 1, 1,
+                BiomeSelector.in(BiomeTags.IS_JUNGLE));
     }
 
     private static void add(RegistryObject<? extends EntityType<?>> type, int weight, int minGroup, int maxGroup, BiomeSelector selector) {
