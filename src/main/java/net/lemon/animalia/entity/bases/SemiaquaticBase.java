@@ -35,7 +35,7 @@ public abstract class SemiaquaticBase extends AnimaliaLandBase{
 
     protected SemiaquaticBase(EntityType<? extends Animal> entityType, Level level) {
         super(entityType, level);
-        this.moveControl = new SmoothSwimmingMoveControl(this, 85, 10, 0.02F, 0.1F, true);
+        this.moveControl = new SmoothSwimmingMoveControl(this, 85, 10, 0.02F, 0.1F, false);
         this.setMaxUpStep(1.0F);
     }
 

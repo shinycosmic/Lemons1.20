@@ -160,6 +160,7 @@ public class HyemoschusEntity extends SemiaquaticBase implements GeoEntity, Scan
     }
 
     private <T extends GeoAnimatable> PlayState predicate(AnimationState<T> animationState) {
+        animationState.getController().setAnimationSpeed(1.0D);
         if (this.isGrazing() && !this.isBaby()) {
             animationState.getController().setAnimation(RawAnimation.begin().then("graze", Animation.LoopType.LOOP));
             return PlayState.CONTINUE;
@@ -186,6 +187,9 @@ public class HyemoschusEntity extends SemiaquaticBase implements GeoEntity, Scan
             return PlayState.CONTINUE;
         }
         if (this.isInWater() && !this.onGround()) {
+            if (!this.isActuallyMoving()) {
+                animationState.getController().setAnimationSpeed(0.0D);
+            }
             animationState.getController().setAnimation(RawAnimation.begin().then("diving", Animation.LoopType.LOOP));
             return PlayState.CONTINUE;
         }
