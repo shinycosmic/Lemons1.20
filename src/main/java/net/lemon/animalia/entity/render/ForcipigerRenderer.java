@@ -19,7 +19,7 @@ public class ForcipigerRenderer extends GeoEntityRenderer<RegSchoolingEntity> {
 
     public ForcipigerRenderer(EntityRendererProvider.Context context) {
         super(context, new ForcipigerModel());
-        this.addRenderLayer(new NightFadeLayer<>(this, new ResourceLocation(Animalia.MODID, "textures/entity/forcipiger_flavissimus_night.png")));
+        this.addRenderLayer(new NightFadeLayer<>(this));
     }
 
     @Override

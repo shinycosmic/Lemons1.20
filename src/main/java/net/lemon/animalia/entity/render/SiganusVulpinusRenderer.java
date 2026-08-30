@@ -18,7 +18,7 @@ public class SiganusVulpinusRenderer extends GeoEntityRenderer<RegSchoolingEntit
 
     public SiganusVulpinusRenderer(EntityRendererProvider.Context context) {
         super(context, new SiganusVulpinusModel());
-        this.addRenderLayer(new NightFadeLayer<>(this, new ResourceLocation(Animalia.MODID, "textures/entity/siganus_vulpinus_night.png")));
+        this.addRenderLayer(new NightFadeLayer<>(this));
     }
 
     @Override
