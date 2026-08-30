@@ -2,9 +2,7 @@ package net.lemon.animalia.entity.render;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.lemon.animalia.entity.custom.HyemoschusEntity;
-import net.lemon.animalia.entity.custom.PangolinEntity;
 import net.lemon.animalia.entity.model.field.HyemoschusAquaticusModel;
-import net.lemon.animalia.entity.model.field.SmutsiaGiganteaModel;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import software.bernie.geckolib.cache.object.BakedGeoModel;

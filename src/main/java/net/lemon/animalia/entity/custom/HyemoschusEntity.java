@@ -7,7 +7,6 @@ import net.lemon.animalia.entity.bases.SemiaquaticBase;
 import net.lemon.animalia.entity.bases.helpers.ActivityTime;
 import net.lemon.animalia.entity.bases.helpers.ICanSleep;
 import net.lemon.animalia.entity.bases.helpers.ICanThreat;
-import net.lemon.animalia.entity.bases.helpers.IGrazer;
 import net.lemon.animalia.registry.ModEntities;
 import net.lemon.animalia.registry.ModTags;
 import net.lemon.animalia.util.AnimaliaFunctionUtil;

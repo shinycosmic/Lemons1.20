@@ -2,7 +2,6 @@ package net.lemon.animalia.entity.model.field;
 
 import net.lemon.animalia.Animalia;
 import net.lemon.animalia.entity.custom.HyemoschusEntity;
-import net.lemon.animalia.entity.custom.PangolinEntity;
 import net.minecraft.resources.ResourceLocation;
 import software.bernie.geckolib.constant.DataTickets;
 import software.bernie.geckolib.core.animatable.model.CoreGeoBone;
