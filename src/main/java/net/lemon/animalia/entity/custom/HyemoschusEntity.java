@@ -235,24 +235,27 @@ public class HyemoschusEntity extends SemiaquaticBase implements GeoEntity, Scan
 
 
     @Override
-    public boolean isBottomWalker() {return true;}
+    public boolean isBottomWalker() { return true; }
 
     @Override
-    public int depthTolerance() {return 5;}
+    public int depthTolerance() { return 5; }
 
     @Override
-    public int getMaxAirSupply() {return 4800;}
+    public int getMaxAirSupply() { return 4800; }
 
 
 
     @Override
-    public int getThreatPhase() {return this.entityData.get(THREAT_PHASE);}
+    public int getThreatPhase() { return this.entityData.get(THREAT_PHASE); }
 
     @Override
-    public void setThreatPhase(int phase) {this.entityData.set(THREAT_PHASE, phase);}
+    public void setThreatPhase(int phase) { this.entityData.set(THREAT_PHASE, phase); }
 
     @Override
-    public boolean canStartThreatening() {return !this.isInWater();}
+    public boolean canStartThreatening() { return !this.isInWater(); }
+
+    @Override
+    public int getThreatCooldown() { return 60; }
 
     @Override
     public void onThreatFlee(LivingEntity threat) {
@@ -309,6 +312,7 @@ public class HyemoschusEntity extends SemiaquaticBase implements GeoEntity, Scan
             case 0 -> 10 + this.random.nextInt(21);
             case 2 -> 10 + this.random.nextInt(11);
             case 3 -> 15;
+            case 4 -> 40 + this.random.nextInt(61);
             default -> 20 + this.random.nextInt(21);
         };
     }
@@ -343,13 +347,16 @@ public class HyemoschusEntity extends SemiaquaticBase implements GeoEntity, Scan
 
 
     @Override
-    public int regChance() {return 100;}
+    public int regChance() { return 100; }
 
     @Override
-    public boolean isGrazableBlock(BlockState state) {return state.is(ModTags.Blocks.FORAGEABLE);}
+    public boolean isGrazableBlock(BlockState state) { return state.is(ModTags.Blocks.FORAGEABLE); }
 
     @Override
-    public boolean canGraze() {return super.canGraze() && !this.isBaby();}
+    public boolean canGraze() { return super.canGraze() && !this.isBaby(); }
+
+    @Override
+    public int getGrazeSearchHeight() { return 1; }
 
     @Override
     public void aiStep() {
@@ -372,5 +379,10 @@ public class HyemoschusEntity extends SemiaquaticBase implements GeoEntity, Scan
             this.landPanic.panicFrom(from);
         }
         return result;
+    }
+
+    @Override
+    public float getSwimSpeed() {
+        return 1.4f;
     }
 }

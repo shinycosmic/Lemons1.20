@@ -17,9 +17,9 @@ public interface IGrazer {
         return 20;
     }
 
-    default int getGrazeSearchRange() {
-        return 6;
-    }
+    default int getGrazeSearchRange() { return 6; }
+
+    default int getGrazeSearchHeight() { return this.getGrazeSearchRange(); }
 
     default int getGrazeCount() {
         return 1;
@@ -53,8 +53,7 @@ public interface IGrazer {
     @Nullable
     default BlockPos findGrazeBlock() {
         PathfinderMob mob = (PathfinderMob) this;
-        int range = this.getGrazeSearchRange();
-        return BlockPos.findClosestMatch(mob.blockPosition(), range, range,
+        return BlockPos.findClosestMatch(mob.blockPosition(), this.getGrazeSearchRange(), this.getGrazeSearchHeight(),
                 pos -> this.isGrazableBlock(mob.level().getBlockState(pos))).orElse(null);
     }
 }

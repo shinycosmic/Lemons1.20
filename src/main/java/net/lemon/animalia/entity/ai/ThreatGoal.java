@@ -144,7 +144,7 @@ public class ThreatGoal extends Goal {
     public void stop() {
         this.threatener.setThreatPhase(ICanThreat.THREAT_PHASE_NONE);
         this.threatTarget = null;
-        this.cooldown = 200;
+        this.cooldown = this.threatener.getThreatCooldown();
     }
 
     @Override

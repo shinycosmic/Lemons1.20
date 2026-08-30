@@ -26,6 +26,8 @@ public interface ICanThreat {
         return true;
     }
 
+    default int getThreatCooldown() { return 200; }
+
     //use this to add mid threat actions like attacking.
     default void onThreatTick(LivingEntity threat) {
     }

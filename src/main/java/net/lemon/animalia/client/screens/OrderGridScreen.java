@@ -3,6 +3,7 @@ package net.lemon.animalia.client.screens;
 import com.mojang.blaze3d.platform.Lighting;
 import net.lemon.animalia.entity.bases.FishBase;
 import net.lemon.animalia.client.player.network.ClientDiscoveryCache;
+import net.lemon.animalia.entity.bases.helpers.IDimorphism;
 import net.lemon.animalia.util.HolonetEntities;
 import net.lemon.animalia.entity.bases.helpers.IsGenetic;
 import net.lemon.animalia.util.Scannable;
@@ -338,6 +339,11 @@ public class OrderGridScreen extends Screen {
             if (dummy instanceof IsGenetic genetic) {
                 genetic.buildTraitsRandom();
             }
+
+            if (dummy instanceof IDimorphism gendered) {
+                gendered.setGender(1);
+            }
+
             dummy.discard();
             cachedDummies.put(entityType, dummy);
         }
