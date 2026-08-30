@@ -2392,7 +2392,7 @@
 				}
 			}
 		},
-		"sleeping": {
+		"sleep": {
 			"loop": true,
 			"bones": {
 				"main": {
