@@ -30,7 +30,8 @@ public class NightFadeLayer<T extends LivingEntity & GeoAnimatable> extends GeoR
             return;
         }
         ResourceLocation nightTexture = new ResourceLocation(Animalia.MODID, "textures/entity/" + ForgeRegistries.ENTITY_TYPES.getKey(animatable.getType()).getPath() + "_night.png");
-        RenderType overlayType = RenderType.entityTranslucent(nightTexture);        VertexConsumer vc = bufferSource.getBuffer(overlayType);
+        RenderType overlayType = RenderType.entityTranslucent(nightTexture);
+        VertexConsumer vc = bufferSource.getBuffer(overlayType);
         this.getRenderer().reRender(bakedModel, poseStack, bufferSource, animatable, overlayType, vc, partialTick, packedLight, packedOverlay, 1.0F, 1.0F, 1.0F, blend);
     }
 }
