@@ -2631,7 +2631,7 @@
 				}
 			}
 		},
-		"threatSniff": {
+		"idle3": {
 			"animation_length": 0.75,
 			"bones": {
 				"main": {
@@ -2832,7 +2832,7 @@
 				}
 			}
 		},
-		"threatEar": {
+		"idle4": {
 			"loop": true,
 			"bones": {
 				"main": {
