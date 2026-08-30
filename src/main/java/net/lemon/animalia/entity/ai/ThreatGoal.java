@@ -28,6 +28,7 @@ public class ThreatGoal extends Goal {
     private final ThreatOutcome outcome;
     private final Predicate<LivingEntity> threatPredicate;
     private final TargetingConditions targetingConditions;
+    private final double escalationRange;
 
     private LivingEntity threatTarget;
     private int displayTicks;
@@ -35,14 +36,22 @@ public class ThreatGoal extends Goal {
     private int cooldown;
     private int nextThreatScan;
 
+
     public ThreatGoal(PathfinderMob mob, double threatRange, int maxThreatTicks, int exitTicks, ThreatOutcome outcome) {
         this(mob, threatRange, maxThreatTicks, exitTicks, outcome, entity -> entity instanceof Player player && !player.isCreative());
     }
 
-    public ThreatGoal(PathfinderMob mob, double threatRange, int maxThreatTicks, int exitTicks, ThreatOutcome outcome, Predicate<LivingEntity> threatPredicate) {
+    public ThreatGoal(PathfinderMob mob, double threatRange, int maxThreatTicks, int exitTicks, ThreatOutcome outcome, Predicate<LivingEntity> threatPredicate)
+    {
+        this(mob, threatRange, 0.0D, maxThreatTicks, exitTicks, outcome, threatPredicate);
+    }
+
+    public ThreatGoal(PathfinderMob mob, double threatRange, double escalateRange, int maxThreatTicks, int exitTicks, ThreatOutcome outcome,
+                      Predicate<LivingEntity> threatPredicate) {
         this.mob = mob;
         this.threatener = (ICanThreat) mob;
         this.threatRange = threatRange;
+        this.escalationRange = escalateRange;
         this.maxThreatTicks = maxThreatTicks;
         this.exitTicks = exitTicks;
         this.outcome = outcome;
@@ -114,6 +123,14 @@ public class ThreatGoal extends Goal {
 
         if (threatGone) {
             this.beginLeaving();
+            return;
+        }
+
+        if (this.mob.hurtTime > 0
+                || (this.escalationRange > 0.0D
+                && this.mob.distanceTo(this.threatTarget) < this.escalationRange
+                && this.threatPredicate.test(this.threatTarget))) {
+            this.fireOutcome();
             return;
         }
 

@@ -142,6 +142,11 @@ public abstract class SemiaquaticBase extends AnimaliaLandBase{
     }
 
     @Override
+    public boolean babyFollowsParent() {
+        return false;
+    }
+
+    @Override
     protected PathNavigation createNavigation(Level level) {
         return new SemiaquaticPathNavigation(this, level);
     }
@@ -321,43 +326,37 @@ public abstract class SemiaquaticBase extends AnimaliaLandBase{
         }
     }
 
-    //This goal should be registered in child entities with priority same or higher than guard or panic.
-    //if no water is found, itll run guard or panic instead. child entities cannot have both guard and panic alts
-    public static class SemiaquaticPanicGoal extends PanicGoal {
-        private final Predicate<BlockState> refuge;
+    public static class SemiaquaticPanicGoal extends LandPanicGoal {
+        private final Predicate<BlockState> targetType;
         private final int range;
 
-        public SemiaquaticPanicGoal(SemiaquaticBase mob, double speedMult, int range) {
-            this(mob, speedMult, range, state -> state.getFluidState().is(FluidTags.WATER));
+        private BlockPos targetPos;
+
+        public SemiaquaticPanicGoal(SemiaquaticBase mob, double speedMult, int fleeLength, double proximityRange, int range) {
+            this(mob, speedMult, fleeLength, proximityRange, range, state -> state.getFluidState().is(FluidTags.WATER));
         }
 
-        public SemiaquaticPanicGoal(SemiaquaticBase mob, double speedMult, int range, TagKey<Block> tag) {
-            this(mob, speedMult, range, state -> state.is(tag));
+        public SemiaquaticPanicGoal(SemiaquaticBase mob, double speedMult, int fleeLength, double proximityRange, int range, TagKey<Block> tag) {
+            this(mob, speedMult, fleeLength, proximityRange, range, state -> state.is(tag));
         }
 
-        public SemiaquaticPanicGoal(SemiaquaticBase mob, double speedMult, int range, Block block) {
-            this(mob, speedMult, range, state -> state.is(block));
+        public SemiaquaticPanicGoal(SemiaquaticBase mob, double speedMult, int fleeLength, double proximityRange, int range, Block block) {
+            this(mob, speedMult, fleeLength, proximityRange, range, state -> state.is(block));
         }
 
-        private SemiaquaticPanicGoal(SemiaquaticBase mob, double speedMult, int range, Predicate<BlockState> refuge) {
-            super(mob, speedMult);
+        private SemiaquaticPanicGoal(SemiaquaticBase mob, double speedMult, int fleeLength, double proximityRange, int range, Predicate<BlockState> refuge) {
+            super(mob, speedMult, fleeLength, proximityRange);
             this.range = range;
-            this.refuge = refuge;
+            this.targetType = refuge;
         }
 
         @Override
         public boolean canUse() {
-            if (!this.shouldPanic()) {
+            if (!super.canUse()) {
                 return false;
             }
-            BlockPos pos = this.findTarget();
-            if (pos == null) {
-                return false;
-            }
-            this.posX = pos.getX();
-            this.posY = pos.getY();
-            this.posZ = pos.getZ();
-            return true;
+            this.targetPos = this.findTarget();
+            return this.targetPos != null;
         }
 
         private BlockPos findTarget() {
@@ -366,12 +365,23 @@ public abstract class SemiaquaticBase extends AnimaliaLandBase{
             if (!level.getBlockState(pos).getCollisionShape(level, pos).isEmpty()) {
                 return null;
             }
-            BlockPos found = BlockPos.findClosestMatch(pos, this.range, 1, p -> this.refuge.test(level.getBlockState(p))).orElse(null);
+            BlockPos found = BlockPos.findClosestMatch(pos, this.range, 1, p -> this.targetType.test(level.getBlockState(p))).orElse(null);
             if (found == null) {
                 return null;
             }
             Path path = this.mob.getNavigation().createPath(found, 1);
             return path != null && path.canReach() ? found.immutable() : null;
+        }
+
+        @Override
+        protected void moveAway() {
+            this.mob.getNavigation().moveTo(this.targetPos.getX(), this.targetPos.getY(), this.targetPos.getZ(), this.speedMult);
+        }
+
+        @Override
+        public void stop() {
+            super.stop();
+            this.targetPos = null;
         }
     }
 

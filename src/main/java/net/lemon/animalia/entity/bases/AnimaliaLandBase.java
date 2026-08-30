@@ -24,6 +24,8 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
+import net.minecraft.world.entity.ai.targeting.TargetingConditions;
+import net.minecraft.world.entity.ai.util.DefaultRandomPos;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
@@ -37,7 +39,9 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.ForgeMod;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.EnumSet;
 import java.util.Objects;
+import java.util.function.Predicate;
 
 import static net.lemon.animalia.entity.bases.AnimaliaBreedableWater.*;
 
@@ -52,6 +56,7 @@ public abstract class AnimaliaLandBase extends Animal implements IActivityTime, 
     private static final EntityDataAccessor<Integer> BODY_IDLE = SynchedEntityData.defineId(AnimaliaLandBase.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Integer> TWITCH_IDLE = SynchedEntityData.defineId(AnimaliaLandBase.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Boolean> IS_PREGNANT = SynchedEntityData.defineId(AnimaliaLandBase.class, EntityDataSerializers.BOOLEAN);
+    private static final EntityDataAccessor<Boolean> IS_RUNNING = SynchedEntityData.defineId(AnimaliaLandBase.class, EntityDataSerializers.BOOLEAN);
 
     private int grazeTicks = 0;
     private int wantsToGrazeUntil;
@@ -87,6 +92,8 @@ public abstract class AnimaliaLandBase extends Animal implements IActivityTime, 
         this.entityData.define(BODY_IDLE, -1);
         this.entityData.define(TWITCH_IDLE, -1);
         this.entityData.define(IS_PREGNANT, false);
+        this.entityData.define(IS_RUNNING, false);
+
     }
 
     @Override
@@ -108,11 +115,14 @@ public abstract class AnimaliaLandBase extends Animal implements IActivityTime, 
         this.goalSelector.addGoal(1, new BreedGoal(this, 1.15D));
         if (this.getBirthLocation() != BirthLocation.ANY) this.goalSelector.addGoal(2, new SpawnChildGoal(this, 1.0D, 12));
         this.goalSelector.addGoal(3, new TemptGoal(this, 1.0D, this.foodIngredients(), false));
-        this.goalSelector.addGoal(5, new FollowParentGoal(this, 1.25D));
-        this.goalSelector.addGoal(5, new WaterAvoidingRandomStrollGoal(this, 1.0D));
+        if (this.babyFollowsParent()) this.goalSelector.addGoal(5, new FollowParentGoal(this, 1.25D));        this.goalSelector.addGoal(5, new WaterAvoidingRandomStrollGoal(this, 1.0D));
         this.goalSelector.addGoal(7, new LookAtPlayerGoal(this, Player.class, 6.0F));
         this.goalSelector.addGoal(8, new RandomLookAroundGoal(this));
         super.registerGoals();
+    }
+
+    public boolean babyFollowsParent() {
+        return true;
     }
 
     public Ingredient foodIngredients() {
@@ -625,6 +635,10 @@ public abstract class AnimaliaLandBase extends Animal implements IActivityTime, 
         this.entityData.set(IS_PREGNANT, isPregnant);
     }
 
+    public boolean isRunning() { return this.entityData.get(IS_RUNNING); }
+
+    public void setRunning(boolean running) { this.entityData.set(IS_RUNNING, running); }
+
     /**
      * TODO Edit this method so it drops LandEggItem. These item eggs are used for insects and such.
      * Birds and lizards lay eggs in mounds/nests
@@ -729,6 +743,110 @@ public abstract class AnimaliaLandBase extends Animal implements IActivityTime, 
             }
         }
 
+    }
+
+    public static class LandPanicGoal extends Goal {
+        protected final AnimaliaLandBase mob;
+        protected final double speedMult;
+        private final int fleeLength;
+        private final double proximityRange;
+        private final Predicate<LivingEntity> threatPredicate;
+        private final TargetingConditions targetingConditions;
+
+        private Vec3 pushedFleeFrom;
+        private Vec3 fleeFrom;
+        private int fleeTicks;
+        private int nextScan;
+
+        public LandPanicGoal(AnimaliaLandBase mob, double speedMult, int fleeLength, double proximityRange) {
+            this(mob, speedMult, fleeLength, proximityRange, entity -> entity instanceof Player player && !player.isCreative() && !player.isCrouching());
+        }
+
+        public LandPanicGoal(AnimaliaLandBase mob, double speedMult, int fleeLength, double proximityRange, Predicate<LivingEntity> threatPredicate) {
+            this.mob = mob;
+            this.speedMult = speedMult;
+            this.fleeLength = fleeLength;
+            this.proximityRange = proximityRange;
+            this.threatPredicate = threatPredicate.and(EntitySelector.NO_SPECTATORS);
+            this.targetingConditions = TargetingConditions.forNonCombat().range(proximityRange).selector(this.threatPredicate);
+            this.setFlags(EnumSet.of(Goal.Flag.MOVE));
+        }
+
+        public void panicFrom(Vec3 pos) {
+            this.pushedFleeFrom = pos;
+        }
+
+        protected boolean canScan() {
+            return true;
+        }
+
+        @Override
+        public boolean canUse() {
+            if (this.pushedFleeFrom != null) {
+                this.fleeFrom = this.pushedFleeFrom;
+                return true;
+            }
+            if (this.mob.hurtTime > 0 || this.mob.isOnFire()) {
+                LivingEntity attacker = this.mob.getLastHurtByMob();
+                this.fleeFrom = attacker != null ? attacker.position() : this.mob.position();
+                return true;
+            }
+            if (this.proximityRange > 0.0D && this.canScan()) {
+                if (this.mob.tickCount < this.nextScan) {
+                    return false;
+                }
+                this.nextScan = this.mob.tickCount + 5 + this.mob.getRandom().nextInt(10);
+                LivingEntity threat = this.mob.level().getNearestEntity(LivingEntity.class, this.targetingConditions, this.mob,
+                        this.mob.getX(), this.mob.getY(), this.mob.getZ(), this.mob.getBoundingBox().inflate(this.proximityRange));
+                if (threat != null) {
+                    this.fleeFrom = threat.position();
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        @Override
+        public boolean canContinueToUse() {
+            return this.fleeTicks > 0 && !this.mob.isInWater();
+        }
+
+        @Override
+        public void start() {
+            this.pushedFleeFrom = null;
+            this.fleeTicks = this.fleeLength;
+            this.mob.setRunning(true);
+            this.moveAway();
+        }
+
+        @Override
+        public void tick() {
+            --this.fleeTicks;
+            if (this.mob.getNavigation().isDone()) {
+                this.moveAway();
+            }
+        }
+
+        @Override
+        public void stop() {
+            this.pushedFleeFrom = null;
+            this.fleeFrom = null;
+            this.fleeTicks = 0;
+            this.mob.setRunning(false);
+            this.mob.getNavigation().stop();
+        }
+
+        @Override
+        public boolean requiresUpdateEveryTick() {
+            return true;
+        }
+
+        protected void moveAway() {
+            Vec3 target = DefaultRandomPos.getPosAway(this.mob, 16, 7, this.fleeFrom);
+            if (target != null) {
+                this.mob.getNavigation().moveTo(target.x, target.y, target.z, this.speedMult);
+            }
+        }
     }
 
 }
