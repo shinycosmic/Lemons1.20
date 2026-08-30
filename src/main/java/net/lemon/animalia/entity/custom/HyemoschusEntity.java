@@ -17,6 +17,7 @@ import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.DifficultyInstance;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -27,6 +28,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.core.animatable.GeoAnimatable;
@@ -188,7 +190,7 @@ public class HyemoschusEntity extends SemiaquaticBase implements GeoEntity, Scan
             animationState.getController().setAnimation(RawAnimation.begin().then("walk", Animation.LoopType.LOOP));
             return PlayState.CONTINUE;
         }
-        return PlayState.CONTINUE;
+        return PlayState.STOP;
     }
 
     private <T extends GeoAnimatable> PlayState idlesPredicate(AnimationState<T> state) {
@@ -352,5 +354,16 @@ public class HyemoschusEntity extends SemiaquaticBase implements GeoEntity, Scan
             }
             this.wasGrazing = this.isGrazing();
         }
+    }
+
+    @Override
+    public boolean hurt(DamageSource source, float amount) {
+        boolean result = super.hurt(source, amount);
+        if (!this.level().isClientSide && result && this.isAlive()) {
+            Vec3 from = source.getEntity() != null ? source.getEntity().position() : this.position();
+            this.waterPanic.panicFrom(from);
+            this.landPanic.panicFrom(from);
+        }
+        return result;
     }
 }

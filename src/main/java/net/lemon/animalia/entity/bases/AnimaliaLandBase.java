@@ -758,6 +758,7 @@ public abstract class AnimaliaLandBase extends Animal implements IActivityTime, 
         private Vec3 fleeFrom;
         private int fleeTicks;
         private int nextScan;
+        private int pushExpiration;
 
         public LandPanicGoal(AnimaliaLandBase mob, double speedMult, int fleeLength, double proximityRange) {
             this(mob, speedMult, fleeLength, proximityRange, entity -> entity instanceof Player player && !player.isCreative() && !player.isCrouching());
@@ -775,6 +776,7 @@ public abstract class AnimaliaLandBase extends Animal implements IActivityTime, 
 
         public void panicFrom(Vec3 pos) {
             this.pushedFleeFrom = pos;
+            this.pushExpiration = this.mob.tickCount + 40;
         }
 
         protected boolean canScan() {
@@ -783,6 +785,9 @@ public abstract class AnimaliaLandBase extends Animal implements IActivityTime, 
 
         @Override
         public boolean canUse() {
+            if (this.pushedFleeFrom != null && this.mob.tickCount > this.pushExpiration) {
+                this.pushedFleeFrom = null;
+            }
             if (this.pushedFleeFrom != null) {
                 this.fleeFrom = this.pushedFleeFrom;
                 return true;

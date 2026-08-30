@@ -80,7 +80,6 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
         tag(ModTags.Blocks.AQUATIC_PLANTS).add(Blocks.KELP_PLANT);
 
         tag(ModTags.Blocks.FORAGEABLE).addTag(ModTags.Blocks.CROSS_PLANTS);
-        tag(ModTags.Blocks.FORAGEABLE).addTag(BlockTags.DIRT);
         tag(ModTags.Blocks.FORAGEABLE).addTag(BlockTags.LEAVES);
         tag(ModTags.Blocks.FORAGEABLE).addTag(BlockTags.CROPS);
 
