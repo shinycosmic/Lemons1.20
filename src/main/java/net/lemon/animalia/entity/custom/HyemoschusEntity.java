@@ -2,15 +2,21 @@ package net.lemon.animalia.entity.custom;
 
 import net.lemon.animalia.entity.bases.SemiaquaticBase;
 import net.lemon.animalia.entity.bases.helpers.ActivityTime;
+import net.lemon.animalia.registry.ModEntities;
 import net.lemon.animalia.registry.ModTags;
+import net.lemon.animalia.util.AnimaliaFunctionUtil;
+import net.lemon.animalia.util.HolonetEntities;
 import net.lemon.animalia.util.Scannable;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.SpawnGroupData;
+import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
@@ -28,6 +34,13 @@ public class HyemoschusEntity extends SemiaquaticBase implements GeoEntity, Scan
 
     public HyemoschusEntity(EntityType<? extends Animal> entityType, Level level) {
         super(entityType, level);
+    }
+
+    public static AttributeSupplier setAttributes() {
+        return Mob.createMobAttributes()
+                .add(Attributes.MAX_HEALTH, 8D)
+                .add(Attributes.MOVEMENT_SPEED, 0.1f)
+                .build();
     }
 
     @Override
@@ -63,6 +76,24 @@ public class HyemoschusEntity extends SemiaquaticBase implements GeoEntity, Scan
     @Override
     public Component getOrder() {
         return Component.translatable("order.animalia.artiodactyla");
+    }
+
+    @Override
+    public int getScaleforGUI() {
+        return 22;
+
+    }
+
+    public static void registerHolonet(){
+//        HolonetEntities.register(ModEntities.HYEMOSCHUS_AQUATICUS, AppName.FIELD, "Artiodactyla");
+    }
+
+    @Override
+    public float genVarSizeMultiplier() {
+//        if (this.getType() == ModEntities.HYEMOSCHUS_AQUATICUS.get()) {
+//            return AnimaliaFunctionUtil.getScaleForSize(21, 85);
+//        }
+        return 1;
     }
 
     @Override
