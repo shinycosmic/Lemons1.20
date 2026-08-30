@@ -18,7 +18,7 @@ public class ZebrasomaFlavescensRenderer extends GeoEntityRenderer<GrazeSchoolin
 
     public ZebrasomaFlavescensRenderer(EntityRendererProvider.Context context) {
         super(context, new ZebrasomaFlavescensModel());
-        this.addRenderLayer(new NightFadeLayer<>(this, new ResourceLocation(Animalia.MODID, "textures/entity/zebrasoma_flavescens_night.png")));
+        this.addRenderLayer(new NightFadeLayer<>(this));
     }
 
     @Override

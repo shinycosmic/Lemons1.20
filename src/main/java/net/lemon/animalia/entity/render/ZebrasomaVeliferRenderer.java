@@ -18,7 +18,7 @@ public class ZebrasomaVeliferRenderer extends GeoEntityRenderer<GrazeSchoolingEn
 
     public ZebrasomaVeliferRenderer(EntityRendererProvider.Context context) {
         super(context, new ZebrasomaVeliferModel());
-        this.addRenderLayer(new NightFadeLayer<>(this, new ResourceLocation(Animalia.MODID, "textures/entity/zebrasoma_velifer_night.png")));
+        this.addRenderLayer(new NightFadeLayer<>(this));
     }
 
     @Override

@@ -5,6 +5,7 @@ import net.lemon.animalia.entity.custom.BettaEntity;
 import net.lemon.animalia.entity.custom.traits.BettaTraits;
 import net.lemon.animalia.util.ColorUtil;
 import net.minecraft.ChatFormatting;
+import net.minecraft.locale.Language;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvent;
@@ -36,12 +37,15 @@ public class AnimaliaBucketItem extends MobBucketItem {
         super.appendHoverText(stack, level, tooltipComp, isAdvanced);
         EntityType<?> type = getFishType();
 
-        if (type != null && level != null) {
+        String key = type.getDescriptionId() + ".scientific";
+        if (Language.getInstance().has(key)) {
+            tooltipComp.add(Component.translatable(key).withStyle(ChatFormatting.GRAY, ChatFormatting.ITALIC));
+        }
+
+        if (level != null) {
             Entity entity = type.create(level);
 
             if (entity instanceof FishBase fish) {
-                tooltipComp.add(Component.literal(fish.getScientificName()).withStyle(ChatFormatting.GRAY, net.minecraft.ChatFormatting.ITALIC));
-
                 if (stack.hasTag() && stack.getTag().getBoolean("BucketBaby")) {
                     tooltipComp.add(Component.translatable("tooltip.animalia.baby").withStyle(ChatFormatting.GRAY));
                 }

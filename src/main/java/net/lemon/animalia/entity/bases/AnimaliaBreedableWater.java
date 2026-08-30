@@ -4,6 +4,7 @@ import net.lemon.animalia.entity.ai.FishBreedGoal;
 import net.lemon.animalia.entity.bases.helpers.*;
 import net.lemon.animalia.item.FishEggItem;
 import net.lemon.animalia.registry.ModItems;
+import net.lemon.animalia.registry.spawning.ISpawnTime;
 import net.lemon.animalia.registry.spawning.SpawnBand;
 import net.lemon.animalia.util.Scannable;
 import net.minecraft.core.BlockPos;
@@ -46,7 +47,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Objects;
 import java.util.UUID;
 
-public abstract class AnimaliaBreedableWater extends WaterAnimal implements IActivityTime, IFoodEater, IIdles, IGrazer, IDimorphism {
+public abstract class AnimaliaBreedableWater extends WaterAnimal implements IActivityTime, IFoodEater, IIdles, IGrazer, IDimorphism, ISpawnTime {
     private static final EntityDataAccessor<Integer> AGE = SynchedEntityData.defineId(AnimaliaBreedableWater.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Integer> GENDER = SynchedEntityData.defineId(AnimaliaBreedableWater.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Integer> VAR_COLOR = SynchedEntityData.defineId(AnimaliaBreedableWater.class, EntityDataSerializers.INT);
@@ -785,9 +786,9 @@ public abstract class AnimaliaBreedableWater extends WaterAnimal implements IAct
     }
 
     private boolean checkSpawnTime() {
-        return switch (this.activityTime()) {
-            case DIURNAL -> this.level().isDay();
-            case NOCTURNAL -> this.level().isNight();
+        return switch (this.spawnTime()) {
+            case DAY -> this.level().isDay();
+            case NIGHT -> this.level().isNight();
             default -> true;
         };
     }
