@@ -69,6 +69,9 @@ public class AnimaliaRenderInit {
         EntityRenderers.register(ModEntities.FORCIPIGER_FLAVISSIMUS.get(), ForcipigerRenderer::new);
         EntityRenderers.register(ModEntities.NEOLISSOCHILUS_PNAR.get(), CavefishRenderer::new);
         EntityRenderers.register(ModEntities.SATAN_EURYSTOMUS.get(), CavefishRenderer::new);
+        EntityRenderers.register(ModEntities.CENTROPYGE_LORICULA.get(), CentropygeRenderer::new);
+        EntityRenderers.register(ModEntities.CENTROPYGE_VENUSTA.get(), CentropygeRenderer::new);
+        EntityRenderers.register(ModEntities.CENTROPYGE_BOYLEI.get(), CentropygeRobustRenderer::new);
 
 
 

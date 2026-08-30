@@ -104,6 +104,12 @@ public class RegSchoolingEntity extends FishBase implements GeoEntity, Scannable
             return Component.translatable("trivia.animalia.forcipiger_longirostris");
         } else if (this.getType() == ModEntities.FORCIPIGER_FLAVISSIMUS.get()) {
             return Component.translatable("trivia.animalia.forcipiger_flavissimus");
+        } else if (this.getType() == ModEntities.CENTROPYGE_VENUSTA.get()) {
+            return Component.translatable("trivia.animalia.centropyge_venusta");
+        } else if (this.getType() == ModEntities.CENTROPYGE_BOYLEI.get()) {
+            return Component.translatable("trivia.animalia.centropyge_boylei");
+        } else if (this.getType() == ModEntities.CENTROPYGE_LORICULA.get()) {
+            return Component.translatable("trivia.animalia.centropyge_loricula");
         }
         return Component.translatable("debug.animalia.trivia");
     }
@@ -112,7 +118,10 @@ public class RegSchoolingEntity extends FishBase implements GeoEntity, Scannable
     public Component getFamily() {
         if (this.getType() == ModEntities.SCATOPHAGUS_ARGUS.get()) {
             return Component.translatable("family.animalia.scatophagidae");
-        } else if (this.getType() == ModEntities.POMACANTHUS_IMPERATOR.get()) {
+        } else if (this.getType() == ModEntities.POMACANTHUS_IMPERATOR.get()
+                || this.getType() == ModEntities.CENTROPYGE_VENUSTA.get()
+                || this.getType() == ModEntities.CENTROPYGE_LORICULA.get()
+                || this.getType() == ModEntities.CENTROPYGE_BOYLEI.get()) {
             return Component.translatable("family.animalia.pomacanthidae");
         } else if (this.getType() == ModEntities.NASO_BREVIROSTRIS.get()
                 || this.getType() == ModEntities.ACANTHURUS_LINEATUS.get()
@@ -259,6 +268,10 @@ public class RegSchoolingEntity extends FishBase implements GeoEntity, Scannable
             return AnimaliaFunctionUtil.getScaleForSize(24, 50);
         } else if (this.getType() == ModEntities.ACANTHURUS_LEUCOSTERNON.get() || this.getType() == ModEntities.ACANTHURUS_JAPONICUS.get() || this.getType() == ModEntities.ACANTHURUS_ACHILLES.get()) {
             return AnimaliaFunctionUtil.getScaleForSize(24, 25);
+        } else if (this.getType() == ModEntities.CENTROPYGE_LORICULA.get()
+                    || this.getType() == ModEntities.CENTROPYGE_BOYLEI.get()
+                    || this.getType() == ModEntities.CENTROPYGE_VENUSTA.get()) {
+            return AnimaliaFunctionUtil.getScaleForSize(16, 25);
         }
         return 1;
     }
@@ -279,6 +292,9 @@ public class RegSchoolingEntity extends FishBase implements GeoEntity, Scannable
         HolonetEntities.register(ModEntities.ACANTHURUS_LINEATUS, Scannable.AppName.FISH, "Acanthuriformes");
         HolonetEntities.register(ModEntities.FORCIPIGER_LONGIROSTRIS, Scannable.AppName.FISH, "Acanthuriformes");
         HolonetEntities.register(ModEntities.FORCIPIGER_FLAVISSIMUS, Scannable.AppName.FISH, "Acanthuriformes");
+        HolonetEntities.register(ModEntities.CENTROPYGE_BOYLEI, Scannable.AppName.FISH, "Acanthuriformes");
+        HolonetEntities.register(ModEntities.CENTROPYGE_LORICULA, Scannable.AppName.FISH, "Acanthuriformes");
+        HolonetEntities.register(ModEntities.CENTROPYGE_VENUSTA, Scannable.AppName.FISH, "Acanthuriformes");
 
     }
 

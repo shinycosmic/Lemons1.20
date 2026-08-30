@@ -140,6 +140,12 @@ public class ModSpawns {
                 BiomeSelector.in(Biomes.WARM_OCEAN));
         add(ModEntities.FORCIPIGER_LONGIROSTRIS, 2, 1, 2,
                 BiomeSelector.in(Biomes.WARM_OCEAN));
+        add(ModEntities.CENTROPYGE_VENUSTA, 3, 1, 2,
+                BiomeSelector.in(Biomes.WARM_OCEAN));
+        add(ModEntities.CENTROPYGE_LORICULA, 3, 1, 2,
+                BiomeSelector.in(Biomes.WARM_OCEAN));
+        add(ModEntities.CENTROPYGE_BOYLEI, 1, 1, 2,
+                BiomeSelector.in(Biomes.WARM_OCEAN));
 
         add(ModEntities.PROCAMBARUS_CLARKII, 6, 1, 2,
                 BiomeSelector.in(Biomes.SWAMP, Biomes.RIVER));

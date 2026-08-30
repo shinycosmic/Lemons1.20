@@ -157,6 +157,9 @@
   "entity.animalia.heteroconger_luteolus": "Yellow Garden Eel",
   "entity.animalia.gorgasia_barnesi": "Barnes' Garden Eel",
   "entity.animalia.gorgasia_japonica": "Pacific Spaghetti Eel",
+  "entity.animalia.centropyge_boylei": "Peppermint Angelfish",
+  "entity.animalia.centropyge_venusta": "Purple-masked Angelfish",
+  "entity.animalia.centropyge_loricula": "Flame Angelfish",
 
 
   "tooltip.animalia.baby": "Juvenile",
@@ -252,6 +255,9 @@
   "entity.animalia.acanthurus_japonicus.scientific": "Acanthurus japonicus",
   "entity.animalia.forcipiger_flavissimus.scientific": "Forcipiger flavissimus",
   "entity.animalia.forcipiger_longirostris.scientific": "Forcipiger longirostris",
+  "entity.animalia.centropyge_loricula.scientific": "Centropyge loricula",
+  "entity.animalia.centropyge_venusta.scientific": "Centropyge venusta",
+  "entity.animalia.centropyge_boylei.scientific": "Centropyge boylei",
 
   "order.animalia.perciformes": "Perciformes",
   "order.animalia.anabantiformes": "Anabantiformes",
@@ -370,6 +376,9 @@
   "trivia.animalia.heteroconger_luteolus": "",
   "trivia.animalia.gorgasia_barnesi": "",
   "trivia.animalia.gorgasia_japonica": "",
+  "trivia.animalia.centropyge_loricula": "",
+  "trivia.animalia.centropyge_venusta": "",
+  "trivia.animalia.centropyge_boylei": "",
 
   "debug.animalia.trivia": "If this value displays, there is a bug [trivia]",
   "debug.animalia.family": "if this text appears, there is a bug [family]",

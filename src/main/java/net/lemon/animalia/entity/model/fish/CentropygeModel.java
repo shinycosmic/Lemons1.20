@@ -1,7 +1,6 @@
 package net.lemon.animalia.entity.model.fish;//package net.lemon.animalia.entity.model;
 
 import net.lemon.animalia.Animalia;
-import net.lemon.animalia.entity.custom.CavefishEntity;
 import net.lemon.animalia.entity.custom.RegSchoolingEntity;
 import net.lemon.animalia.registry.ModEntities;
 import net.minecraft.resources.ResourceLocation;
@@ -12,22 +11,17 @@ import software.bernie.geckolib.core.animation.AnimationState;
 import software.bernie.geckolib.model.GeoModel;
 import software.bernie.geckolib.model.data.EntityModelData;
 
-public class AcanthurusModel extends GeoModel<RegSchoolingEntity> {
+public class CentropygeModel extends GeoModel<RegSchoolingEntity> {
     public ResourceLocation getModelResource(RegSchoolingEntity object) {
         if(object.isBaby()) {
             return new ResourceLocation(Animalia.MODID, "geo/babyreeffish.geo.json");
         }
-        return new ResourceLocation(Animalia.MODID, "geo/acanthurus.geo.json");
+        return new ResourceLocation(Animalia.MODID, "geo/centropyge.geo.json");
     }
 
     public ResourceLocation getTextureResource(RegSchoolingEntity object) {
         if(object.isBaby()) {
-            if(object.getType() == ModEntities.ACANTHURUS_LEUCOSTERNON.get()) {
-                return new ResourceLocation(Animalia.MODID, "textures/entity/babyacanthurusleucosternon.png");
-            } else if(object.getType() == ModEntities.ACANTHURUS_COERULEUS.get()) {
-                return new ResourceLocation(Animalia.MODID, "textures/entity/babyacanthuruscoeruleus.png");
-            }
-            return new ResourceLocation(Animalia.MODID, "textures/entity/babysiganus.png");
+            return new ResourceLocation(Animalia.MODID, "textures/entity/babycentropyge.png");
         }
         return new ResourceLocation(Animalia.MODID, "textures/entity/" + ForgeRegistries.ENTITY_TYPES.getKey(object.getType()).getPath() + ".png");
     }
@@ -36,7 +30,7 @@ public class AcanthurusModel extends GeoModel<RegSchoolingEntity> {
         if(animatable.isBaby()) {
             return new ResourceLocation(Animalia.MODID, "animations/babyreeffish.animation.json");
         }
-        return new ResourceLocation(Animalia.MODID, "animations/acanthurus.animation.json");
+        return new ResourceLocation(Animalia.MODID, "animations/centropyge.animation.json");
     }
 
     @Override
