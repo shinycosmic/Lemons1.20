@@ -124,5 +124,13 @@ public class ModItemTagGenerator extends ItemTagsProvider {
         tag(ModTags.Items.RAW_CRUSTACEAN).add(ModItems.PROCAMBARUS_VIRGINALIS.get());
         tag(ModTags.Items.RAW_CRUSTACEAN).add(ModItems.PROCAMBARUS_LUCIFUGUS.get());
 
+        tag(ModTags.Items.FRUITS_SEEDS).add(Items.APPLE);
+        tag(ModTags.Items.FRUITS_SEEDS).add(Items.MELON_SLICE);
+        tag(ModTags.Items.FRUITS_SEEDS).add(Items.PUMPKIN);
+        tag(ModTags.Items.FRUITS_SEEDS).add(Items.COCOA_BEANS);
+        tag(ModTags.Items.FRUITS_SEEDS).add(Items.SWEET_BERRIES);
+        tag(ModTags.Items.FRUITS_SEEDS).addTag(Tags.Items.CROPS);
+        tag(ModTags.Items.FRUITS_SEEDS).addTag(Tags.Items.SEEDS);
+
     }
 }
