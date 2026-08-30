@@ -9,6 +9,7 @@ import net.lemon.animalia.registry.ModEntities;
 import net.lemon.animalia.registry.ModItems;
 import net.lemon.animalia.registry.ModTags;
 import net.lemon.animalia.registry.spawning.SpawnBand;
+import net.lemon.animalia.registry.spawning.SpawnTime;
 import net.lemon.animalia.util.AnimaliaFunctionUtil;
 import net.lemon.animalia.util.HolonetEntities;
 import net.lemon.animalia.util.Scannable;
@@ -137,6 +138,14 @@ public class SeahorseEntity extends FishBase implements GeoEntity, Scannable {
             return ActivityTime.NOCTURNAL;
         }
         return ActivityTime.DIURNAL;
+    }
+
+    @Override
+    public SpawnTime spawnTime() {
+        if (this.getType() == ModEntities.HIPPOCAMPUS_INGENS.get()) {
+            return SpawnTime.NIGHT;
+        }
+        return super.spawnTime();
     }
 
     @Override

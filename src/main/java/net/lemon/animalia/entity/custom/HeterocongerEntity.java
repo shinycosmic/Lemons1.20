@@ -263,7 +263,7 @@ public class HeterocongerEntity extends FishBase implements GeoEntity, Scannable
                 case PHASE_BURROWED:
                     if (this.tickCount >= this.nextCheck) {
                         this.nextCheck = this.tickCount + 5 + this.random.nextInt(10);
-                        if (this.findThreat(this.retreatCon, 3.0D) != null) {
+                        if (this.level().isNight() || this.findThreat(this.retreatCon, 3.0D) != null) {
                             this.startRetreat();
                         }
                     }
@@ -278,7 +278,7 @@ public class HeterocongerEntity extends FishBase implements GeoEntity, Scannable
                 case PHASE_HIDDEN:
                     if (this.tickCount >= this.nextCheck) {
                         this.nextCheck = this.tickCount + 5 + this.random.nextInt(10);
-                        if (this.findThreat(this.clearCon, 4.0D) != null) {
+                        if (this.level().isNight() || this.findThreat(this.clearCon, 4.0D) != null) {
                             this.hiddenTicks = 0;
                         }
                     }
@@ -291,7 +291,7 @@ public class HeterocongerEntity extends FishBase implements GeoEntity, Scannable
                 case PHASE_RETURN:
                     if (this.tickCount >= this.nextCheck) {
                         this.nextCheck = this.tickCount + 5 + this.random.nextInt(10);
-                        if (this.findThreat(this.retreatCon, 3.0D) != null) {
+                        if (this.level().isNight() || this.findThreat(this.retreatCon, 3.0D) != null) {
                             this.startRetreat();
                             break;
                         }
