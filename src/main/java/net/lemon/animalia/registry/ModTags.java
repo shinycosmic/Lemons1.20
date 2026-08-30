@@ -18,6 +18,7 @@ public class ModTags {
         public static final TagKey<Block> TERMITE_MOUNDS = tag("termite_mounds");
         public static final TagKey<Block> CROSS_PLANTS = tag("cross_plants");
         public static final TagKey<Block> AQUATIC_PLANTS = tag("aquatic_plants");
+        public static final TagKey<Block> FORAGEABLE = tag("forageable");
 
 
         private static TagKey<Block> tag(String name) {

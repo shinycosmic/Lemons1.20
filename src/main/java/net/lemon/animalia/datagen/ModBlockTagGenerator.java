@@ -8,6 +8,7 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.BlockTagsProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import org.jetbrains.annotations.Nullable;
@@ -77,6 +78,11 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
         tag(ModTags.Blocks.AQUATIC_PLANTS).add(Blocks.BUBBLE_CORAL_WALL_FAN);
         tag(ModTags.Blocks.AQUATIC_PLANTS).add(Blocks.KELP);
         tag(ModTags.Blocks.AQUATIC_PLANTS).add(Blocks.KELP_PLANT);
+
+        tag(ModTags.Blocks.FORAGEABLE).addTag(ModTags.Blocks.CROSS_PLANTS);
+        tag(ModTags.Blocks.FORAGEABLE).addTag(BlockTags.DIRT);
+        tag(ModTags.Blocks.FORAGEABLE).addTag(BlockTags.LEAVES);
+        tag(ModTags.Blocks.FORAGEABLE).addTag(BlockTags.CROPS);
 
         tag(BlockTags.MINEABLE_WITH_SHOVEL).addTag(ModTags.Blocks.TERMITE_MOUNDS);
 
