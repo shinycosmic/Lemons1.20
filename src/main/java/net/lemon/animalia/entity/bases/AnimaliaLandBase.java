@@ -232,8 +232,11 @@ public abstract class AnimaliaLandBase extends Animal implements IActivityTime, 
     }
 
     public static boolean isLand(Level level, BlockPos pos) {
+        return isFloor(level, pos) && level.getFluidState(pos).isEmpty();
+    }
+
+    public static boolean isFloor(Level level, BlockPos pos) {
         return level.getBlockState(pos).getCollisionShape(level, pos).isEmpty()
-                && level.getFluidState(pos).isEmpty()
                 && !level.getBlockState(pos.below()).getCollisionShape(level, pos.below()).isEmpty();
     }
 
