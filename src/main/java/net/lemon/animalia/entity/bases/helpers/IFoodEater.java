@@ -3,21 +3,21 @@ package net.lemon.animalia.entity.bases.helpers;
 import net.minecraft.world.item.ItemStack;
 
 public interface IFoodEater {
-    boolean isFood(ItemStack stack);
+    boolean eats(ItemStack stack);
 
     boolean isEating();
 
     void startEating();
 
-    int getAge();
+    int eatAge();
 
-    void setAge(int age);
+    void setEatAge(int age);
 
     default void ageUpFromFood() {
-        int age = this.getAge();
+        int age = this.eatAge();
         if (age < 0) {
             int boost = Math.max(1, -age / 10);
-            this.setAge(Math.min(-1, age + boost));
+            this.setEatAge(Math.min(-1, age + boost));
         }
     }
 }

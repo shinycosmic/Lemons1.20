@@ -17,7 +17,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.registries.ForgeRegistries;
 
 import javax.annotation.Nullable;
@@ -90,7 +89,7 @@ public class FishEggItem extends Item {
         if (!(entity instanceof FishBase baby))
             return InteractionResultHolder.fail(stack);
 
-        baby.setAge(-12000); // make baby
+        baby.setEatAge(-12000); // make baby
         baby.setVarSizeMultiplier(baby.genVarSizeMultiplier());
         baby.setGender(baby.getRandom().nextInt(2));
         baby.copyPosition(player);
@@ -135,7 +134,7 @@ public class FishEggItem extends Item {
         baby.moveTo(x, y, z, 0.0F, 0.0F);
 
         // Make baby
-        baby.setAge(-12000);
+        baby.setEatAge(-12000);
         baby.setVarSizeMultiplier(baby.genVarSizeMultiplier());
         baby.setGender(baby.getRandom().nextInt(2));
         baby.setPersistenceRequired();

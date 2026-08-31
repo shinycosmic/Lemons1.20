@@ -1,6 +1,5 @@
 package net.lemon.animalia.item;
 
-import net.lemon.animalia.entity.bases.FishBase;
 import net.lemon.animalia.entity.custom.BettaEntity;
 import net.lemon.animalia.entity.custom.traits.BettaTraits;
 import net.lemon.animalia.util.ColorUtil;
@@ -8,7 +7,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -16,12 +14,10 @@ import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.registries.ForgeRegistries;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -92,7 +88,7 @@ public class BettaFishEggItem extends FishEggItem {
         if (!(entity instanceof BettaEntity baby))
             return InteractionResultHolder.fail(stack);
 
-        baby.setAge(-12000); // make baby
+        baby.setEatAge(-12000); // make baby
         baby.syncTraits(compoundTag);
         baby.setVarSizeMultiplier(baby.genVarSizeMultiplier());
         baby.setGender(baby.getRandom().nextInt(2));
@@ -140,7 +136,7 @@ public class BettaFishEggItem extends FishEggItem {
         baby.moveTo(x, y, z, 0.0F, 0.0F);
 
         // Make baby
-        baby.setAge(-12000);
+        baby.setEatAge(-12000);
         baby.syncTraits(compoundTag);
         baby.setVarSizeMultiplier(baby.genVarSizeMultiplier());
         baby.setGender(baby.getRandom().nextInt(2));

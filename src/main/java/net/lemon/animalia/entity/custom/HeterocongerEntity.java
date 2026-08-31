@@ -363,13 +363,13 @@ public class HeterocongerEntity extends FishBase implements GeoEntity, Scannable
     @Override
     public InteractionResult mobInteract(Player player, InteractionHand hand) {
         ItemStack itemstack = player.getItemInHand(hand);
-        if (!this.level().isClientSide && this.getAge() == 0 && this.isBreedingItem(itemstack)) {
+        if (!this.level().isClientSide && this.eatAge() == 0 && this.isBreedingItem(itemstack)) {
             this.usePlayerItem(player, hand, itemstack);
             HeterocongerEntity partner = this.findBreedPartner();
             if (partner != null) {
                 this.dropEggItem();
-                this.setAge(6000);
-                partner.setAge(6000);
+                this.setEatAge(6000);
+                partner.setEatAge(6000);
             }
             return InteractionResult.SUCCESS;
         }
@@ -386,7 +386,7 @@ public class HeterocongerEntity extends FishBase implements GeoEntity, Scannable
     private HeterocongerEntity findBreedPartner() {
         List<HeterocongerEntity> neighbors = this.level().getEntitiesOfClass(HeterocongerEntity.class,
                 this.getBoundingBox().inflate(5.0D),
-                eel -> eel != this && eel.getAge() == 0 && eel.getType() == this.getType());
+                eel -> eel != this && eel.eatAge() == 0 && eel.getType() == this.getType());
         return neighbors.isEmpty() ? null : neighbors.get(0);
     }
 

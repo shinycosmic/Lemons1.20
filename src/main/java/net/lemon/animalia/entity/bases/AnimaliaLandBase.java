@@ -137,7 +137,7 @@ public abstract class AnimaliaLandBase extends Animal implements IActivityTime, 
     public abstract Item getBreedingItem();
 
     @Override
-    public boolean isFood(ItemStack stack) {
+    public boolean eats(ItemStack stack) {
         return stack.is(getFoodTag());
     }
 
@@ -675,7 +675,7 @@ public abstract class AnimaliaLandBase extends Animal implements IActivityTime, 
 
         float healAmount = itemstack.getFoodProperties(this) != null
                 ? Objects.requireNonNull(itemstack.getFoodProperties(this)).getNutrition() : 2;
-        if (this.isFood(itemstack)) {
+        if (this.eats(itemstack)) {
             this.usePlayerItem(player, hand, itemstack);
             this.heal(healAmount);
             this.startEating();

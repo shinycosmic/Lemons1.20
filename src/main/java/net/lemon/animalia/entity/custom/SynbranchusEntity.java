@@ -22,8 +22,6 @@ import net.minecraft.world.entity.SpawnGroupData;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import org.jetbrains.annotations.Nullable;
@@ -254,7 +252,7 @@ public class SynbranchusEntity extends BottomWalkerSwimmerBase implements GeoEnt
         }
         if(dataTag != null) {
             if(dataTag.contains("BucketVarSize")) this.setVarSizeMultiplier(dataTag.getFloat("BucketVarSize"));
-            if(dataTag.contains("Age")) this.setAge(dataTag.getInt("Age"));
+            if(dataTag.contains("Age")) this.setEatAge(dataTag.getInt("Age"));
             if(dataTag.contains("BucketGender")) this.setGender(dataTag.getInt("BucketGender"));
             if(dataTag.contains("BucketVarColor")) this.setVarColor(dataTag.getInt("BucketVarColor"));
         }

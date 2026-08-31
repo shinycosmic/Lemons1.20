@@ -9,9 +9,7 @@ import net.lemon.animalia.registry.spawning.SpawnBand;
 import net.lemon.animalia.util.Scannable;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.locale.Language;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.chat.Component;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -90,7 +88,7 @@ public abstract class AnimaliaBreedableWater extends WaterAnimal implements IAct
     }
 
     protected void customServerAiStep() {
-        if (this.getAge() != 0) {
+        if (this.eatAge() != 0) {
             this.inLove = 0;
         }
 
@@ -228,20 +226,20 @@ public abstract class AnimaliaBreedableWater extends WaterAnimal implements IAct
 
     @Override
     public boolean isBaby() {
-        return this.getAge() < 0;
+        return this.eatAge() < 0;
     }
 
-    public int getAge() {
+    public int eatAge() {
         return this.entityData.get(AGE);
     }
 
-    public void setAge(int i) {
+    public void setEatAge(int i) {
         this.entityData.set(AGE, i);
     }
 
     /// Override this to control how long to grow into adult
     public void setBaby(boolean condition) {
-        this.setAge(condition ? this.growthTicks : 0);
+        this.setEatAge(condition ? this.growthTicks : 0);
         this.refreshDimensions();
     }
     public AnimaliaEggTypes getEggType() {
@@ -444,7 +442,7 @@ public abstract class AnimaliaBreedableWater extends WaterAnimal implements IAct
     @Override
     public void addAdditionalSaveData(CompoundTag pCompound) {
         pCompound.putFloat("VarSize", this.getVarSizeMultiplier());
-        pCompound.putInt("Age", this.getAge());
+        pCompound.putInt("Age", this.eatAge());
         pCompound.putInt("Gender", this.getGender());
         pCompound.putInt("VarColor", this.getVarColor());
         pCompound.putInt("InLove", this.inLove);
@@ -469,7 +467,7 @@ public abstract class AnimaliaBreedableWater extends WaterAnimal implements IAct
     public void readAdditionalSaveData(CompoundTag pCompound) {
         this.inLove = pCompound.getInt("InLove");
         this.loveCause = pCompound.hasUUID("LoveCause") ? pCompound.getUUID("LoveCause") : null;
-        this.setAge(pCompound.getInt("Age"));
+        this.setEatAge(pCompound.getInt("Age"));
         this.setGender(pCompound.getInt("Gender"));
         this.setVarColor(pCompound.getInt("VarColor"));
 
@@ -607,20 +605,20 @@ public abstract class AnimaliaBreedableWater extends WaterAnimal implements IAct
         }
 
 
-        if (this.getAge() != 0) {
+        if (this.eatAge() != 0) {
             this.inLove = 0;
         }
 
-        int i = this.getAge();
+        int i = this.eatAge();
         if (i < 0) {
             ++i;
-            this.setAge(i);
+            this.setEatAge(i);
             if (i == 0) {
                 this.refreshDimensions();
             }
         } else if (i > 0) {
             --i;
-            this.setAge(i);
+            this.setEatAge(i);
         }
 
         if (this.inLove > 0) {
@@ -648,7 +646,7 @@ public abstract class AnimaliaBreedableWater extends WaterAnimal implements IAct
 
     public abstract Item getBreedingItem();
 
-    public boolean isFood(ItemStack stack) {
+    public boolean eats(ItemStack stack) {
         return stack.is(getFoodTag());
     }
 
@@ -718,8 +716,8 @@ public abstract class AnimaliaBreedableWater extends WaterAnimal implements IAct
             case BLOCK_EGG:
                 this.dropEggItem();
         }
-        this.setAge(6000);
-        fish.setAge(6000);
+        this.setEatAge(6000);
+        fish.setEatAge(6000);
         this.resetLove();
         fish.resetLove();
     }
@@ -730,7 +728,7 @@ public abstract class AnimaliaBreedableWater extends WaterAnimal implements IAct
             Entity entity = type.create(level);
             if (!(entity instanceof AnimaliaBreedableWater baby)) return;
 
-            baby.setAge(this.growthTicks);
+            baby.setEatAge(this.growthTicks);
             baby.copyPosition(this);
             baby.setVarSizeMultiplier(this.genVarSizeMultiplier());
             baby.setGender(this.random.nextInt(2));
@@ -741,7 +739,7 @@ public abstract class AnimaliaBreedableWater extends WaterAnimal implements IAct
     @Override
     protected InteractionResult mobInteract(Player player, InteractionHand hand) {
         ItemStack itemstack = player.getItemInHand(hand);
-        int i = this.getAge();
+        int i = this.eatAge();
 
         if (!this.level().isClientSide && i == 0 && this.canFallInLove() && this.isBreedingItem(itemstack)) {
             this.usePlayerItem(player, hand, itemstack);
@@ -750,7 +748,7 @@ public abstract class AnimaliaBreedableWater extends WaterAnimal implements IAct
         }
         float healAmount = itemstack.getFoodProperties(this) != null ? Objects.requireNonNull(itemstack.getFoodProperties(this)).getNutrition() : 2;
 
-        if (this.isFood(itemstack)) {
+        if (this.eats(itemstack)) {
             this.usePlayerItem(player, hand, itemstack);
             this.heal(healAmount);
             this.startEating();

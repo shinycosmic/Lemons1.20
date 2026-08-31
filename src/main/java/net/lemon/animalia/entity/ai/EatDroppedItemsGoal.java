@@ -91,7 +91,7 @@ public class EatDroppedItemsGoal<T extends PathfinderMob & IFoodEater> extends G
 
     private ItemEntity findNearestFoodItem() {
         List<ItemEntity> items = this.mob.level().getEntitiesOfClass(ItemEntity.class,
-                this.mob.getBoundingBox().inflate(this.searchRange), item -> (item.isInWater() || item.onGround()) && this.mob.isFood(item.getItem()));
+                this.mob.getBoundingBox().inflate(this.searchRange), item -> (item.isInWater() || item.onGround()) && this.mob.eats(item.getItem()));
 
         ItemEntity nearest = null;
         double nearestDist = Double.MAX_VALUE;

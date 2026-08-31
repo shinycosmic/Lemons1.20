@@ -122,7 +122,7 @@ public abstract class FishBase extends AnimaliaBreedableWater implements Bucketa
     public void saveToBucketTag(ItemStack stack) {
         CompoundTag compoundTag = stack.getOrCreateTag();
         compoundTag.putFloat("BucketVarSize", this.getVarSizeMultiplier());
-        compoundTag.putInt("Age", this.getAge());
+        compoundTag.putInt("Age", this.eatAge());
         compoundTag.putInt("BucketGender", this.getGender());
         compoundTag.putInt("BucketVarColor", this.getVarColor());
         compoundTag.putBoolean("BucketBaby", this.isBaby());
@@ -134,7 +134,7 @@ public abstract class FishBase extends AnimaliaBreedableWater implements Bucketa
                 this.setVarSizeMultiplier(pTag.getFloat("BucketVarSize"));
             }
             if(pTag.contains("Age")) {
-                this.setAge(pTag.getInt("Age"));
+                this.setEatAge(pTag.getInt("Age"));
             }
             if(pTag.contains("BucketGender")) {
                 this.setGender(pTag.getInt("BucketGender"));

@@ -93,8 +93,8 @@ public class SeahorseEntity extends FishBase implements GeoEntity, Scannable {
         this.setBrooding(true);
         this.broodTicks = 400 + this.random.nextInt(400);
 
-        this.setAge(6000);
-        partner.setAge(6000);
+        this.setEatAge(6000);
+        partner.setEatAge(6000);
         this.resetLove();
         partner.resetLove();
     }

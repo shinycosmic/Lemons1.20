@@ -26,7 +26,6 @@ import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.Blocks;
@@ -238,8 +237,8 @@ public class ChaenocephalusEntity extends BottomWalkerSwimmerBase implements Geo
     public void spawnChildFromBreeding(ServerLevel level, AnimaliaBreedableWater partner) {
         this.beginNesting();
 
-        this.setAge(6000);
-        partner.setAge(6000);
+        this.setEatAge(6000);
+        partner.setEatAge(6000);
         this.resetLove();
         partner.resetLove();
     }
@@ -416,7 +415,7 @@ public class ChaenocephalusEntity extends BottomWalkerSwimmerBase implements Geo
 
             Entity baby = this.getType().create(this.level());
             if (baby instanceof ChaenocephalusEntity fry) {
-                fry.setAge(-12000);
+                fry.setEatAge(-12000);
                 fry.setVarSizeMultiplier(fry.genVarSizeMultiplier());
                 fry.setGender(rand.nextInt(2));
                 fry.moveTo(this.nestPos.getX() + 0.5, this.nestPos.getY() + 0.5, this.nestPos.getZ() + 0.5, rand.nextFloat() * 360, 0);

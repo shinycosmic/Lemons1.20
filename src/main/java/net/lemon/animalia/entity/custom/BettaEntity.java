@@ -110,7 +110,7 @@ public class BettaEntity extends FishBase implements GeoEntity, IsGenetic, Scann
 
     @Override
     public void setBaby(boolean condition) {
-        this.setAge(condition ? -4000 : 0);
+        this.setEatAge(condition ? -4000 : 0);
         this.refreshDimensions();
     }
 
@@ -985,8 +985,8 @@ public class BettaEntity extends FishBase implements GeoEntity, IsGenetic, Scann
         }
 
         this.passGenes(level, (BettaEntity) fish);
-        this.setAge(6000);
-        fish.setAge(6000);
+        this.setEatAge(6000);
+        fish.setEatAge(6000);
         this.resetLove();
         fish.resetLove();
     }
