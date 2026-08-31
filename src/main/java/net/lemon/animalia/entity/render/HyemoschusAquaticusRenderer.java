@@ -9,7 +9,7 @@ import software.bernie.geckolib.cache.object.BakedGeoModel;
 import software.bernie.geckolib.renderer.GeoEntityRenderer;
 
 public class HyemoschusAquaticusRenderer extends GeoEntityRenderer<HyemoschusEntity> {
-    private float babyMult = 0.2f;
+    private float babyMult = 0.52f;
 
     public HyemoschusAquaticusRenderer(EntityRendererProvider.Context context) {
         super(context, new HyemoschusAquaticusModel());

@@ -42,9 +42,9 @@ public class HyemoschusAquaticusModel extends GeoModel<HyemoschusEntity> {
 
         if (animatable.isAsleep() || animatable.isGrazing() || animatable.isEating()) return;
 
-        CoreGeoBone head = this.getAnimationProcessor().getBone("head");
-        EntityModelData entityData = animationState.getData(DataTickets.ENTITY_MODEL_DATA);
-        head.setRotX(head.getRotX() + entityData.headPitch() * ((float) Math.PI / 180F));
-        head.setRotY(head.getRotY() + entityData.netHeadYaw() * ((float) Math.PI / 180F));
+//        CoreGeoBone head = this.getAnimationProcessor().getBone("head");
+//        EntityModelData entityData = animationState.getData(DataTickets.ENTITY_MODEL_DATA);
+//        head.setRotX(head.getRotX() + entityData.headPitch() * ((float) Math.PI / 180F));
+//        head.setRotY(head.getRotY() + entityData.netHeadYaw() * ((float) Math.PI / 180F));
     }
 }

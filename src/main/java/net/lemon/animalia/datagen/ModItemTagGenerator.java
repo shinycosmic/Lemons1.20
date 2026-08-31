@@ -129,8 +129,8 @@ public class ModItemTagGenerator extends ItemTagsProvider {
         tag(ModTags.Items.FRUITS_SEEDS).add(Items.PUMPKIN);
         tag(ModTags.Items.FRUITS_SEEDS).add(Items.COCOA_BEANS);
         tag(ModTags.Items.FRUITS_SEEDS).add(Items.SWEET_BERRIES);
-        tag(ModTags.Items.FRUITS_SEEDS).addTag(Tags.Items.CROPS);
-        tag(ModTags.Items.FRUITS_SEEDS).addTag(Tags.Items.SEEDS);
+        tag(ModTags.Items.FRUITS_SEEDS).addOptionalTag(Tags.Items.CROPS.location());
+        tag(ModTags.Items.FRUITS_SEEDS).addOptionalTag(Tags.Items.SEEDS.location());
 
     }
 }

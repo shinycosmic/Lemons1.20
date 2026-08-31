@@ -30,5 +30,7 @@ public class HolonetSetup {
         //Field
         CrayfishEntity.registerHolonet();
         PangolinEntity.registerHolonet();
+        HyemoschusEntity.registerHolonet();
+
     }
 }

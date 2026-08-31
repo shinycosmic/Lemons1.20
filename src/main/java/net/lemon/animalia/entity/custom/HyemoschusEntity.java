@@ -59,7 +59,7 @@ public class HyemoschusEntity extends SemiaquaticBase implements GeoEntity, Scan
     public static AttributeSupplier setAttributes() {
         return Mob.createMobAttributes()
                 .add(Attributes.MAX_HEALTH, 8D)
-                .add(Attributes.MOVEMENT_SPEED, 0.1f)
+                .add(Attributes.MOVEMENT_SPEED, 1.3f)
                 .build();
     }
 
@@ -73,13 +73,13 @@ public class HyemoschusEntity extends SemiaquaticBase implements GeoEntity, Scan
 
     @Override
     protected void registerGoals() {
-        this.waterPanic = new SemiaquaticPanicGoal(this, 1.5D, 200, 8.0D, 12) {
+        this.waterPanic = new SemiaquaticPanicGoal(this, 2D, 200, 8.0D, 12) {
             @Override
             protected boolean canScan() {
                 return HyemoschusEntity.this.isBaby();
             }
         };
-        this.landPanic = new LandPanicGoal(this, 1.5D, 200, 8.0D) {
+        this.landPanic = new LandPanicGoal(this, 2D, 200, 8.0D) {
             @Override
             protected boolean canScan() {
                 return HyemoschusEntity.this.isBaby();
@@ -387,6 +387,6 @@ public class HyemoschusEntity extends SemiaquaticBase implements GeoEntity, Scan
 
     @Override
     public float getSwimSpeed() {
-        return 1.4f;
+        return 1.2f;
     }
 }
