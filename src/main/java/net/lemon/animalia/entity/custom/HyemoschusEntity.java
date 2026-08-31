@@ -284,6 +284,10 @@ public class HyemoschusEntity extends SemiaquaticBase implements GeoEntity, Scan
     @Override
     public void playerTouch(Player player) {
         if (!this.level().isClientSide && !player.isCreative() && !player.isSpectator()) {
+            if (this.isAsleep()) {
+                this.setSleepPhase(SLEEP_PHASE_NONE);
+                this.setCurrentSleepIdle(-1);
+            }
             this.waterPanic.panicFrom(player.position());
             this.landPanic.panicFrom(player.position());
         }
@@ -388,6 +392,10 @@ public class HyemoschusEntity extends SemiaquaticBase implements GeoEntity, Scan
     public boolean hurt(DamageSource source, float amount) {
         boolean result = super.hurt(source, amount);
         if (!this.level().isClientSide && result && this.isAlive()) {
+            if (this.isAsleep()) {
+                this.setSleepPhase(SLEEP_PHASE_NONE);
+                this.setCurrentSleepIdle(-1);
+            }
             Vec3 from = source.getEntity() != null ? source.getEntity().position() : this.position();
             this.waterPanic.panicFrom(from);
             this.landPanic.panicFrom(from);
