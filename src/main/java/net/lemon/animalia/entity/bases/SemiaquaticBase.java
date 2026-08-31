@@ -266,6 +266,7 @@ public abstract class SemiaquaticBase extends AnimaliaLandBase{
         @Override
         protected boolean passCheck() {
             return this.semiaquatic.isInWater()
+                    && this.semiaquatic.getNavigation().isDone()
                     && (this.semiaquatic.depthTolerance() <= 0
                     || !this.semiaquatic.isActiveTime(this.semiaquatic));
         }
