@@ -141,6 +141,16 @@ public abstract class AnimaliaLandBase extends Animal implements IActivityTime, 
         return stack.is(getFoodTag());
     }
 
+    @Override
+    public int eatAge() {
+        return this.getAge();
+    }
+
+    @Override
+    public void setEatAge(int age) {
+        this.setAge(age);
+    }
+
     public abstract TagKey<Item> getFoodTag();
 
     protected SoundEvent getAmbientSound() {

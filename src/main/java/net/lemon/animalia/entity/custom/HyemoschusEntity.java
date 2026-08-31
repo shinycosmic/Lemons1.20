@@ -188,7 +188,7 @@ public class HyemoschusEntity extends SemiaquaticBase implements GeoEntity, Scan
             animationState.getController().setAnimation(RawAnimation.begin().then("run", Animation.LoopType.LOOP));
             return PlayState.CONTINUE;
         }
-        if (this.isInWater() && !this.onGround()) {
+        if (this.isInWater()) {
             if (!this.isActuallyMoving()) {
                 animationState.getController().setAnimationSpeed(0.0D);
             }

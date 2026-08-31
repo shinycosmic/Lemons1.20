@@ -650,6 +650,7 @@ public abstract class AnimaliaBreedableWater extends WaterAnimal implements IAct
         return stack.is(getFoodTag());
     }
 
+
     protected void usePlayerItem(Player pPlayer, InteractionHand hand, ItemStack stack) {
         if (!pPlayer.getAbilities().instabuild) {
             stack.shrink(1);
