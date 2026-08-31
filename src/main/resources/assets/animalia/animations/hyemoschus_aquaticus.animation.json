@@ -4485,6 +4485,29 @@
 					}
 				}
 			}
+		},
+		"idle1T": {
+			"animation_length": 0.25,
+			"bones": {
+				"neck": {
+					"rotation": {
+						"0.0": {
+							"vector": ["45-math.sin(query.anim_time*240/0.5-100)*0.7", 0, 0]
+						},
+						"0.25": {
+							"vector": [0, 0, 0]
+						}
+					},
+					"position": {
+						"0.0": {
+							"vector": [0, -0.25, -0.7]
+						},
+						"0.25": {
+							"vector": [0, 0, 0]
+						}
+					}
+				}
+			}
 		}
 	}
 }

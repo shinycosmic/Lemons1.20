@@ -73,13 +73,13 @@ public class HyemoschusEntity extends SemiaquaticBase implements GeoEntity, Scan
 
     @Override
     protected void registerGoals() {
-        this.waterPanic = new SemiaquaticPanicGoal(this, 2D, 200, 8.0D, 12) {
+        this.waterPanic = new SemiaquaticPanicGoal(this, 2.5D, 200, 8.0D, 12) {
             @Override
             protected boolean canScan() {
                 return HyemoschusEntity.this.isBaby();
             }
         };
-        this.landPanic = new LandPanicGoal(this, 2D, 200, 8.0D) {
+        this.landPanic = new LandPanicGoal(this, 2.5D, 200, 8.0D) {
             @Override
             protected boolean canScan() {
                 return HyemoschusEntity.this.isBaby();
