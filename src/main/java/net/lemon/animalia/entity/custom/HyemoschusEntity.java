@@ -36,11 +36,8 @@ import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.core.animatable.GeoAnimatable;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.core.animatable.instance.SingletonAnimatableInstanceCache;
+import software.bernie.geckolib.core.animation.*;
 import software.bernie.geckolib.core.animation.AnimationState;
-import software.bernie.geckolib.core.animation.AnimatableManager;
-import software.bernie.geckolib.core.animation.Animation;
-import software.bernie.geckolib.core.animation.AnimationController;
-import software.bernie.geckolib.core.animation.RawAnimation;
 import software.bernie.geckolib.core.object.PlayState;
 
 public class HyemoschusEntity extends SemiaquaticBase implements GeoEntity, Scannable, ICanThreat, ICanSleep {
@@ -208,6 +205,12 @@ public class HyemoschusEntity extends SemiaquaticBase implements GeoEntity, Scan
         int twitch = this.getCurrTwitchIdle();
         if (twitch >= 0 && !this.isBaby()) {
             state.getController().setAnimation(RawAnimation.begin().then("idle" + twitch, Animation.LoopType.LOOP));
+            return PlayState.CONTINUE;
+        }
+        AnimationProcessor.QueuedAnimation current = state.getController().getCurrentAnimation();
+        if (current != null && !state.getController().hasAnimationFinished()
+                && (current.animation().name().equals("idle1") || current.animation().name().equals("idle1T"))) {
+            state.getController().setAnimation(RawAnimation.begin().then("idle1T", Animation.LoopType.PLAY_ONCE));
             return PlayState.CONTINUE;
         }
         state.getController().forceAnimationReset();
