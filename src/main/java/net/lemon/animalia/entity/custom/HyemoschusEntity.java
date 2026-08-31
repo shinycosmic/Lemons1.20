@@ -158,6 +158,7 @@ public class HyemoschusEntity extends SemiaquaticBase implements GeoEntity, Scan
 
     private <T extends GeoAnimatable> PlayState predicate(AnimationState<T> animationState) {
         animationState.getController().setAnimationSpeed(1.0D);
+        animationState.getController().transitionLength(5);
         if (this.isGrazing() && !this.isBaby()) {
             animationState.getController().setAnimation(RawAnimation.begin().then("graze", Animation.LoopType.LOOP));
             return PlayState.CONTINUE;
@@ -174,6 +175,10 @@ public class HyemoschusEntity extends SemiaquaticBase implements GeoEntity, Scan
                 return PlayState.CONTINUE;
         }
         if (!this.isBaby() && this.getThreatPhase() == THREAT_PHASE_DISPLAY) {
+            AnimationProcessor.QueuedAnimation current = animationState.getController().getCurrentAnimation();
+            if (current != null && current.animation().name().equals("toThreat")) {
+                animationState.getController().transitionLength(0);
+            }
             animationState.getController().setAnimation(RawAnimation.begin()
                     .then("toThreat", Animation.LoopType.PLAY_ONCE)
                     .thenLoop("threat"));
@@ -204,12 +209,14 @@ public class HyemoschusEntity extends SemiaquaticBase implements GeoEntity, Scan
     private <T extends GeoAnimatable> PlayState idlesPredicate(AnimationState<T> state) {
         int twitch = this.getCurrTwitchIdle();
         if (twitch >= 0 && !this.isBaby()) {
+            state.getController().transitionLength(5);
             state.getController().setAnimation(RawAnimation.begin().then("idle" + twitch, Animation.LoopType.LOOP));
             return PlayState.CONTINUE;
         }
         AnimationProcessor.QueuedAnimation current = state.getController().getCurrentAnimation();
         if (current != null && !state.getController().hasAnimationFinished()
                 && (current.animation().name().equals("idle1") || current.animation().name().equals("idle1T"))) {
+            state.getController().transitionLength(0);
             state.getController().setAnimation(RawAnimation.begin().then("idle1T", Animation.LoopType.PLAY_ONCE));
             return PlayState.CONTINUE;
         }
