@@ -249,7 +249,9 @@ public abstract class SemiaquaticBase extends AnimaliaLandBase{
 
         @Override
         public boolean canContinueToUse() {
-            return this.semiaquatic.isInWater() && super.canContinueToUse();
+            return this.semiaquatic.isInWater()
+                    && this.semiaquatic.tooDeep(this.semiaquatic.blockPosition(), this.shallowY)
+                    && super.canContinueToUse();
         }
 
         @Override

@@ -71,7 +71,8 @@ public class FindNearestBlockGoal extends Goal {
         if (this.targetPos == null || this.mob.hurtTime > 0) {
             return false;
         }
-        if (this.mob.blockPosition().equals(this.targetPos)) {
+        if (this.mob.blockPosition().equals(this.targetPos)
+                || (this.mob.isInWater() && !this.mob.onGround() && this.targetPos.distToCenterSqr(this.mob.position()) < 1.0D)) {
             this.onArrival();
             return false;
         }
