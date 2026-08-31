@@ -118,6 +118,9 @@ public abstract class SemiaquaticBase extends AnimaliaLandBase{
             if (this.isBottomWalker() && this.getNavigation().isDone()) {
                 this.setDeltaMovement(this.getDeltaMovement().add(0.0D, -0.005D, 0.0D));
             }
+            if (this.horizontalCollision && !this.getNavigation().isDone()) {
+                this.setDeltaMovement(this.getDeltaMovement().add(0.0D, 0.02D, 0.0D));
+            }
         } else {
             super.travel(pTravelVector);
         }
