@@ -98,6 +98,9 @@ public class ModEntities {
     public static final RegistryObject<EntityType<CrayfishEntity>> PROCAMBARUS_ALLENI = registerEntityType("procambarus_alleni", CrayfishEntity::new, ModMobCategories.ANIMALIA_INVERTEBRATE, 0.5f, 0.3f, CrayfishEntity::setAttributes, 0xdb743a, 0x26a5c6, true);
     public static final RegistryObject<EntityType<CrayfishEntity>> PROCAMBARUS_VIRGINALIS = registerEntityType("procambarus_virginalis", CrayfishEntity::new, ModMobCategories.ANIMALIA_INVERTEBRATE, 0.5f, 0.3f, CrayfishEntity::setAttributes, 0x332b20, 0x8a7346, true);
     public static final RegistryObject<EntityType<CrayfishEntity>> PROCAMBARUS_LUCIFUGUS = registerEntityType("procambarus_lucifugus", CrayfishEntity::new, ModMobCategories.ANIMALIA_INVERTEBRATE, 0.5f, 0.3f, CrayfishEntity::setAttributes, 0xab9782, 0xbbb8c9, true);
+    public static final RegistryObject<EntityType<PelagicInvertSwimmerEntity>> XIBALBANUS_TULUMENSIS = registerEntityType("xibalbanus_tulumensis", PelagicInvertSwimmerEntity::new, ModMobCategories.ANIMALIA_INVERTEBRATE, 0.5f, 0.3f, PelagicInvertSwimmerEntity::setAttributes, 0xe4e5de, 0x967869, true);
+
+
     //Actual Land animals
     public static final RegistryObject<EntityType<PangolinEntity>> SMUTSIA_GIGANTEA = registerEntityType("smutsia_gigantea", PangolinEntity::new, ModMobCategories.ANIMALIA_LAND, 0.9f, 0.9f, PangolinEntity::setAttributes, 0x8e6b3c, 0xffc06a);
     public static final RegistryObject<EntityType<HyemoschusEntity>> HYEMOSCHUS_AQUATICUS = registerEntityType("hyemoschus_aquaticus", HyemoschusEntity::new, ModMobCategories.ANIMALIA_LAND, 0.9f, 0.9f, HyemoschusEntity::setAttributes, 0x553933, 0xe0dbd9);

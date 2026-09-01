@@ -165,6 +165,8 @@ public class CavefishEntity extends FishBase implements GeoEntity, Scannable {
     public int getScaleforGUI() {
         if (this.getType() == ModEntities.NEOLISSOCHILUS_PNAR.get()) {
             return 24;
+        } else if (this.getType() == ModEntities.SATAN_EURYSTOMUS.get()) {
+            return 24;
         }
         return 35;
     }
