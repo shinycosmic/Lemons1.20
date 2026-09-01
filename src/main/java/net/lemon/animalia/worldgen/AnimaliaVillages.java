@@ -30,14 +30,18 @@ public class AnimaliaVillages {
         for (String type : List.of("desert")) {
             addToPool(pools, villagePool(type, "houses"), villagePiece(type + "_aquarist_1"), empty, 65);
         }
+        System.out.println("[AQUARIST] handler fired, template present=" + event.getServer().getStructureManager()
+                .get(new ResourceLocation(Animalia.MODID, "village/desert_aquarist_1")).isPresent());
     }
 
     private static void addToPool(Registry<StructureTemplatePool> pools, ResourceLocation poolId, String pieceId,
                                   Holder<StructureProcessorList> processors, int weight) {
         StructureTemplatePool pool = pools.get(poolId);
         if (pool == null) {
+            System.out.println("[AQUARIST] POOL NOT FOUND: " + poolId);
             return;
         }
+        System.out.println("[AQUARIST] " + poolId + " before=" + pool.templates.size());
         SinglePoolElement piece = StructurePoolElement.legacy(pieceId, processors).apply(StructureTemplatePool.Projection.RIGID);
         for (int i = 0; i < weight; i++) {
             pool.templates.add(piece);
@@ -45,6 +49,7 @@ public class AnimaliaVillages {
         List<Pair<StructurePoolElement, Integer>> rawTemplates = new ArrayList<>(pool.rawTemplates);
         rawTemplates.add(new Pair<>(piece, weight));
         pool.rawTemplates = rawTemplates;
+        System.out.println("[AQUARIST] " + poolId + " after=" + pool.templates.size());
     }
 
     private static ResourceLocation villagePool(String type, String pool) {
