@@ -13,10 +13,12 @@ import net.minecraft.world.level.levelgen.structure.pools.StructureTemplatePool;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessorList;
 import net.minecraftforge.event.server.ServerAboutToStartEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Mod.EventBusSubscriber(modid = Animalia.MODID)
 public class AnimaliaVillages {
     @SubscribeEvent
     public static void onServerAboutToStart(ServerAboutToStartEvent event) {
@@ -24,8 +26,9 @@ public class AnimaliaVillages {
         Registry<StructureProcessorList> processors = event.getServer().registryAccess().registryOrThrow(Registries.PROCESSOR_LIST);
         Holder<StructureProcessorList> empty = processors.getHolderOrThrow(
                 ResourceKey.create(Registries.PROCESSOR_LIST, new ResourceLocation("minecraft", "empty")));
-        for (String type : List.of("plains", "desert", "savanna", "snowy", "taiga")) {
-            addToPool(pools, villagePool(type, "houses"), villagePiece(type + "_aquarist_shop"), empty, 2);
+//        for (String type : List.of("plains", "desert", "savanna", "snowy", "taiga")) {
+        for (String type : List.of("desert")) {
+            addToPool(pools, villagePool(type, "houses"), villagePiece(type + "_aquarist_1"), empty, 65);
         }
     }
 
