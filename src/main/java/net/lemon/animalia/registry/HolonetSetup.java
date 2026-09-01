@@ -31,6 +31,7 @@ public class HolonetSetup {
         CrayfishEntity.registerHolonet();
         PangolinEntity.registerHolonet();
         HyemoschusEntity.registerHolonet();
+        PelagicInvertSwimmerEntity.registerHolonet();
 
     }
 }

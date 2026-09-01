@@ -155,6 +155,8 @@ public class ModSpawns {
                 BiomeSelector.in(Biomes.RIVER));
         add(ModEntities.PROCAMBARUS_LUCIFUGUS, 3, 1, 1,
                 BiomeSelector.in(Biomes.DRIPSTONE_CAVES, Biomes.LUSH_CAVES));
+        add(ModEntities.XIBALBANUS_TULUMENSIS, 3, 1, 1,
+                BiomeSelector.in(Biomes.DRIPSTONE_CAVES));
 
         //land
         add(ModEntities.SMUTSIA_GIGANTEA, 1, 1, 1,
