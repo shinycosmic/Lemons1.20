@@ -354,10 +354,10 @@ public abstract class SemiaquaticBase extends AnimaliaLandBase{
             this(mob, speedMult, fleeLength, proximityRange, range, state -> state.is(block));
         }
 
-        private SemiaquaticPanicGoal(SemiaquaticBase mob, double speedMult, int fleeLength, double proximityRange, int range, Predicate<BlockState> refuge) {
+        private SemiaquaticPanicGoal(SemiaquaticBase mob, double speedMult, int fleeLength, double proximityRange, int range, Predicate<BlockState> targetType) {
             super(mob, speedMult, fleeLength, proximityRange);
             this.range = range;
-            this.targetType = refuge;
+            this.targetType = targetType;
         }
 
         @Override

@@ -161,6 +161,8 @@
   "entity.animalia.centropyge_venusta": "Purple-masked Angelfish",
   "entity.animalia.centropyge_loricula": "Flame Angelfish",
   "entity.animalia.hyemoschus_aquaticus": "Water Chevrotain",
+  "entity.animalia.crossarchus_obscurus": "Common Kusimanse",
+  "entity.animalia.crossarchus_platycephalus": "Flat-headed Kusimanse",
 
 
   "tooltip.animalia.baby": "Juvenile",
@@ -260,6 +262,8 @@
   "entity.animalia.centropyge_venusta.scientific": "Centropyge venusta",
   "entity.animalia.centropyge_boylei.scientific": "Centropyge boylei",
   "entity.animalia.hyemoschus_aquaticus.scientific": "Hyemoschus aquaticus",
+  "entity.animalia.crossarchus_obscurus.scientific": "Crossarchus obscurus",
+  "entity.animalia.crossarchus_platycephalus.scientific": "Crossarchus platycephalus",
 
   "order.animalia.perciformes": "Perciformes",
   "order.animalia.anabantiformes": "Anabantiformes",
@@ -277,6 +281,7 @@
   "order.animalia.anguilliformes": "Anguilliformes",
   "order.animalia.artiodactyla": "Artiodactyla",
   "order.animalia.nectiopoda": "Nectiopoda",
+  "order.animalia.carnivora": "Carnivora",
 
   "family.animalia.percophidae": "Percophidae",
   "family.animalia.eleginopidae": "Eleginopidae",
@@ -315,6 +320,7 @@
   "family.animalia.ictaluridae": "Ictaluridae",
   "family.animalia.tragulidae": "Tragulidae",
   "family.animalia.xibalbanidae": "Xibalbanidae",
+  "family.animalia.herpestidae": "Herpestidae",
 
   "trivia.animalia.dissostichus_eleginoides": "The Chilean Sea Bass, also known as the Patagonian Toothfish is an icefish that lives in the southern cold oceans at depths of 45 to over 3000 meters deep.",
   "trivia.animalia.percophis_brasiliensis": "The Brazilian Flathead is considered to be the most basal member of Notothenioidei. It lives off the coast of Brazil and Argentina.",
@@ -386,6 +392,8 @@
   "trivia.animalia.centropyge_venusta": "",
   "trivia.animalia.centropyge_boylei": "",
   "trivia.animalia.hyemoschus_aquaticus": "The water chevrotain is a small deer-like animal that lives in tropical Africa. It is the largest of the chevrotains, at 85cm in length and it typically stays around water, foraging for food. It is also exclusively nocturnal.",
+  "trivia.animalia.crossarchus_obscurus": "",
+  "trivia.animalia.crossarchus_platycephalus": "",
 
   "debug.animalia.trivia": "If this value displays, there is a bug [trivia]",
   "debug.animalia.family": "if this text appears, there is a bug [family]",

@@ -2,7 +2,9 @@ package net.lemon.animalia.entity.bases;
 
 import net.lemon.animalia.entity.ai.FindNearestBlockGoal;
 import net.lemon.animalia.entity.ai.SleepGoal;
+import net.lemon.animalia.entity.aimove.ClimberMoveControl;
 import net.lemon.animalia.entity.bases.helpers.*;
+import net.lemon.animalia.entity.navigation.ClimberPathNavigation;
 import net.lemon.animalia.item.FishEggItem;
 import net.lemon.animalia.registry.ModItems;
 import net.lemon.animalia.util.Scannable;
@@ -25,6 +27,7 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
+import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.entity.ai.targeting.TargetingConditions;
 import net.minecraft.world.entity.ai.util.DefaultRandomPos;
 import net.minecraft.world.entity.animal.Animal;
@@ -46,7 +49,7 @@ import java.util.function.Predicate;
 
 import static net.lemon.animalia.entity.bases.AnimaliaBreedableWater.*;
 
-public abstract class AnimaliaLandBase extends Animal implements IActivityTime, IFoodEater, IIdles, IGrazer, IDimorphism, ICanSleep{
+public abstract class AnimaliaLandBase extends Animal implements IActivityTime, IFoodEater, IIdles, IGrazer, IDimorphism, ICanSleep, ICanClimb{
     private static final EntityDataAccessor<Integer> GENDER = SynchedEntityData.defineId(AnimaliaLandBase.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Integer> VAR_COLOR = SynchedEntityData.defineId(AnimaliaLandBase.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Float> VAR_SIZE_MULTIPLIER = SynchedEntityData.defineId(AnimaliaLandBase.class, EntityDataSerializers.FLOAT);
@@ -60,6 +63,7 @@ public abstract class AnimaliaLandBase extends Animal implements IActivityTime, 
     private static final EntityDataAccessor<Boolean> IS_RUNNING = SynchedEntityData.defineId(AnimaliaLandBase.class, EntityDataSerializers.BOOLEAN);
     private static final EntityDataAccessor<Integer> SLEEP_PHASE = SynchedEntityData.defineId(AnimaliaLandBase.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Integer> SLEEP_IDLE = SynchedEntityData.defineId(AnimaliaLandBase.class, EntityDataSerializers.INT);
+    private static final EntityDataAccessor<Byte> CLIMB_DATA = SynchedEntityData.defineId(AnimaliaLandBase.class, EntityDataSerializers.BYTE);
 
     private int grazeTicks = 0;
     private int wantsToGrazeUntil;
@@ -73,9 +77,18 @@ public abstract class AnimaliaLandBase extends Animal implements IActivityTime, 
     public int growthTicks = -12000;
     private int idleDisplayTicks;
     private int twitchIdleTicks;
+    private boolean wantsToClimb;
 
     protected AnimaliaLandBase(EntityType<? extends Animal> entityType, Level level) {
         super(entityType, level);
+        if (this.canClimb()) {
+            this.moveControl = new ClimberMoveControl(this);
+        }
+    }
+
+    @Override
+    protected PathNavigation createNavigation(Level level) {
+        return this.canClimb() ? new ClimberPathNavigation(this, level) : super.createNavigation(level);
     }
 
     protected float getStandingEyeHeight(Pose pPose, EntityDimensions pSize) {
@@ -98,6 +111,7 @@ public abstract class AnimaliaLandBase extends Animal implements IActivityTime, 
         this.entityData.define(IS_RUNNING, false);
         this.entityData.define(SLEEP_PHASE, 0);
         this.entityData.define(SLEEP_IDLE, -1);
+        this.entityData.define(CLIMB_DATA, (byte) 0);
 
     }
 
@@ -150,6 +164,26 @@ public abstract class AnimaliaLandBase extends Animal implements IActivityTime, 
     public boolean canStartSleeping() {
         return ICanSleep.super.canStartSleeping() && !this.isGrazing() && !this.isEating()
                 && !this.isInLove() && !this.isMovementLockedByIdle();
+    }
+
+    @Override
+    public byte getClimbData() {
+        return this.entityData.get(CLIMB_DATA);
+    }
+
+    @Override
+    public void setClimbData(byte data) {
+        this.entityData.set(CLIMB_DATA, data);
+    }
+
+    @Override
+    public boolean wantsToClimb() {
+        return this.wantsToClimb;
+    }
+
+    @Override
+    public void setWantsToClimb(boolean wantsToClimb) {
+        this.wantsToClimb = wantsToClimb;
     }
 
     public boolean babyFollowsParent() {
@@ -393,6 +427,9 @@ public abstract class AnimaliaLandBase extends Animal implements IActivityTime, 
         pCompound.putInt("Gender", this.getGender());
         pCompound.putInt("VarColor", this.getVarColor());
         pCompound.putBoolean("IsPregnant", this.isPregnant());
+        if (this.canClimb()) {
+            pCompound.putByte("ClimbData", this.getClimbData());
+        }
         if(this.canHide()) {
             pCompound.putInt("HidePhase", this.getHidePhase());
             pCompound.putInt("HideTicks", this.hideTicks);
@@ -410,6 +447,9 @@ public abstract class AnimaliaLandBase extends Animal implements IActivityTime, 
         this.setGender(pCompound.getInt("Gender"));
         this.setVarColor(pCompound.getInt("VarColor"));
         this.setPregnant(pCompound.getBoolean("IsPregnant"));
+        if (this.canClimb()) {
+            this.setClimbData(pCompound.getByte("ClimbData"));
+        }
         if(this.canHide()) {
             this.setHiding(pCompound.getBoolean("IsHiding"));
             this.setHidePhase(PHASE_NONE);
@@ -457,6 +497,9 @@ public abstract class AnimaliaLandBase extends Animal implements IActivityTime, 
                 this.setSleepPhase(SLEEP_PHASE_NONE);
                 this.setCurrentSleepIdle(-1);
             }
+            if (!this.level().isClientSide && this.isAttached()) {
+                this.detach();
+            }
             return super.hurt(source, amount);
         }
     }
@@ -503,7 +546,7 @@ public abstract class AnimaliaLandBase extends Animal implements IActivityTime, 
 
     @Override
     public boolean canPlayIdle() {
-        return IIdles.super.canPlayIdle() && !this.isHiding() && !this.isGrazing();
+        return IIdles.super.canPlayIdle() && !this.isHiding() && !this.isGrazing() && !this.isAttached();
     }
 
     @Override
@@ -513,11 +556,30 @@ public abstract class AnimaliaLandBase extends Animal implements IActivityTime, 
 
     @Override
     public void travel(Vec3 pTravelVector) {
+        if (this.isAttached()) {
+            this.climbTravel(this.isMovementLockedByIdle() || this.isGrazing() ? Vec3.ZERO : pTravelVector);
+            return;
+        }
         if (this.isMovementLockedByIdle() || this.isGrazing()) {
             super.travel(Vec3.ZERO);
             return;
         }
         super.travel(pTravelVector);
+    }
+
+    @Override
+    protected void customServerAiStep() {
+        super.customServerAiStep();
+        if (this.canClimb()) {
+            if (this.waterBlocking()) {
+                this.detach();
+            } else {
+                this.tickClimb();
+            }
+            if (!this.onGround()) {
+                this.resetFallDistance();
+            }
+        }
     }
 
     @Override
