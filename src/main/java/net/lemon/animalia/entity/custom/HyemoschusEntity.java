@@ -1,7 +1,6 @@
 package net.lemon.animalia.entity.custom;
 
 import net.lemon.animalia.entity.ai.GrazeGoal;
-import net.lemon.animalia.entity.ai.SleepGoal;
 import net.lemon.animalia.entity.ai.ThreatGoal;
 import net.lemon.animalia.entity.bases.SemiaquaticBase;
 import net.lemon.animalia.entity.bases.helpers.ActivityTime;
@@ -43,8 +42,6 @@ import software.bernie.geckolib.core.object.PlayState;
 public class HyemoschusEntity extends SemiaquaticBase implements GeoEntity, Scannable, ICanThreat, ICanSleep {
     private final AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
     private static final EntityDataAccessor<Integer> THREAT_PHASE = SynchedEntityData.defineId(HyemoschusEntity.class, EntityDataSerializers.INT);
-    private static final EntityDataAccessor<Integer> SLEEP_PHASE = SynchedEntityData.defineId(HyemoschusEntity.class, EntityDataSerializers.INT);
-    private static final EntityDataAccessor<Integer> SLEEP_IDLE = SynchedEntityData.defineId(HyemoschusEntity.class, EntityDataSerializers.INT);
 
     private SemiaquaticPanicGoal waterPanic;
     private LandPanicGoal landPanic;
@@ -64,8 +61,6 @@ public class HyemoschusEntity extends SemiaquaticBase implements GeoEntity, Scan
     protected void defineSynchedData() {
         super.defineSynchedData();
         this.entityData.define(THREAT_PHASE, THREAT_PHASE_NONE);
-        this.entityData.define(SLEEP_PHASE, 0);
-        this.entityData.define(SLEEP_IDLE, -1);
     }
 
     @Override
@@ -86,7 +81,6 @@ public class HyemoschusEntity extends SemiaquaticBase implements GeoEntity, Scan
         this.goalSelector.addGoal(1, this.landPanic);
         this.goalSelector.addGoal(2, new ThreatGoal(this, 8.0D, 2.0D, Integer.MAX_VALUE, 0, ThreatGoal.ThreatOutcome.FLEE,
                 entity -> entity instanceof Player player && !player.isCreative() && !player.isCrouching()));
-        this.goalSelector.addGoal(2, new SleepGoal(this));
         this.goalSelector.addGoal(6, new GrazeGoal<>(this, 1.0D));
         super.registerGoals();
     }
@@ -295,19 +289,6 @@ public class HyemoschusEntity extends SemiaquaticBase implements GeoEntity, Scan
     }
 
 
-
-    @Override
-    public int getSleepPhase() {return this.entityData.get(SLEEP_PHASE);}
-
-    @Override
-    public void setSleepPhase(int phase) {this.entityData.set(SLEEP_PHASE, phase);}
-
-    @Override
-    public int getCurrentSleepIdle() {return this.entityData.get(SLEEP_IDLE);}
-
-    @Override
-    public void setCurrentSleepIdle(int sleepIdleId) {this.entityData.set(SLEEP_IDLE, sleepIdleId);}
-
     @Override
     public int getToSleepLength() {return 20;}
 
@@ -392,10 +373,6 @@ public class HyemoschusEntity extends SemiaquaticBase implements GeoEntity, Scan
     public boolean hurt(DamageSource source, float amount) {
         boolean result = super.hurt(source, amount);
         if (!this.level().isClientSide && result && this.isAlive()) {
-            if (this.isAsleep()) {
-                this.setSleepPhase(SLEEP_PHASE_NONE);
-                this.setCurrentSleepIdle(-1);
-            }
             Vec3 from = source.getEntity() != null ? source.getEntity().position() : this.position();
             this.waterPanic.panicFrom(from);
             this.landPanic.panicFrom(from);

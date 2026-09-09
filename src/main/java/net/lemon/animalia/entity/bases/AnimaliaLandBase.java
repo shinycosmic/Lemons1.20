@@ -1,6 +1,7 @@
 package net.lemon.animalia.entity.bases;
 
 import net.lemon.animalia.entity.ai.FindNearestBlockGoal;
+import net.lemon.animalia.entity.ai.SleepGoal;
 import net.lemon.animalia.entity.bases.helpers.*;
 import net.lemon.animalia.item.FishEggItem;
 import net.lemon.animalia.registry.ModItems;
@@ -45,7 +46,7 @@ import java.util.function.Predicate;
 
 import static net.lemon.animalia.entity.bases.AnimaliaBreedableWater.*;
 
-public abstract class AnimaliaLandBase extends Animal implements IActivityTime, IFoodEater, IIdles, IGrazer, IDimorphism {
+public abstract class AnimaliaLandBase extends Animal implements IActivityTime, IFoodEater, IIdles, IGrazer, IDimorphism, ICanSleep{
     private static final EntityDataAccessor<Integer> GENDER = SynchedEntityData.defineId(AnimaliaLandBase.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Integer> VAR_COLOR = SynchedEntityData.defineId(AnimaliaLandBase.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Float> VAR_SIZE_MULTIPLIER = SynchedEntityData.defineId(AnimaliaLandBase.class, EntityDataSerializers.FLOAT);
@@ -57,6 +58,8 @@ public abstract class AnimaliaLandBase extends Animal implements IActivityTime, 
     private static final EntityDataAccessor<Integer> TWITCH_IDLE = SynchedEntityData.defineId(AnimaliaLandBase.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Boolean> IS_PREGNANT = SynchedEntityData.defineId(AnimaliaLandBase.class, EntityDataSerializers.BOOLEAN);
     private static final EntityDataAccessor<Boolean> IS_RUNNING = SynchedEntityData.defineId(AnimaliaLandBase.class, EntityDataSerializers.BOOLEAN);
+    private static final EntityDataAccessor<Integer> SLEEP_PHASE = SynchedEntityData.defineId(AnimaliaLandBase.class, EntityDataSerializers.INT);
+    private static final EntityDataAccessor<Integer> SLEEP_IDLE = SynchedEntityData.defineId(AnimaliaLandBase.class, EntityDataSerializers.INT);
 
     private int grazeTicks = 0;
     private int wantsToGrazeUntil;
@@ -93,6 +96,8 @@ public abstract class AnimaliaLandBase extends Animal implements IActivityTime, 
         this.entityData.define(TWITCH_IDLE, -1);
         this.entityData.define(IS_PREGNANT, false);
         this.entityData.define(IS_RUNNING, false);
+        this.entityData.define(SLEEP_PHASE, 0);
+        this.entityData.define(SLEEP_IDLE, -1);
 
     }
 
@@ -111,15 +116,40 @@ public abstract class AnimaliaLandBase extends Animal implements IActivityTime, 
     @Override
     protected void registerGoals() {
         this.goalSelector.addGoal(0, new FloatGoal(this));
-
         this.goalSelector.addGoal(1, new BreedGoal(this, 1.15D));
         if (this.getBirthLocation() != BirthLocation.ANY) this.goalSelector.addGoal(2, new SpawnChildGoal(this, 1.0D, 12));
+        this.goalSelector.addGoal(2, new SleepGoal(this));
         this.goalSelector.addGoal(3, new TemptGoal(this, 1.0D, this.foodIngredients(), false));
         if (this.babyFollowsParent()) this.goalSelector.addGoal(5, new FollowParentGoal(this, 1.25D));
         this.goalSelector.addGoal(5, new WaterAvoidingRandomStrollGoal(this, 1.0D));
         this.goalSelector.addGoal(7, new LookAtPlayerGoal(this, Player.class, 6.0F));
         this.goalSelector.addGoal(8, new RandomLookAroundGoal(this));
         super.registerGoals();
+    }
+
+    public int getSleepPhase(){
+        return this.entityData.get(SLEEP_PHASE);
+    }
+
+    @Override
+    public void setSleepPhase(int phase) {
+        this.entityData.set(SLEEP_PHASE, phase);
+    }
+
+    @Override
+    public int getCurrentSleepIdle() {
+        return this.entityData.get(SLEEP_IDLE);
+    }
+
+    @Override
+    public void setCurrentSleepIdle(int sleepIdleId) {
+        this.entityData.set(SLEEP_IDLE, sleepIdleId);
+    }
+
+    @Override
+    public boolean canStartSleeping() {
+        return ICanSleep.super.canStartSleeping() && !this.isGrazing() && !this.isEating()
+                && !this.isInLove() && !this.isMovementLockedByIdle();
     }
 
     public boolean babyFollowsParent() {
@@ -198,7 +228,7 @@ public abstract class AnimaliaLandBase extends Animal implements IActivityTime, 
 
     public boolean canGraze() {
         return this.onGround() && !this.isInWater() && !this.isHiding() && !this.isEating() && !this.isInLove()
-                && !this.isMovementLockedByIdle() && !(this instanceof ICanSleep sleeper && sleeper.isAsleep());
+                && !this.isMovementLockedByIdle() && !(this.isAsleep());
     }
 
     public boolean wantsToGraze() {
@@ -422,6 +452,10 @@ public abstract class AnimaliaLandBase extends Animal implements IActivityTime, 
                 this.setIdleTicks(0);
                 this.setCurrRegIdle(-1);
                 this.onMovementLockingIdleEnd();
+            }
+            if (!this.level().isClientSide && this.isAsleep()) {
+                this.setSleepPhase(SLEEP_PHASE_NONE);
+                this.setCurrentSleepIdle(-1);
             }
             return super.hurt(source, amount);
         }

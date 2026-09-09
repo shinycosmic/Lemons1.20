@@ -3,11 +3,9 @@ package net.lemon.animalia.entity.custom;
 import net.lemon.animalia.entity.ai.FindNearestBlockGoal;
 import net.lemon.animalia.entity.ai.GrazeGoal;
 import net.lemon.animalia.entity.ai.GuardGoal;
-import net.lemon.animalia.entity.ai.SleepGoal;
 import net.lemon.animalia.entity.bases.AnimaliaLandBase;
 import net.lemon.animalia.entity.bases.helpers.ActivityTime;
 import net.lemon.animalia.entity.bases.helpers.ICanGuard;
-import net.lemon.animalia.entity.bases.helpers.ICanSleep;
 import net.lemon.animalia.registry.ModEntities;
 import net.lemon.animalia.registry.ModItems;
 import net.lemon.animalia.registry.ModTags;
@@ -19,7 +17,6 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.damagesource.DamageSource;
@@ -32,7 +29,6 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.common.Tags;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.core.animatable.GeoAnimatable;
@@ -42,11 +38,9 @@ import software.bernie.geckolib.core.animation.*;
 import software.bernie.geckolib.core.animation.AnimationState;
 import software.bernie.geckolib.core.object.PlayState;
 
-public class PangolinEntity extends AnimaliaLandBase implements GeoEntity, Scannable, ICanGuard, ICanSleep {
+public class PangolinEntity extends AnimaliaLandBase implements GeoEntity, Scannable, ICanGuard {
     private final AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
     private static final EntityDataAccessor<Integer> GUARD_PHASE = SynchedEntityData.defineId(PangolinEntity.class, EntityDataSerializers.INT);
-    private static final EntityDataAccessor<Integer> SLEEP_PHASE = SynchedEntityData.defineId(PangolinEntity.class, EntityDataSerializers.INT);
-    private static final EntityDataAccessor<Integer> SLEEP_IDLE = SynchedEntityData.defineId(PangolinEntity.class, EntityDataSerializers.INT);
 
     private int wantsToGuardUntil;
     private int attackCooldown;
@@ -61,7 +55,6 @@ public class PangolinEntity extends AnimaliaLandBase implements GeoEntity, Scann
     @Override
     protected void registerGoals() {
         this.goalSelector.addGoal(2, new GuardGoal(this, 6D, entity -> !(entity instanceof PangolinEntity) && !(entity instanceof Player player && player.isCreative())));
-        this.goalSelector.addGoal(2, new SleepGoal(this));
         this.goalSelector.addGoal(4, new FindNearestBlockGoal(this, 1.0D, 8, ModTags.Blocks.CROSS_PLANTS));
         this.goalSelector.addGoal(6, new GrazeGoal<>(this, 1.0D));
         super.registerGoals();
@@ -71,8 +64,6 @@ public class PangolinEntity extends AnimaliaLandBase implements GeoEntity, Scann
     protected void defineSynchedData() {
         super.defineSynchedData();
         this.entityData.define(GUARD_PHASE, 0);
-        this.entityData.define(SLEEP_PHASE, 0);
-        this.entityData.define(SLEEP_IDLE, -1);
     }
 
     public static AttributeSupplier setAttributes() {
@@ -246,10 +237,6 @@ public class PangolinEntity extends AnimaliaLandBase implements GeoEntity, Scann
         if (this.isInvulnerableTo(source)) {
             return false;
         }
-        if (!this.level().isClientSide && this.isAsleep()) {
-            this.setSleepPhase(SLEEP_PHASE_NONE);
-            this.setCurrentSleepIdle(-1);
-        }
         if (!this.level().isClientSide && this.guardTriggersFrom(source)) {
             this.guardWindow(this.getGuardReAttackWindow());
         }
@@ -301,24 +288,11 @@ public class PangolinEntity extends AnimaliaLandBase implements GeoEntity, Scann
     }
 
     @Override
-    public int getSleepPhase() {return this.entityData.get(SLEEP_PHASE);}
-
-    @Override
-    public void setSleepPhase(int phase) {this.entityData.set(SLEEP_PHASE, phase);}
-
-    @Override
-    public int getCurrentSleepIdle() {return this.entityData.get(SLEEP_IDLE);}
-
-    @Override
-    public void setCurrentSleepIdle(int sleepIdleId) {this.entityData.set(SLEEP_IDLE, sleepIdleId);}
-
-    @Override
     public int getSleepIdleCount() {return 1;}
 
     @Override
     public boolean canStartSleeping() {
-        return ICanSleep.super.canStartSleeping() && this.getGuardPhase() == GUARD_PHASE_NONE
-                && !this.isGrazing() && !this.isEating() && !this.isInLove() && !this.isMovementLockedByIdle();
+        return super.canStartSleeping() && this.getGuardPhase() == GUARD_PHASE_NONE;
     }
 
     @Override
