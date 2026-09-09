@@ -50,7 +50,7 @@ public class ClimbPanicGoal extends AnimaliaLandBase.LandPanicGoal {
         if (!super.canUse()) {
             return false;
         }
-        this.targetPos = this.findRefuge();
+        this.targetPos = this.findTarget();
         return true;
     }
 
@@ -59,7 +59,7 @@ public class ClimbPanicGoal extends AnimaliaLandBase.LandPanicGoal {
      * checking first would path with the wall withheld and refuse every climb.
      */
     @Nullable
-    private BlockPos findRefuge() {
+    private BlockPos findTarget() {
         Level level = this.mob.level();
         BlockPos found = BlockPos.findClosestMatch(this.mob.blockPosition(), this.range, this.range,
                 pos -> this.refuge.test(level.getBlockState(pos))).orElse(null);
@@ -76,7 +76,7 @@ public class ClimbPanicGoal extends AnimaliaLandBase.LandPanicGoal {
             }
         }
 
-        BlockPos perch = this.perchBeside(level, cursor.immutable());
+        BlockPos perch = this.getSideOf(level, cursor.immutable());
         if (perch == null) {
             return null;
         }
@@ -92,7 +92,7 @@ public class ClimbPanicGoal extends AnimaliaLandBase.LandPanicGoal {
     }
 
     @Nullable
-    private BlockPos perchBeside(Level level, BlockPos trunk) {
+    private BlockPos getSideOf(Level level, BlockPos trunk) {
         BlockPos best = null;
         double bestDist = Double.MAX_VALUE;
         for (Direction face : Direction.Plane.HORIZONTAL) {
@@ -114,6 +114,9 @@ public class ClimbPanicGoal extends AnimaliaLandBase.LandPanicGoal {
     protected void moveAway() {
         if (this.targetPos == null) {
             super.moveAway();
+            return;
+        }
+        if (this.mob.isAttached()) {     // ← missing
             return;
         }
         Path path = this.climbPath != null ? this.climbPath : this.mob.getNavigation().createPath(this.targetPos, 0);

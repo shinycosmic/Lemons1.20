@@ -39,7 +39,7 @@ import software.bernie.geckolib.core.animation.*;
 import software.bernie.geckolib.core.animation.AnimationState;
 import software.bernie.geckolib.core.object.PlayState;
 
-public class HyemoschusEntity extends SemiaquaticBase implements GeoEntity, Scannable, ICanThreat, ICanSleep {
+public class HyemoschusEntity extends SemiaquaticBase implements GeoEntity, Scannable, ICanThreat {
     private final AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
     private static final EntityDataAccessor<Integer> THREAT_PHASE = SynchedEntityData.defineId(HyemoschusEntity.class, EntityDataSerializers.INT);
 

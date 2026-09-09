@@ -1,5 +1,6 @@
 package net.lemon.animalia.entity.custom;
 
+import net.lemon.animalia.entity.ai.ClimbPanicGoal;
 import net.lemon.animalia.entity.bases.AnimaliaLandBase;
 import net.lemon.animalia.entity.bases.helpers.ActivityTime;
 import net.lemon.animalia.registry.ModEntities;
@@ -10,6 +11,7 @@ import net.lemon.animalia.util.HolonetEntities;
 import net.lemon.animalia.util.Scannable;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.entity.EntityType;
@@ -19,6 +21,7 @@ import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
+import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
@@ -85,6 +88,22 @@ public class CrossarchusEntity extends AnimaliaLandBase implements GeoEntity, Sc
 //            return AnimaliaFunctionUtil.getScaleForSize(39, 137);
 //        }
         return 1;
+    }
+
+    @Override
+    protected void registerGoals() {
+        super.registerGoals();
+        this.goalSelector.addGoal(2, new ClimbPanicGoal(this, 1.6D, 200, 8.0D, 16, 6, BlockTags.LOGS));
+    }
+
+    @Override
+    public boolean canClimb() {
+        return true;
+    }
+
+    @Override
+    public boolean isClimbableBlock(BlockState state) {
+        return state.is(BlockTags.LOGS);
     }
 
     @Override

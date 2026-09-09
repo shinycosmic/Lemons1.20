@@ -29,8 +29,8 @@ public class ClimberNodeEvaluator extends WalkNodeEvaluator {
     @Override
     public void prepare(PathNavigationRegion region, Mob mob) {
         super.prepare(region, mob);
-        this.climber = mob instanceof ICanClimb candidate ? candidate : null;
-        this.climbing = this.climber != null && this.climber.canPathfindWithWalls();
+        this.climber = (ICanClimb) mob;
+        this.climbing = this.climber.canPathfindWithWalls();
         if (this.climbing) {
             this.climbUp = this.climber.canClimbUp();
             this.climbDown = this.climber.canClimbDown();
@@ -49,16 +49,10 @@ public class ClimberNodeEvaluator extends WalkNodeEvaluator {
 
     @Override
     public Node getStart() {
-        Node start = this.climbStart();
-        return start != null ? start : super.getStart();
-    }
-
-    @Nullable
-    protected Node climbStart() {
         if (this.climbing && this.climber.isAttached()) {
             return this.getStartNode(this.mob.blockPosition());
         }
-        return null;
+        return super.getStart();
     }
 
     @Override
