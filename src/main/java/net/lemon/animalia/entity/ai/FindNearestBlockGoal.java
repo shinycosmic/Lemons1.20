@@ -49,6 +49,14 @@ public class FindNearestBlockGoal extends Goal {
         this(mob, speedMult, searchRange, pos -> mob.level().getBlockState(pos).is(block), location, 0, true);
     }
 
+    public FindNearestBlockGoal(PathfinderMob mob, double speedMult, int searchRange, Predicate<BlockPos> target, TargetLocation location, int chance) {
+        this(mob, speedMult, searchRange, target, location, chance, false);
+    }
+
+    public FindNearestBlockGoal(PathfinderMob mob, double speedMult, int searchRange, Predicate<BlockPos> target, TargetLocation location) {
+        this(mob, speedMult, searchRange, target, location, 0, true);
+    }
+
     public FindNearestBlockGoal(PathfinderMob mob, double speedMult, int searchRange, Predicate<BlockPos> target, TargetLocation location, int chance, boolean timegate) {
         this.mob = mob;
         this.speedMult = speedMult;

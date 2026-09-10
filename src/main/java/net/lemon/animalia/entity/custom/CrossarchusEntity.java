@@ -1,6 +1,7 @@
 package net.lemon.animalia.entity.custom;
 
 import net.lemon.animalia.entity.ai.ClimbPanicGoal;
+import net.lemon.animalia.entity.ai.FindNearestBlockGoal;
 import net.lemon.animalia.entity.ai.GrazeGoal;
 import net.lemon.animalia.entity.ai.ThreatGoal;
 import net.lemon.animalia.entity.bases.AnimaliaLandBase;
@@ -12,6 +13,7 @@ import net.lemon.animalia.registry.ModTags;
 import net.lemon.animalia.util.AnimaliaFunctionUtil;
 import net.lemon.animalia.util.HolonetEntities;
 import net.lemon.animalia.util.Scannable;
+import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -100,14 +102,12 @@ public class CrossarchusEntity extends AnimaliaLandBase implements GeoEntity, Sc
 
     @Override
     public int getScaleforGUI() {
-//        if (this.getType() == ModEntities.SMUTSIA_GIGANTEA.get()) {
-//            return 22;
-//        }
-        return Scannable.super.getScaleforGUI();
+        return 22;
     }
 
     public static void registerHolonet(){
-//        HolonetEntities.register(ModEntities.SMUTSIA_GIGANTEA, AppName.FIELD, "Pholidota");
+//        HolonetEntities.register(ModEntities.CROSSARCHUS_OBSCURUS, AppName.FIELD, "Carnivora");
+        //        HolonetEntities.register(ModEntities.CROSSARCHUS_PLATYCEPHALUS, AppName.FIELD, "Carnivora");
     }
 
     @Override
@@ -124,6 +124,8 @@ public class CrossarchusEntity extends AnimaliaLandBase implements GeoEntity, Sc
         this.climbPanic = new ClimbPanicGoal(this, 1.6D, 200, 8.0D, 16, 6, BlockTags.LOGS);
         this.goalSelector.addGoal(1, climbPanic);
         this.goalSelector.addGoal(2, new ThreatGoal(this, 12.0D, 4.0D, Integer.MAX_VALUE, 0, ThreatGoal.ThreatOutcome.FLEE, entity -> entity instanceof Player player && !player.isCreative()));
+        this.goalSelector.addGoal(4, new FindNearestBlockGoal(this, 1.0D, 8, pos -> !this.level().canSeeSky(pos) && this.level().getBlockState(pos.below())
+                .isFaceSturdy(this.level(), pos.below(), Direction.UP), FindNearestBlockGoal.TargetLocation.IN));
         this.goalSelector.addGoal(6, new GrazeGoal<>(this, 1.0D));
     }
 
