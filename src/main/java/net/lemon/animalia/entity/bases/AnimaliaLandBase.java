@@ -746,6 +746,8 @@ public abstract class AnimaliaLandBase extends Animal implements IActivityTime, 
 
     public void setRunning(boolean running) { this.entityData.set(IS_RUNNING, running); }
 
+    public boolean babyClimbEnabled() { return true; }
+
     /**
      * TODO Edit this method so it drops LandEggItem. These item eggs are used for insects and such.
      * Birds and lizards lay eggs in mounds/nests
@@ -886,7 +888,7 @@ public abstract class AnimaliaLandBase extends Animal implements IActivityTime, 
         }
 
         protected boolean canScan() {
-            return true;
+            return mob.babyClimbEnabled();
         }
 
         @Override
