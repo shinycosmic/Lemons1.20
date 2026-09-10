@@ -261,7 +261,7 @@ public class CrossarchusEntity extends AnimaliaLandBase implements GeoEntity, Sc
         if (this.isThreatening()) {
             return 3; //idle3 is threatBark
         }
-        return mob.getRandom().nextInt(2);
+        return mob.getRandom().nextInt(3);
     }
 
 
