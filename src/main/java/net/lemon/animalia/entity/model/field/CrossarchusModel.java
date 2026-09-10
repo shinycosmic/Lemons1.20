@@ -31,20 +31,4 @@ public class CrossarchusModel extends GeoModel<CrossarchusEntity> {
         return new ResourceLocation(Animalia.MODID, "animations/crossarchus.animation.json");
     }
 
-    @Override
-    public void setCustomAnimations(CrossarchusEntity animatable, long instanceId, AnimationState<CrossarchusEntity> animationState) {
-        super.setCustomAnimations(animatable, instanceId, animationState);
-
-        CoreGeoBone tusk = this.getAnimationProcessor().getBone("tusk");
-        if (tusk != null) {
-            tusk.setHidden(animatable.getGender() == 0);
-        }
-
-        if (animatable.isAsleep() || animatable.isGrazing() || animatable.isEating()) return;
-
-//        CoreGeoBone head = this.getAnimationProcessor().getBone("head");
-//        EntityModelData entityData = animationState.getData(DataTickets.ENTITY_MODEL_DATA);
-//        head.setRotX(head.getRotX() + entityData.headPitch() * ((float) Math.PI / 180F));
-//        head.setRotY(head.getRotY() + entityData.netHeadYaw() * ((float) Math.PI / 180F));
-    }
 }
