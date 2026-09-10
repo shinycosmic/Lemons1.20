@@ -23,7 +23,6 @@ import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import org.jetbrains.annotations.Nullable;
@@ -187,7 +186,7 @@ public class CrayfishEntity extends BottomWalkerSwimmerBase implements GeoEntity
         }
 
 
-        if (this.getThreatPhase() == THREAT_PHASE_LEAVING) {
+        if (this.getThreatPhase() == THREAT_PHASE_EXITING) {
             controller.setAnimation(RawAnimation.begin().then("unStancing", Animation.LoopType.PLAY_ONCE));
             return PlayState.CONTINUE;
         }

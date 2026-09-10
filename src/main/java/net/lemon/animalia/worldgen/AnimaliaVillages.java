@@ -26,9 +26,8 @@ public class AnimaliaVillages {
         Registry<StructureProcessorList> processors = event.getServer().registryAccess().registryOrThrow(Registries.PROCESSOR_LIST);
         Holder<StructureProcessorList> empty = processors.getHolderOrThrow(
                 ResourceKey.create(Registries.PROCESSOR_LIST, new ResourceLocation("minecraft", "empty")));
-//        for (String type : List.of("plains", "desert", "savanna", "snowy", "taiga")) {
-        for (String type : List.of("desert")) {
-            addToPool(pools, villagePool(type, "houses"), villagePiece(type + "_aquarist_1"), empty, 65);
+        for (String type : List.of("plains", "desert", "savanna", "snowy", "taiga")) {
+            addToPool(pools, villagePool(type, "houses"), villagePiece(type + "_aquarist_1"), empty, 5);
         }
         System.out.println("[AQUARIST] handler fired, template present=" + event.getServer().getStructureManager()
                 .get(new ResourceLocation(Animalia.MODID, "village/desert_aquarist_1")).isPresent());

@@ -7,7 +7,7 @@ import org.jetbrains.annotations.Nullable;
 public interface ICanThreat {
     int THREAT_PHASE_NONE = 0;
     int THREAT_PHASE_DISPLAY = 1;
-    int THREAT_PHASE_LEAVING = 2;
+    int THREAT_PHASE_EXITING = 2;
 
     int getThreatPhase();
 

@@ -163,7 +163,7 @@ public class ThreatGoal extends Goal {
 
     private void beginLeaving() {
         if (this.exitTicks > 0) {
-            this.threatener.setThreatPhase(ICanThreat.THREAT_PHASE_LEAVING);
+            this.threatener.setThreatPhase(ICanThreat.THREAT_PHASE_EXITING);
             this.leavingTicks = this.exitTicks;
         } else {
             this.threatener.setThreatPhase(ICanThreat.THREAT_PHASE_NONE);

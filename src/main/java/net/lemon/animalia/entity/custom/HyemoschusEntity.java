@@ -361,7 +361,7 @@ public class HyemoschusEntity extends SemiaquaticBase implements GeoEntity, Scan
     public void aiStep() {
         super.aiStep();
         if (!this.level().isClientSide) {
-            if (this.wasGrazing && !this.isGrazing()) {
+            if (this.wasGrazing && !this.isGrazing()) { //right after ending graze, play the munching twitch idle
                 this.setCurrTwitchIdle(0);
                 this.setTwitchTicks(20);
             }
