@@ -817,7 +817,7 @@ public abstract class AnimaliaLandBase extends Animal implements IActivityTime, 
         private final AnimaliaLandBase parent;
 
         public SpawnChildGoal(AnimaliaLandBase mob, double speedMult, int searchRange) {
-            super(mob, speedMult, searchRange, state -> true, 1, false);
+            super(mob, speedMult, searchRange, pos -> true, TargetLocation.IN, 1, false);
             this.parent = mob;
         }
 
