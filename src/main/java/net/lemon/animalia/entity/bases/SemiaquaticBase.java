@@ -204,7 +204,7 @@ public abstract class SemiaquaticBase extends AnimaliaLandBase{
         private final SemiaquaticBase semiaquatic;
 
         GoToWaterGoal(SemiaquaticBase mob, double speedMult, int searchRange) {
-            super(mob, speedMult, searchRange, state -> state.getFluidState().is(FluidTags.WATER), 1, false);
+            super(mob, speedMult, searchRange, pos -> mob.level().getFluidState(pos).is(FluidTags.WATER), TargetLocation.IN, 1, false);
             this.semiaquatic = mob;
         }
 
@@ -229,7 +229,7 @@ public abstract class SemiaquaticBase extends AnimaliaLandBase{
         private int shallowY;
 
         GoToShallowGoal(SemiaquaticBase mob, double speedMult, int searchRange) {
-            super(mob, speedMult, searchRange, state -> state.getFluidState().is(FluidTags.WATER), 1, false);
+            super(mob, speedMult, searchRange, pos -> mob.level().getFluidState(pos).is(FluidTags.WATER), TargetLocation.IN, 1, false);
             this.semiaquatic = mob;
         }
 
@@ -264,7 +264,7 @@ public abstract class SemiaquaticBase extends AnimaliaLandBase{
         private final SemiaquaticBase semiaquatic;
 
         GoToLandGoal(SemiaquaticBase mob, double speedMult, int searchRange) {
-            super(mob, speedMult, searchRange, state -> true, 1, false);
+            super(mob, speedMult, searchRange, pos -> true, TargetLocation.IN, 1, false);
             this.semiaquatic = mob;
         }
 

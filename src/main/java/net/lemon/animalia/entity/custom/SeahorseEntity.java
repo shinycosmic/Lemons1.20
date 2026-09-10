@@ -52,7 +52,7 @@ public class SeahorseEntity extends FishBase implements GeoEntity, Scannable {
     @Override
     protected void registerGoals() {
         super.registerGoals();
-        this.goalSelector.addGoal(4, new FindNearestBlockGoal(this, 1.4D, 8, ModTags.Blocks.AQUATIC_PLANTS, 10));
+        this.goalSelector.addGoal(4, new FindNearestBlockGoal(this, 1.4D, 8, ModTags.Blocks.AQUATIC_PLANTS, FindNearestBlockGoal.TargetLocation.IN, 10));
     }
 
     @Override
