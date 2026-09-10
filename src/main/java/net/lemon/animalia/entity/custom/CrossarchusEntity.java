@@ -58,7 +58,7 @@ public class CrossarchusEntity extends AnimaliaLandBase implements GeoEntity, Sc
     public static AttributeSupplier setAttributes() {
         return Mob.createMobAttributes()
                 .add(Attributes.MAX_HEALTH, 4D)
-                .add(Attributes.MOVEMENT_SPEED, 1.3f)
+                .add(Attributes.MOVEMENT_SPEED, 0.3f)
                 .build();
     }
 
