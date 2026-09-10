@@ -258,6 +258,9 @@ public class CrossarchusEntity extends AnimaliaLandBase implements GeoEntity, Sc
     //all of its idles are movement negative minus idle3, threatBark
     @Override
     public int pickIdleOfType(PathfinderMob mob, IdleType type) {
+        if (type != IdleType.MOVEMENT_NEGATIVE) {
+            return -1;
+        }
         if (this.isThreatening()) {
             return 3; //idle3 is threatBark
         }
