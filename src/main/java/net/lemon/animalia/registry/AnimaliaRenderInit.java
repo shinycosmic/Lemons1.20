@@ -79,6 +79,8 @@ public class AnimaliaRenderInit {
         //Land
         EntityRenderers.register(ModEntities.SMUTSIA_GIGANTEA.get(), SmutsiaGiganteaRenderer::new);
         EntityRenderers.register(ModEntities.HYEMOSCHUS_AQUATICUS.get(), HyemoschusAquaticusRenderer::new);
+        EntityRenderers.register(ModEntities.CROSSARCHUS_OBSCURUS.get(), CrossarchusRenderer::new);
+        EntityRenderers.register(ModEntities.CROSSARCHUS_PLATYCEPHALUS.get(), CrossarchusRenderer::new);
 
 
         EntityRenderers.register(ModEntities.WATER_SPIT.get(), WaterSpitRenderer::new);

@@ -2,11 +2,8 @@ package net.lemon.animalia.entity.model.field;
 
 import net.lemon.animalia.Animalia;
 import net.lemon.animalia.entity.custom.CrossarchusEntity;
-import net.lemon.animalia.entity.custom.HyemoschusEntity;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.registries.ForgeRegistries;
-import software.bernie.geckolib.core.animatable.model.CoreGeoBone;
-import software.bernie.geckolib.core.animation.AnimationState;
 import software.bernie.geckolib.model.GeoModel;
 
 public class CrossarchusModel extends GeoModel<CrossarchusEntity> {

@@ -104,6 +104,8 @@ public class ModEntities {
     //Actual Land animals
     public static final RegistryObject<EntityType<PangolinEntity>> SMUTSIA_GIGANTEA = registerEntityType("smutsia_gigantea", PangolinEntity::new, ModMobCategories.ANIMALIA_LAND, 0.9f, 0.9f, PangolinEntity::setAttributes, 0x8e6b3c, 0xffc06a);
     public static final RegistryObject<EntityType<HyemoschusEntity>> HYEMOSCHUS_AQUATICUS = registerEntityType("hyemoschus_aquaticus", HyemoschusEntity::new, ModMobCategories.ANIMALIA_LAND, 0.9f, 0.9f, HyemoschusEntity::setAttributes, 0x553933, 0xe0dbd9);
+    public static final RegistryObject<EntityType<CrossarchusEntity>> CROSSARCHUS_OBSCURUS = registerEntityType("crossarchus_obscurus", CrossarchusEntity::new, ModMobCategories.ANIMALIA_LAND, 0.9f, 0.9f, CrossarchusEntity::setAttributes, 0x553933, 0xe0dbd9);
+    public static final RegistryObject<EntityType<CrossarchusEntity>> CROSSARCHUS_PLATYCEPHALUS = registerEntityType("crossarchus_platycephalus", CrossarchusEntity::new, ModMobCategories.ANIMALIA_LAND, 0.9f, 0.9f, CrossarchusEntity::setAttributes, 0x553933, 0xe0dbd9);
 
 
 

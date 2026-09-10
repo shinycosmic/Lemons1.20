@@ -84,9 +84,9 @@ public class CrossarchusEntity extends AnimaliaLandBase implements GeoEntity, Sc
 
     @Override
     public Component getTrivia() {
-//        if (this.getType() == ModEntities.CROSSARCHUS_OBSCURUS.get()) {
-//            return Component.translatable("trivia.animalia.crossarchus_obscurus");
-//        }
+        if (this.getType() == ModEntities.CROSSARCHUS_OBSCURUS.get()) {
+            return Component.translatable("trivia.animalia.crossarchus_obscurus");
+        }
         return Component.translatable("trivia.animalia.crossarchus_platycephalus");
     }
 
@@ -106,15 +106,15 @@ public class CrossarchusEntity extends AnimaliaLandBase implements GeoEntity, Sc
     }
 
     public static void registerHolonet(){
-//        HolonetEntities.register(ModEntities.CROSSARCHUS_OBSCURUS, AppName.FIELD, "Carnivora");
-        //        HolonetEntities.register(ModEntities.CROSSARCHUS_PLATYCEPHALUS, AppName.FIELD, "Carnivora");
+        HolonetEntities.register(ModEntities.CROSSARCHUS_OBSCURUS, AppName.FIELD, "Carnivora");
+        HolonetEntities.register(ModEntities.CROSSARCHUS_PLATYCEPHALUS, AppName.FIELD, "Carnivora");
     }
 
     @Override
     public float genVarSizeMultiplier() {
-//        if (this.getType() == ModEntities.CROSSARCHUS_OBSCURUS.get()) {
-//            return AnimaliaFunctionUtil.getScaleForSize(27, 35);
-//        }
+        if (this.getType() == ModEntities.CROSSARCHUS_OBSCURUS.get()) {
+            return AnimaliaFunctionUtil.getScaleForSize(27, 35);
+        }
         return AnimaliaFunctionUtil.getScaleForSize(27, 57);
     }
 
