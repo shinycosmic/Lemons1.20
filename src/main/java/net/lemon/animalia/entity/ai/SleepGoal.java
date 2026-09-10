@@ -31,7 +31,7 @@ public class SleepGoal extends Goal {
             this.cooldown--;
             return false;
         }
-        if (!this.sleeper.canStartSleeping() || this.activityTime.isActiveTime(this.mob)) {
+        if (!this.sleeper.canStartSleeping() || this.activityTime.isActiveWindow(this.mob)) {
             return false;
         }
         return this.mob.getRandom().nextInt(100) == 0;
@@ -102,7 +102,7 @@ public class SleepGoal extends Goal {
             return;
         }
         this.nextWakeCheck = this.mob.tickCount + 20 + this.mob.getRandom().nextInt(20);
-        if (this.activityTime.isActiveTime(this.mob) || this.mob.isInWater()) {
+        if (this.activityTime.isActiveWindow(this.mob) || this.mob.isInWater()) {
             this.beginExiting();
         }
     }

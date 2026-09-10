@@ -16,6 +16,14 @@ public interface IActivityTime {
         };
     }
 
+    default boolean isActiveWindow(PathfinderMob mob) {
+        return switch (activityTime()) {
+            case NOCTURNAL -> mob.level().isNight();
+            case DIURNAL -> mob.level().isDay();
+            default -> true;
+        };
+    }
+
     default boolean activityChecker(PathfinderMob mob) {
         boolean activityCheck = this.isActiveTime(mob);
 
