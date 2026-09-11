@@ -58,7 +58,7 @@ public class CrossarchusEntity extends AnimaliaLandBase implements GeoEntity, Sc
     public static AttributeSupplier setAttributes() {
         return Mob.createMobAttributes()
                 .add(Attributes.MAX_HEALTH, 4D)
-                .add(Attributes.MOVEMENT_SPEED, 0.3f)
+                .add(Attributes.MOVEMENT_SPEED, 0.1f)
                 .build();
     }
 
@@ -113,9 +113,9 @@ public class CrossarchusEntity extends AnimaliaLandBase implements GeoEntity, Sc
     @Override
     public float genVarSizeMultiplier() {
         if (this.getType() == ModEntities.CROSSARCHUS_OBSCURUS.get()) {
-            return AnimaliaFunctionUtil.getScaleForSize(27, 35);
+            return AnimaliaFunctionUtil.getScaleForSize(22, 35);
         }
-        return AnimaliaFunctionUtil.getScaleForSize(27, 57);
+        return AnimaliaFunctionUtil.getScaleForSize(22, 57);
     }
 
     @Override

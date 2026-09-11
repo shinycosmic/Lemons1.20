@@ -44,8 +44,8 @@ public class ModBlockStateProvider extends BlockStateProvider {
         anyAttachBlock(ModBlocks.BLACK_MUSSEL, "mussel2", "solid");
         anyAttachBlock(ModBlocks.YELLOW_MUSSEL, "mussel2", "solid");
         anyAttachBlock(ModBlocks.CREAM_MUSSEL, "mussel2", "solid");
-        anyAttachBlock(ModBlocks.HARP_SPONGE, "symmetrocladia", "cutout");
-        anyAttachBlock(ModBlocks.PING_PONG_TREE_SPONGE, "chondrocladia", "cutout");
+        anyAttachBlock(ModBlocks.HARP_SPONGE, "harp_sponge", "cutout");
+        anyAttachBlock(ModBlocks.PING_PONG_TREE_SPONGE, "ping_pong_tree_sponge", "cutout");
 
         overlayBlock(ModBlocks.TERMITE_MOUND, mcLoc("block/sandstone_top"), modLoc("block/termite_mound"), "cutout_mipped");
         overlayBlock(ModBlocks.RED_TERMITE_MOUND, mcLoc("block/red_sandstone_top"), modLoc("block/termite_mound"), "cutout_mipped");
