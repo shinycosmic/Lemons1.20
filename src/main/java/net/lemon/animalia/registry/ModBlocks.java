@@ -37,6 +37,8 @@ public class ModBlocks {
     public static final RegistryObject<Block> CREAM_MUSSEL = registerBlock("cream_mussel", () -> new AnyAttachWaterStaticBlock(BlockBehaviour.Properties.copy(Blocks.TUBE_CORAL).noOcclusion().noCollission()));
     public static final RegistryObject<Block> YELLOW_MUSSEL = registerBlock("yellow_mussel", () -> new AnyAttachWaterStaticBlock(BlockBehaviour.Properties.copy(Blocks.TUBE_CORAL).noOcclusion().noCollission()));
     public static final RegistryObject<Block> BLACK_MUSSEL = registerBlock("black_mussel", () -> new AnyAttachWaterStaticBlock(BlockBehaviour.Properties.copy(Blocks.TUBE_CORAL).noOcclusion().noCollission()));
+    public static final RegistryObject<Block> PING_PONG_TREE_SPONGE = registerBlock("ping_pong_tree_sponge", () -> new AnyAttachWaterStaticBlock(BlockBehaviour.Properties.copy(Blocks.TUBE_CORAL).noOcclusion().noCollission()));
+    public static final RegistryObject<Block> HARP_SPONGE = registerBlock("harp_sponge", () -> new AnyAttachWaterStaticBlock(BlockBehaviour.Properties.copy(Blocks.TUBE_CORAL).noOcclusion().noCollission()));
 
 
 

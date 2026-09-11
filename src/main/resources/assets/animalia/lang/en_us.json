@@ -17,6 +17,8 @@
   "block.animalia.yellow_mussel": "Yellow Mussel",
   "block.animalia.termite_mound": "Termite Mound",
   "block.animalia.red_termite_mound": "Termite Mound",
+  "block.animalia.harp_sponge": "Harp Sponge",
+  "block.animalia.ping_pong_tree_sponge": "Ping Pong Tree Sponge",
 
   "entity.animalia.betta_splendens.twoComp": "%s %s Betta",
   "entity.animalia.betta_splendens.threeComp": "%s %s %s Betta",

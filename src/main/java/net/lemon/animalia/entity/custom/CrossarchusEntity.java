@@ -246,6 +246,11 @@ public class CrossarchusEntity extends AnimaliaLandBase implements GeoEntity, Sc
         };
     }
 
+    @Override
+    public int regChance() {
+        return 100;
+    }
+
     //first use of isAttached here just means it cant play idles during climbs
     @Override
     public boolean canPlayIdle() {

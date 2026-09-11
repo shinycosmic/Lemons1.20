@@ -42,6 +42,8 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         this.dropSelf(ModBlocks.ALGAE_CRUSTED_MUSSEL.get());
         this.dropSelf(ModBlocks.YELLOW_MUSSEL.get());
         this.dropSelf(ModBlocks.CREAM_MUSSEL.get());
+        this.dropSelf(ModBlocks.HARP_SPONGE.get());
+        this.dropSelf(ModBlocks.PING_PONG_TREE_SPONGE.get());
 
         this.add(ModBlocks.TERMITE_MOUND.get(), block -> createSilkTouchDispatchTable(block, this.applyExplosionDecay(block, LootItem.lootTableItem(ModItems.TERMITE.get())
                         .apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 3.0F))))));

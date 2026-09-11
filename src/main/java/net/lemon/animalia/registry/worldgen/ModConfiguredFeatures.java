@@ -40,6 +40,7 @@ public class ModConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> FRESHWATER_MUSSELS = createKey("freshwater_mussels");
     public static final ResourceKey<ConfiguredFeature<?, ?>> TERMITE_MOUND = createKey("termite_mound");
     public static final ResourceKey<ConfiguredFeature<?, ?>> RED_TERMITE_MOUND = createKey("red_termite_mound");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> DEEP_SEA_STATICS = createKey("deep_sea_statics");
 
 
     //Define worldgen configurations here
@@ -51,6 +52,8 @@ public class ModConfiguredFeatures {
         FeatureUtils.register(context, FRESHWATER_MUSSELS, Feature.SIMPLE_BLOCK, waterFloorBlocks(ModBlocks.YELLOW_MUSSEL.get(), ModBlocks.ALGAE_CRUSTED_MUSSEL.get(), ModBlocks.BLACK_MUSSEL.get(), ModBlocks.CREAM_MUSSEL.get(), ModBlocks.SWAN_MUSSEL.get()));
         FeatureUtils.register(context, TERMITE_MOUND, ModFeatures.TERMITE_MOUND.get(), new TermiteMoundConfiguration(Blocks.SMOOTH_SANDSTONE, ModBlocks.TERMITE_MOUND.get(), Blocks.RED_SAND, Blocks.SMOOTH_RED_SANDSTONE, ModBlocks.RED_TERMITE_MOUND.get()));
         FeatureUtils.register(context, RED_TERMITE_MOUND, ModFeatures.TERMITE_MOUND.get(), new TermiteMoundConfiguration(Blocks.SMOOTH_RED_SANDSTONE, ModBlocks.RED_TERMITE_MOUND.get(), Blocks.SAND, Blocks.SMOOTH_SANDSTONE, ModBlocks.TERMITE_MOUND.get()));
+        FeatureUtils.register(context, DEEP_SEA_STATICS, Feature.SIMPLE_BLOCK, waterFloorBlocks(ModBlocks.HARP_SPONGE.get(), ModBlocks.PING_PONG_TREE_SPONGE.get()));
+
     }
 
 

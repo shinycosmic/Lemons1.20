@@ -29,6 +29,7 @@ public class ModBiomeModifiers {
     public static final ResourceKey<BiomeModifier> ADD_FRESHWATER_MUSSEL = createKey("add_freshwater_mussel");
     public static final ResourceKey<BiomeModifier> ADD_TERMITE_MOUND = createKey("add_termite_mound");
     public static final ResourceKey<BiomeModifier> ADD_RED_TERMITE_MOUND = createKey("add_red_termite_mound");
+    public static final ResourceKey<BiomeModifier> ADD_DEEP_SEA_STATICS = createKey("add_deep_sea_statics");
 
     //Defines which biomes a block spawns in.
     public static void bootstrap(BootstapContext<BiomeModifier> context) {
@@ -39,6 +40,8 @@ public class ModBiomeModifiers {
         addFeature(context, ADD_FRESHWATER_MUSSEL, ModPlacedFeatures.FRESHWATER_MUSSELS, GenerationStep.Decoration.VEGETAL_DECORATION, Tags.Biomes.IS_SWAMP, BiomeTags.IS_RIVER);
         addFeature(context, ADD_TERMITE_MOUND, ModPlacedFeatures.TERMITE_MOUND, GenerationStep.Decoration.SURFACE_STRUCTURES, Tags.Biomes.IS_DESERT);
         addFeature(context, ADD_RED_TERMITE_MOUND, ModPlacedFeatures.RED_TERMITE_MOUND, GenerationStep.Decoration.SURFACE_STRUCTURES, BiomeTags.IS_SAVANNA, BiomeTags.IS_BADLANDS);
+        addFeature(context, ADD_DEEP_SEA_STATICS, ModPlacedFeatures.DEEP_SEA_STATICS, GenerationStep.Decoration.VEGETAL_DECORATION, BiomeTags.IS_DEEP_OCEAN);
+
     }
 
 

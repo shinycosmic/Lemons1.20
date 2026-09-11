@@ -111,6 +111,8 @@ public class ModItemTagGenerator extends ItemTagsProvider {
         tag(ModTags.Items.DUROPHAGOUS).add(ModBlocks.BLACK_MUSSEL.get().asItem());
         tag(ModTags.Items.DUROPHAGOUS).add(ModBlocks.ALGAE_CRUSTED_MUSSEL.get().asItem());
         tag(ModTags.Items.DUROPHAGOUS).add(ModBlocks.SWAN_MUSSEL.get().asItem());
+        tag(ModTags.Items.DUROPHAGOUS).add(ModBlocks.PING_PONG_TREE_SPONGE.get().asItem());
+        tag(ModTags.Items.DUROPHAGOUS).add(ModBlocks.HARP_SPONGE.get().asItem());
 
         tag(ModTags.Items.BIVALVES).add(ModBlocks.CREAM_MUSSEL.get().asItem());
         tag(ModTags.Items.BIVALVES).add(ModBlocks.YELLOW_MUSSEL.get().asItem());

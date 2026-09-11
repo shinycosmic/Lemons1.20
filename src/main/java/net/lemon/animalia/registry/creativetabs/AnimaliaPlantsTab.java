@@ -19,7 +19,9 @@ public class AnimaliaPlantsTab {
             ModBlocks.ALGAE_CRUSTED_MUSSEL,
             ModBlocks.CREAM_MUSSEL,
             ModBlocks.BLACK_MUSSEL,
-            ModBlocks.YELLOW_MUSSEL
+            ModBlocks.YELLOW_MUSSEL,
+            ModBlocks.HARP_SPONGE,
+            ModBlocks.PING_PONG_TREE_SPONGE
 
     );
 

@@ -37,12 +37,16 @@ public class ModBlockStateProvider extends BlockStateProvider {
         glowLichenBaseBlock(ModBlocks.ALGAE_MAT.get(), "algae_mat", modLoc("block/algae_mat"));
         plantWithSpecialModel(ModBlocks.KAEMPFERIA_PULCHRA);
         semiaquaticDoubleBlockPlant(ModBlocks.SAGITTARIA);
+
         anyAttachBlock(ModBlocks.BLUE_MUSSEL, "mussel1", "solid");
         anyAttachBlock(ModBlocks.SWAN_MUSSEL, "mussel1", "solid");
         anyAttachBlock(ModBlocks.ALGAE_CRUSTED_MUSSEL, "mussel1", "solid");
         anyAttachBlock(ModBlocks.BLACK_MUSSEL, "mussel2", "solid");
         anyAttachBlock(ModBlocks.YELLOW_MUSSEL, "mussel2", "solid");
         anyAttachBlock(ModBlocks.CREAM_MUSSEL, "mussel2", "solid");
+        anyAttachBlock(ModBlocks.HARP_SPONGE, "symmetrocladia", "cutout");
+        anyAttachBlock(ModBlocks.PING_PONG_TREE_SPONGE, "chondrocladia", "cutout");
+
         overlayBlock(ModBlocks.TERMITE_MOUND, mcLoc("block/sandstone_top"), modLoc("block/termite_mound"), "cutout_mipped");
         overlayBlock(ModBlocks.RED_TERMITE_MOUND, mcLoc("block/red_sandstone_top"), modLoc("block/termite_mound"), "cutout_mipped");
 

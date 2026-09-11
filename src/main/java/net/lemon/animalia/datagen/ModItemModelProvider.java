@@ -58,6 +58,8 @@ public class ModItemModelProvider extends ItemModelProvider {
         blockSpriteItem(ModBlocks.YELLOW_MUSSEL);
         blockSpriteItem(ModBlocks.CREAM_MUSSEL);
         blockSpriteItem(ModBlocks.BLACK_MUSSEL);
+        blockSpriteItem(ModBlocks.HARP_SPONGE);
+        blockSpriteItem(ModBlocks.PING_PONG_TREE_SPONGE);
 
         for (RegistryObject<Item> bucket : ModEntities.BUCKETS.getEntries()) {
             simpleItem(bucket);
