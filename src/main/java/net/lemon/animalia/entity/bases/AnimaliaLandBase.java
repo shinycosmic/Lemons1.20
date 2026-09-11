@@ -891,7 +891,7 @@ public abstract class AnimaliaLandBase extends Animal implements IActivityTime, 
         }
 
         protected boolean canScan() {
-            return true;
+            return this.mob.isBaby();
         }
 
         @Override

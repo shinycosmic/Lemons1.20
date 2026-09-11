@@ -2,20 +2,10 @@ package net.lemon.animalia.entity.ai;
 
 import net.lemon.animalia.entity.bases.AnimaliaLandBase;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
-import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.pathfinder.Path;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.function.Predicate;
-
-/**
- * Flees to a climbable refuge and climbs it. With no refuge in range it falls through to the plain
- * flee of its parent, so the mob is never stranded by a failed search.
- */
 public class ClimbPanicGoal extends AnimaliaLandBase.LandPanicGoal {
 
     private final int range;
@@ -37,6 +27,9 @@ public class ClimbPanicGoal extends AnimaliaLandBase.LandPanicGoal {
 
     @Nullable
     private BlockPos findClimbPos() {
+        if (!this.mob.climbEnabled()) {
+            return null;
+        }
         Level level = this.mob.level();
         return BlockPos.findClosestMatch(this.mob.blockPosition(), this.range, this.range,
                         pos -> pos.getY() > this.mob.getBlockY()
