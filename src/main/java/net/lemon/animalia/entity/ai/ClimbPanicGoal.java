@@ -18,109 +18,47 @@ import java.util.function.Predicate;
  */
 public class ClimbPanicGoal extends AnimaliaLandBase.LandPanicGoal {
 
-    private final Predicate<BlockState> refuge;
     private final int range;
-    private final int climbHeight;
 
     @Nullable
-    private BlockPos targetPos;
-    @Nullable
-    private Path climbPath;
+    private BlockPos climbPos;
 
-    public ClimbPanicGoal(AnimaliaLandBase mob, double speedMult, int fleeLength, double proximityRange, int range, int climbHeight, TagKey<Block> tag) {
-        this(mob, speedMult, fleeLength, proximityRange, range, climbHeight, state -> state.is(tag));
-    }
-
-    public ClimbPanicGoal(AnimaliaLandBase mob, double speedMult, int fleeLength, double proximityRange, int range, int climbHeight, Block block) {
-        this(mob, speedMult, fleeLength, proximityRange, range, climbHeight, state -> state.is(block));
-    }
-
-    private ClimbPanicGoal(AnimaliaLandBase mob, double speedMult, int fleeLength, double proximityRange, int range, int climbHeight, Predicate<BlockState> refuge) {
+    public ClimbPanicGoal(AnimaliaLandBase mob, double speedMult, int fleeLength, double proximityRange, int range) {
         super(mob, speedMult, fleeLength, proximityRange);
         this.range = range;
-        this.climbHeight = climbHeight;
-        this.refuge = refuge;
     }
 
     @Override
-    public boolean canUse() {
-        this.mob.setWantsToClimb(false);
-        this.targetPos = null;
-        this.climbPath = null;
-        if (!super.canUse()) {
-            return false;
-        }
-        this.targetPos = this.findTarget();
-        return true;
-    }
-
-    /**
-     * Intent is set before the reachability pre-check: the evaluator reads it in {@code prepare}, so
-     * checking first would path with the wall withheld and refuse every climb.
-     */
-    @Nullable
-    private BlockPos findTarget() {
-        Level level = this.mob.level();
-        BlockPos found = BlockPos.findClosestMatch(this.mob.blockPosition(), this.range, this.range,
-                pos -> this.refuge.test(level.getBlockState(pos))).orElse(null);
-        if (found == null) {
-            return null;
-        }
-
-        BlockPos.MutableBlockPos cursor = found.mutable();
-        for (int i = 0; i < this.climbHeight; i++) {
-            cursor.move(Direction.UP);
-            if (!this.refuge.test(level.getBlockState(cursor))) {
-                cursor.move(Direction.DOWN);
-                break;
-            }
-        }
-
-        BlockPos perch = this.getSideOf(level, cursor.immutable());
-        if (perch == null) {
-            return null;
-        }
-
+    public void start() {
         this.mob.setWantsToClimb(true);
-        this.climbPath = this.mob.getNavigation().createPath(perch, 0);
-        if (this.climbPath != null && this.climbPath.canReach()) {
-            return perch;
-        }
-        this.climbPath = null;
-        this.mob.setWantsToClimb(false);
-        return null;
+        this.climbPos = this.findClimbPos();
+        super.start();
     }
 
     @Nullable
-    private BlockPos getSideOf(Level level, BlockPos trunk) {
-        BlockPos best = null;
-        double bestDist = Double.MAX_VALUE;
-        for (Direction face : Direction.Plane.HORIZONTAL) {
-            BlockPos side = trunk.relative(face);
-            if (!level.getBlockState(side).getCollisionShape(level, side).isEmpty()
-                    || !this.mob.hasClimbableFace(level, side)) {
-                continue;
-            }
-            double dist = this.mob.distanceToSqr(side.getX() + 0.5D, side.getY() + 0.5D, side.getZ() + 0.5D);
-            if (dist < bestDist) {
-                best = side;
-                bestDist = dist;
-            }
-        }
-        return best;
+    private BlockPos findClimbPos() {
+        Level level = this.mob.level();
+        return BlockPos.findClosestMatch(this.mob.blockPosition(), this.range, this.range,
+                        pos -> pos.getY() > this.mob.getBlockY()
+                                && level.getBlockState(pos).getCollisionShape(level, pos).isEmpty()
+                                && this.mob.hasClimbableFace(level, pos))
+                .map(BlockPos::immutable).orElse(null);
     }
 
     @Override
     protected void moveAway() {
-        if (this.targetPos == null) {
+        if (this.mob.isAttached()) {
+            return;
+        }
+        if (this.mob.blockPosition().equals(this.climbPos)) {
+            this.climbPos = null;
+        }
+        Path path = this.climbPos == null ? null : this.mob.getNavigation().createPath(this.climbPos, 0);
+        if (path == null || !path.canReach()) {
+            this.climbPos = null;
             super.moveAway();
             return;
         }
-        if (this.mob.isAttached()) {     // ← missing
-            return;
-        }
-        Path path = this.climbPath != null ? this.climbPath : this.mob.getNavigation().createPath(this.targetPos, 0);
-        this.climbPath = null;
         this.mob.getNavigation().moveTo(path, this.speedMult);
     }
 
@@ -128,7 +66,6 @@ public class ClimbPanicGoal extends AnimaliaLandBase.LandPanicGoal {
     public void stop() {
         super.stop();
         this.mob.setWantsToClimb(false);
-        this.targetPos = null;
-        this.climbPath = null;
+        this.climbPos = null;
     }
 }

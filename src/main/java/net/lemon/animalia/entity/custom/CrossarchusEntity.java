@@ -121,7 +121,7 @@ public class CrossarchusEntity extends AnimaliaLandBase implements GeoEntity, Sc
     @Override
     protected void registerGoals() {
         super.registerGoals();
-        this.climbPanic = new ClimbPanicGoal(this, 1.6D, 200, 8.0D, 16, 6, BlockTags.LOGS);
+        this.climbPanic = new ClimbPanicGoal(this, 1.6D, 200, 8.0D, 16);
         this.goalSelector.addGoal(1, climbPanic);
         this.goalSelector.addGoal(2, new ThreatGoal(this, 12.0D, 4.0D, Integer.MAX_VALUE, 0, ThreatGoal.ThreatOutcome.FLEE, entity -> entity instanceof Player player && !player.isCreative()));
         this.goalSelector.addGoal(4, new FindNearestBlockGoal(this, 1.0D, 8, pos -> !this.level().canSeeSky(pos) && this.level().getBlockState(pos.below())

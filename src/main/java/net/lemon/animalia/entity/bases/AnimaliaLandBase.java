@@ -555,6 +555,11 @@ public abstract class AnimaliaLandBase extends Animal implements IActivityTime, 
     }
 
     @Override
+    public boolean causeFallDamage(float distance, float multiplier, DamageSource source) {
+        return !this.canClimb() && super.causeFallDamage(distance, multiplier, source);
+    }
+
+    @Override
     public void travel(Vec3 pTravelVector) {
         if (this.isAttached()) {
             this.climbTravel(this.isMovementLockedByIdle() || this.isGrazing() ? Vec3.ZERO : pTravelVector);
@@ -746,8 +751,6 @@ public abstract class AnimaliaLandBase extends Animal implements IActivityTime, 
 
     public void setRunning(boolean running) { this.entityData.set(IS_RUNNING, running); }
 
-    public boolean babyClimbEnabled() { return true; }
-
     /**
      * TODO Edit this method so it drops LandEggItem. These item eggs are used for insects and such.
      * Birds and lizards lay eggs in mounds/nests
@@ -888,7 +891,7 @@ public abstract class AnimaliaLandBase extends Animal implements IActivityTime, 
         }
 
         protected boolean canScan() {
-            return mob.babyClimbEnabled();
+            return true;
         }
 
         @Override
