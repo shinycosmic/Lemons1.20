@@ -44,8 +44,8 @@ public class ModBlockStateProvider extends BlockStateProvider {
         anyAttachBlock(ModBlocks.BLACK_MUSSEL, "mussel2", "solid");
         anyAttachBlock(ModBlocks.YELLOW_MUSSEL, "mussel2", "solid");
         anyAttachBlock(ModBlocks.CREAM_MUSSEL, "mussel2", "solid");
-        anyAttachBlock(ModBlocks.HARP_SPONGE, "symmetrocladia", "cutout");
-        anyAttachBlock(ModBlocks.PING_PONG_TREE_SPONGE, "chondrocladia", "cutout");
+        anyAttachBlock(ModBlocks.HARP_SPONGE, cutoutWrapper("harp_sponge"));
+        anyAttachBlock(ModBlocks.PING_PONG_TREE_SPONGE, cutoutWrapper("ping_pong_tree_sponge"));
 
         overlayBlock(ModBlocks.TERMITE_MOUND, mcLoc("block/sandstone_top"), modLoc("block/termite_mound"), "cutout_mipped");
         overlayBlock(ModBlocks.RED_TERMITE_MOUND, mcLoc("block/red_sandstone_top"), modLoc("block/termite_mound"), "cutout_mipped");
@@ -78,7 +78,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
     private ModelFile cutoutWrapper(String name) {
         return models().withExistingParent(name + "_cutout", modLoc("block/" + name))
-                .renderType("cutout").texture("particle", "#1");
+                .renderType("cutout");
     }
 
     private ModelFile crossWrapper(String name) {
@@ -89,9 +89,13 @@ public class ModBlockStateProvider extends BlockStateProvider {
         Block block = blockObject.get();
         String name = ForgeRegistries.BLOCKS.getKey(block).getPath();
         ModelFile model = models().withExistingParent(name, modLoc("block/"+parentModel))
-                        .texture("0", modLoc("block/"+name)).texture("particle", modLoc("block/"+name))
-                        .renderType(renderType);
-        getVariantBuilder(block).forAllStatesExcept(state -> switch (state.getValue(BlockStateProperties.FACING)) {
+                .texture("0", modLoc("block/"+name)).texture("particle", modLoc("block/"+name))
+                .renderType(renderType);
+        anyAttachBlock(blockObject, model);
+    }
+
+    private void anyAttachBlock(RegistryObject<Block> blockObject, ModelFile model) {
+        getVariantBuilder(blockObject.get()).forAllStatesExcept(state -> switch (state.getValue(BlockStateProperties.FACING)) {
             case UP -> ConfiguredModel.allYRotations(model, 0, false);
             case DOWN -> ConfiguredModel.allYRotations(model, 180, false);
             case NORTH -> ConfiguredModel.builder().modelFile(model).rotationX(90).build();

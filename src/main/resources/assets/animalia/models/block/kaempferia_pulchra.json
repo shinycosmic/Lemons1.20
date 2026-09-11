@@ -4,7 +4,8 @@
 	"parent": "minecraft:block/block",
 	"texture_size": [19, 22],
 	"textures": {
-		"1": "animalia:block/kaempferia_pulchra"
+		"1": "animalia:block/kaempferia_pulchra",
+        "particle": "animalia:block/kaempferia_pulchra"
 	},
 	"elements": [
 		{
