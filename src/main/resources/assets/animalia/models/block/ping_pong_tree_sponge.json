@@ -1,9 +1,10 @@
 {
 	"format_version": "1.9.0",
 	"parent": "minecraft:block/block",
+	"ambientocclusion": false,
 	"textures": {
-		"0": "block/texture",
-		"particle": "block/texture"
+		"0": "animalia:block/ping_pong_tree_sponge",
+		"particle": "animalia:block/ping_pong_tree_sponge"
 	},
 	"elements": [
 		{
