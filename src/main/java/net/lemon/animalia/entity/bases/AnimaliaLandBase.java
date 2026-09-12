@@ -562,7 +562,9 @@ public abstract class AnimaliaLandBase extends Animal implements IActivityTime, 
     @Override
     public void travel(Vec3 pTravelVector) {
         if (this.isAttached()) {
-            this.climbTravel(this.isMovementLockedByIdle() || this.isGrazing() ? Vec3.ZERO : pTravelVector);
+            if (this.isEffectiveAi()) {
+                this.climbTravel(this.isMovementLockedByIdle() || this.isGrazing() ? Vec3.ZERO : pTravelVector);
+            }
             return;
         }
         if (this.isMovementLockedByIdle() || this.isGrazing()) {
