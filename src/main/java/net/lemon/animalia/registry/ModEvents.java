@@ -13,6 +13,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.trading.MerchantOffer;
 import net.minecraftforge.event.village.VillagerTradesEvent;
+import net.minecraftforge.event.village.WandererTradesEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
@@ -90,6 +91,15 @@ public class ModEvents {
 
 
 
+    }
+
+    @SubscribeEvent
+    public static void addCustomWanderingTrades(WandererTradesEvent event) {
+//        List<VillagerTrades.ItemListing> genericTrades = event.getGenericTrades();
+        List<VillagerTrades.ItemListing> rareTrades = event.getRareTrades();
+
+        rareTrades.add((pTrader, pRandom) -> new MerchantOffer(
+                new ItemStack(Items.EMERALD, 16), traitedBucket(ModEntities.BETTA_SPLENDENS.get(), pTrader, pRandom, true), 1, 24, 0.02f));
     }
 
     private static ItemStack traitedBucket(EntityType<?> type, Entity trader, RandomSource randomSource, boolean special) {
