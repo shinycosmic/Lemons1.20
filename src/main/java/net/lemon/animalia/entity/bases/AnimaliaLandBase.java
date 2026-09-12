@@ -9,6 +9,7 @@ import net.lemon.animalia.item.FishEggItem;
 import net.lemon.animalia.registry.ModItems;
 import net.lemon.animalia.util.Scannable;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -565,6 +566,7 @@ public abstract class AnimaliaLandBase extends Animal implements IActivityTime, 
             if (this.isEffectiveAi()) {
                 this.climbTravel(this.isMovementLockedByIdle() || this.isGrazing() ? Vec3.ZERO : pTravelVector);
             }
+            this.calculateEntityAnimation(true);
             return;
         }
         if (this.isMovementLockedByIdle() || this.isGrazing()) {
@@ -605,6 +607,16 @@ public abstract class AnimaliaLandBase extends Animal implements IActivityTime, 
             this.setYRot(this.yRotO);
             this.yBodyRot = this.yBodyRotO;
             this.yHeadRot = this.yHeadRotO;
+        }
+
+        if (this.isAttached()) {
+            Direction face = this.getClimbFace();
+            if (face.getAxis().isHorizontal()) {
+                float yaw = face.toYRot();
+                this.setYRot(Mth.approachDegrees(this.getYRot(), yaw, 10.0F));
+                this.yBodyRot = Mth.approachDegrees(this.yBodyRot, yaw, 10.0F);
+                this.yHeadRot = Mth.approachDegrees(this.yHeadRot, yaw, 10.0F);
+            }
         }
 
         if (!this.level().isClientSide && this.eatTicks > 0) {

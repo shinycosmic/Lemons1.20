@@ -5,7 +5,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.ai.control.MoveControl;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
@@ -50,12 +49,6 @@ public class ClimberMoveControl extends MoveControl {
         this.operation = Operation.WAIT;
         Vec3 wanted = new Vec3(this.wantedX - this.mob.getX(), this.wantedY - this.mob.getY(), this.wantedZ - this.mob.getZ());
         this.drive(wanted.lengthSqr() < 2.5000003E-7D ? Vec3.ZERO : wanted.normalize().scale(this.speedModifier));
-
-        Direction face = this.climber.getClimbFace();
-        if (face.getAxis().isHorizontal()) {
-            float yaw = (float) (Mth.atan2(face.getStepZ(), face.getStepX()) * (180.0F / (float) Math.PI)) - 90.0F;
-            this.mob.setYRot(this.rotlerp(this.mob.getYRot(), yaw, 10.0F));
-        }
     }
 
     private void drive(Vec3 drive) {

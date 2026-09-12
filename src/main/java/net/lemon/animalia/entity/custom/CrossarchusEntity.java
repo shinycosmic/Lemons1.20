@@ -162,6 +162,7 @@ public class CrossarchusEntity extends AnimaliaLandBase implements GeoEntity, Sc
             animationState.getController().transitionLength(5);
             if (!this.isActuallyMoving()) {
                 animationState.getController().setAnimationSpeed(0.0D);
+                animationState.getController().forceAnimationReset();
             }
             animationState.getController().setAnimation(RawAnimation.begin().then("climb", Animation.LoopType.LOOP));
             return PlayState.CONTINUE;
