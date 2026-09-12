@@ -47,6 +47,7 @@ public class Animalia {
         ModEntities.register(modEventBus);
         ModLootModifiers.register(modEventBus);
         ModFeatures.register(modEventBus);
+        ModVillagers.register(modEventBus);
 
         GeckoLib.initialize();
 
