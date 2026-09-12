@@ -2,6 +2,11 @@ package net.lemon.animalia.registry;
 
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import net.lemon.animalia.Animalia;
+import net.lemon.animalia.entity.bases.FishBase;
+import net.lemon.animalia.entity.bases.helpers.IsGenetic;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.npc.VillagerProfession;
 import net.minecraft.world.entity.npc.VillagerTrades;
 import net.minecraft.world.item.ItemStack;
@@ -46,6 +51,9 @@ public class ModEvents {
                     new ItemStack(Items.COD, 1), new ItemStack(ModBlocks.ALGAE_MAT.get(), 1), 10, 8, 0.02f));
             trades.get(2).add((entity, randomSource) -> new MerchantOffer(
                     new ItemStack(Items.EMERALD, 2), new ItemStack(Items.FISHING_ROD, 1), 2, 24, 0.02f));
+            trades.get(2).add((entity, randomSource) -> new MerchantOffer(
+                    new ItemStack(Items.EMERALD, 8), traitedBucket(ModEntities.BETTA_SPLENDENS.get(), entity, randomSource, false), 1, 24, 0.02f));
+
 
             trades.get(3).add((entity, randomSource) -> new MerchantOffer(
                     new ItemStack(Items.EMERALD, 1), new ItemStack(Items.BRAIN_CORAL, 2), 4, 8, 0.02f));
@@ -61,35 +69,43 @@ public class ModEvents {
                     new ItemStack(Items.EMERALD, 1), new ItemStack(Items.SALMON_BUCKET, 1), 4, 8, 0.02f));
             trades.get(3).add((entity, randomSource) -> new MerchantOffer(
                     new ItemStack(Items.EMERALD, 1), new ItemStack(Items.PUFFERFISH_BUCKET, 1), 4, 8, 0.02f));
+            trades.get(3).add((entity, randomSource) -> new MerchantOffer(
+                    new ItemStack(Items.EMERALD, 8), traitedBucket(ModEntities.BETTA_SPLENDENS.get(), entity, randomSource, false), 1, 24, 0.02f));
 
             trades.get(4).add((entity, randomSource) -> new MerchantOffer(
                     new ItemStack(Items.EMERALD, 3), new ItemStack(Items.NAUTILUS_SHELL, 1), 4, 8, 0.02f));
             trades.get(4).add((entity, randomSource) -> new MerchantOffer(
                     new ItemStack(ModItems.RAW_ICEFISH.get(), 12), new ItemStack(Items.HEART_OF_THE_SEA, 1), 4, 50, 0.02f));
             trades.get(4).add((entity, randomSource) -> new MerchantOffer(
-                    new ItemStack(Items.EMERALD, 8), new ItemStack(ModItems.PUFFERFISH_BUCKET, 1), 1, 24, 0.02f));
+                    new ItemStack(Items.EMERALD, 8), traitedBucket(ModEntities.BETTA_SPLENDENS.get(), entity, randomSource, false), 1, 24, 0.02f));
             trades.get(4).add((entity, randomSource) -> new MerchantOffer(
-                    new ItemStack(Items.EMERALD, 8), new ItemStack(ModItems.PUFFERFISH_BUCKET, 1), 1, 24, 0.02f));
-            trades.get(4).add((entity, randomSource) -> new MerchantOffer(
-                    new ItemStack(Items.EMERALD, 8), new ItemStack(ModItems.PUFFERFISH_BUCKET, 1), 1, 24, 0.02f));
-            trades.get(4).add((entity, randomSource) -> new MerchantOffer(
-                    new ItemStack(Items.EMERALD, 8), new ItemStack(ModItems.PUFFERFISH_BUCKET, 1), 1, 24, 0.02f));
-            trades.get(4).add((entity, randomSource) -> new MerchantOffer(
-                    new ItemStack(Items.EMERALD, 8), new ItemStack(ModItems.PUFFERFISH_BUCKET, 1), 1, 24, 0.02f));
-            trades.get(4).add((entity, randomSource) -> new MerchantOffer(
-                    new ItemStack(Items.EMERALD, 8), new ItemStack(ModItems.PUFFERFISH_BUCKET, 1), 1, 24, 0.02f));
-            trades.get(4).add((entity, randomSource) -> new MerchantOffer(
-                    new ItemStack(Items.EMERALD, 8), new ItemStack(ModItems.PUFFERFISH_BUCKET, 1), 1, 24, 0.02f));
-
-            /**
-             * L1 Fish Food, Raw Cod, Raw Salmon, Raw Fish, Worm, Tropical Fish
-             * L2 Tadpole, Brine Shrimp, Amphipod, Algae
-             * L3 Raw Crustacean, Bucket of Salmon, Bucket of Cod
-             * L4 Bucket of (random) Betta, Bucket of Pufferfish
-             */
+                    new ItemStack(Items.EMERALD, 8), traitedBucket(ModEntities.BETTA_SPLENDENS.get(), entity, randomSource, false), 1, 24, 0.02f));
+            trades.get(5).add((entity, randomSource) -> new MerchantOffer(
+                    new ItemStack(Items.EMERALD, 8), traitedBucket(ModEntities.BETTA_SPLENDENS.get(), entity, randomSource, false), 1, 24, 0.02f));
+            trades.get(5).add((entity, randomSource) -> new MerchantOffer(
+                    new ItemStack(Items.EMERALD, 8), traitedBucket(ModEntities.BETTA_SPLENDENS.get(), entity, randomSource, false), 1, 24, 0.02f));
 
         }
 
 
+
+
+    }
+
+    private static ItemStack traitedBucket(EntityType<?> type, Entity trader, RandomSource randomSource, boolean special) {
+        FishBase fish = (FishBase) type.create(trader.level());
+        if (fish == null) {
+            return new ItemStack(ModEntities.BUCKET_MAP.get(EntityType.getKey(type).getPath()).get());
+        }
+        if (special) {
+            ((IsGenetic) fish).buildTraitsSpecial();
+        } else {
+            ((IsGenetic) fish).buildTraitsRandom();
+        }
+        fish.setGender(randomSource.nextInt(2));
+        fish.setVarSizeMultiplier(fish.genVarSizeMultiplier());
+        ItemStack stack = fish.getBucketItemStack();
+        fish.saveToBucketTag(stack);
+        return stack;
     }
 }
