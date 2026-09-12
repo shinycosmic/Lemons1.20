@@ -150,6 +150,12 @@ public class CrossarchusEntity extends AnimaliaLandBase implements GeoEntity, Sc
     }
 
     @Override
+    public int getToSleepLength() {return 13 + 60 + this.random.nextInt(101);}
+
+    @Override
+    public int getUnSleepLength() {return this.isBaby() ? 10 : 25;}
+
+    @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
         controllers.add(new AnimationController<>(this, "controller", 0, this::predicate));
         controllers.add(new AnimationController<>(this, "eat_controller", 0, this::eatPredicate));
@@ -171,17 +177,25 @@ public class CrossarchusEntity extends AnimaliaLandBase implements GeoEntity, Sc
             animationState.getController().setAnimation(RawAnimation.begin().then("forage", Animation.LoopType.PLAY_ONCE));
             return PlayState.CONTINUE;
         }
-//        switch (this.getSleepPhase()) {
-//            case SLEEP_PHASE_ENTERING:
-//                animationState.getController().setAnimation(RawAnimation.begin().then("toSleep", Animation.LoopType.HOLD_ON_LAST_FRAME));
-//                return PlayState.CONTINUE;
-//            case SLEEP_PHASE_SLEEPING:
-//                animationState.getController().setAnimation(RawAnimation.begin().then("sleep", Animation.LoopType.LOOP));
-//                return PlayState.CONTINUE;
-//            case SLEEP_PHASE_EXITING:
-//                animationState.getController().setAnimation(RawAnimation.begin().then("unSleep", Animation.LoopType.HOLD_ON_LAST_FRAME));
-//                return PlayState.CONTINUE;
-//        }
+        switch (this.getSleepPhase()) {
+            case SLEEP_PHASE_ENTERING:
+                animationState.getController().setAnimation(RawAnimation.begin()
+                        .then("toRest", Animation.LoopType.PLAY_ONCE).thenLoop("resting"));
+                return PlayState.CONTINUE;
+            case SLEEP_PHASE_SLEEPING:
+                if (this.isBaby()) {
+                    animationState.getController().setAnimation(RawAnimation.begin()
+                            .then("restingTosleeping", Animation.LoopType.PLAY_ONCE).thenLoop("sleeping"));
+                } else {
+                    animationState.getController().setAnimation(RawAnimation.begin()
+                            .then("restingYawn", Animation.LoopType.PLAY_ONCE)
+                            .then("restingTosleeping", Animation.LoopType.PLAY_ONCE).thenLoop("sleeping"));
+                }
+                return PlayState.CONTINUE;
+            case SLEEP_PHASE_EXITING:
+                animationState.getController().setAnimation(RawAnimation.begin().then("unSleep", Animation.LoopType.HOLD_ON_LAST_FRAME));
+                return PlayState.CONTINUE;
+        }
         int idleNum = this.getCurrRegIdle();
         if(idleNum < 2 && idleNum >= 0 ) {
             animationState.getController().transitionLength(5);
