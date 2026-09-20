@@ -100,6 +100,7 @@ public class ModEntityLootTables extends EntityLootSubProvider {
         this.add(ModEntities.HYEMOSCHUS_AQUATICUS.get(), LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(LootItem.lootTableItem(ModItems.RAW_VENISON.get()).apply(SmeltItemFunction.smelted().when(LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.THIS, ENTITY_ON_FIRE))))).withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(LootItem.lootTableItem(Items.BONE)).when(LootItemRandomChanceCondition.randomChance(0.05F))));
         this.add(ModEntities.CROSSARCHUS_PLATYCEPHALUS.get(), LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(LootItem.lootTableItem(Items.BONE)).when(LootItemRandomChanceCondition.randomChance(0.05F))));
         this.add(ModEntities.CROSSARCHUS_OBSCURUS.get(), LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(LootItem.lootTableItem(Items.BONE)).when(LootItemRandomChanceCondition.randomChance(0.05F))));
+        this.add(ModEntities.MUNTIACUS_MUNTJAK.get(), LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(LootItem.lootTableItem(ModItems.RAW_VENISON.get()).apply(SmeltItemFunction.smelted().when(LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.THIS, ENTITY_ON_FIRE))))).withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(LootItem.lootTableItem(Items.BONE)).when(LootItemRandomChanceCondition.randomChance(0.05F))));
 
 
     }

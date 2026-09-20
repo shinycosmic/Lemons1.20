@@ -106,8 +106,8 @@ public class CrossarchusEntity extends AnimaliaLandBase implements GeoEntity, Sc
     }
 
     public static void registerHolonet(){
-        HolonetEntities.register(ModEntities.CROSSARCHUS_OBSCURUS, AppName.FIELD, "Carnivora");
-        HolonetEntities.register(ModEntities.CROSSARCHUS_PLATYCEPHALUS, AppName.FIELD, "Carnivora");
+        HolonetEntities.register(ModEntities.CROSSARCHUS_OBSCURUS, AppName.FIELD, "Feliformia");
+        HolonetEntities.register(ModEntities.CROSSARCHUS_PLATYCEPHALUS, AppName.FIELD, "Feliformia");
     }
 
     @Override

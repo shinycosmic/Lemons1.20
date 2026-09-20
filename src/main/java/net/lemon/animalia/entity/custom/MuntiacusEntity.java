@@ -1,8 +1,9 @@
 package net.lemon.animalia.entity.custom;
 
+import net.lemon.animalia.entity.ai.FindNearestBlockGoal;
 import net.lemon.animalia.entity.ai.GrazeGoal;
 import net.lemon.animalia.entity.ai.ThreatGoal;
-import net.lemon.animalia.entity.bases.SemiaquaticBase;
+import net.lemon.animalia.entity.bases.AnimaliaLandBase;
 import net.lemon.animalia.entity.bases.helpers.ActivityTime;
 import net.lemon.animalia.entity.bases.helpers.ICanThreat;
 import net.lemon.animalia.registry.ModEntities;
@@ -15,6 +16,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.damagesource.DamageSource;
@@ -38,22 +40,14 @@ import software.bernie.geckolib.core.animation.*;
 import software.bernie.geckolib.core.animation.AnimationState;
 import software.bernie.geckolib.core.object.PlayState;
 
-public class HyemoschusEntity extends SemiaquaticBase implements GeoEntity, Scannable, ICanThreat {
+public class MuntiacusEntity extends AnimaliaLandBase implements GeoEntity, Scannable, ICanThreat  {
     private final AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
-    private static final EntityDataAccessor<Integer> THREAT_PHASE = SynchedEntityData.defineId(HyemoschusEntity.class, EntityDataSerializers.INT);
-
-    private SemiaquaticPanicGoal waterPanic;
+    private static final EntityDataAccessor<Integer> THREAT_PHASE = SynchedEntityData.defineId(MuntiacusEntity.class, EntityDataSerializers.INT);
     private LandPanicGoal landPanic;
     private boolean wasGrazing;
-    public HyemoschusEntity(EntityType<? extends Animal> entityType, Level level) {
-        super(entityType, level);
-    }
 
-    public static AttributeSupplier setAttributes() {
-        return Mob.createMobAttributes()
-                .add(Attributes.MAX_HEALTH, 8D)
-                .add(Attributes.MOVEMENT_SPEED, 1.3f)
-                .build();
+    public MuntiacusEntity(EntityType<? extends Animal> entityType, Level level) {
+        super(entityType, level);
     }
 
     @Override
@@ -62,26 +56,40 @@ public class HyemoschusEntity extends SemiaquaticBase implements GeoEntity, Scan
         this.entityData.define(THREAT_PHASE, THREAT_PHASE_NONE);
     }
 
+    public static AttributeSupplier setAttributes() {
+        return Mob.createMobAttributes()
+                .add(Attributes.MAX_HEALTH, 4D)
+                .add(Attributes.MOVEMENT_SPEED, 0.1f)
+                .build();
+    }
+
     @Override
-    protected void registerGoals() {
-        this.waterPanic = new SemiaquaticPanicGoal(this, 2.5D, 200, 8.0D, 12);
-        this.landPanic = new LandPanicGoal(this, 2.5D, 200, 8.0D);
-        this.goalSelector.addGoal(1, this.waterPanic);
-        this.goalSelector.addGoal(1, this.landPanic);
-        this.goalSelector.addGoal(2, new ThreatGoal(this, 8.0D, 2.0D, Integer.MAX_VALUE, 0, ThreatGoal.ThreatOutcome.FLEE,
-                entity -> entity instanceof Player player && !player.isCreative() && !player.isCrouching()));
-        this.goalSelector.addGoal(6, new GrazeGoal<>(this, 1.0D));
-        super.registerGoals();
+    public int getScaleforGUI() {
+        return 22;
+    }
+
+    public static void registerHolonet(){
+        HolonetEntities.register(ModEntities.MUNTIACUS_MUNTJAK, AppName.FIELD, "Ruminantia");
+
+    }
+
+    @Override
+    public float genVarSizeMultiplier() {
+//        if (this.getType() == ModEntities.MUNTIACUS_MUNTJAK.get()) {
+//            return AnimaliaFunctionUtil.getScaleForSize(22, 35);
+//        }
+        int desiredCm = this.getGender() == 0 ? 89 : 135;
+        return AnimaliaFunctionUtil.getScaleForSize(28, desiredCm);
     }
 
     @Override
     public Item getBreedingItem() {
-        return Items.APPLE;
+        return Items.WHEAT_SEEDS;
     }
 
     @Override
     public TagKey<Item> getFoodTag() {
-        return ModTags.Items.FRUITS_SEEDS;
+        return ItemTags.LEAVES;
     }
 
     @Override
@@ -96,12 +104,12 @@ public class HyemoschusEntity extends SemiaquaticBase implements GeoEntity, Scan
 
     @Override
     public Component getTrivia() {
-        return Component.translatable("trivia.animalia.hyemoschus_aquaticus");
+        return Component.translatable("trivia.animalia.muntiacus_muntjak");
     }
 
     @Override
     public Component getFamily() {
-        return Component.translatable("family.animalia.tragulidae");
+        return Component.translatable("family.animalia.cervidae");
     }
 
     @Override
@@ -110,22 +118,17 @@ public class HyemoschusEntity extends SemiaquaticBase implements GeoEntity, Scan
     }
 
     @Override
-    public int getScaleforGUI() {
-        return 22;
-
-    }
-
-    public static void registerHolonet(){
-        HolonetEntities.register(ModEntities.HYEMOSCHUS_AQUATICUS, AppName.FIELD, "Ruminantia");
+    protected void registerGoals() {
+        super.registerGoals();
+        this.landPanic = new LandPanicGoal(this, 2.5D, 200, 8.0D);
+        this.goalSelector.addGoal(1, this.landPanic);
+        this.goalSelector.addGoal(2, new ThreatGoal(this, 12.0D, 4.0D, Integer.MAX_VALUE, 0, ThreatGoal.ThreatOutcome.FLEE, entity -> entity instanceof Player player && !player.isCreative()));
+        this.goalSelector.addGoal(4, new FindNearestBlockGoal(this, 1.0D, 8, ModTags.Blocks.CROSS_PLANTS, FindNearestBlockGoal.TargetLocation.IN));
+        this.goalSelector.addGoal(6, new GrazeGoal<>(this, 1.0D));
     }
 
     @Override
-    public float genVarSizeMultiplier() {
-        if (this.getType() == ModEntities.HYEMOSCHUS_AQUATICUS.get()) {
-            return AnimaliaFunctionUtil.getScaleForSize(21, 85);
-        }
-        return 1;
-    }
+    public int getEatLength() { return 25; }
 
     @Override
     public boolean hasDimorphism() {
@@ -139,11 +142,12 @@ public class HyemoschusEntity extends SemiaquaticBase implements GeoEntity, Scan
         controllers.add(new AnimationController<>(this, "eat_controller", 0, this::eatPredicate));
     }
 
+    //TODO need to do bark animation, then tie a soundEvent to it
     private <T extends GeoAnimatable> PlayState predicate(AnimationState<T> animationState) {
         animationState.getController().setAnimationSpeed(1.0D);
         animationState.getController().transitionLength(5);
         if (this.isGrazing() && !this.isBaby()) {
-            animationState.getController().setAnimation(RawAnimation.begin().then("graze", Animation.LoopType.LOOP));
+            animationState.getController().setAnimation(RawAnimation.begin().then("forage", Animation.LoopType.LOOP));
             return PlayState.CONTINUE;
         }
         switch (this.getSleepPhase()) {
@@ -151,12 +155,18 @@ public class HyemoschusEntity extends SemiaquaticBase implements GeoEntity, Scan
                 animationState.getController().setAnimation(RawAnimation.begin().then("toSleep", Animation.LoopType.HOLD_ON_LAST_FRAME));
                 return PlayState.CONTINUE;
             case SLEEP_PHASE_SLEEPING:
-                animationState.getController().setAnimation(RawAnimation.begin().then("sleep", Animation.LoopType.LOOP));
+                int sleepIdle = this.getCurrentSleepIdle();
+                if (sleepIdle >= 0 && !this.isBaby()) { //TODO this animation is actually a looper, so we need to give it random durations
+                    animationState.getController().setAnimation(RawAnimation.begin().then("sleepIdle" + sleepIdle, Animation.LoopType.PLAY_ONCE));
+                    return PlayState.CONTINUE;
+                }
+                animationState.getController().setAnimation(RawAnimation.begin().then("sleeping", Animation.LoopType.LOOP));
                 return PlayState.CONTINUE;
             case SLEEP_PHASE_EXITING:
                 animationState.getController().setAnimation(RawAnimation.begin().then("unSleep", Animation.LoopType.HOLD_ON_LAST_FRAME));
                 return PlayState.CONTINUE;
         }
+
         if (!this.isBaby() && this.getThreatPhase() == THREAT_PHASE_DISPLAY) {
             AnimationProcessor.QueuedAnimation current = animationState.getController().getCurrentAnimation();
             if (current != null && current.animation().name().equals("toThreat")) {
@@ -169,17 +179,6 @@ public class HyemoschusEntity extends SemiaquaticBase implements GeoEntity, Scan
         }
         if (this.isRunning()) {
             animationState.getController().setAnimation(RawAnimation.begin().then("run", Animation.LoopType.LOOP));
-            return PlayState.CONTINUE;
-        }
-        if (this.isInWater()) {
-            if (!this.isActuallyMoving()) {
-                animationState.getController().setAnimationSpeed(0.0D);
-            }
-            animationState.getController().setAnimation(RawAnimation.begin().then("diving", Animation.LoopType.LOOP));
-            return PlayState.CONTINUE;
-        }
-        if (this.getCurrRegIdle() >= 0) {
-            animationState.getController().setAnimation(RawAnimation.begin().then("idle2", Animation.LoopType.LOOP));
             return PlayState.CONTINUE;
         }
         if (this.isActuallyMoving()) {
@@ -197,8 +196,7 @@ public class HyemoschusEntity extends SemiaquaticBase implements GeoEntity, Scan
             return PlayState.CONTINUE;
         }
         AnimationProcessor.QueuedAnimation current = state.getController().getCurrentAnimation();
-        if (current != null && !state.getController().hasAnimationFinished()
-                && (current.animation().name().equals("idle1") || current.animation().name().equals("idle1T"))) {
+        if (current != null && !state.getController().hasAnimationFinished() && (current.animation().name().equals("idle1") || current.animation().name().equals("idle1T"))) {
             state.getController().transitionLength(0);
             state.getController().setAnimation(RawAnimation.begin().then("idle1T", Animation.LoopType.PLAY_ONCE));
             return PlayState.CONTINUE;
@@ -230,33 +228,17 @@ public class HyemoschusEntity extends SemiaquaticBase implements GeoEntity, Scan
     }
 
 
-
     @Override
-    public boolean isBottomWalker() { return true; }
-
-    @Override
-    public int depthTolerance() { return 5; }
-
-    @Override
-    public int getMaxAirSupply() { return 4800; }
-
-
-
-    @Override
-    public int getThreatPhase() { return this.entityData.get(THREAT_PHASE); }
+    public int getThreatPhase() {return this.entityData.get(THREAT_PHASE);}
 
     @Override
     public void setThreatPhase(int phase) { this.entityData.set(THREAT_PHASE, phase); }
-
-    @Override
-    public boolean canStartThreatening() { return !this.isInWater(); }
 
     @Override
     public int getThreatCooldown() { return 60; }
 
     @Override
     public void onThreatFlee(LivingEntity threat) {
-        this.waterPanic.panicFrom(threat.position());
         this.landPanic.panicFrom(threat.position());
         if (this.getCurrTwitchIdle() >= 0) {
             this.setTwitchTicks(0);
@@ -271,7 +253,6 @@ public class HyemoschusEntity extends SemiaquaticBase implements GeoEntity, Scan
                 this.setSleepPhase(SLEEP_PHASE_NONE);
                 this.setCurrentSleepIdle(-1);
             }
-            this.waterPanic.panicFrom(player.position());
             this.landPanic.panicFrom(player.position());
         }
         super.playerTouch(player);
@@ -285,29 +266,22 @@ public class HyemoschusEntity extends SemiaquaticBase implements GeoEntity, Scan
     public int getUnSleepLength() {return 20;}
 
 
-
     @Override
-    public int getIdleCount() {return 5;}
+    public int getIdleCount() {return 4;} //TODO +1 bark, the bark plays only if the player is within 3 blocks, and plays every 6-12 seconds if player still in threshold, playing immediately upon the player entering the threshold and bark being off cooldown
 
     @Override
     public IdleType getIdleType(int displayId) {
-        return displayId == 2 ? IdleType.MOVEMENT_NEGATIVE : IdleType.TWITCH;
+        return IdleType.TWITCH;
     }
 
     @Override
     public int getIdleLength(int displayId) {
         return switch (displayId) {
-            case 0 -> 10 + this.random.nextInt(21);
-            case 2 -> 10 + this.random.nextInt(11);
-            case 3 -> 15;
+            case 0 -> 20 + this.random.nextInt(31);
+            case 2, 3 -> 40 + this.random.nextInt(31);
             case 4 -> 40 + this.random.nextInt(61);
-            default -> 20 + this.random.nextInt(21);
+            default -> 10 + this.random.nextInt(21);
         };
-    }
-
-    @Override
-    public boolean canIdleInWater(int displayId) {
-        return displayId == 2;
     }
 
     @Override
@@ -327,15 +301,11 @@ public class HyemoschusEntity extends SemiaquaticBase implements GeoEntity, Scan
             return -1;
         }
         if (this.isThreatening()) {
-            return 3 + mob.getRandom().nextInt(2);
+            return 4;
         }
-        return mob.getRandom().nextInt(2);
+        return mob.getRandom().nextInt(4);
     }
 
-
-
-    @Override
-    public int regChance() { return 100; }
 
     @Override
     public boolean isGrazableBlock(BlockState state) { return state.is(ModTags.Blocks.FORAGEABLE); }
@@ -363,14 +333,13 @@ public class HyemoschusEntity extends SemiaquaticBase implements GeoEntity, Scan
         boolean result = super.hurt(source, amount);
         if (!this.level().isClientSide && result && this.isAlive()) {
             Vec3 from = source.getEntity() != null ? source.getEntity().position() : this.position();
-            this.waterPanic.panicFrom(from);
             this.landPanic.panicFrom(from);
         }
         return result;
     }
 
+
     @Override
-    public float getSwimSpeed() {
-        return 1.2f;
-    }
+    public int getSleepIdleCount() {return 1;}
+
 }

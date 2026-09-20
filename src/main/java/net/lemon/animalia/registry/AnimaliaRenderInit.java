@@ -81,6 +81,7 @@ public class AnimaliaRenderInit {
         EntityRenderers.register(ModEntities.HYEMOSCHUS_AQUATICUS.get(), HyemoschusAquaticusRenderer::new);
         EntityRenderers.register(ModEntities.CROSSARCHUS_OBSCURUS.get(), CrossarchusRenderer::new);
         EntityRenderers.register(ModEntities.CROSSARCHUS_PLATYCEPHALUS.get(), CrossarchusRenderer::new);
+        EntityRenderers.register(ModEntities.MUNTIACUS_MUNTJAK.get(), MuntiacusMuntjakRenderer::new);
 
 
         EntityRenderers.register(ModEntities.WATER_SPIT.get(), WaterSpitRenderer::new);
