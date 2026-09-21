@@ -6,6 +6,7 @@ import net.lemon.animalia.entity.ai.ThreatGoal;
 import net.lemon.animalia.entity.bases.AnimaliaLandBase;
 import net.lemon.animalia.entity.bases.helpers.ActivityTime;
 import net.lemon.animalia.entity.bases.helpers.ICanThreat;
+import net.lemon.animalia.registry.AnimaliaSound;
 import net.lemon.animalia.registry.ModEntities;
 import net.lemon.animalia.registry.ModTags;
 import net.lemon.animalia.util.AnimaliaFunctionUtil;
@@ -45,6 +46,7 @@ public class MuntiacusEntity extends AnimaliaLandBase implements GeoEntity, Scan
     private static final EntityDataAccessor<Integer> THREAT_PHASE = SynchedEntityData.defineId(MuntiacusEntity.class, EntityDataSerializers.INT);
     private LandPanicGoal landPanic;
     private boolean wasGrazing;
+    private int barkCooldown;
 
     public MuntiacusEntity(EntityType<? extends Animal> entityType, Level level) {
         super(entityType, level);
@@ -122,7 +124,7 @@ public class MuntiacusEntity extends AnimaliaLandBase implements GeoEntity, Scan
         super.registerGoals();
         this.landPanic = new LandPanicGoal(this, 2.5D, 200, 8.0D);
         this.goalSelector.addGoal(1, this.landPanic);
-        this.goalSelector.addGoal(2, new ThreatGoal(this, 12.0D, 4.0D, Integer.MAX_VALUE, 0, ThreatGoal.ThreatOutcome.FLEE, entity -> entity instanceof Player player && !player.isCreative()));
+        this.goalSelector.addGoal(2, new ThreatGoal(this, 12.0D, 1.0D, Integer.MAX_VALUE, 0, ThreatGoal.ThreatOutcome.FLEE, entity -> entity instanceof Player player && !player.isCreative()));
         this.goalSelector.addGoal(4, new FindNearestBlockGoal(this, 1.0D, 8, ModTags.Blocks.CROSS_PLANTS, FindNearestBlockGoal.TargetLocation.IN));
         this.goalSelector.addGoal(6, new GrazeGoal<>(this, 1.0D));
     }
@@ -157,7 +159,7 @@ public class MuntiacusEntity extends AnimaliaLandBase implements GeoEntity, Scan
             case SLEEP_PHASE_SLEEPING:
                 int sleepIdle = this.getCurrentSleepIdle();
                 if (sleepIdle >= 0 && !this.isBaby()) { //TODO this animation is actually a looper, so we need to give it random durations
-                    animationState.getController().setAnimation(RawAnimation.begin().then("sleepIdle" + sleepIdle, Animation.LoopType.PLAY_ONCE));
+                    animationState.getController().setAnimation(RawAnimation.begin().then("sleepIdle" + sleepIdle, Animation.LoopType.LOOP));
                     return PlayState.CONTINUE;
                 }
                 animationState.getController().setAnimation(RawAnimation.begin().then("sleeping", Animation.LoopType.LOOP));
@@ -190,6 +192,11 @@ public class MuntiacusEntity extends AnimaliaLandBase implements GeoEntity, Scan
 
     private <T extends GeoAnimatable> PlayState idlesPredicate(AnimationState<T> state) {
         int twitch = this.getCurrTwitchIdle();
+        if (twitch == 5) {
+            state.getController().transitionLength(5);
+            state.getController().setAnimation(RawAnimation.begin().then("bark", Animation.LoopType.PLAY_ONCE));
+            return PlayState.CONTINUE;
+        }
         if (twitch >= 0 && !this.isBaby()) {
             state.getController().transitionLength(5);
             state.getController().setAnimation(RawAnimation.begin().then("idle" + twitch, Animation.LoopType.LOOP));
@@ -267,7 +274,7 @@ public class MuntiacusEntity extends AnimaliaLandBase implements GeoEntity, Scan
 
 
     @Override
-    public int getIdleCount() {return 4;} //TODO +1 bark, the bark plays only if the player is within 3 blocks, and plays every 6-12 seconds if player still in threshold, playing immediately upon the player entering the threshold and bark being off cooldown
+    public int getIdleCount() {return 5;} //TODO +1 bark, the bark plays only if the player is within 3 blocks, and plays every 6-12 seconds if player still in threshold, playing immediately upon the player entering the threshold and bark being off cooldown
 
     @Override
     public IdleType getIdleType(int displayId) {
@@ -325,6 +332,15 @@ public class MuntiacusEntity extends AnimaliaLandBase implements GeoEntity, Scan
                 this.setTwitchTicks(20);
             }
             this.wasGrazing = this.isGrazing();
+            if (this.barkCooldown > 0) {
+                this.barkCooldown--;
+            } else if (this.getThreatPhase() == THREAT_PHASE_DISPLAY && this.getNavigation().isDone()
+                    && this.level().getNearestPlayer(this.getX(), this.getY(), this.getZ(), 4.0D, true) != null) {
+                this.setCurrTwitchIdle(5);
+                this.setTwitchTicks(10);
+                this.playSound(AnimaliaSound.MUNTIACUS_MUNTJAK_BARK.get());
+                this.barkCooldown = 120 + this.random.nextInt(121);
+            }
         }
     }
 
@@ -341,5 +357,8 @@ public class MuntiacusEntity extends AnimaliaLandBase implements GeoEntity, Scan
 
     @Override
     public int getSleepIdleCount() {return 1;}
+
+    @Override
+    public int getSleepIdleLength(int sleepIdleId) {return 60 + this.random.nextInt(61);}
 
 }
