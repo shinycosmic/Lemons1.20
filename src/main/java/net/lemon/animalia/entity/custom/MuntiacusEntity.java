@@ -158,7 +158,7 @@ public class MuntiacusEntity extends AnimaliaLandBase implements GeoEntity, Scan
                 return PlayState.CONTINUE;
             case SLEEP_PHASE_SLEEPING:
                 int sleepIdle = this.getCurrentSleepIdle();
-                if (sleepIdle >= 0 && !this.isBaby()) { //TODO this animation is actually a looper, so we need to give it random durations
+                if (sleepIdle >= 0 && !this.isBaby()) {
                     animationState.getController().setAnimation(RawAnimation.begin().then("sleepIdle" + sleepIdle, Animation.LoopType.LOOP));
                     return PlayState.CONTINUE;
                 }
@@ -274,7 +274,7 @@ public class MuntiacusEntity extends AnimaliaLandBase implements GeoEntity, Scan
 
 
     @Override
-    public int getIdleCount() {return 5;} //TODO +1 bark, the bark plays only if the player is within 3 blocks, and plays every 6-12 seconds if player still in threshold, playing immediately upon the player entering the threshold and bark being off cooldown
+    public int getIdleCount() {return 5;}
 
     @Override
     public IdleType getIdleType(int displayId) {
