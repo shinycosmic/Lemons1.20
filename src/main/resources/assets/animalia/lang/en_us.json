@@ -452,5 +452,7 @@
   "commands.animalia.holonet.reset": "Holonet discoveries reset",
   "commands.animalia.holonet.discoverall": "All Holonet entries discovered",
   "commands.animalia.holonet.invalid": "%s is not registered in the Holonet.",
-  "commands.animalia.holonet.discovered": "Discovered: %s"
+  "commands.animalia.holonet.discovered": "Discovered: %s",
+
+  "entity.animalia.muntiacus_muntjak.bark": "Muntjac barks"
 }
