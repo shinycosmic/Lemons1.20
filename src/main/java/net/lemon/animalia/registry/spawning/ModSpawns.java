@@ -167,6 +167,8 @@ public class ModSpawns {
                 BiomeSelector.in(BiomeTags.IS_JUNGLE));
         add(ModEntities.CROSSARCHUS_OBSCURUS, 3, 1, 3,
                 BiomeSelector.in(BiomeTags.IS_SAVANNA));
+        add(ModEntities.MUNTIACUS_MUNTJAK, 2, 1, 3,
+                BiomeSelector.in(BiomeTags.IS_JUNGLE));
     }
 
     private static void add(RegistryObject<? extends EntityType<?>> type, int weight, int minGroup, int maxGroup, BiomeSelector selector) {

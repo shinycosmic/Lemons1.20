@@ -33,6 +33,7 @@ public class HolonetSetup {
         HyemoschusEntity.registerHolonet();
         PelagicInvertSwimmerEntity.registerHolonet();
         CrossarchusEntity.registerHolonet();
+        MuntiacusEntity.registerHolonet();
 
     }
 }

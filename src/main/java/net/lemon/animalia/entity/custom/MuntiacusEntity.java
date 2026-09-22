@@ -80,7 +80,7 @@ public class MuntiacusEntity extends AnimaliaLandBase implements GeoEntity, Scan
 //        if (this.getType() == ModEntities.MUNTIACUS_MUNTJAK.get()) {
 //            return AnimaliaFunctionUtil.getScaleForSize(22, 35);
 //        }
-        int desiredCm = this.getGender() == 0 ? 89 : 135;
+        int desiredCm = this.getGender() == 0 ? 100 : 135;
         return AnimaliaFunctionUtil.getScaleForSize(28, desiredCm);
     }
 
@@ -122,7 +122,7 @@ public class MuntiacusEntity extends AnimaliaLandBase implements GeoEntity, Scan
     @Override
     protected void registerGoals() {
         super.registerGoals();
-        this.landPanic = new LandPanicGoal(this, 2.5D, 200, 8.0D);
+        this.landPanic = new LandPanicGoal(this, 3.5D, 200, 8.0D);
         this.goalSelector.addGoal(1, this.landPanic);
         this.goalSelector.addGoal(2, new ThreatGoal(this, 12.0D, 1.0D, Integer.MAX_VALUE, 0, ThreatGoal.ThreatOutcome.FLEE, entity -> entity instanceof Player player && !player.isCreative()));
         this.goalSelector.addGoal(4, new FindNearestBlockGoal(this, 1.0D, 8, ModTags.Blocks.CROSS_PLANTS, FindNearestBlockGoal.TargetLocation.IN));
@@ -174,9 +174,18 @@ public class MuntiacusEntity extends AnimaliaLandBase implements GeoEntity, Scan
             if (current != null && current.animation().name().equals("toThreat")) {
                 animationState.getController().transitionLength(0);
             }
+            if (this.getCurrTwitchIdle() == 4) {
+                animationState.getController().transitionLength(10);
+                animationState.getController().setAnimation(RawAnimation.begin().then("idle4", Animation.LoopType.LOOP));
+            } else {
             animationState.getController().setAnimation(RawAnimation.begin()
                     .then("toThreat", Animation.LoopType.PLAY_ONCE)
                     .thenLoop("threat"));
+            }
+            return PlayState.CONTINUE;
+        }
+        if (this.getCurrRegIdle() >= 0) {
+            animationState.getController().setAnimation(RawAnimation.begin().then("idle3", Animation.LoopType.LOOP));
             return PlayState.CONTINUE;
         }
         if (this.isRunning()) {
@@ -192,17 +201,26 @@ public class MuntiacusEntity extends AnimaliaLandBase implements GeoEntity, Scan
 
     private <T extends GeoAnimatable> PlayState idlesPredicate(AnimationState<T> state) {
         int twitch = this.getCurrTwitchIdle();
+        if(twitch != -1) {
+            System.out.println("[DEBUG] idle" + twitch);
+        }
+
         if (twitch == 5) {
-            state.getController().transitionLength(5);
+            state.getController().transitionLength(0);
             state.getController().setAnimation(RawAnimation.begin().then("bark", Animation.LoopType.PLAY_ONCE));
             return PlayState.CONTINUE;
         }
-        if (twitch >= 0 && !this.isBaby()) {
-            state.getController().transitionLength(5);
+        if (twitch >= 0 && twitch != 4 && !this.isBaby() && !this.isThreatening()) {
+            state.getController().transitionLength(10);
             state.getController().setAnimation(RawAnimation.begin().then("idle" + twitch, Animation.LoopType.LOOP));
             return PlayState.CONTINUE;
         }
         AnimationProcessor.QueuedAnimation current = state.getController().getCurrentAnimation();
+        if (current != null && !state.getController().hasAnimationFinished() && (current.animation().name().equals("idle2") || current.animation().name().equals("idle2T"))) {
+            state.getController().transitionLength(0);
+            state.getController().setAnimation(RawAnimation.begin().then("idle2T", Animation.LoopType.PLAY_ONCE));
+            return PlayState.CONTINUE;
+        }
         if (current != null && !state.getController().hasAnimationFinished() && (current.animation().name().equals("idle1") || current.animation().name().equals("idle1T"))) {
             state.getController().transitionLength(0);
             state.getController().setAnimation(RawAnimation.begin().then("idle1T", Animation.LoopType.PLAY_ONCE));
@@ -273,20 +291,29 @@ public class MuntiacusEntity extends AnimaliaLandBase implements GeoEntity, Scan
     public int getUnSleepLength() {return 20;}
 
 
+    /**
+     * idles ref:
+     * 0- munch
+     * 1- slight down
+     * 2- more down
+     * 3- tail wag
+     * 4- threat second phase
+     */
+
     @Override
     public int getIdleCount() {return 5;}
 
     @Override
     public IdleType getIdleType(int displayId) {
-        return IdleType.TWITCH;
+        return displayId == 3 ? IdleType.MOVEMENT_NEGATIVE : IdleType.TWITCH;
     }
 
     @Override
     public int getIdleLength(int displayId) {
         return switch (displayId) {
             case 0 -> 20 + this.random.nextInt(31);
-            case 2, 3 -> 40 + this.random.nextInt(31);
-            case 4 -> 40 + this.random.nextInt(61);
+            case 1, 2 -> 40 + this.random.nextInt(31);
+            case 4 -> 60 + this.random.nextInt(61);
             default -> 10 + this.random.nextInt(21);
         };
     }
@@ -302,7 +329,7 @@ public class MuntiacusEntity extends AnimaliaLandBase implements GeoEntity, Scan
     @Override
     public int pickIdleOfType(PathfinderMob mob, IdleType type) {
         if (type == IdleType.MOVEMENT_NEGATIVE) {
-            return this.isThreatening() ? -1 : 2;
+            return this.isThreatening() ? -1 : 3;
         }
         if (type != IdleType.TWITCH || this.isBaby()) {
             return -1;
@@ -312,6 +339,9 @@ public class MuntiacusEntity extends AnimaliaLandBase implements GeoEntity, Scan
         }
         return mob.getRandom().nextInt(4);
     }
+
+    @Override
+    public int regChance() { return 100; }
 
 
     @Override
