@@ -149,6 +149,9 @@ public class MuntiacusEntity extends AnimaliaLandBase implements GeoEntity, Scan
     private <T extends GeoAnimatable> PlayState predicate(AnimationState<T> animationState) {
         animationState.getController().setAnimationSpeed(1.0D);
         animationState.getController().transitionLength(5);
+        if (this.getThreatPhase() != THREAT_PHASE_DISPLAY) {
+            this.currThreatPose = 0;
+        }
         if (this.isGrazing() && !this.isBaby()) {
             animationState.getController().setAnimation(RawAnimation.begin().then("forage", Animation.LoopType.LOOP));
             return PlayState.CONTINUE;
@@ -176,13 +179,11 @@ public class MuntiacusEntity extends AnimaliaLandBase implements GeoEntity, Scan
                 animationState.getController().transitionLength(0);
             }
             if (this.getCurrTwitchIdle() == 4) {
-                System.out.println("here 4");
                 animationState.getController().transitionLength(10);
                 animationState.getController().setAnimation(RawAnimation.begin().then("idle4", Animation.LoopType.LOOP));
                 currThreatPose = 1;
             } else if (current != null && currThreatPose == 1) {
-                System.out.println("here 4 33333333333333333333");
-                animationState.getController().transitionLength(0);
+                animationState.getController().transitionLength(10);
                 animationState.getController().setAnimation(RawAnimation.begin().then("threat", Animation.LoopType.LOOP));
                 currThreatPose = 0;
             } else {
