@@ -47,6 +47,7 @@ public class MuntiacusEntity extends AnimaliaLandBase implements GeoEntity, Scan
     private LandPanicGoal landPanic;
     private boolean wasGrazing;
     private int barkCooldown;
+    private int currThreatPose = 0;
 
     public MuntiacusEntity(EntityType<? extends Animal> entityType, Level level) {
         super(entityType, level);
@@ -175,12 +176,19 @@ public class MuntiacusEntity extends AnimaliaLandBase implements GeoEntity, Scan
                 animationState.getController().transitionLength(0);
             }
             if (this.getCurrTwitchIdle() == 4) {
+                System.out.println("here 4");
                 animationState.getController().transitionLength(10);
                 animationState.getController().setAnimation(RawAnimation.begin().then("idle4", Animation.LoopType.LOOP));
+                currThreatPose = 1;
+            } else if (current != null && currThreatPose == 1) {
+                System.out.println("here 4 33333333333333333333");
+                animationState.getController().transitionLength(0);
+                animationState.getController().setAnimation(RawAnimation.begin().then("threat", Animation.LoopType.LOOP));
+                currThreatPose = 0;
             } else {
-            animationState.getController().setAnimation(RawAnimation.begin()
-                    .then("toThreat", Animation.LoopType.PLAY_ONCE)
+                animationState.getController().setAnimation(RawAnimation.begin().then("toThreat", Animation.LoopType.PLAY_ONCE)
                     .thenLoop("threat"));
+                currThreatPose = 0;
             }
             return PlayState.CONTINUE;
         }
@@ -201,10 +209,6 @@ public class MuntiacusEntity extends AnimaliaLandBase implements GeoEntity, Scan
 
     private <T extends GeoAnimatable> PlayState idlesPredicate(AnimationState<T> state) {
         int twitch = this.getCurrTwitchIdle();
-        if(twitch != -1) {
-            System.out.println("[DEBUG] idle" + twitch);
-        }
-
         if (twitch == 5) {
             state.getController().transitionLength(0);
             state.getController().setAnimation(RawAnimation.begin().then("bark", Animation.LoopType.PLAY_ONCE));
@@ -367,7 +371,7 @@ public class MuntiacusEntity extends AnimaliaLandBase implements GeoEntity, Scan
             } else if (this.getThreatPhase() == THREAT_PHASE_DISPLAY && this.getNavigation().isDone()
                     && this.level().getNearestPlayer(this.getX(), this.getY(), this.getZ(), 4.0D, true) != null) {
                 this.setCurrTwitchIdle(5);
-                this.setTwitchTicks(10);
+                this.setTwitchTicks(15);
                 this.playSound(AnimaliaSound.MUNTIACUS_MUNTJAK_BARK.get());
                 this.barkCooldown = 120 + this.random.nextInt(121);
             }

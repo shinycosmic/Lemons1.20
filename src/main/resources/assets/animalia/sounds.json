@@ -2,9 +2,8 @@
   "entity.muntiacus_muntjak.bark": {
     "subtitle": "entity.animalia.muntiacus_muntjak.bark",
     "sounds": [
-      "animalia:entity/muntiacus_muntjak/bark01",
-      "animalia:entity/muntiacus_muntjak/bark02",
-      "animalia:entity/muntiacus_muntjak/bark03"
+      "animalia:entity/muntiacus_muntjak/bark1",
+      "animalia:entity/muntiacus_muntjak/bark2"
     ]
   }
 }
