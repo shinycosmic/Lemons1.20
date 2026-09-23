@@ -2,10 +2,11 @@ package net.lemon.animalia.entity.model.field;
 
 import net.lemon.animalia.Animalia;
 import net.lemon.animalia.entity.custom.MuntiacusEntity;
+import net.lemon.animalia.entity.model.AnimaliaCustomModel;
 import net.minecraft.resources.ResourceLocation;
 import software.bernie.geckolib.model.GeoModel;
 
-public class MuntiacusMuntjakModel extends GeoModel<MuntiacusEntity> {
+public class MuntiacusMuntjakModel extends AnimaliaCustomModel<MuntiacusEntity> {
     public ResourceLocation getModelResource(MuntiacusEntity object) {
         if(object.isBaby()) {
             return new ResourceLocation(Animalia.MODID, "geo/babymuntjac.geo.json");

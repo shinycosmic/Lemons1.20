@@ -219,17 +219,17 @@ public class MuntiacusEntity extends AnimaliaLandBase implements GeoEntity, Scan
             state.getController().setAnimation(RawAnimation.begin().then("idle" + twitch, Animation.LoopType.LOOP));
             return PlayState.CONTINUE;
         }
-        AnimationProcessor.QueuedAnimation current = state.getController().getCurrentAnimation();
-        if (current != null && !state.getController().hasAnimationFinished() && (current.animation().name().equals("idle2") || current.animation().name().equals("idle2T"))) {
-            state.getController().transitionLength(0);
-            state.getController().setAnimation(RawAnimation.begin().then("idle2T", Animation.LoopType.PLAY_ONCE));
-            return PlayState.CONTINUE;
-        }
-        if (current != null && !state.getController().hasAnimationFinished() && (current.animation().name().equals("idle1") || current.animation().name().equals("idle1T"))) {
-            state.getController().transitionLength(0);
-            state.getController().setAnimation(RawAnimation.begin().then("idle1T", Animation.LoopType.PLAY_ONCE));
-            return PlayState.CONTINUE;
-        }
+//        AnimationProcessor.QueuedAnimation current = state.getController().getCurrentAnimation();
+//        if (current != null && !state.getController().hasAnimationFinished() && (current.animation().name().equals("idle2") || current.animation().name().equals("idle2T"))) {
+//            state.getController().transitionLength(0);
+//            state.getController().setAnimation(RawAnimation.begin().then("idle2T", Animation.LoopType.PLAY_ONCE));
+//            return PlayState.CONTINUE;
+//        }
+//        if (current != null && !state.getController().hasAnimationFinished() && (current.animation().name().equals("idle1") || current.animation().name().equals("idle1T"))) {
+//            state.getController().transitionLength(0);
+//            state.getController().setAnimation(RawAnimation.begin().then("idle1T", Animation.LoopType.PLAY_ONCE));
+//            return PlayState.CONTINUE;
+//        }
         state.getController().forceAnimationReset();
         return PlayState.STOP;
     }
