@@ -182,10 +182,9 @@ public class MuntiacusEntity extends AnimaliaLandBase implements GeoEntity, Scan
                 animationState.getController().transitionLength(10);
                 animationState.getController().setAnimation(RawAnimation.begin().then("idle4", Animation.LoopType.LOOP));
                 currThreatPose = 1;
-            } else if (current != null && currThreatPose == 1) {
+            } else if (currThreatPose == 1) {
                 animationState.getController().transitionLength(10);
                 animationState.getController().setAnimation(RawAnimation.begin().then("threat", Animation.LoopType.LOOP));
-                currThreatPose = 0;
             } else {
                 animationState.getController().setAnimation(RawAnimation.begin().then("toThreat", Animation.LoopType.PLAY_ONCE)
                     .thenLoop("threat"));
