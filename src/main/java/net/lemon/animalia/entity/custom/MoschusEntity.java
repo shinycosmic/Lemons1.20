@@ -48,7 +48,6 @@ public class MoschusEntity extends AnimaliaLandBase implements GeoEntity, Scanna
     private static final EntityDataAccessor<Integer> THREAT_PHASE = SynchedEntityData.defineId(MoschusEntity.class, EntityDataSerializers.INT);
     private LandPanicGoal landPanic;
     private boolean wasGrazing;
-    private int barkCooldown;
     private int currThreatPose = 0;
 
     public MoschusEntity(EntityType<? extends Animal> entityType, Level level) {
@@ -63,7 +62,7 @@ public class MoschusEntity extends AnimaliaLandBase implements GeoEntity, Scanna
         this.goalSelector.addGoal(2, new ThreatGoal(this, 12.0D, 1.0D, Integer.MAX_VALUE, 0, ThreatGoal.ThreatOutcome.FLEE, entity -> entity instanceof Player player && !player.isCreative()));
         this.goalSelector.addGoal(4, new FindNearestBlockGoal(this, 1.0D, 8, ModTags.Blocks.CROSS_PLANTS, FindNearestBlockGoal.TargetLocation.IN));
         this.goalSelector.addGoal(6, new GrazeGoal<>(this, 1.0D));
-        //TODO territorial goals — mark, leash, owner territory tick (intruder push + alert bark)
+        //TODO territorial goals — mark, leash, owner territory tick (intruder push)
     }
 
     @Override
@@ -193,11 +192,6 @@ public class MoschusEntity extends AnimaliaLandBase implements GeoEntity, Scanna
 
     private <T extends GeoAnimatable> PlayState idlesPredicate(AnimationState<T> state) {
         int twitch = this.getCurrTwitchIdle();
-        if (twitch == 4) {
-            state.getController().transitionLength(0);
-            state.getController().setAnimation(RawAnimation.begin().then("bark", Animation.LoopType.PLAY_ONCE));
-            return PlayState.CONTINUE;
-        }
         if (twitch >= 0 && twitch != 3 && !this.isBaby() && !this.isThreatening()) {
             state.getController().transitionLength(10);
             state.getController().setAnimation(RawAnimation.begin().then("idle" + twitch, Animation.LoopType.LOOP));
@@ -236,7 +230,6 @@ public class MoschusEntity extends AnimaliaLandBase implements GeoEntity, Scanna
      *  1- slight down
      *  2- more down
      *  3- threat second pose (threatEar)
-     *  4- bark (WIP)
      */
 
     @Override
@@ -336,15 +329,6 @@ public class MoschusEntity extends AnimaliaLandBase implements GeoEntity, Scanna
                 this.setTwitchTicks(20);
             }
             this.wasGrazing = this.isGrazing();
-            if (this.barkCooldown > 0) {
-                this.barkCooldown--;
-            } else if (this.getThreatPhase() == THREAT_PHASE_DISPLAY && this.getNavigation().isDone()
-                    && this.level().getNearestPlayer(this.getX(), this.getY(), this.getZ(), 4.0D, true) != null) {
-                this.setCurrTwitchIdle(4);
-                this.setTwitchTicks(15);
-                this.playSound(AnimaliaSound.MUNTIACUS_MUNTJAK_BARK.get());
-                this.barkCooldown = 120 + this.random.nextInt(121);
-            }
         }
     }
 
