@@ -1919,7 +1919,7 @@
 				}
 			}
 		},
-		"threatEar": {
+		"idle3": {
 			"loop": true,
 			"bones": {
 				"main": {
