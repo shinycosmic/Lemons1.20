@@ -34,6 +34,7 @@ public class HolonetSetup {
         PelagicInvertSwimmerEntity.registerHolonet();
         CrossarchusEntity.registerHolonet();
         MuntiacusEntity.registerHolonet();
+        MoschusEntity.registerHolonet();
 
     }
 }

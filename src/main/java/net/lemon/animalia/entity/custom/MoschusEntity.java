@@ -103,7 +103,7 @@ public class MoschusEntity extends AnimaliaLandBase implements GeoEntity, Scanna
 //            return AnimaliaFunctionUtil.getScaleForSize(22, 35);
 //        }
         int desiredCm = this.getGender() == 0 ? 90 : 100;
-        return AnimaliaFunctionUtil.getScaleForSize(28, desiredCm); //TODO placeholder
+        return AnimaliaFunctionUtil.getScaleForSize(22, desiredCm);
     }
 
     @Override
@@ -196,8 +196,11 @@ public class MoschusEntity extends AnimaliaLandBase implements GeoEntity, Scanna
             animationState.getController().setAnimation(RawAnimation.begin().then("walk", Animation.LoopType.LOOP));
             return PlayState.CONTINUE;
         }
-        animationState.getController().setAnimation(RawAnimation.begin().then("still", Animation.LoopType.LOOP));
-        return PlayState.CONTINUE;
+        if(!this.isBaby()) {
+            animationState.getController().setAnimation(RawAnimation.begin().then("still", Animation.LoopType.LOOP));
+            return PlayState.CONTINUE;
+        }
+        return PlayState.STOP;
     }
 
     private <T extends GeoAnimatable> PlayState idlesPredicate(AnimationState<T> state) {
