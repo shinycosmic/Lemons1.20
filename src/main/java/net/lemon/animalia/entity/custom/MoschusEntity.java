@@ -6,7 +6,6 @@ import net.lemon.animalia.entity.ai.ThreatGoal;
 import net.lemon.animalia.entity.bases.AnimaliaLandBase;
 import net.lemon.animalia.entity.bases.helpers.ActivityTime;
 import net.lemon.animalia.entity.bases.helpers.ICanThreat;
-import net.lemon.animalia.registry.AnimaliaSound;
 import net.lemon.animalia.registry.ModEntities;
 import net.lemon.animalia.registry.ModTags;
 import net.lemon.animalia.util.AnimaliaFunctionUtil;
@@ -49,6 +48,8 @@ public class MoschusEntity extends AnimaliaLandBase implements GeoEntity, Scanna
     private LandPanicGoal landPanic;
     private boolean wasGrazing;
     private int currThreatPose = 0;
+    private BlockPos territoryPos;
+    private int territoryRadius;
 
     public MoschusEntity(EntityType<? extends Animal> entityType, Level level) {
         super(entityType, level);
@@ -170,7 +171,7 @@ public class MoschusEntity extends AnimaliaLandBase implements GeoEntity, Scanna
                 animationState.getController().transitionLength(10);
                 animationState.getController().setAnimation(RawAnimation.begin().then("idle3", Animation.LoopType.LOOP));
                 this.currThreatPose = 1;
-            } else if (current != null && this.currThreatPose == 1) {
+            } else if (this.currThreatPose == 1) {
                 animationState.getController().transitionLength(10);
                 animationState.getController().setAnimation(RawAnimation.begin().then("threat", Animation.LoopType.LOOP));
             } else {
@@ -341,9 +342,6 @@ public class MoschusEntity extends AnimaliaLandBase implements GeoEntity, Scanna
         }
         return result;
     }
-
-    private BlockPos territoryPos;
-    private int territoryRadius;
 
     public BlockPos getTerritoryPos() {
         return this.territoryPos;
