@@ -25,6 +25,7 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
@@ -32,6 +33,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.GeoEntity;
@@ -42,10 +44,13 @@ import software.bernie.geckolib.core.animation.*;
 import software.bernie.geckolib.core.animation.AnimationState;
 import software.bernie.geckolib.core.object.PlayState;
 
+import java.util.EnumSet;
+
 public class MoschusEntity extends AnimaliaLandBase implements GeoEntity, Scannable, ICanThreat {
     private final AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
     private static final EntityDataAccessor<Integer> THREAT_PHASE = SynchedEntityData.defineId(MoschusEntity.class, EntityDataSerializers.INT);
     private LandPanicGoal landPanic;
+    private IntrudeTerritoryGoal intrudeGoal;
     private boolean wasGrazing;
     private int currThreatPose = 0;
     private BlockPos territoryPos;
@@ -59,11 +64,14 @@ public class MoschusEntity extends AnimaliaLandBase implements GeoEntity, Scanna
     protected void registerGoals() {
         super.registerGoals();
         this.landPanic = new LandPanicGoal(this, 3.5D, 200, 8.0D);
+        this.intrudeGoal = new IntrudeTerritoryGoal(this);
         this.goalSelector.addGoal(1, this.landPanic);
-        this.goalSelector.addGoal(2, new ThreatGoal(this, 12.0D, 1.0D, Integer.MAX_VALUE, 0, ThreatGoal.ThreatOutcome.FLEE, entity -> entity instanceof Player player && !player.isCreative()));
+        this.goalSelector.addGoal(1, this.intrudeGoal);
+        this.goalSelector.addGoal(2, new ThreatGoal(this, 16.0D, 4.0D, Integer.MAX_VALUE, 0, ThreatGoal.ThreatOutcome.FLEE, entity -> entity instanceof Player player && !player.isCreative()));
+        this.goalSelector.addGoal(3, new TerritoryLeashGoal(this));
         this.goalSelector.addGoal(4, new FindNearestBlockGoal(this, 1.0D, 8, ModTags.Blocks.CROSS_PLANTS, FindNearestBlockGoal.TargetLocation.IN));
+        this.goalSelector.addGoal(4, new TerritoryGoal(this));
         this.goalSelector.addGoal(6, new GrazeGoal<>(this, 1.0D));
-        //TODO territorial goals — mark, leash, owner territory tick (intruder push)
     }
 
     @Override
@@ -188,7 +196,8 @@ public class MoschusEntity extends AnimaliaLandBase implements GeoEntity, Scanna
             animationState.getController().setAnimation(RawAnimation.begin().then("walk", Animation.LoopType.LOOP));
             return PlayState.CONTINUE;
         }
-        return PlayState.STOP;
+        animationState.getController().setAnimation(RawAnimation.begin().then("still", Animation.LoopType.LOOP));
+        return PlayState.CONTINUE;
     }
 
     private <T extends GeoAnimatable> PlayState idlesPredicate(AnimationState<T> state) {
@@ -359,6 +368,10 @@ public class MoschusEntity extends AnimaliaLandBase implements GeoEntity, Scanna
         this.territoryRadius = radius;
     }
 
+    public boolean canHoldTerritory() {
+        return !this.isBaby() && this.getGender() == 1;
+    }
+
     @Override
     public void addAdditionalSaveData(CompoundTag tag) {
         super.addAdditionalSaveData(tag);
@@ -376,4 +389,180 @@ public class MoschusEntity extends AnimaliaLandBase implements GeoEntity, Scanna
             this.territoryRadius = tag.getInt("TerritoryRadius");
         }
     }
+
+
+    public static class IntrudeTerritoryGoal extends Goal {
+        private final MoschusEntity mob;
+        private BlockPos pushedMark;
+        private BlockPos mark;
+        private int pushExpiration;
+        private int displayTicks;
+        private int cooldown;
+
+        public IntrudeTerritoryGoal(MoschusEntity mob) {
+            this.mob = mob;
+            this.setFlags(EnumSet.of(Goal.Flag.MOVE, Goal.Flag.LOOK));
+        }
+
+        public void comeFrom(BlockPos mark) {
+            this.pushedMark = mark;
+            this.pushExpiration = this.mob.tickCount + 40;
+        }
+
+        @Override
+        public boolean canUse() {
+            if (this.pushedMark != null && this.mob.tickCount > this.pushExpiration) {
+                this.pushedMark = null;
+            }
+            if (this.pushedMark == null || this.mob.tickCount < this.cooldown
+                    || this.mob.isBaby() || this.mob.isAsleep() || this.mob.isThreatening()) {
+                return false;
+            }
+            this.mark = this.pushedMark;
+            return true;
+        }
+
+        @Override
+        public boolean canContinueToUse() {
+            return this.displayTicks > 0;
+        }
+
+        @Override
+        public boolean isInterruptable() {
+            return false;
+        }
+
+        @Override
+        public void start() {
+            this.pushedMark = null;
+            this.displayTicks = 40 + this.mob.getRandom().nextInt(41);
+            this.mob.setThreatPhase(THREAT_PHASE_DISPLAY);
+            this.mob.getNavigation().stop();
+        }
+
+        @Override
+        public void tick() {
+            if (this.mob.hurtTime > 0) {
+                this.displayTicks = 0;
+                return;
+            }
+            this.mob.getNavigation().stop();
+            this.mob.getLookControl().setLookAt(this.mark.getX() + 0.5D, this.mark.getY() + 0.5D, this.mark.getZ() + 0.5D, 30.0F, 30.0F);
+            --this.displayTicks;
+            if (this.displayTicks <= 0) {
+                this.mob.landPanic.panicFrom(Vec3.atCenterOf(this.mark));
+            }
+        }
+
+        @Override
+        public void stop() {
+            this.mob.setThreatPhase(THREAT_PHASE_NONE);
+            this.mark = null;
+            this.cooldown = this.mob.tickCount + 24000;
+        }
+
+        @Override
+        public boolean requiresUpdateEveryTick() {
+            return true;
+        }
+    }
+
+    public static class TerritoryLeashGoal extends Goal {
+        private final MoschusEntity mob;
+        private int nextCheck;
+
+        public TerritoryLeashGoal(MoschusEntity mob) {
+            this.mob = mob;
+            this.setFlags(EnumSet.of(Goal.Flag.MOVE));
+        }
+
+        @Override
+        public boolean canUse() {
+            BlockPos mark = this.mob.getTerritoryPos();
+            if (mark == null || this.mob.tickCount < this.nextCheck) {
+                return false;
+            }
+            this.nextCheck = this.mob.tickCount + 20 + this.mob.getRandom().nextInt(20);
+            int radius = this.mob.getTerritoryRadius();
+            return this.mob.blockPosition().distSqr(mark) > radius * radius;
+        }
+
+        @Override
+        public boolean canContinueToUse() {
+            return !this.mob.getNavigation().isDone();
+        }
+
+        @Override
+        public void start() {
+            BlockPos mark = this.mob.getTerritoryPos();
+            this.mob.getNavigation().moveTo(this.mob.getNavigation().createPath(mark, this.mob.getTerritoryRadius() / 2), 1.0D);
+        }
+
+        @Override
+        public void stop() {
+            this.mob.getNavigation().stop();
+        }
+    }
+
+
+    public static class TerritoryGoal extends Goal {
+        private final MoschusEntity mob;
+        private int nextTick;
+        private int nextMark;
+
+        public TerritoryGoal(MoschusEntity mob) {
+            this.mob = mob;
+        }
+
+        @Override
+        public boolean canUse() {
+            if (!this.mob.canHoldTerritory() || this.mob.isAsleep() || this.mob.tickCount < this.nextTick) {
+                return false;
+            }
+            this.nextTick = this.mob.tickCount + 10 + this.mob.getRandom().nextInt(10);
+            return true;
+        }
+
+        @Override
+        public boolean canContinueToUse() {
+            return false;
+        }
+
+        @Override
+        public void start() {
+            BlockPos mark = this.mob.getTerritoryPos();
+            if (mark == null) {
+                this.tryMark();
+                return;
+            }
+            if (!this.mob.level().isLoaded(mark)) {
+                return;
+            }
+            if (this.mob.level().getBlockState(mark).isAir()) {
+                this.mob.setTerritoryPos(null);
+                this.nextMark = this.mob.tickCount + 600 + this.mob.getRandom().nextInt(600);
+                return;
+            }
+            for (MoschusEntity intruder : this.mob.level().getEntitiesOfClass(MoschusEntity.class, new AABB(mark).inflate(4.0D),
+                    other -> other != this.mob && other.canHoldTerritory())) {
+                intruder.intrudeGoal.comeFrom(mark);
+            }
+        }
+
+        private void tryMark() {
+            if (this.mob.tickCount < this.nextMark) {
+                return;
+            }
+            BlockPos here = this.mob.getOnPos();
+            boolean tooClose = !this.mob.level().getEntitiesOfClass(MoschusEntity.class, this.mob.getBoundingBox().inflate(28.0D),
+                    other -> other != this.mob && other.getTerritoryPos() != null && other.getTerritoryPos().closerThan(here, 16.0D)).isEmpty();
+            if (tooClose) {
+                this.nextMark = this.mob.tickCount + 600 + this.mob.getRandom().nextInt(600);
+                return;
+            }
+            this.mob.setTerritoryPos(here);
+            this.mob.setTerritoryRadius(6 + this.mob.getRandom().nextInt(7));
+        }
+    }
+
 }
