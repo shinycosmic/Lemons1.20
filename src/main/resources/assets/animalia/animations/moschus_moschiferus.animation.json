@@ -3631,6 +3631,16 @@
 					}
 				}
 			}
+		},
+		"still": {
+			"loop": true,
+			"bones": {
+				"tail": {
+					"rotation": {
+						"vector": ["-0-math.sin(query.anim_time*120/0.5-150)*2", 0, 0]
+					}
+				}
+			}
 		}
 	}
 }
