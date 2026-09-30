@@ -40,6 +40,7 @@ import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.pathfinder.Path;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.ForgeMod;
 import org.jetbrains.annotations.Nullable;
@@ -910,19 +911,19 @@ public abstract class AnimaliaLandBase extends Animal implements IActivityTime, 
 
         @Override
         public boolean canUse() {
-            if (this.pushedFleeFrom != null && this.mob.tickCount > this.pushExpiration) {
+            if(this.pushedFleeFrom != null && this.mob.tickCount > this.pushExpiration) {
                 this.pushedFleeFrom = null;
             }
-            if (this.pushedFleeFrom != null) {
+            if(this.pushedFleeFrom != null) {
                 this.fleeFrom = this.pushedFleeFrom;
                 return true;
             }
-            if (this.mob.hurtTime > 0 || this.mob.isOnFire()) {
+            if(this.mob.hurtTime > 0 || this.mob.isOnFire()) {
                 LivingEntity attacker = this.mob.getLastHurtByMob();
                 this.fleeFrom = attacker != null ? attacker.position() : this.mob.position();
                 return true;
             }
-            if (this.proximityRange > 0.0D && this.canScan()) {
+            if(this.proximityRange > 0.0D && this.canScan()) {
                 if (this.mob.tickCount < this.nextScan) {
                     return false;
                 }
@@ -930,8 +931,11 @@ public abstract class AnimaliaLandBase extends Animal implements IActivityTime, 
                 LivingEntity threat = this.mob.level().getNearestEntity(LivingEntity.class, this.targetingConditions, this.mob,
                         this.mob.getX(), this.mob.getY(), this.mob.getZ(), this.mob.getBoundingBox().inflate(this.proximityRange));
                 if (threat != null) {
-                    this.fleeFrom = threat.position();
-                    return true;
+                    Path path = this.mob.getNavigation().createPath(threat, 1);
+                    if (path != null && path.canReach()) {
+                        this.fleeFrom = threat.position();
+                        return true;
+                    }
                 }
             }
             return false;

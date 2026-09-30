@@ -7,6 +7,7 @@ import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.ai.targeting.TargetingConditions;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.pathfinder.Path;
 
 import java.util.EnumSet;
 import java.util.function.Predicate;
@@ -153,12 +154,17 @@ public class ThreatGoal extends Goal {
     }
 
     private LivingEntity findThreat() {
-        return this.mob.level().getNearestEntity(
+        LivingEntity threat = this.mob.level().getNearestEntity(
                 LivingEntity.class,
                 this.targetingConditions,
                 this.mob,
                 this.mob.getX(), this.mob.getY(), this.mob.getZ(),
                 this.mob.getBoundingBox().inflate(this.threatRange));
+        if (threat == null) {
+            return null;
+        }
+        Path path = this.mob.getNavigation().createPath(threat, 1);
+        return path != null && path.canReach() ? threat : null;
     }
 
     private void beginLeaving() {
