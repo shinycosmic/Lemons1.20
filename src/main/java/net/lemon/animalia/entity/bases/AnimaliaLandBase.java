@@ -911,19 +911,19 @@ public abstract class AnimaliaLandBase extends Animal implements IActivityTime, 
 
         @Override
         public boolean canUse() {
-            if(this.pushedFleeFrom != null && this.mob.tickCount > this.pushExpiration) {
+            if (this.pushedFleeFrom != null && this.mob.tickCount > this.pushExpiration) {
                 this.pushedFleeFrom = null;
             }
-            if(this.pushedFleeFrom != null) {
+            if (this.pushedFleeFrom != null) {
                 this.fleeFrom = this.pushedFleeFrom;
                 return true;
             }
-            if(this.mob.hurtTime > 0 || this.mob.isOnFire()) {
+            if (this.mob.hurtTime > 0 || this.mob.isOnFire()) {
                 LivingEntity attacker = this.mob.getLastHurtByMob();
                 this.fleeFrom = attacker != null ? attacker.position() : this.mob.position();
                 return true;
             }
-            if(this.proximityRange > 0.0D && this.canScan()) {
+            if (this.proximityRange > 0.0D && this.canScan()) {
                 if (this.mob.tickCount < this.nextScan) {
                     return false;
                 }
@@ -936,6 +936,7 @@ public abstract class AnimaliaLandBase extends Animal implements IActivityTime, 
                         this.fleeFrom = threat.position();
                         return true;
                     }
+                    this.nextScan = this.mob.tickCount + 20 + this.mob.getRandom().nextInt(20);
                 }
             }
             return false;

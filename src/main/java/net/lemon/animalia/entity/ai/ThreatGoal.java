@@ -75,7 +75,16 @@ public class ThreatGoal extends Goal {
         }
         this.nextThreatScan = this.mob.tickCount + SCAN_INTERVAL + this.mob.getRandom().nextInt(10);
         this.threatTarget = this.findThreat();
-        return this.threatTarget != null;
+        if (this.threatTarget == null) {
+            return false;
+        }
+        Path path = this.mob.getNavigation().createPath(this.threatTarget, 1);
+        if (path == null || !path.canReach()) {
+            this.threatTarget = null;
+            this.nextThreatScan = this.mob.tickCount + 20 + this.mob.getRandom().nextInt(20);
+            return false;
+        }
+        return true;
     }
 
     @Override
@@ -154,17 +163,12 @@ public class ThreatGoal extends Goal {
     }
 
     private LivingEntity findThreat() {
-        LivingEntity threat = this.mob.level().getNearestEntity(
+        return this.mob.level().getNearestEntity(
                 LivingEntity.class,
                 this.targetingConditions,
                 this.mob,
                 this.mob.getX(), this.mob.getY(), this.mob.getZ(),
                 this.mob.getBoundingBox().inflate(this.threatRange));
-        if (threat == null) {
-            return null;
-        }
-        Path path = this.mob.getNavigation().createPath(threat, 1);
-        return path != null && path.canReach() ? threat : null;
     }
 
     private void beginLeaving() {
