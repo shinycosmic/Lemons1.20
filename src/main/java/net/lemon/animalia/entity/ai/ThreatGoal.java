@@ -57,7 +57,7 @@ public class ThreatGoal extends Goal {
         this.maxThreatTicks = maxThreatTicks;
         this.exitTicks = exitTicks;
         this.outcome = outcome;
-        this.threatPredicate = threatPredicate.and(EntitySelector.NO_SPECTATORS).and(entity -> !(entity instanceof Player) || !((IBold) mob).isBold());
+        this.threatPredicate = threatPredicate.and(EntitySelector.NO_SPECTATORS).and(entity -> !(entity instanceof Player player) || !((IBold) mob).isBold() && !player.isCrouching());
         this.targetingConditions = TargetingConditions.forNonCombat().range(threatRange).selector(this.threatPredicate);
         this.setFlags(EnumSet.of(Goal.Flag.MOVE, Goal.Flag.LOOK));
     }

@@ -328,7 +328,7 @@ public abstract class FishBase extends AnimaliaBreedableWater implements Bucketa
 
     public boolean isThreat(LivingEntity entity) {
         if (entity instanceof Player player) {
-            return !this.isBold() && !player.isCreative() && !player.isSpectator();
+            return !this.isBold() && !player.isCreative() && !player.isSpectator() && !player.isCrouching();
         }
         return entity instanceof Monster;
     }

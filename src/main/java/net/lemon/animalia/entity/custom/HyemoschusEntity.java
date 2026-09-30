@@ -68,8 +68,7 @@ public class HyemoschusEntity extends SemiaquaticBase implements GeoEntity, Scan
         this.landPanic = new LandPanicGoal(this, 2.5D, 200, 8.0D);
         this.goalSelector.addGoal(1, this.waterPanic);
         this.goalSelector.addGoal(1, this.landPanic);
-        this.goalSelector.addGoal(2, new ThreatGoal(this, 8.0D, 2.0D, Integer.MAX_VALUE, 0, ThreatGoal.ThreatOutcome.FLEE,
-                entity -> entity instanceof Player player && !player.isCreative() && !player.isCrouching()));
+        this.goalSelector.addGoal(2, new ThreatGoal(this, 8.0D, 2.0D, Integer.MAX_VALUE, 0, ThreatGoal.ThreatOutcome.FLEE, entity -> entity instanceof Player player && !player.isCreative()));
         this.goalSelector.addGoal(6, new GrazeGoal<>(this, 1.0D));
         super.registerGoals();
     }

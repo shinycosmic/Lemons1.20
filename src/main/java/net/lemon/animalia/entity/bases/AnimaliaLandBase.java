@@ -911,7 +911,7 @@ public abstract class AnimaliaLandBase extends Animal implements IActivityTime, 
         private int pushExpiration;
 
         public LandPanicGoal(AnimaliaLandBase mob, double speedMult, int fleeLength, double proximityRange) {
-            this(mob, speedMult, fleeLength, proximityRange, entity -> entity instanceof Player player && !player.isCreative() && !player.isCrouching());
+            this(mob, speedMult, fleeLength, proximityRange, entity -> entity instanceof Player player && !player.isCreative());
         }
 
         public LandPanicGoal(AnimaliaLandBase mob, double speedMult, int fleeLength, double proximityRange, Predicate<LivingEntity> threatPredicate) {
@@ -919,7 +919,7 @@ public abstract class AnimaliaLandBase extends Animal implements IActivityTime, 
             this.speedMult = speedMult;
             this.fleeLength = fleeLength;
             this.proximityRange = proximityRange;
-            this.threatPredicate = threatPredicate.and(EntitySelector.NO_SPECTATORS).and(entity -> !(entity instanceof Player) || !mob.isBold());
+            this.threatPredicate = threatPredicate.and(EntitySelector.NO_SPECTATORS).and(entity -> !(entity instanceof Player player) || !mob.isBold() && !player.isCrouching());
             this.targetingConditions = TargetingConditions.forNonCombat().range(proximityRange).selector(this.threatPredicate);
             this.setFlags(EnumSet.of(Goal.Flag.MOVE));
         }
