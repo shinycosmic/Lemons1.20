@@ -51,7 +51,7 @@ import java.util.function.Predicate;
 
 import static net.lemon.animalia.entity.bases.AnimaliaBreedableWater.*;
 
-public abstract class AnimaliaLandBase extends Animal implements IActivityTime, IFoodEater, IIdles, IGrazer, IDimorphism, ICanSleep, ICanClimb{
+public abstract class AnimaliaLandBase extends Animal implements IActivityTime, IFoodEater, IIdles, IGrazer, IDimorphism, ICanSleep, ICanClimb, IBold{
     private static final EntityDataAccessor<Integer> GENDER = SynchedEntityData.defineId(AnimaliaLandBase.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Integer> VAR_COLOR = SynchedEntityData.defineId(AnimaliaLandBase.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Float> VAR_SIZE_MULTIPLIER = SynchedEntityData.defineId(AnimaliaLandBase.class, EntityDataSerializers.FLOAT);
@@ -80,6 +80,7 @@ public abstract class AnimaliaLandBase extends Animal implements IActivityTime, 
     private int idleDisplayTicks;
     private int twitchIdleTicks;
     private boolean wantsToClimb;
+    private boolean bold;
 
     protected AnimaliaLandBase(EntityType<? extends Animal> entityType, Level level) {
         super(entityType, level);
@@ -303,6 +304,12 @@ public abstract class AnimaliaLandBase extends Animal implements IActivityTime, 
     @Override
     public void setGender(int i) {this.entityData.set(GENDER, i);}
 
+    @Override
+    public boolean isBold() {return this.bold;}
+
+    @Override
+    public void setBold(boolean bold) {this.bold = bold;}
+
     public int getEatLength() { return 20; }
 
     public boolean onHideableBlock(AnimaliaLandBase mob) {
@@ -427,6 +434,7 @@ public abstract class AnimaliaLandBase extends Animal implements IActivityTime, 
     public void addAdditionalSaveData(CompoundTag pCompound) {
         pCompound.putFloat("VarSize", this.getVarSizeMultiplier());
         pCompound.putInt("Gender", this.getGender());
+        pCompound.putBoolean("Bold", this.isBold());
         pCompound.putInt("VarColor", this.getVarColor());
         pCompound.putBoolean("IsPregnant", this.isPregnant());
         if (this.canClimb()) {
@@ -470,6 +478,11 @@ public abstract class AnimaliaLandBase extends Animal implements IActivityTime, 
             this.setVarSizeMultiplier(this.genVarSizeMultiplier());
         } else {
             this.setVarSizeMultiplier(pCompound.getFloat("VarSize")); }
+        if (!pCompound.contains("Bold")) {
+            this.setBold(this.random.nextFloat() < this.boldChance());
+        } else {
+            this.setBold(pCompound.getBoolean("Bold"));
+        }
         super.readAdditionalSaveData(pCompound);
     }
 
@@ -747,6 +760,7 @@ public abstract class AnimaliaLandBase extends Animal implements IActivityTime, 
             baby.moveTo(this.getX(), this.getY(), this.getZ(), 0.0F, 0.0F);
             baby.setVarSizeMultiplier(this.genVarSizeMultiplier());
             baby.setGender(this.random.nextInt(2));
+            baby.setBold(this.random.nextFloat() < baby.boldChance());
             level.addFreshEntityWithPassengers(baby);
             if (level.getGameRules().getBoolean(GameRules.RULE_DOMOBLOOT)) {
                 level.addFreshEntity(new ExperienceOrb(level, this.getX(), this.getY(), this.getZ(), this.random.nextInt(7) + 1));
@@ -765,6 +779,15 @@ public abstract class AnimaliaLandBase extends Animal implements IActivityTime, 
     public boolean isRunning() { return this.entityData.get(IS_RUNNING); }
 
     public void setRunning(boolean running) { this.entityData.set(IS_RUNNING, running); }
+
+    public float getWalkSpeed() {
+        return 1.0f;
+    }
+
+    @Override
+    public float getSpeed() {
+        return super.getSpeed() * this.getWalkSpeed();
+    }
 
     /**
      * TODO Edit this method so it drops LandEggItem. These item eggs are used for insects and such.
@@ -820,6 +843,7 @@ public abstract class AnimaliaLandBase extends Animal implements IActivityTime, 
     public @Nullable SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, MobSpawnType reason, @Nullable SpawnGroupData spawnData, @Nullable CompoundTag dataTag) {
         this.setVarColor(1);
         this.setGender(this.random.nextInt(2));
+        this.setBold(this.random.nextFloat() < this.boldChance());
         this.setVarSizeMultiplier(this.genVarSizeMultiplier());
         return super.finalizeSpawn(level, difficulty, reason, spawnData, dataTag);
     }
@@ -895,7 +919,7 @@ public abstract class AnimaliaLandBase extends Animal implements IActivityTime, 
             this.speedMult = speedMult;
             this.fleeLength = fleeLength;
             this.proximityRange = proximityRange;
-            this.threatPredicate = threatPredicate.and(EntitySelector.NO_SPECTATORS);
+            this.threatPredicate = threatPredicate.and(EntitySelector.NO_SPECTATORS).and(entity -> !(entity instanceof Player) || !mob.isBold());
             this.targetingConditions = TargetingConditions.forNonCombat().range(proximityRange).selector(this.threatPredicate);
             this.setFlags(EnumSet.of(Goal.Flag.MOVE));
         }

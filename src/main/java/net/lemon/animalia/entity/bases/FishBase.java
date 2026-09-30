@@ -124,6 +124,7 @@ public abstract class FishBase extends AnimaliaBreedableWater implements Bucketa
         compoundTag.putFloat("BucketVarSize", this.getVarSizeMultiplier());
         compoundTag.putInt("Age", this.eatAge());
         compoundTag.putInt("BucketGender", this.getGender());
+        compoundTag.putBoolean("BucketBold", this.isBold());
         compoundTag.putInt("BucketVarColor", this.getVarColor());
         compoundTag.putBoolean("BucketBaby", this.isBaby());
     }
@@ -138,6 +139,9 @@ public abstract class FishBase extends AnimaliaBreedableWater implements Bucketa
             }
             if(pTag.contains("BucketGender")) {
                 this.setGender(pTag.getInt("BucketGender"));
+            }
+            if(pTag.contains("BucketBold")) {
+                this.setBold(pTag.getBoolean("BucketBold"));
             }
             if(pTag.contains("BucketVarColor")){
                 this.setVarColor(pTag.getInt("BucketVarColor"));
@@ -324,7 +328,7 @@ public abstract class FishBase extends AnimaliaBreedableWater implements Bucketa
 
     public boolean isThreat(LivingEntity entity) {
         if (entity instanceof Player player) {
-            return !player.isCreative() && !player.isSpectator();
+            return !this.isBold() && !player.isCreative() && !player.isSpectator();
         }
         return entity instanceof Monster;
     }

@@ -1,5 +1,6 @@
 package net.lemon.animalia.entity.ai;
 
+import net.lemon.animalia.entity.bases.helpers.IBold;
 import net.lemon.animalia.entity.bases.helpers.ICanThreat;
 import net.minecraft.world.entity.EntitySelector;
 import net.minecraft.world.entity.LivingEntity;
@@ -56,7 +57,7 @@ public class ThreatGoal extends Goal {
         this.maxThreatTicks = maxThreatTicks;
         this.exitTicks = exitTicks;
         this.outcome = outcome;
-        this.threatPredicate = threatPredicate.and(EntitySelector.NO_SPECTATORS);
+        this.threatPredicate = threatPredicate.and(EntitySelector.NO_SPECTATORS).and(entity -> !(entity instanceof Player) || !((IBold) mob).isBold());
         this.targetingConditions = TargetingConditions.forNonCombat().range(threatRange).selector(this.threatPredicate);
         this.setFlags(EnumSet.of(Goal.Flag.MOVE, Goal.Flag.LOOK));
     }

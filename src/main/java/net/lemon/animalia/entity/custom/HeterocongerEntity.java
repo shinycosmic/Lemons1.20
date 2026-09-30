@@ -200,23 +200,6 @@ public class HeterocongerEntity extends FishBase implements GeoEntity, Scannable
     }
 
     @Override
-    public boolean isPushable() {
-        return !this.isHiding();
-    }
-
-    @Override
-    protected void doPush(Entity p_20971_) {
-        if(!this.isHiding()) {
-            super.doPush(p_20971_);
-        }
-    }
-
-    @Override
-    public boolean isPushedByFluid() {
-        return !this.isHiding();
-    }
-
-    @Override
     public int getIdleCount() {
         return 3;
     }

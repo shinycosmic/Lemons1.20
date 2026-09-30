@@ -45,7 +45,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Objects;
 import java.util.UUID;
 
-public abstract class AnimaliaBreedableWater extends WaterAnimal implements IActivityTime, IFoodEater, IIdles, IGrazer, IDimorphism, ISpawnTime {
+public abstract class AnimaliaBreedableWater extends WaterAnimal implements IActivityTime, IFoodEater, IIdles, IGrazer, IDimorphism, ISpawnTime, IBold {
     private static final EntityDataAccessor<Integer> AGE = SynchedEntityData.defineId(AnimaliaBreedableWater.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Integer> GENDER = SynchedEntityData.defineId(AnimaliaBreedableWater.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Integer> VAR_COLOR = SynchedEntityData.defineId(AnimaliaBreedableWater.class, EntityDataSerializers.INT);
@@ -70,6 +70,7 @@ public abstract class AnimaliaBreedableWater extends WaterAnimal implements IAct
     private int inLove;
     private int idleDisplayTicks;
     private int twitchIdleTicks;
+    private boolean bold;
 
     //Constants for hiding logic
     public static final int PHASE_NONE = 0;
@@ -270,6 +271,12 @@ public abstract class AnimaliaBreedableWater extends WaterAnimal implements IAct
     @Override
     public void setGender(int i) {this.entityData.set(GENDER, i);}
 
+    @Override
+    public boolean isBold() {return this.bold;}
+
+    @Override
+    public void setBold(boolean bold) {this.bold = bold;}
+
     public int getEatLength() { return 20; }
 
     @Override
@@ -373,6 +380,30 @@ public abstract class AnimaliaBreedableWater extends WaterAnimal implements IAct
         return this.canHide() && !this.isHiding() && this.hideCooldown <= 0;
     }
 
+    @Override
+    public boolean isPushable() {
+        return !this.isHiding();
+    }
+
+    @Override
+    protected void doPush(Entity entity) {
+        if(!this.isHiding()) {
+            super.doPush(entity);
+        }
+    }
+
+    @Override
+    public boolean isPushedByFluid() {
+        return !this.isHiding();
+    }
+
+    @Override
+    public void knockback(double strength, double x, double z) {
+        if (!this.isHiding()) {
+            super.knockback(strength, x, z);
+        }
+    }
+
     public float getSwimSpeed() {
         if(this.isHiding()){
             return 0f;
@@ -444,6 +475,7 @@ public abstract class AnimaliaBreedableWater extends WaterAnimal implements IAct
         pCompound.putFloat("VarSize", this.getVarSizeMultiplier());
         pCompound.putInt("Age", this.eatAge());
         pCompound.putInt("Gender", this.getGender());
+        pCompound.putBoolean("Bold", this.isBold());
         pCompound.putInt("VarColor", this.getVarColor());
         pCompound.putInt("InLove", this.inLove);
 
@@ -489,6 +521,11 @@ public abstract class AnimaliaBreedableWater extends WaterAnimal implements IAct
             this.setVarSizeMultiplier(this.genVarSizeMultiplier());
         } else {
             this.setVarSizeMultiplier(pCompound.getFloat("VarSize")); }
+        if (!pCompound.contains("Bold")) {
+            this.setBold(this.random.nextFloat() < this.boldChance());
+        } else {
+            this.setBold(pCompound.getBoolean("Bold"));
+        }
         super.readAdditionalSaveData(pCompound);
     }
 
@@ -733,6 +770,7 @@ public abstract class AnimaliaBreedableWater extends WaterAnimal implements IAct
             baby.copyPosition(this);
             baby.setVarSizeMultiplier(this.genVarSizeMultiplier());
             baby.setGender(this.random.nextInt(2));
+            baby.setBold(this.random.nextFloat() < baby.boldChance());
             level.addFreshEntity(baby);
         }
     }
@@ -809,6 +847,7 @@ public abstract class AnimaliaBreedableWater extends WaterAnimal implements IAct
     public @Nullable SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, MobSpawnType reason, @Nullable SpawnGroupData spawnData, @Nullable CompoundTag dataTag) {
         if(reason != MobSpawnType.BUCKET || dataTag == null || !dataTag.contains("BucketVarSize")) {
             this.setGender(this.random.nextInt(2));
+            this.setBold(this.random.nextFloat() < this.boldChance());
         }
         if((reason == MobSpawnType.NATURAL || reason == MobSpawnType.CHUNK_GENERATION) && this.random.nextFloat() < 0.05f) {
             this.setBaby(true);

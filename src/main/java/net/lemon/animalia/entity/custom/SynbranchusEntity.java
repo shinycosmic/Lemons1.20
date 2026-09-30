@@ -254,6 +254,7 @@ public class SynbranchusEntity extends BottomWalkerSwimmerBase implements GeoEnt
             if(dataTag.contains("BucketVarSize")) this.setVarSizeMultiplier(dataTag.getFloat("BucketVarSize"));
             if(dataTag.contains("Age")) this.setEatAge(dataTag.getInt("Age"));
             if(dataTag.contains("BucketGender")) this.setGender(dataTag.getInt("BucketGender"));
+            if(dataTag.contains("BucketBold")) this.setBold(dataTag.getBoolean("BucketBold"));
             if(dataTag.contains("BucketVarColor")) this.setVarColor(dataTag.getInt("BucketVarColor"));
         }
         return super.finalizeSpawn(level, difficulty, reason, spawnData, dataTag);
