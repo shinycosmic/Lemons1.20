@@ -108,6 +108,7 @@ public class ModEntities {
     public static final RegistryObject<EntityType<CrossarchusEntity>> CROSSARCHUS_PLATYCEPHALUS = registerEntityType("crossarchus_platycephalus", CrossarchusEntity::new, ModMobCategories.ANIMALIA_LAND, 0.9f, 0.9f, CrossarchusEntity::setAttributes, 0x1f1e1d, 0x918976);
     public static final RegistryObject<EntityType<MuntiacusEntity>> MUNTIACUS_MUNTJAK = registerEntityType("muntiacus_muntjak", MuntiacusEntity::new, ModMobCategories.ANIMALIA_LAND, 0.9f, 0.9f, MuntiacusEntity::setAttributes, 0x843919, 0x561504);
     public static final RegistryObject<EntityType<MoschusEntity>> MOSCHUS_MOSCHIFERUS = registerEntityType("moschus_moschiferus", MoschusEntity::new, ModMobCategories.ANIMALIA_LAND, 0.9f, 0.9f, MoschusEntity::setAttributes, 0x857764, 0xd6c7ae);
+    public static final RegistryObject<EntityType<ElaphodusEntity>> ELAPHODUS_CEPHALOPHUS = registerEntityType("elaphodus_cephalophus", ElaphodusEntity::new, ModMobCategories.ANIMALIA_LAND, 0.9f, 0.9f, ElaphodusEntity::setAttributes, 0x413634, 0x4c322c);
 
 
 

@@ -41,15 +41,15 @@ import software.bernie.geckolib.core.animation.*;
 import software.bernie.geckolib.core.animation.AnimationState;
 import software.bernie.geckolib.core.object.PlayState;
 
-public class MuntiacusEntity extends AnimaliaLandBase implements GeoEntity, Scannable, ICanThreat  {
+public class ElaphodusEntity extends AnimaliaLandBase implements GeoEntity, Scannable, ICanThreat  {
     private final AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
-    private static final EntityDataAccessor<Integer> THREAT_PHASE = SynchedEntityData.defineId(MuntiacusEntity.class, EntityDataSerializers.INT);
+    private static final EntityDataAccessor<Integer> THREAT_PHASE = SynchedEntityData.defineId(ElaphodusEntity.class, EntityDataSerializers.INT);
     private LandPanicGoal landPanic;
     private boolean wasGrazing;
     private int barkCooldown;
     private int currThreatPose = 0;
 
-    public MuntiacusEntity(EntityType<? extends Animal> entityType, Level level) {
+    public ElaphodusEntity(EntityType<? extends Animal> entityType, Level level) {
         super(entityType, level);
     }
 
@@ -62,7 +62,7 @@ public class MuntiacusEntity extends AnimaliaLandBase implements GeoEntity, Scan
     public static AttributeSupplier setAttributes() {
         return Mob.createMobAttributes()
                 .add(Attributes.MAX_HEALTH, 4D)
-                .add(Attributes.MOVEMENT_SPEED, 0.1f)
+                .add(Attributes.MOVEMENT_SPEED, 0.13f)
                 .build();
     }
 
@@ -72,27 +72,27 @@ public class MuntiacusEntity extends AnimaliaLandBase implements GeoEntity, Scan
     }
 
     public static void registerHolonet(){
-        HolonetEntities.register(ModEntities.MUNTIACUS_MUNTJAK, AppName.FIELD, "Ruminantia");
+        HolonetEntities.register(ModEntities.ELAPHODUS_CEPHALOPHUS, AppName.FIELD, "Ruminantia");
 
     }
 
     @Override
     public float genVarSizeMultiplier() {
-//        if (this.getType() == ModEntities.MUNTIACUS_MUNTJAK.get()) {
+//        if (this.getType() == ModEntities.ELAPHODUS_CEPHALOPHUS.get()) {
 //            return AnimaliaFunctionUtil.getScaleForSize(22, 35);
 //        }
-        int desiredCm = this.getGender() == 0 ? 100 : 135;
-        return AnimaliaFunctionUtil.getScaleForSize(28, desiredCm);
+        int desiredCm = this.getGender() == 0 ? 120 : 150;
+        return AnimaliaFunctionUtil.getScaleForSize(22, this.genVarSize(110, 160, desiredCm));
     }
 
     @Override
     public Item getBreedingItem() {
-        return Items.WHEAT_SEEDS;
+        return Items.APPLE;
     }
 
     @Override
     public TagKey<Item> getFoodTag() {
-        return ItemTags.LEAVES;
+        return ModTags.Items.FRUITS_SEEDS;
     }
 
     @Override
@@ -107,7 +107,7 @@ public class MuntiacusEntity extends AnimaliaLandBase implements GeoEntity, Scan
 
     @Override
     public Component getTrivia() {
-        return Component.translatable("trivia.animalia.muntiacus_muntjak");
+        return Component.translatable("trivia.animalia.elaphodus_cephalophus");
     }
 
     @Override
@@ -160,11 +160,6 @@ public class MuntiacusEntity extends AnimaliaLandBase implements GeoEntity, Scan
                 animationState.getController().setAnimation(RawAnimation.begin().then("toSleep", Animation.LoopType.HOLD_ON_LAST_FRAME));
                 return PlayState.CONTINUE;
             case SLEEP_PHASE_SLEEPING:
-                int sleepIdle = this.getCurrentSleepIdle();
-                if (sleepIdle >= 0 && !this.isBaby()) {
-                    animationState.getController().setAnimation(RawAnimation.begin().then("sleepIdle" + sleepIdle, Animation.LoopType.LOOP));
-                    return PlayState.CONTINUE;
-                }
                 animationState.getController().setAnimation(RawAnimation.begin().then("sleeping", Animation.LoopType.LOOP));
                 return PlayState.CONTINUE;
             case SLEEP_PHASE_EXITING:
@@ -179,7 +174,7 @@ public class MuntiacusEntity extends AnimaliaLandBase implements GeoEntity, Scan
             }
             if (this.getCurrTwitchIdle() == 4) {
                 animationState.getController().transitionLength(10);
-                animationState.getController().setAnimation(RawAnimation.begin().then("idle4", Animation.LoopType.LOOP));
+                animationState.getController().setAnimation(RawAnimation.begin().then("idle3", Animation.LoopType.LOOP));
                 currThreatPose = 1;
             } else if (currThreatPose == 1) {
                 animationState.getController().transitionLength(10);
@@ -189,10 +184,6 @@ public class MuntiacusEntity extends AnimaliaLandBase implements GeoEntity, Scan
                     .thenLoop("threat"));
                 currThreatPose = 0;
             }
-            return PlayState.CONTINUE;
-        }
-        if (this.getCurrRegIdle() >= 0) {
-            animationState.getController().setAnimation(RawAnimation.begin().then("idle3", Animation.LoopType.LOOP));
             return PlayState.CONTINUE;
         }
         if (this.isRunning()) {
@@ -288,16 +279,15 @@ public class MuntiacusEntity extends AnimaliaLandBase implements GeoEntity, Scan
      * 0- munch
      * 1- slight down
      * 2- more down
-     * 3- tail wag
-     * 4- threat second phase
+     * 3- threat second pose
      */
 
     @Override
-    public int getIdleCount() {return 5;}
+    public int getIdleCount() {return 4;}
 
     @Override
     public IdleType getIdleType(int displayId) {
-        return displayId == 3 ? IdleType.MOVEMENT_NEGATIVE : IdleType.TWITCH;
+        return IdleType.TWITCH;
     }
 
     @Override
@@ -305,7 +295,7 @@ public class MuntiacusEntity extends AnimaliaLandBase implements GeoEntity, Scan
         return switch (displayId) {
             case 0 -> 20 + this.random.nextInt(31);
             case 1, 2 -> 40 + this.random.nextInt(31);
-            case 4 -> 60 + this.random.nextInt(61);
+            case 3 -> 60 + this.random.nextInt(61);
             default -> 10 + this.random.nextInt(21);
         };
     }
@@ -320,16 +310,13 @@ public class MuntiacusEntity extends AnimaliaLandBase implements GeoEntity, Scan
 
     @Override
     public int pickIdleOfType(PathfinderMob mob, IdleType type) {
-        if (type == IdleType.MOVEMENT_NEGATIVE) {
-            return this.isThreatening() ? -1 : 3;
-        }
         if (type != IdleType.TWITCH || this.isBaby()) {
             return -1;
         }
         if (this.isThreatening()) {
-            return 4;
+            return 3;
         }
-        return mob.getRandom().nextInt(4);
+        return mob.getRandom().nextInt(3);
     }
 
     @Override
@@ -357,7 +344,7 @@ public class MuntiacusEntity extends AnimaliaLandBase implements GeoEntity, Scan
             if (this.barkCooldown > 0) {
                 this.barkCooldown--;
             } else if (this.getThreatPhase() == THREAT_PHASE_DISPLAY && this.getNavigation().isDone()
-                    && this.level().getNearestPlayer(this.getX(), this.getY(), this.getZ(), 4.0D, true) != null) {
+                    && this.level().getNearestPlayer(this.getX(), this.getY(), this.getZ(), 6.0D, true) != null) {
                 this.setCurrTwitchIdle(5);
                 this.setTwitchTicks(15);
                 this.playSound(AnimaliaSound.MUNTIACUS_MUNTJAK_BARK.get());
@@ -375,12 +362,5 @@ public class MuntiacusEntity extends AnimaliaLandBase implements GeoEntity, Scan
         }
         return result;
     }
-
-
-    @Override
-    public int getSleepIdleCount() {return 1;}
-
-    @Override
-    public int getSleepIdleLength(int sleepIdleId) {return 60 + this.random.nextInt(61);}
 
 }
