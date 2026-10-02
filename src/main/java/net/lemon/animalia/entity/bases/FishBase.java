@@ -5,6 +5,7 @@ import net.lemon.animalia.entity.ai.utils.SchoolDepthBias;
 import net.lemon.animalia.entity.ai.utils.SchoolSignal;
 import net.lemon.animalia.registry.ModEntities;
 import net.lemon.animalia.registry.ModItems;
+import net.lemon.animalia.registry.ModTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -330,7 +331,7 @@ public abstract class FishBase extends AnimaliaBreedableWater implements Bucketa
         if (entity instanceof Player player) {
             return !this.isBold() && !player.isCreative() && !player.isSpectator() && !player.isCrouching();
         }
-        return entity instanceof Monster;
+        return entity.getType().is(ModTags.EntityTypes.PREDATORS);
     }
 
     public SchoolDepthBias getSchoolDepthBias() {
