@@ -92,6 +92,12 @@ public class MoschusEntity extends AnimaliaLandBase implements GeoEntity, Scanna
         return 22;
     }
 
+    @Override
+    public int getScaleforDetailGUI() {
+        int currScale = Scannable.super.getScaleforDetailGUI();
+        return (int) (currScale * 0.8f);
+    }
+
     public static void registerHolonet(){
         HolonetEntities.register(ModEntities.MOSCHUS_MOSCHIFERUS, AppName.FIELD, "Ruminantia");
 

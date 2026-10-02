@@ -114,6 +114,12 @@ public class HyemoschusEntity extends SemiaquaticBase implements GeoEntity, Scan
 
     }
 
+    @Override
+    public int getScaleforDetailGUI() {
+        int currScale = Scannable.super.getScaleforDetailGUI();
+        return (int) (currScale * 0.8f);
+    }
+
     public static void registerHolonet(){
         HolonetEntities.register(ModEntities.HYEMOSCHUS_AQUATICUS, AppName.FIELD, "Ruminantia");
     }
@@ -150,7 +156,7 @@ public class HyemoschusEntity extends SemiaquaticBase implements GeoEntity, Scan
                 animationState.getController().setAnimation(RawAnimation.begin().then("toSleep", Animation.LoopType.HOLD_ON_LAST_FRAME));
                 return PlayState.CONTINUE;
             case SLEEP_PHASE_SLEEPING:
-                animationState.getController().setAnimation(RawAnimation.begin().then("sleep", Animation.LoopType.LOOP));
+                animationState.getController().setAnimation(RawAnimation.begin().then("sleeping", Animation.LoopType.LOOP));
                 return PlayState.CONTINUE;
             case SLEEP_PHASE_EXITING:
                 animationState.getController().setAnimation(RawAnimation.begin().then("unSleep", Animation.LoopType.HOLD_ON_LAST_FRAME));

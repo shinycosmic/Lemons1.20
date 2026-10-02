@@ -77,6 +77,12 @@ public class MuntiacusEntity extends AnimaliaLandBase implements GeoEntity, Scan
     }
 
     @Override
+    public int getScaleforDetailGUI() {
+        int currScale = Scannable.super.getScaleforDetailGUI();
+        return (int) (currScale * 0.8f);
+    }
+
+    @Override
     public float genVarSizeMultiplier() {
 //        if (this.getType() == ModEntities.MUNTIACUS_MUNTJAK.get()) {
 //            return AnimaliaFunctionUtil.getScaleForSize(22, 35);

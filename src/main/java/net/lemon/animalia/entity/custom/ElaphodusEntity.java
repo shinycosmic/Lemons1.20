@@ -77,6 +77,12 @@ public class ElaphodusEntity extends AnimaliaLandBase implements GeoEntity, Scan
     }
 
     @Override
+    public int getScaleforDetailGUI() {
+        int currScale = Scannable.super.getScaleforDetailGUI();
+        return (int) (currScale * 0.8f);
+    }
+
+    @Override
     public float genVarSizeMultiplier() {
 //        if (this.getType() == ModEntities.ELAPHODUS_CEPHALOPHUS.get()) {
 //            return AnimaliaFunctionUtil.getScaleForSize(22, 35);
