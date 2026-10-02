@@ -178,7 +178,7 @@ public class ElaphodusEntity extends AnimaliaLandBase implements GeoEntity, Scan
             if (current != null && current.animation().name().equals("toThreat")) {
                 animationState.getController().transitionLength(0);
             }
-            if (this.getCurrTwitchIdle() == 4) {
+            if (this.getCurrTwitchIdle() == 3) {
                 animationState.getController().transitionLength(10);
                 animationState.getController().setAnimation(RawAnimation.begin().then("idle3", Animation.LoopType.LOOP));
                 currThreatPose = 1;
@@ -210,7 +210,7 @@ public class ElaphodusEntity extends AnimaliaLandBase implements GeoEntity, Scan
             state.getController().setAnimation(RawAnimation.begin().then("bark", Animation.LoopType.PLAY_ONCE));
             return PlayState.CONTINUE;
         }
-        if (twitch >= 0 && twitch != 4 && !this.isBaby() && !this.isThreatening()) {
+        if (twitch >= 0 && twitch != 3 && !this.isBaby() && !this.isThreatening()) {
             state.getController().transitionLength(10);
             state.getController().setAnimation(RawAnimation.begin().then("idle" + twitch, Animation.LoopType.LOOP));
             return PlayState.CONTINUE;
