@@ -92,7 +92,7 @@ public class ModEntities {
 
     public static final RegistryObject<EntityType<PangasianodonEntity>> PANGASIANODON_GIGAS = registerEntityType("pangasianodon_gigas", PangasianodonEntity::new, ModMobCategories.ANIMALIA_FISH, 0.9f, 0.9f, PangasianodonEntity::setAttributes, 0x384643, 0xb4ccc0, true);
     public static final RegistryObject<EntityType<HydrocynusEntity>> HYDROCYNUS_GOLIATH = registerEntityType("hydrocynus_goliath", HydrocynusEntity::new, ModMobCategories.ANIMALIA_FISH, 0.9f, 0.9f, HydrocynusEntity::setAttributes, 0xb7b075, 0xc83226, true);
-    public static final RegistryObject<EntityType<SpinnerSharkEntity>> CARCHARHINUS_BREVIPINNA = registerEntityType("pangasianodon_gigas", SpinnerSharkEntity::new, ModMobCategories.ANIMALIA_FISH, 0.9f, 0.9f, SpinnerSharkEntity::setAttributes, 0x384643, 0xb4ccc0, true);
+    public static final RegistryObject<EntityType<SpinnerSharkEntity>> CARCHARHINUS_BREVIPINNA = registerEntityType("carcharhinus_brevipinna", SpinnerSharkEntity::new, ModMobCategories.ANIMALIA_FISH, 0.9f, 0.9f, SpinnerSharkEntity::setAttributes, 0x384643, 0xb4ccc0, true);
 
     //Non Fish
     public static final RegistryObject<EntityType<CrayfishEntity>> PROCAMBARUS_CLARKII = registerEntityType("procambarus_clarkii", CrayfishEntity::new, ModMobCategories.ANIMALIA_INVERTEBRATE, 0.5f, 0.3f, CrayfishEntity::setAttributes, 0x932a2a, 0x202522, true);
