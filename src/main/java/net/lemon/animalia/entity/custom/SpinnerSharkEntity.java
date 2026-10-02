@@ -86,7 +86,7 @@ public class SpinnerSharkEntity extends FishBase implements Scannable, GeoEntity
 
     @Override
     public int getScaleforGUI() {
-        if (this.getType() == ModEntities.HYDROCYNUS_GOLIATH.get()) {
+        if (this.getType() == ModEntities.CARCHARHINUS_BREVIPINNA.get()) {
             return 18;
         }
         return Scannable.super.getScaleforGUI();
@@ -99,12 +99,12 @@ public class SpinnerSharkEntity extends FishBase implements Scannable, GeoEntity
     }
 
     public static void registerHolonet() {
-        HolonetEntities.register(ModEntities.HYDROCYNUS_GOLIATH, AppName.FISH, "Characiformes");
+        HolonetEntities.register(ModEntities.CARCHARHINUS_BREVIPINNA, AppName.FISH, "Carcharhiniformes");
     }
 
     @Override
     public float genVarSizeMultiplier() {
-        if (this.getType() == ModEntities.NEMATISTIUS_PECTORALIS.get()) {
+        if (this.getType() == ModEntities.CARCHARHINUS_BREVIPINNA.get()) {
             return AnimaliaFunctionUtil.getScaleForSize(44, this.genVarSize(133, 200, 180));
         }
         return 1;
