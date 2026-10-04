@@ -62,7 +62,7 @@ public class MuntiacusEntity extends AnimaliaLandBase implements GeoEntity, Scan
     public static AttributeSupplier setAttributes() {
         return Mob.createMobAttributes()
                 .add(Attributes.MAX_HEALTH, 4D)
-                .add(Attributes.MOVEMENT_SPEED, 0.1f)
+                .add(Attributes.MOVEMENT_SPEED, 0.14f)
                 .build();
     }
 
@@ -131,7 +131,7 @@ public class MuntiacusEntity extends AnimaliaLandBase implements GeoEntity, Scan
         super.registerGoals();
         this.landPanic = new LandPanicGoal(this, 3.5D, 200, 8.0D);
         this.goalSelector.addGoal(1, this.landPanic);
-        this.goalSelector.addGoal(2, new ThreatGoal(this, 16.0D, 4.0D, Integer.MAX_VALUE, 0, ThreatGoal.ThreatOutcome.FLEE, entity -> entity instanceof Player player && !player.isCreative()));
+        this.goalSelector.addGoal(2, new ThreatGoal(this, 16.0D, 2.0D, Integer.MAX_VALUE, 0, ThreatGoal.ThreatOutcome.FLEE, entity -> entity instanceof Player player && !player.isCreative()));
         this.goalSelector.addGoal(4, new FindNearestBlockGoal(this, 1.0D, 8, ModTags.Blocks.CROSS_PLANTS, FindNearestBlockGoal.TargetLocation.IN));
         this.goalSelector.addGoal(6, new GrazeGoal<>(this, 1.0D));
     }

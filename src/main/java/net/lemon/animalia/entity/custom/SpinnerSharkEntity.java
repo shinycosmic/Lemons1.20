@@ -126,17 +126,17 @@ public class SpinnerSharkEntity extends FishBase implements Scannable, GeoEntity
 
     @Override
     public Component getTrivia() {
-        return null;
+        return Component.translatable("trivia.animalia.carcharhinus_brevipinna");
     }
 
     @Override
     public Component getFamily() {
-        return null;
+        return Component.translatable("family.animalia.carcharhinidae");
     }
 
     @Override
     public Component getOrder() {
-        return null;
+        return Component.translatable("order.animalia.carcharhiniformes");
     }
 
     @Override
@@ -150,7 +150,7 @@ public class SpinnerSharkEntity extends FishBase implements Scannable, GeoEntity
     @Override
     public int getScaleforDetailGUI() {
         int currScale = Scannable.super.getScaleforDetailGUI();
-        return (int) (currScale * 0.8f);
+        return (int) (currScale * 0.7f);
     }
 
     public static void registerHolonet() {
@@ -160,7 +160,7 @@ public class SpinnerSharkEntity extends FishBase implements Scannable, GeoEntity
     @Override
     public float genVarSizeMultiplier() {
         if (this.getType() == ModEntities.CARCHARHINUS_BREVIPINNA.get()) {
-            return AnimaliaFunctionUtil.getScaleForSize(44, this.genVarSize(133, 200, 180));
+            return AnimaliaFunctionUtil.getScaleForSize(44, this.genVarSize(170, 300, 200));
         }
         return 1;
     }
@@ -181,7 +181,9 @@ public class SpinnerSharkEntity extends FishBase implements Scannable, GeoEntity
     }
 
     private <T extends GeoAnimatable> PlayState predicate(AnimationState<T> animationState) {
+        animationState.getController().transitionLength(5);
         if (this.getSpinPhase() == SPIN_PHASE_BREACH) {
+            animationState.getController().transitionLength(0);
             animationState.getController().setAnimation(RawAnimation.begin().then("breach", Animation.LoopType.PLAY_ONCE));
             return PlayState.CONTINUE;
         }
@@ -369,7 +371,7 @@ public class SpinnerSharkEntity extends FishBase implements Scannable, GeoEntity
             this.shark.setYRot(yaw);
             this.shark.yBodyRot = yaw;
             this.shark.setYHeadRot(yaw);
-            this.spinTicks = 20 + this.shark.getRandom().nextInt(20);
+            this.spinTicks = 60 + this.shark.getRandom().nextInt(60);
             this.hit.clear();
             this.shark.setSpinPhase(SPIN_PHASE_SPIN);
         }

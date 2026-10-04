@@ -302,6 +302,7 @@
   "order.animalia.artiodactyla": "Artiodactyla",
   "order.animalia.nectiopoda": "Nectiopoda",
   "order.animalia.carnivora": "Carnivora",
+  "order.animalia.carcharhiniformes": "Carcharhiniformes",
 
   "family.animalia.percophidae": "Percophidae",
   "family.animalia.eleginopidae": "Eleginopidae",
@@ -342,6 +343,7 @@
   "family.animalia.xibalbanidae": "Xibalbanidae",
   "family.animalia.herpestidae": "Herpestidae",
   "family.animalia.cervidae": "Cervidae",
+  "family.animalia.carcharhinidae": "Carcharhinidae",
 
   "trivia.animalia.dissostichus_eleginoides": "The Chilean Sea Bass, also known as the Patagonian Toothfish is an icefish that lives in the southern cold oceans at depths of 45 to over 3000 meters deep.",
   "trivia.animalia.percophis_brasiliensis": "The Brazilian Flathead is considered to be the most basal member of Notothenioidei. It lives off the coast of Brazil and Argentina.",
@@ -422,7 +424,7 @@
   "trivia.animalia.ailurus_fulgens": "",
   "trivia.animalia.galictis_cuja": "",
   "trivia.animalia.galictis_vittata": "",
-  "trivia.animalia.carcharhinus_brevipinna": "",
+  "trivia.animalia.carcharhinus_brevipinna": "A smaller sized shark, this animal is known for spinning into schools of forage fish in order to feed on them. It grows to a maximum of 3m in length.",
   "trivia.animalia.proteus_anguinus": "",
 
   "debug.animalia.trivia": "If this value displays, there is a bug [trivia]",

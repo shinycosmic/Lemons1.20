@@ -73,7 +73,7 @@ public class AnimaliaRenderInit {
         EntityRenderers.register(ModEntities.CENTROPYGE_VENUSTA.get(), CentropygeRenderer::new);
         EntityRenderers.register(ModEntities.CENTROPYGE_BOYLEI.get(), CentropygeRobustRenderer::new);
         EntityRenderers.register(ModEntities.XIBALBANUS_TULUMENSIS.get(), PelagicInvertSwimmerRenderer::new);
-
+        EntityRenderers.register(ModEntities.CARCHARHINUS_BREVIPINNA.get(), CarcharhinusBrevipinnaRenderer::new);
 
 
         //Land
