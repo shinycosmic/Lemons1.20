@@ -22,6 +22,9 @@ public class ModEntityTypeTagGenerator extends EntityTypeTagsProvider {
     @Override
     protected void addTags(HolderLookup.Provider pProvider) {
         tag(ModTags.EntityTypes.FORAGE_FISH).add(ModEntities.LEPTOBRAMA_MUELLERI.get());
+        tag(ModTags.EntityTypes.FORAGE_FISH).add(EntityType.SALMON);
+        tag(ModTags.EntityTypes.FORAGE_FISH).add(EntityType.COD);
+        tag(ModTags.EntityTypes.FORAGE_FISH).add(EntityType.TROPICAL_FISH);
 
         tag(ModTags.EntityTypes.PREDATORS).add(ModEntities.CARCHARHINUS_BREVIPINNA.get());
     }
