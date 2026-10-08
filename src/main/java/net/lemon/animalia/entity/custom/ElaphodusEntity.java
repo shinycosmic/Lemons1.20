@@ -241,6 +241,11 @@ public class ElaphodusEntity extends AnimaliaLandBase implements GeoEntity, Scan
         return super.finalizeSpawn(level, difficulty, reason, spawnData, dataTag);
     }
 
+    @Override
+    public boolean isSoftActivity() {
+        return true;
+    }
+
 
     @Override
     public int getThreatPhase() {return this.entityData.get(THREAT_PHASE);}

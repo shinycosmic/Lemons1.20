@@ -17,9 +17,11 @@ public interface IActivityTime {
     }
 
     default boolean isActiveWindow(PathfinderMob mob) {
+        long time = mob.level().getDayTime() % 24000L;
+        long half = 1800L + (mob.getId() * 1664525L & 0x7FFFFFFFL) % 1200L;
         return switch (activityTime()) {
-            case NOCTURNAL -> mob.level().isNight();
-            case DIURNAL -> mob.level().isDay();
+            case NOCTURNAL -> mob.level().isNight() || this.isSoftActivity() && Math.abs(time - 6000L) >= half;
+            case DIURNAL -> mob.level().isDay() || this.isSoftActivity() && Math.abs(time - 18000L) >= half;
             default -> true;
         };
     }
@@ -33,5 +35,9 @@ public interface IActivityTime {
         }
 
         return activityCheck;
+    }
+
+    default boolean isSoftActivity() {
+        return false;
     }
 }

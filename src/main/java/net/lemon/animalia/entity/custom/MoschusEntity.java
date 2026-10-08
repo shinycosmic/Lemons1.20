@@ -242,6 +242,11 @@ public class MoschusEntity extends AnimaliaLandBase implements GeoEntity, Scanna
         return super.finalizeSpawn(level, difficulty, reason, spawnData, dataTag);
     }
 
+    @Override
+    public boolean isSoftActivity() {
+        return true;
+    }
+
 
     /**
      * Idles ref:

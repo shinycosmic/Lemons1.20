@@ -128,7 +128,7 @@ public class FindNearestBlockGoal extends Goal {
 
     protected boolean passCheck() {
         if (this.activityTime != null) {
-            return !this.activityTime.isActiveTime(this.mob);
+            return !this.activityTime.isActiveWindow(this.mob);
         }
         return this.mob.getRandom().nextInt(this.chance) == 0;
     }

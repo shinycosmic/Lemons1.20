@@ -234,6 +234,10 @@ public class HyemoschusEntity extends SemiaquaticBase implements GeoEntity, Scan
         return super.finalizeSpawn(level, difficulty, reason, spawnData, dataTag);
     }
 
+    @Override
+    public boolean isSoftActivity() {
+        return true;
+    }
 
 
     @Override
