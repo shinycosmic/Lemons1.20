@@ -2,6 +2,7 @@ package net.lemon.animalia.registry;
 
 import net.lemon.animalia.Animalia;
 import net.lemon.animalia.entity.custom.*;
+import net.lemon.animalia.entity.custom.ProteusEntity;
 import net.lemon.animalia.entity.projectiles.WaterSpitProjectile;
 import net.lemon.animalia.item.AnimaliaBucketItem;
 import net.lemon.animalia.item.AnimaliaSpawnEggItem;
@@ -100,6 +101,7 @@ public class ModEntities {
     public static final RegistryObject<EntityType<CrayfishEntity>> PROCAMBARUS_VIRGINALIS = registerEntityType("procambarus_virginalis", CrayfishEntity::new, ModMobCategories.ANIMALIA_INVERTEBRATE, 0.5f, 0.3f, CrayfishEntity::setAttributes, 0x332b20, 0x8a7346, true);
     public static final RegistryObject<EntityType<CrayfishEntity>> PROCAMBARUS_LUCIFUGUS = registerEntityType("procambarus_lucifugus", CrayfishEntity::new, ModMobCategories.ANIMALIA_INVERTEBRATE, 0.5f, 0.3f, CrayfishEntity::setAttributes, 0xab9782, 0xbbb8c9, true);
     public static final RegistryObject<EntityType<PelagicInvertSwimmerEntity>> XIBALBANUS_TULUMENSIS = registerEntityType("xibalbanus_tulumensis", PelagicInvertSwimmerEntity::new, ModMobCategories.ANIMALIA_INVERTEBRATE, 0.5f, 0.3f, PelagicInvertSwimmerEntity::setAttributes, 0xe4e5de, 0x967869, true);
+    public static final RegistryObject<EntityType<ProteusEntity>> PROTEUS_ANGUINUS = registerEntityType("proteus_anguinus", ProteusEntity::new, ModMobCategories.ANIMALIA_FISH, 0.5f, 0.3f, ProteusEntity::setAttributes, 0xe0c3be, 0xd7565f, true);
 
 
     //Actual Land animals

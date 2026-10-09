@@ -37,6 +37,7 @@ public class HolonetSetup {
         MuntiacusEntity.registerHolonet();
         MoschusEntity.registerHolonet();
         ElaphodusEntity.registerHolonet();
+        ProteusEntity.registerHolonet();
 
     }
 }

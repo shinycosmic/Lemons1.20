@@ -112,7 +112,6 @@ public abstract class FishBase extends AnimaliaBreedableWater implements Bucketa
         return 6;
     }
 
-    //now we should finally have signal if there is no bucket instead of just defaulting to salmon buckets
     @Override
     public ItemStack getBucketItemStack() {
         String name = EntityType.getKey(this.getType()).getPath();

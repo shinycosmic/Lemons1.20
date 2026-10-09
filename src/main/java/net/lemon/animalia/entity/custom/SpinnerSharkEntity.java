@@ -3,6 +3,7 @@ package net.lemon.animalia.entity.custom;
 import net.lemon.animalia.entity.ai.EatDroppedItemsGoal;
 import net.lemon.animalia.entity.bases.FishBase;
 import net.lemon.animalia.entity.bases.helpers.ActivityTime;
+import net.lemon.animalia.entity.bases.helpers.AnimaliaEggTypes;
 import net.lemon.animalia.registry.ModEntities;
 import net.lemon.animalia.registry.ModItems;
 import net.lemon.animalia.registry.ModTags;
@@ -87,6 +88,11 @@ public class SpinnerSharkEntity extends FishBase implements Scannable, GeoEntity
 
     @Override
     public boolean bucketable() { return this.isBaby(); }
+
+    @Override
+    public AnimaliaEggTypes getEggType() {
+        return AnimaliaEggTypes.LIVE_BIRTH;
+    }
 
     @Override
     public int getEatLength() { return 20; }
@@ -369,8 +375,11 @@ public class SpinnerSharkEntity extends FishBase implements Scannable, GeoEntity
             this.spinDir = this.center.subtract(this.shark.position()).normalize();
             float yaw = (float) (Mth.atan2(this.spinDir.z, this.spinDir.x) * Mth.RAD_TO_DEG) - 90.0F;
             this.shark.setYRot(yaw);
+            this.shark.yRotO = yaw;
             this.shark.yBodyRot = yaw;
+            this.shark.yBodyRotO = yaw;
             this.shark.setYHeadRot(yaw);
+            this.shark.yHeadRot = yaw;
             this.spinTicks = 60 + this.shark.getRandom().nextInt(60);
             this.hit.clear();
             this.shark.setSpinPhase(SPIN_PHASE_SPIN);
