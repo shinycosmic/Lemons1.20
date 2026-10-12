@@ -33,6 +33,8 @@ import software.bernie.geckolib.core.object.PlayState;
 
 public class ProteusEntity extends BottomWalkerSwimmerBase implements GeoEntity, Scannable {
     private final AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
+    private int restPose;
+    private int restTicks;
 
     public ProteusEntity(EntityType<? extends FishBase> entityType, Level level) {
         super(entityType, level);
@@ -132,9 +134,18 @@ public class ProteusEntity extends BottomWalkerSwimmerBase implements GeoEntity,
 
     private <T extends GeoAnimatable> PlayState predicate(AnimationState<T> animationState) {
         if(!this.isActuallyMoving()) {
-            if (this.isWalking()) {
-
+            AnimationController<T> controller = animationState.getController();
+            if (this.isActuallyMoving() || !this.onGround()) {
+                controller.setAnimation(RawAnimation.begin().then(this.isActuallyMoving() ? "walk" : "idle0", Animation.LoopType.LOOP));
+                return PlayState.CONTINUE;
             }
+            switch (this.restPose) {
+                case 1 -> controller.setAnimation(RawAnimation.begin().then("idle1", Animation.LoopType.LOOP));
+                case 2 -> controller.setAnimation(RawAnimation.begin().then("idle2", Animation.LoopType.HOLD_ON_LAST_FRAME));
+                case 3 -> controller.setAnimation(RawAnimation.begin().then("idle3", Animation.LoopType.HOLD_ON_LAST_FRAME));
+                default -> controller.setAnimation(RawAnimation.begin().then("idle0", Animation.LoopType.LOOP));
+            }
+            return PlayState.CONTINUE;
         }
         animationState.getController().setAnimation(RawAnimation.begin().then("walk", Animation.LoopType.LOOP));
         return PlayState.CONTINUE;
@@ -154,7 +165,23 @@ public class ProteusEntity extends BottomWalkerSwimmerBase implements GeoEntity,
         return super.finalizeSpawn(level, difficulty, reason, spawnData, dataTag);
     }
 
-    /**
-     * 4 idle poses, all can be randomly switched to, none are true idles. only available when it is static on ground.
-     */
+    @Override
+    public void aiStep() {
+        super.aiStep();
+        if (!this.level().isClientSide) {
+            return;
+        }
+        if (this.isActuallyMoving() || !this.onGround()) {
+            this.restTicks = 0;
+            return;
+        }
+        if (--this.restTicks <= 0) {
+            this.restPose = (this.restPose + 1 + this.random.nextInt(3)) % 4;
+            this.restTicks = switch (this.restPose) {
+                case 2 -> 85 + this.random.nextInt(100);
+                case 3 -> 15 + this.random.nextInt(100);
+                default -> 200 + this.random.nextInt(200);
+            };
+        }
+    }
 }
