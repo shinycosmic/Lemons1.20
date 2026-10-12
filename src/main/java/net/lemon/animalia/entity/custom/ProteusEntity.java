@@ -178,7 +178,7 @@ public class ProteusEntity extends BottomWalkerSwimmerBase implements GeoEntity,
         if (--this.restTicks <= 0) {
             this.restPose = (this.restPose + 1 + this.random.nextInt(3)) % 4;
             this.restTicks = switch (this.restPose) {
-                case 2 -> 85 + this.random.nextInt(100);
+                case 2 -> 85 + this.random.nextInt(150);
                 case 3 -> 15 + this.random.nextInt(100);
                 default -> 200 + this.random.nextInt(200);
             };
