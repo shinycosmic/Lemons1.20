@@ -98,12 +98,12 @@ public class GalictisEntity extends AnimaliaLandBase implements GeoEntity, Scann
 
     @Override
     public Item getBreedingItem() {
-        return Items.APPLE;
+        return Items.CHICKEN;
     }
 
     @Override
     public TagKey<Item> getFoodTag() {
-        return ModTags.Items.FRUITS_SEEDS;
+        return ModTags.Items.MEATS;
     }
 
     @Override
