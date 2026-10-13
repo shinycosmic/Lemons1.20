@@ -45,6 +45,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         //Misc
         simpleItem(ModItems.FISH_EGG);
         simpleItem(ModItems.MOUND_FISH_EGG);
+        simpleItem(ModItems.AMPHIBIAN_EGG);
         simpleItem(ModItems.BETTA_FISH_EGG);
         simpleItem(ModItems.FISH_FOOD);
         simpleItem(ModItems.HOLONET);

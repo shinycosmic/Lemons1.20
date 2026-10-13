@@ -11,7 +11,7 @@ import software.bernie.geckolib.cache.object.BakedGeoModel;
 import software.bernie.geckolib.renderer.GeoEntityRenderer;
 
 public class ProteusAnguinusRenderer extends GeoEntityRenderer<ProteusEntity> {
-    private float babyMult = 0.1f;
+    private float babyMult = 0.06f;
 
     public ProteusAnguinusRenderer(EntityRendererProvider.Context context) {
         super(context, new ProteusAnguinusModel());

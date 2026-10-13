@@ -49,7 +49,7 @@ public class ProteusEntity extends BottomWalkerSwimmerBase implements GeoEntity,
     }
 
     public float getSwimSpeed() {
-        return  0.8f;
+        return  0.7f;
     }
 
     public int getWalkTime() {return 800 + random.nextInt(800);}
@@ -60,6 +60,11 @@ public class ProteusEntity extends BottomWalkerSwimmerBase implements GeoEntity,
     @Override
     public SpawnBand spawnBand() {
         return SpawnBand.CAVE_WATER;
+    }
+
+    @Override
+    public Item getEggItem() {
+        return ModItems.AMPHIBIAN_EGG.get();
     }
 
     @Override
@@ -117,7 +122,7 @@ public class ProteusEntity extends BottomWalkerSwimmerBase implements GeoEntity,
     @Override
     public float genVarSizeMultiplier() {
         if (this.getType() == ModEntities.PROTEUS_ANGUINUS.get()) {
-            return AnimaliaFunctionUtil.getScaleForSize(20, 28);
+            return AnimaliaFunctionUtil.getScaleForSize(41, 34);
         }
         return 1;
     }
@@ -135,7 +140,7 @@ public class ProteusEntity extends BottomWalkerSwimmerBase implements GeoEntity,
     private <T extends GeoAnimatable> PlayState predicate(AnimationState<T> animationState) {
         if(!this.isActuallyMoving()) {
             AnimationController<T> controller = animationState.getController();
-            if (!this.onGround()) {
+            if (!this.isWalking()) {
                 controller.setAnimation(RawAnimation.begin().then("idle0", Animation.LoopType.LOOP));
                 return PlayState.CONTINUE;
             }
@@ -171,7 +176,7 @@ public class ProteusEntity extends BottomWalkerSwimmerBase implements GeoEntity,
         if (!this.level().isClientSide) {
             return;
         }
-        if (this.isActuallyMoving() || !this.onGround()) {
+        if (this.isActuallyMoving() || !this.isWalking()) {
             this.restTicks = 0;
             return;
         }
