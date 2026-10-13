@@ -303,6 +303,7 @@
   "order.animalia.nectiopoda": "Nectiopoda",
   "order.animalia.carnivora": "Carnivora",
   "order.animalia.carcharhiniformes": "Carcharhiniformes",
+  "order.animalia.urodela": "Urodela",
 
   "family.animalia.percophidae": "Percophidae",
   "family.animalia.eleginopidae": "Eleginopidae",
@@ -344,6 +345,7 @@
   "family.animalia.herpestidae": "Herpestidae",
   "family.animalia.cervidae": "Cervidae",
   "family.animalia.carcharhinidae": "Carcharhinidae",
+  "family.animalia.proteidae": "Proteidae",
 
   "trivia.animalia.dissostichus_eleginoides": "The Chilean Sea Bass, also known as the Patagonian Toothfish is an icefish that lives in the southern cold oceans at depths of 45 to over 3000 meters deep.",
   "trivia.animalia.percophis_brasiliensis": "The Brazilian Flathead is considered to be the most basal member of Notothenioidei. It lives off the coast of Brazil and Argentina.",

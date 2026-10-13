@@ -82,7 +82,7 @@ public class MoschusEntity extends AnimaliaLandBase implements GeoEntity, Scanna
 
     public static AttributeSupplier setAttributes() {
         return Mob.createMobAttributes()
-                .add(Attributes.MAX_HEALTH, 4D)
+                .add(Attributes.MAX_HEALTH, 8D)
                 .add(Attributes.MOVEMENT_SPEED, 0.1f)
                 .build();
     }

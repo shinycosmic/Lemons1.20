@@ -61,7 +61,7 @@ public class ElaphodusEntity extends AnimaliaLandBase implements GeoEntity, Scan
 
     public static AttributeSupplier setAttributes() {
         return Mob.createMobAttributes()
-                .add(Attributes.MAX_HEALTH, 4D)
+                .add(Attributes.MAX_HEALTH, 8D)
                 .add(Attributes.MOVEMENT_SPEED, 0.13f)
                 .build();
     }
