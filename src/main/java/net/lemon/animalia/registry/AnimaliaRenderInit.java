@@ -84,6 +84,8 @@ public class AnimaliaRenderInit {
         EntityRenderers.register(ModEntities.MUNTIACUS_MUNTJAK.get(), MuntiacusMuntjakRenderer::new);
         EntityRenderers.register(ModEntities.MOSCHUS_MOSCHIFERUS.get(), MoschusMoschiferusRenderer::new);
         EntityRenderers.register(ModEntities.ELAPHODUS_CEPHALOPHUS.get(), ElaphodusCephalophusRenderer::new);
+        EntityRenderers.register(ModEntities.GALICTIS_CUJA.get(), GalictisRenderer::new);
+        EntityRenderers.register(ModEntities.GALICTIS_VITTATA.get(), GalictisRenderer::new);
 
 
         EntityRenderers.register(ModEntities.WATER_SPIT.get(), WaterSpitRenderer::new);

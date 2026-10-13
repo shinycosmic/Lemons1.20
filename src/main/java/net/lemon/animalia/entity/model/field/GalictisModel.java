@@ -27,7 +27,7 @@ public class GalictisModel extends AnimaliaCustomModel<GalictisEntity> {
         if(animatable.isBaby()) {
             return new ResourceLocation(Animalia.MODID, "animations/babymongoose.animation.json");
         }
-        return new ResourceLocation(Animalia.MODID, "animations/galictis_vittata.animation.json");
+        return new ResourceLocation(Animalia.MODID, "animations/galictis.animation.json");
     }
 
 }

@@ -55,7 +55,7 @@ public class GalictisEntity extends AnimaliaLandBase implements GeoEntity, Scann
     @Override
     protected void registerGoals() {
         super.registerGoals();
-        this.landPanic = new LandPanicGoal(this, 3.5D, 200, 8.0D);
+        this.landPanic = new LandPanicGoal(this, 2D, 200, 8.0D);
         this.goalSelector.addGoal(1, this.landPanic);
         this.goalSelector.addGoal(2, new ThreatGoal(this, 12.0D, 0.0D, 160 + this.random.nextInt(141), 0, ThreatGoal.ThreatOutcome.FLEE, entity -> entity instanceof Player player && !player.isCreative()));
     }
@@ -80,9 +80,9 @@ public class GalictisEntity extends AnimaliaLandBase implements GeoEntity, Scann
     @Override
     public float genVarSizeMultiplier() {
         if (this.getType() == ModEntities.GALICTIS_VITTATA.get()) {
-            return AnimaliaFunctionUtil.getScaleForSize(33, this.genVarSize(70, 60, 80));
+            return AnimaliaFunctionUtil.getScaleForSize(33, this.genVarSize(60, 90, 75));
         }
-        return AnimaliaFunctionUtil.getScaleForSize(33, this.genVarSize(50, 45, 70));
+        return AnimaliaFunctionUtil.getScaleForSize(33, this.genVarSize(45, 80, 60));
     }
 
     @Override
