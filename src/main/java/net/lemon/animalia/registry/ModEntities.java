@@ -112,8 +112,8 @@ public class ModEntities {
     public static final RegistryObject<EntityType<MuntiacusEntity>> MUNTIACUS_MUNTJAK = registerEntityType("muntiacus_muntjak", MuntiacusEntity::new, ModMobCategories.ANIMALIA_LAND, 0.9f, 0.9f, MuntiacusEntity::setAttributes, 0x843919, 0x561504);
     public static final RegistryObject<EntityType<MoschusEntity>> MOSCHUS_MOSCHIFERUS = registerEntityType("moschus_moschiferus", MoschusEntity::new, ModMobCategories.ANIMALIA_LAND, 0.9f, 0.9f, MoschusEntity::setAttributes, 0x857764, 0xd6c7ae);
     public static final RegistryObject<EntityType<ElaphodusEntity>> ELAPHODUS_CEPHALOPHUS = registerEntityType("elaphodus_cephalophus", ElaphodusEntity::new, ModMobCategories.ANIMALIA_LAND, 0.9f, 0.9f, ElaphodusEntity::setAttributes, 0x413634, 0x4c322c);
-    public static final RegistryObject<EntityType<GalictisEntity>> GALICTIS_VITTATA = registerEntityType("galictis_vittata", GalictisEntity::new, ModMobCategories.ANIMALIA_LAND, 0.9f, 0.9f, GalictisEntity::setAttributes, 0x413634, 0x4c322c);
-    public static final RegistryObject<EntityType<GalictisEntity>> GALICTIS_CUJA = registerEntityType("galictis_cuja", GalictisEntity::new, ModMobCategories.ANIMALIA_LAND, 0.9f, 0.9f, GalictisEntity::setAttributes, 0x413634, 0x4c322c);
+    public static final RegistryObject<EntityType<GalictisEntity>> GALICTIS_VITTATA = registerEntityType("galictis_vittata", GalictisEntity::new, ModMobCategories.ANIMALIA_LAND, 0.9f, 0.9f, GalictisEntity::setAttributes, 0xe0e0e0, 0x1f1e1c);
+    public static final RegistryObject<EntityType<GalictisEntity>> GALICTIS_CUJA = registerEntityType("galictis_cuja", GalictisEntity::new, ModMobCategories.ANIMALIA_LAND, 0.9f, 0.9f, GalictisEntity::setAttributes, 0xcacab6, 0x38322b);
 
 
 
