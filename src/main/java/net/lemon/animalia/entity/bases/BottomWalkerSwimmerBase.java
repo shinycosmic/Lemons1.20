@@ -211,7 +211,7 @@ public abstract class BottomWalkerSwimmerBase extends FishBase {
         if(!this.isWalking()) {
             if((!(this.moveControl instanceof SmoothSwimmingMoveControl))
         || (!(this.navigation instanceof WaterBoundPathNavigation))) {
-                this.moveControl = new SmoothSwimmingMoveControl(this, 85, 10, 0.2f, 0.1f, true);
+                this.moveControl = new SmoothSwimmingMoveControl(this, 85, 10, 0.2f, 0.1f, false);
                 this.navigation = new WaterBoundPathNavigation(this, this.level());
                 this.navigation.stop();
             }

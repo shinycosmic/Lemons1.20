@@ -26,6 +26,8 @@ public class ModItems {
     //Misc
     public static final RegistryObject<Item> FISH_EGG = ITEMS.register("fish_egg", () -> new FishEggItem(new Item.Properties()));
     public static final RegistryObject<Item> MOUND_FISH_EGG = ITEMS.register("mound_fish_egg", () -> new FishEggItem(new Item.Properties()));
+    public static final RegistryObject<Item> AMPHIBIAN_EGG = ITEMS.register("amphibian_egg", () -> new FishEggItem(new Item.Properties()));
+//    public static final RegistryObject<Item> SHARK_EGG = ITEMS.register("shark_egg", () -> new FishEggItem(new Item.Properties()));
     public static final RegistryObject<Item> BETTA_FISH_EGG = ITEMS.register("betta_fish_egg", () -> new BettaFishEggItem(new Item.Properties()));
     public static final RegistryObject<Item> HOLONET = ITEMS.register("holonet", () -> new HolonetItem(new Item.Properties().stacksTo(1)));
 
