@@ -186,6 +186,11 @@ public class GalictisEntity extends AnimaliaLandBase implements GeoEntity, Scann
 
     private <T extends GeoAnimatable> PlayState predicate(AnimationState<T> animationState) {
         AnimationController<T> controller = animationState.getController();
+        controller.transitionLength(5);
+        AnimationProcessor.QueuedAnimation current = controller.getCurrentAnimation();
+        if (current != null && (current.animation().name().equals("toRest") || current.animation().name().equals("toSleep") || current.animation().name().equals("toThreat"))) {
+            controller.transitionLength(0);
+        }
         switch (this.getSleepPhase()) {
             case SLEEP_PHASE_ENTERING:
                 controller.setAnimation(RawAnimation.begin().then("toRest", Animation.LoopType.PLAY_ONCE).thenLoop("rest"));
