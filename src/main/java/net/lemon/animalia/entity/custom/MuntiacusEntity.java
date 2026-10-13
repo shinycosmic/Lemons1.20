@@ -332,7 +332,7 @@ public class MuntiacusEntity extends AnimaliaLandBase implements GeoEntity, Scan
     @Override
     public int pickIdleOfType(PathfinderMob mob, IdleType type) {
         if (type == IdleType.MOVEMENT_NEGATIVE) {
-            return this.isThreatening() ? -1 : 3;
+            return this.isThreatening() || this.isBaby() ? -1 : 3;
         }
         if (type != IdleType.TWITCH || this.isBaby()) {
             return -1;

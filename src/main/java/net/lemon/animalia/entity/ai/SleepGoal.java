@@ -65,8 +65,10 @@ public class SleepGoal extends Goal {
         this.mob.getNavigation().stop();
         switch (this.sleeper.getSleepPhase()) {
             case ICanSleep.SLEEP_PHASE_ENTERING:
+                this.tickSleepIdle();
                 this.enteringTicks--;
                 if (this.enteringTicks <= 0) {
+                    this.sleeper.setCurrentSleepIdle(-1);
                     this.sleeper.setSleepPhase(ICanSleep.SLEEP_PHASE_SLEEPING);
                 }
                 break;

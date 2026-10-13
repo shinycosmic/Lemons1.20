@@ -12,6 +12,8 @@ public class AnimaliaSound {
     public static final DeferredRegister<SoundEvent> REGISTRY = DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, Animalia.MODID);
 
     public static final RegistryObject<SoundEvent> MUNTIACUS_MUNTJAK_BARK = registerSound("entity.muntiacus_muntjak.bark");
+    public static final RegistryObject<SoundEvent> GALICTIS_GRUMBLE = registerSound("entity.galictis.grumble");
+    public static final RegistryObject<SoundEvent> GALICTIS_BARK = registerSound("entity.galictis.bark");
 
     private static RegistryObject<SoundEvent> registerSound(String name) {
         return REGISTRY.register(name, () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(Animalia.MODID, name)));

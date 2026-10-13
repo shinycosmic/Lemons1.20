@@ -266,10 +266,9 @@ public class CrossarchusEntity extends AnimaliaLandBase implements GeoEntity, Sc
         return 100;
     }
 
-    //first use of isAttached here just means it cant play idles during climbs
     @Override
     public boolean canPlayIdle() {
-        if (this.isAsleep() || this.isGrazing() || this.isRunning() || this.isAttached() || this.isBaby()) {
+        if (this.isAsleep() || this.isGrazing() || this.isRunning() || this.isAttached() || this.isBaby() || this.isThreatening()) {
             return false;
         }
         return !this.isInWater() || this.onGround();

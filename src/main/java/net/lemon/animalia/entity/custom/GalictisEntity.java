@@ -1,8 +1,10 @@
 package net.lemon.animalia.entity.custom;
 
+import net.lemon.animalia.entity.ai.ThreatGoal;
 import net.lemon.animalia.entity.bases.AnimaliaLandBase;
 import net.lemon.animalia.entity.bases.helpers.ActivityTime;
 import net.lemon.animalia.entity.bases.helpers.ICanThreat;
+import net.lemon.animalia.registry.AnimaliaSound;
 import net.lemon.animalia.registry.ModEntities;
 import net.lemon.animalia.registry.ModTags;
 import net.lemon.animalia.util.AnimaliaFunctionUtil;
@@ -29,10 +31,8 @@ import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.core.animatable.GeoAnimatable;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.core.animatable.instance.SingletonAnimatableInstanceCache;
-import software.bernie.geckolib.core.animation.AnimatableManager;
-import software.bernie.geckolib.core.animation.Animation;
+import software.bernie.geckolib.core.animation.*;
 import software.bernie.geckolib.core.animation.AnimationState;
-import software.bernie.geckolib.core.animation.RawAnimation;
 import software.bernie.geckolib.core.object.PlayState;
 
 public class GalictisEntity extends AnimaliaLandBase implements GeoEntity, Scannable, ICanThreat {
@@ -50,6 +50,14 @@ public class GalictisEntity extends AnimaliaLandBase implements GeoEntity, Scann
                 .add(Attributes.MAX_HEALTH, 8D)
                 .add(Attributes.MOVEMENT_SPEED, 0.13f)
                 .build();
+    }
+
+    @Override
+    protected void registerGoals() {
+        super.registerGoals();
+        this.landPanic = new LandPanicGoal(this, 3.5D, 200, 8.0D);
+        this.goalSelector.addGoal(1, this.landPanic);
+        this.goalSelector.addGoal(2, new ThreatGoal(this, 12.0D, 0.0D, 160 + this.random.nextInt(141), 0, ThreatGoal.ThreatOutcome.FLEE, entity -> entity instanceof Player player && !player.isCreative()));
     }
 
     @Override
@@ -122,6 +130,11 @@ public class GalictisEntity extends AnimaliaLandBase implements GeoEntity, Scann
             this.setTwitchTicks(0);
             this.setCurrTwitchIdle(-1);
         }
+        if (this.isMovementLockedByIdle()) {
+            this.setIdleTicks(0);
+            this.setCurrRegIdle(-1);
+            this.onMovementLockingIdleEnd();
+        }
     }
 
     @Override
@@ -130,6 +143,11 @@ public class GalictisEntity extends AnimaliaLandBase implements GeoEntity, Scann
             if (this.isAsleep()) {
                 this.setSleepPhase(SLEEP_PHASE_NONE);
                 this.setCurrentSleepIdle(-1);
+            }
+            if (this.isMovementLockedByIdle()) {
+                this.setIdleTicks(0);
+                this.setCurrRegIdle(-1);
+                this.onMovementLockingIdleEnd();
             }
             this.landPanic.panicFrom(player.position());
         }
@@ -161,7 +179,64 @@ public class GalictisEntity extends AnimaliaLandBase implements GeoEntity, Scann
 
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
+        controllers.add(new AnimationController<>(this, "controller", 5, this::predicate));
+        controllers.add(new AnimationController<>(this, "idles_controller", 5, this::idlesPredicate));
+        controllers.add(new AnimationController<>(this, "eat_controller", 0, this::eatPredicate));
+    }
 
+    private <T extends GeoAnimatable> PlayState predicate(AnimationState<T> animationState) {
+        AnimationController<T> controller = animationState.getController();
+        switch (this.getSleepPhase()) {
+            case SLEEP_PHASE_ENTERING:
+                controller.setAnimation(RawAnimation.begin().then("toRest", Animation.LoopType.PLAY_ONCE).thenLoop("rest"));
+                return PlayState.CONTINUE;
+            case SLEEP_PHASE_SLEEPING:
+                controller.setAnimation(RawAnimation.begin().then("toSleep", Animation.LoopType.PLAY_ONCE).thenLoop("sleep"));
+                return PlayState.CONTINUE;
+            case SLEEP_PHASE_EXITING:
+                controller.setAnimation(RawAnimation.begin().then("unSleep", Animation.LoopType.HOLD_ON_LAST_FRAME));
+                return PlayState.CONTINUE;
+        }
+        if (!this.isBaby() && this.getThreatPhase() == THREAT_PHASE_DISPLAY) {
+            controller.setAnimation(RawAnimation.begin().then("toThreat", Animation.LoopType.PLAY_ONCE).thenLoop("threat"));
+            return PlayState.CONTINUE;
+        }
+        int idle = this.getCurrRegIdle();
+        if (idle >= 0) {
+            controller.setAnimation(RawAnimation.begin().then("idle" + idle, Animation.LoopType.LOOP));
+            return PlayState.CONTINUE;
+        }
+        if (this.isRunning()) {
+            controller.setAnimation(RawAnimation.begin().then("run", Animation.LoopType.LOOP));
+            return PlayState.CONTINUE;
+        }
+        if (this.isActuallyMoving()) {
+            controller.setAnimation(RawAnimation.begin().then("walk", Animation.LoopType.LOOP));
+            return PlayState.CONTINUE;
+        }
+        return PlayState.STOP;
+    }
+
+    private <T extends GeoAnimatable> PlayState idlesPredicate(AnimationState<T> state) {
+        AnimationController<T> controller = state.getController();
+        controller.transitionLength(5);
+        int twitch = this.getCurrTwitchIdle();
+        if (twitch == 4 || twitch == 5) {
+            controller.transitionLength(0);
+            controller.setAnimation(RawAnimation.begin().then(twitch == 4 ? "threatGrumble" : "threatBark", Animation.LoopType.PLAY_ONCE));
+            return PlayState.CONTINUE;
+        }
+        int sleepIdle = this.getCurrentSleepIdle();
+        if (sleepIdle >= 0 && this.getSleepPhase() == SLEEP_PHASE_ENTERING) {
+            controller.setAnimation(RawAnimation.begin().then("restIdle" + sleepIdle, sleepIdle == 0 ? Animation.LoopType.LOOP : Animation.LoopType.PLAY_ONCE));
+            return PlayState.CONTINUE;
+        }
+        if (twitch >= 0 && !this.isThreatening()) {
+            controller.setAnimation(RawAnimation.begin().then("idle" + twitch, Animation.LoopType.LOOP));
+            return PlayState.CONTINUE;
+        }
+        controller.forceAnimationReset();
+        return PlayState.STOP;
     }
 
     private <T extends GeoAnimatable> PlayState eatPredicate(AnimationState<T> state) {
@@ -221,27 +296,54 @@ public class GalictisEntity extends AnimaliaLandBase implements GeoEntity, Scann
 
     @Override
     public boolean canPlayIdle() {
-        if (this.isAsleep() || this.isGrazing() || this.isRunning()) {
+        if (this.isAsleep() || this.isThreatening() || this.isGrazing() || this.isRunning() || this.isBaby()) {
             return false;
         }
         return !this.isInWater() || this.onGround();
     }
 
-    @Override
     public int pickIdleOfType(PathfinderMob mob, IdleType type) {
-        if (type != IdleType.TWITCH || this.isBaby()) {
-            return -1;
-        }
-        return mob.getRandom().nextInt(4);
+        return this.isBaby() ? -1 : super.pickIdleOfType(mob, type);
     }
 
     @Override
     public int regChance() { return 100; }
 
-
-    @Override
-    public int getToSleepLength() {return 7;}
-
     @Override
     public int getUnSleepLength() {return 23;}
+
+    @Override
+    public int getToSleepLength() {return 200 + this.random.nextInt(200);}
+
+    @Override
+    public int getSleepIdleCount() {return 2;}
+
+    @Override
+    public int getSleepIdleLength(int sleepIdleId) {
+        return sleepIdleId == 0 ? 40 + this.random.nextInt(80) : 31;
+    }
+
+    @Override
+    public int sleepIdleChance() {return 60;}
+
+    @Override
+    public void aiStep() {
+        super.aiStep();
+        if (this.level().isClientSide) {
+            return;
+        }
+        if (this.getThreatPhase() != THREAT_PHASE_DISPLAY) {
+            this.barkCooldown = 20;
+            return;
+        }
+        if (this.barkCooldown > 0) {
+            this.barkCooldown--;
+            return;
+        }
+        int call = 4 + this.random.nextInt(2);
+        this.setCurrTwitchIdle(call);
+        this.setTwitchTicks(7);
+        this.playSound(call == 4 ? AnimaliaSound.GALICTIS_GRUMBLE.get() : AnimaliaSound.GALICTIS_BARK.get());
+        this.barkCooldown = 40 + this.random.nextInt(81);
+    }
 }
