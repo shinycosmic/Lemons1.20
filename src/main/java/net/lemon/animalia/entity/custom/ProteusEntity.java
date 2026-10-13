@@ -135,8 +135,8 @@ public class ProteusEntity extends BottomWalkerSwimmerBase implements GeoEntity,
     private <T extends GeoAnimatable> PlayState predicate(AnimationState<T> animationState) {
         if(!this.isActuallyMoving()) {
             AnimationController<T> controller = animationState.getController();
-            if (this.isActuallyMoving() || !this.onGround()) {
-                controller.setAnimation(RawAnimation.begin().then(this.isActuallyMoving() ? "walk" : "idle0", Animation.LoopType.LOOP));
+            if (!this.onGround()) {
+                controller.setAnimation(RawAnimation.begin().then("idle0", Animation.LoopType.LOOP));
                 return PlayState.CONTINUE;
             }
             switch (this.restPose) {
