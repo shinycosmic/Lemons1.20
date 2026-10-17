@@ -160,7 +160,7 @@ public class ModSpawns {
         add(ModEntities.XIBALBANUS_TULUMENSIS, 3, 1, 1,
                 BiomeSelector.in(Biomes.DRIPSTONE_CAVES));
         add(ModEntities.PROTEUS_ANGUINUS, 2, 1, 1,
-                BiomeSelector.in(Biomes.DRIPSTONE_CAVES));
+                BiomeSelector.in(Biomes.DRIPSTONE_CAVES, Biomes.WINDSWEPT_HILLS, Biomes.WINDSWEPT_GRAVELLY_HILLS));
 
         //land
         add(ModEntities.SMUTSIA_GIGANTEA, 1, 1, 1,
@@ -178,7 +178,7 @@ public class ModSpawns {
         add(ModEntities.ELAPHODUS_CEPHALOPHUS, 2, 1, 3,
                 BiomeSelector.in(BiomeTags.IS_TAIGA));
         add(ModEntities.GALICTIS_CUJA, 2, 1, 3,
-                BiomeSelector.in(Biomes.WINDSWEPT_HILLS, Biomes.WINDSWEPT_FOREST, Biomes.WINDSWEPT_SAVANNA));
+                BiomeSelector.in(Biomes.WINDSWEPT_HILLS, Biomes.WINDSWEPT_FOREST, Biomes.WINDSWEPT_SAVANNA, Biomes.WINDSWEPT_GRAVELLY_HILLS));
         add(ModEntities.GALICTIS_VITTATA, 2, 1, 3,
                 BiomeSelector.in(Biomes.SAVANNA, Biomes.FOREST, Biomes.BIRCH_FOREST));
     }
