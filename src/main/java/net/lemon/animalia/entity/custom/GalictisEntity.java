@@ -258,11 +258,6 @@ public class GalictisEntity extends AnimaliaLandBase implements GeoEntity, Scann
     }
 
     @Override
-    public boolean isSoftActivity() {
-        return true;
-    }
-
-    @Override
     public @Nullable SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, MobSpawnType reason, @Nullable SpawnGroupData spawnData, @Nullable CompoundTag dataTag) {
         if (dataTag == null) {
             this.setVarColor(1);

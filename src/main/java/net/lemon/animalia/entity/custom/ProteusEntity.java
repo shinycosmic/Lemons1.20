@@ -122,7 +122,7 @@ public class ProteusEntity extends BottomWalkerSwimmerBase implements GeoEntity,
     @Override
     public float genVarSizeMultiplier() {
         if (this.getType() == ModEntities.PROTEUS_ANGUINUS.get()) {
-            return AnimaliaFunctionUtil.getScaleForSize(41, 34);
+            return AnimaliaFunctionUtil.getScaleForSize(41, 40);
         }
         return 1;
     }
