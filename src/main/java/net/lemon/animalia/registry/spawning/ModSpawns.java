@@ -177,9 +177,9 @@ public class ModSpawns {
                 BiomeSelector.in(BiomeTags.IS_TAIGA));
         add(ModEntities.ELAPHODUS_CEPHALOPHUS, 2, 1, 3,
                 BiomeSelector.in(BiomeTags.IS_TAIGA));
-        add(ModEntities.ELAPHODUS_CEPHALOPHUS, 2, 1, 3,
+        add(ModEntities.GALICTIS_CUJA, 2, 1, 3,
                 BiomeSelector.in(Biomes.WINDSWEPT_HILLS, Biomes.WINDSWEPT_FOREST, Biomes.WINDSWEPT_SAVANNA));
-        add(ModEntities.ELAPHODUS_CEPHALOPHUS, 2, 1, 3,
+        add(ModEntities.GALICTIS_VITTATA, 2, 1, 3,
                 BiomeSelector.in(Biomes.SAVANNA, Biomes.FOREST, Biomes.BIRCH_FOREST));
     }
 

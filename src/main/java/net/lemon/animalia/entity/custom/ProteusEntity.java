@@ -105,7 +105,7 @@ public class ProteusEntity extends BottomWalkerSwimmerBase implements GeoEntity,
     @Override
     public int getScaleforGUI() {
         if (this.getType() == ModEntities.PROTEUS_ANGUINUS.get()) {
-            return 30;
+            return 22;
         }
         return Scannable.super.getScaleforGUI();
     }
@@ -114,7 +114,7 @@ public class ProteusEntity extends BottomWalkerSwimmerBase implements GeoEntity,
     public int getScaleforDetailGUI() {
         int currScale = Scannable.super.getScaleforDetailGUI();
         if(this.getType() == ModEntities.PROTEUS_ANGUINUS.get()) {
-            currScale *= 0.8f;
+            currScale *= 0.5f;
         }
         return currScale;
     }

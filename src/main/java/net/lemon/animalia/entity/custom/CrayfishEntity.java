@@ -103,9 +103,9 @@ public class CrayfishEntity extends BottomWalkerSwimmerBase implements GeoEntity
     @Override
     public int getScaleforGUI() {
         if (this.getType() == ModEntities.PROCAMBARUS_LUCIFUGUS.get()) {
-            return 40;
+            return 30;
         }
-        return 40;
+        return 30;
     }
 
     @Override
