@@ -75,6 +75,7 @@ public class AnimaliaRenderInit {
         EntityRenderers.register(ModEntities.XIBALBANUS_TULUMENSIS.get(), PelagicInvertSwimmerRenderer::new);
         EntityRenderers.register(ModEntities.CARCHARHINUS_BREVIPINNA.get(), CarcharhinusBrevipinnaRenderer::new);
         EntityRenderers.register(ModEntities.PROTEUS_ANGUINUS.get(), ProteusAnguinusRenderer::new);
+        EntityRenderers.register(ModEntities.MUNIDOPSIS_POLYMORPHA.get(), MunidopsisRenderer::new);
 
         //Land
         EntityRenderers.register(ModEntities.SMUTSIA_GIGANTEA.get(), SmutsiaGiganteaRenderer::new);

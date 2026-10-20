@@ -100,6 +100,7 @@ public class ModEntities {
     public static final RegistryObject<EntityType<CrayfishEntity>> PROCAMBARUS_ALLENI = registerEntityType("procambarus_alleni", CrayfishEntity::new, ModMobCategories.ANIMALIA_INVERTEBRATE, 0.5f, 0.3f, CrayfishEntity::setAttributes, 0xdb743a, 0x26a5c6, true);
     public static final RegistryObject<EntityType<CrayfishEntity>> PROCAMBARUS_VIRGINALIS = registerEntityType("procambarus_virginalis", CrayfishEntity::new, ModMobCategories.ANIMALIA_INVERTEBRATE, 0.5f, 0.3f, CrayfishEntity::setAttributes, 0x332b20, 0x8a7346, true);
     public static final RegistryObject<EntityType<CrayfishEntity>> PROCAMBARUS_LUCIFUGUS = registerEntityType("procambarus_lucifugus", CrayfishEntity::new, ModMobCategories.ANIMALIA_INVERTEBRATE, 0.5f, 0.3f, CrayfishEntity::setAttributes, 0xab9782, 0xbbb8c9, true);
+    public static final RegistryObject<EntityType<WalkingCrustaceanEntity>> MUNIDOPSIS_POLYMORPHA = registerEntityType("munidopsis_polymorpha", WalkingCrustaceanEntity::new, ModMobCategories.ANIMALIA_INVERTEBRATE, 0.5f, 0.3f, WalkingCrustaceanEntity::setAttributes, 0xf0dbbc, 0xf5f2ec, true);
     public static final RegistryObject<EntityType<PelagicInvertSwimmerEntity>> XIBALBANUS_TULUMENSIS = registerEntityType("xibalbanus_tulumensis", PelagicInvertSwimmerEntity::new, ModMobCategories.ANIMALIA_INVERTEBRATE, 0.5f, 0.3f, PelagicInvertSwimmerEntity::setAttributes, 0xe4e5de, 0x967869, true);
     public static final RegistryObject<EntityType<ProteusEntity>> PROTEUS_ANGUINUS = registerEntityType("proteus_anguinus", ProteusEntity::new, ModMobCategories.ANIMALIA_FISH, 0.5f, 0.3f, ProteusEntity::setAttributes, 0xe0c3be, 0xd7565f, true);
 
@@ -114,6 +115,7 @@ public class ModEntities {
     public static final RegistryObject<EntityType<ElaphodusEntity>> ELAPHODUS_CEPHALOPHUS = registerEntityType("elaphodus_cephalophus", ElaphodusEntity::new, ModMobCategories.ANIMALIA_LAND, 0.9f, 0.9f, ElaphodusEntity::setAttributes, 0x413634, 0x4c322c);
     public static final RegistryObject<EntityType<GalictisEntity>> GALICTIS_VITTATA = registerEntityType("galictis_vittata", GalictisEntity::new, ModMobCategories.ANIMALIA_LAND, 0.9f, 0.9f, GalictisEntity::setAttributes, 0xe0e0e0, 0x1f1e1c);
     public static final RegistryObject<EntityType<GalictisEntity>> GALICTIS_CUJA = registerEntityType("galictis_cuja", GalictisEntity::new, ModMobCategories.ANIMALIA_LAND, 0.9f, 0.9f, GalictisEntity::setAttributes, 0xcacab6, 0x38322b);
+//    public static final RegistryObject<EntityType<AilurusFulgensEntity>> AILURUS_FULGENS = registerEntityType("ailurus_fulgens", AilurusFulgensEntity::new, ModMobCategories.ANIMALIA_LAND, 0.9f, 0.9f, AilurusFulgensEntity::setAttributes, 0xc25937, 0xe3c7af);
 
 
 
