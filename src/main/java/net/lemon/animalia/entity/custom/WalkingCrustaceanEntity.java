@@ -87,14 +87,14 @@ public class WalkingCrustaceanEntity extends BottomWalkerSwimmerBase implements 
     @Override
     public int getScaleforGUI() {
         if (this.getType() == ModEntities.MUNIDOPSIS_POLYMORPHA.get()) {
-            return 30;
+            return 24;
         }
         return 30;
     }
 
     @Override
     public int getScaleforDetailGUI() {
-        return Scannable.super.getScaleforDetailGUI();
+        return 80;
     }
 
     @Override
