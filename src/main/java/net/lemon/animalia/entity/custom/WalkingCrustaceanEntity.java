@@ -118,10 +118,7 @@ public class WalkingCrustaceanEntity extends BottomWalkerSwimmerBase implements 
 
     @Override
     public float getSwimSpeed() {
-        if(this.isWalking()) {
-            return 0.9f;
-        }
-        return 1.5f;
+        return 0.8f;
     }
 
     @Override
@@ -189,6 +186,6 @@ public class WalkingCrustaceanEntity extends BottomWalkerSwimmerBase implements 
 
     @Override
     public SpawnBand spawnBand() {
-        return SpawnBand.ANY_FLOOR;
+        return SpawnBand.CAVE_WATER;
     }
 }
