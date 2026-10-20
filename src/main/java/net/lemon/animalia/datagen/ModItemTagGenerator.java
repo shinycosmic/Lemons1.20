@@ -1,5 +1,6 @@
 package net.lemon.animalia.datagen;
 
+import net.lemon.animalia.Animalia;
 import net.lemon.animalia.registry.ModBlocks;
 import net.lemon.animalia.registry.ModItems;
 import net.lemon.animalia.registry.ModTags;
@@ -10,13 +11,15 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.Tags;
+import net.minecraftforge.common.data.ExistingFileHelper;
 
+import javax.annotation.Nullable;
 import java.util.concurrent.CompletableFuture;
 
 public class ModItemTagGenerator extends ItemTagsProvider {
 
-    public ModItemTagGenerator(PackOutput pOutput, CompletableFuture<HolderLookup.Provider> pLookupProvider, CompletableFuture<TagLookup<Block>> pBlockTags) {
-        super(pOutput, pLookupProvider, pBlockTags);
+    public ModItemTagGenerator(PackOutput pOutput, CompletableFuture<HolderLookup.Provider> pLookupProvider, CompletableFuture<TagLookup<Block>> pBlockTags, @Nullable ExistingFileHelper existingFileHelper) {
+        super(pOutput, pLookupProvider, pBlockTags, Animalia.MODID, existingFileHelper);
     }
 
     @Override
@@ -85,7 +88,7 @@ public class ModItemTagGenerator extends ItemTagsProvider {
         tag(ModTags.Items.DUROPHAGOUS).add(Items.DEAD_FIRE_CORAL, Items.DEAD_FIRE_CORAL_BLOCK, Items.DEAD_FIRE_CORAL_FAN);
         tag(ModTags.Items.DUROPHAGOUS).add(Items.DEAD_BUBBLE_CORAL, Items.DEAD_BUBBLE_CORAL_BLOCK, Items.DEAD_BUBBLE_CORAL_FAN);
 
-//        tag(ModTags.Items.FRUITS_SEEDS).addTag(Tags.Items.CROPS);
+        tag(ModTags.Items.FRUITS_SEEDS).addTag(Tags.Items.CROPS);
         tag(ModTags.Items.FRUITS_SEEDS).addTag(Tags.Items.SEEDS);
         tag(ModTags.Items.FRUITS_SEEDS).add(Items.APPLE);
         tag(ModTags.Items.FRUITS_SEEDS).add(Items.MELON_SLICE);

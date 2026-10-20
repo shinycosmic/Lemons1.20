@@ -131,23 +131,13 @@ public class WalkingCrustaceanEntity extends BottomWalkerSwimmerBase implements 
 
     private <T extends GeoAnimatable> PlayState predicate(AnimationState<T> animationState) {
         AnimationController<T> controller = animationState.getController();
-
-        if (!this.isInWater()) {
-            controller.setAnimation(RawAnimation.begin().then("beached", Animation.LoopType.LOOP));
-            return PlayState.CONTINUE;
-        }
-
-        if (this.isWalking()) {
-            if (!this.isActuallyMoving()) {
-                controller.setAnimation(RawAnimation.begin().then("idle", Animation.LoopType.LOOP));
-                return PlayState.CONTINUE;
-            }
+        if (this.isActuallyMoving()) {
             controller.setAnimation(RawAnimation.begin().then("walk", Animation.LoopType.LOOP));
             return PlayState.CONTINUE;
         }
-
-        controller.setAnimation(RawAnimation.begin().then("swim", Animation.LoopType.LOOP));
+        controller.setAnimation(RawAnimation.begin().then("idle0", Animation.LoopType.LOOP));
         return PlayState.CONTINUE;
+
     }
 
     @Override
