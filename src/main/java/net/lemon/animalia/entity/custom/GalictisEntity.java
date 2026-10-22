@@ -15,8 +15,11 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.DifficultyInstance;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -80,9 +83,9 @@ public class GalictisEntity extends AnimaliaLandBase implements GeoEntity, Scann
     @Override
     public float genVarSizeMultiplier() {
         if (this.getType() == ModEntities.GALICTIS_VITTATA.get()) {
-            return AnimaliaFunctionUtil.getScaleForSize(33, this.genVarSize(60, 90, 75));
+            return AnimaliaFunctionUtil.getScaleForSize(33, this.genVarSize(70, 100, 90));
         }
-        return AnimaliaFunctionUtil.getScaleForSize(33, this.genVarSize(45, 80, 60));
+        return AnimaliaFunctionUtil.getScaleForSize(33, this.genVarSize(55, 90, 76));
     }
 
     @Override
@@ -345,5 +348,20 @@ public class GalictisEntity extends AnimaliaLandBase implements GeoEntity, Scann
         this.setTwitchTicks(7);
         this.playSound(call == 4 ? AnimaliaSound.GALICTIS_GRUMBLE.get() : AnimaliaSound.GALICTIS_BARK.get());
         this.barkCooldown = 40 + this.random.nextInt(81);
+    }
+
+    @Override
+    protected SoundEvent getAmbientSound() {
+        return AnimaliaSound.GALICTIS_BARK.get();
+    }
+
+    @Override
+    protected SoundEvent getHurtSound(DamageSource pDamageSource) {
+        return AnimaliaSound.GALICTIS_BARK.get();
+    }
+
+    @Override
+    protected SoundEvent getDeathSound() {
+        return null;
     }
 }

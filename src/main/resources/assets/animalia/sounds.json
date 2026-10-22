@@ -5,5 +5,19 @@
       "animalia:entity/muntiacus_muntjak/bark1",
       "animalia:entity/muntiacus_muntjak/bark2"
     ]
+  },
+  "entity.galictis_vittata.bark": {
+    "subtitle": "entity.animalia.galictis_vittata.bark",
+    "sounds": [
+      "animalia:entity/galictis_vittata/bark1",
+      "animalia:entity/galictis_vittata/bark2"
+    ]
+  },
+  "entity.galictis_vittata.grumble": {
+    "subtitle": "entity.animalia.galictis_vittata.grumble",
+    "sounds": [
+      "animalia:entity/galictis_vittata/grumble1",
+      "animalia:entity/galictis_vittata/grumble2"
+    ]
   }
 }

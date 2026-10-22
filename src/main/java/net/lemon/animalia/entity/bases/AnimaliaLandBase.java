@@ -225,11 +225,11 @@ public abstract class AnimaliaLandBase extends Animal implements IActivityTime, 
     }
 
     protected SoundEvent getHurtSound(DamageSource pDamageSource) {
-        return SoundEvents.RABBIT_HURT;
+        return null;
     }
 
     protected SoundEvent getDeathSound() {
-        return SoundEvents.RABBIT_DEATH;
+        return null;
     }
 
     public boolean isEating() {

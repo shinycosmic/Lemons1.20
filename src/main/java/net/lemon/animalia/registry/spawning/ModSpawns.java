@@ -165,7 +165,7 @@ public class ModSpawns {
                 BiomeSelector.in(BiomeTags.IS_OCEAN, BiomeTags.IS_DEEP_OCEAN, BiomeTags.IS_BEACH));
 
         //land
-        add(ModEntities.SMUTSIA_GIGANTEA, 1, 1, 1,
+        add(ModEntities.SMUTSIA_GIGANTEA, 3, 1, 1,
                 BiomeSelector.in(BiomeTags.IS_SAVANNA));
         add(ModEntities.HYEMOSCHUS_AQUATICUS, 2, 1, 1,
                 BiomeSelector.in(BiomeTags.IS_JUNGLE));
