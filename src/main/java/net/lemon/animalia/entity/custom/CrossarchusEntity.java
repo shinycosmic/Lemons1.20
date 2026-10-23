@@ -44,6 +44,7 @@ public class CrossarchusEntity extends AnimaliaLandBase implements GeoEntity, Sc
     private final AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
     private static final EntityDataAccessor<Integer> THREAT_PHASE = SynchedEntityData.defineId(CrossarchusEntity.class, EntityDataSerializers.INT);
     private ClimbPanicGoal climbPanic;
+    private int currThreatPose;
 
     public CrossarchusEntity(EntityType<? extends Animal> entityType, Level level) {
         super(entityType, level);
@@ -164,6 +165,10 @@ public class CrossarchusEntity extends AnimaliaLandBase implements GeoEntity, Sc
     private <T extends GeoAnimatable> PlayState predicate(AnimationState<T> animationState) {
         animationState.getController().setAnimationSpeed(1.0D);
         animationState.getController().transitionLength(0);
+        if (this.getThreatPhase() != THREAT_PHASE_DISPLAY) {
+            this.currThreatPose = 0;
+        }
+
         if (this.isAttached()) {
             animationState.getController().transitionLength(5);
             if (!this.isActuallyMoving()) {
@@ -196,17 +201,24 @@ public class CrossarchusEntity extends AnimaliaLandBase implements GeoEntity, Sc
                 animationState.getController().setAnimation(RawAnimation.begin().then("unSleep", Animation.LoopType.HOLD_ON_LAST_FRAME));
                 return PlayState.CONTINUE;
         }
+        if (!this.isBaby() && this.getThreatPhase() == THREAT_PHASE_DISPLAY) {
+            if (this.getCurrRegIdle() == 3) {
+                animationState.getController().setAnimation(RawAnimation.begin().then("idle3", Animation.LoopType.LOOP));
+                this.currThreatPose = 1;
+            } else if (this.currThreatPose == 1) {
+                animationState.getController().setAnimation(RawAnimation.begin().then("threat", Animation.LoopType.LOOP));
+            } else {
+                animationState.getController().setAnimation(RawAnimation.begin()
+                        .then("toThreat", Animation.LoopType.PLAY_ONCE).thenLoop("threat"));
+            }
+            return PlayState.CONTINUE;
+        }
         int idleNum = this.getCurrRegIdle();
         if(idleNum < 2 && idleNum >= 0 ) {
             animationState.getController().transitionLength(5);
         }
         if (idleNum >= 0) {
             animationState.getController().setAnimation(RawAnimation.begin().then("idle" + idleNum, Animation.LoopType.LOOP));
-            return PlayState.CONTINUE;
-        }
-        if (!this.isBaby() && this.getThreatPhase() == THREAT_PHASE_DISPLAY) {
-            animationState.getController().setAnimation(RawAnimation.begin()
-                    .then("toThreat", Animation.LoopType.PLAY_ONCE).thenLoop("threat"));
             return PlayState.CONTINUE;
         }
         if (this.isRunning()) {
@@ -268,7 +280,7 @@ public class CrossarchusEntity extends AnimaliaLandBase implements GeoEntity, Sc
 
     @Override
     public boolean canPlayIdle() {
-        if (this.isAsleep() || this.isGrazing() || this.isRunning() || this.isAttached() || this.isBaby() || this.isThreatening()) {
+        if (this.isAsleep() || this.isGrazing() || this.isRunning() || this.isAttached() || this.isBaby()) {
             return false;
         }
         return !this.isInWater() || this.onGround();

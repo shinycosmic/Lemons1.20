@@ -65,7 +65,7 @@ public class AilurusFulgensEntity extends AnimaliaLandBase implements GeoEntity,
     protected void registerGoals() {
         super.registerGoals();
         this.goalSelector.addGoal(1, new AilurusPanicGoal(this));
-        this.goalSelector.addGoal(2, new ThreatGoal(this, 8.0D, 60 + this.random.nextInt(60), 10, ThreatGoal.ThreatOutcome.NONE));
+        this.goalSelector.addGoal(2, new ThreatGoal(this, 8.0D, 160 + this.random.nextInt(60), 10, ThreatGoal.ThreatOutcome.NONE));
     }
 
     @Override
