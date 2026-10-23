@@ -24,24 +24,24 @@ import java.util.function.Function;
 
 @Mod.EventBusSubscriber(modid = Animalia.MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class ModClientLayerEvents {
-    private static final Map<StickingProjectileType, Function<LivingEntity, ? extends Entity>> STUCK_PROJECTILES = Map.of(
+    private static final Map<StickingProjectileType, Function<LivingEntity, ? extends Entity>> STICKING_PROJECTILES = Map.of(
             StickingProjectileTypes.QUILL, entity -> new QuillProjectile(entity.level(), entity.getX(), entity.getY(), entity.getZ()));
 
     @SubscribeEvent
     public static void addLayers(EntityRenderersEvent.AddLayers event) {
         EntityRenderDispatcher dispatcher = event.getContext().getEntityRenderDispatcher();
         for (String skin : event.getSkins()) {
-            attachStuckProjectiles(event.getPlayerSkin(skin), dispatcher);
+            attachStickingProjectiles(event.getPlayerSkin(skin), dispatcher);
         }
         for (EntityType<?> type : ForgeRegistries.ENTITY_TYPES) {
-            attachStuckProjectiles(event.getEntityRenderer(type), dispatcher);
+            attachStickingProjectiles(event.getEntityRenderer(type), dispatcher);
         }
     }
 
     @SuppressWarnings({"unchecked", "rawtypes"})
-    private static void attachStuckProjectiles(@Nullable EntityRenderer<?> renderer, EntityRenderDispatcher dispatcher) {
+    private static void attachStickingProjectiles(@Nullable EntityRenderer<?> renderer, EntityRenderDispatcher dispatcher) {
         if (renderer instanceof LivingEntityRenderer living && living.getModel() instanceof HumanoidModel) {
-            STUCK_PROJECTILES.forEach((type, factory) -> living.addLayer(new StickingProjectileLayer(living, dispatcher, type, factory)));
+            STICKING_PROJECTILES.forEach((type, factory) -> living.addLayer(new StickingProjectileLayer(living, dispatcher, type, factory)));
         }
     }
 }

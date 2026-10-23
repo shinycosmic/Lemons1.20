@@ -88,6 +88,7 @@ public class AnimaliaRenderInit {
         EntityRenderers.register(ModEntities.GALICTIS_CUJA.get(), GalictisRenderer::new);
         EntityRenderers.register(ModEntities.GALICTIS_VITTATA.get(), GalictisRenderer::new);
         EntityRenderers.register(ModEntities.AILURUS_FULGENS.get(), AilurusFulgensRenderer::new);
+        EntityRenderers.register(ModEntities.HYSTRIX_CRISTATA.get(), HystrixCristataRenderer::new);
 
 
         EntityRenderers.register(ModEntities.WATER_SPIT.get(), WaterSpitRenderer::new);
