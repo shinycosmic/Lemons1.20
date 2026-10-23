@@ -18,6 +18,12 @@ public class AnimaliaFoodTab {
             ModItems.RAW_CRUSTACEAN,
             ModItems.COOKED_CRUSTACEAN,
             ModItems.BIVALVE_MEAT,
+            ModItems.RAW_SHARK,
+            ModItems.COOKED_SHARK,
+            ModItems.RAW_SMALL_MAMMAL,
+            ModItems.COOKED_SMALL_MAMMAL,
+            ModItems.RAW_LARGE_MAMMAL,
+            ModItems.COOKED_LARGE_MAMMAL,
 
             //Other|Breeding
             ModItems.AMPHIPOD,
