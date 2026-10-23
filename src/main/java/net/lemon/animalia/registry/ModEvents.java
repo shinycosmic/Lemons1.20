@@ -4,14 +4,18 @@ import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import net.lemon.animalia.Animalia;
 import net.lemon.animalia.entity.bases.FishBase;
 import net.lemon.animalia.entity.bases.helpers.IsGenetic;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.npc.VillagerProfession;
 import net.minecraft.world.entity.npc.VillagerTrades;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.trading.MerchantOffer;
+import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.village.VillagerTradesEvent;
 import net.minecraftforge.event.village.WandererTradesEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -21,6 +25,25 @@ import java.util.List;
 
 @Mod.EventBusSubscriber(modid = Animalia.MODID)
 public class ModEvents {
+    private static final String HOLONET_GIVEN_TAG = Animalia.MODID + ":holonet_given";
+
+    @SubscribeEvent
+    public static void giveHolonetOnFirstJoin(PlayerEvent.PlayerLoggedInEvent event) {
+        if (!(event.getEntity() instanceof ServerPlayer player)) {
+            return;
+        }
+        CompoundTag persisted = player.getPersistentData().getCompound(Player.PERSISTED_NBT_TAG);
+        if (persisted.getBoolean(HOLONET_GIVEN_TAG)) {
+            return;
+        }
+        persisted.putBoolean(HOLONET_GIVEN_TAG, true);
+        player.getPersistentData().put(Player.PERSISTED_NBT_TAG, persisted);
+        ItemStack holonet = new ItemStack(ModItems.HOLONET.get());
+        if (!player.getInventory().add(holonet)) {
+            player.drop(holonet, false);
+        }
+    }
+
 
     @SubscribeEvent
     public static void addCustomTrades(VillagerTradesEvent event) {
