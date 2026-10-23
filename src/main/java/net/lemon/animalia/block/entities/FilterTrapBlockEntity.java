@@ -3,6 +3,7 @@ package net.lemon.animalia.block.entities;
 import net.lemon.animalia.block.FilterTrapBlock;
 import net.lemon.animalia.registry.ModBlockEntities;
 import net.lemon.animalia.client.screens.FilterTrapMenu;
+import net.lemon.animalia.registry.ModTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -165,7 +166,7 @@ public class FilterTrapBlockEntity extends BlockEntity implements MenuProvider {
 
     private boolean hasFuel() {
         ItemStack fuel = itemHandler.getStackInSlot(FUEL_SLOT);
-        return !fuel.isEmpty() && fuel.is(net.minecraft.tags.ItemTags.FISHES);
+        return !fuel.isEmpty() && fuel.is(ModTags.Items.FISH_FOOD);
     }
 
     private void consumeFuel() {
