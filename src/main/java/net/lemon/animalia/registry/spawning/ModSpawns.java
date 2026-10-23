@@ -183,6 +183,8 @@ public class ModSpawns {
                 BiomeSelector.in(Biomes.WINDSWEPT_HILLS, Biomes.WINDSWEPT_FOREST, Biomes.WINDSWEPT_SAVANNA, Biomes.WINDSWEPT_GRAVELLY_HILLS));
         add(ModEntities.GALICTIS_VITTATA, 2, 1, 3,
                 BiomeSelector.in(Biomes.SAVANNA, Biomes.FOREST, Biomes.BIRCH_FOREST));
+        add(ModEntities.AILURUS_FULGENS, 2, 1, 3,
+                BiomeSelector.in(Biomes.BAMBOO_JUNGLE));
     }
 
     private static void add(RegistryObject<? extends EntityType<?>> type, int weight, int minGroup, int maxGroup, BiomeSelector selector) {

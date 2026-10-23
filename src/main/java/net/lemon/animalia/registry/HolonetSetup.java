@@ -40,5 +40,8 @@ public class HolonetSetup {
         ElaphodusEntity.registerHolonet();
         ProteusEntity.registerHolonet();
         GalictisEntity.registerHolonet();
+        AilurusFulgensEntity.registerHolonet();
+        HystrixCristataEntity.registerHolonet();
+
     }
 }

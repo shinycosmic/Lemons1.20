@@ -459,7 +459,7 @@
   "gui.animalia.holonet.by_order": "By Order",
   "gui.animalia.holonet.tutorials": "Tutorials",
   "gui.animalia.holonet.tutorial.scanning": "Scanning Creatures",
-  "gui.animalia.holonet.tutorial.scanning.body": "Scan living creatures by left or right clicking them. \n\nSome animals are particularly rare. Good luck trying to find them all!",
+  "gui.animalia.holonet.tutorial.scanning.body": "Scan living creatures by left or right clicking them. \n\nSome animals are particularly rare. Good luck trying to find them all!\n\nYou do not need to have the Holonet in your hotbar or inventory to scan. You can also open the Holonet with a keybind while it is in your inventory (Default: G)",
   "gui.animalia.holonet.tutorial.gene_inheritance": "Gene Inheritance",
   "gui.animalia.holonet.tutorial.gene_inheritance.body": "A few creatures are able to pass on their traits to their offspring with this system. The Betta fish will be the example here. \n\nBreeding two different parents will result in children with combined traits. Mutations can also occur at a 10% rate. Some mutatable traits have prerequisite parent traits, while others can appear from any parent trait.",
   "gui.animalia.holonet.tutorial.filter_trap": "The Filter Trap",

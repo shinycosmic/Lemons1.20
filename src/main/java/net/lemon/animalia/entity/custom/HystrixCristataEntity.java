@@ -60,7 +60,7 @@ public class HystrixCristataEntity extends AnimaliaLandBase implements GeoEntity
     }
 
     public static void registerHolonet(){
-//        HolonetEntities.register(ModEntities.HYSTRIX_CRISTATA, AppName.FIELD, "Hystricomorpha");
+        HolonetEntities.register(ModEntities.HYSTRIX_CRISTATA, AppName.FIELD, "Hystricomorpha");
     }
 
     //this one is calculated based on head to body, not including tail as i couldnt find reliable full body size estimates

@@ -166,7 +166,7 @@ public class AilurusFulgensEntity extends AnimaliaLandBase implements GeoEntity,
 
     @Override
     public int getEatLength() {
-        return 60 + this.random.nextInt(40);
+        return 100 + this.random.nextInt(100);
     }
 
     @Override
@@ -409,7 +409,7 @@ public class AilurusFulgensEntity extends AnimaliaLandBase implements GeoEntity,
 
     private static class AilurusPanicGoal extends LandPanicGoal {
         public AilurusPanicGoal(AilurusFulgensEntity mob) {
-            super(mob, 2D, 200, 8.0D);
+            super(mob, 2.5D, 200, 8.0D);
         }
 
         @Override

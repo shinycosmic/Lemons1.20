@@ -106,17 +106,17 @@ public class ModEntities {
 
 
     //Actual Land animals
-    public static final RegistryObject<EntityType<PangolinEntity>> SMUTSIA_GIGANTEA = registerEntityType("smutsia_gigantea", PangolinEntity::new, ModMobCategories.ANIMALIA_LAND, 0.9f, 0.9f, PangolinEntity::setAttributes, 0x8e6b3c, 0xffc06a);
-    public static final RegistryObject<EntityType<HyemoschusEntity>> HYEMOSCHUS_AQUATICUS = registerEntityType("hyemoschus_aquaticus", HyemoschusEntity::new, ModMobCategories.ANIMALIA_LAND, 0.9f, 0.9f, HyemoschusEntity::setAttributes, 0x553933, 0xe0dbd9);
-    public static final RegistryObject<EntityType<CrossarchusEntity>> CROSSARCHUS_OBSCURUS = registerEntityType("crossarchus_obscurus", CrossarchusEntity::new, ModMobCategories.ANIMALIA_LAND, 0.9f, 0.9f, CrossarchusEntity::setAttributes, 0xbd9067, 0x593d2b);
-    public static final RegistryObject<EntityType<CrossarchusEntity>> CROSSARCHUS_PLATYCEPHALUS = registerEntityType("crossarchus_platycephalus", CrossarchusEntity::new, ModMobCategories.ANIMALIA_LAND, 0.9f, 0.9f, CrossarchusEntity::setAttributes, 0x1f1e1d, 0x918976);
-    public static final RegistryObject<EntityType<MuntiacusEntity>> MUNTIACUS_MUNTJAK = registerEntityType("muntiacus_muntjak", MuntiacusEntity::new, ModMobCategories.ANIMALIA_LAND, 0.9f, 0.9f, MuntiacusEntity::setAttributes, 0x843919, 0x561504);
-    public static final RegistryObject<EntityType<MoschusEntity>> MOSCHUS_MOSCHIFERUS = registerEntityType("moschus_moschiferus", MoschusEntity::new, ModMobCategories.ANIMALIA_LAND, 0.9f, 0.9f, MoschusEntity::setAttributes, 0x857764, 0xd6c7ae);
-    public static final RegistryObject<EntityType<ElaphodusEntity>> ELAPHODUS_CEPHALOPHUS = registerEntityType("elaphodus_cephalophus", ElaphodusEntity::new, ModMobCategories.ANIMALIA_LAND, 0.9f, 0.9f, ElaphodusEntity::setAttributes, 0x413634, 0x4c322c);
-    public static final RegistryObject<EntityType<GalictisEntity>> GALICTIS_VITTATA = registerEntityType("galictis_vittata", GalictisEntity::new, ModMobCategories.ANIMALIA_LAND, 0.9f, 0.9f, GalictisEntity::setAttributes, 0xe0e0e0, 0x1f1e1c);
-    public static final RegistryObject<EntityType<GalictisEntity>> GALICTIS_CUJA = registerEntityType("galictis_cuja", GalictisEntity::new, ModMobCategories.ANIMALIA_LAND, 0.9f, 0.9f, GalictisEntity::setAttributes, 0xcacab6, 0x38322b);
-    public static final RegistryObject<EntityType<AilurusFulgensEntity>> AILURUS_FULGENS = registerEntityType("ailurus_fulgens", AilurusFulgensEntity::new, ModMobCategories.ANIMALIA_LAND, 0.9f, 0.9f, AilurusFulgensEntity::setAttributes, 0xc25937, 0xe3c7af);
-    public static final RegistryObject<EntityType<HystrixCristataEntity>> HYSTRIX_CRISTATA = registerEntityType("hystrix_cristata", HystrixCristataEntity::new, ModMobCategories.ANIMALIA_LAND, 0.9f, 0.9f, HystrixCristataEntity::setAttributes, 0x141010, 0xd7e1e3);
+    public static final RegistryObject<EntityType<PangolinEntity>> SMUTSIA_GIGANTEA = registerEntityType("smutsia_gigantea", PangolinEntity::new, ModMobCategories.ANIMALIA_LAND, 1f, 1f, PangolinEntity::setAttributes, 0x8e6b3c, 0xffc06a);
+    public static final RegistryObject<EntityType<HyemoschusEntity>> HYEMOSCHUS_AQUATICUS = registerEntityType("hyemoschus_aquaticus", HyemoschusEntity::new, ModMobCategories.ANIMALIA_LAND, 1f, 1f, HyemoschusEntity::setAttributes, 0x553933, 0xe0dbd9);
+    public static final RegistryObject<EntityType<CrossarchusEntity>> CROSSARCHUS_OBSCURUS = registerEntityType("crossarchus_obscurus", CrossarchusEntity::new, ModMobCategories.ANIMALIA_LAND, 1f, 1f, CrossarchusEntity::setAttributes, 0xbd9067, 0x593d2b);
+    public static final RegistryObject<EntityType<CrossarchusEntity>> CROSSARCHUS_PLATYCEPHALUS = registerEntityType("crossarchus_platycephalus", CrossarchusEntity::new, ModMobCategories.ANIMALIA_LAND, 1f, 1f, CrossarchusEntity::setAttributes, 0x1f1e1d, 0x918976);
+    public static final RegistryObject<EntityType<MuntiacusEntity>> MUNTIACUS_MUNTJAK = registerEntityType("muntiacus_muntjak", MuntiacusEntity::new, ModMobCategories.ANIMALIA_LAND, 1f, 1f, MuntiacusEntity::setAttributes, 0x843919, 0x561504);
+    public static final RegistryObject<EntityType<MoschusEntity>> MOSCHUS_MOSCHIFERUS = registerEntityType("moschus_moschiferus", MoschusEntity::new, ModMobCategories.ANIMALIA_LAND, 1f, 1f, MoschusEntity::setAttributes, 0x857764, 0xd6c7ae);
+    public static final RegistryObject<EntityType<ElaphodusEntity>> ELAPHODUS_CEPHALOPHUS = registerEntityType("elaphodus_cephalophus", ElaphodusEntity::new, ModMobCategories.ANIMALIA_LAND, 1f, 1f, ElaphodusEntity::setAttributes, 0x413634, 0x4c322c);
+    public static final RegistryObject<EntityType<GalictisEntity>> GALICTIS_VITTATA = registerEntityType("galictis_vittata", GalictisEntity::new, ModMobCategories.ANIMALIA_LAND, 1f, 1f, GalictisEntity::setAttributes, 0xe0e0e0, 0x1f1e1c);
+    public static final RegistryObject<EntityType<GalictisEntity>> GALICTIS_CUJA = registerEntityType("galictis_cuja", GalictisEntity::new, ModMobCategories.ANIMALIA_LAND, 1f, 1f, GalictisEntity::setAttributes, 0xcacab6, 0x38322b);
+    public static final RegistryObject<EntityType<AilurusFulgensEntity>> AILURUS_FULGENS = registerEntityType("ailurus_fulgens", AilurusFulgensEntity::new, ModMobCategories.ANIMALIA_LAND, 1f, 1f, AilurusFulgensEntity::setAttributes, 0xc25937, 0xe3c7af);
+    public static final RegistryObject<EntityType<HystrixCristataEntity>> HYSTRIX_CRISTATA = registerEntityType("hystrix_cristata", HystrixCristataEntity::new, ModMobCategories.ANIMALIA_LAND, 1f, 1f, HystrixCristataEntity::setAttributes, 0x141010, 0xd7e1e3);
 
 
 
