@@ -16,11 +16,16 @@ import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.DifficultyInstance;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.animal.Animal;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
@@ -117,7 +122,7 @@ public class AilurusFulgensEntity extends AnimaliaLandBase implements GeoEntity,
     public void setThreatPhase(int phase) { this.entityData.set(THREAT_PHASE, phase); }
 
     @Override
-    public boolean canStartThreatening() {return !this.isAttached() && this.onGround();}
+    public boolean canStartThreatening() {return !this.isAttached() && this.onGround() && !this.isEating();}
 
     @Override
     public AppName getApp() {
@@ -140,9 +145,15 @@ public class AilurusFulgensEntity extends AnimaliaLandBase implements GeoEntity,
     }
 
     @Override
+    public int getEatLength() {
+        return 60 + this.random.nextInt(40);
+    }
+
+    @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
         controllers.add(new AnimationController<>(this, "controller", 5, this::predicate));
         controllers.add(new AnimationController<>(this, "idles_controller", 5, this::idlesPredicate));
+        controllers.add(new AnimationController<>(this, "eat_controller", 5, this::eatPredicate));
     }
 
     private <T extends GeoAnimatable> PlayState predicate(AnimationState<T> animationState) {
@@ -228,6 +239,14 @@ public class AilurusFulgensEntity extends AnimaliaLandBase implements GeoEntity,
         return PlayState.STOP;
     }
 
+    private <T extends GeoAnimatable> PlayState eatPredicate(AnimationState<T> state) {
+        if (this.isEating() && !this.isBaby()) {
+            state.getController().setAnimation(RawAnimation.begin().then("eat", Animation.LoopType.PLAY_ONCE).thenLoop("eating"));
+            return PlayState.CONTINUE;
+        }
+        return PlayState.STOP;
+    }
+
     @Override
     public AnimatableInstanceCache getAnimatableInstanceCache() {
         return cache;
@@ -240,6 +259,55 @@ public class AilurusFulgensEntity extends AnimaliaLandBase implements GeoEntity,
             this.setVarSizeMultiplier(this.genVarSizeMultiplier());
         }
         return super.finalizeSpawn(level, difficulty, reason, spawnData, dataTag);
+    }
+
+    @Override
+    public InteractionResult mobInteract(Player player, InteractionHand hand) {
+        ItemStack itemstack = player.getItemInHand(hand);
+        if (!this.isBaby() && this.eats(itemstack)) {
+            if (!this.onGround() || this.isAttached() || this.isAsleep() || this.isThreatening() || this.isEating()) {
+                return InteractionResult.PASS;
+            }
+            if (!this.level().isClientSide) {
+                if (this.isMovementLockedByIdle()) {
+                    this.setIdleTicks(0);
+                    this.setCurrRegIdle(-1);
+                    this.onMovementLockingIdleEnd();
+                }
+                this.setItemSlot(EquipmentSlot.MAINHAND, itemstack.copyWithCount(1));
+                this.setDropChance(EquipmentSlot.MAINHAND, 0.0F);
+                this.usePlayerItem(player, hand, itemstack);
+                this.heal(2.0F);
+                this.startEating();
+                this.getNavigation().stop();
+                if (this.getAge() == 0 && this.canFallInLove()) {
+                    this.setInLove(player);
+                }
+            }
+            return InteractionResult.sidedSuccess(this.level().isClientSide);
+        }
+        return super.mobInteract(player, hand);
+    }
+
+    @Override
+    public void aiStep() {
+        super.aiStep();
+        if (!this.level().isClientSide && !this.isEating() && !this.getMainHandItem().isEmpty()) {
+            this.setItemSlot(EquipmentSlot.MAINHAND, ItemStack.EMPTY);
+        }
+    }
+
+    @Override
+    public boolean hurt(DamageSource source, float amount) {
+        if (!this.level().isClientSide && this.isEating()) {
+            this.setEating(false);
+        }
+        return super.hurt(source, amount);
+    }
+
+    @Override
+    protected boolean isMovementLocked() {
+        return super.isMovementLocked() || (this.isEating() && !this.isBaby());
     }
 
     /***
@@ -327,6 +395,12 @@ public class AilurusFulgensEntity extends AnimaliaLandBase implements GeoEntity,
         @Override
         protected boolean canScan() {
             return !this.mob.isBold() && !this.mob.isEating();
+        }
+
+        @Override
+        public void start() {
+            this.mob.setEating(false);
+            super.start();
         }
     }
 
