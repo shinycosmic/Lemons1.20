@@ -40,4 +40,19 @@ public interface ICanThreat {
     default void onThreatFlee(LivingEntity threat) {
         ((PathfinderMob) this).setLastHurtByMob(threat);
     }
+
+    default void onThreatStart(LivingEntity threat) {
+    }
+
+    default boolean isThreatGone(LivingEntity threat, double threatRange) {
+        return ((PathfinderMob) this).distanceTo(threat) > threatRange;
+    }
+
+    default boolean shouldEndThreat() {
+        return false;
+    }
+
+    default boolean onThreatHurt(LivingEntity threat) {
+        return true;
+    }
 }

@@ -91,6 +91,7 @@ public class AnimaliaRenderInit {
 
 
         EntityRenderers.register(ModEntities.WATER_SPIT.get(), WaterSpitRenderer::new);
+        EntityRenderers.register(ModEntities.QUILL.get(), QuillRenderer::new);
 
     }
 }

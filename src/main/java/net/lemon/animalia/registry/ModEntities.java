@@ -3,6 +3,7 @@ package net.lemon.animalia.registry;
 import net.lemon.animalia.Animalia;
 import net.lemon.animalia.entity.custom.*;
 import net.lemon.animalia.entity.custom.ProteusEntity;
+import net.lemon.animalia.entity.projectiles.QuillProjectile;
 import net.lemon.animalia.entity.projectiles.WaterSpitProjectile;
 import net.lemon.animalia.item.AnimaliaBucketItem;
 import net.lemon.animalia.item.AnimaliaSpawnEggItem;
@@ -123,8 +124,8 @@ public class ModEntities {
 
     public static final RegistryObject<EntityType<WaterSpitProjectile>> WATER_SPIT = ENTITY_TYPES.register("water_spit",
             () -> EntityType.Builder.<WaterSpitProjectile>of(WaterSpitProjectile::new, MobCategory.MISC).sized(0.25F, 0.25F).clientTrackingRange(4).updateInterval(10).build("water_spit"));
-
-
+    public static final RegistryObject<EntityType<QuillProjectile>> QUILL = ENTITY_TYPES.register("quill",
+            () -> EntityType.Builder.<QuillProjectile>of(QuillProjectile::new, MobCategory.MISC).sized(0.5F, 0.5F).clientTrackingRange(4).updateInterval(20).build("quill"));
 
 
     //Supplier Helper Methods

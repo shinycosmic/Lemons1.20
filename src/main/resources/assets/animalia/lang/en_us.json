@@ -472,5 +472,7 @@
   "commands.animalia.holonet.invalid": "%s is not registered in the Holonet.",
   "commands.animalia.holonet.discovered": "Discovered: %s",
 
+  "entity.animalia.quill": "Quill",
+
   "entity.animalia.muntiacus_muntjak.bark": "Muntjac barks"
 }

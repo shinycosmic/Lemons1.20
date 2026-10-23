@@ -1,4 +1,4 @@
-package net.lemon.animalia.client.player;
+package net.lemon.animalia.client.player.capability;
 
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;

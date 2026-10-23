@@ -4,7 +4,7 @@ import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.suggestion.SuggestionProvider;
-import net.lemon.animalia.client.player.HolonetCapabilityProvider;
+import net.lemon.animalia.client.player.capability.HolonetCapabilityProvider;
 import net.lemon.animalia.client.player.network.DiscoverSpeciesPacket;
 import net.lemon.animalia.client.player.network.ModNetwork;
 import net.lemon.animalia.client.player.network.SyncAllDiscoveriesPacket;

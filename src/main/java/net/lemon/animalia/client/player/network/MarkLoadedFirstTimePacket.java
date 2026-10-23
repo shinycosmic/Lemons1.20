@@ -1,6 +1,6 @@
 package net.lemon.animalia.client.player.network;
 
-import net.lemon.animalia.client.player.HolonetCapabilityProvider;
+import net.lemon.animalia.client.player.capability.HolonetCapabilityProvider;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.network.NetworkEvent;

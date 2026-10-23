@@ -26,7 +26,6 @@ import java.util.List;
 @Mod.EventBusSubscriber(modid = Animalia.MODID)
 public class ModEvents {
     private static final String HOLONET_GIVEN_TAG = Animalia.MODID + ":holonet_given";
-
     @SubscribeEvent
     public static void giveHolonetOnFirstJoin(PlayerEvent.PlayerLoggedInEvent event) {
         if (!(event.getEntity() instanceof ServerPlayer player)) {

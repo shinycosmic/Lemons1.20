@@ -39,6 +39,12 @@ public class ModNetwork {
                 .decoder(MarkLoadedFirstTimePacket::new)
                 .consumerMainThread(MarkLoadedFirstTimePacket::handle)
                 .add();
+
+        CHANNEL.messageBuilder(SyncStickingProjectilePacket.class, packetId++, NetworkDirection.PLAY_TO_CLIENT)
+                .encoder(SyncStickingProjectilePacket::encode)
+                .decoder(SyncStickingProjectilePacket::new)
+                .consumerMainThread(SyncStickingProjectilePacket::handle)
+                .add();
     }
 
     public static void sendToPlayer(ServerPlayer player, Object packet) {

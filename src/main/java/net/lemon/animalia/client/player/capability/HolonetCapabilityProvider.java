@@ -1,4 +1,4 @@
-package net.lemon.animalia.client.player;
+package net.lemon.animalia.client.player.capability;
 
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;

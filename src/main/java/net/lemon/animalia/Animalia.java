@@ -50,7 +50,6 @@ public class Animalia {
         ModVillagers.register(modEventBus);
         AnimaliaSound.register(modEventBus);
 
-
         GeckoLib.initialize();
 
         modEventBus.addListener(this::commonSetup);

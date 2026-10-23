@@ -110,6 +110,7 @@ public class ThreatGoal extends Goal {
             this.mob.playSound(this.threatener.getThreatSound());
         }
         this.mob.getNavigation().stop();
+        this.threatener.onThreatStart(this.threatTarget);
     }
 
     @Override
@@ -130,15 +131,14 @@ public class ThreatGoal extends Goal {
 
         boolean threatGone = this.threatTarget == null
                 || !this.threatTarget.isAlive()
-                || this.mob.distanceTo(this.threatTarget) > this.threatRange;
+                || this.threatener.isThreatGone(this.threatTarget, this.threatRange);
 
-        if (threatGone) {
+        if (threatGone || this.threatener.shouldEndThreat()) {
             this.beginLeaving();
             return;
         }
 
-        if (this.mob.hurtTime > 0
-                || (this.escalationRange > 0.0D
+        if ((this.mob.hurtTime > 0 && this.threatener.onThreatHurt(this.threatTarget)) || (this.escalationRange > 0.0D
                 && this.mob.distanceTo(this.threatTarget) < this.escalationRange
                 && this.threatPredicate.test(this.threatTarget))) {
             this.fireOutcome();
