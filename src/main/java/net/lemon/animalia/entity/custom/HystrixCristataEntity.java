@@ -34,7 +34,7 @@ import software.bernie.geckolib.core.animation.AnimatableManager;
 
 public class HystrixCristataEntity extends AnimaliaLandBase implements GeoEntity, Scannable, ICanThreat {
     private final AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
-    private static final EntityDataAccessor<Integer> THREAT_PHASE = SynchedEntityData.defineId(AilurusFulgensEntity.class, EntityDataSerializers.INT);
+    private static final EntityDataAccessor<Integer> THREAT_PHASE = SynchedEntityData.defineId(HystrixCristataEntity.class, EntityDataSerializers.INT);
 
 
     public HystrixCristataEntity(EntityType<? extends Animal> entityType, Level level) {
