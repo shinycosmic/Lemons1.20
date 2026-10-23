@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:smelting",
+  "category": "food",
+  "cookingtime": 200,
+  "experience": 0.35,
+  "ingredient": {
+    "item": "animalia:raw_large_mammal"
+  },
+  "result": "animalia:cooked_large_mammal"
+}

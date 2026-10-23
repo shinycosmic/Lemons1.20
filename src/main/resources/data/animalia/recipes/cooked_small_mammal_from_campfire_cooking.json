@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:campfire_cooking",
+  "category": "food",
+  "cookingtime": 600,
+  "experience": 0.35,
+  "ingredient": {
+    "item": "animalia:raw_small_mammal"
+  },
+  "result": "animalia:cooked_small_mammal"
+}
