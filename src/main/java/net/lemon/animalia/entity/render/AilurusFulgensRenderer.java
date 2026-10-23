@@ -2,9 +2,7 @@ package net.lemon.animalia.entity.render;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.lemon.animalia.entity.custom.AilurusFulgensEntity;
-import net.lemon.animalia.entity.custom.CrossarchusEntity;
 import net.lemon.animalia.entity.model.field.AilurusFulgensModel;
-import net.lemon.animalia.entity.model.field.CrossarchusModel;
 import net.lemon.animalia.entity.render.layer.HeldItemGeoLayer;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
@@ -19,7 +17,7 @@ public class AilurusFulgensRenderer extends GeoEntityRenderer<AilurusFulgensEnti
     public AilurusFulgensRenderer(EntityRendererProvider.Context context) {
         super(context, new AilurusFulgensModel());
         addRenderLayer(new HeldItemGeoLayer<>(this, "heldItem", EquipmentSlot.MAINHAND, ItemDisplayContext.GROUND,
-                entity -> entity.isEating() && !entity.isBaby() && HeldItemGeoLayer.isPlaying(entity, "eat_controller", "eating")));
+                entity -> entity.isEating() && !entity.isBaby() && HeldItemGeoLayer.isPlaying(entity, "eat_controller", "eating"), -90.0F));
     }
 
     @Override
