@@ -83,6 +83,12 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
         tag(ModTags.Blocks.FORAGEABLE).addTag(BlockTags.LEAVES);
         tag(ModTags.Blocks.FORAGEABLE).addTag(BlockTags.CROPS);
 
+        tag(ModTags.Blocks.SOFT_CLIMBABLE).addTag(BlockTags.DIRT);
+        tag(ModTags.Blocks.SOFT_CLIMBABLE).addTag(BlockTags.SAND);
+        tag(ModTags.Blocks.SOFT_CLIMBABLE).addTag(Tags.Blocks.GRAVEL);
+        tag(ModTags.Blocks.SOFT_CLIMBABLE).addTag(BlockTags.LEAVES);
+        tag(ModTags.Blocks.SOFT_CLIMBABLE).addTag(BlockTags.LOGS);
+
         tag(BlockTags.MINEABLE_WITH_SHOVEL).addTag(ModTags.Blocks.TERMITE_MOUNDS);
 
     }

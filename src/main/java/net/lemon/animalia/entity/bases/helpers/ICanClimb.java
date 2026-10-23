@@ -156,7 +156,8 @@ public interface ICanClimb {
         }
         PathfinderMob mob = (PathfinderMob) this;
         if (!this.climbEnabled() || mob.isPassenger() || mob.isLeashed()
-                || (!this.wantsToClimb() && (mob.onGround() || !mob.getNavigation().isDone()))) {
+                || (!this.wantsToClimb() && (mob.onGround() || !mob.getNavigation().isDone()))
+                || (mob.onGround() && mob.getMoveControl().getWantedY() - mob.getY() <= 0.5D)) {
             this.detach();
             return;
         }
