@@ -1,5 +1,7 @@
 package net.lemon.animalia.entity.bases.helpers;
 
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 
 public interface IFoodEater {
@@ -12,6 +14,8 @@ public interface IFoodEater {
     int eatAge();
 
     void setEatAge(int age);
+
+    TagKey<Item> getFoodTag();
 
     default void ageUpFromFood() {
         int age = this.eatAge();

@@ -667,12 +667,6 @@ public abstract class AnimaliaBreedableWater extends WaterAnimal implements IAct
         super.aiStep();
     }
 
-    /***
-     * cannibalized from Animal class. Used to set Food Item (to heal/grow)
-     * @return
-     */
-    public abstract TagKey<Item> getFoodTag();
-
     public Ingredient foodIngredients() {
         return Ingredient.of(getFoodTag());
     }

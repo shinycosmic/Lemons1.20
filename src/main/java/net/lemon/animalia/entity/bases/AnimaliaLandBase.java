@@ -218,8 +218,6 @@ public abstract class AnimaliaLandBase extends Animal implements IActivityTime, 
         this.setAge(age);
     }
 
-    public abstract TagKey<Item> getFoodTag();
-
     protected SoundEvent getAmbientSound() {
         return SoundEvents.RABBIT_AMBIENT;
     }
