@@ -18,6 +18,10 @@ public interface ICanSleep {
         return this.getSleepPhase() != SLEEP_PHASE_NONE;
     }
 
+    default int restChance() {
+        return 0;
+    }
+
     default int getSleepIdleCount() {
         return 0;
     }
