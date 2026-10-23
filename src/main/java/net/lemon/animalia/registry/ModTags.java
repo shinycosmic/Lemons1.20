@@ -20,6 +20,7 @@ public class ModTags {
         public static final TagKey<Block> CROSS_PLANTS = tag("cross_plants");
         public static final TagKey<Block> AQUATIC_PLANTS = tag("aquatic_plants");
         public static final TagKey<Block> FORAGEABLE = tag("forageable");
+        public static final TagKey<Block> SOFT_CLIMBABLE = tag("soft_climbable");
 
 
         private static TagKey<Block> tag(String name) {

@@ -1,5 +1,6 @@
 package net.lemon.animalia.entity.custom;
 
+import net.lemon.animalia.entity.ai.ThreatGoal;
 import net.lemon.animalia.entity.bases.AnimaliaLandBase;
 import net.lemon.animalia.entity.bases.helpers.ActivityTime;
 import net.lemon.animalia.entity.bases.helpers.ICanThreat;
@@ -64,6 +65,7 @@ public class AilurusFulgensEntity extends AnimaliaLandBase implements GeoEntity,
     protected void registerGoals() {
         super.registerGoals();
         this.goalSelector.addGoal(1, new AilurusPanicGoal(this));
+        this.goalSelector.addGoal(2, new ThreatGoal(this, 8.0D, 60 + this.random.nextInt(60), 10, ThreatGoal.ThreatOutcome.NONE));
     }
 
     @Override
@@ -112,7 +114,17 @@ public class AilurusFulgensEntity extends AnimaliaLandBase implements GeoEntity,
 
     @Override
     public boolean isClimbableBlock(BlockState state) {
-        return state.is(BlockTags.LOGS);
+        return state.is(ModTags.Blocks.SOFT_CLIMBABLE);
+    }
+
+    @Override
+    public boolean wantsToClimb() {
+        return this.climbEnabled();
+    }
+
+    @Override
+    public boolean canStartSleeping() {
+        return super.canStartSleeping() && !this.isAttached();
     }
 
     @Override
@@ -123,6 +135,14 @@ public class AilurusFulgensEntity extends AnimaliaLandBase implements GeoEntity,
 
     @Override
     public boolean canStartThreatening() {return !this.isAttached() && this.onGround() && !this.isEating();}
+
+    @Override
+    public boolean canThreat(Player player) {
+        return this.isBold() && !player.isCrouching();
+    }
+
+    @Override
+    public int getThreatCooldown() {return 12000;}
 
     @Override
     public AppName getApp() {
