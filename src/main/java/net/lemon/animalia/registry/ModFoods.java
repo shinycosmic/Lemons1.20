@@ -15,4 +15,8 @@ public class ModFoods {
             .nutrition(6).saturationMod(6.0f).build();
     public static final FoodProperties COOKED_FISH = new FoodProperties.Builder()
             .nutrition(4).saturationMod(4.0f).build();
+    public static final FoodProperties COOKED_LARGE_MAMMAL = new FoodProperties.Builder()
+            .nutrition(8).saturationMod(8.0f).build();
+    public static final FoodProperties COOKED_SHARK = new FoodProperties.Builder()
+            .nutrition(5).saturationMod(5.0f).build();
 }

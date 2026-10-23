@@ -22,6 +22,12 @@ public class ModItems {
     public static final RegistryObject<Item> RAW_CRUSTACEAN = ITEMS.register("raw_crustacean", () -> new Item(new Item.Properties().food(ModFoods.FISH_FOOD)));
     public static final RegistryObject<Item> COOKED_CRUSTACEAN = ITEMS.register("cooked_crustacean", () -> new Item(new Item.Properties().food(ModFoods.COOKED_FISH)));
     public static final RegistryObject<Item> BIVALVE_MEAT = ITEMS.register("bivalve_meat", () -> new Item(new Item.Properties().food(ModFoods.RAW_FISH)));
+    public static final RegistryObject<Item> RAW_SMALL_MAMMAL = ITEMS.register("raw_small_mammal", () -> new Item(new Item.Properties().food(ModFoods.RAW_FISH)));
+    public static final RegistryObject<Item> RAW_LARGE_MAMMAL = ITEMS.register("raw_large_mammal", () -> new Item(new Item.Properties().food(ModFoods.COOKED_VENISON)));
+    public static final RegistryObject<Item> RAW_SHARK = ITEMS.register("raw_shark", () -> new Item(new Item.Properties().food(ModFoods.RAW_FISH)));
+    public static final RegistryObject<Item> COOKED_SMALL_MAMMAL = ITEMS.register("cooked_small_mammal", () -> new Item(new Item.Properties().food(ModFoods.COOKED_FISH)));
+    public static final RegistryObject<Item> COOKED_LARGE_MAMMAL = ITEMS.register("cooked_large_mammal", () -> new Item(new Item.Properties().food(ModFoods.COOKED_LARGE_MAMMAL)));
+    public static final RegistryObject<Item> COOKED_SHARK = ITEMS.register("cooked_shark", () -> new Item(new Item.Properties().food(ModFoods.COOKED_SHARK)));
 
     //Misc
     public static final RegistryObject<Item> FISH_EGG = ITEMS.register("fish_egg", () -> new FishEggItem(new Item.Properties()));

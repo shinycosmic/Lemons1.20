@@ -2,11 +2,11 @@ package net.lemon.animalia.entity.model.field;
 
 import net.lemon.animalia.Animalia;
 import net.lemon.animalia.entity.custom.CrossarchusEntity;
+import net.lemon.animalia.entity.model.AnimaliaCustomModel;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.registries.ForgeRegistries;
-import software.bernie.geckolib.model.GeoModel;
 
-public class CrossarchusModel extends GeoModel<CrossarchusEntity> {
+public class CrossarchusModel extends AnimaliaCustomModel<CrossarchusEntity> {
     public ResourceLocation getModelResource(CrossarchusEntity object) {
         if(object.isBaby()) {
             return new ResourceLocation(Animalia.MODID, "geo/babymongoose.geo.json");
