@@ -47,7 +47,7 @@ public class FilterTrapBlockEntity extends BlockEntity implements MenuProvider {
     private LazyOptional<IItemHandler> lazyItemHandler = LazyOptional.empty();
     protected final ContainerData data;
     private int timer = 0;
-    private int dropTimer = 3000;
+    private int dropTimer = 600;
 
     public FilterTrapBlockEntity(BlockPos pPos, BlockState pBlockState) {
         super(ModBlockEntities.FILTER_TRAP_BE.get(), pPos, pBlockState);
