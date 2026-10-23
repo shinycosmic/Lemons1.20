@@ -4,7 +4,9 @@ import net.lemon.animalia.Animalia;
 import net.lemon.animalia.entity.custom.AilurusFulgensEntity;
 import net.lemon.animalia.entity.model.AnimaliaCustomModel;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.registries.ForgeRegistries;
+import software.bernie.geckolib.cache.object.GeoBone;
 
 public class AilurusFulgensModel extends AnimaliaCustomModel<AilurusFulgensEntity> {
     public ResourceLocation getModelResource(AilurusFulgensEntity object) {
@@ -26,6 +28,10 @@ public class AilurusFulgensModel extends AnimaliaCustomModel<AilurusFulgensEntit
             return new ResourceLocation(Animalia.MODID, "animations/babymongoose.animation.json");
         }
         return new ResourceLocation(Animalia.MODID, "animations/ailurus_fulgens.animation.json");
+    }
+
+    protected ItemStack getStackForBone(GeoBone bone, AilurusFulgensEntity animatable) {
+        return bone.getName().equals("item") && animatable.isEating() ? animatable.getMainHandItem() : null;
     }
 
 }
