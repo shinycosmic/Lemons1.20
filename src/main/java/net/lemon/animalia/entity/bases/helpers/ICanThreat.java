@@ -2,6 +2,7 @@ package net.lemon.animalia.entity.bases.helpers;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.PathfinderMob;
+import net.minecraft.world.entity.player.Player;
 import org.jetbrains.annotations.Nullable;
 
 public interface ICanThreat {
@@ -24,6 +25,10 @@ public interface ICanThreat {
 
     default boolean canStartThreatening() {
         return true;
+    }
+
+    default boolean canThreat(Player player) {
+        return !((IBold) this).isBold() && !player.isCrouching();
     }
 
     default int getThreatCooldown() { return 200; }

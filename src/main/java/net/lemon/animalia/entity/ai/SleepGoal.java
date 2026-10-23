@@ -31,8 +31,11 @@ public class SleepGoal extends Goal {
             this.cooldown--;
             return false;
         }
-        if (!this.sleeper.canStartSleeping() || this.activityTime.isActiveWindow(this.mob)) {
+        if (!this.sleeper.canStartSleeping()) {
             return false;
+        }
+        if(this.activityTime.isActiveWindow(this.mob)) {
+            return this.sleeper.restChance() > 0 && this.mob.getRandom().nextInt(this.sleeper.restChance()) == 0;
         }
         return this.mob.getRandom().nextInt(100) == 0;
     }
@@ -69,7 +72,7 @@ public class SleepGoal extends Goal {
                 this.enteringTicks--;
                 if (this.enteringTicks <= 0) {
                     this.sleeper.setCurrentSleepIdle(-1);
-                    this.sleeper.setSleepPhase(ICanSleep.SLEEP_PHASE_SLEEPING);
+                    this.sleeper.setSleepPhase(this.activityTime.isActiveWindow(this.mob) ? ICanSleep.SLEEP_PHASE_NONE : ICanSleep.SLEEP_PHASE_SLEEPING);
                 }
                 break;
             case ICanSleep.SLEEP_PHASE_SLEEPING:

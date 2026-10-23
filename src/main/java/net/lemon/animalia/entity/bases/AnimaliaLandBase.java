@@ -334,6 +334,10 @@ public abstract class AnimaliaLandBase extends Animal implements IActivityTime, 
                 && !level.getBlockState(pos.below()).getCollisionShape(level, pos.below()).isEmpty();
     }
 
+    protected boolean isMovementLocked(){
+        return this.isMovementLockedByIdle() || this.isGrazing();
+    }
+
     public boolean canHide() {
         return false;
     }
@@ -578,12 +582,12 @@ public abstract class AnimaliaLandBase extends Animal implements IActivityTime, 
     public void travel(Vec3 pTravelVector) {
         if (this.isAttached()) {
             if (this.isEffectiveAi()) {
-                this.climbTravel(this.isMovementLockedByIdle() || this.isGrazing() ? Vec3.ZERO : pTravelVector);
+                this.climbTravel(this.isMovementLocked() ? Vec3.ZERO : pTravelVector);
             }
             this.calculateEntityAnimation(true);
             return;
         }
-        if (this.isMovementLockedByIdle() || this.isGrazing()) {
+        if (this.isMovementLocked()) {
             super.travel(Vec3.ZERO);
             return;
         }
@@ -617,7 +621,7 @@ public abstract class AnimaliaLandBase extends Animal implements IActivityTime, 
             this.tickIdle(this);
         }
 
-        if (!this.level().isClientSide && (this.isMovementLockedByIdle() || this.isGrazing())) {
+        if (!this.level().isClientSide && (this.isMovementLocked())) {
             this.setYRot(this.yRotO);
             this.yBodyRot = this.yBodyRotO;
             this.yHeadRot = this.yHeadRotO;
@@ -975,6 +979,11 @@ public abstract class AnimaliaLandBase extends Animal implements IActivityTime, 
         public void start() {
             this.pushedFleeFrom = null;
             this.fleeTicks = this.fleeLength;
+            if (this.mob.isMovementLockedByIdle()) {
+                this.mob.setIdleTicks(0);
+                this.mob.setCurrRegIdle(-1);
+                this.mob.onMovementLockingIdleEnd();
+            }
             this.mob.setRunning(true);
             this.moveAway();
         }

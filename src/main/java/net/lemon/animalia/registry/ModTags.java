@@ -41,6 +41,7 @@ public class ModTags {
         public static final TagKey<Item> FISH = tag("fish");
         public static final TagKey<Item> MEATS = tag("meats");
         public static final TagKey<Item> SEAFOOD = tag("seafood");
+        public static final TagKey<Item> BAMBOOS = tag("bamboos");
 
         private static TagKey<Item> tag(String name) {
             return ItemTags.create(new ResourceLocation(Animalia.MODID, name));
