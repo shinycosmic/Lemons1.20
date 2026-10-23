@@ -41,6 +41,7 @@ public class CreatureDetailScreen extends Screen {
     private static final ResourceLocation MALE_PRESSED = new ResourceLocation(Animalia.MODID, "textures/gui/male_button_pressed.png");
     private static final ResourceLocation FEMALE_PRESSED = new ResourceLocation(Animalia.MODID, "textures/gui/female_button_pressed.png");
     private static final ResourceLocation LOCKED = new ResourceLocation(Animalia.MODID, "textures/gui/generic_locked.png");
+    private static final ResourceLocation VANILLA_ICONS = new ResourceLocation("textures/gui/icons.png");
 
     private static final int MODEL_AREA_WIDTH = 160;
     private static final int INFO_LEFT_OFFSET = 175;
@@ -191,8 +192,10 @@ public class CreatureDetailScreen extends Screen {
                     : displayEntity instanceof AnimaliaLandBase land ? new ItemStack(land.getBreedingItem())
                     : ItemStack.EMPTY;
             if (!foodItem.isEmpty()) {
-                graphics.renderItem(foodItem, infoX, infoY - 2);
-                graphics.drawString(this.font, foodItem.getHoverName(), infoX + 18, infoY + 2, 0xFFFFFF, true);
+                graphics.blit(VANILLA_ICONS, infoX, infoY + 2, 16, 0, 9, 9);
+                graphics.blit(VANILLA_ICONS, infoX, infoY + 2, 52, 0, 9, 9);
+                graphics.renderItem(foodItem, infoX + 13, infoY - 2);
+                graphics.drawString(this.font, foodItem.getHoverName(), infoX + 31, infoY + 2, 0xFFFFFF, true);
                 infoY += LINE_SPACING + 10;
             }
 

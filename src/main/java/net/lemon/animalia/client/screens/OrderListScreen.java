@@ -67,9 +67,7 @@ public class OrderListScreen extends Screen {
         bgY = (this.height - BG_HEIGHT) / 2;
         backBtnX = bgX + BACK_BUTTON_MARGIN_LEFT;
         backBtnY = bgY + BACK_BUTTON_MARGIN_TOP;
-        this.addRenderableWidget(Button.builder(Component.translatable("gui.animalia.holonet.view_all"), b -> {
-            Minecraft.getInstance().setScreen(new OrderGridScreen(app, null, this));
-        }).pos(bgX + BG_WIDTH - 90, bgY + 35).size(55, 16).build());
+        this.addRenderableWidget(Button.builder(Component.translatable("gui.animalia.holonet.view_all"), b -> goBack()).pos(bgX + BG_WIDTH - 90, bgY + 35).size(55, 16).build());
     }
 
     @Override

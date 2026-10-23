@@ -400,7 +400,7 @@ public class HystrixCristataEntity extends AnimaliaLandBase implements GeoEntity
     @Override
     public int pickIdleOfType(PathfinderMob mob, IdleType type) {
         if (this.isThreatening()) {
-            return type == IdleType.MOVEMENT_NEGATIVE ? 5 : -1;
+            return type == IdleType.MOVEMENT_NEGATIVE && this.attackStartedAt < 0 ? 5 : -1;
         }
         return switch (type) {
             case MOVEMENT_NEGATIVE -> 2;
@@ -419,4 +419,7 @@ public class HystrixCristataEntity extends AnimaliaLandBase implements GeoEntity
 
     @Override
     public int getUnSleepLength() { return this.isBaby() ? 10 : 20; }
+
+    @Override
+    public int getEatLength() { return 10; }
 }
