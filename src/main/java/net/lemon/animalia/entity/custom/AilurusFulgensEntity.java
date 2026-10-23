@@ -425,20 +425,15 @@ public class AilurusFulgensEntity extends AnimaliaLandBase implements GeoEntity,
     }
 
     /***
-     * Eating ref
+     * Eating notes
      * must be hand-fed, if hand fed (like vanilla panda) eat plays first (this is the pick up the item from your hand with its mouth)
      * then play eating, which the item you gave it is rendered in its hands as it eats.
      */
 
     /***
-     * threat ref
+     * threat notes
      * two types: this animal should proximity panic away from any player that approaches it without crouching by default.
      * if it is bold -> play threat instead. once threat expires, initiate a 1 minecraft day cooldown. Bold red pandas can threat players but cannot panic from players
      */
 
-    /***
-     * climb ref
-     * Climbing is normal pathfinding behavior
-     * Red Panda does not climb during panics. it only climbs during normal pathfinding and should be allowed to pathfind up walls, letting it escape holes.
-     */
 }
