@@ -29,6 +29,12 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItems.COOKED_VENISON);
         simpleItem(ModItems.COOKED_CRUSTACEAN);
         simpleItem(ModItems.BIVALVE_MEAT);
+        simpleItem(ModItems.RAW_SHARK);
+        simpleItem(ModItems.RAW_SMALL_MAMMAL);
+        simpleItem(ModItems.RAW_LARGE_MAMMAL);
+        simpleItem(ModItems.COOKED_SHARK);
+        simpleItem(ModItems.COOKED_SMALL_MAMMAL);
+        simpleItem(ModItems.COOKED_LARGE_MAMMAL);
 
         //Animal Items
         simpleItem(ModItems.AMPHIPOD);
