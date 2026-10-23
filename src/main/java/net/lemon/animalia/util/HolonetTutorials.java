@@ -10,7 +10,8 @@ public class HolonetTutorials {
     private static final List<String> TUTORIALS = List.of(
             "scanning",
             "gene_inheritance",
-            "filter_trap"
+            "filter_trap",
+            "aquarist"
     );
 
     public static List<String> getAll() {

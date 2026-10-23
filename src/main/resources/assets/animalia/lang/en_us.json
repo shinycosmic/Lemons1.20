@@ -464,6 +464,9 @@
   "gui.animalia.holonet.tutorial.gene_inheritance.body": "A few creatures are able to pass on their traits to their offspring with this system. The Betta fish will be the example here. \n\nBreeding two different parents will result in children with combined traits. Mutations can also occur at a 10% rate. Some mutatable traits have prerequisite parent traits, while others can appear from any parent trait.",
   "gui.animalia.holonet.tutorial.filter_trap": "The Filter Trap",
   "gui.animalia.holonet.tutorial.filter_trap.body": "This device is used to catch small creatures used as breeding items for your other animals. \nAll you need to do is place it in water, and insert fish meat or fish food. Then wait as the trap fills up. \n\nDifferent critters can be caught in different biomes in this way.",
+  "gui.animalia.holonet.tutorial.aquarist": "The Aquarist Villager",
+  "gui.animalia.holonet.tutorial.aquarist.body": "The Aquarist can setup shop in any village with a Water Trap as their job block! \n\nThey will sell you a multitude of aquaculture-related items including breeding items, raw meats, fish food, and even buckets of fish!",
+
   "commands.animalia.holonet.reset": "Holonet discoveries reset",
   "commands.animalia.holonet.discoverall": "All Holonet entries discovered",
   "commands.animalia.holonet.invalid": "%s is not registered in the Holonet.",

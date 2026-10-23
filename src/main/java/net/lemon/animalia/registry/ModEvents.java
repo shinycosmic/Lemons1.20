@@ -111,6 +111,32 @@ public class ModEvents {
 
         }
 
+        if(event.getType() == VillagerProfession.BUTCHER) {
+            Int2ObjectMap<List<VillagerTrades.ItemListing>> trades = event.getTrades();
+            trades.get(1).add((entity, randomSource) -> new MerchantOffer(
+                    new ItemStack(ModItems.RAW_VENISON.get(), 8), new ItemStack(Items.EMERALD, 2), 10, 8, 0.02f));
+            trades.get(2).add((entity, randomSource) -> new MerchantOffer(
+                    new ItemStack(ModItems.RAW_VENISON.get(), 4), new ItemStack(Items.EMERALD, 1), 10, 8, 0.02f));
+            trades.get(3).add((entity, randomSource) -> new MerchantOffer(
+                    new ItemStack(Items.EMERALD, 2), new ItemStack(ModItems.COOKED_VENISON.get(), 4), 10, 8, 0.02f));
+        }
+
+        if(event.getType() == VillagerProfession.FISHERMAN) {
+            Int2ObjectMap<List<VillagerTrades.ItemListing>> trades = event.getTrades();
+            trades.get(1).add((entity, randomSource) -> new MerchantOffer(
+                    new ItemStack(ModItems.RAW_FISH.get(), 8), new ItemStack(Items.EMERALD, 1), 10, 8, 0.02f));
+            trades.get(1).add((entity, randomSource) -> new MerchantOffer(
+                    new ItemStack(Items.EMERALD, 1), new ItemStack(ModItems.ARTEMIA.get(), 8), 10, 8, 0.02f));
+            trades.get(2).add((entity, randomSource) -> new MerchantOffer(
+                    new ItemStack(ModItems.RAW_ICEFISH.get(), 4), new ItemStack(Items.EMERALD, 1), 10, 8, 0.02f));
+            trades.get(2).add((entity, randomSource) -> new MerchantOffer(
+                    new ItemStack(Items.COOKED_SALMON, 6), new ItemStack(ModItems.COOKED_FISH.get(), 6), 10, 8, 0.02f));
+            trades.get(3).add((entity, randomSource) -> new MerchantOffer(
+                    new ItemStack(Items.EMERALD, 2), new ItemStack(ModItems.RAW_SHARK.get(), 2), 10, 8, 0.02f));
+            trades.get(3).add((entity, randomSource) -> new MerchantOffer(
+                    new ItemStack(Items.COD, 1), new ItemStack(ModItems.ARTEMIA.get(), 4), 10, 8, 0.02f));
+        }
+
 
 
 
