@@ -115,7 +115,7 @@ public class ModEntities {
     public static final RegistryObject<EntityType<ElaphodusEntity>> ELAPHODUS_CEPHALOPHUS = registerEntityType("elaphodus_cephalophus", ElaphodusEntity::new, ModMobCategories.ANIMALIA_LAND, 0.9f, 0.9f, ElaphodusEntity::setAttributes, 0x413634, 0x4c322c);
     public static final RegistryObject<EntityType<GalictisEntity>> GALICTIS_VITTATA = registerEntityType("galictis_vittata", GalictisEntity::new, ModMobCategories.ANIMALIA_LAND, 0.9f, 0.9f, GalictisEntity::setAttributes, 0xe0e0e0, 0x1f1e1c);
     public static final RegistryObject<EntityType<GalictisEntity>> GALICTIS_CUJA = registerEntityType("galictis_cuja", GalictisEntity::new, ModMobCategories.ANIMALIA_LAND, 0.9f, 0.9f, GalictisEntity::setAttributes, 0xcacab6, 0x38322b);
-//    public static final RegistryObject<EntityType<AilurusFulgensEntity>> AILURUS_FULGENS = registerEntityType("ailurus_fulgens", AilurusFulgensEntity::new, ModMobCategories.ANIMALIA_LAND, 0.9f, 0.9f, AilurusFulgensEntity::setAttributes, 0xc25937, 0xe3c7af);
+    public static final RegistryObject<EntityType<AilurusFulgensEntity>> AILURUS_FULGENS = registerEntityType("ailurus_fulgens", AilurusFulgensEntity::new, ModMobCategories.ANIMALIA_LAND, 0.9f, 0.9f, AilurusFulgensEntity::setAttributes, 0xc25937, 0xe3c7af);
 
 
 

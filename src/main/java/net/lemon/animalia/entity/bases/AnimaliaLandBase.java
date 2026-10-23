@@ -975,6 +975,11 @@ public abstract class AnimaliaLandBase extends Animal implements IActivityTime, 
         public void start() {
             this.pushedFleeFrom = null;
             this.fleeTicks = this.fleeLength;
+            if (this.mob.isMovementLockedByIdle()) {
+                this.mob.setIdleTicks(0);
+                this.mob.setCurrRegIdle(-1);
+                this.mob.onMovementLockingIdleEnd();
+            }
             this.mob.setRunning(true);
             this.moveAway();
         }

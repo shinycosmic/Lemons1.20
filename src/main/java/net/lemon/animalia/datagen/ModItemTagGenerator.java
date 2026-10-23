@@ -110,5 +110,8 @@ public class ModItemTagGenerator extends ItemTagsProvider {
         tag(ModTags.Items.SEAFOOD).addTag(ModTags.Items.BIVALVES);
         tag(ModTags.Items.SEAFOOD).addTag(ModTags.Items.CRUSTACEAN);
         tag(ModTags.Items.SEAFOOD).add(ModItems.BIVALVE_MEAT.get());
+
+        tag(ModTags.Items.BAMBOOS).add(Items.BAMBOO);
+
     }
 }
