@@ -48,7 +48,7 @@ public class ModEventBusEvents {
                 new ResourceLocation(Animalia.MODID, "holonet_discovery");
 
         private static final ResourceLocation STICKING_PROJECTILES_CAP_ID =
-                new ResourceLocation(Animalia.MODID, "Sticking_projectiles");
+                new ResourceLocation(Animalia.MODID, "sticking_projectiles");
 
         @SubscribeEvent
         public static void attachCapabilities(AttachCapabilitiesEvent<Entity> event) {
