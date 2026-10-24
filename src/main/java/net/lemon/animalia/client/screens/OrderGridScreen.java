@@ -206,6 +206,7 @@ public class OrderGridScreen extends Screen {
     private void renderEntityInCell(GuiGraphics graphics, EntityType<?> entityType, int cellX, int cellY) {
         LivingEntity dummy = cachedDummies.get(entityType);
         if (dummy == null) return;
+        dummy.tickCount++;
 
         if(dummy instanceof GeoEntity geo) {
             geo.getAnimatableInstanceCache().getManagerForId(dummy.getId())
@@ -344,6 +345,7 @@ public class OrderGridScreen extends Screen {
                 gendered.setGender(1);
             }
 
+            dummy.setId(Integer.MIN_VALUE + cachedDummies.size());
             dummy.discard();
             cachedDummies.put(entityType, dummy);
         }
