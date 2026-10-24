@@ -34,6 +34,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraftforge.common.Tags;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.core.animatable.GeoAnimatable;
@@ -351,7 +352,7 @@ public class HystrixCristataEntity extends AnimaliaLandBase implements GeoEntity
     public int getGrazeSearchHeight() { return 1; }
 
     @Override
-    public boolean isGrazableBlock(BlockState state) { return state.is(BlockTags.DIRT); }
+    public boolean isGrazableBlock(BlockState state) { return state.is(BlockTags.DIRT) || state.is(BlockTags.LEAVES); }
 
     @Override
     public boolean canGraze() { return super.canGraze() && !this.isBaby() && !this.isThreatening(); }
