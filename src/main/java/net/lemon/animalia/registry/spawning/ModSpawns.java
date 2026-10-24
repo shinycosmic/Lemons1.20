@@ -185,6 +185,8 @@ public class ModSpawns {
                 BiomeSelector.in(Biomes.SAVANNA, Biomes.FOREST, Biomes.BIRCH_FOREST));
         add(ModEntities.AILURUS_FULGENS, 2, 1, 3,
                 BiomeSelector.in(Biomes.BAMBOO_JUNGLE));
+        add(ModEntities.HYSTRIX_CRISTATA, 2, 1, 3,
+                BiomeSelector.in(BiomeTags.IS_SAVANNA));
     }
 
     private static void add(RegistryObject<? extends EntityType<?>> type, int weight, int minGroup, int maxGroup, BiomeSelector selector) {
