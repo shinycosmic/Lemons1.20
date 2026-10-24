@@ -313,7 +313,7 @@ public class HystrixCristataEntity extends AnimaliaLandBase implements GeoEntity
         if (this.attackStartedAt >= 0) {
             return false;
         }
-        return !this.hasLineOfSight(threat) || this.isThreatGone(threat, 6.0D);
+        return !this.hasLineOfSight(threat) || this.distanceTo(threat) > 10.0D;
     }
 
     @Override
