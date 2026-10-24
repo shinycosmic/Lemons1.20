@@ -352,6 +352,7 @@ public class GalictisEntity extends AnimaliaLandBase implements GeoEntity, Scann
 
     @Override
     protected SoundEvent getAmbientSound() {
+        if(this.isAsleep()) {return null;}
         return AnimaliaSound.GALICTIS_BARK.get();
     }
 

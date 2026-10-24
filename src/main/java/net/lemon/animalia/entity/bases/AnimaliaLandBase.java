@@ -219,6 +219,7 @@ public abstract class AnimaliaLandBase extends Animal implements IActivityTime, 
     }
 
     protected SoundEvent getAmbientSound() {
+        if(this.isAsleep() || this.isHiding()) {return null;}
         return SoundEvents.RABBIT_AMBIENT;
     }
 
