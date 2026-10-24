@@ -260,7 +260,7 @@ public class AilurusFulgensEntity extends AnimaliaLandBase implements GeoEntity,
     }
 
     private <T extends GeoAnimatable> PlayState eatPredicate(AnimationState<T> state) {
-        if (this.isEating() && !this.isBaby()) {
+        if (this.isEating() && !this.isBaby() && !this.isAsleep()) {
             state.getController().setAnimation(RawAnimation.begin().then("eat", Animation.LoopType.PLAY_ONCE).thenLoop("eating"));
             return PlayState.CONTINUE;
         }
@@ -376,6 +376,9 @@ public class AilurusFulgensEntity extends AnimaliaLandBase implements GeoEntity,
     public int pickIdleOfType(PathfinderMob mob, IdleType type) {
         if (this.isBaby()) {
             return -1;
+        }
+        if (this.getSleepPhase() == SLEEP_PHASE_ENTERING) {
+
         }
         return switch (type) {
             case TWITCH -> this.getCurrRegIdle() == 3 && this.random.nextBoolean() ? 4 : 0;
