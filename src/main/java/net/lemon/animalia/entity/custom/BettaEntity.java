@@ -3,6 +3,7 @@ package net.lemon.animalia.entity.custom;
 import com.google.common.collect.ImmutableMap;
 import net.lemon.animalia.entity.bases.AnimaliaBreedableWater;
 import net.lemon.animalia.item.BettaFishEggItem;
+import net.lemon.animalia.registry.ModTags;
 import net.lemon.animalia.util.HolonetEntities;
 import net.lemon.animalia.entity.bases.helpers.IsGenetic;
 import net.lemon.animalia.util.Scannable;
@@ -188,7 +189,7 @@ public class BettaEntity extends FishBase implements GeoEntity, IsGenetic, Scann
 
     @Override
     public TagKey<Item> getFoodTag() {
-        return ItemTags.FISHES;
+        return ModTags.Items.INVERTEBRATE;
     }
 
     @Override

@@ -45,6 +45,7 @@ public class ModItemTagGenerator extends ItemTagsProvider {
         tag(ModTags.Items.CRUSTACEAN).add(ModItems.GIGANTOCYPRIS.get());
         tag(ModTags.Items.CRUSTACEAN).add(ModItems.ARTEMIA.get());
         tag(ModTags.Items.CRUSTACEAN).add(ModItems.RAW_CRUSTACEAN.get());
+        tag(ModTags.Items.CRUSTACEAN).add(ModItems.FISH_FOOD.get());
 
         tag(ModTags.Items.INVERTEBRATE).addTag(ModTags.Items.CRUSTACEAN);
         tag(ModTags.Items.INVERTEBRATE).add(ModItems.TERMITE.get());
@@ -54,6 +55,7 @@ public class ModItemTagGenerator extends ItemTagsProvider {
         tag(ModTags.Items.AQUATIC_PLANT).add(Items.KELP);
         tag(ModTags.Items.AQUATIC_PLANT).add(Items.SEAGRASS);
         tag(ModTags.Items.AQUATIC_PLANT).add(ModBlocks.ALGAE_MAT.get().asItem());
+        tag(ModTags.Items.AQUATIC_PLANT).add(ModItems.FISH_FOOD.get());
 
         tag(ModTags.Items.FISH_FOOD).addTag(ModTags.Items.AQUATIC_PLANT);
         tag(ModTags.Items.FISH_FOOD).add(ModItems.FISH_FOOD.get());
