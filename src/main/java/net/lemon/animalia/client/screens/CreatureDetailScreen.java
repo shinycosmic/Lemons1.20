@@ -219,6 +219,9 @@ public class CreatureDetailScreen extends Screen {
         }
 
         graphics.blit(BACK_BUTTON, backBtnX, backBtnY, 0, 0, BACK_BUTTON_SIZE, BACK_BUTTON_SIZE, BACK_BUTTON_SIZE, BACK_BUTTON_SIZE);
+        if (isOverBackButton(mouseX, mouseY)) {
+            graphics.fill(backBtnX - 1, backBtnY - 1, backBtnX + BACK_BUTTON_SIZE + 1, backBtnY + BACK_BUTTON_SIZE + 1, 0x44FFFFFF);
+        }
 
         super.render(graphics, mouseX, mouseY, partialTick);
     }

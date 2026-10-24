@@ -261,41 +261,45 @@ public class HystrixCristataEntity extends AnimaliaLandBase implements GeoEntity
         return super.finalizeSpawn(level, difficulty, reason, spawnData, dataTag);
     }
 
-    @Override
     public void aiStep() {
         super.aiStep();
-        if (!this.level().isClientSide && this.attackCooldown > 0) {
+        if (this.level().isClientSide) {
+            return;
+        }
+        if (this.attackCooldown > 0) {
             this.attackCooldown--;
         }
-    }
-
-    @Override
-    public void onThreatStart(LivingEntity threat) {
-        this.attackCooldown = 40;
-        this.attackStartedAt = -1;
-        this.attackTarget = null;
-    }
-
-    @Override
-    public void onThreatTick(LivingEntity threat) {
         if (this.attackStartedAt >= 0) {
             int elapsed = this.tickCount - this.attackStartedAt;
-            if (elapsed == 7) {
-                this.quillHit(this.attackTarget != null ? this.attackTarget : threat);
+            if (this.attackTarget != null) {
+                this.getNavigation().stop();
+                this.getLookControl().setLookAt(this.attackTarget, 30.0F, 30.0F);
+                if (elapsed == 7) {
+                    this.quillHit(this.attackTarget);
+                }
             }
             if (elapsed >= ATTACK_ANIM_LENGTH) {
                 this.attackStartedAt = -1;
                 this.attackTarget = null;
                 this.attackCooldown = 40;
             }
-            return;
-        }
-        if (this.attackCooldown <= 0 && this.isInAttackReach(threat)) {
-            this.startAttack();
         }
     }
 
-    private void startAttack() {
+    @Override
+    public void onThreatStart(LivingEntity threat) {
+        this.attackCooldown = 40;
+    }
+
+    @Override
+    public void onThreatTick(LivingEntity threat) {
+        if (this.attackStartedAt < 0 && this.attackCooldown <= 0 && this.isInAttackReach(threat)) {
+            this.startAttack(threat);
+        }
+    }
+
+    private void startAttack(LivingEntity target) {
+        this.attackTarget = target;
         this.triggerAnim("attack_controller", "threatAttack");
         this.attackStartedAt = this.tickCount;
     }
@@ -330,10 +334,8 @@ public class HystrixCristataEntity extends AnimaliaLandBase implements GeoEntity
     @Override
     public boolean hurt(DamageSource source, float amount) {
         boolean hurt = super.hurt(source, amount);
-        if (hurt && !this.level().isClientSide && this.getThreatPhase() == THREAT_PHASE_DISPLAY && this.attackStartedAt < 0
-                && source.getEntity() instanceof LivingEntity attacker) {
-            this.attackTarget = attacker;
-            this.startAttack();
+        if (hurt && !this.level().isClientSide && !this.isBaby() && this.attackStartedAt < 0 && source.getEntity() instanceof LivingEntity attacker) {
+            this.startAttack(attacker);
         }
         return hurt;
     }
