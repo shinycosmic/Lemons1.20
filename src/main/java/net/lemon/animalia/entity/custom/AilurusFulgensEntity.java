@@ -79,7 +79,7 @@ public class AilurusFulgensEntity extends AnimaliaLandBase implements GeoEntity,
 
     @Override
     public float genVarSizeMultiplier() {
-        return AnimaliaFunctionUtil.getScaleForSize(39, 115);
+        return AnimaliaFunctionUtil.getScaleForSize(39, 150);
     }
 
     @Override

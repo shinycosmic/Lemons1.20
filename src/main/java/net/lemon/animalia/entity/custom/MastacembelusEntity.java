@@ -4,6 +4,7 @@ import net.lemon.animalia.entity.ai.BottomDwellingGoal;
 import net.lemon.animalia.entity.ai.FishFrySwimmingGoal;
 import net.lemon.animalia.entity.ai.FishHideGoal;
 import net.lemon.animalia.entity.aimove.BottomDwellingMoveHelperController;
+import net.lemon.animalia.entity.bases.BottomWalkerSwimmerBase;
 import net.lemon.animalia.entity.bases.helpers.ActivityTime;
 import net.lemon.animalia.entity.bases.AnimaliaBreedableWater;
 import net.lemon.animalia.entity.bases.FishBase;
@@ -36,7 +37,7 @@ import software.bernie.geckolib.core.animatable.instance.SingletonAnimatableInst
 import software.bernie.geckolib.core.animation.*;
 import software.bernie.geckolib.core.object.PlayState;
 
-public class MastacembelusEntity extends FishBase implements GeoEntity, Scannable {
+public class MastacembelusEntity extends BottomWalkerSwimmerBase implements GeoEntity, Scannable {
 
     private final AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
     private int stillTicks = 0;
@@ -62,10 +63,7 @@ public class MastacembelusEntity extends FishBase implements GeoEntity, Scannabl
 
     @Override
     protected void registerGoals() {
-        this.goalSelector.addGoal(5, new FishFrySwimmingGoal(this, 1.0D, 40));
         this.goalSelector.addGoal(5, new FishHideGoal(this, this.activityTime()));        super.registerGoals();
-        this.goalSelector.addGoal(7, new BottomDwellingGoal(this, 1.0D, 160, 8, 4));
-
     }
 
     @Override
