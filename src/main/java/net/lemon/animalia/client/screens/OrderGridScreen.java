@@ -4,6 +4,7 @@ import com.mojang.blaze3d.platform.Lighting;
 import net.lemon.animalia.entity.bases.FishBase;
 import net.lemon.animalia.client.player.network.ClientDiscoveryCache;
 import net.lemon.animalia.entity.bases.helpers.IDimorphism;
+import net.lemon.animalia.entity.model.AnimaliaCustomModel;
 import net.lemon.animalia.util.HolonetEntities;
 import net.lemon.animalia.entity.bases.helpers.IsGenetic;
 import net.lemon.animalia.util.Scannable;
@@ -206,7 +207,6 @@ public class OrderGridScreen extends Screen {
     private void renderEntityInCell(GuiGraphics graphics, EntityType<?> entityType, int cellX, int cellY) {
         LivingEntity dummy = cachedDummies.get(entityType);
         if (dummy == null) return;
-        dummy.tickCount++;
 
         if(dummy instanceof GeoEntity geo) {
             geo.getAnimatableInstanceCache().getManagerForId(dummy.getId())
@@ -345,7 +345,7 @@ public class OrderGridScreen extends Screen {
                 gendered.setGender(1);
             }
 
-            dummy.setId(Integer.MIN_VALUE + cachedDummies.size());
+            dummy.addTag(AnimaliaCustomModel.GUI_DUMMY_TAG);
             dummy.discard();
             cachedDummies.put(entityType, dummy);
         }

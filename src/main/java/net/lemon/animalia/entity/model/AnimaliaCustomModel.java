@@ -12,6 +12,7 @@ import software.bernie.geckolib.core.animation.AnimationProcessor;
 import software.bernie.geckolib.core.animation.AnimationState;
 import software.bernie.geckolib.core.keyframe.BoneAnimation;
 import software.bernie.geckolib.core.object.DataTicket;
+import software.bernie.geckolib.core.state.BoneSnapshot;
 import software.bernie.geckolib.model.GeoModel;
 
 import java.util.Map;
@@ -112,6 +113,28 @@ public abstract class AnimaliaCustomModel<T extends Entity & GeoAnimatable> exte
                 }
             }
         }
+    }
+
+    public static final String GUI_DUMMY_TAG = "animalia_gui_dummy";
+
+    @Override
+    public void handleAnimations(T animatable, long instanceId, AnimationState<T> animationState) {
+        if (animatable.getTags().contains(GUI_DUMMY_TAG)) {
+            for (CoreGeoBone bone : this.getAnimationProcessor().getRegisteredBones()) {
+                BoneSnapshot rest = bone.getInitialSnapshot();
+                bone.setRotX(rest.getRotX());
+                bone.setRotY(rest.getRotY());
+                bone.setRotZ(rest.getRotZ());
+                bone.setPosX(rest.getOffsetX());
+                bone.setPosY(rest.getOffsetY());
+                bone.setPosZ(rest.getOffsetZ());
+                bone.setScaleX(rest.getScaleX());
+                bone.setScaleY(rest.getScaleY());
+                bone.setScaleZ(rest.getScaleZ());
+            }
+            return;
+        }
+        super.handleAnimations(animatable, instanceId, animationState);
     }
 
     private static class BoneCapture {

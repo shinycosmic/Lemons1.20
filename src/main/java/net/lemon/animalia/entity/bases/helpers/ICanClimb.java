@@ -84,7 +84,10 @@ public interface ICanClimb {
 
     default void detach() {
         this.setClimbFace(Direction.DOWN);
-        ((Mob) this).setYya(0.0F);
+        Mob mob = (Mob) this;
+        mob.setXxa(0.0F);
+        mob.setYya(0.0F);
+        mob.setZza(0.0F);
     }
 
     default boolean faceAllowed(Direction face) {
@@ -139,6 +142,9 @@ public interface ICanClimb {
             }
         }
         if (best == null) {
+            if (current.getAxis().isHorizontal()) {
+                mob.setDeltaMovement(mob.getDeltaMovement().add(current.getStepX() * 0.15D, 0.1D, current.getStepZ() * 0.15D));
+            }
             this.detach();
             return;
         }
