@@ -2,11 +2,12 @@ package net.lemon.animalia.entity.model.fish;
 
 import net.lemon.animalia.Animalia;
 import net.lemon.animalia.entity.custom.HydrocynusEntity;
+import net.lemon.animalia.entity.model.AnimaliaCustomModel;
 import net.minecraft.resources.ResourceLocation;
 import software.bernie.geckolib.core.animation.AnimationState;
 import software.bernie.geckolib.model.GeoModel;
 
-public class HydrocynusGoliathModel extends GeoModel<HydrocynusEntity> {
+public class HydrocynusGoliathModel extends AnimaliaCustomModel<HydrocynusEntity> {
     public ResourceLocation getModelResource(HydrocynusEntity object) {
         if(object.isBaby()) {
             return new ResourceLocation(Animalia.MODID, "geo/babysmallfish.geo.json");

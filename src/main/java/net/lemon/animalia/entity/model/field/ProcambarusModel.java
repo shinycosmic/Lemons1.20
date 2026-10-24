@@ -2,11 +2,12 @@ package net.lemon.animalia.entity.model.field;
 
 import net.lemon.animalia.Animalia;
 import net.lemon.animalia.entity.custom.CrayfishEntity;
+import net.lemon.animalia.entity.model.AnimaliaCustomModel;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.registries.ForgeRegistries;
 import software.bernie.geckolib.model.GeoModel;
 
-public class ProcambarusModel extends GeoModel<CrayfishEntity> {
+public class ProcambarusModel extends AnimaliaCustomModel<CrayfishEntity> {
     public ResourceLocation getModelResource(CrayfishEntity object) {
         return new ResourceLocation(Animalia.MODID, "geo/procambarus.geo.json");
     }

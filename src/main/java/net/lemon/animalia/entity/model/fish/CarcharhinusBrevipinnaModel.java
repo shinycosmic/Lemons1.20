@@ -3,10 +3,11 @@ package net.lemon.animalia.entity.model.fish;//package net.lemon.animalia.entity
 import net.lemon.animalia.Animalia;
 import net.lemon.animalia.entity.custom.PangasianodonEntity;
 import net.lemon.animalia.entity.custom.SpinnerSharkEntity;
+import net.lemon.animalia.entity.model.AnimaliaCustomModel;
 import net.minecraft.resources.ResourceLocation;
 import software.bernie.geckolib.model.GeoModel;
 
-public class CarcharhinusBrevipinnaModel extends GeoModel<SpinnerSharkEntity> {
+public class CarcharhinusBrevipinnaModel extends AnimaliaCustomModel<SpinnerSharkEntity> {
     public ResourceLocation getModelResource(SpinnerSharkEntity object) {
 //        if(object.isBaby()) {
 //            return new ResourceLocation(Animalia.MODID, "geo/babyshark.geo.json");

@@ -2,6 +2,7 @@ package net.lemon.animalia.entity.model.fish;//package net.lemon.animalia.entity
 
 import net.lemon.animalia.Animalia;
 import net.lemon.animalia.entity.custom.CavefishEntity;
+import net.lemon.animalia.entity.model.AnimaliaCustomModel;
 import net.lemon.animalia.registry.ModEntities;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -11,7 +12,7 @@ import software.bernie.geckolib.core.animation.AnimationState;
 import software.bernie.geckolib.model.GeoModel;
 import software.bernie.geckolib.model.data.EntityModelData;
 
-public class CavefishModel extends GeoModel<CavefishEntity> {
+public class CavefishModel extends AnimaliaCustomModel<CavefishEntity> {
     public ResourceLocation getModelResource(CavefishEntity object) {
         if(object.getType() == ModEntities.SINOCYCLOCHEILUS_LONGICORNUS.get() || object.getType() == ModEntities.SINOCYCLOCHEILUS_HYALINUS.get() || object.getType() == ModEntities.SINOCYCLOCHEILUS_ANATIROSTRIS.get()) {
             return new ResourceLocation(Animalia.MODID, "geo/sinocyclocheilus.geo.json");

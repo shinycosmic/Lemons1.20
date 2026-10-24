@@ -2,10 +2,11 @@ package net.lemon.animalia.entity.model.fish;//package net.lemon.animalia.entity
 
 import net.lemon.animalia.Animalia;
 import net.lemon.animalia.entity.custom.CongolliEntity;
+import net.lemon.animalia.entity.model.AnimaliaCustomModel;
 import net.minecraft.resources.ResourceLocation;
 import software.bernie.geckolib.model.GeoModel;
 
-public class PseudaphritisUrvilliiModel extends GeoModel<CongolliEntity> {
+public class PseudaphritisUrvilliiModel extends AnimaliaCustomModel<CongolliEntity> {
     public ResourceLocation getModelResource(CongolliEntity object) {
         if(object.isBaby()) {
             return new ResourceLocation(Animalia.MODID, "geo/babynotothen.geo.json");

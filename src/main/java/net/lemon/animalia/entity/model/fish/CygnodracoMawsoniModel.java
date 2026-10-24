@@ -2,10 +2,11 @@ package net.lemon.animalia.entity.model.fish;//package net.lemon.animalia.entity
 
 import net.lemon.animalia.Animalia;
 import net.lemon.animalia.entity.custom.ChaenocephalusEntity;
+import net.lemon.animalia.entity.model.AnimaliaCustomModel;
 import net.minecraft.resources.ResourceLocation;
 import software.bernie.geckolib.model.GeoModel;
 
-public class CygnodracoMawsoniModel extends GeoModel<ChaenocephalusEntity> {
+public class CygnodracoMawsoniModel extends AnimaliaCustomModel<ChaenocephalusEntity> {
     public ResourceLocation getModelResource(ChaenocephalusEntity object) {
         if(object.isBaby()) {
             return new ResourceLocation(Animalia.MODID, "geo/babynotothen.geo.json");

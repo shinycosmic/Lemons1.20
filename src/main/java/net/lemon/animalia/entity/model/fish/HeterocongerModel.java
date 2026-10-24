@@ -2,11 +2,12 @@ package net.lemon.animalia.entity.model.fish;
 
 import net.lemon.animalia.Animalia;
 import net.lemon.animalia.entity.custom.HeterocongerEntity;
+import net.lemon.animalia.entity.model.AnimaliaCustomModel;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.registries.ForgeRegistries;
 import software.bernie.geckolib.model.GeoModel;
 
-public class HeterocongerModel extends GeoModel<HeterocongerEntity> {
+public class HeterocongerModel extends AnimaliaCustomModel<HeterocongerEntity> {
     public ResourceLocation getModelResource(HeterocongerEntity object) {
         if(object.isBaby()) {
             return new ResourceLocation(Animalia.MODID, "geo/babyeel.geo.json");

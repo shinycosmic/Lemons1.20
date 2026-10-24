@@ -2,6 +2,7 @@ package net.lemon.animalia.entity.model.fish;
 
 import net.lemon.animalia.Animalia;
 import net.lemon.animalia.entity.custom.RegSchoolingEntity;
+import net.lemon.animalia.entity.model.AnimaliaCustomModel;
 import net.lemon.animalia.util.NightBlend;
 import net.minecraft.resources.ResourceLocation;
 import software.bernie.geckolib.constant.DataTickets;
@@ -10,7 +11,7 @@ import software.bernie.geckolib.core.animation.AnimationState;
 import software.bernie.geckolib.model.GeoModel;
 import software.bernie.geckolib.model.data.EntityModelData;
 
-public class SiganusVulpinusModel extends GeoModel<RegSchoolingEntity> {
+public class SiganusVulpinusModel extends AnimaliaCustomModel<RegSchoolingEntity> {
     public ResourceLocation getModelResource(RegSchoolingEntity object) {
         if(object.isBaby()) {
             return new ResourceLocation(Animalia.MODID, "geo/babyreeffish.geo.json");

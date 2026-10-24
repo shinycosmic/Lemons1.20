@@ -9,6 +9,7 @@ import net.lemon.animalia.client.player.network.ClientDiscoveryCache;
 import net.lemon.animalia.entity.bases.helpers.IDimorphism;
 import net.lemon.animalia.entity.bases.helpers.IFoodEater;
 import net.lemon.animalia.entity.bases.helpers.IsGenetic;
+import net.lemon.animalia.entity.model.AnimaliaCustomModel;
 import net.lemon.animalia.util.Scannable;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
@@ -127,6 +128,7 @@ public class CreatureDetailScreen extends Screen {
             genetic.buildTraitsRandom();
         }
 
+        displayEntity.addTag(AnimaliaCustomModel.GUI_DUMMY_TAG);
         displayEntity.discard();
     }
 
@@ -135,9 +137,6 @@ public class CreatureDetailScreen extends Screen {
         CompendiumHomeScreen.renderHelper(graphics, app, FISH_BG, FIELD_BG, bgX, bgY, BG_WIDTH, BG_HEIGHT, BORDER);
         
         if (displayEntity != null) {
-            if (displayEntity instanceof GeoEntity geo) {
-                geo.getAnimatableInstanceCache().getManagerForId(displayEntity.getId()).getAnimationControllers().values().forEach(AnimationController::forceAnimationReset);
-            }
 
             int entityX = bgX + MODEL_AREA_WIDTH / 2 + 40;
             int entityY = bgY + BG_HEIGHT / 2 + 40;

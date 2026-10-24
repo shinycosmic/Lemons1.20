@@ -4,6 +4,7 @@ import com.mojang.blaze3d.platform.Lighting;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.lemon.animalia.entity.bases.FishBase;
 import net.lemon.animalia.client.player.network.ClientDiscoveryCache;
+import net.lemon.animalia.entity.model.AnimaliaCustomModel;
 import net.lemon.animalia.util.HolonetEntities;
 import net.lemon.animalia.entity.bases.helpers.IsGenetic;
 import net.lemon.animalia.util.Scannable;
@@ -107,11 +108,6 @@ public class CompendiumHomeScreen extends Screen {
 
     private void renderFeaturedEntity(GuiGraphics graphics) {
         if (displayEntity == null) return;
-        if (displayEntity instanceof GeoEntity geo) {
-            geo.getAnimatableInstanceCache().getManagerForId(displayEntity.getId())
-                    .getAnimationControllers().values()
-                    .forEach(AnimationController::forceAnimationReset);
-        }
 
         Quaternionf rotation = new Quaternionf().rotateY((float) Math.toRadians(90)).rotateZ((float) Math.PI);
         int entityY = bgY + BG_HEIGHT / 2 + 5;
@@ -195,6 +191,7 @@ public class CompendiumHomeScreen extends Screen {
             genetic.buildTraitsRandom();
         }
 
+        displayEntity.addTag(AnimaliaCustomModel.GUI_DUMMY_TAG);
         displayEntity.discard();
     }
 }

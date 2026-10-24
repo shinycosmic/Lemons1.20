@@ -2,10 +2,11 @@ package net.lemon.animalia.entity.model.fish;//package net.lemon.animalia.entity
 
 import net.lemon.animalia.Animalia;
 import net.lemon.animalia.entity.custom.RakthamichthysEntity;
+import net.lemon.animalia.entity.model.AnimaliaCustomModel;
 import net.minecraft.resources.ResourceLocation;
 import software.bernie.geckolib.model.GeoModel;
 
-public class RakthamichthysIndicusModel extends GeoModel<RakthamichthysEntity> {
+public class RakthamichthysIndicusModel extends AnimaliaCustomModel<RakthamichthysEntity> {
     public ResourceLocation getModelResource(RakthamichthysEntity object) {
         if(object.isBaby()) {
             return new ResourceLocation(Animalia.MODID, "geo/babyeel.geo.json");

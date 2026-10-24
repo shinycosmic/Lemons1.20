@@ -1,11 +1,12 @@
-package net.lemon.animalia.entity.model.fish;//package net.lemon.animalia.entity.model;
+package net.lemon.animalia.entity.model.fish;
 
 import net.lemon.animalia.Animalia;
 import net.lemon.animalia.entity.custom.MastacembelusEntity;
+import net.lemon.animalia.entity.model.AnimaliaCustomModel;
 import net.minecraft.resources.ResourceLocation;
 import software.bernie.geckolib.model.GeoModel;
 
-public class MastacembelusArmatusModel extends GeoModel<MastacembelusEntity> {
+public class MastacembelusArmatusModel extends AnimaliaCustomModel<MastacembelusEntity> {
     public ResourceLocation getModelResource(MastacembelusEntity object) {
         if(object.isBaby()) {
             return new ResourceLocation(Animalia.MODID, "geo/babyeel.geo.json");
