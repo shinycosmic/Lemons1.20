@@ -75,10 +75,15 @@ public class HystrixCristataEntity extends AnimaliaLandBase implements GeoEntity
 
     public static AttributeSupplier setAttributes() {
         return Mob.createMobAttributes()
-                .add(Attributes.MAX_HEALTH, 10D)
+                .add(Attributes.MAX_HEALTH, 16D)
                 .add(Attributes.MOVEMENT_SPEED, 0.1f)
                 .add(Attributes.ATTACK_DAMAGE, 2f)
                 .build();
+    }
+
+    @Override
+    public float getWalkSpeed() {
+        return 0.8f;
     }
 
     @Override
@@ -302,7 +307,7 @@ public class HystrixCristataEntity extends AnimaliaLandBase implements GeoEntity
         if (!this.isInAttackReach(target)) {
             return;
         }
-        if (target.hurt(this.damageSources().thorns(this), 2.0F)) {
+        if (target.hurt(this.damageSources().thorns(this), 4.0F)) {
             target.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 1800, 0), this);
             StickingProjectilesCapability.add(target, StickingProjectileTypes.QUILL);
         }
