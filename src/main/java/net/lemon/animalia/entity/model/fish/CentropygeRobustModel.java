@@ -21,7 +21,7 @@ public class CentropygeRobustModel extends AnimaliaCustomModel<RegSchoolingEntit
 
     public ResourceLocation getTextureResource(RegSchoolingEntity object) {
         if(object.isBaby()) {
-            return new ResourceLocation(Animalia.MODID, "textures/entity/babycentropyge.png");
+            return new ResourceLocation(Animalia.MODID, "textures/entity/baby"+ ForgeRegistries.ENTITY_TYPES.getKey(object.getType()).getPath() +".png");
         }
         return new ResourceLocation(Animalia.MODID, "textures/entity/" + ForgeRegistries.ENTITY_TYPES.getKey(object.getType()).getPath() + ".png");
     }
