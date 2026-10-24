@@ -7,6 +7,7 @@ import net.lemon.animalia.entity.bases.AnimaliaLandBase;
 import net.lemon.animalia.entity.bases.FishBase;
 import net.lemon.animalia.client.player.network.ClientDiscoveryCache;
 import net.lemon.animalia.entity.bases.helpers.IDimorphism;
+import net.lemon.animalia.entity.bases.helpers.IFoodEater;
 import net.lemon.animalia.entity.bases.helpers.IsGenetic;
 import net.lemon.animalia.util.Scannable;
 import net.minecraft.ChatFormatting;
@@ -14,6 +15,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.InventoryScreen;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.FormattedCharSequence;
@@ -57,6 +59,8 @@ public class CreatureDetailScreen extends Screen {
     private final EntityType<?> entityType;
     private final Screen parent;
 
+    private int arrowX;
+    private int arrowY;
     private int bgX;
     private int bgY;
     private int backBtnX;
@@ -83,6 +87,8 @@ public class CreatureDetailScreen extends Screen {
         bgY = (this.height - BG_HEIGHT) / 2;
         backBtnX = bgX + BACK_BUTTON_MARGIN_LEFT;
         backBtnY = bgY + BACK_BUTTON_MARGIN_TOP;
+        arrowX = bgX + BG_WIDTH - 65;
+        arrowY = bgY + BG_HEIGHT - 38 - BACK_BUTTON_SIZE;
 
         ResourceLocation entityId = ForgeRegistries.ENTITY_TYPES.getKey(entityType);
         discoveredGenders = ClientDiscoveryCache.getDiscoveredGenders(entityId);
@@ -206,10 +212,14 @@ public class CreatureDetailScreen extends Screen {
             }
         }
 
-        graphics.blit(BACK_BUTTON, backBtnX, backBtnY, 0, 0, BACK_BUTTON_SIZE, BACK_BUTTON_SIZE, BACK_BUTTON_SIZE, BACK_BUTTON_SIZE);
-        if (isOverBackButton(mouseX, mouseY)) {
-            graphics.fill(backBtnX - 1, backBtnY - 1, backBtnX + BACK_BUTTON_SIZE + 1, backBtnY + BACK_BUTTON_SIZE + 1, 0x44FFFFFF);
+        if (hasDiet()) {
+            graphics.drawString(this.font, "▶", arrowX, arrowY, 0xFFFFFF, true);
+            if (isOverArrow(mouseX, mouseY)) {
+                graphics.fill(arrowX - 2, arrowY - 2, arrowX + this.font.width("▶") + 2, arrowY + this.font.lineHeight + 2, 0x44FFFFFF);
+            }
         }
+
+        graphics.blit(BACK_BUTTON, backBtnX, backBtnY, 0, 0, BACK_BUTTON_SIZE, BACK_BUTTON_SIZE, BACK_BUTTON_SIZE, BACK_BUTTON_SIZE);
 
         super.render(graphics, mouseX, mouseY, partialTick);
     }
@@ -224,6 +234,11 @@ public class CreatureDetailScreen extends Screen {
         if (button == 0) {
             if (isOverBackButton((int) mouseX, (int) mouseY)) {
                 goBack();
+                return true;
+            }
+
+            if (hasDiet() && isOverArrow((int) mouseX, (int) mouseY)) {
+                openDiet();
                 return true;
             }
 
@@ -274,6 +289,28 @@ public class CreatureDetailScreen extends Screen {
     private boolean isOverBackButton(int mouseX, int mouseY) {
         return mouseX >= backBtnX && mouseX <= backBtnX + BACK_BUTTON_SIZE
                 && mouseY >= backBtnY && mouseY <= backBtnY + BACK_BUTTON_SIZE;
+    }
+
+    @Override
+    public boolean mouseScrolled(double mouseX, double mouseY, double delta) {
+        if (delta < 0 && hasDiet()) {
+            openDiet();
+            return true;
+        }
+        return super.mouseScrolled(mouseX, mouseY, delta);
+    }
+
+    private boolean hasDiet() {
+        return displayEntity instanceof IFoodEater eater && BuiltInRegistries.ITEM.getTagOrEmpty(eater.getFoodTag()).iterator().hasNext();
+    }
+
+    private void openDiet() {
+        Minecraft.getInstance().setScreen(new DietScreen(app, ((IFoodEater) displayEntity).getFoodTag(), this, parent));
+    }
+
+    private boolean isOverArrow(int mouseX, int mouseY) {
+        return mouseX >= arrowX && mouseX <= arrowX + this.font.width("▶")
+                && mouseY >= arrowY && mouseY <= arrowY + this.font.lineHeight;
     }
 
     private boolean isOverGenderButton(int mouseX, int mouseY, int btnX, int btnY) {
