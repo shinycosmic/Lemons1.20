@@ -52,7 +52,6 @@ public class HystrixCristataEntity extends AnimaliaLandBase implements GeoEntity
     private static final int ATTACK_ANIM_LENGTH = 15;
     private int attackCooldown;
     private int attackStartedAt = -1;
-    private boolean endThreat;
     private int currThreatPose;
     @Nullable
     private LivingEntity attackTarget;
@@ -268,7 +267,6 @@ public class HystrixCristataEntity extends AnimaliaLandBase implements GeoEntity
     public void onThreatStart(LivingEntity threat) {
         this.attackCooldown = 40;
         this.attackStartedAt = -1;
-        this.endThreat = false;
         this.attackTarget = null;
     }
 
@@ -280,18 +278,15 @@ public class HystrixCristataEntity extends AnimaliaLandBase implements GeoEntity
                 this.quillHit(this.attackTarget != null ? this.attackTarget : threat);
             }
             if (elapsed >= ATTACK_ANIM_LENGTH) {
-                this.endThreat = true;
+                this.attackStartedAt = -1;
+                this.attackTarget = null;
+                this.attackCooldown = 40;
             }
             return;
         }
         if (this.attackCooldown <= 0 && this.isInAttackReach(threat)) {
             this.startAttack();
         }
-    }
-
-    @Override
-    public boolean shouldEndThreat() {
-        return this.endThreat;
     }
 
     private void startAttack() {
@@ -318,7 +313,7 @@ public class HystrixCristataEntity extends AnimaliaLandBase implements GeoEntity
         if (this.attackStartedAt >= 0) {
             return false;
         }
-        return !this.hasLineOfSight(threat) || this.distanceTo(threat) > 16.0D;
+        return !this.hasLineOfSight(threat) || this.isThreatGone(threat, 6.0D);
     }
 
     @Override
