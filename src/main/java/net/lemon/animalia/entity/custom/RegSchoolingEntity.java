@@ -46,13 +46,17 @@ public class RegSchoolingEntity extends FishBase implements GeoEntity, Scannable
 
     @Override
     public Item getBreedingItem() {
-        if (this.getType() == ModEntities.NASO_BREVIROSTRIS.get()) {
+        if (this.getType() == ModEntities.NASO_BREVIROSTRIS.get()
+                || this.getType() == ModEntities.DUSSUMIERIA_ACUTA.get()
+                || this.getType() == ModEntities.SARDINOPS_SAGAX.get()
+                || this.getType() == ModEntities.SARDINOPS_MELANOSTICTA.get()
+                || this.getType() == ModEntities.SARDINA_PILCHARDUS.get()) {
             return ModItems.FISH_FOOD.get();
         } else if (this.getType() == ModEntities.POMACANTHUS_IMPERATOR.get()) {
             return Items.SPONGE;
         } else if (this.getType() == ModEntities.CHELMON_ROSTRATUS.get()
-                    || this.getType() == ModEntities.FORCIPIGER_LONGIROSTRIS.get()
-                    || this.getType() == ModEntities.FORCIPIGER_FLAVISSIMUS.get()) {
+                || this.getType() == ModEntities.FORCIPIGER_LONGIROSTRIS.get()
+                || this.getType() == ModEntities.FORCIPIGER_FLAVISSIMUS.get()) {
             return ModItems.WORM.get();
         } else if (this.getType() == ModEntities.SIGANUS_VULPINUS.get()) {
             return Items.SEAGRASS;
@@ -110,6 +114,14 @@ public class RegSchoolingEntity extends FishBase implements GeoEntity, Scannable
             return Component.translatable("trivia.animalia.centropyge_boylei");
         } else if (this.getType() == ModEntities.CENTROPYGE_LORICULA.get()) {
             return Component.translatable("trivia.animalia.centropyge_loricula");
+        } else if (this.getType() == ModEntities.DUSSUMIERIA_ACUTA.get()) {
+            return Component.translatable("trivia.animalia.dussumieria_acuta");
+        } else if (this.getType() == ModEntities.SARDINA_PILCHARDUS.get()) {
+            return Component.translatable("trivia.animalia.sardina_pilchardus");
+        } else if (this.getType() == ModEntities.SARDINOPS_MELANOSTICTA.get()) {
+            return Component.translatable("trivia.animalia.sardinops_melanosticta");
+        } else if (this.getType() == ModEntities.SARDINOPS_SAGAX.get()) {
+            return Component.translatable("trivia.animalia.sardinops_sagax");
         }
         return Component.translatable("debug.animalia.trivia");
     }
@@ -140,6 +152,12 @@ public class RegSchoolingEntity extends FishBase implements GeoEntity, Scannable
             return Component.translatable("family.animalia.siganidae");
         } else if (this.getType() == ModEntities.LEPTOBRAMA_MUELLERI.get()) {
             return Component.translatable("family.animalia.leptobramidae");
+        } else if (this.getType() == ModEntities.SARDINOPS_SAGAX.get()
+                || this.getType() == ModEntities.SARDINOPS_MELANOSTICTA.get()
+                || this.getType() == ModEntities.SARDINA_PILCHARDUS.get()) {
+            return Component.translatable("family.animalia.alosidae");
+        } else if (this.getType() == ModEntities.DUSSUMIERIA_ACUTA.get()) {
+            return Component.translatable("family.animalia.dussumieriidae");
         }
         return Component.translatable("debug.animalia.family");
     }
@@ -148,6 +166,11 @@ public class RegSchoolingEntity extends FishBase implements GeoEntity, Scannable
     public Component getOrder() {
         if(this.getType() == ModEntities.LEPTOBRAMA_MUELLERI.get()) {
             return Component.translatable("order.animalia.carangiformes");
+        } else if(this.getType() == ModEntities.DUSSUMIERIA_ACUTA.get()
+                || this.getType() == ModEntities.SARDINOPS_SAGAX.get()
+                || this.getType() == ModEntities.SARDINOPS_MELANOSTICTA.get()
+                || this.getType() == ModEntities.SARDINA_PILCHARDUS.get()) {
+            return Component.translatable("order.animalia.clupeiformes");
         }
         return Component.translatable("order.animalia.acanthuriformes");
     }
@@ -224,7 +247,11 @@ public class RegSchoolingEntity extends FishBase implements GeoEntity, Scannable
                 || this.getType() == ModEntities.ACANTHURUS_JAPONICUS.get()
                 || this.getType() == ModEntities.ACANTHURUS_LINEATUS.get()
                 || this.getType() == ModEntities.ACANTHURUS_ACHILLES.get()
-                || this.getType() == ModEntities.ACANTHURUS_COERULEUS.get()) {
+                || this.getType() == ModEntities.ACANTHURUS_COERULEUS.get()
+                || this.getType() == ModEntities.DUSSUMIERIA_ACUTA.get()
+                || this.getType() == ModEntities.SARDINOPS_SAGAX.get()
+                || this.getType() == ModEntities.SARDINOPS_MELANOSTICTA.get()
+                || this.getType() == ModEntities.SARDINA_PILCHARDUS.get()) {
             return true;
         }
         return false;
@@ -272,6 +299,10 @@ public class RegSchoolingEntity extends FishBase implements GeoEntity, Scannable
                     || this.getType() == ModEntities.CENTROPYGE_BOYLEI.get()
                     || this.getType() == ModEntities.CENTROPYGE_VENUSTA.get()) {
             return AnimaliaFunctionUtil.getScaleForSize(16, 25);
+        } else if (this.getType() == ModEntities.SARDINOPS_MELANOSTICTA.get() || this.getType() == ModEntities.SARDINOPS_SAGAX.get()) {
+            return AnimaliaFunctionUtil.getScaleForSize(18, 40);
+        } else if (this.getType() == ModEntities.DUSSUMIERIA_ACUTA.get() || this.getType() == ModEntities.SARDINA_PILCHARDUS.get()) {
+            return AnimaliaFunctionUtil.getScaleForSize(18, 30);
         }
         return 1;
     }
@@ -295,6 +326,10 @@ public class RegSchoolingEntity extends FishBase implements GeoEntity, Scannable
         HolonetEntities.register(ModEntities.CENTROPYGE_BOYLEI, Scannable.AppName.FISH, "Acanthuriformes");
         HolonetEntities.register(ModEntities.CENTROPYGE_LORICULA, Scannable.AppName.FISH, "Acanthuriformes");
         HolonetEntities.register(ModEntities.CENTROPYGE_VENUSTA, Scannable.AppName.FISH, "Acanthuriformes");
+        HolonetEntities.register(ModEntities.DUSSUMIERIA_ACUTA, Scannable.AppName.FISH, "Clupeiformes");
+        HolonetEntities.register(ModEntities.SARDINOPS_SAGAX, Scannable.AppName.FISH, "Clupeiformes");
+        HolonetEntities.register(ModEntities.SARDINOPS_MELANOSTICTA, Scannable.AppName.FISH, "Clupeiformes");
+        HolonetEntities.register(ModEntities.SARDINA_PILCHARDUS, Scannable.AppName.FISH, "Clupeiformes");
 
     }
 

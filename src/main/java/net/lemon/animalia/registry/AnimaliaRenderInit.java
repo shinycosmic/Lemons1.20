@@ -76,6 +76,10 @@ public class AnimaliaRenderInit {
         EntityRenderers.register(ModEntities.CARCHARHINUS_BREVIPINNA.get(), CarcharhinusBrevipinnaRenderer::new);
         EntityRenderers.register(ModEntities.PROTEUS_ANGUINUS.get(), ProteusAnguinusRenderer::new);
         EntityRenderers.register(ModEntities.MUNIDOPSIS_POLYMORPHA.get(), MunidopsisRenderer::new);
+        EntityRenderers.register(ModEntities.DUSSUMIERIA_ACUTA.get(), SardineRenderer::new);
+        EntityRenderers.register(ModEntities.SARDINOPS_MELANOSTICTA.get(), SardineRenderer::new);
+        EntityRenderers.register(ModEntities.SARDINOPS_SAGAX.get(), SardineRenderer::new);
+        EntityRenderers.register(ModEntities.SARDINA_PILCHARDUS.get(), SardineRenderer::new);
 
         //Land
         EntityRenderers.register(ModEntities.SMUTSIA_GIGANTEA.get(), SmutsiaGiganteaRenderer::new);

@@ -148,6 +148,14 @@ public class ModSpawns {
                 BiomeSelector.in(Biomes.WARM_OCEAN));
         add(ModEntities.CARCHARHINUS_BREVIPINNA, 2, 1, 3,
                 BiomeSelector.in(Biomes.WARM_OCEAN, Biomes.DEEP_OCEAN, Biomes.LUKEWARM_OCEAN, Biomes.DEEP_LUKEWARM_OCEAN, Biomes.OCEAN));
+        add(ModEntities.DUSSUMIERIA_ACUTA, 3, 8, 16,
+                BiomeSelector.in(Biomes.DEEP_OCEAN, Biomes.LUKEWARM_OCEAN, Biomes.DEEP_LUKEWARM_OCEAN, Biomes.OCEAN));
+        add(ModEntities.SARDINA_PILCHARDUS, 3, 8, 16,
+                BiomeSelector.in(Biomes.DEEP_OCEAN, Biomes.OCEAN));
+        add(ModEntities.SARDINOPS_MELANOSTICTA, 3, 8, 16,
+                BiomeSelector.in(Biomes.DEEP_OCEAN, Biomes.LUKEWARM_OCEAN, Biomes.DEEP_LUKEWARM_OCEAN, Biomes.OCEAN));
+        add(ModEntities.SARDINOPS_SAGAX, 3, 8, 16,
+                BiomeSelector.in(Biomes.DEEP_OCEAN, Biomes.LUKEWARM_OCEAN, Biomes.DEEP_LUKEWARM_OCEAN, Biomes.OCEAN));
 
         add(ModEntities.PROCAMBARUS_CLARKII, 6, 1, 2,
                 BiomeSelector.in(Biomes.SWAMP, Biomes.RIVER));

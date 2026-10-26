@@ -208,6 +208,10 @@
   "entity.animalia.galictis_vittata": "Greater Grison",
   "entity.animalia.carcharhinus_brevipinna": "Spinner Shark",
   "entity.animalia.proteus_anguinus": "Olm",
+  "entity.animalia.dussumieria_acuta": "Rainbow Sardine",
+  "entity.animalia.sardina_pilchardus": "European Pilchard",
+  "entity.animalia.sardinops_sagax": "Pacific Sardine",
+  "entity.animalia.sardinops_melanosticta": "Japanese Pilchard",
 
   "entity.animalia.dissostichus_eleginoides.scientific": "Dissostichus eleginoides",
   "entity.animalia.eleginops_maclovinus.scientific": "Eleginops maclovinus",
@@ -290,6 +294,10 @@
   "entity.animalia.galictis_vittata.scientific": "Galictis vittata",
   "entity.animalia.carcharhinus_brevipinna.scientific": "Carcharhinus brevipinna",
   "entity.animalia.proteus_anguinus.scientific": "Proteus anguinus",
+  "entity.animalia.dussumieria_acuta.scientific": "Dussumieria acuta",
+  "entity.animalia.sardina_pilchardus.scientific": "Sardina pilchardus",
+  "entity.animalia.sardinops_sagax.scientific": "Sardinops sagax",
+  "entity.animalia.sardinops_melanosticta.scientific": "Sardinops melanosticta",
 
   "order.animalia.perciformes": "Perciformes",
   "order.animalia.anabantiformes": "Anabantiformes",
@@ -311,6 +319,7 @@
   "order.animalia.carcharhiniformes": "Carcharhiniformes",
   "order.animalia.urodela": "Urodela",
   "order.animalia.rodentia": "Rodentia",
+  "order.animalia.clupeiformes": "Clupeiformes",
 
   "family.animalia.percophidae": "Percophidae",
   "family.animalia.eleginopidae": "Eleginopidae",
@@ -357,6 +366,8 @@
   "family.animalia.munidopsidae": "Munidopsidae",
   "family.animalia.ailuridae": "Ailuridae",
   "family.animalia.hystricidae": "Hystricidae",
+  "family.animalia.alosidae": "Alosidae",
+  "family.animalia.dussumieriidae": "Dussumieriidae",
 
   "trivia.animalia.dissostichus_eleginoides": "The Chilean Sea Bass, also known as the Patagonian Toothfish is an icefish that lives in the southern cold oceans at depths of 45 to over 3000 meters deep.",
   "trivia.animalia.percophis_brasiliensis": "The Brazilian Flathead is considered to be the most basal member of Notothenioidei. It lives off the coast of Brazil and Argentina.",
@@ -439,6 +450,10 @@
   "trivia.animalia.galictis_vittata": "This animal is a species of mustelid native to Central and South America. They have a long neck and bushy tails and are known to feed on smaller vertebrates. They also respond to threats with short grunts and barks.",
   "trivia.animalia.carcharhinus_brevipinna": "A smaller sized shark, this animal is known for spinning into schools of forage fish in order to feed on them. It grows to a maximum of 3m in length.",
   "trivia.animalia.proteus_anguinus": "The olm is a cave-dwelling aquatic salamander that is endemic to several caves in Dinaric Alps, mostly in Croatia. It has underdeveloped eyes and and exhibits neoteny, with external gills retained as adults.",
+  "trivia.animalia.dussumieria_acuta": "The rainbow sardine is a small schooling forage fish that can be found in the Indo-Pacific regions and the Persian Gulf. It is an important fish to commercial fisheries and typically forms large schools.",
+  "trivia.animalia.sardinops_sagax": "The Pacific sardine is a small schooling forage fish that can be found in most oceans. It reaches 40cm in length and typically forms massive schools of hundreds of individuals.",
+  "trivia.animalia.sardinops_melanosticta": "The Japanese pilchard is a small schooling forage fish that is found in the Pacific Ocean. It was once considered a synonym of Sardinops sagax but has since been validated as its own species: Sardinops melanosticta.",
+  "trivia.animalia.sardina_pilchardus": "The European pilchard is a small schooling forage fish that can be found in the northeast Atlantic, Mediterranean and the Black Sea. They move towards deeper cooler waters during fall and winter, returning to shallower waters when it is warmer.",
 
   "debug.animalia.trivia": "If this value displays, there is a bug [trivia]",
   "debug.animalia.family": "if this text appears, there is a bug [family]",

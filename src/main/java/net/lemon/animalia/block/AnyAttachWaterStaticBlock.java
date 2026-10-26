@@ -25,14 +25,14 @@ public class AnyAttachWaterStaticBlock extends AmethystClusterBlock {
         super(height, aabbOffset, properties);
     }
 
-    @Nullable
-    @Override
-    public BlockState getStateForPlacement(BlockPlaceContext context) {
-        if (!context.getLevel().getFluidState(context.getClickedPos()).isSourceOfType(Fluids.WATER)) {
-            return null;
-        }
-        return super.getStateForPlacement(context);
-    }
+//    @Nullable
+//    @Override
+//    public BlockState getStateForPlacement(BlockPlaceContext context) {
+//        if (!context.getLevel().getFluidState(context.getClickedPos()).isSourceOfType(Fluids.WATER)) {
+//            return null;
+//        }
+//        return super.getStateForPlacement(context);
+//    }
 
     @Override
     public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
