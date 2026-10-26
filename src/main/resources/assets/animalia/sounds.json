@@ -21,5 +21,11 @@
       "animalia:entity/galictis_vittata/grumble1",
       "animalia:entity/galictis_vittata/grumble2"
     ]
+  },
+  "entity.hystrix_cristata.rattle": {
+    "subtitle": "entity.animalia.hystrix_cristata.rattle",
+    "sounds": [
+      "animalia:entity/hystrix_cristata/rattle1"
+    ]
   }
 }
