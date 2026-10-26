@@ -10,7 +10,9 @@
     "subtitle": "entity.animalia.galictis_vittata.bark",
     "sounds": [
       "animalia:entity/galictis_vittata/bark1",
-      "animalia:entity/galictis_vittata/bark2"
+      "animalia:entity/galictis_vittata/bark2",
+      "animalia:entity/galictis_vittata/bark3",
+      "animalia:entity/galictis_vittata/bark4"
     ]
   },
   "entity.galictis_vittata.grumble": {
