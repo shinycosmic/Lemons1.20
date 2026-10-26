@@ -14,6 +14,7 @@ public class AnimaliaSound {
     public static final RegistryObject<SoundEvent> MUNTIACUS_MUNTJAK_BARK = registerSound("entity.muntiacus_muntjak.bark");
     public static final RegistryObject<SoundEvent> GALICTIS_GRUMBLE = registerSound("entity.galictis_vittata.grumble");
     public static final RegistryObject<SoundEvent> GALICTIS_BARK = registerSound("entity.galictis_vittata.bark");
+    public static final RegistryObject<SoundEvent> HYSTRIX_RATTLE = registerSound("entity.hystrix_cristata.rattle");
 
     private static RegistryObject<SoundEvent> registerSound(String name) {
         return REGISTRY.register(name, () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(Animalia.MODID, name)));

@@ -7,6 +7,7 @@ import net.lemon.animalia.entity.ai.ThreatGoal;
 import net.lemon.animalia.entity.bases.AnimaliaLandBase;
 import net.lemon.animalia.entity.bases.helpers.ActivityTime;
 import net.lemon.animalia.entity.bases.helpers.ICanThreat;
+import net.lemon.animalia.registry.AnimaliaSound;
 import net.lemon.animalia.registry.ModEntities;
 import net.lemon.animalia.registry.ModTags;
 import net.lemon.animalia.util.AnimaliaFunctionUtil;
@@ -17,6 +18,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.DifficultyInstance;
@@ -329,6 +331,14 @@ public class HystrixCristataEntity extends AnimaliaLandBase implements GeoEntity
     @Override
     public boolean onThreatHurt(LivingEntity threat) {
         return false;
+    }
+
+    @Override
+    protected SoundEvent getAmbientSound() {
+        if(this.getThreatPhase() == THREAT_PHASE_DISPLAY) {
+            return AnimaliaSound.HYSTRIX_RATTLE.get();
+        }
+        return super.getAmbientSound();
     }
 
     @Override
