@@ -66,6 +66,7 @@ public abstract class AnimaliaLandBase extends Animal implements IActivityTime, 
     private static final EntityDataAccessor<Integer> SLEEP_PHASE = SynchedEntityData.defineId(AnimaliaLandBase.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Integer> SLEEP_IDLE = SynchedEntityData.defineId(AnimaliaLandBase.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Byte> CLIMB_DATA = SynchedEntityData.defineId(AnimaliaLandBase.class, EntityDataSerializers.BYTE);
+    private static final EntityDataAccessor<Boolean> IS_PASSIVE = SynchedEntityData.defineId(AnimaliaLandBase.class, EntityDataSerializers.BOOLEAN);
 
     private int grazeTicks = 0;
     private int wantsToGrazeUntil;
@@ -115,6 +116,7 @@ public abstract class AnimaliaLandBase extends Animal implements IActivityTime, 
         this.entityData.define(SLEEP_PHASE, 0);
         this.entityData.define(SLEEP_IDLE, -1);
         this.entityData.define(CLIMB_DATA, (byte) 0);
+        this.entityData.define(IS_PASSIVE, false);
 
     }
 
@@ -216,6 +218,14 @@ public abstract class AnimaliaLandBase extends Animal implements IActivityTime, 
     @Override
     public void setEatAge(int age) {
         this.setAge(age);
+    }
+
+    public void setIsPassive(boolean configValue) {
+        this.entityData.set(IS_PASSIVE, configValue);
+    }
+
+    public boolean getIsPassive() {
+        return this.entityData.get(IS_PASSIVE);
     }
 
     protected SoundEvent getAmbientSound() {

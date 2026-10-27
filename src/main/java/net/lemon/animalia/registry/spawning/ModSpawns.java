@@ -170,7 +170,7 @@ public class ModSpawns {
         add(ModEntities.PROTEUS_ANGUINUS, 2, 1, 1,
                 BiomeSelector.in(Biomes.DRIPSTONE_CAVES, Biomes.WINDSWEPT_HILLS, Biomes.WINDSWEPT_GRAVELLY_HILLS));
         add(ModEntities.MUNIDOPSIS_POLYMORPHA, 5, 1, 3,
-                BiomeSelector.in(BiomeTags.IS_OCEAN, BiomeTags.IS_DEEP_OCEAN, BiomeTags.IS_BEACH));
+                BiomeSelector.in(BiomeTags.IS_BEACH));
 
         //land
         add(ModEntities.SMUTSIA_GIGANTEA, 3, 1, 1,
