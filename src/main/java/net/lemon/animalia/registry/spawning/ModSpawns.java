@@ -2,16 +2,22 @@ package net.lemon.animalia.registry.spawning;
 
 import net.lemon.animalia.registry.ModEntities;
 import net.lemon.animalia.registry.ModTags;
+import net.minecraft.core.Holder;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.BiomeTags;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.biome.Biomes;
+import net.minecraft.world.level.levelgen.structure.BuiltinStructures;
+import net.minecraft.world.level.levelgen.structure.Structure;
 import net.minecraftforge.registries.RegistryObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class ModSpawns {
     public static final List<SpawnEntry> ENTRIES = new ArrayList<>();
+    public static final List<StructureSpawnEntry> STRUCTURE_ENTRIES = new ArrayList<>();
 
     /***
      * Parameter definitions:
@@ -199,6 +205,10 @@ public class ModSpawns {
                 BiomeSelector.in(Biomes.BAMBOO_JUNGLE));
         add(ModEntities.HYSTRIX_CRISTATA, 2, 1, 3,
                 BiomeSelector.in(BiomeTags.IS_SAVANNA));
+
+
+        /// Below for Structure based spawns
+        addStructure(ModEntities.TAUTOGA_ONITIS, 10, 1, 3, BuiltinStructures.SHIPWRECK);
     }
 
     private static void add(RegistryObject<? extends EntityType<?>> type, int weight, int minGroup, int maxGroup, BiomeSelector selector) {
@@ -207,5 +217,16 @@ public class ModSpawns {
 
     public record SpawnEntry(RegistryObject<? extends EntityType<?>> type, int weight, int minGroup, int maxGroup,
                              BiomeSelector selector) {
+    }
+
+    @SafeVarargs
+    private static void addStructure(RegistryObject<? extends EntityType<?>> type, int weight, int minGroup, int maxGroup, ResourceKey<Structure>... structures) {
+        STRUCTURE_ENTRIES.add(new StructureSpawnEntry(type, weight, minGroup, maxGroup, Set.of(structures)));
+    }
+
+    public record StructureSpawnEntry(RegistryObject<? extends EntityType<?>> type, int weight, int minGroup, int maxGroup, Set<ResourceKey<Structure>> structures) {
+        public boolean matches(Holder<Structure> structure) {
+            return this.structures.stream().anyMatch(structure::is);
+        }
     }
 }

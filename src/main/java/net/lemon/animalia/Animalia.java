@@ -7,6 +7,7 @@ import net.lemon.animalia.registry.*;
 import net.lemon.animalia.registry.creativetabs.ModCreativeModeTabs;
 import net.lemon.animalia.client.screens.FilterTrapScreen;
 import net.lemon.animalia.registry.AnimaliaRenderInit;
+import net.lemon.animalia.registry.worldgen.ModStructureModifiers;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
@@ -49,6 +50,7 @@ public class Animalia {
         ModFeatures.register(modEventBus);
         ModVillagers.register(modEventBus);
         AnimaliaSound.register(modEventBus);
+        ModStructureModifiers.register(modEventBus);
 
         GeckoLib.initialize();
 
