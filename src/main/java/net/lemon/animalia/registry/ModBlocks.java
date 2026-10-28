@@ -19,7 +19,7 @@ import java.util.function.Supplier;
 public class ModBlocks {
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, Animalia.MODID);
 
-    public static final RegistryObject<Block> FILTER_TRAP = registerBlock("filter_trap", () -> new FilterTrapBlock(BlockBehaviour.Properties.copy(Blocks.STONE).noOcclusion()));
+    public static final RegistryObject<Block> FILTER_TRAP = registerBlock("filter_trap", () -> new FilterTrapBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).noOcclusion()));
     public static final RegistryObject<Block> MOUND_NEST = registerBlock("mound_nest", () -> new MoundNestBlock(BlockBehaviour.Properties.copy(Blocks.SAND).noOcclusion().noLootTable()));
     public static final RegistryObject<Block> TERMITE_MOUND = registerBlock("termite_mound", () -> new Block(BlockBehaviour.Properties.copy(Blocks.SAND)));
     public static final RegistryObject<Block> RED_TERMITE_MOUND = registerBlock("red_termite_mound", () -> new Block(BlockBehaviour.Properties.copy(Blocks.RED_SAND)));

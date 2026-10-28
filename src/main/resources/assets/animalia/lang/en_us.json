@@ -212,6 +212,8 @@
   "entity.animalia.sardina_pilchardus": "European Pilchard",
   "entity.animalia.sardinops_sagax": "Pacific Sardine",
   "entity.animalia.sardinops_melanosticta": "Japanese Pilchard",
+  "entity.animalia.congiopodus_torvus": "Smooth Horsefish",
+  "entity.animalia.tautoga_onitis": "Tautog",
 
   "entity.animalia.dissostichus_eleginoides.scientific": "Dissostichus eleginoides",
   "entity.animalia.eleginops_maclovinus.scientific": "Eleginops maclovinus",
@@ -298,6 +300,8 @@
   "entity.animalia.sardina_pilchardus.scientific": "Sardina pilchardus",
   "entity.animalia.sardinops_sagax.scientific": "Sardinops sagax",
   "entity.animalia.sardinops_melanosticta.scientific": "Sardinops melanosticta",
+  "entity.animalia.tautoga_onitis.scientific": "Tautoga onitis",
+  "entity.animalia.congiopodus_torvus.scientific": "Congiopodus torvus",
 
   "order.animalia.perciformes": "Perciformes",
   "order.animalia.anabantiformes": "Anabantiformes",
@@ -320,6 +324,7 @@
   "order.animalia.urodela": "Urodela",
   "order.animalia.rodentia": "Rodentia",
   "order.animalia.clupeiformes": "Clupeiformes",
+  "order.animalia.labriformes": "Labriformes",
 
   "family.animalia.percophidae": "Percophidae",
   "family.animalia.eleginopidae": "Eleginopidae",
@@ -368,6 +373,8 @@
   "family.animalia.hystricidae": "Hystricidae",
   "family.animalia.alosidae": "Alosidae",
   "family.animalia.dussumieriidae": "Dussumieriidae",
+  "family.animalia.labridae": "Labridae",
+  "family.animalia.congiopodidae": "Congiopodidae",
 
   "trivia.animalia.dissostichus_eleginoides": "The Chilean Sea Bass, also known as the Patagonian Toothfish is an icefish that lives in the southern cold oceans at depths of 45 to over 3000 meters deep.",
   "trivia.animalia.percophis_brasiliensis": "The Brazilian Flathead is considered to be the most basal member of Notothenioidei. It lives off the coast of Brazil and Argentina.",
@@ -454,6 +461,8 @@
   "trivia.animalia.sardinops_sagax": "The Pacific sardine is a small schooling forage fish that can be found in most oceans. It reaches 40cm in length and typically forms massive schools of hundreds of individuals.",
   "trivia.animalia.sardinops_melanosticta": "The Japanese pilchard is a small schooling forage fish that is found in the Pacific Ocean. It was once considered a synonym of Sardinops sagax but has since been validated as its own species: Sardinops melanosticta.",
   "trivia.animalia.sardina_pilchardus": "The European pilchard is a small schooling forage fish that can be found in the northeast Atlantic, Mediterranean and the Black Sea. They move towards deeper cooler waters during fall and winter, returning to shallower waters when it is warmer.",
+  "trivia.animalia.congiopodus_torvus": "The smooth horsefish is a medium sized bottom dwelling fish that has a projected mouth and a tall dorsal fin that extends to its head. They are endemic to temperate waters of southern Africa. Babies have rough skin while adults are smooth, hence the name.",
+  "trivia.animalia.tautoga_onitis": "The Tautog, also known as the blackfish is a species of wrasse that can be found in shallow waters. They have powerful jaws, allowing them to crush hard shelled prey. Their young take shelter in sea grasses and are green for camouflage.",
 
   "debug.animalia.trivia": "If this value displays, there is a bug [trivia]",
   "debug.animalia.family": "if this text appears, there is a bug [family]",

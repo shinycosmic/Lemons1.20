@@ -49,7 +49,7 @@ public class FilterTrapBlockEntity extends BlockEntity implements MenuProvider {
     private LazyOptional<IItemHandler> lazyItemHandler = LazyOptional.empty();
     protected final ContainerData data;
     private int timer = 0;
-    private int dropTimer = 600;
+    private int dropTimer = 200;
 
     public FilterTrapBlockEntity(BlockPos pPos, BlockState pBlockState) {
         super(ModBlockEntities.FILTER_TRAP_BE.get(), pPos, pBlockState);
@@ -120,7 +120,6 @@ public class FilterTrapBlockEntity extends BlockEntity implements MenuProvider {
     protected void saveAdditional(CompoundTag pTag) {
         pTag.put("inventory", itemHandler.serializeNBT());
         pTag.putInt("filter_trap.timer", timer);
-        pTag.putInt("filter_trap.dropTimer", dropTimer);
         super.saveAdditional(pTag);
     }
 
@@ -129,7 +128,6 @@ public class FilterTrapBlockEntity extends BlockEntity implements MenuProvider {
         super.load(pTag);
         itemHandler.deserializeNBT(pTag.getCompound("inventory"));
         timer = pTag.getInt("filter_trap.timer");
-        dropTimer = pTag.getInt("filter_trap.dropTimer");
     }
 
     public ItemStack getRenderStack() {
