@@ -89,6 +89,7 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
         tag(ModTags.Blocks.SOFT_CLIMBABLE).addTag(BlockTags.LEAVES);
         tag(ModTags.Blocks.SOFT_CLIMBABLE).addTag(BlockTags.LOGS);
 
+        tag(BlockTags.MINEABLE_WITH_AXE).add(ModBlocks.FILTER_TRAP.get());
         tag(BlockTags.MINEABLE_WITH_SHOVEL).addTag(ModTags.Blocks.TERMITE_MOUNDS);
 
     }
