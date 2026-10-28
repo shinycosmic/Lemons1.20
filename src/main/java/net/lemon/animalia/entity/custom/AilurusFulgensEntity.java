@@ -299,6 +299,7 @@ public class AilurusFulgensEntity extends AnimaliaLandBase implements GeoEntity,
                 this.usePlayerItem(player, hand, itemstack);
                 this.heal(2.0F);
                 this.startEating();
+                this.tryTrust();
                 this.getNavigation().stop();
                 if (this.getAge() == 0 && this.canFallInLove()) {
                     this.setInLove(player);

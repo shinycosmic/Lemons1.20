@@ -22,7 +22,6 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.FluidTags;
-import net.minecraft.tags.TagKey;
 import net.minecraft.util.Mth;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.InteractionHand;
@@ -50,7 +49,6 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.EnumSet;
 import java.util.Objects;
-import java.util.UUID;
 import java.util.function.Predicate;
 
 import static net.lemon.animalia.entity.bases.AnimaliaBreedableWater.*;
@@ -86,8 +84,6 @@ public abstract class AnimaliaLandBase extends Animal implements IActivityTime, 
     private int twitchIdleTicks;
     private boolean wantsToClimb;
     private boolean bold;
-    @Nullable
-    private UUID trustedPlayer;
 
     protected AnimaliaLandBase(EntityType<? extends Animal> entityType, Level level) {
         super(entityType, level);
@@ -234,11 +230,18 @@ public abstract class AnimaliaLandBase extends Animal implements IActivityTime, 
         return this.entityData.get(IS_PASSIVE);
     }
 
-    public boolean isScaredOf(LivingEntity entity) {
+    public boolean isThreat(LivingEntity entity) {
         if (!Config.TRUST_PLAYER.get() || !this.getIsPassive()) {
             return true;
         }
         return !(entity instanceof Player) && entity.getType().is(ModTags.EntityTypes.PREDATORS);
+    }
+
+    public void tryTrust() {
+        if (!this.level().isClientSide && Config.TRUST_PLAYER.get() && !this.getIsPassive() && this.random.nextInt(5) == 0) {
+            this.setIsPassive(true);
+            ((ServerLevel) this.level()).sendParticles(ParticleTypes.HEART, this.getX(), this.getY(0.5D), this.getZ(), 5, 0.3D, 0.3D, 0.3D, 0.0D);
+        }
     }
 
     protected SoundEvent getAmbientSound() {
@@ -839,6 +842,7 @@ public abstract class AnimaliaLandBase extends Animal implements IActivityTime, 
         return super.canFallInLove() && !this.isPregnant();
     }
 
+    @Override
     public InteractionResult mobInteract(Player player, InteractionHand hand) {
         ItemStack itemstack = player.getItemInHand(hand);
         int i = this.getAge();
@@ -855,10 +859,7 @@ public abstract class AnimaliaLandBase extends Animal implements IActivityTime, 
             this.usePlayerItem(player, hand, itemstack);
             this.heal(healAmount);
             this.startEating();
-            if (!this.level().isClientSide && Config.TRUST_PLAYER.get() && !this.getIsPassive() && this.random.nextInt(5) == 0) {
-                this.setIsPassive(true);
-                ((ServerLevel) this.level()).sendParticles(ParticleTypes.HEART, this.getX(), this.getY(0.5D), this.getZ(), 5, 0.3D, 0.3D, 0.3D, 0.0D);
-            }
+            this.tryTrust();
             if (this.level().isClientSide) {
                 return InteractionResult.CONSUME;
             }
@@ -950,7 +951,7 @@ public abstract class AnimaliaLandBase extends Animal implements IActivityTime, 
             this.speedMult = speedMult;
             this.fleeLength = fleeLength;
             this.proximityRange = proximityRange;
-            this.threatPredicate = threatPredicate.and(EntitySelector.NO_SPECTATORS).and(entity -> !(entity instanceof Player player) || !mob.isBold() && !player.isCrouching()).and(mob::isScaredOf);
+            this.threatPredicate = threatPredicate.and(EntitySelector.NO_SPECTATORS).and(entity -> !(entity instanceof Player player) || !mob.isBold() && !player.isCrouching()).and(mob::isThreat);
             this.targetingConditions = TargetingConditions.forNonCombat().range(proximityRange).selector(this.threatPredicate);
             this.setFlags(EnumSet.of(Goal.Flag.MOVE));
         }
