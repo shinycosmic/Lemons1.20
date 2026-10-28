@@ -20,7 +20,11 @@ public interface ICanClimb {
     default boolean babyClimbEnabled() { return true; }
 
     default boolean climbEnabled() {
-        return this.canClimb() && (this.babyClimbEnabled() || !((Mob) this).isBaby());
+        return (this.canClimb() || this.panicClimb()) && (this.babyClimbEnabled() || !((Mob) this).isBaby());
+    }
+
+    default boolean panicClimb() {
+        return false;
     }
 
     byte getClimbData();
@@ -67,7 +71,7 @@ public interface ICanClimb {
      * basically, this method controls if during pathfinding, the mob should treat walls as valid passes
      */
     default boolean canPathfindWithWalls() {
-        return this.climbEnabled() && (this.wantsToClimb() || this.isAttached());
+        return this.climbEnabled() && (this.canClimb() || this.wantsToClimb() || this.isAttached());
     }
 
     default Direction getClimbFace() {
@@ -162,7 +166,7 @@ public interface ICanClimb {
         }
         PathfinderMob mob = (PathfinderMob) this;
         if (!this.climbEnabled() || mob.isPassenger() || mob.isLeashed()
-                || (!this.wantsToClimb() && (mob.onGround() || !mob.getNavigation().isDone()))
+                || (!this.wantsToClimb() && (!this.canClimb() || mob.getNavigation().isDone()))
                 || (mob.onGround() && mob.getMoveControl().getWantedY() - mob.getY() <= 0.5D)) {
             this.detach();
             return;

@@ -131,7 +131,7 @@ public class CrossarchusEntity extends AnimaliaLandBase implements GeoEntity, Sc
     }
 
     @Override
-    public boolean canClimb() {
+    public boolean panicClimb() {
         return true;
     }
 
