@@ -37,7 +37,9 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 public class FilterTrapBlockEntity extends BlockEntity implements MenuProvider {
-    private final ItemStackHandler itemHandler = new ItemStackHandler(6);
+    private final ItemStackHandler itemHandler = new ItemStackHandler(6) {
+        @Override
+        public boolean isItemValid(int slot, @NotNull ItemStack stack) {return slot != FUEL_SLOT || stack.is(ModTags.Items.FISH_FOOD);}};
     private static final int OUTPUT_SLOT1 = 0;
     private static final int OUTPUT_SLOT2 = 1;
     private static final int OUTPUT_SLOT3 = 2;
@@ -153,8 +155,7 @@ public class FilterTrapBlockEntity extends BlockEntity implements MenuProvider {
 
             if (timer >= dropTimer) {
                 ItemStack drop = getDrop();
-                if (!drop.isEmpty()) {
-                    addDropToInventory(drop);
+                if (!drop.isEmpty() && addDropToInventory(drop)) {
                     consumeFuel();
                 }
                 resetTimer();
@@ -198,15 +199,16 @@ public class FilterTrapBlockEntity extends BlockEntity implements MenuProvider {
         timer = 0;
     }
 
-    private void addDropToInventory(ItemStack stack) {
-        for(int i = 0; i < itemHandler.getSlots(); i++) {
+    private boolean addDropToInventory(ItemStack stack) {
+        for(int i = OUTPUT_SLOT1; i <= OUTPUT_SLOT5; i++) {
             stack = itemHandler.insertItem(i, stack, false);
 
             if(stack.isEmpty()) {
                 setChanged();
-                return;
+                return true;
             }
         }
+        return false;
     }
 
     private boolean placedInWater() {

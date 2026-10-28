@@ -3,6 +3,7 @@ package net.lemon.animalia.client.screens;
 import net.lemon.animalia.block.entities.FilterTrapBlockEntity;
 import net.lemon.animalia.registry.ModBlocks;
 import net.lemon.animalia.registry.ModMenuTypes;
+import net.lemon.animalia.registry.ModTags;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.entity.player.Inventory;
@@ -35,7 +36,7 @@ public class FilterTrapMenu extends AbstractContainerMenu {
             for (int i = 0; i < 5; i++) {
                 this.addSlot(new AnimaliaSlot(iItemHandler, i, 44 + (i * 18), 31, AnimaliaSlot.DENY_ALL));
             }
-            this.addSlot(new AnimaliaSlot(iItemHandler, 5, 80, 55, stack -> stack.is(ItemTags.FISHES)));
+            this.addSlot(new AnimaliaSlot(iItemHandler, 5, 80, 55, stack -> stack.is(ModTags.Items.FISH_FOOD)));
         });
         addDataSlots(data);
     }
