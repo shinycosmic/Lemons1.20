@@ -82,11 +82,6 @@ public class ToothfishEntity extends FishBase implements GeoEntity, Scannable {
     }
 
     @Override
-    protected ResourceLocation getDefaultLootTable() {
-        return super.getDefaultLootTable();
-    }
-
-    @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
         controllers.add(new AnimationController<>(this, "controller", 0, this::predicate));
         controllers.add(new AnimationController<>(this, "eat_controller", 0, this::eatPredicate));

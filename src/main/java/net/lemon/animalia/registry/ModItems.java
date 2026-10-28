@@ -44,6 +44,7 @@ public class ModItems {
     public static final RegistryObject<Item> TADPOLE = ITEMS.register("tadpole", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> TERMITE = ITEMS.register("termite", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> WORM = ITEMS.register("worm", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> GRUB = ITEMS.register("grub", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> PROCAMBARUS_CLARKII = ITEMS.register("procambarus_clarkii", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> PROCAMBARUS_ALLENI = ITEMS.register("procambarus_alleni", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> PROCAMBARUS_VIRGINALIS = ITEMS.register("procambarus_virginalis", () -> new Item(new Item.Properties()));

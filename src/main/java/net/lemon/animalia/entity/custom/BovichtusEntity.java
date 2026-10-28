@@ -1,5 +1,6 @@
 package net.lemon.animalia.entity.custom;
 
+import com.google.common.collect.ImmutableMap;
 import net.lemon.animalia.entity.bases.BottomWalkerSwimmerBase;
 import net.lemon.animalia.entity.bases.FishBase;
 import net.lemon.animalia.entity.bases.helpers.ActivityTime;
@@ -31,8 +32,14 @@ import software.bernie.geckolib.core.animatable.instance.SingletonAnimatableInst
 import software.bernie.geckolib.core.animation.*;
 import software.bernie.geckolib.core.object.PlayState;
 
+import java.util.Map;
+
 public class BovichtusEntity extends BottomWalkerSwimmerBase implements GeoEntity, Scannable {
     private final AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
+
+//    private static final Map<EntityType, Integer> MOB_ID = ImmutableMap.<EntityType, Integer>builder()
+//            .put(ModEntities.BOVICHTUS_VARIEGATUS.get(), 0)
+//            .put(ModEntities.CONGIOPODUS_TORVUS.get(), 1).build();
 
     public BovichtusEntity(EntityType<? extends FishBase> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
@@ -40,7 +47,7 @@ public class BovichtusEntity extends BottomWalkerSwimmerBase implements GeoEntit
 
     public static AttributeSupplier setAttributes() {
         return Mob.createMobAttributes()
-                .add(Attributes.MAX_HEALTH, 2D)
+                .add(Attributes.MAX_HEALTH, 3D)
                 .add(Attributes.MOVEMENT_SPEED, 0.45f)
                 .build();
     }
@@ -55,7 +62,7 @@ public class BovichtusEntity extends BottomWalkerSwimmerBase implements GeoEntit
     public int getWalkTime() {return 400 + random.nextInt(200);}
 
     @Override
-    public TagKey<Item> getFoodTag() {return ModTags.Items.CRUSTACEAN;}
+    public TagKey<Item> getFoodTag() {return ModTags.Items.INVERTEBRATE;}
 
     @Override
     public Item getBreedingItem() {return ModItems.ARTEMIA.get();}
@@ -68,12 +75,18 @@ public class BovichtusEntity extends BottomWalkerSwimmerBase implements GeoEntit
 
     @Override
     public Component getTrivia() {
-        return Component.translatable("trivia.animalia.bovichtus_variegatus");
+        if (this.getType() == ModEntities.BOVICHTUS_VARIEGATUS.get()) {
+            return Component.translatable("trivia.animalia.bovichtus_variegatus");
+        }
+        return Component.translatable("trivia.animalia.congiopodus_torvus");
     }
 
     @Override
     public Component getFamily() {
-        return Component.translatable("family.animalia.bovichtidae");
+        if (this.getType() == ModEntities.BOVICHTUS_VARIEGATUS.get()) {
+            return Component.translatable("trivia.animalia.bovichtus_variegatus");
+        }
+        return Component.translatable("family.animalia.congiopodidae");
     }
 
     @Override
@@ -86,7 +99,7 @@ public class BovichtusEntity extends BottomWalkerSwimmerBase implements GeoEntit
         if (this.getType() == ModEntities.BOVICHTUS_VARIEGATUS.get()) {
             return 30;
         }
-        return Scannable.super.getScaleforGUI();
+        return 26;
     }
 
     @Override
@@ -94,6 +107,8 @@ public class BovichtusEntity extends BottomWalkerSwimmerBase implements GeoEntit
         int currScale = Scannable.super.getScaleforDetailGUI();
         if(this.getType() == ModEntities.BOVICHTUS_VARIEGATUS.get()) {
             currScale *= 0.8f;
+        } else {
+            currScale *= 0.7f;
         }
         return currScale;
     }
@@ -102,12 +117,15 @@ public class BovichtusEntity extends BottomWalkerSwimmerBase implements GeoEntit
     public float genVarSizeMultiplier() {
         if (this.getType() == ModEntities.BOVICHTUS_VARIEGATUS.get()) {
             return AnimaliaFunctionUtil.getScaleForSize(20, 28);
+        } else if (this.getType() == ModEntities.CONGIOPODUS_TORVUS.get()) {
+            return AnimaliaFunctionUtil.getScaleForSize(32, 78);
         }
         return 1;
     }
 
     public static void registerHolonet(){
         HolonetEntities.register(ModEntities.BOVICHTUS_VARIEGATUS, AppName.FISH, "Perciformes");
+        HolonetEntities.register(ModEntities.CONGIOPODUS_TORVUS, AppName.FISH, "Perciformes");
 
     }
 

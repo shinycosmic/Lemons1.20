@@ -33,6 +33,7 @@ public class AnimaliaFoodTab {
             ModItems.FISH_FOOD,
             ModItems.TERMITE,
             ModItems.WORM,
+            ModItems.GRUB,
             ModItems.PROCAMBARUS_CLARKII,
             ModItems.PROCAMBARUS_ALLENI,
             ModItems.PROCAMBARUS_VIRGINALIS,

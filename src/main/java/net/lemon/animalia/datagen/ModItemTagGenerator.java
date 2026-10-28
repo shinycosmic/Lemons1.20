@@ -50,6 +50,7 @@ public class ModItemTagGenerator extends ItemTagsProvider {
         tag(ModTags.Items.INVERTEBRATE).addTag(ModTags.Items.CRUSTACEAN);
         tag(ModTags.Items.INVERTEBRATE).add(ModItems.TERMITE.get());
         tag(ModTags.Items.INVERTEBRATE).add(ModItems.WORM.get());
+        tag(ModTags.Items.INVERTEBRATE).add(ModItems.GRUB.get());
         tag(ModTags.Items.INVERTEBRATE).add(ModItems.COOKED_CRUSTACEAN.get());
 
         tag(ModTags.Items.AQUATIC_PLANT).add(Items.KELP);

@@ -1,4 +1,4 @@
-package net.lemon.animalia.entity.model.fish;//package net.lemon.animalia.entity.model;
+package net.lemon.animalia.entity.model.fish;
 
 import net.lemon.animalia.Animalia;
 import net.lemon.animalia.entity.custom.BovichtusEntity;
