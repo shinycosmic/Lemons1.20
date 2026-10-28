@@ -99,7 +99,7 @@ public abstract class FishBase extends AnimaliaBreedableWater implements Bucketa
 
     @Override
     protected void registerGoals() {
-        this.goalSelector.addGoal(3, new AvoidEntityGoal<>(this, Player.class, 8.0F, 1.6D, 1.4D, EntitySelector.NO_SPECTATORS::test));
+        this.goalSelector.addGoal(4, new AvoidEntityGoal<>(this, Player.class, 8.0F, 1.6D, 1.4D, EntitySelector.NO_SPECTATORS::test));
         this.goalSelector.addGoal(7, new FishSwimGoal(this));
         if (this.isSchoolingFish()) {
             this.schoolBoidGoal = new SchoolBoidGoal(this, this.maxNeighbors());

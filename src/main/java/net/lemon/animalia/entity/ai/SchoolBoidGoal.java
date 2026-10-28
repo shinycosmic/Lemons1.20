@@ -88,7 +88,7 @@ public class SchoolBoidGoal extends Goal {
         if (this.closestThreat != null) {
             this.fish.getNavigation().stop();
             push = this.computeFlee().add(this.computeSeparation().scale(SEPARATION));
-            if (this.fish.horizontalCollision) {
+            if (this.fish.horizontalCollision && this.fish.level().getFluidState(this.fish.blockPosition().above()).is(FluidTags.WATER)) {
                 push = push.add(0, 0.8, 0);
             }
             maxDelta = maxDelta * this.fish.getSchoolFleeSpeedMultiplier();
