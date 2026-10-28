@@ -9,20 +9,7 @@
           "name": "animalia:amphipod",
           "weight": 20,
           "conditions": [
-            {
-              "condition": "minecraft:alternative",
-              "terms": [
-                { "condition": "minecraft:location_check", "predicate": { "biome": "minecraft:ocean" } },
-                { "condition": "minecraft:location_check", "predicate": { "biome": "minecraft:deep_ocean" } },
-                { "condition": "minecraft:location_check", "predicate": { "biome": "minecraft:warm_ocean" } },
-                { "condition": "minecraft:location_check", "predicate": { "biome": "minecraft:lukewarm_ocean" } },
-                { "condition": "minecraft:location_check", "predicate": { "biome": "minecraft:deep_lukewarm_ocean" } },
-                { "condition": "minecraft:location_check", "predicate": { "biome": "minecraft:cold_ocean" } },
-                { "condition": "minecraft:location_check", "predicate": { "biome": "minecraft:deep_cold_ocean" } },
-                { "condition": "minecraft:location_check", "predicate": { "biome": "minecraft:frozen_ocean" } },
-                { "condition": "minecraft:location_check", "predicate": { "biome": "minecraft:deep_frozen_ocean" } }
-              ]
-            }
+            { "condition": "animalia:biome_tag", "tag": "minecraft:is_ocean" }
           ]
         },
         {
@@ -30,12 +17,7 @@
           "name": "animalia:artemia",
           "weight": 20,
           "conditions": [
-            {
-              "condition": "minecraft:location_check",
-              "predicate": {
-                "dimension": "minecraft:overworld"
-              }
-            }
+            { "condition": "minecraft:location_check", "predicate": { "dimension": "minecraft:overworld" } }
           ]
         },
         {
@@ -43,12 +25,7 @@
           "name": "animalia:worm",
           "weight": 20,
           "conditions": [
-            {
-              "condition": "minecraft:location_check",
-              "predicate": {
-                "dimension": "minecraft:overworld"
-              }
-            }
+            { "condition": "minecraft:location_check", "predicate": { "dimension": "minecraft:overworld" } }
           ]
         },
         {
@@ -57,11 +34,10 @@
           "weight": 20,
           "conditions": [
             {
-              "condition": "minecraft:alternative",
+              "condition": "minecraft:any_of",
               "terms": [
-                { "condition": "minecraft:location_check", "predicate": { "biome": "minecraft:river" } },
-                { "condition": "minecraft:location_check", "predicate": { "biome": "minecraft:swamp" } },
-                { "condition": "minecraft:location_check", "predicate": { "biome": "minecraft:mangrove_swamp" } }
+                { "condition": "animalia:biome_tag", "tag": "minecraft:is_river" },
+                { "condition": "animalia:biome_tag", "tag": "forge:is_swamp" }
               ]
             }
           ]
@@ -72,11 +48,10 @@
           "weight": 20,
           "conditions": [
             {
-              "condition": "minecraft:alternative",
+              "condition": "minecraft:any_of",
               "terms": [
-                { "condition": "minecraft:location_check", "predicate": { "biome": "minecraft:river" } },
-                { "condition": "minecraft:location_check", "predicate": { "biome": "minecraft:swamp" } },
-                { "condition": "minecraft:location_check", "predicate": { "biome": "minecraft:mangrove_swamp" } }
+                { "condition": "animalia:biome_tag", "tag": "minecraft:is_river" },
+                { "condition": "animalia:biome_tag", "tag": "forge:is_swamp" }
               ]
             }
           ]
@@ -87,11 +62,10 @@
           "weight": 20,
           "conditions": [
             {
-              "condition": "minecraft:alternative",
+              "condition": "minecraft:any_of",
               "terms": [
-                { "condition": "minecraft:location_check", "predicate": { "biome": "minecraft:river" } },
-                { "condition": "minecraft:location_check", "predicate": { "biome": "minecraft:swamp" } },
-                { "condition": "minecraft:location_check", "predicate": { "biome": "minecraft:mangrove_swamp" } }
+                { "condition": "animalia:biome_tag", "tag": "minecraft:is_river" },
+                { "condition": "animalia:biome_tag", "tag": "forge:is_swamp" }
               ]
             }
           ]
@@ -102,11 +76,10 @@
           "weight": 20,
           "conditions": [
             {
-              "condition": "minecraft:alternative",
+              "condition": "minecraft:any_of",
               "terms": [
-                { "condition": "minecraft:location_check", "predicate": { "biome": "minecraft:river" } },
-                { "condition": "minecraft:location_check", "predicate": { "biome": "minecraft:swamp" } },
-                { "condition": "minecraft:location_check", "predicate": { "biome": "minecraft:mangrove_swamp" } }
+                { "condition": "animalia:biome_tag", "tag": "minecraft:is_river" },
+                { "condition": "animalia:biome_tag", "tag": "forge:is_swamp" }
               ]
             }
           ]
@@ -116,13 +89,7 @@
           "name": "animalia:procambarus_lucifugus",
           "weight": 20,
           "conditions": [
-            {
-              "condition": "minecraft:alternative",
-              "terms": [
-                { "condition": "minecraft:location_check", "predicate": { "biome": "minecraft:lush_caves" } },
-                { "condition": "minecraft:location_check", "predicate": { "biome": "minecraft:dripstone_caves" } }
-              ]
-            }
+            { "condition": "animalia:biome_tag", "tag": "forge:is_cave" }
           ]
         },
         {
@@ -130,12 +97,7 @@
           "name": "animalia:gigantocypris",
           "weight": 1,
           "conditions": [
-            {
-              "condition": "minecraft:location_check",
-              "predicate": {
-                "biome": "minecraft:deep_cold_ocean"
-              }
-            }
+            { "condition": "minecraft:location_check", "predicate": { "biome": "minecraft:deep_cold_ocean" } }
           ]
         }
       ]
