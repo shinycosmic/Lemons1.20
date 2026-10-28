@@ -1,5 +1,6 @@
 package net.lemon.animalia.entity.custom;
 
+import net.lemon.animalia.entity.ai.ClimbPanicGoal;
 import net.lemon.animalia.entity.ai.ThreatGoal;
 import net.lemon.animalia.entity.bases.AnimaliaLandBase;
 import net.lemon.animalia.entity.bases.helpers.ActivityTime;
@@ -115,11 +116,6 @@ public class AilurusFulgensEntity extends AnimaliaLandBase implements GeoEntity,
     @Override
     public boolean isClimbableBlock(BlockState state) {
         return state.is(ModTags.Blocks.SOFT_CLIMBABLE);
-    }
-
-    @Override
-    public boolean wantsToClimb() {
-        return this.climbEnabled();
     }
 
     @Override
@@ -411,11 +407,8 @@ public class AilurusFulgensEntity extends AnimaliaLandBase implements GeoEntity,
     @Override
     public int sleepIdleChance() {return 60;}
 
-    private static class AilurusPanicGoal extends LandPanicGoal {
-        public AilurusPanicGoal(AilurusFulgensEntity mob) {
-            super(mob, 2.5D, 200, 8.0D);
-        }
-
+    private static class AilurusPanicGoal extends ClimbPanicGoal {
+        public AilurusPanicGoal(AilurusFulgensEntity mob) {super(mob, 2.5D, 200, 8.0D, 16);}
         @Override
         protected boolean canScan() {
             return !this.mob.isBold() && !this.mob.isEating();

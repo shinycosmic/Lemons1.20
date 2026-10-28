@@ -2,8 +2,6 @@ package net.lemon.animalia.entity.aimove;
 
 import net.lemon.animalia.entity.bases.helpers.ICanClimb;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
-import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.control.MoveControl;
 import net.minecraft.world.level.Level;
@@ -24,7 +22,7 @@ public class ClimberMoveControl extends MoveControl {
             this.tickAttached();
             return;
         }
-        boolean wantsClimbNode = this.operation == Operation.MOVE_TO && this.climber.wantsToClimb()
+        boolean wantsClimbNode = this.operation == Operation.MOVE_TO && (this.climber.canClimb() || this.climber.wantsToClimb())
                 && this.wantedY - this.mob.getY() > 0.5D && this.isClimbNode();
         super.tick();
         if (wantsClimbNode && this.climber.attach()) {
