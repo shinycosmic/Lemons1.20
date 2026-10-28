@@ -358,10 +358,10 @@ public class AilurusFulgensEntity extends AnimaliaLandBase implements GeoEntity,
     public int getIdleLength(int displayId) {
         return switch (displayId) {
             case 1 -> 40 + this.random.nextInt(60);
-            case 2 -> 17;
+            case 2 -> 24;
             case 3 -> 400 + this.random.nextInt(801);
-            case 4 -> 29;
-            default -> 10;
+            case 4 -> 36;
+            default -> 16;
         };
     }
 
@@ -403,9 +403,9 @@ public class AilurusFulgensEntity extends AnimaliaLandBase implements GeoEntity,
     @Override
     public int getSleepIdleLength(int sleepIdleId) {
         if (this.getSleepPhase() == SLEEP_PHASE_SLEEPING) {
-            return 10;
+            return 16;
         }
-        return sleepIdleId == 0 ? 38 : 40 + this.random.nextInt(80);
+        return sleepIdleId == 0 ? 44 : 40 + this.random.nextInt(80);
     }
 
     @Override
