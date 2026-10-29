@@ -2,20 +2,13 @@ package net.lemon.animalia.registry.spawning;
 
 import net.lemon.animalia.registry.ModEntities;
 import net.lemon.animalia.registry.ModTags;
-import net.minecraft.core.Holder;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.BiomeTags;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.Biomes;
-import net.minecraft.world.level.levelgen.structure.BuiltinStructures;
-import net.minecraft.world.level.levelgen.structure.Structure;
 import net.minecraftforge.registries.RegistryObject;
 
-import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 public class ModSpawns {
     public static final List<SpawnEntry> ENTRIES = new ArrayList<>();
