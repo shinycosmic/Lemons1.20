@@ -329,7 +329,9 @@ public class MoschusEntity extends AnimaliaLandBase implements GeoEntity, Scanna
                 this.setSleepPhase(SLEEP_PHASE_NONE);
                 this.setCurrentSleepIdle(-1);
             }
-            this.landPanic.panicFrom(player.position());
+            if (this.isThreat(player)) {
+                this.landPanic.panicFrom(player.position());
+            }
         }
         super.playerTouch(player);
     }

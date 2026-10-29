@@ -280,8 +280,10 @@ public class HyemoschusEntity extends SemiaquaticBase implements GeoEntity, Scan
                 this.setSleepPhase(SLEEP_PHASE_NONE);
                 this.setCurrentSleepIdle(-1);
             }
-            this.waterPanic.panicFrom(player.position());
-            this.landPanic.panicFrom(player.position());
+            if (this.isThreat(player)) {
+                this.waterPanic.panicFrom(player.position());
+                this.landPanic.panicFrom(player.position());
+            }
         }
         super.playerTouch(player);
     }

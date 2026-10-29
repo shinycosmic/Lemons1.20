@@ -152,7 +152,9 @@ public class GalictisEntity extends AnimaliaLandBase implements GeoEntity, Scann
                 this.setCurrRegIdle(-1);
                 this.onMovementLockingIdleEnd();
             }
-            this.landPanic.panicFrom(player.position());
+            if (this.isThreat(player)) {
+                this.landPanic.panicFrom(player.position());
+            }
         }
         super.playerTouch(player);
     }

@@ -272,7 +272,9 @@ public class ElaphodusEntity extends AnimaliaLandBase implements GeoEntity, Scan
                 this.setSleepPhase(SLEEP_PHASE_NONE);
                 this.setCurrentSleepIdle(-1);
             }
-            this.landPanic.panicFrom(player.position());
+            if (this.isThreat(player)) {
+                this.landPanic.panicFrom(player.position());
+            }
         }
         super.playerTouch(player);
     }
