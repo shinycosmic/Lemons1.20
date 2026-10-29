@@ -7,12 +7,9 @@ import net.lemon.animalia.registry.*;
 import net.lemon.animalia.registry.creativetabs.ModCreativeModeTabs;
 import net.lemon.animalia.client.screens.FilterTrapScreen;
 import net.lemon.animalia.registry.AnimaliaRenderInit;
-import net.lemon.animalia.registry.worldgen.ModStructureModifiers;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.FlowerPotBlock;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
@@ -33,7 +30,7 @@ public class Animalia {
     // Define mod id in a common place for everything to reference
     public static final String MODID = "animalia";
     // Directly reference a slf4j logger
-    private static final Logger LOGGER = LogUtils.getLogger();
+    public static final Logger LOGGER = LogUtils.getLogger();
     // Create a Deferred Register to hold Blocks which will all be registered under the "examplemod" namespace
 
     public Animalia(FMLJavaModLoadingContext context) {
@@ -50,7 +47,6 @@ public class Animalia {
         ModFeatures.register(modEventBus);
         ModVillagers.register(modEventBus);
         AnimaliaSound.register(modEventBus);
-        ModStructureModifiers.register(modEventBus);
 
         GeckoLib.initialize();
 

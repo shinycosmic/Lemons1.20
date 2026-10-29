@@ -19,7 +19,6 @@ import java.util.Set;
 
 public class ModSpawns {
     public static final List<SpawnEntry> ENTRIES = new ArrayList<>();
-    public static final List<StructureSpawnEntry> STRUCTURE_ENTRIES = new ArrayList<>();
 
     /***
      * Parameter definitions:
@@ -208,10 +207,7 @@ public class ModSpawns {
         add(ModEntities.HYSTRIX_CRISTATA, 2, 1, 3,
                 BiomeSelector.in(BiomeTags.IS_SAVANNA));
 
-
-        /// Below for Structure based spawns
-        addStructure(ModEntities.TAUTOGA_ONITIS, 10, 1, 3,
-                BiomeSelector.in(Biomes.OCEAN, Biomes.DEEP_OCEAN), BuiltinStructures.SHIPWRECK);    }
+    }
 
     private static void add(RegistryObject<? extends EntityType<?>> type, int weight, int minGroup, int maxGroup, BiomeSelector selector) {
         ENTRIES.add(new SpawnEntry(type, weight, minGroup, maxGroup, selector));
@@ -219,26 +215,5 @@ public class ModSpawns {
 
     public record SpawnEntry(RegistryObject<? extends EntityType<?>> type, int weight, int minGroup, int maxGroup,
                              BiomeSelector selector) {
-    }
-
-    @SafeVarargs
-    private static void addStructure(RegistryObject<? extends EntityType<?>> type, int weight, int minGroup, int maxGroup, ResourceKey<Structure>... structures) {
-        addStructure(type, weight, minGroup, maxGroup, null, structures);
-    }
-
-    @SafeVarargs
-    private static void addStructure(RegistryObject<? extends EntityType<?>> type, int weight, int minGroup, int maxGroup, @Nullable BiomeSelector biomes, ResourceKey<Structure>... structures) {
-        STRUCTURE_ENTRIES.add(new StructureSpawnEntry(type, weight, minGroup, maxGroup, biomes, Set.of(structures)));
-    }
-
-    public record StructureSpawnEntry(RegistryObject<? extends EntityType<?>> type, int weight, int minGroup, int maxGroup,
-                                      @Nullable BiomeSelector biomes, Set<ResourceKey<Structure>> structures) {
-        public boolean matches(Holder<Structure> structure) {
-            return this.structures.stream().anyMatch(structure::is);
-        }
-
-        public boolean allowsBiome(Holder<Biome> biome) {
-            return this.biomes == null || this.biomes.matches(biome);
-        }
     }
 }

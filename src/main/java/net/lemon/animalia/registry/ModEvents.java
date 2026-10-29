@@ -153,12 +153,9 @@ public class ModEvents {
             return;
         }
         Holder<Biome> biome = event.getLevel().getBiome(event.getPos());
-        for (ModSpawns.StructureSpawnEntry entry : ModSpawns.STRUCTURE_ENTRIES) {
-            if (entry.type().get() == event.getEntityType() && !entry.allowsBiome(biome)) {
-                event.setResult(Event.Result.DENY);
-                return;
-            }
-        }
+//        if(event.getEntityType().getCategory() == ModMobCategories.ANIMALIA_FISH) {
+//            Animalia.LOGGER.info("structure spawn check {} at {}", event.getEntityType().getDescriptionId(), event.getPos());
+//        }
     }
 
     @SubscribeEvent
