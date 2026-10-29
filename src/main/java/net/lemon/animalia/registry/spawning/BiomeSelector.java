@@ -56,6 +56,12 @@ public class BiomeSelector {
         return this;
     }
 
+    public boolean matches(Holder<Biome> biome) {
+        boolean included = this.tags.stream().anyMatch(biome::is) || this.biomes.stream().anyMatch(biome::is);
+        boolean excluded = this.excludedTags.stream().anyMatch(biome::is) || this.excludedBiomes.stream().anyMatch(biome::is);
+        return included && !excluded;
+    }
+
     public HolderSet<Biome> resolve(HolderLookup.RegistryLookup<Biome> lookup) {
         HolderSet<Biome> included = union(lookup, this.tags, this.biomes);
         if (included == null) {

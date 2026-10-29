@@ -6,11 +6,13 @@ import net.minecraft.core.Holder;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.BiomeTags;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.levelgen.structure.BuiltinStructures;
 import net.minecraft.world.level.levelgen.structure.Structure;
 import net.minecraftforge.registries.RegistryObject;
 
+import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -208,8 +210,8 @@ public class ModSpawns {
 
 
         /// Below for Structure based spawns
-        addStructure(ModEntities.TAUTOGA_ONITIS, 10, 1, 3, BuiltinStructures.SHIPWRECK);
-    }
+        addStructure(ModEntities.TAUTOGA_ONITIS, 10, 1, 3,
+                BiomeSelector.in(Biomes.OCEAN, Biomes.DEEP_OCEAN), BuiltinStructures.SHIPWRECK);    }
 
     private static void add(RegistryObject<? extends EntityType<?>> type, int weight, int minGroup, int maxGroup, BiomeSelector selector) {
         ENTRIES.add(new SpawnEntry(type, weight, minGroup, maxGroup, selector));
@@ -221,12 +223,22 @@ public class ModSpawns {
 
     @SafeVarargs
     private static void addStructure(RegistryObject<? extends EntityType<?>> type, int weight, int minGroup, int maxGroup, ResourceKey<Structure>... structures) {
-        STRUCTURE_ENTRIES.add(new StructureSpawnEntry(type, weight, minGroup, maxGroup, Set.of(structures)));
+        addStructure(type, weight, minGroup, maxGroup, null, structures);
     }
 
-    public record StructureSpawnEntry(RegistryObject<? extends EntityType<?>> type, int weight, int minGroup, int maxGroup, Set<ResourceKey<Structure>> structures) {
+    @SafeVarargs
+    private static void addStructure(RegistryObject<? extends EntityType<?>> type, int weight, int minGroup, int maxGroup, @Nullable BiomeSelector biomes, ResourceKey<Structure>... structures) {
+        STRUCTURE_ENTRIES.add(new StructureSpawnEntry(type, weight, minGroup, maxGroup, biomes, Set.of(structures)));
+    }
+
+    public record StructureSpawnEntry(RegistryObject<? extends EntityType<?>> type, int weight, int minGroup, int maxGroup,
+                                      @Nullable BiomeSelector biomes, Set<ResourceKey<Structure>> structures) {
         public boolean matches(Holder<Structure> structure) {
             return this.structures.stream().anyMatch(structure::is);
+        }
+
+        public boolean allowsBiome(Holder<Biome> biome) {
+            return this.biomes == null || this.biomes.matches(biome);
         }
     }
 }

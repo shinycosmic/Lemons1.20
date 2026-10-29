@@ -4,20 +4,26 @@ import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import net.lemon.animalia.Animalia;
 import net.lemon.animalia.entity.bases.FishBase;
 import net.lemon.animalia.entity.bases.helpers.IsGenetic;
+import net.lemon.animalia.registry.spawning.ModSpawns;
+import net.minecraft.core.Holder;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.npc.VillagerProfession;
 import net.minecraft.world.entity.npc.VillagerTrades;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.trading.MerchantOffer;
+import net.minecraft.world.level.biome.Biome;
+import net.minecraftforge.event.entity.living.MobSpawnEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.village.VillagerTradesEvent;
 import net.minecraftforge.event.village.WandererTradesEvent;
+import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
@@ -139,6 +145,20 @@ public class ModEvents {
 
 
 
+    }
+
+    @SubscribeEvent
+    public static void onSpawnPlacementCheck(MobSpawnEvent.SpawnPlacementCheck event) {
+        if (event.getSpawnType() != MobSpawnType.NATURAL) {
+            return;
+        }
+        Holder<Biome> biome = event.getLevel().getBiome(event.getPos());
+        for (ModSpawns.StructureSpawnEntry entry : ModSpawns.STRUCTURE_ENTRIES) {
+            if (entry.type().get() == event.getEntityType() && !entry.allowsBiome(biome)) {
+                event.setResult(Event.Result.DENY);
+                return;
+            }
+        }
     }
 
     @SubscribeEvent
