@@ -135,6 +135,12 @@ repositories {
         name = "Jared's maven"
         url = "https://maven.blamejared.com/"
     }
+
+    maven { // CuriosAPI
+        name = "Illusive Soulworks maven"
+        url = "https://maven.theillusivec4.top/"
+    }
+
     maven {
         // location of a maven mirror for JEI files, as a fallback
         name = "ModMaven"
@@ -150,6 +156,10 @@ repositories {
 dependencies {
     implementation fg.deobf("software.bernie.geckolib:geckolib-forge-${minecraft_version}:${geckolib_version}")
     implementation("com.eliotlash.mclib:mclib:20")
+    // Compile against only the API artifact
+    compileOnly "top.theillusivec4.curios:curios-neoforge:${curios_version}:api"
+    // Use the full Curios API jar at runtime
+    runtimeOnly "top.theillusivec4.curios:curios-neoforge:${curios_version}"
 }
 
 dependencies {
