@@ -8,8 +8,10 @@ import net.minecraft.world.level.pathfinder.BlockPathTypes;
 import net.minecraft.world.level.pathfinder.Node;
 import net.minecraft.world.level.pathfinder.SwimNodeEvaluator;
 import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.Vec3;
 
 public class AnimaliaSwimNodeEvaluator extends SwimNodeEvaluator {
+    private Node start;
     public AnimaliaSwimNodeEvaluator() {
         super(false);
     }
@@ -43,6 +45,24 @@ public class AnimaliaSwimNodeEvaluator extends SwimNodeEvaluator {
         if (this.getBlockPathType(this.level, x, y, z, this.mob) == BlockPathTypes.BLOCKED) {
             y = Mth.floor(box.minY);
         }
-        return this.getNode(x, y, z);
+        this.start = this.getNode(x, y, z);
+        return this.start;
+    }
+
+    @Override
+    public int getNeighbors(Node[] pOutputArray, Node pNode) {
+        int count = super.getNeighbors(pOutputArray, pNode);
+        if (pNode != this.start) {
+            return count;
+        }
+        int kept = 0;
+        for (int i = 0; i < count; ++i) {
+            Node node = pOutputArray[i];
+            Vec3 move = new Vec3(node.x + 0.5D, node.y, node.z + 0.5D).subtract(this.mob.position());
+            if (this.mob.level().noCollision(this.mob, this.mob.getBoundingBox().expandTowards(move))) {
+                pOutputArray[kept++] = node;
+            }
+        }
+        return kept;
     }
 }

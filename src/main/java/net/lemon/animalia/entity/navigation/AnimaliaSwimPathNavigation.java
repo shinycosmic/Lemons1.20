@@ -23,19 +23,28 @@ public class AnimaliaSwimPathNavigation extends WaterBoundPathNavigation {
         Vec3 pos = this.getTempMobPos();
         this.maxDistanceToWaypoint = this.mob.getBbWidth() > 0.75F ? this.mob.getBbWidth() / 2.0F : 0.75F - this.mob.getBbWidth() / 2.0F;
         Vec3i next = this.path.getNextNodePos();
+
         double dx = Math.abs(this.mob.getX() - (next.getX() + (this.mob.getBbWidth() + 1.0D) / 2.0D));
         double dy = next.getY() - this.mob.getY();
         double dz = Math.abs(this.mob.getZ() - (next.getZ() + (this.mob.getBbWidth() + 1.0D) / 2.0D));
-        boolean reached = dx <= this.maxDistanceToWaypoint && dz <= this.maxDistanceToWaypoint && Math.abs(dy) < 1.0D
-                && this.level.noCollision(this.mob, this.mob.getBoundingBox().move(0, dy, 0));
+
+        Vec3 toNode = this.path.getNextEntityPos(this.mob).subtract(this.mob.position());
+        boolean reached = dx <= this.maxDistanceToWaypoint && dz <= this.maxDistanceToWaypoint && Math.abs(dy) < 1.0D && this.level.noCollision(this.mob, this.mob.getBoundingBox().expandTowards(toNode));
         int after = this.path.getNextNodeIndex() + 1;
         boolean shortcut = after < this.path.getNodeCount()
                 && pos.closerThan(Vec3.atBottomCenterOf(next), 2.0D)
                 && this.canCutCorner(this.path.getNextNode().type)
                 && this.canMoveDirectly(pos, this.path.getEntityPosAtNode(this.mob, after));
+
         if (reached || shortcut) {
             this.path.advance();
         }
         this.doStuckDetection(pos);
+    }
+
+    @Override
+    protected boolean canMoveDirectly(Vec3 pPosVec31, Vec3 pPosVec32) {
+        Vec3 move = pPosVec32.subtract(this.mob.position());
+        return this.level.noCollision(this.mob, this.mob.getBoundingBox().expandTowards(move));
     }
 }
