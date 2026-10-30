@@ -11,9 +11,6 @@ import net.minecraft.world.phys.Vec3;
 
 import java.util.EnumSet;
 
-/**
- * Target a grazable block, move to it, and play the eat animation in graze animation cycles.
- */
 public class GrazeGoal<T extends PathfinderMob & IGrazer & IFoodEater> extends Goal {
     private final T mob;
     private final double speedMult;

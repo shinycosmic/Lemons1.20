@@ -14,39 +14,20 @@
 //
 
 //public class TemplateModel extends GeoModel<Entity> {
-//    /***
-//     *  Set the location of the geckolib model
-//     * @param object
-//     *  This parameter refers to the entity this model will be tied to
-//     * @return
-//     */
 //    public ResourceLocation getModelResource(Entity object) {
 //        return new ResourceLocation(PlanetEarth.MODID, "geo/name.geo.json");
 //    }
 //
-//    /***
-//     *  Set the location of the texture
-//     * @param object
-//     * @return
-//     */
 //    public ResourceLocation getTextureResource(Entity object) {
 //        return new ResourceLocation(PlanetEarth.MODID, "textures/entity/scientific_name.png");
 //    }
 //
-//    /***
-//     *  Set the location of the animations for this geckolib mob
-//     * @param animatable
-//     * @return
-//     */
 //    public ResourceLocation getAnimationResource(Entity animatable) {
 //        return new ResourceLocation(PlanetEarth.MODID, "animations/scientific_name.animation.json");
 //    }
 //
 //    /***
-//     * This is the method that gets the mob to look at you
-//     * @param animatable The {@code GeoAnimatable} instance currently being rendered
-//     * @param instanceId The instance id of the {@code GeoAnimatable}
-//     * @param animationState An {@link AnimationState} instance created to hold animation data for the {@code animatable} for this method call
+//     * This is the method that gets the mob to look at you, also used for smooth turning.
 //     */
 //    @Override
 //    public void setCustomAnimations(Entity animatable, long instanceId, AnimationState<Entity> animationState) {

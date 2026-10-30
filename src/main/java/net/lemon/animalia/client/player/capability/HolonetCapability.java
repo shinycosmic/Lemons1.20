@@ -10,12 +10,6 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-/**
- * Stores Holonet data. unique for each player
- * Key format:
- *   Non-dimorphic: "animalia:dissostichus_eleginoides"
- *   Dimorphic:     "animalia:betta_splendens_1"
- */
 public class HolonetCapability {
 
     private final Set<String> discovered = new HashSet<>();

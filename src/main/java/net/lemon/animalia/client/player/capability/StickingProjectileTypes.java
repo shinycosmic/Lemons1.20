@@ -8,7 +8,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.IntUnaryOperator;
 
-/** Every stuck-projectile type. Add one line here per new projectile. */
 public class StickingProjectileTypes {
     private static final Map<ResourceLocation, StickingProjectileType> TYPES = new HashMap<>();
 

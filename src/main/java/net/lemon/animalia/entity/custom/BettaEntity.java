@@ -393,10 +393,6 @@ public class BettaEntity extends FishBase implements GeoEntity, IsGenetic, Scann
 
     //GENE INHERITANCE WOOOO!!!
 
-    /**
-     * Resolves attribute rules and builds the traits object.
-     * Also resolves special texture checks.
-     */
     public void buildTraits() {
         resolveAttributes();
 
@@ -513,11 +509,7 @@ public class BettaEntity extends FishBase implements GeoEntity, IsGenetic, Scann
         }
     }
 
-    /**
-     * this method resolves attributes and enforces certain combination rules
-     * This audits faulty body/butterfly presets
-     * Overrides happen here.
-     */
+
     public void resolveAttributes() {
         BettaTraits.PatternPreset pattern = BettaTraits.PatternPreset.fromId(this.entityData.get(PATTERN_PRESET));
         BettaTraits.BodyPreset body = BettaTraits.BodyPreset.fromId(this.entityData.get(BODY_PRESET));
@@ -605,26 +597,21 @@ public class BettaEntity extends FishBase implements GeoEntity, IsGenetic, Scann
         passedSecondary = tryMutateColor(this.traits.secondaryColor, fish.traits.secondaryColor, passedSecondary, passedPrimary);
         passedThird = tryMutateThirdColor(this.traits, fish.traits, passedThird, passedPrimary, passedSecondary, passedPattern);
 
-
-        //create an egg, and set the egg entity to this.
         ItemStack egg = new ItemStack(getEggItem());
         BettaFishEggItem.setEntity(egg, this.getType());
 
-        //create baby traits from the passed genes
         BettaTraits babyTraits = new BettaTraits(
                 passedPrimary, passedSecondary, passedThird,
                 passedPattern, isButterfly, passedBody, passedDorsal,
                 passedCaudal, passedAnal, passedPelvic
         );
 
-        //call in-trait attribute resolver to pass correct traits to the item NBT
         babyTraits.resolveAttributes();
         babyTraits.specialTexture = this.checkSpecialVariant(babyTraits);
         if(babyTraits.specialTexture != null){
             babyTraits.isSpecialVariant = true;
         }
 
-        //Here is where we set genes
         CompoundTag eggTag = egg.getOrCreateTag();
         eggTag.putInt("PrimaryColor", babyTraits.primaryColor.getId());
         eggTag.putInt("SecondaryColor", babyTraits.secondaryColor.getId());
@@ -644,7 +631,7 @@ public class BettaEntity extends FishBase implements GeoEntity, IsGenetic, Scann
 
     /***
      * the below set of methods run the mutation rules, and mutate the passed gene if rules ring true.
-     * @return
+     *
      */
     private BettaTraits.DorsalPreset tryMutateDorsal(BettaTraits traits, BettaTraits traits1, BettaTraits.DorsalPreset passedDorsal) {
         boolean shouldMutate = Math.random() < 0.03;
@@ -956,7 +943,6 @@ public class BettaEntity extends FishBase implements GeoEntity, IsGenetic, Scann
         }
         boolean shouldMutate = Math.random() < 0.03;
         if(!shouldMutate) return passedThirdColor;
-        double rand = Math.random();
 
         switch (passedPattern) {
             case MULTICOLOR, MARBLE:
@@ -977,11 +963,6 @@ public class BettaEntity extends FishBase implements GeoEntity, IsGenetic, Scann
         return ModItems.BETTA_FISH_EGG.get();
     }
 
-    /***
-     * Drops ITEM_EGG. this will use both parents and call passGenes
-     * @param level
-     * @param fish
-     */
     @Override
     public void spawnChildFromBreeding(ServerLevel level, AnimaliaBreedableWater fish) {
         if(!(fish instanceof BettaEntity)) {

@@ -436,18 +436,12 @@ public abstract class AnimaliaLandBase extends Animal implements IActivityTime, 
     }
 
     /***
-     * Override this to get a variant size. Default is random of 0.7 to 1.5 of base. Set base value in the renderer.
-     * If there is NO random sizing for a creature, override this method to return 1, and set base value in the renderer.
-     * @return
+     * same as the water version
      */
     public float genVarSizeMultiplier() {
         return 1;
     }
 
-    /***
-     * Override this to get a random CM length, min = minimum cm, max = maximum cm, mode = most common average
-     * @param
-     */
     public float genVarSize(float min, float max, float mode) {
         float u = this.random.nextFloat();
         float c = (mode - min) / (max - min);
@@ -821,6 +815,7 @@ public abstract class AnimaliaLandBase extends Animal implements IActivityTime, 
     /**
      * TODO Edit this method so it drops LandEggItem. These item eggs are used for insects and such.
      * Birds and lizards lay eggs in mounds/nests
+     * 10/30/2026 - One of these days.... sigh
      * @return
      */
     public Item getEggItem() {

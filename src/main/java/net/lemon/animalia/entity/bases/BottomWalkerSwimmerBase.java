@@ -89,7 +89,6 @@ public abstract class BottomWalkerSwimmerBase extends FishBase {
         return 100 + random.nextInt(100); // 5-10 seconds default
     }
 
-    /** Override to adjust sink speed when walking underwater. */
     public double getSinkSpeed() {
         return -0.008;
     }
@@ -272,7 +271,6 @@ public abstract class BottomWalkerSwimmerBase extends FishBase {
         return SpawnBand.FLOOR;
     }
 
-    /** Override in subclass. Whether this bottom walker may path onto dry land. */
     public boolean canLeaveWater() {
         return false;
     }

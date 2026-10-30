@@ -480,9 +480,6 @@ public abstract class FishBase extends AnimaliaBreedableWater implements Bucketa
         return ModItems.FISH_EGG.get();
     }
 
-    /**
-     * Taken from AbstractFish
-     */
     public static class FishSwimGoal extends RandomSwimmingGoal {
         private final FishBase fish;
 

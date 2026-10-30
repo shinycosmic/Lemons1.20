@@ -28,10 +28,6 @@ public class ModBlockStateProvider extends BlockStateProvider {
     }
 
     @Override
-    /***
-     * Add block registries to the below to generate Blockstates
-     * ex: blockWithItem(ModBlocks.ITEM_NAME);
-     */
     protected void registerStatesAndModels() {
         simpleBlockWithItem(ModBlocks.FILTER_TRAP.get(), new ModelFile.UncheckedModelFile(modLoc("block/filter_trap")));
         glowLichenBaseBlock(ModBlocks.ALGAE_MAT.get(), "algae_mat", modLoc("block/algae_mat"));

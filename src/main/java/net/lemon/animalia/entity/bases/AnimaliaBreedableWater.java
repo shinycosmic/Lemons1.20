@@ -447,18 +447,16 @@ public abstract class AnimaliaBreedableWater extends WaterAnimal implements IAct
         );
     }
 
-    /***
-     * Override this to get a variant size. Default is random of 0.7 to 1.5 of base. Set base value in the renderer.
-     * If there is NO random sizing for a creature, override this method to return 1, and set base value in the renderer.
+    /**
+     * This is always going to get overridden, just copy one from another class
      * @return
      */
     public float genVarSizeMultiplier() {
         return 1;
     }
 
-    /***
-     * Override this to get a random CM length, min = minimum cm, max = maximum cm, mode = most common average
-     * @param
+    /**
+     * dont touch this one. overridden versions of the above use this method to get a random number within a range of sizes
      */
     public float genVarSize(float min, float max, float mode) {
         float u = this.random.nextFloat();
