@@ -31,12 +31,13 @@ public class AnimaliaSwimPathNavigation extends WaterBoundPathNavigation {
         Vec3 toNode = this.path.getNextEntityPos(this.mob).subtract(this.mob.position());
         boolean reached = dx <= this.maxDistanceToWaypoint && dz <= this.maxDistanceToWaypoint && Math.abs(dy) < 1.0D && this.level.noCollision(this.mob, this.mob.getBoundingBox().expandTowards(toNode));
         int after = this.path.getNextNodeIndex() + 1;
-        boolean shortcut = after < this.path.getNodeCount()
+        boolean last = after >= this.path.getNodeCount();
+        boolean clearToAfter = !last && this.canMoveDirectly(pos, this.path.getEntityPosAtNode(this.mob, after));
+        boolean shortcut = clearToAfter
                 && pos.closerThan(Vec3.atBottomCenterOf(next), 2.0D)
-                && this.canCutCorner(this.path.getNextNode().type)
-                && this.canMoveDirectly(pos, this.path.getEntityPosAtNode(this.mob, after));
+                && this.canCutCorner(this.path.getNextNode().type);
 
-        if (reached || shortcut) {
+        if (reached && (last || clearToAfter) || shortcut) {
             this.path.advance();
         }
         this.doStuckDetection(pos);
