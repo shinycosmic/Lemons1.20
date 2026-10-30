@@ -14,6 +14,7 @@ import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
@@ -44,7 +45,12 @@ public class AnimaliaSpawnEggItem extends ForgeSpawnEggItem {
         if(pMob instanceof IsGenetic) {
             return Optional.empty();
         }
-        return super.spawnOffspringFromSpawnEgg(pPlayer, pMob, pEntityType, level, pPos, stack);
+        Optional<Mob> baby = super.spawnOffspringFromSpawnEgg(pPlayer, pMob, pEntityType, level, pPos, stack);
+        baby.ifPresent(mob -> {
+            mob.finalizeSpawn(level, level.getCurrentDifficultyAt(mob.blockPosition()), MobSpawnType.SPAWN_EGG, null, null);
+            mob.setBaby(true);
+        });
+        return baby;
     }
 
     @Override
