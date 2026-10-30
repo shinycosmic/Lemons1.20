@@ -1,6 +1,7 @@
 package net.lemon.animalia.entity.bases;
 
 import net.lemon.animalia.entity.ai.FishBreedGoal;
+import net.lemon.animalia.entity.aimove.AnimaliaSmoothSwimmingMoveControl;
 import net.lemon.animalia.entity.bases.helpers.*;
 import net.lemon.animalia.item.FishEggItem;
 import net.lemon.animalia.registry.ModItems;
@@ -83,7 +84,7 @@ public abstract class AnimaliaBreedableWater extends WaterAnimal implements IAct
     protected AnimaliaBreedableWater(EntityType<? extends AnimaliaBreedableWater> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
         if(this.useSmoothControl()) {
-            this.moveControl = new SmoothSwimmingMoveControl(this, 85, 10, 0.02F, 0.1F, this.hasVerticalDrift());
+            this.moveControl = new AnimaliaSmoothSwimmingMoveControl(this, 85, 10, 0.02F, 0.1F, this.hasVerticalDrift());
             this.lookControl = new SmoothSwimmingLookControl(this, 10);
         }
     }
