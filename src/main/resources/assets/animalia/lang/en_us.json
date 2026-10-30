@@ -83,6 +83,8 @@
 
   "item.animalia.bucket": "Bucket of %s",
   "item.animalia.spawn_egg": "%s Spawn Egg",
+  "item.animalia.spawn_egg.special": "Special Betta Variants",
+  "item.animalia.spawn_egg.random": "Random Betta Variants",
 
   "entity.minecraft.villager.animalia.aquarist": "Aquarist",
 

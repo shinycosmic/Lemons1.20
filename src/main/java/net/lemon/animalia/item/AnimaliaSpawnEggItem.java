@@ -6,8 +6,11 @@ import net.lemon.animalia.entity.bases.helpers.IsGenetic;
 import net.lemon.animalia.registry.ModEntities;
 import net.minecraft.ChatFormatting;
 import net.minecraft.locale.Language;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
@@ -42,6 +45,34 @@ public class AnimaliaSpawnEggItem extends ForgeSpawnEggItem {
             return Optional.empty();
         }
         return super.spawnOffspringFromSpawnEgg(pPlayer, pMob, pEntityType, level, pPos, stack);
+    }
+
+    @Override
+    public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
+        ItemStack stack = player.getItemInHand(hand);
+        if (player.isSecondaryUseActive() && this.getType(stack.getTag()) == ModEntities.BETTA_SPLENDENS.get()) {
+            if (!level.isClientSide) {
+                CompoundTag entityTag = stack.getOrCreateTagElement("EntityTag");
+                boolean special = !entityTag.getBoolean("SpawnSpecial");
+                if (special) {
+                    entityTag.putBoolean("SpawnSpecial", true);
+                } else {
+                    entityTag.remove("SpawnSpecial");
+                }
+                if (entityTag.isEmpty()) {
+                    stack.removeTagKey("EntityTag");
+                }
+                player.displayClientMessage(Component.translatable(special ? "item.animalia.spawn_egg.special" : "item.animalia.spawn_egg.random"), true);
+            }
+            return InteractionResultHolder.sidedSuccess(stack, level.isClientSide);
+        }
+        return super.use(level, player, hand);
+    }
+
+    @Override
+    public boolean isFoil(ItemStack stack) {
+        CompoundTag entityTag = stack.getTagElement("EntityTag");
+        return entityTag != null && entityTag.getBoolean("SpawnSpecial");
     }
 
 

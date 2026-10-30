@@ -273,6 +273,9 @@ public class BettaEntity extends FishBase implements GeoEntity, IsGenetic, Scann
         this.entityData.set(SPECIAL_VARIANT, pCompound.getBoolean("SpecialVariant"));
 
         buildTraits();
+        if (pCompound.getBoolean("SpawnSpecial")) {
+            buildTraitsSpecial();
+        }
     }
 
     @Override
