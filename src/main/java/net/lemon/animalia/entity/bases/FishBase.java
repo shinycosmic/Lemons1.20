@@ -30,6 +30,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
+import net.minecraft.world.level.pathfinder.Path;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 
@@ -436,6 +437,19 @@ public abstract class FishBase extends AnimaliaBreedableWater implements Bucketa
                 }
                 this.getNavigation().moveTo(this.getX(), floor.getY() + 0.5, this.getZ(), 1.0);
             }
+        }
+        if (!this.level().isClientSide && this.isInWater() && this.verticalCollision && !this.verticalCollisionBelow && this.tickCount % 20 == 0) {
+            Path p = this.getNavigation().getPath();
+            System.out.println("ROOF " + this.getType().getDescriptionId()
+                    + " pos=" + this.position()
+                    + " wanted=" + this.getMoveControl().getWantedX() + "," + this.getMoveControl().getWantedY() + "," + this.getMoveControl().getWantedZ()
+                    + " node=" + (p == null ? null : p.getNextNodeIndex() + "/" + p.getNodeCount())
+                    + " nav=" + this.getNavigation().getClass().getSimpleName()
+                    + " navDone=" + this.getNavigation().isDone()
+                    + " end=" + (p == null ? null : p.getEndNode())
+                    + " target=" + (p == null ? null : p.getTarget())
+                    + " reach=" + (p == null ? null : p.canReach())
+                    + " goals=" + this.goalSelector.getRunningGoals().map(g -> g.getGoal().getClass().getSimpleName()).toList());
         }
 
         super.aiStep();
