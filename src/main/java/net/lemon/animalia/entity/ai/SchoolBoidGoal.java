@@ -4,11 +4,13 @@ import net.lemon.animalia.entity.ai.utils.SchoolDepthBias;
 import net.lemon.animalia.entity.bases.FishBase;
 import net.minecraft.commands.arguments.EntityAnchorArgument;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.Goal;
+import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 
 import java.util.ArrayList;
@@ -23,6 +25,7 @@ public class SchoolBoidGoal extends Goal {
     private static final double COHESION = 0.05;
     private static final double ALIGNMENT = 0.4;
     private static final double SEPARATION = 0.25;
+    private static final double AVOID_WALL = 0.5;
     private static final int SCAN_TICKS = 10;
 
     private final FishBase fish;
@@ -96,7 +99,8 @@ public class SchoolBoidGoal extends Goal {
             push = this.computeCohesion().scale(COHESION)
                     .add(this.computeAlignment().scale(ALIGNMENT))
                     .add(this.computeSeparation().scale(SEPARATION))
-                    .add(this.depthBias.scale(0.1));
+                    .add(this.depthBias.scale(0.1))
+                    .add(this.computeWallAvoid().scale(AVOID_WALL));
         }
 
         if (push.length() > maxDelta) {
@@ -134,11 +138,31 @@ public class SchoolBoidGoal extends Goal {
 
     private Vec3 computeAlignment() {
         Vec3 avgVelocity = Vec3.ZERO;
+        int count = 0;
         for (Mob neighbor : this.neighbors) {
+            if (neighbor.horizontalCollision || neighbor.verticalCollision) {
+                continue;
+            }
             avgVelocity = avgVelocity.add(neighbor.getDeltaMovement());
+            count++;
         }
-        avgVelocity = avgVelocity.scale(1.0 / this.neighbors.size());
+        if (count == 0) {
+            return Vec3.ZERO;
+        }
+        avgVelocity = avgVelocity.scale(1.0 / count);
         return avgVelocity.subtract(this.fish.getDeltaMovement());
+    }
+
+    private Vec3 computeWallAvoid() {
+        Vec3 push = Vec3.ZERO;
+        AABB box = this.fish.getBoundingBox();
+        for (Direction dir : Direction.values()) {
+            Vec3 step = Vec3.atLowerCornerOf(dir.getNormal()).scale(0.5D);
+            if (!this.fish.level().noCollision(this.fish, box.move(step))) {
+                push = push.subtract(step);
+            }
+        }
+        return push;
     }
 
     private Vec3 computeSeparation() {
