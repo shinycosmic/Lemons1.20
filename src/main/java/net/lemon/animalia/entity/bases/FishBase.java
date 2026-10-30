@@ -80,7 +80,7 @@ public abstract class FishBase extends AnimaliaBreedableWater implements Bucketa
      * Will return how many at most can spawn in a chunk at once.
      */
     public int getMaxSpawnClusterSize() {
-        return 20;
+        return 45;
     }
 
     public boolean fromBucket() {
@@ -261,7 +261,7 @@ public abstract class FishBase extends AnimaliaBreedableWater implements Bucketa
     }
 
     public int getMaxSchoolSize() {
-        return 20;
+        return 45;
     }
 
     public boolean doesBabySchool() {

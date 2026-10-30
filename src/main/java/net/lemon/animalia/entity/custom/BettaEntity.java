@@ -78,7 +78,7 @@ public class BettaEntity extends FishBase implements GeoEntity, IsGenetic, Scann
             .put("marble_medium_hm_medium_short_marble_black_white_red_y", "vampire_samurai")
             .put("marble_tall_hm_tall_tall_marble_blue_orange_red_y", "fancy")
             .put("marble_tall_hm_tall_tall_marble_blue_yellow_red_y", "fancy_gold_dust")
-            .put("dragon_tall_hm_tall_tall_dragon_blue_orange_red_y", "fancy_gold_dust")
+            .put("dragon_tall_hm_tall_tall_dragon_blue_orange_x_y", "fancy_gold_dust")
             .put("marble_tall_hm_tall_tall_marble_blue_black_blue_n", "avatar")
             .put("marble_tall_hm_tall_tall_marble_blue_black_red_y", "avatar_nebula")
             .put("marble_tall_hm_tall_tall_marble_blue_black_red_n", "avatar_fancy")
