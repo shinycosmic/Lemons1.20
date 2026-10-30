@@ -26,6 +26,12 @@ public class ProteusAnguinusRenderer extends GeoEntityRenderer<ProteusEntity> {
     @Override
     public void scaleModelForRender(float widthScale, float heightScale, PoseStack poseStack, ProteusEntity animatable, BakedGeoModel model, boolean isReRender, float partialTick, int packedLight, int packedOverlay) {
         float scale = animatable.isBaby() ? babyMult : animatable.getVarSizeMultiplier();
+        //Here you go saturn, your godzilla olm
+        String s = animatable.getName().getString();
+        if(s.equalsIgnoreCase("Beeg")) {
+            scale = 1.0f;
+        }
+
         super.scaleModelForRender(scale, scale, poseStack, animatable, model, isReRender, partialTick, packedLight, packedOverlay);
     }
 }
