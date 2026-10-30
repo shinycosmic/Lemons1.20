@@ -102,6 +102,9 @@ public class SchoolBoidGoal extends Goal {
         if (push.length() > maxDelta) {
             push = push.normalize().scale(maxDelta);
         }
+        if (push.y != 0 && !this.fish.level().noCollision(this.fish, this.fish.getBoundingBox().move(0, push.y + Math.signum(push.y) * 0.05, 0))) {
+            push = new Vec3(push.x, 0, push.z);
+        }
         if (push.lengthSqr() < 1.0E-7) {
             return;
         }
@@ -202,7 +205,7 @@ public class SchoolBoidGoal extends Goal {
 
         for (LivingEntity entity : nearby) {
             double dist = this.fish.distanceToSqr(entity);
-            if (dist < THREAT_SQR && dist < closestThreatDist && this.fish.isThreat(entity)) {
+            if (dist < THREAT_SQR && dist < closestThreatDist && this.fish.isThreat(entity) && this.fish.getSensing().hasLineOfSight(entity)) {
                 closestThreatDist = dist;
                 this.closestThreat = entity;
             }
@@ -294,7 +297,8 @@ public class SchoolBoidGoal extends Goal {
                 && other.isInWater()
                 && !(other instanceof FishBase otherFish && otherFish.isInvisToBoid())
                 && this.fish.canSchoolWith(other)
-                && this.isInSchoolingState(other);
+                && this.isInSchoolingState(other)
+                && this.fish.getSensing().hasLineOfSight(other);
     }
 
     private boolean isInSchoolingState(Mob mob) {

@@ -3,6 +3,7 @@ package net.lemon.animalia.entity.bases;
 import net.lemon.animalia.entity.ai.SchoolBoidGoal;
 import net.lemon.animalia.entity.ai.utils.SchoolDepthBias;
 import net.lemon.animalia.entity.ai.utils.SchoolSignal;
+import net.lemon.animalia.entity.navigation.AnimaliaSwimPathNavigation;
 import net.lemon.animalia.registry.ModEntities;
 import net.lemon.animalia.registry.ModItems;
 import net.lemon.animalia.registry.ModTags;
@@ -241,7 +242,7 @@ public abstract class FishBase extends AnimaliaBreedableWater implements Bucketa
     }
 
     protected PathNavigation createNavigation(Level pLevel) {
-        return new WaterBoundPathNavigation(this, pLevel);
+        return new AnimaliaSwimPathNavigation(this, pLevel);
     }
 
     @Override
