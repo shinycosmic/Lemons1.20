@@ -464,17 +464,18 @@ public class BettaEntity extends FishBase implements GeoEntity, IsGenetic, Scann
     }
 
     public void buildTraitsSpecial(){
-        ColorUtil[] allowed = {ColorUtil.ORANGE, ColorUtil.BLACK, ColorUtil.YELLOW};
-        this.entityData.set(PATTERN_PRESET, BettaTraits.PatternPreset.MARBLE.getId());
-        this.entityData.set(BODY_PRESET, BettaTraits.BodyPreset.MARBLE.getId());
-        this.entityData.set(DORSAL_PRESET, BettaTraits.DorsalPreset.TALL.getId());
-        this.entityData.set(CAUDAL_PRESET, BettaTraits.CaudalPreset.HM.getId());
-        this.entityData.set(ANAL_PRESET, BettaTraits.AnalPreset.TALL.getId());
-        this.entityData.set(PELVIC_PRESET, BettaTraits.PelvicPreset.TALL.getId());
-        this.entityData.set(PRIMARY_COLOR, ColorUtil.BLUE.getId());
-        this.entityData.set(SECONDARY_COLOR, allowed[(int)(Math.random() * allowed.length)].getId());
-        this.entityData.set(THIRD_COLOR, ColorUtil.RED.getId());
-        this.entityData.set(IS_BUTTERFLY, true);
+        List<String> keys = List.copyOf(BETTA_SPECIALS.keySet());
+        String[] k = keys.get(this.random.nextInt(keys.size())).split("_");
+        this.entityData.set(BODY_PRESET, BettaTraits.BodyPreset.valueOf(k[0].toUpperCase()).getId());
+        this.entityData.set(DORSAL_PRESET, BettaTraits.DorsalPreset.valueOf(k[1].toUpperCase()).getId());
+        this.entityData.set(CAUDAL_PRESET, BettaTraits.CaudalPreset.valueOf(k[2].toUpperCase()).getId());
+        this.entityData.set(ANAL_PRESET, BettaTraits.AnalPreset.valueOf(k[3].toUpperCase()).getId());
+        this.entityData.set(PELVIC_PRESET, BettaTraits.PelvicPreset.valueOf(k[4].toUpperCase()).getId());
+        this.entityData.set(PATTERN_PRESET, BettaTraits.PatternPreset.valueOf(k[5].toUpperCase()).getId());
+        this.entityData.set(PRIMARY_COLOR, ColorUtil.valueOf(k[6].toUpperCase()).getId());
+        this.entityData.set(SECONDARY_COLOR, ColorUtil.valueOf(k[7].toUpperCase()).getId());
+        this.entityData.set(THIRD_COLOR, k[8].equals("x") ? ColorUtil.NONE.getId() : ColorUtil.valueOf(k[8].toUpperCase()).getId());
+        this.entityData.set(IS_BUTTERFLY, k[9].equals("y"));
 
         buildTraits();
     }

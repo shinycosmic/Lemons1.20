@@ -19,8 +19,12 @@ public interface ICanClimb {
 
     default boolean babyClimbEnabled() { return true; }
 
+    default boolean usesClimbing() {
+        return this.canClimb() || this.panicClimb();
+    }
+
     default boolean climbEnabled() {
-        return (this.canClimb() || this.panicClimb()) && (this.babyClimbEnabled() || !((Mob) this).isBaby());
+        return this.usesClimbing() && (this.babyClimbEnabled() || !((Mob) this).isBaby());
     }
 
     default boolean panicClimb() {

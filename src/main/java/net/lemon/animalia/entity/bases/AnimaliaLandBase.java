@@ -87,14 +87,14 @@ public abstract class AnimaliaLandBase extends Animal implements IActivityTime, 
 
     protected AnimaliaLandBase(EntityType<? extends Animal> entityType, Level level) {
         super(entityType, level);
-        if (this.canClimb()) {
+        if (this.usesClimbing()) {
             this.moveControl = new ClimberMoveControl(this);
         }
     }
 
     @Override
     protected PathNavigation createNavigation(Level level) {
-        return this.canClimb() ? new ClimberPathNavigation(this, level) : super.createNavigation(level);
+        return this.usesClimbing() ? new ClimberPathNavigation(this, level) : super.createNavigation(level);
     }
 
     protected float getStandingEyeHeight(Pose pPose, EntityDimensions pSize) {
@@ -467,7 +467,7 @@ public abstract class AnimaliaLandBase extends Animal implements IActivityTime, 
         pCompound.putInt("VarColor", this.getVarColor());
         pCompound.putBoolean("IsPregnant", this.isPregnant());
         pCompound.putBoolean("IsPassive", this.getIsPassive());
-        if (this.canClimb()) {
+        if (this.usesClimbing()) {
             pCompound.putByte("ClimbData", this.getClimbData());
         }
         if(this.canHide()) {
@@ -488,7 +488,7 @@ public abstract class AnimaliaLandBase extends Animal implements IActivityTime, 
         this.setVarColor(pCompound.getInt("VarColor"));
         this.setPregnant(pCompound.getBoolean("IsPregnant"));
         this.setIsPassive(pCompound.getBoolean("IsPassive"));
-        if (this.canClimb()) {
+        if (this.usesClimbing()) {
             this.setClimbData(pCompound.getByte("ClimbData"));
         }
         if(this.canHide()) {
@@ -499,12 +499,10 @@ public abstract class AnimaliaLandBase extends Animal implements IActivityTime, 
             this.hideTransitionInTicks = 0;
             this.hideTransitionOutTicks = 0;
             this.wantsToHide = false;
-            // Give a short cooldown so it doesn't immediately re-hide on spawn
             this.hideCooldown = pCompound.getInt("HideCooldown") > 0
                     ? pCompound.getInt("HideCooldown")
                     : (this.canHide() ? 100 + random.nextInt(200) : 0);
         }
-
         if (!pCompound.contains("VarSize")) {
             this.setVarSizeMultiplier(this.genVarSizeMultiplier());
         } else {
@@ -602,7 +600,7 @@ public abstract class AnimaliaLandBase extends Animal implements IActivityTime, 
 
     @Override
     public boolean causeFallDamage(float distance, float multiplier, DamageSource source) {
-        return !this.canClimb() && super.causeFallDamage(distance, multiplier, source);
+        return !this.usesClimbing() && super.causeFallDamage(distance, multiplier, source);
     }
 
     @Override
@@ -624,7 +622,7 @@ public abstract class AnimaliaLandBase extends Animal implements IActivityTime, 
     @Override
     protected void customServerAiStep() {
         super.customServerAiStep();
-        if (this.canClimb()) {
+        if (this.usesClimbing()) {
             if (this.waterBlocking()) {
                 this.detach();
             } else {
