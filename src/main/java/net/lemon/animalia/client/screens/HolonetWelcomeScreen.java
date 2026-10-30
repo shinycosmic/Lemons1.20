@@ -76,7 +76,6 @@ public class HolonetWelcomeScreen extends Screen {
                 Component.translatable("gui.animalia.holonet.welcome.line4"),
                 textX, textY + lineSpacing * 3, 0xFFFFFF);
 
-        // Loading bar / Start button area
         int barX = bgX + (BG_WIDTH - BAR_WIDTH) / 2;
         int barY = bgY + BG_HEIGHT - 60;
 

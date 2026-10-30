@@ -73,7 +73,6 @@ public abstract class AnimaliaBreedableWater extends WaterAnimal implements IAct
     private int twitchIdleTicks;
     private boolean bold;
 
-    //Constants for hiding logic
     public static final int PHASE_NONE = 0;
     public static final int PHASE_BURROWING = 1;
     public static final int PHASE_BURROWED = 2;
@@ -439,7 +438,6 @@ public abstract class AnimaliaBreedableWater extends WaterAnimal implements IAct
             scale *= getBabyScale();
         }
         EntityDimensions scaled = super.getDimensions(pose).scale(scale);
-        // Clamp minimum dimensions to prevent derendering and interaction issues
         float minSize = 0.2f;
         return EntityDimensions.scalable(
                 Math.max(scaled.width, minSize),
@@ -510,7 +508,6 @@ public abstract class AnimaliaBreedableWater extends WaterAnimal implements IAct
             this.burrowingTicks = 0;
             this.surfacingTicks = 0;
             this.wantsToHide = false;
-            // Give a short cooldown so it doesn't immediately re-burrow on spawn
             this.hideCooldown = pCompound.getInt("HideCooldown") > 0
                     ? pCompound.getInt("HideCooldown")
                     : (this.canHide() ? 100 + random.nextInt(200) : 0);
@@ -841,6 +838,7 @@ public abstract class AnimaliaBreedableWater extends WaterAnimal implements IAct
         if(reason != MobSpawnType.BUCKET || dataTag == null || !dataTag.contains("BucketVarSize")) {
             this.setGender(this.random.nextInt(2));
             this.setBold(this.random.nextFloat() < this.boldChance());
+            this.setVarSizeMultiplier(this.genVarSizeMultiplier());
         }
         if((reason == MobSpawnType.NATURAL || reason == MobSpawnType.CHUNK_GENERATION) && this.random.nextFloat() < 0.05f) {
             this.setBaby(true);

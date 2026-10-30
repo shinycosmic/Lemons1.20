@@ -428,10 +428,6 @@ public class HeterocongerEntity extends FishBase implements GeoEntity, Scannable
 
     @Override
     public @Nullable SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, MobSpawnType reason, @Nullable SpawnGroupData spawnData, @Nullable CompoundTag dataTag) {
-        if (reason != MobSpawnType.BUCKET || dataTag == null || !dataTag.contains("BucketVarSize")) {
-            this.setVarColor(1);
-            this.setVarSizeMultiplier(this.genVarSizeMultiplier());
-        }
         this.setStateSwitch(this.random.nextInt(2));
         this.setPos(this.getX() + (this.random.nextDouble() - 0.5D) * 0.7D, this.getY(), this.getZ() + (this.random.nextDouble() - 0.5D) * 0.7D);
         return super.finalizeSpawn(level, difficulty, reason, spawnData, dataTag);

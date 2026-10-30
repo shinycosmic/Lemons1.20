@@ -32,7 +32,6 @@ public class PelagicRandomSwimGoal extends Goal {
             double x = pos.getX() + fish.getRandom().nextInt(20) - 10;
             double z = pos.getZ() + fish.getRandom().nextInt(20) - 10;
 
-            // Moderate vertical drift
             double y = pos.getY() + fish.getRandom().nextInt(6) - 3;
 
             fish.getMoveControl().setWantedPosition(x, y, z, speed);

@@ -219,10 +219,6 @@ public class CongolliEntity extends BottomWalkerSwimmerBase implements GeoEntity
 
     @Override
     public @Nullable SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, MobSpawnType reason, @Nullable SpawnGroupData spawnData, @Nullable CompoundTag dataTag) {
-        if (reason != MobSpawnType.BUCKET || dataTag == null || !dataTag.contains("BucketVarSize")) {
-            this.setVarColor(1);
-            this.setVarSizeMultiplier(this.genVarSizeMultiplier());
-        }
         this.ambientTicks = rand.nextInt(1000)+1000;
         return super.finalizeSpawn(level, difficulty, reason, spawnData, dataTag);
     }

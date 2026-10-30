@@ -88,7 +88,7 @@ public class BettaFishEggItem extends FishEggItem {
         if (!(entity instanceof BettaEntity baby))
             return InteractionResultHolder.fail(stack);
 
-        baby.setEatAge(-12000); // make baby
+        baby.setEatAge(-12000);
         baby.syncTraits(compoundTag);
         baby.setVarSizeMultiplier(baby.genVarSizeMultiplier());
         baby.setGender(baby.getRandom().nextInt(2));
@@ -124,18 +124,15 @@ public class BettaFishEggItem extends FishEggItem {
         if (!(entity instanceof BettaEntity baby))
             return InteractionResult.FAIL;
 
-        // Spawn position = block face clicked
         BlockPos pos = context.getClickedPos();
         Direction face = context.getClickedFace();
 
-        // Spawn slightly offset in the direction of the face
         double x = pos.getX() + 0.5 + face.getStepX() * 0.8;
         double y = pos.getY() + 0.5 + face.getStepY() * 0.8;
         double z = pos.getZ() + 0.5 + face.getStepZ() * 0.8;
 
         baby.moveTo(x, y, z, 0.0F, 0.0F);
 
-        // Make baby
         baby.setEatAge(-12000);
         baby.syncTraits(compoundTag);
         baby.setVarSizeMultiplier(baby.genVarSizeMultiplier());

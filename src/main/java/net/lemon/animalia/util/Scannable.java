@@ -25,7 +25,7 @@ public interface Scannable {
         FISH,
         FIELD,
     }
-    //Might use this in the future but doesn't do anything right now
+    //Might use this in the future but doesn't do anything right now, maybe for completion based rewards
     AppName getApp();
 
     Component getTrivia();

@@ -50,7 +50,7 @@ public class BottomDwellingGoal extends RandomSwimmingGoal {
                 fish.getRandom().nextInt(depthCount/2 + 1) :
                 (fish.getRandom().nextFloat() < 0.8F ? fish.getRandom().nextInt(depthCount) : fish.getRandom().nextInt(depthCount * 2));
 
-        int horizontalRange = 8+depthCount; // how far they can wander
+        int horizontalRange = 8+depthCount;
         int xOffset = fish.getRandom().nextInt(horizontalRange * 2 + 1) - horizontalRange;
         int zOffset = fish.getRandom().nextInt(horizontalRange * 2 + 1) - horizontalRange;
         return Vec3.atBottomCenterOf(seafloor.offset(xOffset, heighAboveFloor, zOffset));

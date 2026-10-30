@@ -229,10 +229,6 @@ public class PogonophryneEntity extends BottomWalkerSwimmerBase implements GeoEn
 
     @Override
     public @Nullable SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, MobSpawnType reason, @Nullable SpawnGroupData spawnData, @Nullable CompoundTag dataTag) {
-        if (reason != MobSpawnType.BUCKET || dataTag == null || !dataTag.contains("BucketVarSize")) {
-            this.setVarColor(1);
-            this.setVarSizeMultiplier(this.genVarSizeMultiplier());
-        }
         this.cooldown = rand.nextInt(1000)+1000;
         this.restTicks = 0;
         return super.finalizeSpawn(level, difficulty, reason, spawnData, dataTag);

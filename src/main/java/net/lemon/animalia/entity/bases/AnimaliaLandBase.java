@@ -427,7 +427,6 @@ public abstract class AnimaliaLandBase extends Animal implements IActivityTime, 
             scale *= getBabyScale();
         }
         EntityDimensions scaled = super.getDimensions(pose).scale(scale);
-        // Clamp minimum dimensions to prevent derendering and interaction issues
         float minSize = 0.2f;
         return EntityDimensions.scalable(
                 Math.max(scaled.width, minSize),
@@ -697,7 +696,6 @@ public abstract class AnimaliaLandBase extends Animal implements IActivityTime, 
                             this.getNavigation().stop();
                             this.wantsToHide = false;
                         } else if (this.onGround()) {
-                            // On ground but wrong block - abort
                             this.wantsToHide = false;
                             this.hideCooldown = (int) (this.getHideCooldown() * 0.25f);
                         }
@@ -866,14 +864,12 @@ public abstract class AnimaliaLandBase extends Animal implements IActivityTime, 
 
     @Override
     public @Nullable SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, MobSpawnType reason, @Nullable SpawnGroupData spawnData, @Nullable CompoundTag dataTag) {
-        this.setVarColor(1);
         this.setGender(this.random.nextInt(2));
         this.setBold(this.random.nextFloat() < this.boldChance());
         this.setVarSizeMultiplier(this.genVarSizeMultiplier());
         return super.finalizeSpawn(level, difficulty, reason, spawnData, dataTag);
     }
 
-    //Subclasses for some goals
     public enum BirthLocation {
         ANY,
         LAND,

@@ -28,23 +28,4 @@ public class HydrocynusGoliathModel extends AnimaliaCustomModel<HydrocynusEntity
         }
         return new ResourceLocation(Animalia.MODID, "animations/hydrocynusgoliath.animation.json");
     }
-
-    @Override
-    public void setCustomAnimations(HydrocynusEntity animatable, long instanceId, AnimationState<HydrocynusEntity> animationState) {
-        super.setCustomAnimations(animatable, instanceId, animationState);
-//        if(animatable.isBaby() || !animatable.isInWater()) {
-//            return;
-//        }
-//
-//        CoreGeoBone whole = this.getAnimationProcessor().getBone("swim");
-//
-//
-//        EntityModelData entityData = animationState.getData(DataTickets.ENTITY_MODEL_DATA);
-//        float yaw = entityData.netHeadYaw() * ((float) Math.PI / 180F);
-//        float pitch = entityData.headPitch() * ((float) Math.PI / 180F);
-//
-//        whole.setRotX(pitch);
-//        whole.setRotZ(-yaw/2);
-
-    }
 }

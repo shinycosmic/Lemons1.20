@@ -233,14 +233,7 @@ public class MoschusEntity extends AnimaliaLandBase implements GeoEntity, Scanna
         return cache;
     }
 
-    @Override
-    public @Nullable SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, MobSpawnType reason, @Nullable SpawnGroupData spawnData, @Nullable CompoundTag dataTag) {
-        if (dataTag == null) {
-            this.setVarColor(1);
-            this.setVarSizeMultiplier(this.genVarSizeMultiplier());
-        }
-        return super.finalizeSpawn(level, difficulty, reason, spawnData, dataTag);
-    }
+
 
     @Override
     public boolean isSoftActivity() {

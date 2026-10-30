@@ -27,23 +27,4 @@ public class PangasianodonGigasModel extends AnimaliaCustomModel<PangasianodonEn
         }
         return new ResourceLocation(Animalia.MODID, "animations/pangasianodongigas.animation.json");
     }
-
-//    @Override
-//    public void setCustomAnimations(PangasianodonEntity animatable, long instanceId, AnimationState<PangasianodonEntity> animationState) {
-//        super.setCustomAnimations(animatable, instanceId, animationState);
-//        if(animatable.isBaby() || !animatable.isInWater()) {
-//            return;
-//        }
-//
-//        CoreGeoBone whole = this.getAnimationProcessor().getBone("main");
-//
-//
-//        EntityModelData entityData = animationState.getData(DataTickets.ENTITY_MODEL_DATA);
-//        float yaw = entityData.netHeadYaw() * ((float) Math.PI / 180F);
-//        float pitch = entityData.headPitch() * ((float) Math.PI / 180F);
-//
-//        whole.setRotX(pitch);
-//        whole.setRotZ(-yaw/2);
-//
-//    }
 }

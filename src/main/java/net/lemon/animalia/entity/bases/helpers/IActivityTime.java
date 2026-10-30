@@ -29,7 +29,6 @@ public interface IActivityTime {
     default boolean activityChecker(PathfinderMob mob) {
         boolean activityCheck = this.isActiveTime(mob);
 
-        // random override chance
         if (!activityCheck && mob.getRandom().nextFloat() < 0.25F) {
             return true;
         }

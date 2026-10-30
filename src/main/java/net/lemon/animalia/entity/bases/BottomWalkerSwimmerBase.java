@@ -81,12 +81,12 @@ public abstract class BottomWalkerSwimmerBase extends FishBase {
 
     /** Override in subclass. Ticks spent walking before switching to swim. */
     public int getWalkTime() {
-        return 200 + random.nextInt(200); // 10-20 seconds default
+        return 200 + random.nextInt(200);
     }
 
     /** Override in subclass. Ticks spent swimming before switching to walk. */
     public int getSwimTime() {
-        return 100 + random.nextInt(100); // 5-10 seconds default
+        return 100 + random.nextInt(100);
     }
 
     public double getSinkSpeed() {
@@ -119,7 +119,6 @@ public abstract class BottomWalkerSwimmerBase extends FishBase {
             this.selectNavigator();
         }
         if (this.isInWater() && !this.level().isClientSide) {
-            //handle decrease ticks when walking
             if(this.stateTime > 0 && this.isWalking()) {
                 this.stateTime = this.stateTime - this.random.nextInt(3);
                 if(this.stateTime < 0) {
@@ -127,7 +126,6 @@ public abstract class BottomWalkerSwimmerBase extends FishBase {
                 }
             }
 
-            //handle decrease ticks when swimming
             if(this.stateTime > 0 && !this.isWalking()) {
                 this.stateTime = this.stateTime - this.random.nextInt(3);
                 if(this.stateTime < 0) {
@@ -135,7 +133,6 @@ public abstract class BottomWalkerSwimmerBase extends FishBase {
                 }
             }
 
-            //switch from walking to swimming, cannot switch if also hiding
             if(!(this.stateTime > 0) && this.isWalking() && !this.isHiding() && this.getSwimTime() > 0) {
                 this.setWalking(false);
                 this.stateTime = this.getSwimTime();
@@ -150,7 +147,6 @@ public abstract class BottomWalkerSwimmerBase extends FishBase {
                 }
             }
 
-            // Transition: descend to floor, then switch to walking
             if (this.wantsToWalk) {
                 if (this.onGround()) {
                     this.setWalking(true);
@@ -163,12 +159,10 @@ public abstract class BottomWalkerSwimmerBase extends FishBase {
                 }
             }
 
-            // Sink to bottom when walking
             if (this.isWalking() && !this.onGround()) {
                 this.setDeltaMovement(this.getDeltaMovement().add(0, getSinkSpeed(), 0));
             }
 
-            // Prevent stepping out of water
             BlockPos pos = this.blockPosition();
             if (!this.canLeaveWater() && this.level().getBlockState(pos.above()).getFluidState().is(Fluids.EMPTY)) {
                 this.setMaxUpStep(0);
@@ -179,7 +173,6 @@ public abstract class BottomWalkerSwimmerBase extends FishBase {
 
         super.aiStep();
 
-        // Roll calculation
         float targetRoll = Math.max(-0.45F, Math.min(0.45F, (this.getYRot() - this.yRotO) * 0.1F));
         targetRoll = -targetRoll;
         this.currentRoll = this.currentRoll + (targetRoll - this.currentRoll) * 0.05F;
@@ -197,7 +190,6 @@ public abstract class BottomWalkerSwimmerBase extends FishBase {
         return 120;
     }
 
-    /** Strongly prefer underwater positions, reject land unless allowed */
     @Override
     public float getWalkTargetValue(BlockPos pPos, LevelReader pLevel) {
         if (pLevel.getFluidState(pPos.above()).is(FluidTags.WATER)) {
@@ -389,7 +381,7 @@ public abstract class BottomWalkerSwimmerBase extends FishBase {
 
             if (mob.onGround()) {
                 Vec3 vel = mob.getDeltaMovement();
-                mob.setDeltaMovement(vel.x, 0, vel.z); // lock vertical motion
+                mob.setDeltaMovement(vel.x, 0, vel.z);
             }
         }
     }

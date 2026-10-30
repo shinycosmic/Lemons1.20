@@ -171,14 +171,7 @@ public class SpinnerSharkEntity extends FishBase implements Scannable, GeoEntity
         return 1;
     }
 
-    @Override
-    public @Nullable SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, MobSpawnType reason, @Nullable SpawnGroupData spawnData, @Nullable CompoundTag dataTag) {
-        if (reason != MobSpawnType.BUCKET || dataTag == null || !dataTag.contains("BucketVarSize")) {
-            this.setVarColor(1);
-            this.setVarSizeMultiplier(this.genVarSizeMultiplier());
-        }
-        return super.finalizeSpawn(level, difficulty, reason, spawnData, dataTag);
-    }
+
 
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {

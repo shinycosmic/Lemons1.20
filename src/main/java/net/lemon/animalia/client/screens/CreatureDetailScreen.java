@@ -172,7 +172,6 @@ public class CreatureDetailScreen extends Screen {
             }
         }
 
-        //Draws the common name
         if (displayEntity != null) {
             graphics.drawCenteredString(this.font, entityType.getDescription().copy().withStyle(ChatFormatting.BOLD),
                     bgX + BG_WIDTH / 2, bgY + 35, 0xFFFFFF);
@@ -181,7 +180,6 @@ public class CreatureDetailScreen extends Screen {
         int infoX = bgX + INFO_LEFT_OFFSET;
         int infoY = bgY + INFO_TOP_OFFSET + 10;
 
-        //Draws the right side info
         if (displayEntity instanceof Scannable scannable) {
             graphics.drawString(this.font, Component.literal("> ").append(scannable.getOrder()), infoX, infoY, 0xFFFFFF, true);
             infoY += LINE_SPACING;
@@ -192,7 +190,6 @@ public class CreatureDetailScreen extends Screen {
                     infoX, infoY, 0xFFFFFF, true);
             infoY += LINE_SPACING + 8;
 
-            //Currently only the breeding item. Leaning against including whole diet as diet is made up of itemTags
             ItemStack foodItem = displayEntity instanceof AnimaliaBreedableWater abw ? new ItemStack(abw.getBreedingItem())
                     : displayEntity instanceof AnimaliaLandBase land ? new ItemStack(land.getBreedingItem())
                     : ItemStack.EMPTY;
