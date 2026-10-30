@@ -69,12 +69,6 @@ public class AnimaliaSpawnEggItem extends ForgeSpawnEggItem {
         return super.use(level, player, hand);
     }
 
-    @Override
-    public boolean isFoil(ItemStack stack) {
-        CompoundTag entityTag = stack.getTagElement("EntityTag");
-        return entityTag != null && entityTag.getBoolean("SpawnSpecial");
-    }
-
 
     @Override
     public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltipComp, TooltipFlag isAdvanced) {
