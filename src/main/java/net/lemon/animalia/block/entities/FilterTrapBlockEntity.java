@@ -1,5 +1,6 @@
 package net.lemon.animalia.block.entities;
 
+import net.lemon.animalia.Animalia;
 import net.lemon.animalia.block.FilterTrapBlock;
 import net.lemon.animalia.registry.ModBlockEntities;
 import net.lemon.animalia.client.screens.FilterTrapMenu;
@@ -173,7 +174,7 @@ public class FilterTrapBlockEntity extends BlockEntity implements MenuProvider {
         setChanged();
     }
 
-    private static final ResourceLocation LOOT_TABLE = new ResourceLocation("animalia", "drops/filter_trap");
+    private static final ResourceLocation LOOT_TABLE = new ResourceLocation(Animalia.MODID, "drops/filter_trap");
 
     private ItemStack getDrop() {
         if(!(level instanceof ServerLevel serverLevel)) {

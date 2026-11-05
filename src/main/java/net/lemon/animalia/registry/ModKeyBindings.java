@@ -14,7 +14,7 @@ public class ModKeyBindings {
     public static final KeyMapping OPEN_HOLONET = new KeyMapping(
             "key.wildlifeexplorers.open_holonet",
             GLFW.GLFW_KEY_G,
-            "key.categories.animalia"
+            "key.categories.wildlifeexplorers"
     );
 
     @SubscribeEvent
