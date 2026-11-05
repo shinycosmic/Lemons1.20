@@ -10,6 +10,7 @@ import net.lemon.animalia.client.player.network.DiscoverSpeciesPacket;
 import net.lemon.animalia.client.player.network.ModNetwork;
 import net.lemon.animalia.client.player.network.SyncAllDiscoveriesPacket;
 import net.lemon.animalia.registry.ModEntities;
+import net.lemon.animalia.util.IdRemapper;
 import net.lemon.animalia.util.Scannable;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
@@ -45,7 +46,7 @@ public class ModEventBusEvents {
     public static class ForgeEvents {
 
         private static final ResourceLocation HOLONET_CAP_ID =
-                new ResourceLocation(Animalia.MODID, "holonet_discovery");
+                new ResourceLocation(IdRemapper.MODID, "holonet_discovery");
 
         private static final ResourceLocation STICKING_PROJECTILES_CAP_ID =
                 new ResourceLocation(Animalia.MODID, "sticking_projectiles");

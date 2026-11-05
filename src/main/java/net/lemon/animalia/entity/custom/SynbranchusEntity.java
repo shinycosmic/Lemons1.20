@@ -137,26 +137,26 @@ public class SynbranchusEntity extends BottomWalkerSwimmerBase implements GeoEnt
     @Override
     public Component getTrivia() {
         if (this.getType() == ModEntities.SYNBRANCHUS_MARMORATUS.get()) {
-            return Component.translatable("trivia.animalia.synbranchus_marmoratus");
+            return Component.translatable("trivia.wildlifeexplorers.synbranchus_marmoratus");
         } else if (this.getType() == ModEntities.CHAUDHURIA_CAUDATA.get()) {
-            return Component.translatable("trivia.animalia.chaudhuria_caudata");
+            return Component.translatable("trivia.wildlifeexplorers.chaudhuria_caudata");
         }
-        return Component.translatable("debug.animalia.trivia");
+        return Component.translatable("debug.wildlifeexplorers.trivia");
     }
 
     @Override
     public Component getFamily() {
         if (this.getType() == ModEntities.SYNBRANCHUS_MARMORATUS.get()) {
-            return Component.translatable("family.animalia.synbranchidae");
+            return Component.translatable("family.wildlifeexplorers.synbranchidae");
         } else if (this.getType() == ModEntities.CHAUDHURIA_CAUDATA.get()) {
-            return Component.translatable("family.animalia.chaudhuriidae");
+            return Component.translatable("family.wildlifeexplorers.chaudhuriidae");
         }
-        return Component.translatable("debug.animalia.family");
+        return Component.translatable("debug.wildlifeexplorers.family");
     }
 
     @Override
     public Component getOrder() {
-        return Component.translatable("order.animalia.synbranchiformes");
+        return Component.translatable("order.wildlifeexplorers.synbranchiformes");
     }
 
     @Override

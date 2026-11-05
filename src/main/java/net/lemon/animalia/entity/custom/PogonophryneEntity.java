@@ -95,17 +95,17 @@ public class PogonophryneEntity extends BottomWalkerSwimmerBase implements GeoEn
 
     @Override
     public Component getTrivia() {
-        return Component.translatable("trivia.animalia.pogonophryne_marmorata");
+        return Component.translatable("trivia.wildlifeexplorers.pogonophryne_marmorata");
     }
 
     @Override
     public Component getFamily() {
-        return Component.translatable("family.animalia.harpagiferidae");
+        return Component.translatable("family.wildlifeexplorers.harpagiferidae");
     }
 
     @Override
     public Component getOrder() {
-        return Component.translatable("order.animalia.perciformes");
+        return Component.translatable("order.wildlifeexplorers.perciformes");
     }
 
     @Override

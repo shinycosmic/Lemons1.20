@@ -89,17 +89,17 @@ public class ProteusEntity extends BottomWalkerSwimmerBase implements GeoEntity,
 
     @Override
     public Component getTrivia() {
-        return Component.translatable("trivia.animalia.proteus_anguinus");
+        return Component.translatable("trivia.wildlifeexplorers.proteus_anguinus");
     }
 
     @Override
     public Component getFamily() {
-        return Component.translatable("family.animalia.proteidae");
+        return Component.translatable("family.wildlifeexplorers.proteidae");
     }
 
     @Override
     public Component getOrder() {
-        return Component.translatable("order.animalia.urodela");
+        return Component.translatable("order.wildlifeexplorers.urodela");
     }
 
     @Override

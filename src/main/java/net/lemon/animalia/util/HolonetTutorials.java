@@ -19,10 +19,10 @@ public class HolonetTutorials {
     }
 
     public static Component getTitle(String id) {
-        return Component.translatable("gui.animalia.holonet.tutorial." + id);
+        return Component.translatable("gui.wildlifeexplorers.holonet.tutorial." + id);
     }
 
     public static Component getBody(String id) {
-        return Component.translatable("gui.animalia.holonet.tutorial." + id + ".body");
+        return Component.translatable("gui.wildlifeexplorers.holonet.tutorial." + id + ".body");
     }
 }

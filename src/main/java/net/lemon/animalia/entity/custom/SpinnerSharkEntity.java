@@ -132,17 +132,17 @@ public class SpinnerSharkEntity extends FishBase implements Scannable, GeoEntity
 
     @Override
     public Component getTrivia() {
-        return Component.translatable("trivia.animalia.carcharhinus_brevipinna");
+        return Component.translatable("trivia.wildlifeexplorers.carcharhinus_brevipinna");
     }
 
     @Override
     public Component getFamily() {
-        return Component.translatable("family.animalia.carcharhinidae");
+        return Component.translatable("family.wildlifeexplorers.carcharhinidae");
     }
 
     @Override
     public Component getOrder() {
-        return Component.translatable("order.animalia.carcharhiniformes");
+        return Component.translatable("order.wildlifeexplorers.carcharhiniformes");
     }
 
     @Override

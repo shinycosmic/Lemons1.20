@@ -69,19 +69,19 @@ public class WalkingCrustaceanEntity extends BottomWalkerSwimmerBase implements 
     @Override
     public Component getTrivia() {
         if (this.getType() == ModEntities.MUNIDOPSIS_POLYMORPHA.get()) {
-            return Component.translatable("trivia.animalia.munidopsis_polymorpha");
+            return Component.translatable("trivia.wildlifeexplorers.munidopsis_polymorpha");
         }
-        return Component.translatable("debug.animalia.trivia");
+        return Component.translatable("debug.wildlifeexplorers.trivia");
     }
 
     @Override
     public Component getFamily() {
-        return Component.translatable("family.animalia.munidopsidae");
+        return Component.translatable("family.wildlifeexplorers.munidopsidae");
     }
 
     @Override
     public Component getOrder() {
-        return Component.translatable("order.animalia.decapoda");
+        return Component.translatable("order.wildlifeexplorers.decapoda");
     }
 
     @Override

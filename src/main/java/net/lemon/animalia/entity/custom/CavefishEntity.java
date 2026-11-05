@@ -91,74 +91,74 @@ public class CavefishEntity extends FishBase implements GeoEntity, Scannable {
     @Override
     public Component getTrivia() {
         if(this.getType() == ModEntities.AMBLYOPSIS_HOOSIERI.get()) {
-            return Component.translatable("trivia.animalia.amblyopsis_hoosieri");
+            return Component.translatable("trivia.wildlifeexplorers.amblyopsis_hoosieri");
         } else if(this.getType() == ModEntities.SINOCYCLOCHEILUS_ANATIROSTRIS.get()) {
-            return Component.translatable("trivia.animalia.sinocyclocheilus_anatirostris");
+            return Component.translatable("trivia.wildlifeexplorers.sinocyclocheilus_anatirostris");
         } else if(this.getType() == ModEntities.SINOCYCLOCHEILUS_HYALINUS.get()) {
-            return Component.translatable("trivia.animalia.sinocyclocheilus_hyalinus");
+            return Component.translatable("trivia.wildlifeexplorers.sinocyclocheilus_hyalinus");
         } else if(this.getType() == ModEntities.SINOCYCLOCHEILUS_LONGICORNUS.get()) {
-            return Component.translatable("trivia.animalia.sinocyclocheilus_longicornus");
+            return Component.translatable("trivia.wildlifeexplorers.sinocyclocheilus_longicornus");
         } else if(this.getType() == ModEntities.CYPRINODON_DIABOLIS.get()) {
-            return Component.translatable("trivia.animalia.cyprinodon_diabolis");
+            return Component.translatable("trivia.wildlifeexplorers.cyprinodon_diabolis");
         } else if(this.getType() == ModEntities.GITCHAK_NAKANA.get()) {
-            return Component.translatable("trivia.animalia.gitchak_nakana");
+            return Component.translatable("trivia.wildlifeexplorers.gitchak_nakana");
         } else if(this.getType() == ModEntities.KRYPTOGLANIS_SHAJII.get()) {
-            return Component.translatable("trivia.animalia.kryptoglanis_shajii");
+            return Component.translatable("trivia.wildlifeexplorers.kryptoglanis_shajii");
         } else if(this.getType() == ModEntities.SATAN_EURYSTOMUS.get()) {
-            return Component.translatable("trivia.animalia.satan_eurystomus");
+            return Component.translatable("trivia.wildlifeexplorers.satan_eurystomus");
         } else if(this.getType() == ModEntities.NEOLISSOCHILUS_PNAR.get()) {
-            return Component.translatable("trivia.animalia.neolissochilus_pnar");
+            return Component.translatable("trivia.wildlifeexplorers.neolissochilus_pnar");
         }
-        return Component.translatable("debug.animalia.trivia");
+        return Component.translatable("debug.wildlifeexplorers.trivia");
     }
 
     //todo
     @Override
     public Component getFamily() {
         if(this.getType() == ModEntities.AMBLYOPSIS_HOOSIERI.get()) {
-            return Component.translatable("family.animalia.amblyopsidae");
+            return Component.translatable("family.wildlifeexplorers.amblyopsidae");
         } else if(this.getType() == ModEntities.SINOCYCLOCHEILUS_ANATIROSTRIS.get()) {
-            return Component.translatable("family.animalia.cyprinidae");
+            return Component.translatable("family.wildlifeexplorers.cyprinidae");
         } else if(this.getType() == ModEntities.SINOCYCLOCHEILUS_HYALINUS.get()) {
-            return Component.translatable("family.animalia.cyprinidae");
+            return Component.translatable("family.wildlifeexplorers.cyprinidae");
         } else if(this.getType() == ModEntities.SINOCYCLOCHEILUS_LONGICORNUS.get()) {
-            return Component.translatable("family.animalia.cyprinidae");
+            return Component.translatable("family.wildlifeexplorers.cyprinidae");
         } else if(this.getType() == ModEntities.CYPRINODON_DIABOLIS.get()) {
-            return Component.translatable("family.animalia.cyprinodontidae");
+            return Component.translatable("family.wildlifeexplorers.cyprinodontidae");
         } else if(this.getType() == ModEntities.GITCHAK_NAKANA.get()) {
-            return Component.translatable("family.animalia.cobitidae");
+            return Component.translatable("family.wildlifeexplorers.cobitidae");
         } else if(this.getType() == ModEntities.KRYPTOGLANIS_SHAJII.get()) {
-            return Component.translatable("family.animalia.kryptoglanidae");
+            return Component.translatable("family.wildlifeexplorers.kryptoglanidae");
         } else if(this.getType() == ModEntities.SATAN_EURYSTOMUS.get()) {
-            return Component.translatable("family.animalia.ictaluridae");
+            return Component.translatable("family.wildlifeexplorers.ictaluridae");
         } else if(this.getType() == ModEntities.NEOLISSOCHILUS_PNAR.get()) {
-            return Component.translatable("family.animalia.cyprinidae");
+            return Component.translatable("family.wildlifeexplorers.cyprinidae");
         }
-        return Component.translatable("debug.animalia.family");
+        return Component.translatable("debug.wildlifeexplorers.family");
     }
 
     @Override
     public Component getOrder() {
         if(this.getType() == ModEntities.AMBLYOPSIS_HOOSIERI.get()) {
-            return Component.translatable("order.animalia.percopsiformes");
+            return Component.translatable("order.wildlifeexplorers.percopsiformes");
         } else if(this.getType() == ModEntities.SINOCYCLOCHEILUS_ANATIROSTRIS.get()) {
-            return Component.translatable("order.animalia.cypriniformes");
+            return Component.translatable("order.wildlifeexplorers.cypriniformes");
         } else if(this.getType() == ModEntities.SINOCYCLOCHEILUS_HYALINUS.get()) {
-            return Component.translatable("order.animalia.cypriniformes");
+            return Component.translatable("order.wildlifeexplorers.cypriniformes");
         } else if(this.getType() == ModEntities.SINOCYCLOCHEILUS_LONGICORNUS.get()) {
-            return Component.translatable("order.animalia.cypriniformes");
+            return Component.translatable("order.wildlifeexplorers.cypriniformes");
         } else if(this.getType() == ModEntities.CYPRINODON_DIABOLIS.get()) {
-            return Component.translatable("order.animalia.cyprinodontiformes");
+            return Component.translatable("order.wildlifeexplorers.cyprinodontiformes");
         } else if(this.getType() == ModEntities.GITCHAK_NAKANA.get()) {
-            return Component.translatable("order.animalia.cypriniformes");
+            return Component.translatable("order.wildlifeexplorers.cypriniformes");
         } else if(this.getType() == ModEntities.KRYPTOGLANIS_SHAJII.get()) {
-            return Component.translatable("order.animalia.siluriformes");
+            return Component.translatable("order.wildlifeexplorers.siluriformes");
         } else if(this.getType() == ModEntities.SATAN_EURYSTOMUS.get()) {
-            return Component.translatable("order.animalia.siluriformes");
+            return Component.translatable("order.wildlifeexplorers.siluriformes");
         } else if(this.getType() == ModEntities.NEOLISSOCHILUS_PNAR.get()) {
-            return Component.translatable("order.animalia.cypriniformes");
+            return Component.translatable("order.wildlifeexplorers.cypriniformes");
         }
-        return Component.translatable("debug.animalia.order");
+        return Component.translatable("debug.wildlifeexplorers.order");
     }
 
     @Override

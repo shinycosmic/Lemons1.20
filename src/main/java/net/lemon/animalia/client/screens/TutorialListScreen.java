@@ -40,7 +40,7 @@ public class TutorialListScreen extends Screen {
     private boolean isDraggingScrollbar = false;
 
     public TutorialListScreen(Screen parent) {
-        super(Component.translatable("gui.animalia.holonet.tutorials"));
+        super(Component.translatable("gui.wildlifeexplorers.holonet.tutorials"));
         this.parent = parent;
         this.tutorials = HolonetTutorials.getAll();
     }
@@ -58,7 +58,7 @@ public class TutorialListScreen extends Screen {
     public void render(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
         graphics.blit(BACKGROUND, bgX, bgY, 0, 0, BG_WIDTH, BG_HEIGHT, BG_WIDTH, (int) (BG_HEIGHT * 1.6));
         graphics.blit(BORDER, bgX, bgY, 0, 0, BG_WIDTH, BG_HEIGHT, BG_WIDTH, (int) (BG_HEIGHT * 1.6));
-        graphics.drawCenteredString(this.font, Component.translatable("gui.animalia.holonet.tutorials"), bgX + BG_WIDTH / 2, bgY + 40, TITLE_COLOR);
+        graphics.drawCenteredString(this.font, Component.translatable("gui.wildlifeexplorers.holonet.tutorials"), bgX + BG_WIDTH / 2, bgY + 40, TITLE_COLOR);
 
         int panelX = bgX + PANEL_LEFT;
         int panelY = bgY + PANEL_TOP;

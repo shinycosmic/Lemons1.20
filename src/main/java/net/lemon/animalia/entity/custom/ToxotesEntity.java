@@ -105,17 +105,17 @@ public class ToxotesEntity extends FishBase implements GeoEntity, Scannable {
 
     @Override
     public Component getTrivia() {
-        return Component.translatable("trivia.animalia.toxotes_chatareus");
+        return Component.translatable("trivia.wildlifeexplorers.toxotes_chatareus");
     }
 
     @Override
     public Component getFamily() {
-        return Component.translatable("family.animalia.toxotidae");
+        return Component.translatable("family.wildlifeexplorers.toxotidae");
     }
 
     @Override
     public Component getOrder() {
-        return Component.translatable("order.animalia.carangiformes");
+        return Component.translatable("order.wildlifeexplorers.carangiformes");
     }
 
     @Override

@@ -163,32 +163,32 @@ public class ToothfishEntity extends FishBase implements GeoEntity, Scannable {
     @Override
     public Component getTrivia() {
         if (this.getType() == ModEntities.DISSOSTICHUS_ELEGINOIDES.get()) {
-            return Component.translatable("trivia.animalia.dissostichus_eleginoides");
+            return Component.translatable("trivia.wildlifeexplorers.dissostichus_eleginoides");
         } else if (this.getType() == ModEntities.ELEGINOPS_MACLOVINUS.get()) {
-            return Component.translatable("trivia.animalia.eleginops_maclovinus");
+            return Component.translatable("trivia.wildlifeexplorers.eleginops_maclovinus");
         } else if (this.getType() == ModEntities.PERCOPHIS_BRASILIENSIS.get()){
-            return Component.translatable("trivia.animalia.percophis_brasiliensis");
+            return Component.translatable("trivia.wildlifeexplorers.percophis_brasiliensis");
         } else {
-            return Component.translatable("debug.animalia.trivia");
+            return Component.translatable("debug.wildlifeexplorers.trivia");
         }
     }
 
     @Override
     public Component getFamily() {
         if (this.getType() == ModEntities.DISSOSTICHUS_ELEGINOIDES.get()) {
-            return Component.translatable("family.animalia.nototheniidae");
+            return Component.translatable("family.wildlifeexplorers.nototheniidae");
         } else if (this.getType() == ModEntities.ELEGINOPS_MACLOVINUS.get()) {
-            return Component.translatable("family.animalia.eleginopidae");
+            return Component.translatable("family.wildlifeexplorers.eleginopidae");
         } else if (this.getType() == ModEntities.PERCOPHIS_BRASILIENSIS.get()){
-            return Component.translatable("family.animalia.percophidae");
+            return Component.translatable("family.wildlifeexplorers.percophidae");
         } else {
-            return Component.translatable("debug.animalia.family");
+            return Component.translatable("debug.wildlifeexplorers.family");
         }
     }
 
     @Override
     public Component getOrder() {
-        return Component.translatable("order.animalia.perciformes");
+        return Component.translatable("order.wildlifeexplorers.perciformes");
     }
 
     @Override

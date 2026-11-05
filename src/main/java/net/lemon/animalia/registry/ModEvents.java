@@ -4,6 +4,7 @@ import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import net.lemon.animalia.Animalia;
 import net.lemon.animalia.entity.bases.FishBase;
 import net.lemon.animalia.entity.bases.helpers.IsGenetic;
+import net.lemon.animalia.util.IdRemapper;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.RandomSource;
@@ -34,7 +35,7 @@ public class ModEvents {
             return;
         }
         CompoundTag persisted = player.getPersistentData().getCompound(Player.PERSISTED_NBT_TAG);
-        if (persisted.getBoolean(HOLONET_GIVEN_TAG)) {
+        if (persisted.getBoolean(HOLONET_GIVEN_TAG) || persisted.getBoolean(IdRemapper.MODID + ":holonet_given")) {
             return;
         }
         persisted.putBoolean(HOLONET_GIVEN_TAG, true);

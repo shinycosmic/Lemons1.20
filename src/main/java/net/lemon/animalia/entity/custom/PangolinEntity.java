@@ -96,17 +96,17 @@ public class PangolinEntity extends AnimaliaLandBase implements GeoEntity, Scann
 
     @Override
     public Component getTrivia() {
-        return Component.translatable("trivia.animalia.smutsia_gigantea");
+        return Component.translatable("trivia.wildlifeexplorers.smutsia_gigantea");
     }
 
     @Override
     public Component getFamily() {
-        return Component.translatable("family.animalia.manidae");
+        return Component.translatable("family.wildlifeexplorers.manidae");
     }
 
     @Override
     public Component getOrder() {
-        return Component.translatable("order.animalia.pholidota");
+        return Component.translatable("order.wildlifeexplorers.pholidota");
     }
 
     @Override

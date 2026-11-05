@@ -4,7 +4,7 @@
   "cookingtime": 100,
   "experience": 0.35,
   "ingredient": {
-    "item": "animalia:raw_small_mammal"
+    "item": "wildlifeexplorers:raw_small_mammal"
   },
-  "result": "animalia:cooked_small_mammal"
+  "result": "wildlifeexplorers:cooked_small_mammal"
 }

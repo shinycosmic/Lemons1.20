@@ -134,17 +134,17 @@ public class MoschusEntity extends AnimaliaLandBase implements GeoEntity, Scanna
 
     @Override
     public Component getTrivia() {
-        return Component.translatable("trivia.animalia.moschus_moschiferus");
+        return Component.translatable("trivia.wildlifeexplorers.moschus_moschiferus");
     }
 
     @Override
     public Component getFamily() {
-        return Component.translatable("family.animalia.moschidae");
+        return Component.translatable("family.wildlifeexplorers.moschidae");
     }
 
     @Override
     public Component getOrder() {
-        return Component.translatable("order.animalia.artiodactyla");
+        return Component.translatable("order.wildlifeexplorers.artiodactyla");
     }
 
     @Override

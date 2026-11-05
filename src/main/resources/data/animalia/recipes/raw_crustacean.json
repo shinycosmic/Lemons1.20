@@ -3,11 +3,11 @@
   "category": "misc",
   "ingredients": [
     {
-      "tag": "animalia:raw_crustacean"
+      "tag": "wildlifeexplorers:raw_crustacean"
     }
   ],
   "result": {
     "count": 1,
-    "item": "animalia:raw_crustacean"
+    "item": "wildlifeexplorers:raw_crustacean"
   }
 }

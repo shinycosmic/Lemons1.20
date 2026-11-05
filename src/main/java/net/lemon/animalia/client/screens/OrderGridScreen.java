@@ -59,7 +59,7 @@ public class OrderGridScreen extends Screen {
     private int backBtnY;
 
     public OrderGridScreen(Scannable.AppName app, String order, Screen parent) {
-        super(Component.translatable("gui.animalia.holonet.grid"));
+        super(Component.translatable("gui.wildlifeexplorers.holonet.grid"));
         this.app = app;
         this.order = order;
         this.parent = parent;
@@ -96,7 +96,7 @@ public class OrderGridScreen extends Screen {
         backBtnX = bgX + BACK_BUTTON_MARGIN_LEFT;
         backBtnY = bgY + BACK_BUTTON_MARGIN_TOP;
         if (order == null) {
-            this.addRenderableWidget(Button.builder(Component.translatable("gui.animalia.holonet.by_order"), b -> {
+            this.addRenderableWidget(Button.builder(Component.translatable("gui.wildlifeexplorers.holonet.by_order"), b -> {
                 Minecraft.getInstance().setScreen(new OrderListScreen(app, this));
             }).pos(bgX + BG_WIDTH - 90, bgY + 35).size(55, 16).build());
         }

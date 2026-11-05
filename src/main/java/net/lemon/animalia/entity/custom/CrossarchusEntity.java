@@ -86,19 +86,19 @@ public class CrossarchusEntity extends AnimaliaLandBase implements GeoEntity, Sc
     @Override
     public Component getTrivia() {
         if (this.getType() == ModEntities.CROSSARCHUS_OBSCURUS.get()) {
-            return Component.translatable("trivia.animalia.crossarchus_obscurus");
+            return Component.translatable("trivia.wildlifeexplorers.crossarchus_obscurus");
         }
-        return Component.translatable("trivia.animalia.crossarchus_platycephalus");
+        return Component.translatable("trivia.wildlifeexplorers.crossarchus_platycephalus");
     }
 
     @Override
     public Component getFamily() {
-        return Component.translatable("family.animalia.herpestidae");
+        return Component.translatable("family.wildlifeexplorers.herpestidae");
     }
 
     @Override
     public Component getOrder() {
-        return Component.translatable("order.animalia.carnivora");
+        return Component.translatable("order.wildlifeexplorers.carnivora");
     }
 
     @Override

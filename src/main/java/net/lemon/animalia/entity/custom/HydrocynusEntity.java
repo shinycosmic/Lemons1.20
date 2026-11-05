@@ -93,17 +93,17 @@ public class HydrocynusEntity extends FishBase implements GeoEntity, Scannable {
 
     @Override
     public Component getTrivia() {
-        return Component.translatable("trivia.animalia.hydrocynus_goliath");
+        return Component.translatable("trivia.wildlifeexplorers.hydrocynus_goliath");
     }
 
     @Override
     public Component getFamily() {
-        return Component.translatable("family.animalia.alestidae");
+        return Component.translatable("family.wildlifeexplorers.alestidae");
     }
 
     @Override
     public Component getOrder() {
-        return Component.translatable("order.animalia.characiformes");
+        return Component.translatable("order.wildlifeexplorers.characiformes");
     }
 
     @Override

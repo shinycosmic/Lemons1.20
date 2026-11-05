@@ -4,7 +4,7 @@
   "cookingtime": 600,
   "experience": 0.35,
   "ingredient": {
-    "item": "animalia:raw_venison"
+    "item": "wildlifeexplorers:raw_venison"
   },
-  "result": "animalia:cooked_venison"
+  "result": "wildlifeexplorers:cooked_venison"
 }

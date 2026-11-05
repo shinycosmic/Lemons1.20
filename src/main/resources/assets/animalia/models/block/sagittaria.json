@@ -5,9 +5,9 @@
 	"ambientocclusion": false,
 	"texture_size": [32, 32],
 	"textures": {
-		"0": "animalia:block/sagittaria_leaf",
-		"1": "animalia:block/sagittaria_flower",
-		"particle": "animalia:block/sagittaria_leaf"
+		"0": "wildlifeexplorers:block/sagittaria_leaf",
+		"1": "wildlifeexplorers:block/sagittaria_flower",
+		"particle": "wildlifeexplorers:block/sagittaria_leaf"
 	},
 	"elements": [
 		{

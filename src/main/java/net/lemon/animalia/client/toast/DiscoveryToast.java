@@ -11,7 +11,7 @@ import net.minecraft.world.item.ItemStack;
 
 public class DiscoveryToast implements Toast {
     private static final ResourceLocation BACKGROUND = new ResourceLocation("textures/gui/toasts.png");
-    private static final Component TITLE = Component.translatable("toast.animalia.discovered");
+    private static final Component TITLE = Component.translatable("toast.wildlifeexplorers.discovered");
     private static final ItemStack ICON = new ItemStack(ModItems.HOLONET.get());
     private final Component entityName;
     private long lastChanged;

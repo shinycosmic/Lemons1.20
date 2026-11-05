@@ -76,22 +76,22 @@ public class BovichtusEntity extends BottomWalkerSwimmerBase implements GeoEntit
     @Override
     public Component getTrivia() {
         if (this.getType() == ModEntities.BOVICHTUS_VARIEGATUS.get()) {
-            return Component.translatable("trivia.animalia.bovichtus_variegatus");
+            return Component.translatable("trivia.wildlifeexplorers.bovichtus_variegatus");
         }
-        return Component.translatable("trivia.animalia.congiopodus_torvus");
+        return Component.translatable("trivia.wildlifeexplorers.congiopodus_torvus");
     }
 
     @Override
     public Component getFamily() {
         if (this.getType() == ModEntities.BOVICHTUS_VARIEGATUS.get()) {
-            return Component.translatable("trivia.animalia.bovichtus_variegatus");
+            return Component.translatable("trivia.wildlifeexplorers.bovichtus_variegatus");
         }
-        return Component.translatable("family.animalia.congiopodidae");
+        return Component.translatable("family.wildlifeexplorers.congiopodidae");
     }
 
     @Override
     public Component getOrder() {
-        return Component.translatable("order.animalia.perciformes");
+        return Component.translatable("order.wildlifeexplorers.perciformes");
     }
 
     @Override

@@ -130,26 +130,26 @@ public class ChaenocephalusEntity extends BottomWalkerSwimmerBase implements Geo
     @Override
     public Component getTrivia() {
         if (this.getType() == ModEntities.CHAENOCEPHALUS_ACERATUS.get()) {
-            return Component.translatable("trivia.animalia.chaenocephalus_aceratus");
+            return Component.translatable("trivia.wildlifeexplorers.chaenocephalus_aceratus");
         } else if (this.getType() == ModEntities.CYGNODRACO_MAWSONI.get()) {
-            return Component.translatable("trivia.animalia.cygnodraco_mawsoni");
+            return Component.translatable("trivia.wildlifeexplorers.cygnodraco_mawsoni");
         }
-        return Component.translatable("debug.animalia.trivia");
+        return Component.translatable("debug.wildlifeexplorers.trivia");
     }
 
     @Override
     public Component getFamily() {
         if (this.getType() == ModEntities.CHAENOCEPHALUS_ACERATUS.get()) {
-            return Component.translatable("family.animalia.channichthyidae");
+            return Component.translatable("family.wildlifeexplorers.channichthyidae");
         } else if (this.getType() == ModEntities.CYGNODRACO_MAWSONI.get()) {
-            return Component.translatable("family.animalia.bathydraconidae");
+            return Component.translatable("family.wildlifeexplorers.bathydraconidae");
         }
-        return Component.translatable("debug.animalia.family");
+        return Component.translatable("debug.wildlifeexplorers.family");
     }
 
     @Override
     public Component getOrder() {
-        return Component.translatable("order.animalia.perciformes");
+        return Component.translatable("order.wildlifeexplorers.perciformes");
     }
 
     @Override

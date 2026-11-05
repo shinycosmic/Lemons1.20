@@ -122,17 +122,17 @@ public class BettaEntity extends FishBase implements GeoEntity, IsGenetic, Scann
 
     @Override
     public Component getTrivia() {
-        return Component.translatable("trivia.animalia.betta_splendens");
+        return Component.translatable("trivia.wildlifeexplorers.betta_splendens");
     }
 
     @Override
     public Component getFamily() {
-        return Component.translatable("family.animalia.osphronemidae");
+        return Component.translatable("family.wildlifeexplorers.osphronemidae");
     }
 
     @Override
     public Component getOrder() {
-        return Component.translatable("order.animalia.anabantiformes");
+        return Component.translatable("order.wildlifeexplorers.anabantiformes");
     }
 
     @Override
@@ -481,31 +481,31 @@ public class BettaEntity extends FishBase implements GeoEntity, IsGenetic, Scann
 
     public static Component resolveName(BettaTraits.PatternPreset pp, ColorUtil pc, ColorUtil sc, BettaTraits.CaudalPreset cc, String specialTexture, boolean isSpecial) {
         if (isSpecial) {
-            return Component.translatable("entity.animalia.betta_splendens."+specialTexture);
+            return Component.translatable("entity.wildlifeexplorers.betta_splendens."+specialTexture);
         }
 
-        Component primaryColor = Component.translatable("util.animalia.color."+pc.name().toLowerCase());
-        Component secondaryColor = Component.translatable("util.animalia.color."+sc.name().toLowerCase());
-        Component patternPreset = Component.translatable("entity.animalia.betta_splendens_preset."+pp.name().toLowerCase());
-        Component caudalPreset = Component.translatable("entity.animalia.betta_splendens_preset."+cc.name().toLowerCase());
+        Component primaryColor = Component.translatable("util.wildlifeexplorers.color."+pc.name().toLowerCase());
+        Component secondaryColor = Component.translatable("util.wildlifeexplorers.color."+sc.name().toLowerCase());
+        Component patternPreset = Component.translatable("entity.wildlifeexplorers.betta_splendens_preset."+pp.name().toLowerCase());
+        Component caudalPreset = Component.translatable("entity.wildlifeexplorers.betta_splendens_preset."+cc.name().toLowerCase());
 
         switch(pp) {
             case SOLID:
-                return Component.translatable("entity.animalia.betta_splendens.twoComp", primaryColor, caudalPreset);
+                return Component.translatable("entity.wildlifeexplorers.betta_splendens.twoComp", primaryColor, caudalPreset);
             case DRAGON:
-                return Component.translatable("entity.animalia.betta_splendens.threeComp", caudalPreset, primaryColor, patternPreset);
+                return Component.translatable("entity.wildlifeexplorers.betta_splendens.threeComp", caudalPreset, primaryColor, patternPreset);
             case MARBLE:
-                return Component.translatable("entity.animalia.betta_splendens.threeComp", caudalPreset, primaryColor, patternPreset);
+                return Component.translatable("entity.wildlifeexplorers.betta_splendens.threeComp", caudalPreset, primaryColor, patternPreset);
             case BICOLOR:
-                return Component.translatable("entity.animalia.betta_splendens.threeComp", caudalPreset, primaryColor, secondaryColor);
+                return Component.translatable("entity.wildlifeexplorers.betta_splendens.threeComp", caudalPreset, primaryColor, secondaryColor);
             case PIEBALD:
-                return Component.translatable("entity.animalia.betta_splendens.twoComp", caudalPreset, patternPreset);
+                return Component.translatable("entity.wildlifeexplorers.betta_splendens.twoComp", caudalPreset, patternPreset);
             case BUTTERFLY:
-                return Component.translatable("entity.animalia.betta_splendens.fourComp", caudalPreset, primaryColor, secondaryColor, patternPreset);
+                return Component.translatable("entity.wildlifeexplorers.betta_splendens.fourComp", caudalPreset, primaryColor, secondaryColor, patternPreset);
             case CAMBODIAN:
-                return Component.translatable("entity.animalia.betta_splendens.twoComp", caudalPreset, patternPreset);
+                return Component.translatable("entity.wildlifeexplorers.betta_splendens.twoComp", caudalPreset, patternPreset);
             case MULTICOLOR: default:
-                return Component.translatable("entity.animalia.betta_splendens.twoComp", caudalPreset, patternPreset);
+                return Component.translatable("entity.wildlifeexplorers.betta_splendens.twoComp", caudalPreset, patternPreset);
         }
     }
 

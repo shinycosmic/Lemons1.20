@@ -4,8 +4,8 @@
 	"ambientocclusion": false,
 	"texture_size": [32, 32],
 	"textures": {
-		"0": "animalia:block/harp_sponge",
-		"particle": "animalia:block/harp_sponge"
+		"0": "wildlifeexplorers:block/harp_sponge",
+		"particle": "wildlifeexplorers:block/harp_sponge"
 	},
 	"elements": [
 		{

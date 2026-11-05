@@ -23,7 +23,7 @@ public class HolonetHomeScreen extends Screen {
     private static final int ICON_SPACING = 64;
 
     public HolonetHomeScreen() {
-        super(Component.translatable("gui.animalia.holonet"));
+        super(Component.translatable("gui.wildlifeexplorers.holonet"));
     }
 
     @Override
@@ -46,19 +46,19 @@ public class HolonetHomeScreen extends Screen {
 
         graphics.blit(FISH_ICON, startX, iconY, 0, 0, ICON_SIZE, ICON_SIZE, ICON_SIZE, ICON_SIZE);
         graphics.drawCenteredString(this.font,
-                Component.translatable("gui.animalia.holonet.fish_compendium"),
+                Component.translatable("gui.wildlifeexplorers.holonet.fish_compendium"),
                 startX + ICON_SIZE / 2, iconY + ICON_SIZE + 4, 0xFFFFFF);
 
         int fieldX = startX + ICON_SIZE + ICON_SPACING;
         graphics.blit(FIELD_ICON, fieldX, iconY, 0, 0, ICON_SIZE, ICON_SIZE, ICON_SIZE, ICON_SIZE);
         graphics.drawCenteredString(this.font,
-                Component.translatable("gui.animalia.holonet.field_guide"),
+                Component.translatable("gui.wildlifeexplorers.holonet.field_guide"),
                 fieldX + ICON_SIZE / 2, iconY + ICON_SIZE + 4, 0xFFFFFF);
 
         int tutorialsX = fieldX + ICON_SIZE + ICON_SPACING;
         graphics.blit(TUTORIAL_ICON, tutorialsX, iconY, 0, 0, ICON_SIZE, ICON_SIZE, ICON_SIZE, ICON_SIZE);
         graphics.drawCenteredString(this.font,
-                Component.translatable("gui.animalia.holonet.tutorials"),
+                Component.translatable("gui.wildlifeexplorers.holonet.tutorials"),
                 tutorialsX + ICON_SIZE / 2, iconY + ICON_SIZE + 4, 0xFFFFFF);
 
         if (isOver(mouseX, mouseY, tutorialsX, iconY)) {

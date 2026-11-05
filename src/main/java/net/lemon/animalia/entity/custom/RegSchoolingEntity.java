@@ -79,62 +79,62 @@ public class RegSchoolingEntity extends FishBase implements GeoEntity, Scannable
     @Override
     public Component getTrivia() {
         if (this.getType() == ModEntities.SCATOPHAGUS_ARGUS.get()) {
-            return Component.translatable("trivia.animalia.scatophagus_argus");
+            return Component.translatable("trivia.wildlifeexplorers.scatophagus_argus");
         } else if (this.getType() == ModEntities.POMACANTHUS_IMPERATOR.get()) {
-            return Component.translatable("trivia.animalia.pomacanthus_imperator");
+            return Component.translatable("trivia.wildlifeexplorers.pomacanthus_imperator");
         } else if (this.getType() == ModEntities.NASO_BREVIROSTRIS.get()) {
-            return Component.translatable("trivia.animalia.naso_brevirostris");
+            return Component.translatable("trivia.wildlifeexplorers.naso_brevirostris");
         } else if (this.getType() == ModEntities.CHELMON_ROSTRATUS.get()) {
-            return Component.translatable("trivia.animalia.chelmon_rostratus");
+            return Component.translatable("trivia.wildlifeexplorers.chelmon_rostratus");
         } else if (this.getType() == ModEntities.CHAETODON_AURIGA.get()) {
-            return Component.translatable("trivia.animalia.chaetodon_auriga");
+            return Component.translatable("trivia.wildlifeexplorers.chaetodon_auriga");
         } else if (this.getType() == ModEntities.SIGANUS_VULPINUS.get()) {
-            return Component.translatable("trivia.animalia.siganus_vulpinus");
+            return Component.translatable("trivia.wildlifeexplorers.siganus_vulpinus");
         } else if (this.getType() == ModEntities.ACANTHURUS_LEUCOSTERNON.get()) {
-            return Component.translatable("trivia.animalia.acanthurus_leucosternon");
+            return Component.translatable("trivia.wildlifeexplorers.acanthurus_leucosternon");
         } else if (this.getType() == ModEntities.ACANTHURUS_ACHILLES.get()) {
-            return Component.translatable("trivia.animalia.acanthurus_achilles");
+            return Component.translatable("trivia.wildlifeexplorers.acanthurus_achilles");
         } else if (this.getType() == ModEntities.ACANTHURUS_JAPONICUS.get()) {
-            return Component.translatable("trivia.animalia.acanthurus_japonicus");
+            return Component.translatable("trivia.wildlifeexplorers.acanthurus_japonicus");
         } else if (this.getType() == ModEntities.ACANTHURUS_SOHAL.get()) {
-            return Component.translatable("trivia.animalia.acanthurus_sohal");
+            return Component.translatable("trivia.wildlifeexplorers.acanthurus_sohal");
         } else if (this.getType() == ModEntities.ACANTHURUS_COERULEUS.get()) {
-            return Component.translatable("trivia.animalia.acanthurus_coeruleus");
+            return Component.translatable("trivia.wildlifeexplorers.acanthurus_coeruleus");
         } else if (this.getType() == ModEntities.ACANTHURUS_LINEATUS.get()) {
-            return Component.translatable("trivia.animalia.acanthurus_lineatus");
+            return Component.translatable("trivia.wildlifeexplorers.acanthurus_lineatus");
         } else if (this.getType() == ModEntities.LEPTOBRAMA_MUELLERI.get()) {
-            return Component.translatable("trivia.animalia.leptobrama_muelleri");
+            return Component.translatable("trivia.wildlifeexplorers.leptobrama_muelleri");
         } else if (this.getType() == ModEntities.FORCIPIGER_LONGIROSTRIS.get()) {
-            return Component.translatable("trivia.animalia.forcipiger_longirostris");
+            return Component.translatable("trivia.wildlifeexplorers.forcipiger_longirostris");
         } else if (this.getType() == ModEntities.FORCIPIGER_FLAVISSIMUS.get()) {
-            return Component.translatable("trivia.animalia.forcipiger_flavissimus");
+            return Component.translatable("trivia.wildlifeexplorers.forcipiger_flavissimus");
         } else if (this.getType() == ModEntities.CENTROPYGE_VENUSTA.get()) {
-            return Component.translatable("trivia.animalia.centropyge_venusta");
+            return Component.translatable("trivia.wildlifeexplorers.centropyge_venusta");
         } else if (this.getType() == ModEntities.CENTROPYGE_BOYLEI.get()) {
-            return Component.translatable("trivia.animalia.centropyge_boylei");
+            return Component.translatable("trivia.wildlifeexplorers.centropyge_boylei");
         } else if (this.getType() == ModEntities.CENTROPYGE_LORICULA.get()) {
-            return Component.translatable("trivia.animalia.centropyge_loricula");
+            return Component.translatable("trivia.wildlifeexplorers.centropyge_loricula");
         } else if (this.getType() == ModEntities.DUSSUMIERIA_ACUTA.get()) {
-            return Component.translatable("trivia.animalia.dussumieria_acuta");
+            return Component.translatable("trivia.wildlifeexplorers.dussumieria_acuta");
         } else if (this.getType() == ModEntities.SARDINA_PILCHARDUS.get()) {
-            return Component.translatable("trivia.animalia.sardina_pilchardus");
+            return Component.translatable("trivia.wildlifeexplorers.sardina_pilchardus");
         } else if (this.getType() == ModEntities.SARDINOPS_MELANOSTICTA.get()) {
-            return Component.translatable("trivia.animalia.sardinops_melanosticta");
+            return Component.translatable("trivia.wildlifeexplorers.sardinops_melanosticta");
         } else if (this.getType() == ModEntities.SARDINOPS_SAGAX.get()) {
-            return Component.translatable("trivia.animalia.sardinops_sagax");
+            return Component.translatable("trivia.wildlifeexplorers.sardinops_sagax");
         }
-        return Component.translatable("debug.animalia.trivia");
+        return Component.translatable("debug.wildlifeexplorers.trivia");
     }
 
     @Override
     public Component getFamily() {
         if (this.getType() == ModEntities.SCATOPHAGUS_ARGUS.get()) {
-            return Component.translatable("family.animalia.scatophagidae");
+            return Component.translatable("family.wildlifeexplorers.scatophagidae");
         } else if (this.getType() == ModEntities.POMACANTHUS_IMPERATOR.get()
                 || this.getType() == ModEntities.CENTROPYGE_VENUSTA.get()
                 || this.getType() == ModEntities.CENTROPYGE_LORICULA.get()
                 || this.getType() == ModEntities.CENTROPYGE_BOYLEI.get()) {
-            return Component.translatable("family.animalia.pomacanthidae");
+            return Component.translatable("family.wildlifeexplorers.pomacanthidae");
         } else if (this.getType() == ModEntities.NASO_BREVIROSTRIS.get()
                 || this.getType() == ModEntities.ACANTHURUS_LINEATUS.get()
                 || this.getType() == ModEntities.ACANTHURUS_SOHAL.get()
@@ -142,37 +142,37 @@ public class RegSchoolingEntity extends FishBase implements GeoEntity, Scannable
                 || this.getType() == ModEntities.ACANTHURUS_JAPONICUS.get()
                 || this.getType() == ModEntities.ACANTHURUS_ACHILLES.get()
                 || this.getType() == ModEntities.ACANTHURUS_LEUCOSTERNON.get()) {
-            return Component.translatable("family.animalia.acanthuridae");
+            return Component.translatable("family.wildlifeexplorers.acanthuridae");
         } else if (this.getType() == ModEntities.CHELMON_ROSTRATUS.get()
                 || this.getType() == ModEntities.CHAETODON_AURIGA.get()
                 || this.getType() == ModEntities.FORCIPIGER_FLAVISSIMUS.get()
                 || this.getType() == ModEntities.FORCIPIGER_LONGIROSTRIS.get()) {
-            return Component.translatable("family.animalia.chaetodontidae");
+            return Component.translatable("family.wildlifeexplorers.chaetodontidae");
         }else if (this.getType() == ModEntities.SIGANUS_VULPINUS.get()) {
-            return Component.translatable("family.animalia.siganidae");
+            return Component.translatable("family.wildlifeexplorers.siganidae");
         } else if (this.getType() == ModEntities.LEPTOBRAMA_MUELLERI.get()) {
-            return Component.translatable("family.animalia.leptobramidae");
+            return Component.translatable("family.wildlifeexplorers.leptobramidae");
         } else if (this.getType() == ModEntities.SARDINOPS_SAGAX.get()
                 || this.getType() == ModEntities.SARDINOPS_MELANOSTICTA.get()
                 || this.getType() == ModEntities.SARDINA_PILCHARDUS.get()) {
-            return Component.translatable("family.animalia.alosidae");
+            return Component.translatable("family.wildlifeexplorers.alosidae");
         } else if (this.getType() == ModEntities.DUSSUMIERIA_ACUTA.get()) {
-            return Component.translatable("family.animalia.dussumieriidae");
+            return Component.translatable("family.wildlifeexplorers.dussumieriidae");
         }
-        return Component.translatable("debug.animalia.family");
+        return Component.translatable("debug.wildlifeexplorers.family");
     }
 
     @Override
     public Component getOrder() {
         if(this.getType() == ModEntities.LEPTOBRAMA_MUELLERI.get()) {
-            return Component.translatable("order.animalia.carangiformes");
+            return Component.translatable("order.wildlifeexplorers.carangiformes");
         } else if(this.getType() == ModEntities.DUSSUMIERIA_ACUTA.get()
                 || this.getType() == ModEntities.SARDINOPS_SAGAX.get()
                 || this.getType() == ModEntities.SARDINOPS_MELANOSTICTA.get()
                 || this.getType() == ModEntities.SARDINA_PILCHARDUS.get()) {
-            return Component.translatable("order.animalia.clupeiformes");
+            return Component.translatable("order.wildlifeexplorers.clupeiformes");
         }
-        return Component.translatable("order.animalia.acanthuriformes");
+        return Component.translatable("order.wildlifeexplorers.acanthuriformes");
     }
 
     public static AttributeSupplier setAttributes() {

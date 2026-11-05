@@ -47,7 +47,7 @@ public class CompendiumHomeScreen extends Screen {
     private EntityType<?> displayType;
 
     public CompendiumHomeScreen(Scannable.AppName app, Screen parent) {
-        super(Component.translatable("gui.animalia.holonet.splash"));
+        super(Component.translatable("gui.wildlifeexplorers.holonet.splash"));
         this.app = app;
         this.parent = parent;
     }
@@ -70,7 +70,7 @@ public class CompendiumHomeScreen extends Screen {
             graphics.fill(backBtnX - 1, backBtnY - 1, backBtnX + BACK_BUTTON_SIZE + 1, backBtnY + BACK_BUTTON_SIZE + 1, 0x44FFFFFF);
         }
 
-        String key = app == Scannable.AppName.FISH ? "gui.animalia.holonet.fish_compendium" : "gui.animalia.holonet.field_guide";
+        String key = app == Scannable.AppName.FISH ? "gui.wildlifeexplorers.holonet.fish_compendium" : "gui.wildlifeexplorers.holonet.field_guide";
         int color = app == Scannable.AppName.FISH ? 0x00FFCC : 0x65e900;
         graphics.drawCenteredString(this.font, Component.translatable(key), bgX + BG_WIDTH / 2, bgY + 35, color);
 

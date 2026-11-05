@@ -41,7 +41,7 @@ public class ModCommands {
                                 cap.replaceAll(new HashSet<>());
                                 ModNetwork.sendToPlayer(player, new SyncAllDiscoveriesPacket(cap.getAll(), cap.isLoadedFirstTime()));
                             });
-                            player.sendSystemMessage(Component.translatable("commands.animalia.holonet.reset"));
+                            player.sendSystemMessage(Component.translatable("commands.wildlifeexplorers.holonet.reset"));
                             return 1;
                         })
                 )
@@ -59,7 +59,7 @@ public class ModCommands {
                                 }
                                 ModNetwork.sendToPlayer(player, new SyncAllDiscoveriesPacket(cap.getAll(), cap.isLoadedFirstTime()));
                             });
-                            player.sendSystemMessage(Component.translatable("commands.animalia.holonet.discoverall"));
+                            player.sendSystemMessage(Component.translatable("commands.wildlifeexplorers.holonet.discoverall"));
                             return 1;
                         })
                 )
@@ -83,7 +83,7 @@ public class ModCommands {
 
         // Validate: must be a registered Holonet entity
         if (!isRegisteredHolonetEntity(id)) {
-            player.sendSystemMessage(Component.translatable("commands.animalia.holonet.invalid", id.toString()).withStyle(ChatFormatting.RED));
+            player.sendSystemMessage(Component.translatable("commands.wildlifeexplorers.holonet.invalid", id.toString()).withStyle(ChatFormatting.RED));
             return 0;
         }
 
@@ -102,7 +102,7 @@ public class ModCommands {
 
         EntityType<?> type = ForgeRegistries.ENTITY_TYPES.getValue(id);
         Component name = type != null ? type.getDescription() : Component.literal(id.toString());
-        player.sendSystemMessage(Component.translatable("commands.animalia.holonet.discovered", name));
+        player.sendSystemMessage(Component.translatable("commands.wildlifeexplorers.holonet.discovered", name));
         return 1;
     }
 

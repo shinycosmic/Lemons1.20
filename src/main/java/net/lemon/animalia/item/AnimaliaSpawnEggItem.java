@@ -37,7 +37,7 @@ public class AnimaliaSpawnEggItem extends ForgeSpawnEggItem {
     @Override
     public Component getName(ItemStack stack) {
         EntityType<?> type = this.getType(stack.getTag());
-        return Component.translatable("item.animalia.spawn_egg", type.getDescription());
+        return Component.translatable("item.wildlifeexplorers.spawn_egg", type.getDescription());
     }
 
     @Override
@@ -68,7 +68,7 @@ public class AnimaliaSpawnEggItem extends ForgeSpawnEggItem {
                 if (entityTag.isEmpty()) {
                     stack.removeTagKey("EntityTag");
                 }
-                player.displayClientMessage(Component.translatable(special ? "item.animalia.spawn_egg.special" : "item.animalia.spawn_egg.random"), true);
+                player.displayClientMessage(Component.translatable(special ? "item.wildlifeexplorers.spawn_egg.special" : "item.wildlifeexplorers.spawn_egg.random"), true);
             }
             return InteractionResultHolder.sidedSuccess(stack, level.isClientSide);
         }

@@ -45,7 +45,7 @@ public class DietScreen extends Screen {
     private boolean isDraggingScrollbar = false;
 
     public DietScreen(Scannable.AppName app, TagKey<Item> foodTag, Screen detail, Screen parent) {
-        super(Component.translatable("gui.animalia.holonet.diet"));
+        super(Component.translatable("gui.wildlifeexplorers.holonet.diet"));
         this.app = app;
         this.detail = detail;
         this.parent = parent;

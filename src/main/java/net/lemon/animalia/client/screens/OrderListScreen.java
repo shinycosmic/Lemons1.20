@@ -53,7 +53,7 @@ public class OrderListScreen extends Screen {
     private boolean isDraggingScrollbar = false;
 
     public OrderListScreen(Scannable.AppName app, Screen parent) {
-        super(Component.translatable("gui.animalia.holonet.orders"));
+        super(Component.translatable("gui.wildlifeexplorers.holonet.orders"));
         this.app = app;
         this.parent = parent;
         this.orders = new ArrayList<>(HolonetEntities.getForApp(app).keySet());
@@ -67,14 +67,14 @@ public class OrderListScreen extends Screen {
         bgY = (this.height - BG_HEIGHT) / 2;
         backBtnX = bgX + BACK_BUTTON_MARGIN_LEFT;
         backBtnY = bgY + BACK_BUTTON_MARGIN_TOP;
-        this.addRenderableWidget(Button.builder(Component.translatable("gui.animalia.holonet.view_all"), b -> goBack()).pos(bgX + BG_WIDTH - 90, bgY + 35).size(55, 16).build());
+        this.addRenderableWidget(Button.builder(Component.translatable("gui.wildlifeexplorers.holonet.view_all"), b -> goBack()).pos(bgX + BG_WIDTH - 90, bgY + 35).size(55, 16).build());
     }
 
     @Override
     public void render(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
         CompendiumHomeScreen.renderHelper(graphics, app, FISH_BG, FIELD_BG, bgX, bgY, BG_WIDTH, BG_HEIGHT, BORDER);
         int color = app == Scannable.AppName.FISH ? 0x00FFCC : 0x65e900;
-        graphics.drawCenteredString(this.font, Component.translatable("gui.animalia.holonet.order_list"), bgX + BG_WIDTH / 2, bgY + 40, color);
+        graphics.drawCenteredString(this.font, Component.translatable("gui.wildlifeexplorers.holonet.order_list"), bgX + BG_WIDTH / 2, bgY + 40, color);
 
         int panelX = bgX + PANEL_LEFT;
         int panelY = bgY + PANEL_TOP;

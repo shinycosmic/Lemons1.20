@@ -41,7 +41,7 @@ public class BettaFishEggItem extends FishEggItem {
         EntityType<?> type = getEntity(stack);
 
         if (type != null) {
-            return Component.translatable("item.animalia.betta_fish_egg.species");
+            return Component.translatable("item.wildlifeexplorers.betta_fish_egg.species");
         }
         return super.getName(stack);
     }

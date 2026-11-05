@@ -3,8 +3,8 @@
 	"parent": "minecraft:block/block",
 	"ambientocclusion": false,
 	"textures": {
-		"0": "animalia:block/ping_pong_tree_sponge",
-		"particle": "animalia:block/ping_pong_tree_sponge"
+		"0": "wildlifeexplorers:block/ping_pong_tree_sponge",
+		"particle": "wildlifeexplorers:block/ping_pong_tree_sponge"
 	},
 	"elements": [
 		{

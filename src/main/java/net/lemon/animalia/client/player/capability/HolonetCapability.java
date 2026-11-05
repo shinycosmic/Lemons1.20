@@ -1,5 +1,6 @@
 package net.lemon.animalia.client.player.capability;
 
+import net.lemon.animalia.util.IdRemapper;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.StringTag;
@@ -61,7 +62,7 @@ public class HolonetCapability {
         this.discovered.clear();
         ListTag list = tag.getList("discovered", Tag.TAG_STRING);
         for (int i = 0; i < list.size(); i++) {
-            this.discovered.add(list.getString(i));
+            this.discovered.add(IdRemapper.migrate(list.getString(i)));
         }
         this.loadedFirstTime = tag.getBoolean("loadedFirstTime");
     }

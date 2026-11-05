@@ -154,19 +154,19 @@ public class SeahorseEntity extends FishBase implements GeoEntity, Scannable {
     @Override
     public Component getTrivia() {
         if (this.getType() == ModEntities.HIPPOCAMPUS_INGENS.get()) {
-            return Component.translatable("trivia.animalia.hippocampus_ingens");
+            return Component.translatable("trivia.wildlifeexplorers.hippocampus_ingens");
         }
-        return Component.translatable("trivia.animalia.hippocampus_reidi");
+        return Component.translatable("trivia.wildlifeexplorers.hippocampus_reidi");
     }
 
     @Override
     public Component getFamily() {
-        return Component.translatable("family.animalia.syngnathidae");
+        return Component.translatable("family.wildlifeexplorers.syngnathidae");
     }
 
     @Override
     public Component getOrder() {
-        return Component.translatable("order.animalia.syngnathiformes");
+        return Component.translatable("order.wildlifeexplorers.syngnathiformes");
     }
 
     @Override

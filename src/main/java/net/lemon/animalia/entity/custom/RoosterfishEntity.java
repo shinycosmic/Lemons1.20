@@ -125,17 +125,17 @@ public class RoosterfishEntity extends FishBase implements GeoEntity, Scannable 
 
     @Override
     public Component getTrivia() {
-        return Component.translatable("trivia.animalia.nematistius_pectoralis");
+        return Component.translatable("trivia.wildlifeexplorers.nematistius_pectoralis");
     }
 
     @Override
     public Component getFamily() {
-        return Component.translatable("family.animalia.nematistiidae");
+        return Component.translatable("family.wildlifeexplorers.nematistiidae");
     }
 
     @Override
     public Component getOrder() {
-        return Component.translatable("order.animalia.carangiformes");
+        return Component.translatable("order.wildlifeexplorers.carangiformes");
     }
 
     @Override

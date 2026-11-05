@@ -71,17 +71,17 @@ public class PelagicInvertSwimmerEntity extends FishBase implements GeoEntity, S
 
     @Override
     public Component getTrivia() {
-        return Component.translatable("trivia.animalia.xibalbanus_tulumensis");
+        return Component.translatable("trivia.wildlifeexplorers.xibalbanus_tulumensis");
     }
 
     @Override
     public Component getFamily() {
-        return Component.translatable("family.animalia.xibalbanidae");
+        return Component.translatable("family.wildlifeexplorers.xibalbanidae");
     }
 
     @Override
     public Component getOrder() {
-        return Component.translatable("order.animalia.nectiopoda");
+        return Component.translatable("order.wildlifeexplorers.nectiopoda");
     }
 
     @Override

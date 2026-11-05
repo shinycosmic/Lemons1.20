@@ -4,8 +4,8 @@
 	"parent": "minecraft:block/block",
 	"texture_size": [64, 64],
 	"textures": {
-		"0": "animalia:block/filter_trap",
-		"particle": "animalia:block/filter_trap"
+		"0": "wildlifeexplorers:block/filter_trap",
+		"particle": "wildlifeexplorers:block/filter_trap"
 	},
 	"elements": [
 		{

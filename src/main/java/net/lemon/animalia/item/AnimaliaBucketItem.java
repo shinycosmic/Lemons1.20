@@ -29,7 +29,7 @@ public class AnimaliaBucketItem extends MobBucketItem {
     @Override
     public Component getName(ItemStack stack) {
         EntityType<?> type = this.getFishType();
-        return Component.translatable("item.animalia.bucket", type.getDescription());
+        return Component.translatable("item.wildlifeexplorers.bucket", type.getDescription());
     }
 
     @Override
@@ -47,7 +47,7 @@ public class AnimaliaBucketItem extends MobBucketItem {
 
             if (entity instanceof FishBase fish) {
                 if (stack.hasTag() && stack.getTag().getBoolean("BucketBaby")) {
-                    tooltipComp.add(Component.translatable("tooltip.animalia.baby").withStyle(ChatFormatting.GRAY));
+                    tooltipComp.add(Component.translatable("tooltip.wildlifeexplorers.baby").withStyle(ChatFormatting.GRAY));
                 }
                 //Only for Betta fish, plans for koi so may need to consider refractoring this or adding another check
                 if (stack.hasTag() && stack.getTag().contains("BucketBettaName") && entity instanceof BettaEntity) {

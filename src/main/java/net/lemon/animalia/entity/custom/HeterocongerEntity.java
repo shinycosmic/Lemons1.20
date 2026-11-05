@@ -119,27 +119,27 @@ public class HeterocongerEntity extends FishBase implements GeoEntity, Scannable
     @Override
     public Component getTrivia() {
         if(this.getType() == ModEntities.HETEROCONGER_HASSI.get()) {
-            return Component.translatable("trivia.animalia.heteroconger_hassi");
+            return Component.translatable("trivia.wildlifeexplorers.heteroconger_hassi");
         } else if(this.getType() == ModEntities.HETEROCONGER_POLYZONA.get()) {
-            return Component.translatable("trivia.animalia.heteroconger_polyzona");
+            return Component.translatable("trivia.wildlifeexplorers.heteroconger_polyzona");
         } else if(this.getType() == ModEntities.HETEROCONGER_LUTEOLUS.get()) {
-            return Component.translatable("trivia.animalia.heteroconger_luteolus");
+            return Component.translatable("trivia.wildlifeexplorers.heteroconger_luteolus");
         } else if(this.getType() == ModEntities.GORGASIA_JAPONICA.get()) {
-            return Component.translatable("trivia.animalia.gorgasia_japonica");
+            return Component.translatable("trivia.wildlifeexplorers.gorgasia_japonica");
         } else if(this.getType() == ModEntities.GORGASIA_BARNESI.get()) {
-            return Component.translatable("trivia.animalia.gorgasia_barnesi");
+            return Component.translatable("trivia.wildlifeexplorers.gorgasia_barnesi");
         }
-        return Component.translatable("trivia.animalia.gorgasia_preclara");
+        return Component.translatable("trivia.wildlifeexplorers.gorgasia_preclara");
     }
 
     @Override
     public Component getFamily() {
-        return Component.translatable("family.animalia.congridae");
+        return Component.translatable("family.wildlifeexplorers.congridae");
     }
 
     @Override
     public Component getOrder() {
-        return Component.translatable("order.animalia.anguilliformes");
+        return Component.translatable("order.wildlifeexplorers.anguilliformes");
     }
 
     @Override

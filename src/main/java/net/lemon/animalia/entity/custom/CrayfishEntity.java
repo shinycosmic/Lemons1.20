@@ -79,25 +79,25 @@ public class CrayfishEntity extends BottomWalkerSwimmerBase implements GeoEntity
     @Override
     public Component getTrivia() {
         if (this.getType() == ModEntities.PROCAMBARUS_CLARKII.get()) {
-            return Component.translatable("trivia.animalia.procambarus_clarkii");
+            return Component.translatable("trivia.wildlifeexplorers.procambarus_clarkii");
         } else if (this.getType() == ModEntities.PROCAMBARUS_LUCIFUGUS.get()) {
-            return Component.translatable("trivia.animalia.procambarus_lucifugus");
+            return Component.translatable("trivia.wildlifeexplorers.procambarus_lucifugus");
         } else if (this.getType() == ModEntities.PROCAMBARUS_VIRGINALIS.get()) {
-            return Component.translatable("trivia.animalia.procambarus_virginalis");
+            return Component.translatable("trivia.wildlifeexplorers.procambarus_virginalis");
         } else if (this.getType() == ModEntities.PROCAMBARUS_ALLENI.get()) {
-            return Component.translatable("trivia.animalia.procambarus_alleni");
+            return Component.translatable("trivia.wildlifeexplorers.procambarus_alleni");
         }
-        return Component.translatable("debug.animalia.trivia");
+        return Component.translatable("debug.wildlifeexplorers.trivia");
     }
 
     @Override
     public Component getFamily() {
-        return Component.translatable("family.animalia.cambaridae");
+        return Component.translatable("family.wildlifeexplorers.cambaridae");
     }
 
     @Override
     public Component getOrder() {
-        return Component.translatable("order.animalia.decapoda");
+        return Component.translatable("order.wildlifeexplorers.decapoda");
     }
 
     @Override

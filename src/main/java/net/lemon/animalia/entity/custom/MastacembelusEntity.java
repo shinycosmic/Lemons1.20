@@ -133,27 +133,27 @@ public class MastacembelusEntity extends BottomWalkerSwimmerBase implements GeoE
     @Override
     public Component getTrivia() {
         if (this.getType() == ModEntities.MASTACEMBELUS_ARMATUS.get()) {
-            return Component.translatable("trivia.animalia.mastacembelus_armatus");
+            return Component.translatable("trivia.wildlifeexplorers.mastacembelus_armatus");
         } else if (this.getType() == ModEntities.MASTACEMBELUS_ERYTHROTAENIA.get()) {
-            return Component.translatable("trivia.animalia.mastacembelus_erythrotaenia");
+            return Component.translatable("trivia.wildlifeexplorers.mastacembelus_erythrotaenia");
         } else if (this.getType() == ModEntities.MACROGNATHUS_SIAMENSIS.get()) {
-            return Component.translatable("trivia.animalia.macrognathus_siamensis");
+            return Component.translatable("trivia.wildlifeexplorers.macrognathus_siamensis");
         } else if (this.getType() == ModEntities.MASTACEMBELUS_BRICHARDI.get()) {
-            return Component.translatable("trivia.animalia.mastacembelus_brichardi");
+            return Component.translatable("trivia.wildlifeexplorers.mastacembelus_brichardi");
         } else if (this.getType() == ModEntities.SINOBDELLA_SINENSIS.get()) {
-            return Component.translatable("trivia.animalia.sinobdella_sinensis");
+            return Component.translatable("trivia.wildlifeexplorers.sinobdella_sinensis");
         }
-        return Component.translatable("debug.animalia.trivia");
+        return Component.translatable("debug.wildlifeexplorers.trivia");
     }
 
     @Override
     public Component getFamily() {
-        return Component.translatable("family.animalia.mastacembelidae");
+        return Component.translatable("family.wildlifeexplorers.mastacembelidae");
     }
 
     @Override
     public Component getOrder() {
-        return Component.translatable("order.animalia.synbranchiformes");
+        return Component.translatable("order.wildlifeexplorers.synbranchiformes");
     }
 
     @Override

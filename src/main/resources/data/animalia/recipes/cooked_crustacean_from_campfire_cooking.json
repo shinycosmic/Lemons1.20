@@ -4,7 +4,7 @@
   "cookingtime": 600,
   "experience": 0.35,
   "ingredient": {
-    "item": "animalia:raw_crustacean"
+    "item": "wildlifeexplorers:raw_crustacean"
   },
-  "result": "animalia:cooked_crustacean"
+  "result": "wildlifeexplorers:cooked_crustacean"
 }

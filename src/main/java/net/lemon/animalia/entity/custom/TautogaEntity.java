@@ -73,17 +73,17 @@ public class TautogaEntity extends FishBase implements GeoEntity, Scannable {
 
     @Override
     public Component getTrivia() {
-        return Component.translatable("trivia.animalia.tautoga_onitis");
+        return Component.translatable("trivia.wildlifeexplorers.tautoga_onitis");
     }
 
     @Override
     public Component getFamily() {
-        return Component.translatable("family.animalia.labridae");
+        return Component.translatable("family.wildlifeexplorers.labridae");
     }
 
     @Override
     public Component getOrder() {
-        return Component.translatable("order.animalia.labriformes");
+        return Component.translatable("order.wildlifeexplorers.labriformes");
     }
 
     @Override

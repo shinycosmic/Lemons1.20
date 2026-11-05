@@ -77,30 +77,30 @@ public class GrazeSchoolingEntity extends FishBase implements GeoEntity, Scannab
     @Override
     public Component getTrivia() {
         if (this.getType() == ModEntities.ZANCLUS_CORNUTUS.get()) {
-            return Component.translatable("trivia.animalia.zanclus_cornutus");
+            return Component.translatable("trivia.wildlifeexplorers.zanclus_cornutus");
         } else if (this.getType() == ModEntities.PARACANTHURUS_HEPATUS.get()) {
-            return Component.translatable("trivia.animalia.paracanthurus_hepatus");
+            return Component.translatable("trivia.wildlifeexplorers.paracanthurus_hepatus");
         } else if (this.getType() == ModEntities.ZEBRASOMA_VELIFER.get()) {
-            return Component.translatable("trivia.animalia.zebrasoma_velifer");
+            return Component.translatable("trivia.wildlifeexplorers.zebrasoma_velifer");
         } else if (this.getType() == ModEntities.ZEBRASOMA_FLAVESCENS.get()) {
-            return Component.translatable("trivia.animalia.zebrasoma_flavescens");
+            return Component.translatable("trivia.wildlifeexplorers.zebrasoma_flavescens");
         }
-        return Component.translatable("debug.animalia.trivia");
+        return Component.translatable("debug.wildlifeexplorers.trivia");
     }
 
     @Override
     public Component getFamily() {
         if (this.getType() == ModEntities.ZANCLUS_CORNUTUS.get()) {
-            return Component.translatable("family.animalia.zanclidae");
+            return Component.translatable("family.wildlifeexplorers.zanclidae");
         } else if (this.getType() == ModEntities.PARACANTHURUS_HEPATUS.get() || this.getType() == ModEntities.ZEBRASOMA_VELIFER.get() || this.getType() == ModEntities.ZEBRASOMA_FLAVESCENS.get()) {
-            return Component.translatable("family.animalia.acanthuridae");
+            return Component.translatable("family.wildlifeexplorers.acanthuridae");
         }
-        return Component.translatable("debug.animalia.family");
+        return Component.translatable("debug.wildlifeexplorers.family");
     }
 
     @Override
     public Component getOrder() {
-        return Component.translatable("order.animalia.acanthuriformes");
+        return Component.translatable("order.wildlifeexplorers.acanthuriformes");
     }
 
     public static AttributeSupplier setAttributes() {

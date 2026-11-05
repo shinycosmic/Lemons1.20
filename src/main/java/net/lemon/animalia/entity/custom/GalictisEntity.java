@@ -167,19 +167,19 @@ public class GalictisEntity extends AnimaliaLandBase implements GeoEntity, Scann
     @Override
     public Component getTrivia() {
         if (this.getType() == ModEntities.GALICTIS_VITTATA.get()) {
-            return Component.translatable("trivia.animalia.galictis_vittata");
+            return Component.translatable("trivia.wildlifeexplorers.galictis_vittata");
         }
-        return Component.translatable("trivia.animalia.galictis_cuja");
+        return Component.translatable("trivia.wildlifeexplorers.galictis_cuja");
     }
 
     @Override
     public Component getFamily() {
-        return Component.translatable("family.animalia.mustelidae");
+        return Component.translatable("family.wildlifeexplorers.mustelidae");
     }
 
     @Override
     public Component getOrder() {
-        return Component.translatable("order.animalia.carnivora");
+        return Component.translatable("order.wildlifeexplorers.carnivora");
     }
 
     @Override

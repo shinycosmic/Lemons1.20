@@ -6,23 +6,15 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "animalia:amphipod",
+          "name": "wildlifeexplorers:amphipod",
           "weight": 20,
           "conditions": [
-            { "condition": "animalia:biome_tag", "tag": "minecraft:is_ocean" }
+            { "condition": "wildlifeexplorers:biome_tag", "tag": "minecraft:is_ocean" }
           ]
         },
         {
           "type": "minecraft:item",
-          "name": "animalia:artemia",
-          "weight": 20,
-          "conditions": [
-            { "condition": "minecraft:location_check", "predicate": { "dimension": "minecraft:overworld" } }
-          ]
-        },
-        {
-          "type": "minecraft:item",
-          "name": "animalia:worm",
+          "name": "wildlifeexplorers:artemia",
           "weight": 20,
           "conditions": [
             { "condition": "minecraft:location_check", "predicate": { "dimension": "minecraft:overworld" } }
@@ -30,71 +22,79 @@
         },
         {
           "type": "minecraft:item",
-          "name": "animalia:tadpole",
+          "name": "wildlifeexplorers:worm",
+          "weight": 20,
+          "conditions": [
+            { "condition": "minecraft:location_check", "predicate": { "dimension": "minecraft:overworld" } }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "wildlifeexplorers:tadpole",
           "weight": 20,
           "conditions": [
             {
               "condition": "minecraft:any_of",
               "terms": [
-                { "condition": "animalia:biome_tag", "tag": "minecraft:is_river" },
-                { "condition": "animalia:biome_tag", "tag": "forge:is_swamp" }
+                { "condition": "wildlifeexplorers:biome_tag", "tag": "minecraft:is_river" },
+                { "condition": "wildlifeexplorers:biome_tag", "tag": "forge:is_swamp" }
               ]
             }
           ]
         },
         {
           "type": "minecraft:item",
-          "name": "animalia:procambarus_clarkii",
+          "name": "wildlifeexplorers:procambarus_clarkii",
           "weight": 20,
           "conditions": [
             {
               "condition": "minecraft:any_of",
               "terms": [
-                { "condition": "animalia:biome_tag", "tag": "minecraft:is_river" },
-                { "condition": "animalia:biome_tag", "tag": "forge:is_swamp" }
+                { "condition": "wildlifeexplorers:biome_tag", "tag": "minecraft:is_river" },
+                { "condition": "wildlifeexplorers:biome_tag", "tag": "forge:is_swamp" }
               ]
             }
           ]
         },
         {
           "type": "minecraft:item",
-          "name": "animalia:procambarus_alleni",
+          "name": "wildlifeexplorers:procambarus_alleni",
           "weight": 20,
           "conditions": [
             {
               "condition": "minecraft:any_of",
               "terms": [
-                { "condition": "animalia:biome_tag", "tag": "minecraft:is_river" },
-                { "condition": "animalia:biome_tag", "tag": "forge:is_swamp" }
+                { "condition": "wildlifeexplorers:biome_tag", "tag": "minecraft:is_river" },
+                { "condition": "wildlifeexplorers:biome_tag", "tag": "forge:is_swamp" }
               ]
             }
           ]
         },
         {
           "type": "minecraft:item",
-          "name": "animalia:procambarus_virginalis",
+          "name": "wildlifeexplorers:procambarus_virginalis",
           "weight": 20,
           "conditions": [
             {
               "condition": "minecraft:any_of",
               "terms": [
-                { "condition": "animalia:biome_tag", "tag": "minecraft:is_river" },
-                { "condition": "animalia:biome_tag", "tag": "forge:is_swamp" }
+                { "condition": "wildlifeexplorers:biome_tag", "tag": "minecraft:is_river" },
+                { "condition": "wildlifeexplorers:biome_tag", "tag": "forge:is_swamp" }
               ]
             }
           ]
         },
         {
           "type": "minecraft:item",
-          "name": "animalia:procambarus_lucifugus",
+          "name": "wildlifeexplorers:procambarus_lucifugus",
           "weight": 20,
           "conditions": [
-            { "condition": "animalia:biome_tag", "tag": "forge:is_cave" }
+            { "condition": "wildlifeexplorers:biome_tag", "tag": "forge:is_cave" }
           ]
         },
         {
           "type": "minecraft:item",
-          "name": "animalia:gigantocypris",
+          "name": "wildlifeexplorers:gigantocypris",
           "weight": 1,
           "conditions": [
             { "condition": "minecraft:location_check", "predicate": { "biome": "minecraft:deep_cold_ocean" } }

@@ -88,7 +88,7 @@ public class FilterTrapBlockEntity extends BlockEntity implements MenuProvider {
 
     @Override
     public Component getDisplayName() {
-        return Component.translatable("container.animalia.filter_trap");
+        return Component.translatable("container.wildlifeexplorers.filter_trap");
     }
 
     @Override

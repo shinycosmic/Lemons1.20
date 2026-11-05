@@ -151,17 +151,17 @@ public class HystrixCristataEntity extends AnimaliaLandBase implements GeoEntity
 
     @Override
     public Component getTrivia() {
-        return Component.translatable("trivia.animalia.hystrix_cristata");
+        return Component.translatable("trivia.wildlifeexplorers.hystrix_cristata");
     }
 
     @Override
     public Component getFamily() {
-        return Component.translatable("family.animalia.hystricidae");
+        return Component.translatable("family.wildlifeexplorers.hystricidae");
     }
 
     @Override
     public Component getOrder() {
-        return Component.translatable("order.animalia.rodentia");
+        return Component.translatable("order.wildlifeexplorers.rodentia");
     }
 
     @Override

@@ -90,17 +90,17 @@ public class RakthamichthysEntity extends BottomWalkerSwimmerBase implements Geo
 
     @Override
     public Component getTrivia() {
-        return Component.translatable("trivia.animalia.rakthamichthys_indicus");
+        return Component.translatable("trivia.wildlifeexplorers.rakthamichthys_indicus");
     }
 
     @Override
     public Component getFamily() {
-        return Component.translatable("family.animalia.synbranchidae");
+        return Component.translatable("family.wildlifeexplorers.synbranchidae");
     }
 
     @Override
     public Component getOrder() {
-        return Component.translatable("order.animalia.synbranchiformes");
+        return Component.translatable("order.wildlifeexplorers.synbranchiformes");
     }
 
     @Override

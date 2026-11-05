@@ -83,17 +83,17 @@ public class PangasianodonEntity extends FishBase implements GeoEntity, Scannabl
 
     @Override
     public Component getTrivia() {
-        return Component.translatable("trivia.animalia.pangasianodon_gigas");
+        return Component.translatable("trivia.wildlifeexplorers.pangasianodon_gigas");
     }
 
     @Override
     public Component getFamily() {
-        return Component.translatable("family.animalia.pangasiidae");
+        return Component.translatable("family.wildlifeexplorers.pangasiidae");
     }
 
     @Override
     public Component getOrder() {
-        return Component.translatable("order.animalia.siluriformes");
+        return Component.translatable("order.wildlifeexplorers.siluriformes");
     }
 
     @Override

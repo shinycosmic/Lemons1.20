@@ -1,6 +1,7 @@
 package net.lemon.animalia.item;
 
 import net.lemon.animalia.entity.bases.FishBase;
+import net.lemon.animalia.util.IdRemapper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
@@ -33,7 +34,7 @@ public class FishEggItem extends Item {
 
         if (type != null) {
             return Component.translatable(
-                    "item.animalia.fish_egg.species",
+                    "item.wildlifeexplorers.fish_egg.species",
                     type.getDescription()
             );
         }
@@ -53,7 +54,7 @@ public class FishEggItem extends Item {
         }
         String id = stack.getTag().getString("Species");
         if(id.isEmpty()) return null;
-        ResourceLocation key = ResourceLocation.tryParse(id);
+        ResourceLocation key = ResourceLocation.tryParse(IdRemapper.migrate(id));
         if (key == null) return null;
         return ForgeRegistries.ENTITY_TYPES.getValue(key);
     }

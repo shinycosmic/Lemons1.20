@@ -7,11 +7,11 @@
   ],
   "key": {
     "#": {
-      "tag": "animalia:invertebrate"
+      "tag": "wildlifeexplorers:invertebrate"
     }
   },
   "result": {
     "count": 4,
-    "item": "animalia:fish_food"
+    "item": "wildlifeexplorers:fish_food"
   }
 }

@@ -29,7 +29,7 @@ public class HolonetWelcomeScreen extends Screen {
     private boolean loadComplete;
 
     public HolonetWelcomeScreen() {
-        super(Component.translatable("gui.animalia.holonet.welcome"));
+        super(Component.translatable("gui.wildlifeexplorers.holonet.welcome"));
     }
 
     @Override
@@ -56,7 +56,7 @@ public class HolonetWelcomeScreen extends Screen {
         graphics.blit(BORDER, bgX, bgY, 0, 0, BG_WIDTH, BG_HEIGHT, BG_WIDTH, (int) (BG_HEIGHT * 1.6));
 
         graphics.drawCenteredString(this.font,
-                Component.translatable("gui.animalia.holonet.welcome.title"),
+                Component.translatable("gui.wildlifeexplorers.holonet.welcome.title"),
                 bgX + BG_WIDTH / 2, bgY + 40, 0xFFFFFF);
 
         int textX = bgX + BG_WIDTH / 2;
@@ -64,16 +64,16 @@ public class HolonetWelcomeScreen extends Screen {
         int lineSpacing = 14;
 
         graphics.drawCenteredString(this.font,
-                Component.translatable("gui.animalia.holonet.welcome.line1"),
+                Component.translatable("gui.wildlifeexplorers.holonet.welcome.line1"),
                 textX, textY, 0xFFFFFF);
         graphics.drawCenteredString(this.font,
-                Component.translatable("gui.animalia.holonet.welcome.line2"),
+                Component.translatable("gui.wildlifeexplorers.holonet.welcome.line2"),
                 textX, textY + lineSpacing, 0xFFFFFF);
         graphics.drawCenteredString(this.font,
-                Component.translatable("gui.animalia.holonet.welcome.line3"),
+                Component.translatable("gui.wildlifeexplorers.holonet.welcome.line3"),
                 textX, textY + lineSpacing * 2, 0xFFFFFF);
         graphics.drawCenteredString(this.font,
-                Component.translatable("gui.animalia.holonet.welcome.line4"),
+                Component.translatable("gui.wildlifeexplorers.holonet.welcome.line4"),
                 textX, textY + lineSpacing * 3, 0xFFFFFF);
 
         int barX = bgX + (BG_WIDTH - BAR_WIDTH) / 2;
@@ -85,7 +85,7 @@ public class HolonetWelcomeScreen extends Screen {
             int fillWidth = (int) (progress * BAR_WIDTH);
             graphics.fill(barX, barY, barX + fillWidth, barY + BAR_HEIGHT, BAR_FILL_COLOR);
             graphics.drawCenteredString(this.font,
-                    Component.translatable("gui.animalia.holonet.welcome.setting_up"),
+                    Component.translatable("gui.wildlifeexplorers.holonet.welcome.setting_up"),
                     bgX + BG_WIDTH / 2, barY - 14, 0xFFFFFF);
         } else {
             graphics.fill(barX, barY, barX + BAR_WIDTH, barY + BAR_HEIGHT, BAR_FILL_COLOR);
@@ -94,7 +94,7 @@ public class HolonetWelcomeScreen extends Screen {
             }
 
             graphics.drawCenteredString(this.font,
-                    Component.translatable("gui.animalia.holonet.welcome.start"),
+                    Component.translatable("gui.wildlifeexplorers.holonet.welcome.start"),
                     bgX + BG_WIDTH / 2, barY + 3, 0xFFFFFF);
         }
 

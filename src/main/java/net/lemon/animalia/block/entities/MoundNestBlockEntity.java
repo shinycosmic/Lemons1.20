@@ -3,6 +3,7 @@ package net.lemon.animalia.block.entities;
 import net.lemon.animalia.item.FishEggItem;
 import net.lemon.animalia.registry.ModBlockEntities;
 import net.lemon.animalia.registry.ModItems;
+import net.lemon.animalia.util.IdRemapper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
@@ -72,7 +73,7 @@ public class MoundNestBlockEntity extends BlockEntity {
         super.load(tag);
         this.hasEgg = tag.getBoolean("HasEgg");
         if (tag.contains("EggSpecies")) {
-            ResourceLocation key = ResourceLocation.tryParse(tag.getString("EggSpecies"));
+            ResourceLocation key = ResourceLocation.tryParse(IdRemapper.migrate(tag.getString("EggSpecies")));
             this.eggSpecies = key == null ? null : ForgeRegistries.ENTITY_TYPES.getValue(key);
         }
     }

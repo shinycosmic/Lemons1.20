@@ -68,17 +68,17 @@ public class AenigmachannaEntity extends BottomWalkerSwimmerBase implements GeoE
 
     @Override
     public Component getTrivia() {
-        return Component.translatable("trivia.animalia.aenigmachanna_gollum");
+        return Component.translatable("trivia.wildlifeexplorers.aenigmachanna_gollum");
     }
 
     @Override
     public Component getFamily() {
-        return Component.translatable("family.animalia.aenigmachannidae");
+        return Component.translatable("family.wildlifeexplorers.aenigmachannidae");
     }
 
     @Override
     public Component getOrder() {
-        return Component.translatable("order.animalia.anabantiformes");
+        return Component.translatable("order.wildlifeexplorers.anabantiformes");
     }
 
     @Override

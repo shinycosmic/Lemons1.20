@@ -95,17 +95,17 @@ public class HyemoschusEntity extends SemiaquaticBase implements GeoEntity, Scan
 
     @Override
     public Component getTrivia() {
-        return Component.translatable("trivia.animalia.hyemoschus_aquaticus");
+        return Component.translatable("trivia.wildlifeexplorers.hyemoschus_aquaticus");
     }
 
     @Override
     public Component getFamily() {
-        return Component.translatable("family.animalia.tragulidae");
+        return Component.translatable("family.wildlifeexplorers.tragulidae");
     }
 
     @Override
     public Component getOrder() {
-        return Component.translatable("order.animalia.artiodactyla");
+        return Component.translatable("order.wildlifeexplorers.artiodactyla");
     }
 
     @Override

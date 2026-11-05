@@ -75,7 +75,7 @@ public class CreatureDetailScreen extends Screen {
     private Set<Integer> discoveredGenders;
 
     public CreatureDetailScreen(Scannable.AppName app, EntityType<?> entityType, Screen parent) {
-        super(Component.translatable("gui.animalia.holonet.detail"));
+        super(Component.translatable("gui.wildlifeexplorers.holonet.detail"));
         this.app = app;
         this.entityType = entityType;
         this.parent = parent;

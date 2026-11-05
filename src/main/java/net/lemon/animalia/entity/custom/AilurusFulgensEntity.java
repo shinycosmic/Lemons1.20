@@ -147,17 +147,17 @@ public class AilurusFulgensEntity extends AnimaliaLandBase implements GeoEntity,
 
     @Override
     public Component getTrivia() {
-        return Component.translatable("trivia.animalia.ailurus_fulgens");
+        return Component.translatable("trivia.wildlifeexplorers.ailurus_fulgens");
     }
 
     @Override
     public Component getFamily() {
-        return Component.translatable("family.animalia.ailuridae");
+        return Component.translatable("family.wildlifeexplorers.ailuridae");
     }
 
     @Override
     public Component getOrder() {
-        return Component.translatable("order.animalia.carnivora");
+        return Component.translatable("order.wildlifeexplorers.carnivora");
     }
 
     @Override

@@ -4,7 +4,7 @@
   "cookingtime": 200,
   "experience": 0.35,
   "ingredient": {
-    "item": "animalia:raw_shark"
+    "item": "wildlifeexplorers:raw_shark"
   },
-  "result": "animalia:cooked_shark"
+  "result": "wildlifeexplorers:cooked_shark"
 }

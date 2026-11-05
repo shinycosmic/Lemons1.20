@@ -113,17 +113,17 @@ public class ElaphodusEntity extends AnimaliaLandBase implements GeoEntity, Scan
 
     @Override
     public Component getTrivia() {
-        return Component.translatable("trivia.animalia.elaphodus_cephalophus");
+        return Component.translatable("trivia.wildlifeexplorers.elaphodus_cephalophus");
     }
 
     @Override
     public Component getFamily() {
-        return Component.translatable("family.animalia.cervidae");
+        return Component.translatable("family.wildlifeexplorers.cervidae");
     }
 
     @Override
     public Component getOrder() {
-        return Component.translatable("order.animalia.artiodactyla");
+        return Component.translatable("order.wildlifeexplorers.artiodactyla");
     }
 
     @Override
