@@ -30,7 +30,11 @@ public class ModSpawnPlacements {
 
     @Nullable
     private static SpawnPlacements.Type placementFor(MobCategory category) {
-        if (category == ModMobCategories.ANIMALIA_FISH || category == ModMobCategories.ANIMALIA_INVERTEBRATE || category == ModMobCategories.ANIMALIA_WATER_STRUCTURE) {
+        if (category == ModMobCategories.ANIMALIA_FISH || category == ModMobCategories.ANIMALIA_INVERTEBRATE
+                || category == ModMobCategories.ANIMALIA_WATER_STRUCTURE || category == ModMobCategories.ANIMALIA_JELLY
+                || category == ModMobCategories.ANIMALIA_FRESHWATER_FISH || category == ModMobCategories.ANIMALIA_SHARK
+                || category == ModMobCategories.ANIMALIA_WATER_INVERTEBRATE|| category == ModMobCategories.ANIMALIA_BOTTOM_DWELLER_FISH
+                || category == ModMobCategories.ANIMALIA_SEMIAQUATIC|| category == ModMobCategories.ANIMALIA_AQUATIC_CRITTER) {
             return SpawnPlacements.Type.IN_WATER;
         }
         if (category == ModMobCategories.ANIMALIA_LAND|| category == ModMobCategories.ANIMALIA_LAND_STRUCTURE) {
