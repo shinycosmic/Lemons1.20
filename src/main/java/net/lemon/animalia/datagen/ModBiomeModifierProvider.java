@@ -3,6 +3,7 @@ package net.lemon.animalia.datagen;
 import com.google.gson.JsonElement;
 import com.mojang.serialization.JsonOps;
 import net.lemon.animalia.Animalia;
+import net.lemon.animalia.registry.spawning.MobSpawnBiomeModifier;
 import net.lemon.animalia.registry.spawning.ModSpawns;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
@@ -40,14 +41,11 @@ public class ModBiomeModifierProvider implements DataProvider {
             List<CompletableFuture<?>> futures = new ArrayList<>();
             Map<String, Integer> names = new HashMap<>();
             for (ModSpawns.SpawnEntry entry : ModSpawns.ENTRIES) {
-                String base = entry.type().getId().getPath();
-                int count = names.merge(base, 1, Integer::sum);
-                String name = count == 1 ? base : base + "_" + count;
+                String name = entry.name();
 
-                BiomeModifier modifier = new ForgeBiomeModifiers.AddSpawnsBiomeModifier(
-                        entry.selector().resolve(biomes),
-                        List.of(new MobSpawnSettings.SpawnerData(
-                                entry.type().get(), entry.weight(), entry.minGroup(), entry.maxGroup())));
+                BiomeModifier modifier = new MobSpawnBiomeModifier(
+                        entry.selector().resolve(biomes), name, entry.type().get(),
+                        entry.weight(), entry.minGroup(), entry.maxGroup());
 
                 JsonElement json = BiomeModifier.DIRECT_CODEC.encodeStart(ops, modifier)
                         .getOrThrow(false, error -> {

@@ -8,10 +8,13 @@ import net.minecraft.world.level.biome.Biomes;
 import net.minecraftforge.registries.RegistryObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ModSpawns {
     public static final List<SpawnEntry> ENTRIES = new ArrayList<>();
+    private static final Map<String, Integer> NAMES = new HashMap<>();
 
     /***
      * Parameter definitions:
@@ -203,10 +206,11 @@ public class ModSpawns {
     }
 
     private static void add(RegistryObject<? extends EntityType<?>> type, int weight, int minGroup, int maxGroup, BiomeSelector selector) {
-        ENTRIES.add(new SpawnEntry(type, weight, minGroup, maxGroup, selector));
+        String base = type.getId().getPath();
+        int count = NAMES.merge(base, 1, Integer::sum);
+        String name = count == 1 ? base : base + "_" + count;
+        ENTRIES.add(new SpawnEntry(name, type, weight, minGroup, maxGroup, selector));
     }
 
-    public record SpawnEntry(RegistryObject<? extends EntityType<?>> type, int weight, int minGroup, int maxGroup,
-                             BiomeSelector selector) {
-    }
+    public record SpawnEntry(String name, RegistryObject<? extends EntityType<?>> type, int weight, int minGroup, int maxGroup, BiomeSelector selector) { }
 }

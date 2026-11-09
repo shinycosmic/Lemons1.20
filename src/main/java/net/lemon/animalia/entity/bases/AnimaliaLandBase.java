@@ -1,6 +1,6 @@
 package net.lemon.animalia.entity.bases;
 
-import net.lemon.animalia.Config;
+import net.lemon.animalia.config.Config;
 import net.lemon.animalia.entity.ai.FindNearestBlockGoal;
 import net.lemon.animalia.entity.ai.SleepGoal;
 import net.lemon.animalia.entity.aimove.ClimberMoveControl;

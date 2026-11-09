@@ -1,12 +1,15 @@
 package net.lemon.animalia;
 
 import com.mojang.logging.LogUtils;
+import net.lemon.animalia.config.Config;
+import net.lemon.animalia.config.SpawnConfig;
 import net.lemon.animalia.registry.ModLootModifiers;
 import net.lemon.animalia.client.player.network.ModNetwork;
 import net.lemon.animalia.registry.*;
 import net.lemon.animalia.registry.creativetabs.ModCreativeModeTabs;
 import net.lemon.animalia.client.screens.FilterTrapScreen;
 import net.lemon.animalia.registry.AnimaliaRenderInit;
+import net.lemon.animalia.registry.spawning.BiomeModifiersHandler;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
@@ -47,6 +50,7 @@ public class Animalia {
         ModFeatures.register(modEventBus);
         ModVillagers.register(modEventBus);
         AnimaliaSound.register(modEventBus);
+        BiomeModifiersHandler.register(modEventBus);
 
         GeckoLib.initialize();
 
@@ -54,6 +58,7 @@ public class Animalia {
         MinecraftForge.EVENT_BUS.register(this);
         modEventBus.addListener(this::addCreative);
         context.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
+        context.registerConfig(ModConfig.Type.COMMON, SpawnConfig.SPEC, SpawnConfig.FILE_NAME);
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
