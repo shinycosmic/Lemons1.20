@@ -13,14 +13,10 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.resources.RegistryOps;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.biome.Biome;
-import net.minecraft.world.level.biome.MobSpawnSettings;
 import net.minecraftforge.common.world.BiomeModifier;
-import net.minecraftforge.common.world.ForgeBiomeModifiers;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 
 public class ModBiomeModifierProvider implements DataProvider {
@@ -39,7 +35,6 @@ public class ModBiomeModifierProvider implements DataProvider {
             RegistryOps<JsonElement> ops = RegistryOps.create(JsonOps.INSTANCE, provider);
 
             List<CompletableFuture<?>> futures = new ArrayList<>();
-            Map<String, Integer> names = new HashMap<>();
             for (ModSpawns.SpawnEntry entry : ModSpawns.ENTRIES) {
                 String name = entry.name();
 
