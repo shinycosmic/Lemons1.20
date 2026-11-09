@@ -40,7 +40,7 @@ public class ModMobCategories {
     public static final MobCategory ANIMALIA_LAND = MobCategory.create(
             "ANIMALIA_LAND", Animalia.MODID + ":land", LAND_CAP, true, true, 128);
     public static final MobCategory ANIMALIA_SEMIAQUATIC = MobCategory.create(
-            "ANIMALIA_SEMIAQUATIC", Animalia.MODID + ":land", SEMIAQUATIC_CAP, true, true, 128);
+            "ANIMALIA_SEMIAQUATIC", Animalia.MODID + ":semiaquatic", SEMIAQUATIC_CAP, true, true, 128);
     public static final MobCategory ANIMALIA_FLIER = MobCategory.create(
             "ANIMALIA_FLIER", Animalia.MODID + ":flier", FLIER_CAP, true, true, 128);
     public static final MobCategory ANIMALIA_WATER_STRUCTURE = MobCategory.create(
