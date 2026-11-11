@@ -116,5 +116,16 @@ public class ModItemTagGenerator extends ItemTagsProvider {
 
         tag(ModTags.Items.BAMBOOS).add(Items.BAMBOO);
 
+        tag(ModTags.Items.FORGE_RAW_MEAT).add(ModItems.RAW_VENISON.get());
+        tag(ModTags.Items.FORGE_RAW_MEAT).add(ModItems.RAW_SMALL_MAMMAL.get());
+        tag(ModTags.Items.FORGE_RAW_MEAT).add(ModItems.RAW_LARGE_MAMMAL.get());
+
+        tag(ModTags.Items.FORGE_RAW_FISHES).add(ModItems.RAW_FISH.get());
+        tag(ModTags.Items.FORGE_RAW_FISHES).add(ModItems.RAW_ICEFISH.get());
+        tag(ModTags.Items.FORGE_RAW_FISHES).add(ModItems.RAW_SHARK.get());
+
+        tag(ModTags.Items.FORGE_COOKED_FISHES).add(ModItems.COOKED_FISH.get());
+        tag(ModTags.Items.FORGE_COOKED_FISHES).add(ModItems.COOKED_SHARK.get());
+
     }
 }

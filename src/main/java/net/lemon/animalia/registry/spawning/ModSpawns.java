@@ -5,6 +5,7 @@ import net.lemon.animalia.registry.ModTags;
 import net.minecraft.tags.BiomeTags;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.biome.Biomes;
+import net.minecraftforge.common.Tags;
 import net.minecraftforge.registries.RegistryObject;
 
 import java.util.ArrayList;
@@ -40,11 +41,11 @@ public class ModSpawns {
         add(ModEntities.CYGNODRACO_MAWSONI, 4, 1, 2,
                 BiomeSelector.in(ModTags.Biomes.POLAR_OCEAN));
         add(ModEntities.SYNBRANCHUS_MARMORATUS, 5, 1, 1,
-                BiomeSelector.in(Biomes.SWAMP));
+                BiomeSelector.in(Tags.Biomes.IS_SWAMP));
         add(ModEntities.CHAUDHURIA_CAUDATA, 4, 1, 1,
                 BiomeSelector.in(Biomes.MANGROVE_SWAMP));
         add(ModEntities.MASTACEMBELUS_ARMATUS, 5, 1, 1,
-                BiomeSelector.in(Biomes.SWAMP, Biomes.RIVER));
+                BiomeSelector.in(Tags.Biomes.IS_SWAMP).or(Biomes.RIVER));
         add(ModEntities.MASTACEMBELUS_ERYTHROTAENIA, 4, 1, 1,
                 BiomeSelector.in(Biomes.MANGROVE_SWAMP));
         add(ModEntities.MACROGNATHUS_SIAMENSIS, 6, 1, 2,
@@ -106,7 +107,7 @@ public class ModSpawns {
         add(ModEntities.CYPRINODON_DIABOLIS, 1, 2, 4,
                 BiomeSelector.in(Biomes.DRIPSTONE_CAVES));
         add(ModEntities.AENIGMACHANNA_GOLLUM, 2, 1, 1,
-                BiomeSelector.in(Biomes.LUSH_CAVES, Biomes.DRIPSTONE_CAVES));
+                BiomeSelector.in(Tags.Biomes.IS_CAVE));
         add(ModEntities.LEPTOBRAMA_MUELLERI, 4, 8, 16,
                 BiomeSelector.in(Biomes.LUKEWARM_OCEAN));
         add(ModEntities.HIPPOCAMPUS_INGENS, 2, 1, 3,
@@ -165,15 +166,15 @@ public class ModSpawns {
                 BiomeSelector.in(Biomes.OCEAN, Biomes.DEEP_OCEAN));
 
         add(ModEntities.PROCAMBARUS_CLARKII, 6, 1, 2,
-                BiomeSelector.in(Biomes.SWAMP, Biomes.RIVER));
+                BiomeSelector.in(Tags.Biomes.IS_SWAMP).or(Biomes.RIVER));
         add(ModEntities.PROCAMBARUS_ALLENI, 5, 1, 2,
-                BiomeSelector.in(Biomes.SWAMP, Biomes.MANGROVE_SWAMP));
+                BiomeSelector.in(Tags.Biomes.IS_SWAMP));
         add(ModEntities.PROCAMBARUS_VIRGINALIS, 4, 1, 1,
                 BiomeSelector.in(Biomes.RIVER));
         add(ModEntities.PROCAMBARUS_LUCIFUGUS, 3, 1, 1,
-                BiomeSelector.in(Biomes.DRIPSTONE_CAVES, Biomes.LUSH_CAVES));
+                BiomeSelector.in(Tags.Biomes.IS_CAVE));
         add(ModEntities.XIBALBANUS_TULUMENSIS, 3, 1, 1,
-                BiomeSelector.in(Biomes.DRIPSTONE_CAVES));
+                BiomeSelector.in(Tags.Biomes.IS_CAVE));
         add(ModEntities.PROTEUS_ANGUINUS, 2, 1, 1,
                 BiomeSelector.in(Biomes.DRIPSTONE_CAVES, Biomes.WINDSWEPT_HILLS, Biomes.WINDSWEPT_GRAVELLY_HILLS));
         add(ModEntities.MUNIDOPSIS_POLYMORPHA, 5, 1, 3,

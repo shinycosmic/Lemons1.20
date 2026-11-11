@@ -44,6 +44,10 @@ public class ModTags {
         public static final TagKey<Item> SEAFOOD = tag("seafood");
         public static final TagKey<Item> BAMBOOS = tag("bamboos");
 
+        public static final TagKey<Item> FORGE_RAW_MEAT = forgeTag("raw_meat");
+        public static final TagKey<Item> FORGE_RAW_FISHES = forgeTag("raw_fishes");
+        public static final TagKey<Item> FORGE_COOKED_FISHES = forgeTag("cooked_fishes");
+
         private static TagKey<Item> tag(String name) {
             return ItemTags.create(new ResourceLocation(Animalia.MODID, name));
         }
