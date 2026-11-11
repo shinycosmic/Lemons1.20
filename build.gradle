@@ -76,6 +76,8 @@ minecraft {
             // You can set various levels here.
             // Please read: https://stackoverflow.com/questions/2031163/when-to-use-the-different-log-levels
             property 'forge.logging.console.level', 'debug'
+            property 'mixin.env.remapRefMap', 'true'
+            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
 
             mods {
                 "${mod_id}" {
@@ -136,10 +138,10 @@ repositories {
         url = "https://maven.blamejared.com/"
     }
 
-//    maven { // CuriosAPI
-//        name = "Illusive Soulworks maven"
-//        url = "https://maven.theillusivec4.top/"
-//    }
+    maven { // CuriosAPI
+        name = "Illusive Soulworks maven"
+        url = "https://maven.theillusivec4.top/"
+    }
 
     maven {
         // location of a maven mirror for JEI files, as a fallback
@@ -156,10 +158,10 @@ repositories {
 dependencies {
     implementation fg.deobf("software.bernie.geckolib:geckolib-forge-${minecraft_version}:${geckolib_version}")
     implementation("com.eliotlash.mclib:mclib:20")
-//    // Compile against only the API artifact
-//    compileOnly "top.theillusivec4.curios:curios-neoforge:${curios_version}:api"
-//    // Use the full Curios API jar at runtime
-//    runtimeOnly "top.theillusivec4.curios:curios-neoforge:${curios_version}"
+    // Compile against only the API artifact
+    compileOnly fg.deobf("top.theillusivec4.curios:curios-forge:${curios_version}:api")
+    // Use the full Curios API jar at runtime
+    runtimeOnly fg.deobf("top.theillusivec4.curios:curios-forge:${curios_version}")
 }
 
 dependencies {
