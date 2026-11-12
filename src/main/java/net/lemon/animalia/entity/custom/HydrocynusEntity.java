@@ -145,7 +145,6 @@ public class HydrocynusEntity extends FishBase implements GeoEntity, Scannable {
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
         super.registerControllers(controllers);
         controllers.add(new AnimationController<>(this, "attack_controller", 0, state -> PlayState.STOP).triggerableAnim("attack", RawAnimation.begin().then("attack", Animation.LoopType.PLAY_ONCE)));
-        super.registerControllers(controllers);
     }
 
     @Override

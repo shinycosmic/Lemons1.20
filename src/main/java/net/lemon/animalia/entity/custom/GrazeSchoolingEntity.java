@@ -228,7 +228,6 @@ public class GrazeSchoolingEntity extends FishBase implements GeoEntity, Scannab
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
         super.registerControllers(controllers);
         controllers.add(new AnimationController<>(this, "idles_controller", 5, this::idlesPredicate));
-        super.registerControllers(controllers);
     }
 
     @Override

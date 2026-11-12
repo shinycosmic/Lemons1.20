@@ -377,7 +377,6 @@ public class HeterocongerEntity extends FishBase implements GeoEntity, Scannable
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
         super.registerControllers(controllers);
         controllers.add(new AnimationController<>(this, "idles_controller", 0, this::idlesPredicate));
-        super.registerControllers(controllers);
     }
 
     @Override
