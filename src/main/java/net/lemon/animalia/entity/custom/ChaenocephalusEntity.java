@@ -442,29 +442,12 @@ public class ChaenocephalusEntity extends BottomWalkerSwimmerBase implements Geo
     }
 
     @Override
-    public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
-        controllers.add(new AnimationController<>(this, "controller", 10, this::predicate));
-        super.registerControllers(controllers);
-    }
-
-    private <T extends GeoAnimatable> PlayState predicate(AnimationState<T> animationState) {
-        AnimationController<T> controller = animationState.getController();
-
-        if (this.isBaby()) {
-            controller.setAnimation(RawAnimation.begin().then("swim", Animation.LoopType.LOOP));
-            return PlayState.CONTINUE;
-        }
-
-        if (!this.isInWater() && !this.isBaby()) {
-            animationState.getController().setAnimation(RawAnimation.begin().then("flop", Animation.LoopType.LOOP));
-            return PlayState.CONTINUE;
-        }
-
+    protected <T extends GeoAnimatable> boolean specialAnim(AnimationController<T> controller) {
         int phase = this.getNestPhase();
 
         if (phase == NEST_PHASE_NESTING) {
             controller.setAnimation(RawAnimation.begin().then("nestmaking", Animation.LoopType.PLAY_ONCE));
-            return PlayState.CONTINUE;
+            return true;
         }
 
         if (phase == NEST_PHASE_GUARDING) {
@@ -493,16 +476,15 @@ public class ChaenocephalusEntity extends BottomWalkerSwimmerBase implements Geo
                     break;
             }
 
-            return PlayState.CONTINUE;
+            return true;
         }
 
         if(this.isWalking() && !this.isActuallyMoving()) {
             controller.setAnimation(RawAnimation.begin().then("idle", Animation.LoopType.PLAY_ONCE));
-            return PlayState.CONTINUE;
+            return true;
         }
 
-        controller.setAnimation(RawAnimation.begin().then("swim", Animation.LoopType.LOOP));
-        return PlayState.CONTINUE;
+        return false;
     }
 
     @Override

@@ -223,50 +223,31 @@ public class MastacembelusEntity extends BottomWalkerSwimmerBase implements GeoE
     }
 
     @Override
-    public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
-        controllers.add(new AnimationController<>(this, "controller", 0, this::predicate));
-        super.registerControllers(controllers);
-    }
-
-    private <T extends GeoAnimatable> PlayState predicate(AnimationState<T> animationState) {
-        if(this.isBaby()) {
-            animationState.getController().setAnimation(RawAnimation.begin().then("swim", Animation.LoopType.LOOP));
-            return PlayState.CONTINUE;
-        }
-
-        if (!this.isInWater() && !this.isBaby()) {
-            animationState.getController().setAnimation(RawAnimation.begin().then("flop", Animation.LoopType.LOOP));
-            return PlayState.CONTINUE;
-        }
-
+    protected <T extends GeoAnimatable> boolean specialAnim(AnimationController<T> controller) {
         int phase = this.getHidePhase();
 
-        // BURROWING
         if(phase == AnimaliaBreedableWater.PHASE_BURROWING) {
-            animationState.getController().setAnimationSpeed(1.0);
-            animationState.getController().setAnimation(RawAnimation.begin().then("burrowing", Animation.LoopType.HOLD_ON_LAST_FRAME));
-            return PlayState.CONTINUE;
+            controller.transitionLength(0);
+            controller.setAnimation(RawAnimation.begin().then("burrowing", Animation.LoopType.HOLD_ON_LAST_FRAME));
+            return true;
         }
-        // BURROWED
         if(phase == AnimaliaBreedableWater.PHASE_BURROWED) {
-            animationState.getController().setAnimationSpeed(1.0);
-            animationState.getController().setAnimation(RawAnimation.begin().then("burrowed", Animation.LoopType.LOOP));
-            return PlayState.CONTINUE;
+            controller.transitionLength(0);
+            controller.setAnimation(RawAnimation.begin().then("burrowed", Animation.LoopType.LOOP));
+            return true;
         }
-        // SURFACING
         if(phase == AnimaliaBreedableWater.PHASE_SURFACING) {
-            animationState.getController().setAnimationSpeed(1.0);
-            animationState.getController().setAnimation(RawAnimation.begin().then("surfacing", Animation.LoopType.HOLD_ON_LAST_FRAME));
-            return PlayState.CONTINUE;
+            controller.transitionLength(0);
+            controller.setAnimation(RawAnimation.begin().then("surfacing", Animation.LoopType.HOLD_ON_LAST_FRAME));
+            return true;
         }
 
-        animationState.getController().setAnimation(RawAnimation.begin().then("swim", Animation.LoopType.LOOP));
-        if (this.stillTicks >= FREEZE_DELAY) {
-            animationState.getController().setAnimationSpeed(0.3);
-        } else {
-            animationState.getController().setAnimationSpeed(1.0);
-        }
-        return PlayState.CONTINUE;
+        return false;
+    }
+
+    @Override
+    protected double swimAnimSpeed() {
+        return this.stillTicks >= FREEZE_DELAY ? 0.3 : 1.0;
     }
 
     @Override

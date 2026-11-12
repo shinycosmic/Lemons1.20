@@ -181,40 +181,20 @@ public class CongolliEntity extends BottomWalkerSwimmerBase implements GeoEntity
     }
 
     @Override
-    public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
-        controllers.add(new AnimationController<>(this, "controller", 10, this::predicate));
-    }
-
-    private <T extends GeoAnimatable> PlayState predicate(AnimationState<T> animationState) {
-        AnimationController<T> controller = animationState.getController();
-
-        if(this.isBaby()) {
-            controller.setAnimation(RawAnimation.begin().then("swim", Animation.LoopType.LOOP));
-            return PlayState.CONTINUE;
-        }
-
-        if (!this.isInWater() && !this.isBaby()) {
-            animationState.getController().setAnimation(RawAnimation.begin().then("flop", Animation.LoopType.LOOP));
-            return PlayState.CONTINUE;
-        }
-
+    protected <T extends GeoAnimatable> boolean specialAnim(AnimationController<T> controller) {
         if (this.isWalking()) {
             if (this.isActuallyMoving()) {
-                controller.setAnimation(RawAnimation.begin().then("swim", Animation.LoopType.LOOP));
-                return PlayState.CONTINUE;
+                return false;
             } else {
                 if(this.getIsIdleSand()) {
                     controller.setAnimation(RawAnimation.begin().then("sand", Animation.LoopType.LOOP));
-                    return PlayState.CONTINUE;
+                    return true;
                 }
                 controller.setAnimation(RawAnimation.begin().then("alert", Animation.LoopType.LOOP));
-                return PlayState.CONTINUE;
+                return true;
             }
-        } else {
-            // SWIMMING
-            controller.setAnimation(RawAnimation.begin().then("swim", Animation.LoopType.LOOP));
-            return PlayState.CONTINUE;
         }
+        return false;
     }
 
     @Override

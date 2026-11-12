@@ -859,13 +859,13 @@ public abstract class AnimaliaBreedableWater extends WaterAnimal implements GeoE
 
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
-        controllers.add(new AnimationController<>(this, "controller", 10, this::mainPredicate));
+        controllers.add(new AnimationController<>(this, "controller", 10, this::predicate));
         if (this.hasEat()) {
             controllers.add(new AnimationController<>(this, "eat_controller", 0, this::eatPredicate));
         }
     }
 
-    protected <T extends GeoAnimatable> PlayState mainPredicate(AnimationState<T> state) {
+    protected <T extends GeoAnimatable> PlayState predicate(AnimationState<T> state) {
         AnimationController<T> controller = state.getController();
         controller.transitionLength(10);
         controller.setAnimationSpeed(1.0);

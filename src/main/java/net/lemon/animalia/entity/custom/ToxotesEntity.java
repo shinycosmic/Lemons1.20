@@ -146,30 +146,17 @@ public class ToxotesEntity extends FishBase implements GeoEntity, Scannable {
 
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
-        controllers.add(new AnimationController<>(this, "controller", 10, this::predicate));
         super.registerControllers(controllers);
         controllers.add(new AnimationController<>(this, "shoot_controller", 0, this::shootPredicate));
     }
 
-    private <T extends GeoAnimatable> PlayState predicate(AnimationState<T> animationState) {
-        if(this.isBaby()) {
-            animationState.getController().setAnimation(RawAnimation.begin().then("swim", Animation.LoopType.LOOP));
-            return PlayState.CONTINUE;
-        }
-
-        if (!this.isInWater() && !this.isBaby()) {
-            animationState.getController().setAnimation(RawAnimation.begin().then("flop", Animation.LoopType.LOOP));
-            return PlayState.CONTINUE;
-        }
-
+    @Override
+    protected <T extends GeoAnimatable> boolean specialAnim(AnimationController<T> controller) {
         if (this.isShooting()) {
-            animationState.getController().setAnimation(RawAnimation.begin().then("idle", Animation.LoopType.LOOP));
-            return PlayState.CONTINUE;
+            controller.setAnimation(RawAnimation.begin().then("idle", Animation.LoopType.LOOP));
+            return true;
         }
-
-        animationState.getController().setAnimation(RawAnimation.begin().then("swim", Animation.LoopType.LOOP));
-
-        return PlayState.CONTINUE;
+        return false;
     }
 
     private <T extends GeoAnimatable> PlayState shootPredicate(AnimationState<T> state) {

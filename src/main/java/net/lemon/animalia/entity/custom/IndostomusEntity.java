@@ -150,17 +150,18 @@ public class IndostomusEntity extends WaterDartBase implements GeoEntity, Scanna
 
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
-        controllers.add(new AnimationController<>(this, "controller", 0, this::predicate));
+        super.registerControllers(controllers);
         controllers.add(new AnimationController<>(this, "idles_controller", 5, this::idlesPredicate));
     }
 
-    private <T extends GeoAnimatable> PlayState predicate(AnimationState<T> animationState) {
-        if (this.isMovementLockedByIdle() && !this.isBaby()) {
-            animationState.getController().setAnimation(RawAnimation.begin().then("idle" + this.getCurrRegIdle(), Animation.LoopType.PLAY_ONCE));
-            return PlayState.CONTINUE;
+    @Override
+    protected <T extends GeoAnimatable> boolean specialAnim(AnimationController<T> controller) {
+        if (this.isMovementLockedByIdle()) {
+            controller.transitionLength(0);
+            controller.setAnimation(RawAnimation.begin().then("idle" + this.getCurrRegIdle(), Animation.LoopType.PLAY_ONCE));
+            return true;
         }
-        animationState.getController().setAnimation(RawAnimation.begin().then("swim", Animation.LoopType.LOOP));
-        return PlayState.CONTINUE;
+        return false;
     }
 
     private <T extends GeoAnimatable> PlayState idlesPredicate(AnimationState<T> state) {

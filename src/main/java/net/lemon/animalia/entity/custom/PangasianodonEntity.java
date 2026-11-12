@@ -153,24 +153,12 @@ public class PangasianodonEntity extends FishBase implements GeoEntity, Scannabl
     }
 
     @Override
-    public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
-        controllers.add(new AnimationController<>(this, "controller", 10, this::predicate));
-        super.registerControllers(controllers);
-    }
-
-    private <T extends GeoAnimatable> PlayState predicate(AnimationState<T> animationState) {
-        if (!this.isInWater() && !this.isBaby()) {
-            animationState.getController().setAnimation(RawAnimation.begin().then("beached", Animation.LoopType.LOOP));
-            return PlayState.CONTINUE;
+    protected <T extends GeoAnimatable> boolean specialAnim(AnimationController<T> controller) {
+        if (this.isGrazing()) {
+            controller.setAnimation(RawAnimation.begin().then("graze", Animation.LoopType.LOOP));
+            return true;
         }
-
-        if (this.isGrazing() && !this.isBaby()) {
-            animationState.getController().setAnimation(RawAnimation.begin().then("graze", Animation.LoopType.LOOP));
-            return PlayState.CONTINUE;
-        }
-
-        animationState.getController().setAnimation(RawAnimation.begin().then("swim", Animation.LoopType.LOOP));
-        return PlayState.CONTINUE;
+        return false;
     }
 
     @Override

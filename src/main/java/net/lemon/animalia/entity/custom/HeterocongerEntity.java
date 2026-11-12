@@ -375,32 +375,32 @@ public class HeterocongerEntity extends FishBase implements GeoEntity, Scannable
 
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
-        controllers.add(new AnimationController<>(this, "controller", 10, this::predicate));
+        super.registerControllers(controllers);
         controllers.add(new AnimationController<>(this, "idles_controller", 0, this::idlesPredicate));
         super.registerControllers(controllers);
     }
 
-    private <T extends GeoAnimatable> PlayState predicate(AnimationState<T> animationState) {
+    @Override
+    protected <T extends GeoAnimatable> boolean specialAnim(AnimationController<T> controller) {
         int suffix = this.getStateSwitch() == 0 ? 1 : 2;
         switch (this.getHidePhase()) {
             case PHASE_BURROWING:
-                animationState.getController().setAnimation(RawAnimation.begin().then("burrowing", Animation.LoopType.HOLD_ON_LAST_FRAME));
-                return PlayState.CONTINUE;
+                controller.setAnimation(RawAnimation.begin().then("burrowing", Animation.LoopType.HOLD_ON_LAST_FRAME));
+                return true;
             case PHASE_BURROWED:
-                animationState.getController().setAnimation(RawAnimation.begin().then("burrowed" + suffix, Animation.LoopType.LOOP));
-                return PlayState.CONTINUE;
+                controller.setAnimation(RawAnimation.begin().then("burrowed" + suffix, Animation.LoopType.LOOP));
+                return true;
             case PHASE_RETREAT:
-                animationState.getController().setAnimation(RawAnimation.begin().then("toHide" + suffix, Animation.LoopType.HOLD_ON_LAST_FRAME));
-                return PlayState.CONTINUE;
+                controller.setAnimation(RawAnimation.begin().then("toHide" + suffix, Animation.LoopType.HOLD_ON_LAST_FRAME));
+                return true;
             case PHASE_HIDDEN:
-                animationState.getController().setAnimation(RawAnimation.begin().then("hiding", Animation.LoopType.LOOP));
-                return PlayState.CONTINUE;
+                controller.setAnimation(RawAnimation.begin().then("hiding", Animation.LoopType.LOOP));
+                return true;
 //            case PHASE_RETURN:
-//                animationState.getController().setAnimation(RawAnimation.begin().then("unHide", Animation.LoopType.HOLD_ON_LAST_FRAME));
-//                return PlayState.CONTINUE;
+//                controller.setAnimation(RawAnimation.begin().then("unHide", Animation.LoopType.HOLD_ON_LAST_FRAME));
+//                return true;
         }
-        animationState.getController().setAnimation(RawAnimation.begin().then("swim", Animation.LoopType.LOOP));
-        return PlayState.CONTINUE;
+        return false;
     }
 
     private <T extends GeoAnimatable> PlayState idlesPredicate(AnimationState<T> state) {

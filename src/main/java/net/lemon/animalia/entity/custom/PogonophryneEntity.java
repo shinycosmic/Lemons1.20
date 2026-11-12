@@ -136,38 +136,19 @@ public class PogonophryneEntity extends BottomWalkerSwimmerBase implements GeoEn
     }
 
     @Override
-    public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
-        controllers.add(new AnimationController<>(this, "controller", 10, this::predicate));
-        super.registerControllers(controllers);
-    }
-
-    @Override
     public AnimatableInstanceCache getAnimatableInstanceCache() {
         return cache;
     }
 
-    private <T extends GeoAnimatable> PlayState predicate(AnimationState<T> animationState) {
-        AnimationController<T> controller = animationState.getController();
-
-        if(this.isBaby()) {
-            controller.setAnimation(RawAnimation.begin().then("swim", Animation.LoopType.LOOP));
-            return PlayState.CONTINUE;
-        }
-
-        if (!this.isInWater() && !this.isBaby()) {
-            animationState.getController().setAnimation(RawAnimation.begin().then("flop", Animation.LoopType.LOOP));
-            return PlayState.CONTINUE;
-        }
-
+    @Override
+    protected <T extends GeoAnimatable> boolean specialAnim(AnimationController<T> controller) {
         if (this.isWalking()) {
             if(this.getIsResting()) {
                 controller.setAnimation(RawAnimation.begin().then("resting", Animation.LoopType.LOOP));
-                return PlayState.CONTINUE;
+                return true;
             }
         }
-        // SWIMMING
-        controller.setAnimation(RawAnimation.begin().then("swim", Animation.LoopType.LOOP));
-        return PlayState.CONTINUE;
+        return false;
     }
 
     @Override

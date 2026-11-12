@@ -153,21 +153,17 @@ public class CrayfishEntity extends BottomWalkerSwimmerBase implements GeoEntity
 
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
-        controllers.add(new AnimationController<>(this, "controller", 10, this::predicate));
+        super.registerControllers(controllers);
         controllers.add(new AnimationController<>(this, "threat_controller", 0, this::threatPredicate));
         controllers.add(new AnimationController<>(this, "attack_controller", 0, this::attackPredicate)
                 .triggerableAnim("defensiveAttack", RawAnimation.begin().then("defensiveAttack", Animation.LoopType.PLAY_ONCE)));
     }
 
-    private <T extends GeoAnimatable> PlayState predicate(AnimationState<T> animationState) {
-        AnimationController<T> controller = animationState.getController();
+    @Override
+    protected <T extends GeoAnimatable> PlayState predicate(AnimationState<T> state) {
+        AnimationController<T> controller = state.getController();
 
-        if (!this.isInWater()) {
-            controller.setAnimation(RawAnimation.begin().then("beached", Animation.LoopType.LOOP));
-            return PlayState.CONTINUE;
-        }
-
-        if (this.isWalking()) {
+        if (this.isInWater() && this.isWalking()) {
             if (!this.isActuallyMoving()) {
                 controller.setAnimation(RawAnimation.begin().then("idle", Animation.LoopType.LOOP));
                 return PlayState.CONTINUE;
@@ -176,8 +172,7 @@ public class CrayfishEntity extends BottomWalkerSwimmerBase implements GeoEntity
             return PlayState.CONTINUE;
         }
 
-        controller.setAnimation(RawAnimation.begin().then("swim", Animation.LoopType.LOOP));
-        return PlayState.CONTINUE;
+        return super.predicate(state);
     }
 
     private <T extends GeoAnimatable> PlayState threatPredicate(AnimationState<T> state) {

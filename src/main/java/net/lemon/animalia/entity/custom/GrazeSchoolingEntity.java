@@ -220,30 +220,24 @@ public class GrazeSchoolingEntity extends FishBase implements GeoEntity, Scannab
     }
 
     @Override
+    protected boolean hasSwimFast() {
+        return this.getType() == ModEntities.PARACANTHURUS_HEPATUS.get();
+    }
+
+    @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
-        controllers.add(new AnimationController<>(this, "controller", 5, this::predicate));
+        super.registerControllers(controllers);
         controllers.add(new AnimationController<>(this, "idles_controller", 5, this::idlesPredicate));
         super.registerControllers(controllers);
     }
 
-    private <T extends GeoAnimatable> PlayState predicate(AnimationState<T> animationState) {
-        if (!this.isInWater() && !this.isBaby()) {
-            animationState.getController().setAnimation(RawAnimation.begin().then("flop", Animation.LoopType.LOOP));
-            return PlayState.CONTINUE;
+    @Override
+    protected <T extends GeoAnimatable> boolean specialAnim(AnimationController<T> controller) {
+        if (this.isGrazing()) {
+            controller.setAnimation(RawAnimation.begin().then("graze", Animation.LoopType.PLAY_ONCE));
+            return true;
         }
-
-        if (this.isGrazing() && !this.isBaby()) {
-            animationState.getController().setAnimation(RawAnimation.begin().then("graze", Animation.LoopType.PLAY_ONCE));
-            return PlayState.CONTINUE;
-        }
-
-        if (this.getType() == ModEntities.PARACANTHURUS_HEPATUS.get() && this.isFast()) {
-            animationState.getController().setAnimation(RawAnimation.begin().then("swimfast", Animation.LoopType.LOOP));
-            return PlayState.CONTINUE;
-        }
-
-        animationState.getController().setAnimation(RawAnimation.begin().then("swim", Animation.LoopType.LOOP));
-        return PlayState.CONTINUE;
+        return false;
     }
 
     private <T extends GeoAnimatable> PlayState idlesPredicate(AnimationState<T> state) {

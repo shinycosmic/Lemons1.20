@@ -137,7 +137,8 @@ public class ProteusEntity extends BottomWalkerSwimmerBase implements GeoEntity,
         controllers.add(new AnimationController<>(this, "controller", 5, this::predicate));
     }
 
-    private <T extends GeoAnimatable> PlayState predicate(AnimationState<T> animationState) {
+    @Override
+    protected  <T extends GeoAnimatable> PlayState predicate(AnimationState<T> animationState) {
         if(!this.isActuallyMoving()) {
             AnimationController<T> controller = animationState.getController();
             if (!this.isWalking()) {

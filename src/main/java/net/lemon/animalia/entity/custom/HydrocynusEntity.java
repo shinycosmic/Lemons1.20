@@ -143,33 +143,23 @@ public class HydrocynusEntity extends FishBase implements GeoEntity, Scannable {
 
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
-        controllers.add(new AnimationController<>(this, "controller", 5, this::predicate));
+        super.registerControllers(controllers);
         controllers.add(new AnimationController<>(this, "attack_controller", 0, state -> PlayState.STOP).triggerableAnim("attack", RawAnimation.begin().then("attack", Animation.LoopType.PLAY_ONCE)));
         super.registerControllers(controllers);
     }
 
-    private <T extends GeoAnimatable> PlayState predicate(AnimationState<T> animationState) {
-        if(this.isBaby()) {
-            animationState.getController().setAnimation(RawAnimation.begin().then("swim", Animation.LoopType.LOOP));
-            return PlayState.CONTINUE;
-        }
-
-        if (!this.isInWater() && !this.isBaby()) {
-            animationState.getController().setAnimation(RawAnimation.begin().then("flop", Animation.LoopType.LOOP));
-            return PlayState.CONTINUE;
-        }
-
-        if (this.isFast()) {
-            animationState.getController().setAnimation(RawAnimation.begin().then("swimfast", Animation.LoopType.LOOP));
-            return PlayState.CONTINUE;
-        }
-
+    @Override
+    protected <T extends GeoAnimatable> boolean specialAnim(AnimationController<T> controller) {
         if(isActuallyMoving()) {
-            animationState.getController().setAnimation(RawAnimation.begin().then("swim", Animation.LoopType.LOOP));
-            return PlayState.CONTINUE;
+            return false;
         }
-        animationState.getController().setAnimation(RawAnimation.begin().then("idle", Animation.LoopType.LOOP));
-        return PlayState.CONTINUE;
+        controller.setAnimation(RawAnimation.begin().then("idle", Animation.LoopType.LOOP));
+        return true;
+    }
+
+    @Override
+    protected boolean hasSwimFast() {
+        return true;
     }
 
     @Override

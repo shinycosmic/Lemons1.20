@@ -126,7 +126,8 @@ public class WalkingCrustaceanEntity extends BottomWalkerSwimmerBase implements 
         controllers.add(new AnimationController<>(this, "controller", 10, this::predicate));
     }
 
-    private <T extends GeoAnimatable> PlayState predicate(AnimationState<T> animationState) {
+    @Override
+    protected  <T extends GeoAnimatable> PlayState predicate(AnimationState<T> animationState) {
         AnimationController<T> controller = animationState.getController();
         if (this.isActuallyMoving()) {
             controller.setAnimation(RawAnimation.begin().then("walk", Animation.LoopType.LOOP));

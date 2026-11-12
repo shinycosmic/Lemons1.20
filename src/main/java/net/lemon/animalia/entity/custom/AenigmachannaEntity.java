@@ -112,33 +112,20 @@ public class AenigmachannaEntity extends BottomWalkerSwimmerBase implements GeoE
     }
 
     @Override
-    public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
-        controllers.add(new AnimationController<>(this, "controller", 5, this::predicate));
-        super.registerControllers(controllers);
-    }
-
-    private <T extends GeoAnimatable> PlayState predicate(AnimationState<T> animationState) {
-        if (!this.isInWater()) {
-            animationState.getController().setAnimation(RawAnimation.begin().then("beached", Animation.LoopType.LOOP));
-            return PlayState.CONTINUE;
-        }
-
-        if(!this.isActuallyMoving()) {
+    protected <T extends GeoAnimatable> boolean specialAnim(AnimationController<T> controller) {
+        if (!this.isActuallyMoving()) {
             if (this.isWalking()) {
                 if (this.getGroundIdleSwitch() == 0) {
-                    animationState.getController().setAnimation(RawAnimation.begin().then("idle2", Animation.LoopType.LOOP));
-                    return PlayState.CONTINUE;
+                    controller.setAnimation(RawAnimation.begin().then("idle2", Animation.LoopType.LOOP));
                 } else {
-                    animationState.getController().setAnimation(RawAnimation.begin().then("idle3", Animation.LoopType.LOOP));
-                    return PlayState.CONTINUE;
+                    controller.setAnimation(RawAnimation.begin().then("idle3", Animation.LoopType.LOOP));
                 }
             } else {
-                animationState.getController().setAnimation(RawAnimation.begin().then("idle0", Animation.LoopType.LOOP));
-                return PlayState.CONTINUE;
+                controller.setAnimation(RawAnimation.begin().then("idle0", Animation.LoopType.LOOP));
             }
+            return true;
         }
-        animationState.getController().setAnimation(RawAnimation.begin().then("swim", Animation.LoopType.LOOP));
-        return PlayState.CONTINUE;
+        return false;
     }
 
     @Override

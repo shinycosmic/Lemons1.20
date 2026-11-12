@@ -37,10 +37,6 @@ import java.util.Map;
 public class BovichtusEntity extends BottomWalkerSwimmerBase implements GeoEntity, Scannable {
     private final AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
 
-//    private static final Map<EntityType, Integer> MOB_ID = ImmutableMap.<EntityType, Integer>builder()
-//            .put(ModEntities.BOVICHTUS_VARIEGATUS.get(), 0)
-//            .put(ModEntities.CONGIOPODUS_TORVUS.get(), 1).build();
-
     public BovichtusEntity(EntityType<? extends FishBase> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
     }
@@ -130,30 +126,19 @@ public class BovichtusEntity extends BottomWalkerSwimmerBase implements GeoEntit
     }
 
     @Override
-    public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
-        controllers.add(new AnimationController<>(this, "controller", 10, this::predicate));
-        super.registerControllers(controllers);
-    }
-
-    private <T extends GeoAnimatable> PlayState predicate(AnimationState<T> animationState) {
-        if (!this.isInWater()) {
-            animationState.getController().setAnimation(RawAnimation.begin().then("flop", Animation.LoopType.LOOP));
-            return PlayState.CONTINUE;
-        }
-
-        if(!this.isActuallyMoving() && !this.isBaby()) {
+    protected <T extends GeoAnimatable> boolean specialAnim(AnimationController<T> controller) {
+        if (!this.isActuallyMoving()) {
             if (this.isWalking()) {
                 if (this.getGroundIdleSwitch() == 0) {
-                    animationState.getController().setAnimation(RawAnimation.begin().then("idle0", Animation.LoopType.LOOP));
-                    return PlayState.CONTINUE;
+                    controller.setAnimation(RawAnimation.begin().then("idle0", Animation.LoopType.LOOP));
+                    return true;
                 } else {
-                    animationState.getController().setAnimation(RawAnimation.begin().then("idle1", Animation.LoopType.LOOP));
-                    return PlayState.CONTINUE;
+                    controller.setAnimation(RawAnimation.begin().then("idle1", Animation.LoopType.LOOP));
+                    return true;
                 }
             }
         }
-        animationState.getController().setAnimation(RawAnimation.begin().then("swim", Animation.LoopType.LOOP));
-        return PlayState.CONTINUE;
+        return false;
     }
 
     @Override

@@ -171,35 +171,29 @@ public class SpinnerSharkEntity extends FishBase implements Scannable, GeoEntity
         return 1;
     }
 
-
-
     @Override
-    public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
-        controllers.add(new AnimationController<>(this, "controller", 5, this::predicate));
-        super.registerControllers(controllers);
-    }
-
-    private <T extends GeoAnimatable> PlayState predicate(AnimationState<T> animationState) {
-        animationState.getController().transitionLength(5);
+    protected <T extends GeoAnimatable> PlayState predicate(AnimationState<T> animationState) {
         if (this.getSpinPhase() == SPIN_PHASE_BREACH) {
             animationState.getController().transitionLength(0);
             animationState.getController().setAnimation(RawAnimation.begin().then("breach", Animation.LoopType.PLAY_ONCE));
             return PlayState.CONTINUE;
         }
         if (this.getSpinPhase() == SPIN_PHASE_SPIN) {
+            animationState.getController().transitionLength(5);
             animationState.getController().setAnimation(RawAnimation.begin().then("toSpin", Animation.LoopType.PLAY_ONCE).thenLoop("spin"));
             return PlayState.CONTINUE;
         }
         if (this.onGround() || (this.isInWater() && !this.isActuallyMoving())) {
+            animationState.getController().transitionLength(5);
             animationState.getController().setAnimation(RawAnimation.begin().then("idle0", Animation.LoopType.LOOP));
             return PlayState.CONTINUE;
         }
-        if (this.isFast()) {
-            animationState.getController().setAnimation(RawAnimation.begin().then("swimFast", Animation.LoopType.LOOP));
-            return PlayState.CONTINUE;
-        }
-        animationState.getController().setAnimation(RawAnimation.begin().then("swim", Animation.LoopType.LOOP));
-        return PlayState.CONTINUE;
+        return super.predicate(animationState);
+    }
+
+    @Override
+    protected boolean hasSwimFast() {
+        return true;
     }
 
     @Override
