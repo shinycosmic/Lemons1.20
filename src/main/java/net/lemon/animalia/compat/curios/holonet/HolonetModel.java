@@ -18,12 +18,12 @@ public class HolonetModel {
         float center = armWidth / 2.0F - 1.0F;
 
         PartDefinition bracelet = part.addOrReplaceChild("bracelet", CubeListBuilder.create()
-                        .texOffs(0, 0).addBox(-1.0F, 7.75F, -2.0F, armWidth, 1.0F, 4.0F, new CubeDeformation(0.02F))
-                        .texOffs(5, 6).addBox(center - 0.5F, 7.75F, -2.275F, 1.0F, 1.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.ZERO);
+                        .texOffs(0, 0).addBox(-1.0F, 7.25F, -2.0F, armWidth, 1.0F, 4.0F, new CubeDeformation(0.25F))
+                        .texOffs(5, 6).addBox(center - 0.5F, 7.25F, -2.725F, 1.0F, 1.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.ZERO);
 
         bracelet.addOrReplaceChild("cube_r1", CubeListBuilder.create()
-                        .texOffs(0, 6).addBox(-1.0F, -1.0F, 0.0F, 2.0F, 2.0F, 0.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(center, 8.25F, -2.025F, 0.0F, 0.0F, -0.7854F));
+                        .texOffs(0, 6).addBox(-1.0F, -1.0F, 0.0F, 2.0F, 2.0F, 0.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(center, 7.75F, -2.475F, 0.0F, 0.0F, -0.7854F));
 
-        return LayerDefinition.create(mesh, 32, 32);
+        return LayerDefinition.create(mesh, 16, 16);
     }
 }
