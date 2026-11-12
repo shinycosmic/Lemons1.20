@@ -169,7 +169,7 @@ public class AilurusFulgensEntity extends AnimaliaLandBase implements GeoEntity,
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
         controllers.add(new AnimationController<>(this, "controller", 5, this::predicate));
         controllers.add(new AnimationController<>(this, "idles_controller", 5, this::idlesPredicate));
-        controllers.add(new AnimationController<>(this, "eat_controller", 5, this::eatPredicate));
+        super.registerControllers(controllers);
     }
 
     private <T extends GeoAnimatable> PlayState predicate(AnimationState<T> animationState) {
@@ -255,7 +255,8 @@ public class AilurusFulgensEntity extends AnimaliaLandBase implements GeoEntity,
         return PlayState.STOP;
     }
 
-    private <T extends GeoAnimatable> PlayState eatPredicate(AnimationState<T> state) {
+    @Override
+    protected  <T extends GeoAnimatable> PlayState eatPredicate(AnimationState<T> state) {
         if (this.isEating() && !this.isBaby() && !this.isAsleep()) {
             state.getController().setAnimation(RawAnimation.begin().then("eat", Animation.LoopType.PLAY_ONCE).thenLoop("eating"));
             return PlayState.CONTINUE;

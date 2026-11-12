@@ -138,7 +138,7 @@ public class PogonophryneEntity extends BottomWalkerSwimmerBase implements GeoEn
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
         controllers.add(new AnimationController<>(this, "controller", 10, this::predicate));
-        controllers.add(new AnimationController<>(this, "eat_controller", 0, this::eatPredicate));
+        super.registerControllers(controllers);
     }
 
     @Override
@@ -168,14 +168,6 @@ public class PogonophryneEntity extends BottomWalkerSwimmerBase implements GeoEn
         // SWIMMING
         controller.setAnimation(RawAnimation.begin().then("swim", Animation.LoopType.LOOP));
         return PlayState.CONTINUE;
-    }
-
-    private <T extends GeoAnimatable> PlayState eatPredicate(AnimationState<T> state) {
-        if (this.isEating() && !this.isBaby()) {
-            state.getController().setAnimation(RawAnimation.begin().then("eat", Animation.LoopType.PLAY_ONCE));
-            return PlayState.CONTINUE;
-        }
-        return PlayState.STOP;
     }
 
     @Override

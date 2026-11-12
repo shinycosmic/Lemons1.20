@@ -147,7 +147,7 @@ public class ToxotesEntity extends FishBase implements GeoEntity, Scannable {
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
         controllers.add(new AnimationController<>(this, "controller", 10, this::predicate));
-        controllers.add(new AnimationController<>(this, "eat_controller", 0, this::eatPredicate));
+        super.registerControllers(controllers);
         controllers.add(new AnimationController<>(this, "shoot_controller", 0, this::shootPredicate));
     }
 
@@ -170,14 +170,6 @@ public class ToxotesEntity extends FishBase implements GeoEntity, Scannable {
         animationState.getController().setAnimation(RawAnimation.begin().then("swim", Animation.LoopType.LOOP));
 
         return PlayState.CONTINUE;
-    }
-
-    private <T extends GeoAnimatable> PlayState eatPredicate(AnimationState<T> state) {
-        if (this.isEating() && !this.isBaby()) {
-            state.getController().setAnimation(RawAnimation.begin().then("eat", Animation.LoopType.PLAY_ONCE));
-            return PlayState.CONTINUE;
-        }
-        return PlayState.STOP;
     }
 
     private <T extends GeoAnimatable> PlayState shootPredicate(AnimationState<T> state) {

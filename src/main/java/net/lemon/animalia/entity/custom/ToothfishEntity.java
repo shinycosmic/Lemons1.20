@@ -84,15 +84,7 @@ public class ToothfishEntity extends FishBase implements GeoEntity, Scannable {
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
         controllers.add(new AnimationController<>(this, "controller", 0, this::predicate));
-        controllers.add(new AnimationController<>(this, "eat_controller", 0, this::eatPredicate));
-    }
-
-    private <T extends GeoAnimatable> PlayState eatPredicate(AnimationState<T> state) {
-        if (this.isEating()) {
-            state.getController().setAnimation(RawAnimation.begin().then("eat", Animation.LoopType.PLAY_ONCE));
-            return PlayState.CONTINUE;
-        }
-        return PlayState.STOP;
+        super.registerControllers(controllers);
     }
 
     private <T extends GeoAnimatable> PlayState predicate(AnimationState<T> animationState) {

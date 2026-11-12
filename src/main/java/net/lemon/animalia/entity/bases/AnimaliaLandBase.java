@@ -46,6 +46,11 @@ import net.minecraft.world.level.pathfinder.Path;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.ForgeMod;
 import org.jetbrains.annotations.Nullable;
+import software.bernie.geckolib.animatable.GeoEntity;
+import software.bernie.geckolib.core.animatable.GeoAnimatable;
+import software.bernie.geckolib.core.animation.*;
+import software.bernie.geckolib.core.animation.AnimationState;
+import software.bernie.geckolib.core.object.PlayState;
 
 import java.util.EnumSet;
 import java.util.Objects;
@@ -53,7 +58,7 @@ import java.util.function.Predicate;
 
 import static net.lemon.animalia.entity.bases.AnimaliaBreedableWater.*;
 
-public abstract class AnimaliaLandBase extends Animal implements IActivityTime, IFoodEater, IIdles, IGrazer, IDimorphism, ICanSleep, ICanClimb, IBold{
+public abstract class AnimaliaLandBase extends Animal implements GeoEntity, IActivityTime, IFoodEater, IIdles, IGrazer, IDimorphism, ICanSleep, ICanClimb, IBold{
     private static final EntityDataAccessor<Integer> GENDER = SynchedEntityData.defineId(AnimaliaLandBase.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Integer> VAR_COLOR = SynchedEntityData.defineId(AnimaliaLandBase.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Float> VAR_SIZE_MULTIPLIER = SynchedEntityData.defineId(AnimaliaLandBase.class, EntityDataSerializers.FLOAT);
@@ -868,6 +873,19 @@ public abstract class AnimaliaLandBase extends Animal implements IActivityTime, 
         this.setBold(this.random.nextFloat() < this.boldChance());
         this.setVarSizeMultiplier(this.genVarSizeMultiplier());
         return super.finalizeSpawn(level, difficulty, reason, spawnData, dataTag);
+    }
+
+    @Override
+    public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
+        controllers.add(new AnimationController<>(this, "eat_controller", 0, this::eatPredicate));
+    }
+
+    protected <T extends GeoAnimatable> PlayState eatPredicate(AnimationState<T> state) {
+        if (this.isEating() && !this.isBaby()) {
+            state.getController().setAnimation(RawAnimation.begin().then("eat", Animation.LoopType.PLAY_ONCE));
+            return PlayState.CONTINUE;
+        }
+        return PlayState.STOP;
     }
 
     public enum BirthLocation {

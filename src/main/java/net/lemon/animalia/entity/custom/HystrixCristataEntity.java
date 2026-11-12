@@ -168,7 +168,7 @@ public class HystrixCristataEntity extends AnimaliaLandBase implements GeoEntity
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
         controllers.add(new AnimationController<>(this, "controller", 15, this::predicate));
         controllers.add(new AnimationController<>(this, "idles_controller", 10, this::idlesPredicate));
-        controllers.add(new AnimationController<>(this, "eat_controller", 0, this::eatPredicate));
+        super.registerControllers(controllers);
         controllers.add(new AnimationController<>(this, "attack_controller", 0, this::attackPredicate)
                 .triggerableAnim("threatAttack", RawAnimation.begin().then("threatAttack", Animation.LoopType.PLAY_ONCE)));
     }
@@ -234,14 +234,6 @@ public class HystrixCristataEntity extends AnimaliaLandBase implements GeoEntity
             return PlayState.CONTINUE;
         }
         state.getController().forceAnimationReset();
-        return PlayState.STOP;
-    }
-
-    private <T extends GeoAnimatable> PlayState eatPredicate(AnimationState<T> state) {
-        if (this.isEating() && !this.isBaby()) {
-            state.getController().setAnimation(RawAnimation.begin().then("eat", Animation.LoopType.PLAY_ONCE));
-            return PlayState.CONTINUE;
-        }
         return PlayState.STOP;
     }
 

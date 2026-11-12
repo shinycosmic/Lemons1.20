@@ -133,7 +133,7 @@ public class PangolinEntity extends AnimaliaLandBase implements GeoEntity, Scann
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
         controllers.add(new AnimationController<>(this, "controller", 5, this::predicate).triggerableAnim("attack", RawAnimation.begin().then("attack", Animation.LoopType.PLAY_ONCE)));
-        controllers.add(new AnimationController<>(this, "eat_controller", 0, this::eatPredicate));
+        super.registerControllers(controllers);
     }
 
     private <T extends GeoAnimatable> PlayState predicate(AnimationState<T> animationState) {
@@ -177,14 +177,6 @@ public class PangolinEntity extends AnimaliaLandBase implements GeoEntity, Scann
         }
         animationState.getController().setAnimation(RawAnimation.begin().then("idle", Animation.LoopType.LOOP));
         return PlayState.CONTINUE;
-    }
-
-    private <T extends GeoAnimatable> PlayState eatPredicate(AnimationState<T> state) {
-        if (this.isEating() && !this.isBaby()) {
-            state.getController().setAnimation(RawAnimation.begin().then("eat", Animation.LoopType.PLAY_ONCE));
-            return PlayState.CONTINUE;
-        }
-        return PlayState.STOP;
     }
 
     @Override
