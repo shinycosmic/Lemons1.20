@@ -1,4 +1,4 @@
-package net.lemon.animalia.compat.curios;
+package net.lemon.animalia.compat.curios.holonet;
 
 import net.lemon.animalia.Animalia;
 import net.minecraft.client.model.geom.ModelLayerLocation;
