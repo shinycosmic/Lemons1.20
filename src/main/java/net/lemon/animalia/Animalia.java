@@ -1,6 +1,7 @@
 package net.lemon.animalia;
 
 import com.mojang.logging.LogUtils;
+import net.lemon.animalia.compat.curios.CuriosAnimaliaCompat;
 import net.lemon.animalia.config.Config;
 import net.lemon.animalia.config.SpawnConfig;
 import net.lemon.animalia.registry.ModLootModifiers;
@@ -86,6 +87,10 @@ public class Animalia {
             AnimaliaRenderInit.init();
             ItemBlockRenderTypes.setRenderLayer(ModBlocks.FILTER_TRAP.get(), RenderType.cutout());
             MenuScreens.register(ModMenuTypes.FILTER_TRAP_MENU.get(), FilterTrapScreen::new);
+
+            if(CURIOS) {
+                CuriosAnimaliaCompat.init();
+            }
         }
     }
 }

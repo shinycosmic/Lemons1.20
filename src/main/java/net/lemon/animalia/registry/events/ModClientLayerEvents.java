@@ -3,6 +3,7 @@ package net.lemon.animalia.registry.events;
 import net.lemon.animalia.Animalia;
 import net.lemon.animalia.client.player.capability.StickingProjectileType;
 import net.lemon.animalia.client.player.capability.StickingProjectileTypes;
+import net.lemon.animalia.compat.curios.holonet.HolonetModel;
 import net.lemon.animalia.entity.projectiles.QuillProjectile;
 import net.lemon.animalia.entity.render.layer.StickingProjectileLayer;
 import net.minecraft.client.model.HumanoidModel;
@@ -36,6 +37,13 @@ public class ModClientLayerEvents {
         for (EntityType<?> type : ForgeRegistries.ENTITY_TYPES) {
             attachStickingProjectiles(event.getEntityRenderer(type), dispatcher);
         }
+    }
+
+    @SubscribeEvent
+    public static void registerLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
+        event.registerLayerDefinition(HolonetModel.WIDE, () -> HolonetModel.create(false));
+        event.registerLayerDefinition(HolonetModel.SLIM, () -> HolonetModel.create(true));
+
     }
 
     @SuppressWarnings({"unchecked", "rawtypes"})
