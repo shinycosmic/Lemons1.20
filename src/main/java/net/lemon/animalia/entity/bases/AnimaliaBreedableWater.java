@@ -64,6 +64,11 @@ public abstract class AnimaliaBreedableWater extends WaterAnimal implements GeoE
     private static final EntityDataAccessor<Integer> BODY_IDLE = SynchedEntityData.defineId(AnimaliaBreedableWater.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Integer> TWITCH_IDLE = SynchedEntityData.defineId(AnimaliaBreedableWater.class, EntityDataSerializers.INT);
 
+    protected static final RawAnimation SWIM = RawAnimation.begin().thenLoop("swim");
+    protected static final RawAnimation SWIM_FAST = RawAnimation.begin().thenLoop("swimFast");
+    protected static final RawAnimation STILL = RawAnimation.begin().thenLoop("still");
+    protected static final RawAnimation BEACHED = RawAnimation.begin().thenLoop("beached");
+
     private int eatTicks = 0;
     private int grazeTicks = 0;
     private int wantsToGrazeUntil;
@@ -854,7 +859,71 @@ public abstract class AnimaliaBreedableWater extends WaterAnimal implements GeoE
 
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
-        controllers.add(new AnimationController<>(this, "eat_controller", 0, this::eatPredicate));
+        controllers.add(new AnimationController<>(this, "controller", 10, this::mainPredicate));
+        if (this.hasEat()) {
+            controllers.add(new AnimationController<>(this, "eat_controller", 0, this::eatPredicate));
+        }
+    }
+
+    protected <T extends GeoAnimatable> PlayState mainPredicate(AnimationState<T> state) {
+        AnimationController<T> controller = state.getController();
+        controller.transitionLength(10);
+        controller.setAnimationSpeed(1.0);
+
+        if (this.isBaby()) {
+            controller.setAnimation(SWIM);
+            return PlayState.CONTINUE;
+        }
+        if (this.hasBeached() && !this.isInWater()) {
+            controller.setAnimation(BEACHED);
+            return PlayState.CONTINUE;
+        }
+        if (this.specialAnim(controller)) {
+            return PlayState.CONTINUE;
+        }
+        if (this.hasStill() && !this.isActuallyMoving()) {
+            controller.setAnimation(STILL);
+            return PlayState.CONTINUE;
+        }
+        if (this.isSwimFast()) {
+            controller.setAnimation(SWIM_FAST);
+            return PlayState.CONTINUE;
+        }
+        controller.setAnimation(SWIM);
+        controller.setAnimationSpeed(this.swimAnimSpeed());
+        return PlayState.CONTINUE;
+    }
+
+    /**
+     * instead of writing the whole controller again, we just need the special anims within this logic.
+     */
+    protected <T extends GeoAnimatable> boolean specialAnim(AnimationController<T> controller) {
+        return false;
+    }
+
+    //ah the shit that needs to be done to decrease code maintenance...
+    protected boolean hasStill() {
+        return false;
+    }
+
+    protected boolean hasEat() {
+        return true;
+    }
+
+    protected boolean hasBeached() {
+        return true;
+    }
+
+    protected boolean hasSwimFast() {
+        return false;
+    }
+
+    protected boolean isSwimFast() {
+        return this.hasSwimFast() && this.isFast();
+    }
+
+    protected double swimAnimSpeed() {
+        return 1.0;
     }
 
     protected <T extends GeoAnimatable> PlayState eatPredicate(AnimationState<T> state) {

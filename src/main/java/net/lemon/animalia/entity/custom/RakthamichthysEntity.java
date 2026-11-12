@@ -131,28 +131,13 @@ public class RakthamichthysEntity extends BottomWalkerSwimmerBase implements Geo
     }
 
     @Override
-    public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
-        controllers.add(new AnimationController<>(this, "controller", 10, this::predicate));
+    protected double swimAnimSpeed() {
+        return this.stillTicks >= FREEZE_DELAY ? 0.3 : 1.0;
     }
 
-    private <T extends GeoAnimatable> PlayState predicate(AnimationState<T> animationState) {
-        if(this.isBaby()) {
-            animationState.getController().setAnimation(RawAnimation.begin().then("swim", Animation.LoopType.LOOP));
-            return PlayState.CONTINUE;
-        }
-
-        if (!this.isInWater() && !this.isBaby()) {
-            animationState.getController().setAnimation(RawAnimation.begin().then("flop", Animation.LoopType.LOOP));
-            return PlayState.CONTINUE;
-        }
-
-        animationState.getController().setAnimation(RawAnimation.begin().then("swim", Animation.LoopType.LOOP));
-        if (this.stillTicks >= FREEZE_DELAY) {
-            animationState.getController().setAnimationSpeed(0.3);
-        } else {
-            animationState.getController().setAnimationSpeed(1.0);
-        }
-        return PlayState.CONTINUE;
+    @Override
+    protected boolean hasEat() {
+        return false;
     }
 
     @Override

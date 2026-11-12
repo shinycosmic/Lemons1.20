@@ -101,7 +101,7 @@
 				}
 			}
 		},
-		"flop": {
+		"beached": {
 			"loop": true,
 			"animation_length": 2.4167,
 			"bones": {

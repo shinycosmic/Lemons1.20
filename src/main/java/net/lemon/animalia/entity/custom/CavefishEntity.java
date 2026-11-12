@@ -112,7 +112,6 @@ public class CavefishEntity extends FishBase implements GeoEntity, Scannable {
         return Component.translatable("debug.wildlifeexplorers.trivia");
     }
 
-    //todo
     @Override
     public Component getFamily() {
         if(this.getType() == ModEntities.AMBLYOPSIS_HOOSIERI.get()) {
@@ -231,18 +230,18 @@ public class CavefishEntity extends FishBase implements GeoEntity, Scannable {
     }
 
     @Override
-    public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
-        controllers.add(new AnimationController<>(this, "controller", 5, this::predicate));
-        super.registerControllers(controllers);
+    protected boolean hasEat() {
+        return this.getType() != ModEntities.GITCHAK_NAKANA.get() && this.getType() != ModEntities.KRYPTOGLANIS_SHAJII.get();
     }
 
-    private <T extends GeoAnimatable> PlayState predicate(AnimationState<T> animationState) {
-        if (this.isFast()) {
-            animationState.getController().setAnimation(RawAnimation.begin().then("swimFast", Animation.LoopType.LOOP));
-            return PlayState.CONTINUE;
-        }
-        animationState.getController().setAnimation(RawAnimation.begin().then("swim", Animation.LoopType.LOOP));
-        return PlayState.CONTINUE;
+    @Override
+    protected boolean hasBeached() {
+        return false;
+    }
+
+    @Override
+    protected boolean hasSwimFast() {
+        return true;
     }
 
     @Override

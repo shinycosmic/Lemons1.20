@@ -1,7 +1,7 @@
 {
 	"format_version": "1.8.0",
 	"animations": {
-		"swimfast": {
+		"swimFast": {
 			"loop": true,
 			"bones": {
 				"main": {
@@ -494,7 +494,7 @@
 				}
 			}
 		},
-		"flop": {
+		"beached": {
 			"loop": true,
 			"bones": {
 				"main": {

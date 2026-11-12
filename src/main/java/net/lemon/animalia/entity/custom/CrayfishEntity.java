@@ -147,6 +147,11 @@ public class CrayfishEntity extends BottomWalkerSwimmerBase implements GeoEntity
     }
 
     @Override
+    protected boolean hasEat() {
+        return false;
+    }
+
+    @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
         controllers.add(new AnimationController<>(this, "controller", 10, this::predicate));
         controllers.add(new AnimationController<>(this, "threat_controller", 0, this::threatPredicate));

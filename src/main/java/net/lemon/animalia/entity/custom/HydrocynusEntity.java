@@ -136,7 +136,7 @@ public class HydrocynusEntity extends FishBase implements GeoEntity, Scannable {
     public boolean doHurtTarget(Entity pEntity) {
         boolean res =  super.doHurtTarget(pEntity);
         if(res) {
-            this.triggerAnim("eat_controller", "eat");
+            this.triggerAnim("attack_controller", "attack");
         }
         return res;
     }
@@ -144,6 +144,7 @@ public class HydrocynusEntity extends FishBase implements GeoEntity, Scannable {
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
         controllers.add(new AnimationController<>(this, "controller", 5, this::predicate));
+        controllers.add(new AnimationController<>(this, "attack_controller", 0, state -> PlayState.STOP).triggerableAnim("attack", RawAnimation.begin().then("attack", Animation.LoopType.PLAY_ONCE)));
         super.registerControllers(controllers);
     }
 

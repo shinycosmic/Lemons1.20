@@ -115,13 +115,13 @@ public class PelagicInvertSwimmerEntity extends FishBase implements GeoEntity, S
     }
 
     @Override
-    public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
-        controllers.add(new AnimationController<>(this, "controller", 5, this::predicate));
+    protected boolean hasEat() {
+        return false;
     }
 
-    private <T extends GeoAnimatable> PlayState predicate(AnimationState<T> animationState) {
-        animationState.getController().setAnimation(RawAnimation.begin().then("swim", Animation.LoopType.LOOP));
-        return PlayState.CONTINUE;
+    @Override
+    protected boolean hasBeached() {
+        return false;
     }
 
     @Override

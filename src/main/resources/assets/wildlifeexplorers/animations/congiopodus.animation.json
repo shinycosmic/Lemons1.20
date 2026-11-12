@@ -289,7 +289,7 @@
 				}
 			}
 		},
-		"flop": {
+		"beached": {
 			"loop": true,
 			"bones": {
 				"main": {
@@ -331,6 +331,29 @@
 					}
 				}
 			}
-		}
+		},
+        "eat": {
+            "animation_length": 0.5,
+            "bones": {
+                "main": {
+                    "rotation": {
+                        "vector": ["-0-math.sin(query.anim_time*720)*1", 0, 0]
+                    }
+                },
+                "jaw": {
+                    "rotation": {
+                        "0.0": {
+                            "vector": [0, 0, 0]
+                        },
+                        "0.2083": {
+                            "vector": [25, 0, 0]
+                        },
+                        "0.5": {
+                            "vector": [0, 0, 0]
+                        }
+                    }
+                }
+            }
+        }
 	}
 }

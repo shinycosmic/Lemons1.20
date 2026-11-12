@@ -113,6 +113,16 @@ public class IndostomusEntity extends WaterDartBase implements GeoEntity, Scanna
     }
 
     @Override
+    protected boolean hasEat() {
+        return false;
+    }
+
+    @Override
+    protected boolean hasBeached() {
+        return false;
+    }
+
+    @Override
     public int getIdleCount() {
         return 2;
     }

@@ -203,6 +203,11 @@ public class SpinnerSharkEntity extends FishBase implements Scannable, GeoEntity
     }
 
     @Override
+    protected boolean hasBeached() {
+        return false;
+    }
+
+    @Override
     public AnimatableInstanceCache getAnimatableInstanceCache() {
         return cache;
     }

@@ -63,7 +63,7 @@
 				}
 			}
 		},
-		"swimfast": {
+		"swimFast": {
 			"loop": true,
 			"bones": {
 				"main": {
@@ -186,7 +186,7 @@
 				}
 			}
 		},
-		"flop": {
+		"beached": {
 			"loop": true,
 			"bones": {
 				"main": {

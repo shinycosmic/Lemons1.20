@@ -59,7 +59,7 @@
 				}
 			}
 		},
-		"swimfast": {
+		"swimFast": {
 			"loop": true,
 			"bones": {
 				"main": {
@@ -178,7 +178,7 @@
 				}
 			}
 		},
-		"flop": {
+		"beached": {
 			"animation_length": 5.0833,
 			"bones": {
 				"main": {

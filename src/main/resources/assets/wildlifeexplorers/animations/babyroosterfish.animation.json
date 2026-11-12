@@ -59,7 +59,7 @@
 				}
 			}
 		},
-		"swimfast": {
+		"swimFast": {
 			"loop": true,
 			"bones": {
 				"main": {

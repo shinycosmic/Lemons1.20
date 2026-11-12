@@ -414,6 +414,11 @@ public class HeterocongerEntity extends FishBase implements GeoEntity, Scannable
     }
 
     @Override
+    protected boolean hasBeached() {
+        return false;
+    }
+
+    @Override
     public AnimatableInstanceCache getAnimatableInstanceCache() {
         return cache;
     }

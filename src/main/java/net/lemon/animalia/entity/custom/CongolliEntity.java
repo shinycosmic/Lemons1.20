@@ -104,6 +104,11 @@ public class CongolliEntity extends BottomWalkerSwimmerBase implements GeoEntity
     }
 
     @Override
+    protected boolean hasEat() {
+        return false;
+    }
+
+    @Override
     public float getSwimSpeed() {
         if(this.isWalking()) {
             return 1.8f;

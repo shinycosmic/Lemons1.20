@@ -1,7 +1,7 @@
 {
 	"format_version": "1.8.0",
 	"animations": {
-		"flop": {
+		"beached": {
 			"animation_length": 3.5417,
 			"bones": {
 				"main": {

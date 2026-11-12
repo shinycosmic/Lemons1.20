@@ -9,27 +9,20 @@ import net.lemon.animalia.registry.spawning.SpawnBand;
 import net.lemon.animalia.util.AnimaliaFunctionUtil;
 import net.lemon.animalia.util.HolonetEntities;
 import net.lemon.animalia.util.Scannable;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
-import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.MobSpawnType;
-import net.minecraft.world.entity.SpawnGroupData;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.AvoidEntityGoal;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.ServerLevelAccessor;
-import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.core.animatable.GeoAnimatable;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
@@ -165,28 +158,8 @@ public class RoosterfishEntity extends FishBase implements GeoEntity, Scannable 
     }
 
     @Override
-    public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
-        controllers.add(new AnimationController<>(this, "controller", 5, this::predicate));
-        super.registerControllers(controllers);
-    }
-
-    private <T extends GeoAnimatable> PlayState predicate(AnimationState<T> animationState) {
-        if(this.isBaby()) {
-            animationState.getController().setAnimation(RawAnimation.begin().then("swim", Animation.LoopType.LOOP));
-            return PlayState.CONTINUE;
-        }
-
-        if (!this.isInWater() && !this.isBaby()) {
-            animationState.getController().setAnimation(RawAnimation.begin().then("flop", Animation.LoopType.LOOP));
-            return PlayState.CONTINUE;
-        }
-
-        if (this.isStartled()) {
-            animationState.getController().setAnimation(RawAnimation.begin().then("swimfast", Animation.LoopType.LOOP));
-        } else {
-            animationState.getController().setAnimation(RawAnimation.begin().then("swim", Animation.LoopType.LOOP));
-        }
-        return PlayState.CONTINUE;
+    protected boolean isSwimFast() {
+        return this.isStartled();
     }
 
     @Override

@@ -123,6 +123,11 @@ public class SeahorseEntity extends FishBase implements GeoEntity, Scannable {
     }
 
     @Override
+    protected boolean hasEat() {
+        return false;
+    }
+
+    @Override
     public TagKey<Item> getFoodTag() {
         return ModTags.Items.CRUSTACEAN;
     }
@@ -230,23 +235,10 @@ public class SeahorseEntity extends FishBase implements GeoEntity, Scannable {
 
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
-        controllers.add(new AnimationController<>(this, "controller", 5, this::predicate));
+        super.registerControllers(controllers);
         controllers.add(new AnimationController<>(this, "brood_controller", 10, this::broodPredicate));
     }
 
-    private <T extends GeoAnimatable> PlayState predicate(AnimationState<T> animationState) {
-        if (!this.isInWater()) {
-            animationState.getController().setAnimation(RawAnimation.begin().then("flop", Animation.LoopType.LOOP));
-            return PlayState.CONTINUE;
-        }
-
-//        if(!this.isActuallyMoving()) {
-//            animationState.getController().setAnimation(RawAnimation.begin().then("idle", Animation.LoopType.LOOP));
-//            return PlayState.CONTINUE;
-//        }
-        animationState.getController().setAnimation(RawAnimation.begin().then("swim", Animation.LoopType.LOOP));
-        return PlayState.CONTINUE;
-    }
 
     private <T extends GeoAnimatable> PlayState broodPredicate(AnimationState<T> animationState) {
         if (this.isBrooding()) {
