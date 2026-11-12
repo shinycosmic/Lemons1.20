@@ -1,4 +1,4 @@
-package net.lemon.animalia.compat;
+package net.lemon.animalia.compat.jei;
 
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
