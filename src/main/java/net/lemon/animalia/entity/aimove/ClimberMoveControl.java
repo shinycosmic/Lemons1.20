@@ -2,6 +2,7 @@ package net.lemon.animalia.entity.aimove;
 
 import net.lemon.animalia.entity.bases.helpers.ICanClimb;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.control.MoveControl;
 import net.minecraft.world.level.Level;
@@ -45,7 +46,12 @@ public class ClimberMoveControl extends MoveControl {
             return;
         }
         this.operation = Operation.WAIT;
+        Direction face = this.climber.getClimbFace();
         Vec3 wanted = new Vec3(this.wantedX - this.mob.getX(), this.wantedY - this.mob.getY(), this.wantedZ - this.mob.getZ());
+        Vec3 normal = new Vec3(face.getStepX(), face.getStepY(), face.getStepZ());
+        if (face.getAxis().isHorizontal() && wanted.dot(normal) > 0.5D) {
+            wanted = wanted.add(0.0D, 2.0, 0.0D);
+        }
         this.drive(wanted.lengthSqr() < 2.5000003E-7D ? Vec3.ZERO : wanted.normalize().scale(this.speedModifier));
     }
 

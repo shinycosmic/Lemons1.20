@@ -150,9 +150,6 @@ public interface ICanClimb {
             }
         }
         if (best == null) {
-            if (current.getAxis().isHorizontal()) {
-                mob.setDeltaMovement(mob.getDeltaMovement().add(current.getStepX() * 0.15D, 0.1D, current.getStepZ() * 0.15D));
-            }
             this.detach();
             return;
         }
@@ -183,7 +180,9 @@ public interface ICanClimb {
     default void climbTravel(Vec3 travelVector) {
         PathfinderMob mob = (PathfinderMob) this;
         Direction face = this.getClimbFace();
-        Vec3 drive = travelVector.multiply(1 - Math.abs(face.getStepX()), 1 - Math.abs(face.getStepY()), 1 - Math.abs(face.getStepZ()));
+        Vec3 normal = new Vec3(face.getStepX(), face.getStepY(), face.getStepZ());
+        double into = travelVector.dot(normal);
+        Vec3 drive = travelVector.subtract(normal.scale(Math.min(into, 0.0D)));
         mob.addDeltaMovement(drive.scale(this.getClimbSpeed() * 0.005D));
         if (!mob.horizontalCollision && !mob.verticalCollision) {
             mob.addDeltaMovement(new Vec3(face.getStepX() * 0.01D, face.getStepY() * 0.01D, face.getStepZ() * 0.01D));
