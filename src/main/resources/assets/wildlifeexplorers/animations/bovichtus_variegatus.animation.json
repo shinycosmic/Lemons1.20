@@ -64,7 +64,7 @@
 				},
 				"jaw": {
 					"rotation": {
-						"vector": ["19-math.sin(query.anim_time*150)*2", 0, 0]
+						"vector": ["19-math.sin(query.anim_time*150)*6", 0, 0]
 					}
 				},
 				"gillCube": {
