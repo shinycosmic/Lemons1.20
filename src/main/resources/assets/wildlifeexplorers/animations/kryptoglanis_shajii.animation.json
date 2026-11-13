@@ -74,6 +74,79 @@
 				}
 			}
 		},
+		"still": {
+			"loop": true,
+			"bones": {
+				"main": {
+					"rotation": {
+						"vector": ["-0-math.sin(query.anim_time*50)*0.5", "-0-math.sin(query.anim_time*50)*3", "0+math.sin(query.anim_time*50)*1"]
+					},
+					"position": {
+						"vector": ["-0-math.sin(query.anim_time*20-80)*0.1", "0+math.sin(query.anim_time*20)*0.1", "0+math.sin(query.anim_time*20-80)*0.2"]
+					}
+				},
+				"tail": {
+					"rotation": {
+						"vector": [0, "-0-math.sin(query.anim_time*50-50)*2", 0]
+					}
+				},
+				"tail2": {
+					"rotation": {
+						"vector": [0, "-0-math.sin(query.anim_time*50-150)*3", 0]
+					}
+				},
+				"tail3": {
+					"rotation": {
+						"vector": [0, "-0-math.sin(query.anim_time*50-200)*5", 0]
+					}
+				},
+				"tail4": {
+					"rotation": {
+						"vector": [0, "-0-math.sin(query.anim_time*50-250)*7", 0]
+					}
+				},
+				"whisker": {
+					"rotation": {
+						"vector": [0, "-0-math.sin(query.anim_time*50-100)*-5", "0+math.sin(query.anim_time*50-100)*-9"]
+					}
+				},
+				"whisker2": {
+					"rotation": {
+						"vector": [0, "-0-math.sin(query.anim_time*50-50)*-5", 0]
+					}
+				},
+				"whisker3": {
+					"rotation": {
+						"vector": [0, "-0-math.sin(query.anim_time*50-150)*-5", "0+math.sin(query.anim_time*50-150)*9"]
+					}
+				},
+				"frontLeftFin": {
+					"rotation": {
+						"vector": [0, "-0-math.sin(query.anim_time*550-100)*2", 0]
+					}
+				},
+				"frontRightFin": {
+					"rotation": {
+						"vector": [0, "-0-math.sin(query.anim_time*550-100)*-2", 0]
+					}
+				},
+				"whisker4": {
+					"rotation": {
+						"vector": [0, "-0-math.sin(query.anim_time*50-100)*-5", "0+math.sin(query.anim_time*50-150)*9"]
+					}
+				},
+				"whisker5": {
+					"rotation": {
+						"vector": [0, "-0-math.sin(query.anim_time*50-50)*-5", 0]
+					}
+				},
+				"whisker6": {
+					"rotation": {
+						"vector": [0, "-0-math.sin(query.anim_time*50-150)*-5", "0+math.sin(query.anim_time*50-220)*9"]
+					}
+				}
+			}
+		},
 		"swimFast": {
 			"loop": true,
 			"bones": {
